@@ -38,12 +38,12 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
       with:
         name: airflow-website
-        path: ./dist
+        path: ./build
     - name: Deploy app on gh-pages branch
       uses: s0/git-publish-subdir-action@develop
       if: ${{ github.event_name == 'push' }}
       env:
         REPO: self
         BRANCH: gh-pages
-        FOLDER: dist
+        FOLDER: ./build
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
