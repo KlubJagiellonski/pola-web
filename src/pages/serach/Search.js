@@ -33,7 +33,7 @@ const Search = () => {
   }, []);
 
   const openModal = () => setOpen({ isOpen: true });
-  const closeModal = () => setOpen({ isOpen: false });
+  // const closeModal = () => setOpen({ isOpen: false });
 
   const handleSubmit = (e) => {
     e.preventDefault();
