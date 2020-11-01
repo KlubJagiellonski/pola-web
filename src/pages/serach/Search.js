@@ -43,7 +43,6 @@ const Search = () => {
           params: {
             code: ean,
             device_id: deviceId
-
           }
         }
       )
@@ -59,10 +58,15 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text"
-        value={ean}
-        onChange={e => setEan(e.target.value)}
-      />
+      <label>
+        Kod EAN:
+        <input
+            type="text"
+            value={ean}
+            onChange={e => setEan(e.target.value)}
+        />
+      </label>
+
       <button type="submit">Sprawdź</button>
       {
         isOpen &&
