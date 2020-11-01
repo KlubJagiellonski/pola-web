@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import SearchModal from './SearchModal';
 import axios from 'axios'
 import {getCurrentDeviceId} from "../../deviceId";
@@ -11,24 +11,23 @@ const Search = () => {
   const openModal = () => setOpen({ isOpen: true });
   // const closeModal = () => setOpen({ isOpen: false });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (ean.length > 0) {
-      axios.get('/get_by_code',
-        {
-          params: {
-            code: ean,
-            device_id: getCurrentDeviceId()
-          }
+        try {
+           const resp = await axios.get('/get_by_code',
+            {
+              params: {
+                code: ean,
+                device_id: getCurrentDeviceId()
+              }
+            })
+
+            openModal();
+            setData(resp.data)
+        } catch(err) {
+            console.log(err)
         }
-      )
-        .then(resp => {
-          openModal();
-          setData(resp.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
     }
   }
 
