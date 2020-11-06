@@ -7,7 +7,7 @@ import { SearchButton, SearchFormControl } from "./Search.css"
 import { ImSearch } from 'react-icons/im'
 
 const Search = () => {
-  const [ean, setEan] = useState("5900334005526")
+  const [ean, setEan] = useState("")
   const [data, setData] = useState({})
   const [isOpen, setOpen] = useState(false)
 
