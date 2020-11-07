@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.1a4511c6.chunk.css",
-    "main.js": "/static/js/main.87a44d85.chunk.js",
-    "main.js.map": "/static/js/main.87a44d85.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.d3ec554c.js",
-    "runtime-main.js.map": "/static/js/runtime-main.d3ec554c.js.map",
-    "static/js/2.f16a5a56.chunk.js": "/static/js/2.f16a5a56.chunk.js",
-    "static/js/2.f16a5a56.chunk.js.map": "/static/js/2.f16a5a56.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.3d424573b713088e38bd8476188e8c95.js": "/precache-manifest.3d424573b713088e38bd8476188e8c95.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.1a4511c6.chunk.css.map": "/static/css/main.1a4511c6.chunk.css.map",
-    "static/js/2.f16a5a56.chunk.js.LICENSE.txt": "/static/js/2.f16a5a56.chunk.js.LICENSE.txt"
+    "main.css": "https://klubjagiellonski.github.io/pola-web/static/css/main.1a4511c6.chunk.css",
+    "main.js": "https://klubjagiellonski.github.io/pola-web/static/js/main.8b813b4e.chunk.js",
+    "main.js.map": "https://klubjagiellonski.github.io/pola-web/static/js/main.8b813b4e.chunk.js.map",
+    "runtime-main.js": "https://klubjagiellonski.github.io/pola-web/static/js/runtime-main.c4713c1f.js",
+    "runtime-main.js.map": "https://klubjagiellonski.github.io/pola-web/static/js/runtime-main.c4713c1f.js.map",
+    "static/js/2.54d4601e.chunk.js": "https://klubjagiellonski.github.io/pola-web/static/js/2.54d4601e.chunk.js",
+    "static/js/2.54d4601e.chunk.js.map": "https://klubjagiellonski.github.io/pola-web/static/js/2.54d4601e.chunk.js.map",
+    "index.html": "https://klubjagiellonski.github.io/pola-web/index.html",
+    "precache-manifest.fe0e5f3f468d3fc7591cf15bf81c4e19.js": "https://klubjagiellonski.github.io/pola-web/precache-manifest.fe0e5f3f468d3fc7591cf15bf81c4e19.js",
+    "service-worker.js": "https://klubjagiellonski.github.io/pola-web/service-worker.js",
+    "static/css/main.1a4511c6.chunk.css.map": "https://klubjagiellonski.github.io/pola-web/static/css/main.1a4511c6.chunk.css.map",
+    "static/js/2.54d4601e.chunk.js.LICENSE.txt": "https://klubjagiellonski.github.io/pola-web/static/js/2.54d4601e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d3ec554c.js",
-    "static/js/2.f16a5a56.chunk.js",
+    "static/js/runtime-main.c4713c1f.js",
+    "static/js/2.54d4601e.chunk.js",
     "static/css/main.1a4511c6.chunk.css",
-    "static/js/main.87a44d85.chunk.js"
+    "static/js/main.8b813b4e.chunk.js"
   ]
 }
