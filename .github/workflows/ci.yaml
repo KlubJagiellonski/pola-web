@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  PUBLIC_URL: 'https://klubjagiellonski.github.io/pola-web/'
-
 jobs:
   build:
 
@@ -38,7 +35,7 @@ jobs:
         path: ./build
     - name: Deploy app on gh-pages branch
       uses: s0/git-publish-subdir-action@develop
-      if: ${{ github.event_name == 'push' && matrix.node-version == '14.x' }}
+      if: ${{ github.event_name == 'push' }}
       env:
         REPO: self
         BRANCH: gh-pages
