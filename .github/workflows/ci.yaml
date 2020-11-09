@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ issue-5 ]
   pull_request:
-    branches: [ master ]
+    branches: [ issue-5 ]
 
 env:
   PUBLIC_URL: 'https://klubjagiellonski.github.io/pola-web/'
