@@ -18,7 +18,7 @@ const ModalPage = ({ match, open }) => {
 
   useEffect(() => {
     async function api() {
-      if (match.params.ean.length > 0) {
+      if (ean && ean.length > 0) {
         try {
           const resp = await axios.get('https://www.pola-app.pl/a/v3/get_by_code',
             {
