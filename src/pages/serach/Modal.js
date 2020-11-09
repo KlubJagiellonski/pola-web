@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import SearchModal from './SearchModal';
 import axios from 'axios'
 import { getCurrentDeviceId } from "../../deviceId";
 import { Background, Content, Wrapper } from "./Modal.css";
-import { SearchButton, SearchFormControl } from "./Search.css"
-import { ImSearch } from 'react-icons/im'
 import { Redirect } from "react-router-dom";
-import { FaDivide } from 'react-icons/fa';
 
 const ModalPage = ({ match, open }) => {
   const [data, setData] = useState('');
+  const { ean } = useParams();
+
   const [isRedirect, setRedirect] = useState(false)
 
   const closeModal = () => {
@@ -20,10 +20,10 @@ const ModalPage = ({ match, open }) => {
     async function api() {
       if (match.params.ean.length > 0) {
         try {
-          const resp = await axios.get('https://pola-staging.herokuapp.com/a/v3/get_by_code',
+          const resp = await axios.get('https://www.pola-app.pl/a/v3/get_by_code',
             {
               params: {
-                code: match.params.ean,
+                code: ean,
                 device_id: getCurrentDeviceId()
               }
             })
