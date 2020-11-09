@@ -16,7 +16,7 @@ const ModalPage = ({ match, open }) => {
     setRedirect(true)
   }
 
-  useEffect(() => {
+  useEffect((ean) => {
     async function api() {
       if (ean && ean.length > 0) {
         try {
@@ -34,7 +34,7 @@ const ModalPage = ({ match, open }) => {
       }
     }
     api()
-  }, []);
+  }, [ean]);
 
   return (
     <>
