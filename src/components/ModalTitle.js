@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { WrapperTitle, Title } from './ModalTitle.css'
 import ModalIcon from './ModalIcon'
 import { FaTimesCircle } from 'react-icons/fa'
