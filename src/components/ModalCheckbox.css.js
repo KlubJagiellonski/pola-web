@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Wrapper = styled.p`
-  maargin: 0;
+  margin: 0;
   padding: 0.2em 0;
 
   [type="checkbox"]:not(:checked),
