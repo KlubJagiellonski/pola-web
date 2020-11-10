@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ issue-5 ]
+    branches: [ master ]
 
 env:
   PUBLIC_URL: 'https://klubjagiellonski.github.io/pola-web/'
