@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3528fbb2199716a491d3c33bbb8247f1",
+    "revision": "663677122b0e4309f2f02e8081477760",
     "url": "https://klubjagiellonski.github.io/pola-web/index.html"
   },
   {
-    "revision": "51475dc000f8bbb415ef",
+    "revision": "5ee04686062a3df8f4dd",
     "url": "https://klubjagiellonski.github.io/pola-web/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://klubjagiellonski.github.io/pola-web/static/js/2.6a9b7ae4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "51475dc000f8bbb415ef",
-    "url": "https://klubjagiellonski.github.io/pola-web/static/js/main.01eae427.chunk.js"
+    "revision": "5ee04686062a3df8f4dd",
+    "url": "https://klubjagiellonski.github.io/pola-web/static/js/main.5a275be3.chunk.js"
   },
   {
     "revision": "a080cc0e4fa3bc562fc0",
