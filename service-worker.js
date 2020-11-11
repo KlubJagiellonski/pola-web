@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://klubjagiellonski.github.io/pola-web/precache-manifest.b32ff8c16de2dbf72cec433dbff50985.js"
+  "https://klubjagiellonski.github.io/pola-web/precache-manifest.4b625c8ef825e397806e4750b0f157c0.js"
 );
 
 self.addEventListener('message', (event) => {
