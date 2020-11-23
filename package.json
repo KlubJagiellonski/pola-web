@@ -5,7 +5,8 @@
   "proxy": "https://www.pola-app.pl/a/v3",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
+    "@testing-library/react": "^10.4.9",
+    "@testing-library/react-hooks": "^3.4.2",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "jquery": "^3.5.1",
@@ -15,7 +16,8 @@
     "react-icons": "^3.11.0",
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^4.0.1",
+    "react-test-renderer": "^17.0.1",
     "styled-components": "^5.2.1"
   },
   "scripts": {
