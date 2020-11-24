@@ -5,7 +5,7 @@ import { Route, Router } from 'react-router-dom';
 
 import { withRouter } from '../../withRouter';
 import { history } from '../../history'
-import { fireEvent, waitFor } from '@testing-library/react'
+import { fireEvent, wait } from '@testing-library/react'
 
 const ModalWithRouter = withRouter(Modal)
 
@@ -22,13 +22,13 @@ test('should close modal page', async () => {
 
   const { getByText } = render(
     <Router history={history}>
-      <Route path='ean/:ean'>
+      <Route path='/ean/:ean'>
         <Modal />
       </Route>
     </Router>
   );
 
-  await waitFor(() =>
+  await wait(() =>
     getByText(/TEST-PRODUCT/)
   )
 });
