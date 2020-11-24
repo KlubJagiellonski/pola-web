@@ -40,7 +40,7 @@ const ModalPage = () => {
     return () => {
       isCancelled = true;
     };
-  }, []);
+  }, [ean]);
 
   return (
     <>
