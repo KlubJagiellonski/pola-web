@@ -5,7 +5,7 @@ import { Route, Router } from 'react-router-dom';
 
 import { withRouter } from '../../withRouter';
 import { history } from '../../history'
-import { fireEvent, wait } from '@testing-library/react'
+import { fireEvent, waitFor } from '@testing-library/react'
 
 const ModalWithRouter = withRouter(Modal)
 
@@ -17,7 +17,7 @@ test('should close modal page', () => {
   expect(history.location.pathname).toBe('/');
 });
 
-test('should close modal page', async () => {
+test('should handle data', async () => {
   history.push(`/ean/5900334005526`);
 
   const { getByText } = render(
@@ -28,7 +28,7 @@ test('should close modal page', async () => {
     </Router>
   );
 
-  await wait(() =>
-    getByText(/TEST-PRODUCT/)
+  await waitFor(() =>
+    getByText(/TEST-PRODUCT/i)
   )
 });

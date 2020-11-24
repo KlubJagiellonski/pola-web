@@ -18,8 +18,7 @@ const Search = () => {
     <Wrapper>
       <Text>
         Sprawdź informacje o produkcie.<br />
-        Nie wiesz, jaki kod ma Twój produkt?
-        <a target="_blank" href='https://pl.openfoodfacts.org/' rel="noopener noreferrer" >
+        Nie wiesz, jaki kod ma Twój produkt? <a target="_blank" href='https://pl.openfoodfacts.org/' rel="noopener noreferrer" >
           Sprawdź w bazie kodów
         </a>
       </Text>

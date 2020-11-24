@@ -18,3 +18,15 @@ test('should handle plScore', async () => {
 
     expect(screen.getByText('20 pkt')).toBeInTheDocument();
 });
+
+test('should handle data Germany', async () => {
+  const data = prepareGetCodeMock({code: '4000001012978'})
+
+  expect(data.name).toBe('Miejsce rejestracji: Nimecy');
+});
+
+test('should handle data book', async () => {
+  const data = prepareGetCodeMock({code: '9770001012978'})
+
+  expect(data.name).toBe('Kod ISBN/ISSN/ISMN');
+});
