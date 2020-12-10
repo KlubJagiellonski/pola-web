@@ -1,11 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import Modal from './Modal';
 import { Route, Router } from 'react-router-dom';
 
 import { withRouter } from '../../withRouter';
 import { history } from '../../history'
-import { fireEvent, waitFor } from '@testing-library/react'
+import { fireEvent, wait } from '@testing-library/react'
 
 const ModalWithRouter = withRouter(Modal)
 
@@ -28,7 +28,7 @@ test('should handle data', async () => {
     </Router>
   );
 
-  await waitFor(() =>
+  await wait(() =>
     getByText(/TEST-PRODUCT/i)
   )
 });
