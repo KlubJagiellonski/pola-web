@@ -1,10 +1,37 @@
 import React from 'react'
-import { Wrapper, BigSection, SmallSection, Section, Content } from './SearchModal.css'
+import axios from 'axios'
+import { Wrapper, BigSection, SmallSection, Section, Content, ButtonSection, RedButton, ReportText } from './SearchModal.css'
 import ModalTitle from './../../components/ModalTitle'
 import ModalProgressiveBar from './../../components/ModalProgressiveBar'
 import ModalCheckbox from './../../components/ModalCheckbox'
+import { getCurrentDeviceId } from "../../deviceId";
+
+const BASE_URL = process.env.NODE_ENV !== 'production' ? "" : "https://www.pola-app.pl"
+const GET_BY_CODE_ENDPOINT = `${BASE_URL}/a/v3/create_report`
 
 const SearchModal = ({ data, close }) => {
+
+  const sendReport = async () => {
+    try {
+      const resp = await axios.request(
+        {
+          method: "POST",
+          url: GET_BY_CODE_ENDPOINT,
+          params: {
+            device_id: "TEST-DEVICE-ID",
+          },
+          data: {
+            description: "test-description",
+            product_id: data.product_id,
+            files_count: 0,
+            file_ext: 'jpg',
+            mime_type: 'image/jpeg',
+          }
+        })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <Wrapper>
@@ -70,6 +97,15 @@ const SearchModal = ({ data, close }) => {
                 {data.description}
               </Section>
             </SmallSection>
+            <ButtonSection>
+              <hr />
+              <Section>
+                <ReportText>
+                  Zgłoś jeśli posiadasz bardziej aktualne dane na temat tego produktu
+                </ReportText>
+                <RedButton><button onClick={sendReport}>zgłoś</button></RedButton>
+              </Section>
+            </ButtonSection>
           </>
         }
       </Content>
