@@ -1,11 +1,10 @@
 import React from 'react'
-import { Wrapper, ImageWrapper } from './Friends.css'
+import { Wrapper, ImageWrapper, Title } from './Friends.css'
 import Friend from './../assets/friend.png'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { theme } from './../theme'
-import {TitleSection} from './../GlobalStyle.css'
 
 const friends = [
   { img: Friend },
@@ -33,12 +32,29 @@ const Friends = () => {
     slidesToShow: friends.length > 10 ? 10 : friends.length,
     slidesToScroll: friends.length > 10 ? 10 : friends.length,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: friends.length > 6 ? 6 : friends.length,
+          slidesToScroll: friends.length > 6 ? 6 : friends.length,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: friends.length > 3 ? 3 : friends.length,
+          slidesToScroll: friends.length > 3 ? 3 : friends.length,
+        }
+      },
+    ]
   };
+
   return (
     <Wrapper color={theme.primary}>
-      <TitleSection>
+      <Title>
         Przyjaciele Poli
-      </TitleSection>
+      </Title>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ImageWrapper amountElements={friends.length}>
           <Slider {...settings}>

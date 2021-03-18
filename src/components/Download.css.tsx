@@ -12,4 +12,9 @@ export const Wrapper = styled.div`
   font-size: 14px;
   font-weight: 700;
   min-height: 200px;
+  padding: 35px 0;
+
+  @media only screen and (max-width: 768px) {
+    min-height: 0;
+  }
 `

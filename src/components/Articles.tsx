@@ -1,6 +1,6 @@
 import React from 'react'
 import Article from './Article'
-import { ArticlesButton } from './Articles.css'
+import { ArticlesButton, Wrapper } from './Articles.css'
 import Photo from './../assets/xmas.png'
 
 const article = {
@@ -10,31 +10,38 @@ const article = {
   text: 'Sprawdź szczegóły promocji (wstęp artykułu) Lorem ipsum dolor sit amet enim. Etiam ullamcorper.'
 }
 
-export const Articles = () => {
+type ArticlesProps = {
+  width: number
+}
+
+export const Articles = ({ width }: ArticlesProps) => {
   return (
-    <>
+    <Wrapper>
       <Article
         photo={article.photo}
         title={article.title}
         date={article.data}
         text={article.text}
+        width={width}
       />
       <Article
         photo={article.photo}
         title={article.title}
         date={article.data}
         text={article.text}
+        width={width}
       />
       <Article
         photo={article.photo}
         title={article.title}
         date={article.data}
         text={article.text}
+        width={width}
       />
       <ArticlesButton>
         CZYTAJ WIĘCEJ
       </ArticlesButton>
-    </>
+    </Wrapper>
   )
 }
 

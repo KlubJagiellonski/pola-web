@@ -7,7 +7,7 @@ import { TitleSection, Text } from './../GlobalStyle.css'
 const DevelopmentSection = () => {
   return (
     <Wrapper color={theme.primary}>
-      <Image src={Rectangle} />
+      <Image img={Rectangle} />
       <TextSection>
         <TitleSection>
           Zobacz jak rozwija się Aplikacja Pola i wspomóż ją!

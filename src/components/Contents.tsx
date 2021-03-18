@@ -1,26 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Wrapper, LeftColumn, RightColumn, Column } from './Contents.css'
 import DevelopmentSection from './DevelopmentSection'
 import SocialMedia from './SocialMedia'
 import Articles from './Articles'
-import Rectangle12 from './../assets/Rectangle12.png'
 import Friends from './Friends'
 import Teams from './Teams'
 import Download from './Download'
+import About from './About'
+import { theme } from './../theme'
 
 const Contents = () => {
-  return (
-    <Wrapper>
+  const [width, setWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleResize = () => {
+    setWidth(window.innerWidth)
+  }
+
+  const bigView = (
+    < Wrapper >
       <Column>
         <LeftColumn>
-          <Articles />
+          <Articles width={width} />
         </LeftColumn>
       </Column>
       <Column >
         <RightColumn>
           <DevelopmentSection />
           <SocialMedia />
-          <img src={Rectangle12} width={'100%'} height={410} style={{ marginTop: 15 }} />
+          <About />
         </RightColumn>
       </Column>
       <Friends />
@@ -42,8 +54,39 @@ const Contents = () => {
           />
         </RightColumn>
       </Column>
-      <Download/>
+      <Download />
     </Wrapper >
+  )
+
+  const smallView = (
+    <Wrapper>
+      <DevelopmentSection />
+      <Articles width={width} />
+      <About />
+      <SocialMedia />
+      <Friends />
+      <div style={{ background: theme.primary, width: '100%' }}>
+        <Teams
+          title="Dołącz do Przyjaciół Poli i odnieś sukces!"
+          text="Jedno zdanie, że sekcja jest kierowana do firm"
+          buttonText="POZNAJ SZCZEGÓŁY"
+        />
+      </div>
+      <Teams
+        title="Zespół"
+        text="1-2 zdania: ogólnie kto tworzy Polę (jaka grupa ludzi np. studenci, członkowie Klubu itp.)"
+        buttonText="DOŁĄCZ DO ZESPOŁU"
+      />
+      <Download />
+    </Wrapper >
+  )
+
+  return (
+    <>
+      {width <= 768 ?
+        smallView : bigView
+      }
+    </>
   )
 
 }

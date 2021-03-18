@@ -26,6 +26,10 @@ export const WrapperSection = styled.div`
   background: ${({ color }: Color) => color};
   width: 100%;
   margin-top: 15px;
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 0;
+  }
 `
 
 export const TitleSection = styled.p`
@@ -35,6 +39,12 @@ export const TitleSection = styled.p`
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: 700;
+
+  @media only screen and (min-width: 1900px) {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
 `
 
 export const Text = styled.p`
@@ -43,4 +53,9 @@ export const Text = styled.p`
   font-family: 'Roboto';
   font-size: 12px;
   color: ${theme.text};
+
+  @media only screen and (min-width: 1900px) {
+    font-size: 14px;
+    margin-top: 10px;
+  }
 `

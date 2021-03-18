@@ -4,6 +4,26 @@ import { theme } from './../theme'
 export const Wrapper = styled.div`
   background: ${theme.dark};
   padding: 260px 0 70px 300px;
+
+  @media only screen and (max-width: 900px) {
+    padding: 260px 0 70px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 100px 0 20px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  >div{
+    @media only screen and (max-width: 400px) {
+      width: 90%;
+    }
+  }
 `
 
 export const Title = styled.p`
@@ -12,13 +32,23 @@ export const Title = styled.p`
   font-family: 'Roboto';
   font-weight: bold;
   font-size: 24px;
+  text-align: left;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 18px;
+  }
 `
 
 export const Text = styled.p`
-  margin: 5px 0;
+  margin: 10px 0;
   padding: 0;
   font-family: 'Roboto';
   font-size: 16px;
+  text-align: left;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 
   a{
     color: #6C6C6C;
@@ -31,6 +61,14 @@ export const InputSection = styled.div`
   padding: 5px 100px 5px 5px;
   width: 250px;
   background-color: white;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;  
+    padding: 5px 70px 5px 5px;  
+  }
 `
 
 export const InputText = styled.input`
@@ -68,10 +106,22 @@ export const SubmitButton = styled.button`
   display: inline-block;
   font-weight: 700;
   cursor: pointer;
+  font-family: 'Roboto';
+
+  @media only screen and (max-width: 768px) {
+    padding: 5px 0;
+    margin-left: 0;
+    margin-top: 5px;
+    width: 100%;
+  }
 `
 
 export const FormSearch = styled.form`
     display: flex;
     align-items: center;
     margin-top: 10px;
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+  }
 `
