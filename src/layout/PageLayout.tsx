@@ -1,23 +1,27 @@
-/*
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { PageHeader } from './PageHeader';
 import { PageFooter } from './PageFooter';
-import { todosRequested } from '../state/actions/todos';
 import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
 import './PageLayout.css';
+import { Initialize } from '../state/app/app-actions';
+import { IPolaState } from '../state/types';
+import { articlesDispatcher } from '../state/articles/articles-dispatcher';
+import { appDispatcher } from '../state/app/app-dispatcher';
+
+const connector = connect((state: IPolaState) => ({}), {
+  initApp: appDispatcher.initialize,
+  loadArticles: articlesDispatcher.loadArticles,
+});
+
+type ReduxProps = ConnectedProps<typeof connector>;
+
+type IPageLayout = ReduxProps & {};
 
 const LayoutContainer = styled.div``;
-
 const PageContent = styled.main`
   width: 100%;
   margin: 0 auto;
@@ -31,20 +35,17 @@ const PageContent = styled.main`
   }
 `;
 
-export const PageLayout: React.FC = ({ children }) => {
-  const dispatch = useDispatch();
+const Layout: React.FC<IPageLayout> = ({ children, initApp, loadArticles }) => {
+  const bootApplication = async () => {
+    await initApp();
+    await loadArticles();
+  };
 
   useEffect(() => {
-    /*
-     * This is an example of doing things when the app first loads.
-     * You can dispatch a Redux action here to do some async thing
-     * when the webapp boots up.
-     */
-
-    dispatch(todosRequested());
+    bootApplication();
   }, []);
 
-  const data = useStaticQuery(graphql`
+  const data1 = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -56,9 +57,11 @@ export const PageLayout: React.FC = ({ children }) => {
 
   return (
     <LayoutContainer>
-      <PageHeader siteTitle={data.site.siteMetadata.title} />
+      <PageHeader siteTitle={data1.site.siteMetadata.title} />
       <PageContent>{children}</PageContent>
       <PageFooter />
     </LayoutContainer>
   );
 };
+
+export const PageLayout = connector(Layout);

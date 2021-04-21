@@ -1,16 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { PageLayout } from '../layout/PageLayout';
 import SEO from '../layout/seo';
-import { IState } from '../state/createStore';
-import { ITodo } from '../models/todo';
 import './index.css';
-import Search from '../components/Search';
+import { SearchContainer } from '../components/search';
 import Contents from '../components/Contents';
 import { PageSection } from '../layout/PageSection';
-import { Device, pageWidth, padding, theme } from '../styles/theme';
+import { Device, pageWidth, padding, color } from '../styles/theme';
+import { IPolaState } from '../state/types';
+import { searchDispatcher } from '../state/search/search-dispatcher';
+import { LoadBrowserLocation } from '../state/app/app-actions';
+import { IProduct } from '../domain/products';
+import { IArticle } from '../domain/articles';
 
 const Content = styled.div`
   width: 100%;
@@ -24,43 +27,43 @@ const Content = styled.div`
   }
 `;
 
-const MainPage = ({ todos = [], userId = 0 }: { todos: ITodo[] | undefined; userId: number | undefined }) => {
-  const [amount, setAmount] = React.useState<number>(50);
-  const [users, setUsers] = React.useState<IUser[]>([]);
+interface IMainPage {
+  location: Location;
+  searchResults: IProduct[];
+  articles?: IArticle[];
 
-  const load = () => {
-    fetch(`https://randomuser.me/api/?results=${amount}`)
-      .then(response => response.json())
-      .then((response: IUsersResponse) => {
-        console.log('users', response.results.length);
-        setUsers(response.results);
-      });
-  };
+  invokeSearch: (phrase: string) => void;
+}
+
+const MainPage = (props: IMainPage) => {
+  const { searchResults, location } = props;
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    load();
+    dispatch(LoadBrowserLocation(location));
   }, []);
 
   return (
     <PageLayout>
-      <SEO title="Pola Web" />
-      <PageSection size="full" backgroundColor={theme.dark}>
+      <SEO title="Pola Web | Strona główna" />
+      <PageSection size="full" backgroundColor={color.dark}>
         <Content>
-          <Search />
+          <SearchContainer searchResults={searchResults} onSearch={props.invokeSearch} />
         </Content>
       </PageSection>
       <PageSection>
-        <Contents />
+        <Contents articles={props.articles} />
       </PageSection>
     </PageLayout>
   );
 };
 
-const mapStateToProps = (state: IState) => {
-  return {
-    todos: state.todosReducer.todos,
-    userId: state.loginReducer.userId,
-  };
-};
-
-export default connect(mapStateToProps)(MainPage);
+export default connect(
+  (state: IPolaState) => ({
+    searchResults: state.search.results,
+    articles: state.articles.data,
+  }),
+  {
+    invokeSearch: searchDispatcher.invokeSearch,
+  }
+)(MainPage);

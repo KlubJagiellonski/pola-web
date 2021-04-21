@@ -2,30 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Wrapper, LeftColumn, RightColumn, Column } from './Contents.css';
 import DevelopmentSection from './DevelopmentSection';
 import SocialMedia from './SocialMedia';
-import Articles from './articles/Articles';
+import { ArticlesList } from '../components/articles/ArticlesList';
 import Friends from './Friends';
 import Teams from './Teams';
 import Download from './Download';
 import About from './About';
-import { theme } from '../styles/theme';
+import { color } from '../styles/theme';
+import { IArticle } from '../domain/articles';
 
-const Contents = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+interface IContent {
+  articles?: IArticle[];
+}
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+const Contents: React.FC<IContent> = ({ articles }) => {
+  //const [width, setWidth] = useState(window.innerWidth);
 
-  const handleResize = () => {
-    setWidth(window.innerWidth);
-  };
+  // useEffect(() => {
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
+
+  // const handleResize = () => {
+  //   setWidth(window.innerWidth);
+  // };
 
   const bigView = (
     <Wrapper>
       <Column>
         <LeftColumn>
-          <Articles width={width} />
+          <ArticlesList articles={articles} width={600} />
         </LeftColumn>
       </Column>
       <Column>
@@ -61,11 +66,11 @@ const Contents = () => {
   const smallView = (
     <Wrapper>
       <DevelopmentSection />
-      <Articles width={width} />
+      <ArticlesList articles={articles} width={600} />
       <About />
       <SocialMedia />
       <Friends />
-      <div style={{ background: theme.primary, width: '100%' }}>
+      <div style={{ background: color.primary, width: '100%' }}>
         <Teams
           title="Dołącz do Przyjaciół Poli i odnieś sukces!"
           text="Jedno zdanie, że sekcja jest kierowana do firm"
@@ -81,7 +86,7 @@ const Contents = () => {
     </Wrapper>
   );
 
-  return <>{width <= 768 ? smallView : bigView}</>;
+  return <>{600 <= 768 ? smallView : bigView}</>;
 };
 
 export default Contents;

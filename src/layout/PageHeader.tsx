@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { HamburgerMenu } from './HamburgerMenu';
-import { NavbarMenu } from './NavbarMenu';
-import { desktopHeaderHeight, Device, pageWidth, theme } from '../styles/theme';
+import { HamburgerMenu } from './nav/HamburgerMenu';
+import { NavbarMenu } from './nav/NavbarMenu';
+import { desktopHeaderHeight, Device, pageWidth, color } from '../styles/theme';
+import { Link } from 'gatsby';
 
 interface IPageHeader {
   siteTitle?: string;
@@ -17,7 +18,7 @@ const HeaderContainer = styled.header`
   top: 0;
   z-index: 10;
   width: 100%;
-  background: ${theme.border};
+  background: ${color.border};
 
   .header-content {
     display: flex;
@@ -41,14 +42,30 @@ const HeaderContainer = styled.header`
 
 const navItems = (
   <React.Fragment>
-    <span className="nav-item">Home</span>
-    <span className="nav-item">Aktualności</span>
-    <span className="nav-item">O Poli</span>
-    <span className="nav-item">Wesprzyj aplikację</span>
-    <span className="nav-item">Klub przyjaciół Poli</span>
-    <span className="nav-item">Dołącz do zespołu</span>
-    <span className="nav-item">FAQ</span>
-    <span className="nav-item">Kontakt</span>
+    <span className="nav-item">
+      <Link to="/">Home</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/news">Aktualności</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/about">O Poli</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/support">Wesprzyj aplikację</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/friends">Klub przyjaciół Poli</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/join">Dołącz do zespołu</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/faq">FAQ</Link>
+    </span>
+    <span className="nav-item">
+      <Link to="/contect">Kontakt</Link>
+    </span>
   </React.Fragment>
 );
 
