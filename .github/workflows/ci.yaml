@@ -44,35 +44,9 @@ jobs:
         if-no-files-found: error
     - name: 🚀 Deploy app on gh-pages branch
       uses: JamesIves/github-pages-deploy-action@3.7.1
-      # if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' }}
       with:
         BRANCH: gh-pages  # The branch the action should deploy to.
         FOLDER: ./public  # The folder the action should deploy.
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         CLEAN: true  # Automatically remove deleted files from the deploy branch.
-    - uses: chrnorm/deployment-action@releases/v1
-      id: deployment      
-      name: 🚀 Create GitHub deployment
-      # if: ${{ github.event_name == 'push' }}
-      with:
-        token: "${{ github.token }}"
-        target_url: https://klubjagiellonski.github.io/pola-web/
-        environment: development
-        ref: "${{ github.sha }}"
-    - name: Update deployment status (success)
-      if: success()
-      uses: chrnorm/deployment-status@releases/v1
-      with:
-        token: "${{ github.token }}"
-        target_url: http://my-app-url.com
-        state: "success"
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-
-    - name: Update deployment status (failure)
-      if: failure()
-      uses: chrnorm/deployment-status@releases/v1
-      with:
-        token: "${{ github.token }}"
-        target_url: http://my-app-url.com
-        state: "failure"
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
