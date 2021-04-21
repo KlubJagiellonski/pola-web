@@ -57,5 +57,5 @@ jobs:
         token: "${{ github.token }}"
         target_url: https://klubjagiellonski.github.io/pola-web/
         environment: development
-        state: success
+        initial_status: success
 
