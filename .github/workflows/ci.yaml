@@ -58,4 +58,5 @@ jobs:
         target_url: https://klubjagiellonski.github.io/pola-web/
         environment: development
         initial_status: success
+        ref: "${{ github.ref }}"
 
