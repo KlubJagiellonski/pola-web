@@ -12,7 +12,7 @@ import { Device, pageWidth, padding, color } from '../styles/theme';
 import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation } from '../state/app/app-actions';
-import { IProduct } from '../domain/products';
+import { IProductData } from '../domain/products';
 import { IArticle } from '../domain/articles';
 
 const Content = styled.div`
@@ -29,10 +29,14 @@ const Content = styled.div`
 
 interface IMainPage {
   location: Location;
-  searchResults: IProduct[];
+  searchResults: IProductData[];
+  token?: string;
+  isLoading?: boolean;
   articles?: IArticle[];
 
   invokeSearch: (phrase: string) => void;
+  invokeLoadMore: () => void;
+  selectProduct: (code: string) => void;
 }
 
 const MainPage = (props: IMainPage) => {
@@ -48,7 +52,14 @@ const MainPage = (props: IMainPage) => {
       <SEO title="Pola Web | Strona główna" />
       <PageSection size="full" backgroundColor={color.dark}>
         <Content>
-          <SearchContainer searchResults={searchResults} onSearch={props.invokeSearch} />
+          <SearchContainer
+            searchResults={searchResults}
+            onSearch={props.invokeSearch}
+            token={props.token}
+            isLoading={props.isLoading}
+            onLoadMore={props.invokeLoadMore}
+            onSelect={props.selectProduct}
+          />
         </Content>
       </PageSection>
       <PageSection>
@@ -60,10 +71,14 @@ const MainPage = (props: IMainPage) => {
 
 export default connect(
   (state: IPolaState) => ({
-    searchResults: state.search.results,
+    searchResults: state.search.products,
+    token: state.search.token,
+    isLoading: state.search.isLoading,
     articles: state.articles.data,
   }),
   {
     invokeSearch: searchDispatcher.invokeSearch,
+    invokeLoadMore: searchDispatcher.invokeLoadMore,
+    selectProduct: searchDispatcher.selectProduct,
   }
 )(MainPage);
