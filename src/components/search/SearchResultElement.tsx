@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IProduct } from '../../products';
+import { IProductData } from '../../domain/products';
 import { padding, color } from '../../styles/theme';
 
 const ListElement = styled.li`
@@ -13,22 +13,24 @@ const ResultElement = styled.div`
   display: flex;
   flex-flow: column;
   line-height: 1.7em;
+  cursor: pointer;
 
-  .manufacturer {
+  .company {
     text-transform: uppercase;
   }
 `;
 
 interface ISearchResultElement {
-  product: IProduct;
+  product: IProductData;
+  onSelect: (code: string) => void;
 }
 
-export const SearchResultElement: React.FC<ISearchResultElement> = ({ product }) => (
-  <ListElement>
+export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => (
+  <ListElement onClick={e => onSelect(product.code)}>
     <ResultElement>
-      <span className="manufacturer">{product.category}</span>
-      <span className="brand">{product.title}</span>
-      <span className="name">{product.description}</span>
+      <span className="company">{product.company?.name || 'No company'}</span>
+      <span className="brand">{product.brand?.name || 'No brand'}</span>
+      <span className="name">{product.name}</span>
     </ResultElement>
   </ListElement>
 );

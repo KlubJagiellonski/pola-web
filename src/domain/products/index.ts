@@ -1,14 +1,58 @@
 import { getNumber } from '../../utils/data/random-number';
 
-export interface IProduct {
-  id: string;
-  title: string;
-  description?: string;
-  category?: string;
-  image?: URL;
+export interface ICompany {
+  name: string;
 }
 
-export class Product implements IProduct {
+export interface IBrand {
+  name: string;
+}
+
+export interface IProductData {
+  code: string;
+  name: string;
+  company?: ICompany;
+  brand?: IBrand;
+}
+
+interface IDonate {
+  show_button: boolean;
+  title: string;
+  url: string;
+}
+
+export interface IProductEAN {
+  product_id: number;
+  code: string;
+  name: string;
+  card_type?: string;
+  altText?: string;
+  plCapital?: string;
+  plCapital_notes?: string;
+  plWorkers?: string;
+  plWorkers_notes?: string;
+  plRnD?: string;
+  plRnD_notes?: string;
+  plRegistered?: string;
+  plRegistered_notes?: string;
+  plNotGlobEnt?: string;
+  plNotGlobEnt_notes?: string;
+  plScore: number;
+  report_text: string;
+  report_button_type: string;
+  report_button_text: string;
+  donate: IDonate;
+}
+
+export interface IProductMock {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  image: URL;
+}
+
+export class ProductMock implements IProductMock {
   public id: string;
   public image: URL;
 

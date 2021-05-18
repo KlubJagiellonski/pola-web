@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Article, IArticle } from '../../domain/articles';
+import { Article } from '../../domain/articles';
 import { ArticleService } from '../../domain/articles/article-service';
 import { IPolaState } from '../types';
 import * as actions from './articles-actions';

@@ -7,15 +7,22 @@ import { PageHeader } from './PageHeader';
 import { PageFooter } from './PageFooter';
 import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
 import './PageLayout.css';
-import { Initialize } from '../state/app/app-actions';
 import { IPolaState } from '../state/types';
 import { articlesDispatcher } from '../state/articles/articles-dispatcher';
 import { appDispatcher } from '../state/app/app-dispatcher';
+import { ProductModal } from '../components/search/ProductModal';
+import { searchDispatcher } from '../state/search/search-dispatcher';
 
-const connector = connect((state: IPolaState) => ({}), {
-  initApp: appDispatcher.initialize,
-  loadArticles: articlesDispatcher.loadArticles,
-});
+const connector = connect(
+  (state: IPolaState) => ({
+    selectedProduct: state.search.selectedProduct,
+  }),
+  {
+    initApp: appDispatcher.initialize,
+    loadArticles: articlesDispatcher.loadArticles,
+    unselectProduct: searchDispatcher.unselectProduct,
+  }
+);
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
@@ -35,7 +42,7 @@ const PageContent = styled.main`
   }
 `;
 
-const Layout: React.FC<IPageLayout> = ({ children, initApp, loadArticles }) => {
+const Layout: React.FC<IPageLayout> = ({ children, initApp, loadArticles, selectedProduct, unselectProduct }) => {
   const bootApplication = async () => {
     await initApp();
     await loadArticles();
@@ -45,7 +52,7 @@ const Layout: React.FC<IPageLayout> = ({ children, initApp, loadArticles }) => {
     bootApplication();
   }, []);
 
-  const data1 = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -57,7 +64,8 @@ const Layout: React.FC<IPageLayout> = ({ children, initApp, loadArticles }) => {
 
   return (
     <LayoutContainer>
-      <PageHeader siteTitle={data1.site.siteMetadata.title} />
+      {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
+      <PageHeader siteTitle={data.site.siteMetadata.title} />
       <PageContent>{children}</PageContent>
       <PageFooter />
     </LayoutContainer>
