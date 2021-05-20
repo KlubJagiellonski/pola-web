@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { WrapperSection } from '../styles/GlobalStyle.css';
-import {Device, fontSize} from './../styles/theme'
+import {Device, fontSize, margin} from './../styles/theme'
 import { TitleSection, Text } from '../styles/GlobalStyle.css';
 
 export const Wrapper = styled(WrapperSection)`
@@ -37,7 +37,7 @@ export const Image = styled.div`
 `;
 
 export const TextSection = styled.div`
-  margin: 0 15px;
+  margin: 0 ${margin.normal};
   width: 50%;
 `;
 

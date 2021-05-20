@@ -22,6 +22,12 @@ export const padding = {
   normal: '20px',
   big: '40px',
 };
+export const margin = {
+  tiny: '4px',
+  small: '8px',
+  normal: '20px',
+  big: '40px',
+};
 
 export const fontSize = {
   big: '24px',

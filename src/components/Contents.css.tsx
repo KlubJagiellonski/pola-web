@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   overflow-x: hidden;
-  padding-top: 15px;
+  padding-top: ${padding.normal};
   margin-bottom: -${padding.normal};
   display: grid;
   grid-gap: 15px;
