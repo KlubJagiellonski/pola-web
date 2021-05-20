@@ -23,6 +23,13 @@ export const padding = {
   big: '40px',
 };
 
+export const fontSize = {
+  big: '24px',
+  normal: '18px',
+  small: '14px',
+  tiny: '12px',
+}
+
 export const Device: { [key: string]: string } = {
   mobile: `(max-width: ${width - 1}px)`,
   desktop: `(min-width: ${pageWidth})`,

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { WrapperSection } from '../styles/GlobalStyle.css';
-import {Device} from './../styles/theme'
+import {Device, fontSize} from './../styles/theme'
+import { TitleSection, Text } from '../styles/GlobalStyle.css';
 
 export const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -39,3 +40,15 @@ export const TextSection = styled.div`
   margin: 0 15px;
   width: 50%;
 `;
+
+export const DevelopmentTitle = styled(TitleSection)`
+  @media ${Device.mobile} {
+    font-size: ${fontSize.tiny};
+  }
+`
+
+export const DevelopmentText = styled(Text)`
+  @media ${Device.mobile} {
+    font-size: ${fontSize.tiny};
+  }
+`
