@@ -19,7 +19,7 @@ const reducers: IActionReducer<IFriendsState> = {
     return {
       ...state,
       initialized: true,
-      data: action.payload.articles,
+      data: action.payload.friends,
     };
   },
 };

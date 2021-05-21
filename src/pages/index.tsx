@@ -35,7 +35,6 @@ export const Background = styled.div<{ img?: string }>`
   left: 0px;
   bottom: 0px;
   right: 0px;
-  background-color: red;
   
   div{
     width: 100%;
@@ -83,7 +82,7 @@ const MainPage = (props: IMainPage) => {
         </Content>
       </PageSection>
       <PageSection>
-        <Contents articles={props.articles} />
+        <Contents articles={props.articles} friends={props.friends}/>
       </PageSection>
     </PageLayout>
   );

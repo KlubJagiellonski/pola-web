@@ -6,8 +6,8 @@ import * as actions from './friends-actions';
 
 export const friendsDispatcher = {
   loadFriends: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
-    const friendsData = await FriendsService.getArticles();
-    const friends = friendsData.results.map(data => new Friend(data.photo));
+    const friendsData = await FriendsService.getFriends();
+    const friends = friendsData.results.map(data => new Friend(data.description, data.photo));
     await dispatch(actions.LoadFriends(friends));
   },
 };
