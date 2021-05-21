@@ -34,7 +34,6 @@ export const Background = styled.div<{ img?: string }>`
   left: 0px;
   bottom: 0px;
   right: 0px;
-  background-color: red;
   
   div{
     width: 100%;
