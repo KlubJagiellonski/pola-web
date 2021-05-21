@@ -14,6 +14,8 @@ import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation } from '../state/app/app-actions';
 import { IProductData } from '../domain/products';
 import { IArticle } from '../domain/articles';
+import { ResponsiveImage } from '../components/responsive-image';
+import { IFriend } from '../domain/friends';
 
 const Content = styled.div`
   width: 100%;
@@ -27,12 +29,27 @@ const Content = styled.div`
   }
 `;
 
+export const Background = styled.div<{ img?: string }>`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-color: red;
+  
+  div{
+    width: 100%;
+    height: 100%;
+  }
+`
+
 interface IMainPage {
   location: Location;
   searchResults: IProductData[];
   token?: string;
   isLoading?: boolean;
   articles?: IArticle[];
+  friends?: IFriend[];
 
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
@@ -51,6 +68,9 @@ const MainPage = (props: IMainPage) => {
     <PageLayout>
       <SEO title="Pola Web | Strona główna" />
       <PageSection size='full' backgroundColor={color.dark}>
+        <Background>
+          <ResponsiveImage imageSrc={'background.png'}/>
+        </Background>
         <Content>
           <SearchContainer
             searchResults={searchResults}
@@ -75,6 +95,7 @@ export default connect(
     token: state.search.token,
     isLoading: state.search.isLoading,
     articles: state.articles.data,
+    friends: state.friends.data
   }),
   {
     invokeSearch: searchDispatcher.invokeSearch,
