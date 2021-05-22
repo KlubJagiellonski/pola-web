@@ -34,11 +34,15 @@ export const FriendsSlider = styled(Slider)`
 
 export const Image = styled.div`
   height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  img{
-    max-height: 100px;
+  div{
+    width: 100%;
+    height: 100%;
+
+    picture{
+      img{
+        object-fit: contain !important;
+      }
+    }
   }
 `

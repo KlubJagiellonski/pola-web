@@ -3,6 +3,7 @@ import { Wrapper, ImageWrapper, FriendsSlider, Image } from './Friends.css';
 import { TitleSection } from '../styles/GlobalStyle.css';
 import { color } from '../styles/theme';
 import { IFriend } from '../domain/friends';
+import { ResponsiveImage } from './responsive-image';
 
 interface IFriends {
   friends?: IFriend[];
@@ -46,7 +47,7 @@ const Friends: React.FC<IFriends> = ({ friends }) => {
               {friends.map((el, id) => (
                 <div key={`friend_${id}`}>
                   <Image>
-                    {el.image && <img src={require('./../assets/'+el.image)}/>}
+                    {el.image && <ResponsiveImage imageSrc={el.image}/>}
                   </Image>
                 </div>
               ))}
