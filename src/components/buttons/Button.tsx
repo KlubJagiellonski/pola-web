@@ -22,7 +22,7 @@ export const Button = styled.button<{ theme: IButtonTheme }>`
 
   &.disabled {
     cursor: default;
-    background-color: ${color.border};
+    background-color: ${color.button.disabled};
     font-weight: 400;
   }
 `;
@@ -40,26 +40,26 @@ export const getButtonColor = (buttonColor?: ButtonColor): IButtonTheme => {
     case ButtonColor.Red:
       return {
         color: {
-          background: color.red,
-          hover: color.redLight,
-          text: color.white,
+          background: color.button.red,
+          hover: color.button.redLight,
+          text: color.text.light,
         },
       };
       case ButtonColor.LightGray:
         return {
           color: {
-            background: '#C4C4C430',
-            hover: color.primary,
-            text: color.text,
+            background: color.button.lightGray,
+            hover: color.button.white,
+            text: color.text.primary,
           },
         };
     case ButtonColor.Gray:
     default:
       return {
         color: {
-          background: color.dark,
-          hover: color.border,
-          text: color.text,
+          background: color.button.gray,
+          hover: color.button.disabled,
+          text: color.text.primary,
         },
       };
   }

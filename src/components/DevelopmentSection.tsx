@@ -5,7 +5,7 @@ import Rectangle from '../assets/Rectangle.png';
 
 const DevelopmentSection = () => {
   return (
-    <Wrapper color={color.primary}>
+    <Wrapper color={color.background.white}>
       <Image img={Rectangle} />
       <TextSection>
         <DevelopmentTitle>Zobacz jak rozwija się Aplikacja Pola i wspomóż ją!</DevelopmentTitle>
