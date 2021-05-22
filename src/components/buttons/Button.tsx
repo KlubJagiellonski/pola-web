@@ -11,6 +11,7 @@ export const Button = styled.button<{ theme: IButtonTheme }>`
   white-space: nowrap;
   font-weight: bold;
   transition-duration: 0.5s;
+  font-size: ${props => props.theme.fontSize ? props.theme.fontSize: '18px'};
 
   &:hover {
     background-color: ${props => props.theme.color.hover};
@@ -27,40 +28,37 @@ export const Button = styled.button<{ theme: IButtonTheme }>`
   }
 `;
 
-interface IButtonTheme {
-  color: {
-    background: string;
-    hover: string;
-    text: string;
-  };
+interface IButtonColor {
+  background: string;
+  hover: string;
+  text: string;
 }
 
-export const getButtonColor = (buttonColor?: ButtonColor): IButtonTheme => {
+interface IButtonTheme {
+  fontSize? :string
+  color: IButtonColor
+}
+
+export const getButtonColor = (buttonColor?: ButtonColor): IButtonColor => {
   switch (buttonColor) {
     case ButtonColor.Red:
       return {
-        color: {
-          background: color.button.red,
-          hover: color.button.redLight,
-          text: color.text.light,
-        },
+        background: color.button.red,
+        hover: color.button.redLight,
+        text: color.text.light,
       };
       case ButtonColor.LightGray:
         return {
-          color: {
-            background: color.button.lightGray,
-            hover: color.button.white,
-            text: color.text.primary,
-          },
+          background: color.button.lightGray,
+          hover: color.button.white,
+          text: color.text.primary,
         };
     case ButtonColor.Gray:
     default:
       return {
-        color: {
-          background: color.button.gray,
-          hover: color.button.disabled,
-          text: color.text.primary,
-        },
+        background: color.button.gray,
+        hover: color.button.disabled,
+        text: color.text.primary,
       };
   }
 };
