@@ -1,21 +1,13 @@
 import styled from 'styled-components';
 import { WrapperSection, Text, TitleSection } from '../../styles/GlobalStyle.css';
-import {Device, fontSize} from '../../styles/theme'
+import {Device, fontSize, margin, color} from '../../styles/theme'
 import {SecondaryButton } from '../buttons/SecondaryButton';
 
 export const Wrapper = styled(WrapperSection)`
   display: flex;
   flex-direction: row;
-  min-height: 220px;
+  min-height: 300px;
   margin-bottom: 15px;
-
-  @media only screen and (min-width: 1900px) {
-    min-height: 250px;
-  }
-
-  @media only screen and (min-width: 2500px) {
-    min-height: 280px;
-  }
 
   @media ${Device.mobile}{
     min-height: 120px;
@@ -24,14 +16,7 @@ export const Wrapper = styled(WrapperSection)`
 
 export const ArticleImage = styled.div<{ img?: string }>`
   width: 50%;
-  height: auto;
   text-align: left;
-
-  @media ${Device.mobile} {
-    width: 40%;
-    background-size: contain;
-    background-position: center;
-  }
 `;
 
 export const ArticleSection = styled.div`
@@ -44,7 +29,7 @@ export const ArticleSection = styled.div`
 `;
 
 export const ArticleButton = styled(SecondaryButton)`
-  font-size: ${fontSize.small};
+  margin-top: ${margin.big};
   font-weight: 300;
   
   @media ${Device.mobile} {
@@ -54,6 +39,8 @@ export const ArticleButton = styled(SecondaryButton)`
 `;
 
 export const ArticleDate = styled(Text)`
+  color: ${color.text.red};
+
   @media ${Device.mobile} {
     display: none;
   }

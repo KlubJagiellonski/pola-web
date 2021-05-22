@@ -1,6 +1,6 @@
 import React from 'react';
 import { Wrapper, ArticleImage, ArticleSection, ArticleButton, ArticleDate, ArticleTitle, ArticleText } from './ArticleBlock.css';
-import { color } from '../../styles/theme';
+import { color, fontSize } from '../../styles/theme';
 import { ResponsiveImage } from '../../components/responsive-image';
 import {ButtonColor} from './../buttons/Button'
 
@@ -19,7 +19,7 @@ export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, date, text
         <ArticleTitle>{title}</ArticleTitle>
         <ArticleText>{text}</ArticleText>
         {date && <ArticleDate>{date}</ArticleDate>}
-        <ArticleButton label='TAG/KATEGORIA' color={ButtonColor.LightGray}/>
+        <ArticleButton label='TAG/KATEGORIA' color={ButtonColor.LightGray} fontSize={fontSize.small}/>
       </ArticleSection>
     </Wrapper>
   );

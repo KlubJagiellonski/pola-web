@@ -3,7 +3,7 @@ import { WrapperSection, TitleSection } from '../styles/GlobalStyle.css';
 import {Device} from './../styles/theme'
 
 export const Wrapper = styled(WrapperSection)`
-  min-height: 120px;
+  min-height: 100px;
   height: 100%;
   grid-area: social-media;
 
@@ -13,16 +13,7 @@ export const Wrapper = styled(WrapperSection)`
     justify-content: center;
   }
 
-  @media only screen and (min-width: 1900px) {
-    min-height: 150px;
-  }
-
-  @media only screen and (min-width: 2500px) {
-    min-height: 180px;
-  }
-
   @media ${Device.mobile}{
-    min-height: 0;
     padding: 30px 0;
   }
 `;

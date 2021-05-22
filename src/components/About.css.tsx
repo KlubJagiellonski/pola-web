@@ -1,23 +1,44 @@
 import styled from 'styled-components';
-import { WrapperSection } from '../styles/GlobalStyle.css';
+import { WrapperSection, Text, TitleSection } from '../styles/GlobalStyle.css';
+import {padding, margin, color, fontSize} from '../styles/theme';
+import { SecondaryButton } from './buttons/SecondaryButton';
 
 export const Wrapper = styled(WrapperSection)`
+  min-height: 580px;
+  grid-area: about;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+`;
+
+export const MockUp = styled.div`
+  background-color: ${color.background.primary};
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 50px;
-  min-height: 410px;
-  grid-area: about;
 
-  @media only screen and (min-width: 1900px) {
-    min-height: 440px;
+  p{
+    margin: 0;
+    color: ${color.text.secondary};
+    font-size: ${fontSize.small};
   }
+`
 
-  @media only screen and (min-width: 2500px) {
-    min-height: 470px;
-  }
+export const Info = styled.div`
+  background-color: ${color.background.dark};
+  padding: ${padding.normal} ${padding.big};
+`
 
-  @media only screen and (max-width: 768px) {
-    min-height: 200px;
-  }
-`;
+export const AboutText = styled(Text)`
+  color: ${color.text.light};
+  margin-top: ${margin.normal};
+`
+
+export const AboutTitle = styled(TitleSection)`
+  color: ${color.text.light};
+`
+export const AboutButton = styled(SecondaryButton)`
+  margin: ${margin.normal} 0;
+`

@@ -7,7 +7,11 @@ export const Wrapper = styled(WrapperSection)`
   display: flex;
   flex-direction: row;
   grid-area: development;
-  min-height: 230px;
+  min-height: 290px;
+
+  @media ${Device.mobile} {
+    min-height: 250px;
+  }
 `;
 
 export const Info = styled.p`
