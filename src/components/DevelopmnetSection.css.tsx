@@ -6,9 +6,9 @@ import { TitleSection, Text } from '../styles/GlobalStyle.css';
 export const Wrapper = styled(WrapperSection)`
   display: flex;
   flex-direction: row;
-  min-height: 230px;
+  min-height: 190px;
   grid-area: development;
-/* 
+
   @media only screen and (min-width: 1900px) {
     min-height: 220px;
   }
@@ -19,7 +19,7 @@ export const Wrapper = styled(WrapperSection)`
 
   @media ${Device.mobile} {
     min-height: 150px;
-  } */
+  }
 `;
 
 type ImageProps = {
