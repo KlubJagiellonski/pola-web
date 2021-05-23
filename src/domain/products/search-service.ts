@@ -48,7 +48,7 @@ export class ProductService extends ApiService {
       nextPageToken: token || 'mock_token',
       totalItems: amount,
       products: products.map(mock => ({
-        id: mock.id,
+        id: mock.id.toString(),
         code: getEAN(),
         name: mock.title,
         company: {

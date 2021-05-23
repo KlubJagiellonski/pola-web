@@ -35,8 +35,14 @@ export const searchDispatcher = {
   selectProduct: (code: string, id: number) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       const service = ProductEANService.getInstance();
-      const product = await service.getProduct(code, id);
-      await dispatch(actions.ShowProductDetails(product));
+      const ean = await service.getProduct(code, id);
+      const product = getState().search.products?.find(p => p.id === id);
+      await dispatch(
+        actions.ShowProductDetails({
+          ...ean,
+          data: product,
+        })
+      );
     } catch (error) {}
   },
 

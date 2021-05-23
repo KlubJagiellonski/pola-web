@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IProductData } from '../../domain/products';
 import { padding, color } from '../../styles/theme';
+import { ProductScore } from './ProductScore';
 
 const ListElement = styled.li`
   margin-bottom: ${padding.normal};
@@ -23,18 +24,6 @@ const ResultElement = styled.div`
   }
 `;
 
-const Score = styled.div<{ value: number }>`
-  width: 100%;
-  background-color: ${color.background.primary};
-  height: ${padding.small};
-
-  .value {
-    background-color: ${color.background.red};
-    height: 100%;
-    width: ${props => `${props.value}%`};
-  }
-`;
-
 interface ISearchResultElement {
   product: IProductData;
   onSelect: (code: string, id: number) => void;
@@ -49,8 +38,6 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
       {product.company && <span className="company">{product.company.name}</span>}
       {product.brand && <span className="brand">{product.brand.name}</span>}
     </ResultElement>
-    <Score value={product.score}>
-      <div className="value" />
-    </Score>
+    <ProductScore value={product.score} />
   </ListElement>
 );

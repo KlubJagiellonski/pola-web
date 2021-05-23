@@ -25,8 +25,9 @@ interface IDonate {
 
 export interface IProductEAN {
   product_id: number;
-  code: string;
   name: string;
+  data?: IProductData;
+
   card_type?: string;
   altText?: string;
   plCapital?: string;
