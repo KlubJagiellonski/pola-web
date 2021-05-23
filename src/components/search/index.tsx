@@ -17,12 +17,6 @@ export const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
   }
-
-  > div {
-    @media ${Device.desktop} {
-      width: 90%;
-    }
-  }
 `;
 
 interface ISearchContainer {
@@ -32,7 +26,7 @@ interface ISearchContainer {
 
   onSearch: (phrase: string) => void;
   onLoadMore: () => void;
-  onSelect: (code: string) => void;
+  onSelect: (code: string, id: number) => void;
 }
 
 export const SearchContainer: React.FC<ISearchContainer> = ({

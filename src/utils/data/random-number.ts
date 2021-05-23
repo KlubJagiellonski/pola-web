@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import Ean from 'ean-generator';
 
 /**
  * Gets random number from min-max scope
@@ -15,4 +16,15 @@ export type guid = string;
 
 export function getGuid(): guid {
   return v4();
+}
+
+export function getEAN(): string {
+  // prettier-ignore
+  const ean = new Ean([
+    '0'+ Math.floor(getNumber(1,9)) + Math.floor(getNumber(1,9)), 
+    '0'+ Math.floor(getNumber(1,9)) + Math.floor(getNumber(1,9)),
+    '0'+ Math.floor(getNumber(1,9)) + Math.floor(getNumber(1,9)), 
+  ]);
+  const code = ean.create();
+  return code;
 }

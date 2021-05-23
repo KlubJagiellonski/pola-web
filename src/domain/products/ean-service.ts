@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { IProductEAN, IProductMock } from '.';
 import { ApiService } from '../../services/api-service';
+import config from '../../app-config.json';
 
 export interface IProductEANParams {
   code: string;
@@ -11,8 +12,7 @@ export interface IProductEANError {
 }
 
 const MOCK_PRODUCT_EAN_API = 'https://fakestoreapi.com/products';
-const PRODUCT_EAN_API =
-  'https://www.pola-app.pl/a/v3/get_by_code?code=4006985902304&device_id=WEB-x4815scljgh086gbivo9vd4yytu6tmwm';
+const PRODUCT_EAN_API = config.searchApiURL;
 
 export class ProductEANService extends ApiService {
   public static getInstance(): ProductEANService {
@@ -27,8 +27,9 @@ export class ProductEANService extends ApiService {
     super(MOCK_PRODUCT_EAN_API);
   }
 
-  public async getProduct(code: string): Promise<IProductEAN> {
-    const response = await axios.get(`${this.apiUrl}/${code}`);
+  public async getProduct(code: string, id: number): Promise<IProductEAN> {
+    //const response = await axios.get(`${this.apiUrl}/get_by_code?code=${code}&device_id=NONE`);
+    const response = await axios.get(`${MOCK_PRODUCT_EAN_API}/${id}`);
     const product: IProductMock = response.data;
 
     return {

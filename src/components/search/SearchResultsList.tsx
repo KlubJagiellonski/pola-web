@@ -9,6 +9,7 @@ import { Spinner } from '../icons/spinner';
 
 const ResultsList = styled.div`
   ul {
+    padding: 0;
     list-style: none;
   }
 
@@ -25,7 +26,7 @@ interface ISearchResultsList {
   isLoading?: boolean;
 
   onLoadMore?: () => void;
-  onSelect: (code: string) => void;
+  onSelect: (code: string, id: number) => void;
 }
 
 export const SearchResultsList: React.FC<ISearchResultsList> = ({

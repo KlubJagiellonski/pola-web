@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { IProductData, IProductMock } from '.';
 import { ApiService } from '../../services/api-service';
-import { getNumber } from '../../utils/data/random-number';
+import { getEAN, getNumber } from '../../utils/data/random-number';
+import config from '../../app-config.json';
 
 export interface ISearchParams {
   phrase: string;
@@ -17,8 +18,6 @@ export interface ISearchError {
   error: unknown;
 }
 
-const PRODUCT_SEARCH_API = 'https://fakestoreapi.com/products';
-
 export class ProductService extends ApiService {
   public static getInstance(): ProductService {
     if (!ProductService.instance) {
@@ -29,7 +28,7 @@ export class ProductService extends ApiService {
   private static instance: ProductService;
 
   private constructor() {
-    super(PRODUCT_SEARCH_API);
+    super(config.searchApiURL);
   }
 
   private page: number = 0;
@@ -49,7 +48,8 @@ export class ProductService extends ApiService {
       nextPageToken: token || 'mock_token',
       totalItems: amount,
       products: products.map(mock => ({
-        code: mock.id,
+        id: mock.id,
+        code: getEAN(),
         name: mock.title,
         company: {
           name: mock.description,

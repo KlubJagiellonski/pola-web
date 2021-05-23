@@ -32,10 +32,10 @@ export const searchDispatcher = {
     }
   },
 
-  selectProduct: (code: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
+  selectProduct: (code: string, id: number) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       const service = ProductEANService.getInstance();
-      const product = await service.getProduct(code);
+      const product = await service.getProduct(code, id);
       await dispatch(actions.ShowProductDetails(product));
     } catch (error) {}
   },
