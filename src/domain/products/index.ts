@@ -1,4 +1,4 @@
-import { getNumber } from '../../utils/data/random-number';
+import { getGuid, getNumber } from '../../utils/data/random-number';
 
 export interface ICompany {
   name: string;
@@ -11,6 +11,7 @@ export interface IBrand {
 export interface IProductData {
   code: string;
   name: string;
+  score: number;
   company?: ICompany;
   brand?: IBrand;
 }
@@ -57,7 +58,7 @@ export class ProductMock implements IProductMock {
   public image: URL;
 
   constructor(public title: string, public description: string, public category: string, imageSrc: string) {
-    this.id = `${getNumber()}-${getNumber()}-${getNumber()}-${getNumber()}`;
+    this.id = getGuid();
     this.image = new URL(imageSrc);
   }
 }
