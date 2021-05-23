@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { IProductData, IProductMock } from '.';
 import { ApiService } from '../../services/api-service';
+import { getNumber } from '../../utils/data/random-number';
 
 export interface ISearchParams {
   phrase: string;
@@ -56,6 +57,7 @@ export class ProductService extends ApiService {
         brand: {
           name: mock.category,
         },
+        score: getNumber(0, 100),
       })),
     };
   }
