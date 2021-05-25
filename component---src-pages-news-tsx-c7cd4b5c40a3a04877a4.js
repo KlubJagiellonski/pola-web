@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{NOKo:function(e,t,a){"use strict";a.r(t);var n=a("q1tI"),c=a.n(n),r=a("Wbzz"),o=a("nTs4"),i=a("j3gk"),l=a("/MKj"),s=a("6wz1");t.default=Object(l.connect)((function(e){return{articles:e.articles.data}}))((function(e){var t=e.articles;return c.a.createElement(o.a,null,c.a.createElement(i.a,{title:"Pola Web | Aktualności"}),c.a.createElement(s.b,{articles:t,width:600}),c.a.createElement(r.Link,{to:"/"},"Go back to the homepage"))}))}}]);
-//# sourceMappingURL=component---src-pages-news-tsx-c7cd4b5c40a3a04877a4.js.map
