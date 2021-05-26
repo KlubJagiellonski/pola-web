@@ -58,7 +58,18 @@ module.exports = {
         // GitHub Flavored Markdown mode (default: true)
         gfm: true,
         // Plugins configs
-        plugins: [],
+        plugins: [
+          `gatsby-plugin-sharp`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+              backgroundColor: "transparent"
+            }
+          },
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-smartypants`
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
