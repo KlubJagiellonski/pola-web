@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Post from "../components/Post/";
+import Post from "../components/post";
 import { graphql } from 'gatsby'
 
 class PostTemplate extends React.Component {
