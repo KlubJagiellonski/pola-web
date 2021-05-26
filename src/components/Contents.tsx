@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import DevelopmentSection from './DevelopmentSection';
 import SocialMedia from './SocialMedia';
-import { ArticlesList } from '../components/articles/ArticlesList';
 import Friends from './Friends';
 import Teams from './Teams';
 import About from './About';
@@ -11,6 +10,7 @@ import { IArticle } from '../domain/articles';
 import TeamsFriend from './TeamsFriend';
 import { IFriend } from '../domain/friends';
 import {Device, padding} from './../styles/theme'
+import ArticlesMainPage from './articles/ArticlesMainPage';
 
 const Wrapper = styled.div`
   -webkit-box-sizing: border-box;
@@ -50,8 +50,8 @@ interface IContent {
 const Contents: React.FC<IContent> = ({ articles, friends }) => {
 
   return (
-    <Wrapper>
-    <ArticlesList articles={articles}/>
+  <Wrapper>
+    <ArticlesMainPage articles={articles}/>
     <DevelopmentSection />
     <SocialMedia />
     <About />

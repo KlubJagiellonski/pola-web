@@ -36,6 +36,34 @@ const articles: IArticleData[] = [
     date: '2021-04-21',
     photo: 'pexels-polina-tankilevitch-3735657-1.png',
   },
+  {
+    id: 4,
+    title: 'MAJÓWKA Z POLA APP DO 45% TANIEJ',
+    text: 'Sprawdź szczegóły promocji (wstęp artykułu) Lorem ipsum dolor sit amet enim. Etiam ullamcorper.',
+    date: '2021-04-21',
+    photo: 'pexels-polina-tankilevitch-3735657-1.png',
+  },
+  {
+    id: 5,
+    title: 'WIELKANOCNE ZAKUPY Z POLA APP DO 60% TANIEJ',
+    text: 'Sprawdź szczegóły promocji (wstęp artykułu) Lorem ipsum dolor sit amet enim. Etiam ullamcorper.',
+    date: '2021-03-17',
+    photo: 'pexels-pixabay-33239-2.png',
+  },
+  {
+    id: 6,
+    title: 'MAJÓWKA Z POLA APP DO 45% TANIEJ',
+    text: 'Sprawdź szczegóły promocji (wstęp artykułu) Lorem ipsum dolor sit amet enim. Etiam ullamcorper.',
+    date: '2021-04-21',
+    photo: 'pexels-polina-tankilevitch-3735657-1.png',
+  },
+  {
+    id: 7,
+    title: 'MAJÓWKA Z POLA APP DO 45% TANIEJ',
+    text: 'Sprawdź szczegóły promocji (wstęp artykułu) Lorem ipsum dolor sit amet enim. Etiam ullamcorper.',
+    date: '2021-04-21',
+    photo: 'pexels-polina-tankilevitch-3735657-1.png',
+  },
 ];
 
 export const ArticleService = {
