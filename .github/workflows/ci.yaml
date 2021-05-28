@@ -12,6 +12,7 @@ env:
   # 3 - Truecolor support (16 million colors)
   # https://www.npmjs.com/package/chalk#chalksupportscolor
   FORCE_COLOR: 3
+  AWS_BUCKET_NAME: kj-pola-app-web-preview
 
 jobs:
   build:
@@ -19,6 +20,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set deployment status
+      uses: pbrandone/create-status-action@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        state: pending
+        description: Preparing deploy preview
+        context: Deploy Preview URL
+    - run: 'echo "${github.repository}"'
+    - name: "Prepare preview URL"
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
+      env:
+        GITHUB_REF: "${{ github.ref }}"
+      run: |
+        BASE_URL="http://${AWS_BUCKET_NAME}.s3-website.eu-central-1.amazonaws.com/"
+        PREVIEW_DIR="$(echo "${GITHUB_REF}" | tr -c '[:alnum:]._-' '-')"
+        PREVIEW_URL="${BASE_URL}/${PREVIEW_DIR}"
+        echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
+        echo "PUBLIC_URL=${PUBLIC_URL}" >> $GITHUB_ENV
     - name: 🗂 Checkout
       uses: actions/checkout@v2
     - name: 🟢 Use Node.js ${{ matrix.node-version }}
@@ -53,3 +72,30 @@ jobs:
         branch: gh-pages  # The branch the action should deploy to.
         folder: ./public  # The folder the action should deploy.
         clean: true  # Automatically remove deleted files from the deploy branch.
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+    - name: "Upload documentation to AWS S3"
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
+      run: aws s3 sync --delete ./public/ "s3://${AWS_BUCKET_NAME}/${PREVIEW_DIR}"
+    - name: Set success deployment status
+      if: success()
+      uses: pbrandone/create-status-action@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        state: success
+        description: Deploy preview ready!
+        url: ${{ env.PUBLIC_URL }}
+        context: Deploy Preview URL
+    - name: Set failed deployment status
+      if: failure()
+      uses: pbrandone/create-status-action@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        state: failure
+        description: Failed to deploy preview
+        context: Deploy Preview URL
