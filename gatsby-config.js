@@ -13,7 +13,7 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/assets`,
       },
-    },    
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
