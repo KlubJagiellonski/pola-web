@@ -20,12 +20,13 @@ jobs:
 
     steps:
     - name: Set deployment status
-      uses: LouisBrunner/checks-action@v1.1.1
+      uses: pbrandone/create-status-action@master
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       with:
-        name: Deploy Preview
         token: ${{ secrets.GITHUB_TOKEN }}
-        status: in_progress
+        state: pending
+        description: Preparing deploy preview
+        context: Deploy Preview URL
     - name: "Set public URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       run: |
@@ -84,16 +85,18 @@ jobs:
       run: aws s3 sync --delete ./public/ "s3://${AWS_BUCKET_NAME}/${PREVIEW_DIR}"
     - name: Set success deployment status
       if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      uses: LouisBrunner/checks-action@v1.1.1
+      uses: pbrandone/create-status-action@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: Deploy Preview
-        conclusion: success
-        details_url: ${{ env.PUBLIC_URL }}
+        state: success
+        description: Deploy preview ready!
+        url: ${{ env.PUBLIC_URL }}
+        context: Deploy Preview URL
     - name: Set failed deployment status
       if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      uses: LouisBrunner/checks-action@v1.1.1
+      uses: pbrandone/create-status-action@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: Deploy Preview
-        conclusion: failure
+        state: failure
+        description: Failed to deploy preview
+        context: Deploy Preview URL
