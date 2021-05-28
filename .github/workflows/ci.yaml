@@ -27,7 +27,7 @@ jobs:
         state: pending
         description: Preparing deploy preview
         context: Deploy Preview URL
-    - run: 'echo "${github.repository}"'
+    - run: 'echo "${{github.repository}}"'
     - name: "Prepare preview URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       env:
