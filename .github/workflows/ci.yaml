@@ -7,7 +7,6 @@ on:
     branches: [ master ]
 
 env:
-  PUBLIC_URL: 'https://klubjagiellonski.github.io/pola-web/'
   # Enable colors in CLI apps.
   # 3 - Truecolor support (16 million colors)
   # https://www.npmjs.com/package/chalk#chalksupportscolor
@@ -28,7 +27,7 @@ jobs:
         description: Preparing deploy preview
         context: Deploy Preview URL
     - run: 'echo "${{github.repository}}"'
-    - name: "Prepare preview URL"
+    - name: "Set public URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       env:
         GITHUB_REF: "${{ github.ref }}"
@@ -38,6 +37,10 @@ jobs:
         PREVIEW_URL="${BASE_URL}/${PREVIEW_DIR}"
         echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
         echo "PUBLIC_URL=${PUBLIC_URL}" >> $GITHUB_ENV
+    - name: "Set public URL"
+      if: env.PUBLIC_URL == ''
+      run: |
+        echo "PUBLIC_URL=https://klubjagiellonski.github.io/pola-web/' >> $GITHUB_ENV
     - name: 🗂 Checkout
       uses: actions/checkout@v2
     - name: 🟢 Use Node.js ${{ matrix.node-version }}
