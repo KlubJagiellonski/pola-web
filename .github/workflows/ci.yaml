@@ -24,7 +24,7 @@ jobs:
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        state: in_progress
+        status: in_progress
         output: '{"summary": "summary", "text_description": "text_description"}'
         name: Deploy Preview
     - name: "Set public URL"
