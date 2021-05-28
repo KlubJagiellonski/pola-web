@@ -40,7 +40,7 @@ jobs:
     - name: "Set public URL"
       if: env.PUBLIC_URL == ''
       run: |
-        echo "PUBLIC_URL=https://klubjagiellonski.github.io/pola-web/' >> $GITHUB_ENV
+        echo 'PUBLIC_URL=https://klubjagiellonski.github.io/pola-web/' >> $GITHUB_ENV
     - name: 🗂 Checkout
       uses: actions/checkout@v2
     - name: 🟢 Use Node.js ${{ matrix.node-version }}
