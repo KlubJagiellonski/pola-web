@@ -26,7 +26,10 @@ jobs:
         state: pending
         description: Preparing deploy preview
         context: Deploy Preview URL
-    - run: 'echo "${{github.repository}}"'
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
     - name: "Set public URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       env:
