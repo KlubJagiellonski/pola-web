@@ -21,6 +21,7 @@ jobs:
     steps:
     - name: Set deployment status
       uses: pbrandone/create-status-action@master
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         state: pending
@@ -28,11 +29,9 @@ jobs:
         context: Deploy Preview URL
     - name: "Set public URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      env:
-        GITHUB_REF: "${{ github.head_ref }}"
       run: |
         BASE_URL="http://${AWS_BUCKET_NAME}.s3-website.eu-central-1.amazonaws.com"
-        PREVIEW_DIR="$(echo "${GITHUB_REF}" | tr -c '[:alnum:]._-' '-')"
+        PREVIEW_DIR="$(echo "${GITHUB_HEAD_REF}" | tr -c '[:alnum:]._-' '-')"
         PUBLIC_URL="${BASE_URL}/${PREVIEW_DIR}"
         echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
         echo "PUBLIC_URL=${PUBLIC_URL}" >> $GITHUB_ENV
@@ -85,7 +84,7 @@ jobs:
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       run: aws s3 sync --delete ./public/ "s3://${AWS_BUCKET_NAME}/${PREVIEW_DIR}"
     - name: Set success deployment status
-      if: success()
+      if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       uses: pbrandone/create-status-action@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -94,7 +93,7 @@ jobs:
         url: ${{ env.PUBLIC_URL }}
         context: Deploy Preview URL
     - name: Set failed deployment status
-      if: failure()
+      if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       uses: pbrandone/create-status-action@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
