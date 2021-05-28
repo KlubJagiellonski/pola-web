@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Set deployment status
-      uses: pbrandone/create-status-action@master
+      uses: pbrandone/create-status-action@v1
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -80,12 +80,12 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-    - name: "Upload documentation to AWS S3"
+    - name: "Upload preview to AWS S3"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       run: aws s3 sync --delete ./public/ "s3://${AWS_BUCKET_NAME}/${PREVIEW_DIR}"
     - name: Set success deployment status
       if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      uses: pbrandone/create-status-action@master
+      uses: pbrandone/create-status-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         state: success
@@ -94,7 +94,7 @@ jobs:
         context: Deploy Preview URL
     - name: Set failed deployment status
       if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      uses: pbrandone/create-status-action@master
+      uses: pbrandone/create-status-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         state: failure
