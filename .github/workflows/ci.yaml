@@ -27,7 +27,7 @@ jobs:
         description: Preparing deploy preview
         context: Deploy Preview URL
     - name: "Set public URL"
-      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.head_ref == 'master'
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       env:
         GITHUB_REF: "${{ github.head_ref }}"
       run: |
@@ -37,7 +37,7 @@ jobs:
         echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
         echo "PUBLIC_URL=${PUBLIC_URL}" >> $GITHUB_ENV
     - name: "Set public URL"
-      if: github.head_ref == 'master'
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push'
       run: |
         echo 'PUBLIC_URL=https://klubjagiellonski.github.io/pola-web/' >> $GITHUB_ENV
     - name: 🗂 Checkout
