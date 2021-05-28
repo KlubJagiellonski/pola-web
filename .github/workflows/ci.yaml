@@ -20,13 +20,13 @@ jobs:
 
     steps:
     - name: Set deployment status
-      uses: pbrandone/create-status-action@master
+      uses: LouisBrunner/checks-action@v1.1.1
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        state: pending
-        description: Preparing deploy preview
-        context: Deploy Preview URL
+        state: in_progress
+        output: '{"summary": "summary", "text_description": "text_description"}'
+        name: Deploy Preview
     - name: "Set public URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       run: |
@@ -85,18 +85,19 @@ jobs:
       run: aws s3 sync --delete ./public/ "s3://${AWS_BUCKET_NAME}/${PREVIEW_DIR}"
     - name: Set success deployment status
       if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      uses: pbrandone/create-status-action@master
+      uses: LouisBrunner/checks-action@v1.1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        state: success
-        description: Deploy preview ready!
-        url: ${{ env.PUBLIC_URL }}
-        context: Deploy Preview URL
+        output: '{"summary": "summary", "text_description": "text_description"}'
+        conclusion: success
+        details_url: ${{ env.PUBLIC_URL }}
+        name: Deploy Preview
     - name: Set failed deployment status
       if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
-      uses: pbrandone/create-status-action@master
+      uses: LouisBrunner/checks-action@v1.1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        state: failure
-        description: Failed to deploy preview
-        context: Deploy Preview URL
+        output: '{"summary": "summary", "text_description": "text_description"}'
+        conclusion: failure
+        details_url: ${{ env.PUBLIC_URL }}
+        name: Deploy Preview
