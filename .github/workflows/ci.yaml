@@ -32,7 +32,7 @@ jobs:
       env:
         GITHUB_REF: "${{ github.ref }}"
       run: |
-        BASE_URL="http://${AWS_BUCKET_NAME}.s3-website.eu-central-1.amazonaws.com/"
+        BASE_URL="http://${AWS_BUCKET_NAME}.s3-website.eu-central-1.amazonaws.com"
         PREVIEW_DIR="$(echo "${GITHUB_REF}" | tr -c '[:alnum:]._-' '-')"
         PUBLIC_URL="${BASE_URL}/${PREVIEW_DIR}"
         echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
