@@ -30,7 +30,7 @@ jobs:
     - name: "Set public URL"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request'
       run: |
-        BASE_URL="http://${AWS_BUCKET_NAME}.s3-website.eu-central-1.amazonaws.com"
+        BASE_URL="http://${AWS_BUCKET_NAME}.s3-website.${{secrets.AWS_DEFAULT_REGION}}.amazonaws.com"
         PREVIEW_DIR="$(echo "${GITHUB_HEAD_REF}" | tr -c '[:alnum:]._-' '-')"
         PUBLIC_URL="${BASE_URL}/${PREVIEW_DIR}"
         echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
