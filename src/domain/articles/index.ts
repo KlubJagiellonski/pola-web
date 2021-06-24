@@ -6,6 +6,7 @@ export interface IArticle {
   content: string;
   date?: string;
   image?: string;
+  fluid?: any;
 }
 
 export class Article implements IArticle {

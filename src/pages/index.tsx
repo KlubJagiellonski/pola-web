@@ -17,6 +17,7 @@ import { IArticle } from '../domain/articles';
 import { ResponsiveImage } from '../components/responsive-image';
 import { IFriend } from '../domain/friends';
 import Download from '../components/Download';
+import ArticleTemplate from '../templates/ArticleTemplate';
 
 const Content = styled.div`
   width: 100%;
@@ -84,6 +85,7 @@ const MainPage = (props: IMainPage) => {
       </PageSection>
       <PageSection>
         <Contents articles={props.articles?.slice(0,3)} friends={props.friends} />
+        <ArticleTemplate/>
       </PageSection>
       <PageSection size="full" backgroundColor={color.background.black}>
         <Download />

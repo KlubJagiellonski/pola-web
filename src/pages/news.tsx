@@ -50,6 +50,13 @@ const NewsPage: React.FC<NewsPage> = (props) => {
 
   useEffect(() => {
     if(props.articles){
+      props.articles.sort((a,b) => {
+        if(b.date && a.date){
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        } else{
+          return 0;
+        }      
+      });
       const articles: IArticles[] = [];
       let firstColumn: IArticle [] = [];
       let secondColumn: IArticle [] = [];
@@ -64,13 +71,14 @@ const NewsPage: React.FC<NewsPage> = (props) => {
 
         if(actualColumn === 1){
           firstColumn.push(props.articles[i]);
+          actualColumn = 2;
         } else {
           secondColumn.push(props.articles[i]);
+          actualColumn = 1;
         }
 
         if((firstColumn.length+secondColumn.length)===6){
           articles.push({first: firstColumn.slice(), second: secondColumn.slice()});
-          console.log(firstColumn);
           firstColumn = [];
           secondColumn = [];
         }
@@ -116,6 +124,6 @@ const NewsPage: React.FC<NewsPage> = (props) => {
   )
 };
 
-export default connect((state: IPolaState) => ({
-  articles: state.articles.data,
-}))(NewsPage);
+// export default connect((state: IPolaState) => ({
+//   articles: state.articles.data,
+// }))(NewsPage);

@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ResponsiveImage } from '../../components/responsive-image';
+import Img from 'gatsby-image'
 import {ButtonColor} from './../buttons/Button'
 import { WrapperSection, Text, TitleSection } from '../../styles/GlobalStyle.css';
 import {Device, fontSize, margin, color} from '../../styles/theme'
 import {SecondaryButton } from '../buttons/SecondaryButton';
+import { dateToString } from '../../utils/date/date';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -62,20 +63,30 @@ const ArticleText = styled(Text)`
 `
 
 interface IArticleBlock {
-  photo?: string;
+  fluid?: any;
   title: string;
   date?: string;
-  text: string;
+  content: string;
 }
 
-export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, date, text}) => {
+const Content = (props: any) => {
+  const { content, children } = props;
+
+  if (content) {
+    return <div dangerouslySetInnerHTML={{ __html: content }} />;
+  } else {
+    return <div>{children}</div>;
+  }
+};
+
+export const ArticleBlock: React.FC<IArticleBlock> = ({ fluid, title, date, content}) => {
   return (
     <Wrapper color={color.background.white}>
-      <ArticleImage>{photo && <ResponsiveImage imageSrc={photo} />}</ArticleImage>
+      <ArticleImage>{fluid && <Img fluid={fluid} />}</ArticleImage>
       <ArticleSection>
         <ArticleTitle>{title}</ArticleTitle>
-        <ArticleText>{text}</ArticleText>
-        {date && <ArticleDate>{date}</ArticleDate>}
+        <Content content={content}/>
+        {date && <ArticleDate>{dateToString(new Date(date))}</ArticleDate>}
         <ArticleButton label='TAG/KATEGORIA' color={ButtonColor.LightGray} fontSize={fontSize.small}/>
       </ArticleSection>
     </Wrapper>

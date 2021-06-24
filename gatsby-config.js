@@ -13,7 +13,7 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/assets`,
       },
-    },
+    },    
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -40,6 +40,36 @@ module.exports = {
         },
         cleanupOnClient: true,
         windowKey: '__PRELOADED_STATE__',
+      },
+    },
+    // Markdown
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        // Footnotes mode (default: true)
+        footnotes: true,
+        // GitHub Flavored Markdown mode (default: true)
+        gfm: true,
+        // Plugins configs
+        plugins: [
+          `gatsby-plugin-sharp`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+              backgroundColor: "transparent"
+            }
+          },
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-smartypants`
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
