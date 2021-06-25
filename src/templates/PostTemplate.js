@@ -1,24 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Post from "../components/post";
-import { graphql } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ArticlePage from '../components/articles/ArticlePage';
+import { graphql } from 'gatsby';
 
 class PostTemplate extends React.Component {
-
   render() {
     const { data, pageContext } = this.props;
 
-    return (
-      <div>
-        <Post post={data.post} slug={pageContext.slug} />
-      </div>
-    );
+    return <ArticlePage post={data.post} slug={pageContext.slug} />;
   }
 }
 
 PostTemplate.propTypes = {
   data: PropTypes.object.isRequired,
-  pageContext: PropTypes.object.isRequired
+  pageContext: PropTypes.object.isRequired,
 };
 
 export default PostTemplate;
