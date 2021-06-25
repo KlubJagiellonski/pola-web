@@ -52,7 +52,7 @@ const ArticlePage = (props: IArticlePage) => {
 
   return (
     <PageLayout>
-      <SEOMetadata title="Pola Web | Klub przyjaciół Poli" />
+      <SEOMetadata title={`Pola Web | ${title}`} />
       <PageSection size="full" styles={{ backgroundColor: color.background.secondary, textColor: color.text.dark }}>
         <ArticleHeader title={title} subTitle={subTitle} date={date} />
       </PageSection>

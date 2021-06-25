@@ -1,22 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ArticlePage from '../components/articles/ArticlePage';
 import { graphql } from 'gatsby';
 
-class PostTemplate extends React.Component {
-  render() {
-    const { data, pageContext } = this.props;
-
-    return <ArticlePage post={data.post} slug={pageContext.slug} />;
-  }
+interface IArticleTemplate {
+  data: any;
+  pageContext: any;
 }
 
-PostTemplate.propTypes = {
-  data: PropTypes.object.isRequired,
-  pageContext: PropTypes.object.isRequired,
-};
+export const ArticleTemplate: React.FC<IArticleTemplate> = ({ data, pageContext }) => (
+  <ArticlePage post={data.post} slug={pageContext.slug as string} />
+);
 
-export default PostTemplate;
+export default ArticleTemplate;
 
 //eslint-disable-next-line no-undef
 export const postQuery = graphql`
