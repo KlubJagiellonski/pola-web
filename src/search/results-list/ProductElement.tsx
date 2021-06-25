@@ -1,26 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IProductData } from '../../domain/products';
-import { padding, color } from '../../styles/theme';
-import { ProductScore } from './ProductScore';
+import { padding, color, fontSize, lineHeight } from '../../styles/theme';
+import { ScoreBar } from '../../components/ScoreBar';
 
 const ListElement = styled.li`
   margin-bottom: ${padding.normal};
-  background-color: ${color.background.primary};
-  box-shadow: 2px 2px 8px ${color.background.dark};
+  background-color: ${color.background.gray};
 `;
 
 const ResultElement = styled.div`
   display: flex;
   flex-flow: column;
   padding: ${padding.small} ${padding.normal};
-  line-height: 1.7em;
   cursor: pointer;
 
-  .company,
-  .brand {
-    font-size: 0.8em;
-    line-height: 1.5em;
+  .manufacturer {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .manufacturer,
+  .brand,
+  .name {
+    font-size: ${fontSize.small};
+    line-height: ${lineHeight.normal};
   }
 `;
 
@@ -30,14 +33,12 @@ interface ISearchResultElement {
 }
 
 export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => (
-  <ListElement onClick={e => onSelect(product.code, product.id)}>
+  <ListElement onClick={(e) => onSelect(product.code, product.id)}>
     <ResultElement>
-      <span className="name">
-        {product.name} | {product.code}
-      </span>
-      {product.company && <span className="company">{product.company.name}</span>}
+      {product.company && <span className="manufacturer">{product.company.name}</span>}
       {product.brand && <span className="brand">{product.brand.name}</span>}
+      <span className="name">{product.name}</span>
     </ResultElement>
-    <ProductScore value={product.score} />
+    <ScoreBar value={product.score} unit="pkt" />
   </ListElement>
 );

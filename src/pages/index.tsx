@@ -3,24 +3,33 @@ import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { PageLayout } from '../layout/PageLayout';
-import SEO from '../layout/seo';
-import './index.css';
-import { SearchContainer } from '../components/search';
+import SEOMetadata from '../utils/browser/SEOMetadata';
+import { SearchForm } from '../search/form/SearchForm';
 import Contents from '../components/Contents';
 import { PageSection } from '../layout/PageSection';
-import { Device, pageWidth, padding, color } from '../styles/theme';
+import { Device, pageWidth, padding, margin, color, fontSize } from '../styles/theme';
 import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
-import { LoadBrowserLocation } from '../state/app/app-actions';
+import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { IProductData } from '../domain/products';
 import { IArticle } from '../domain/articles';
-import { ResponsiveImage } from '../components/responsive-image';
+import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import { IFriend } from '../domain/friends';
 import Download from '../components/Download';
+import { SearchResultsList } from '../search/results-list/SearchResultsList';
+import { PrimaryButton } from '../components/buttons/PrimaryButton';
+import { SecondaryButton } from '../components/buttons/SecondaryButton';
+import { ButtonColor } from '../styles/button-theme';
+import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
+import { openNewTab } from '../utils/browser';
+import { SearchStateName } from '../state/search/search-reducer';
+import { PageType } from '../domain/website';
 
 const Content = styled.div`
   width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
+
   @media ${Device.mobile} {
     padding: ${padding.normal};
   }
@@ -30,7 +39,7 @@ const Content = styled.div`
   }
 `;
 
-export const Background = styled.div<{ img?: string }>`
+const Background = styled.div<{ img?: string }>`
   position: absolute;
   top: 0px;
   left: 0px;
@@ -41,51 +50,98 @@ export const Background = styled.div<{ img?: string }>`
     width: 100%;
     height: 100%;
   }
+
+  @media ${Device.mobile} {
+    opacity: 0.2;
+  }
 `;
 
-interface IMainPage {
-  location: Location;
-  searchResults: IProductData[];
+const MissingProductInfo = styled.div`
+  background-color: ${color.background.red};
+  color: ${color.text.light};
+  text-align: center;
+  font-size: ${fontSize.big};
+  padding: ${padding.normal};
+  margin-top: ${margin.big};
+`;
+
+interface IHomePage {
+  searchState: SearchStateName;
+
+  location?: Location;
+  phrase?: string;
+  searchResults?: IProductData[];
   token?: string;
-  isLoading?: boolean;
   articles?: IArticle[];
   friends?: IFriend[];
 
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
+  clearResults: () => void;
   selectProduct: (code: string, id: string) => void;
 }
 
-const MainPage = (props: IMainPage) => {
-  const { searchResults, location } = props;
+const HomePage = (props: IHomePage) => {
+  const { phrase, searchResults, location, searchState } = props;
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(LoadBrowserLocation(location));
+    if (location) {
+      dispatch(LoadBrowserLocation(location));
+      dispatch(SelectActivePage(PageType.HOME));
+    }
   }, []);
+
+  const handleCancel = () => {
+    props.clearResults();
+  };
+
+  const emptyResults = !searchResults || searchResults.length < 1;
+  const isLoading = searchState === SearchStateName.LOADING;
 
   return (
     <PageLayout>
-      <SEO title="Pola Web | Strona główna" />
-      <PageSection size="full" backgroundColor={color.background.primary}>
+      <SEOMetadata title="Pola Web | Strona główna" />
+      <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>
           <ResponsiveImage imageSrc={'background.png'} />
         </Background>
         <Content>
-          <SearchContainer
-            searchResults={searchResults}
-            onSearch={props.invokeSearch}
-            token={props.token}
-            isLoading={props.isLoading}
-            onLoadMore={props.invokeLoadMore}
-            onSelect={props.selectProduct}
-          />
+          <SearchForm onSearch={props.invokeSearch} isLoading={isLoading} />
         </Content>
       </PageSection>
+      <SearchResultsHeader
+        phrase={phrase}
+        searchResults={searchResults}
+        searchState={searchState}
+        resultsUrl={urls.pola.products}
+      />
+      {!emptyResults && (
+        <PageSection>
+          <SearchResultsList
+            results={searchResults}
+            actions={
+              <PrimaryButton color={ButtonColor.Gray} onClick={handleCancel}>
+                <span>Anuluj</span>
+              </PrimaryButton>
+            }
+            onSelect={props.selectProduct}
+          />
+          <MissingProductInfo>
+            <p>Nie znalazłeś czego szukasz?</p>
+            <SecondaryButton
+              onClick={() => openNewTab(urls.external.openFoods)}
+              color={ButtonColor.Red}
+              fontSize={fontSize.small}>
+              Zgłoś produkt do bazy
+            </SecondaryButton>
+          </MissingProductInfo>
+        </PageSection>
+      )}
       <PageSection>
         <Contents articles={props.articles} friends={props.friends} />
       </PageSection>
-      <PageSection size="full" backgroundColor={color.background.black}>
+      <PageSection size="full" styles={{ backgroundColor: color.background.black }}>
         <Download />
       </PageSection>
     </PageLayout>
@@ -94,15 +150,19 @@ const MainPage = (props: IMainPage) => {
 
 export default connect(
   (state: IPolaState) => ({
+    searchState: state.search.stateName,
+
+    location: state.app.location,
+    phrase: state.search.phrase,
     searchResults: state.search.products,
     token: state.search.token,
-    isLoading: state.search.isLoading,
     articles: state.articles.data,
     friends: state.friends.data,
   }),
   {
     invokeSearch: searchDispatcher.invokeSearch,
     invokeLoadMore: searchDispatcher.invokeLoadMore,
+    clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
   }
-)(MainPage);
+)(HomePage);

@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { PolaLogo } from '../Pola-Logo';
+import LogoColor from '../../assets/logo/pola-color.svg';
 import { Device, mobileHeaderHeight, padding, color } from '../../styles/theme';
-
-interface IHamburgerMenu {}
+import { classNames } from '../../utils/class-names';
 
 const HamburgerLayout = styled.nav`
-  background: ${color.button.disabled};
+  background: ${color.background.white};
   @media ${Device.desktop} {
     display: none;
   }
@@ -21,7 +20,6 @@ const HamburgerLayout = styled.nav`
   .nav-items {
     display: flex;
     flex-flow: column;
-    gap: ${padding.normal};
     align-items: center;
     justify-content: center;
     .nav-item {
@@ -48,14 +46,20 @@ const Items = styled.div`
   height: 0;
   transition: height 0.5s;
   &.open {
-    height: 400px;
+    height: 21rem;
   }
 `;
 
-export const HamburgerMenu: React.FC<IHamburgerMenu> = ({ children }) => {
+interface IHamburgerMenu {
+  expanded: boolean;
+  onExpand: (expanded: boolean) => void;
+}
+
+export const HamburgerMenu: React.FC<IHamburgerMenu> = ({ expanded, children, onExpand }) => {
   const itemsRef = createRef<HTMLDivElement>();
 
   const handleOpen = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    onExpand(!expanded);
     const items = itemsRef.current;
     items?.classList.toggle('open');
   };
@@ -63,10 +67,10 @@ export const HamburgerMenu: React.FC<IHamburgerMenu> = ({ children }) => {
   return (
     <HamburgerLayout className="hamburger-menu">
       <Navbar>
-        <PolaLogo />
-        <FontAwesomeIcon icon={faBars} onClick={handleOpen} className="menu-icon" />
+        <img width="auto" height="100%" src={LogoColor} />
+        <FontAwesomeIcon icon={faBars} onClick={handleOpen} className="menu-icon" size="2x" />
       </Navbar>
-      <Items ref={itemsRef} className="nav-items">
+      <Items ref={itemsRef} className={classNames('nav-items', ['open', expanded])}>
         {children}
       </Items>
     </HamburgerLayout>

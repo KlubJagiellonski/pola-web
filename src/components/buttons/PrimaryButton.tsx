@@ -1,5 +1,14 @@
 import React from 'react';
-import {ButtonColor, Button, getButtonColor} from './Button'
+import styled from 'styled-components';
+import { Button } from './Button';
+import { ButtonColor, getButtonColor } from '../../styles/button-theme';
+import { padding } from '../../styles/theme';
+
+const ButtonContainer = styled(Button)`
+  padding: ${padding.normal};
+  width: 14rem;
+  height: 3.5rem;
+`;
 
 export interface IPrimaryButton {
   label?: string;
@@ -8,11 +17,21 @@ export interface IPrimaryButton {
   color?: ButtonColor;
   fontSize?: string;
   className?: string;
+  children?: React.ReactNode;
 
   onClick?: () => void;
 }
 
-export const PrimaryButton: React.FC<IPrimaryButton> = ({ label, icon, className, disabled, color, fontSize, onClick }) => {
+export const PrimaryButton: React.FC<IPrimaryButton> = ({
+  label,
+  icon,
+  className,
+  disabled,
+  color = ButtonColor.Red,
+  fontSize,
+  onClick,
+  children,
+}) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     !disabled && onClick && onClick();
@@ -22,13 +41,14 @@ export const PrimaryButton: React.FC<IPrimaryButton> = ({ label, icon, className
 
   const theme = {
     color: themeColor,
-    fontSize
-  }
+    fontSize,
+  };
 
   return (
-    <Button theme={theme} className={className} onClick={handleClick}>
+    <ButtonContainer theme={theme} className={className} onClick={handleClick} disabled={disabled}>
       {icon}
       {label}
-    </Button>
+      {children}
+    </ButtonContainer>
   );
 };

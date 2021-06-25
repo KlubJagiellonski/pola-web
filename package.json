@@ -1,7 +1,12 @@
 {
   "name": "pola-app",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "private": true,
+  "author": {
+    "name": "Klub Jagielloński",
+    "url": "https://klubjagiellonski.pl/"
+  },
+  "description": "The web version of Pola application",
   "scripts": {
     "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
@@ -23,12 +28,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@types/jest": "^26.0.23",
-    "@types/react-helmet": "^6.1.1",
-    "@types/react-redux": "^7.1.16",
-    "@types/react-test-renderer": "^17.0.1",
-    "@types/redux-mock-store": "^1.0.2",
     "axios": "^0.21.1",
+    "babel-plugin-styled-components": "^1.12.0",
     "ean-generator": "0.0.8",
     "gatsby": "^2.32.13",
     "gatsby-image": "^3.6.0",
@@ -37,6 +38,7 @@
     "gatsby-plugin-react-helmet": "^3.10.0",
     "gatsby-plugin-react-redux": "^1.1.0",
     "gatsby-plugin-sharp": "^2.14.4",
+    "gatsby-plugin-styled-components": "^4.8.0",
     "gatsby-plugin-typescript": "^2.12.1",
     "gatsby-remark-copy-linked-files": "^2.10.0",
     "gatsby-remark-images": "^2.0.6",
@@ -44,7 +46,7 @@
     "gatsby-source-filesystem": "^2.11.1",
     "gatsby-transformer-remark": "^2.16.1",
     "gatsby-transformer-sharp": "^2.12.1",
-    "prop-types": "^15.7.2",
+    "lodash.debounce": "^4.0.8",
     "react": "^16.14.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.14.0",
@@ -52,7 +54,6 @@
     "react-loader-spinner": "^4.0.0",
     "react-onclickoutside": "^6.10.0",
     "react-redux": "^7.2.4",
-    "react-responsive-carousel": "^3.2.18",
     "react-slick": "^0.28.1",
     "react-transition-group": "^4.4.1",
     "redux": "^4.1.0",
@@ -65,20 +66,27 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/brainhubeu__react-carousel": "^2.0.2",
+    "@types/jest": "^26.0.23",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/react-helmet": "^6.1.1",
     "@types/react-loader-spinner": "^4.0.0",
     "@types/react-onclickoutside": "^6.7.3",
+    "@types/react-redux": "^7.1.16",
     "@types/react-slick": "^0.23.4",
+    "@types/react-test-renderer": "^17.0.1",
     "@types/react-transition-group": "^4.4.1",
+    "@types/redux-mock-store": "^1.0.2",
     "@types/redux-thunk": "^2.1.0",
-    "@types/styled-components": "^5.1.9",
+    "@types/styled-components": "^5.1.10",
     "@types/uuid": "^8.3.0",
     "babel-jest": "^27.0.1",
     "babel-preset-gatsby": "^0.2.26",
     "cypress": "^7.4.0",
-    "cypress-cucumber-preprocessor": "^4.1.0",
+    "cypress-cucumber-preprocessor": "^4.1.1",
     "gh-pages": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
+    "polished": "^4.1.3",
     "prettier": "^2.3.0",
     "react-test-renderer": "^16.14.0",
     "redux-mock-store": "^1.5.4",
@@ -95,10 +103,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/KlubJagiellonski/pola-web"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/KlubJagiellonski/pola-web/issues"
   },
   "env": {
     "cypress/globals": true

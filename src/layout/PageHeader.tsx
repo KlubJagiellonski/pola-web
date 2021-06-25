@@ -4,11 +4,8 @@ import styled from 'styled-components';
 import { HamburgerMenu } from './nav/HamburgerMenu';
 import { NavbarMenu } from './nav/NavbarMenu';
 import { desktopHeaderHeight, Device, pageWidth, color } from '../styles/theme';
-import { Link } from 'gatsby';
-
-interface IPageHeader {
-  siteTitle?: string;
-}
+import { NavItem } from './nav/NavItem';
+import { pageLinks, PageType } from '../domain/website';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -40,40 +37,25 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const navItems = (
-  <React.Fragment>
-    <span className="nav-item">
-      <Link to="/">Home</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/news">Aktualności</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/about">O Poli</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/support">Wesprzyj aplikację</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/friends">Klub przyjaciół Poli</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/join">Dołącz do zespołu</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/faq">FAQ</Link>
-    </span>
-    <span className="nav-item">
-      <Link to="/contect">Kontakt</Link>
-    </span>
-  </React.Fragment>
-);
+interface IPageHeader {
+  siteTitle?: string;
+  activePage: PageType;
+  isMenuExpanded: boolean;
 
-export const PageHeader = (props: IPageHeader) => (
-  <HeaderContainer>
-    <div className="header-content">
-      <NavbarMenu>{navItems}</NavbarMenu>
-      <HamburgerMenu>{navItems}</HamburgerMenu>
-    </div>
-  </HeaderContainer>
-);
+  onExpand: (expanded: boolean) => void;
+}
+
+export const PageHeader = (props: IPageHeader) => {
+  const navItems = pageLinks.map((link) => <NavItem key={link.type} data={link} activePage={props.activePage} />);
+
+  return (
+    <HeaderContainer>
+      <div className="header-content">
+        <NavbarMenu>{navItems}</NavbarMenu>
+        <HamburgerMenu expanded={props.isMenuExpanded} onExpand={props.onExpand}>
+          {navItems}
+        </HamburgerMenu>
+      </div>
+    </HeaderContainer>
+  );
+};

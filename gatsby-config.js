@@ -1,11 +1,12 @@
 module.exports = {
-  pathPrefix: '/pola-web',
+  pathPrefix: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).pathname) || null,
   siteMetadata: {
     title: `Pola Web`,
     description: `Strona aplikacji Pola`,
-    author: `Klun Jagielloński`,
+    author: `Klub Jagielloński`,
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -22,10 +23,10 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#FFFFFF`,
+        theme_color: `#D8152F`,
         display: `minimal-ui`,
-        icon: `src/assets/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/assets/logo/pola-color.svg`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-typescript`,
