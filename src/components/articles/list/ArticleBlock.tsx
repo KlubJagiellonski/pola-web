@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
 import { ButtonColor } from '../../../styles/button-theme';
 import { WrapperSection, Text, TitleSection } from '../../../styles/GlobalStyle.css';
@@ -62,18 +63,22 @@ const ArticleText = styled(Text)`
 `;
 
 interface IArticleBlock {
-  photo?: string;
   title: string;
+  slug: string;
+  photo?: string;
   date?: string;
   text: string;
 }
 
-export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, date, text }) => {
+export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, slug, date, text }) => {
   return (
     <Wrapper color={color.background.white}>
       <ArticleImage>{photo && <ResponsiveImage imageSrc={photo} />}</ArticleImage>
       <ArticleSection>
-        <ArticleTitle>{title}</ArticleTitle>
+        <Link to={slug}>
+          <ArticleTitle>{title}</ArticleTitle>
+        </Link>
+
         <ArticleText>{text}</ArticleText>
         {date && <ArticleDate>{date}</ArticleDate>}
         <ArticleButton label="TAG/KATEGORIA" color={ButtonColor.LightGray} fontSize={fontSize.small} />

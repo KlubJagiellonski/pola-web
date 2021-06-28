@@ -7,10 +7,10 @@ import { ArticlesList } from '../components/articles/list/ArticlesList';
 import Friends from './Friends';
 import Teams from './Teams';
 import About from './About';
-import { IArticle } from '../domain/articles';
 import TeamsFriend from './TeamsFriend';
 import { IFriend } from '../domain/friends';
 import { Device, padding } from './../styles/theme';
+import { Article } from '../domain/articles';
 
 const Wrapper = styled.div`
   -webkit-box-sizing: border-box;
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 `;
 
 interface IContent {
-  articles?: IArticle[];
+  articles?: Article[];
   friends?: IFriend[];
 }
 
