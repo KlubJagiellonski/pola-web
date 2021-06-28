@@ -11,12 +11,11 @@ const Footer = styled.div`
 `;
 
 interface IArticleFooter {
-  post: any;
-  author: any;
-  slug: string;
-  facebook: any;
+  author?: any;
+  slug?: string;
+  facebook?: any;
 }
 
-export const ArticleFooter: React.FC<IArticleFooter> = ({ post, slug, author, facebook }) => {
+export const ArticleFooter: React.FC<IArticleFooter> = ({ slug, author, facebook }) => {
   return <Footer>Footer</Footer>;
 };

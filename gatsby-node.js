@@ -45,15 +45,15 @@ exports.createPages = async function ({ graphql, actions }) {
     throw new Error('Unable to fetch pages');
   }
 
-  const postTemplate = path.resolve('./src/templates/ArticleTemplate.tsx');
+  const articleTemplate = path.resolve('./src/templates/ArticleTemplate.tsx');
 
-  // Create posts.
+  // Create articles
   result.data.allMarkdownRemark.edges.forEach((edge) => {
     const { slug } = edge.node.fields;
 
     createPage({
       path: slug,
-      component: postTemplate,
+      component: articleTemplate,
       context: {
         slug,
       },

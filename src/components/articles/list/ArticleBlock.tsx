@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ResponsiveImage } from '../images/ResponsiveImage';
-import { ButtonColor } from '../../styles/button-theme';
-import { WrapperSection, Text, TitleSection } from '../../styles/GlobalStyle.css';
-import { Device, fontSize, margin, color } from '../../styles/theme';
-import { SecondaryButton } from '../buttons/SecondaryButton';
+import { ResponsiveImage } from '../../images/ResponsiveImage';
+import { ButtonColor } from '../../../styles/button-theme';
+import { WrapperSection, Text, TitleSection } from '../../../styles/GlobalStyle.css';
+import { Device, fontSize, margin, color } from '../../../styles/theme';
+import { SecondaryButton } from '../../buttons/SecondaryButton';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;

@@ -24,22 +24,18 @@ const Content = (props: any) => {
 
 interface IArticlePage {
   location?: Location;
-  post: any;
-  author: any;
-  slug: string;
-  facebook: any;
-  classes: any;
-  title: string;
-  subTitle: string;
-  date: string;
+  article: any;
+  author?: any;
+  slug?: string;
+  facebook?: any;
 }
 
 const ArticlePage = (props: IArticlePage) => {
-  const { location, post, author, slug, facebook } = props;
-  const title = ((post || {}).frontmatter || {}).title;
-  const subTitle = ((post || {}).frontmatter || {}).subTitle;
-  const date = ((post || {}).fields || {}).prefix;
-  const html = (post || {}).html;
+  const { location, article, author, slug, facebook } = props;
+  const title = ((article || {}).frontmatter || {}).title;
+  const subTitle = ((article || {}).frontmatter || {}).subTitle;
+  const date = ((article || {}).fields || {}).prefix;
+  const html = (article || {}).html;
 
   const dispatch = useDispatch();
 
@@ -58,7 +54,7 @@ const ArticlePage = (props: IArticlePage) => {
       </PageSection>
       <PageSection>
         <Content html={html} />
-        <ArticleFooter post={post} slug={slug} author={author} facebook={facebook} />
+        <ArticleFooter slug={slug} author={author} facebook={facebook} />
       </PageSection>
     </PageLayout>
   );

@@ -8,7 +8,7 @@ interface IArticleTemplate {
 }
 
 export const ArticleTemplate: React.FC<IArticleTemplate> = ({ data, pageContext }) => (
-  <ArticlePage post={data.post} slug={pageContext.slug as string} />
+  <ArticlePage article={data.post} slug={pageContext.slug as string} />
 );
 
 export default ArticleTemplate;
