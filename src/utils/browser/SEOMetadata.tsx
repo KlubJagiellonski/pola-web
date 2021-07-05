@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 interface ISEOMetadata {
-  title: string;
+  pageTitle: string;
   lang?: string;
   meta?: any[];
   description?: string;
@@ -15,7 +15,7 @@ interface ISEOMetadata {
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-const SEOMetadata: React.FC<ISEOMetadata> = ({ title, description = '', lang = 'en', meta = [] }) => {
+const SEOMetadata: React.FC<ISEOMetadata> = ({ pageTitle, description = '', lang = 'en', meta = [] }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -31,13 +31,14 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ title, description = '', lang = '
   );
 
   const metaDescription = description || site.siteMetadata.description;
+  const browserTabTitle = `${pageTitle} | Pola Web`;
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
+      title={browserTabTitle}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
@@ -46,7 +47,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ title, description = '', lang = '
         },
         {
           property: 'og:title',
-          content: title,
+          content: browserTabTitle,
         },
         {
           property: 'og:description',
@@ -66,7 +67,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ title, description = '', lang = '
         },
         {
           name: 'twitter:title',
-          content: title,
+          content: browserTabTitle,
         },
         {
           name: 'twitter:description',
