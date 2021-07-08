@@ -55,7 +55,7 @@
     "react-onclickoutside": "^6.10.0",
     "react-redux": "^7.2.4",
     "react-slick": "^0.28.1",
-    "react-transition-group": "^4.4.1",
+    "react-transition-group": "^4.4.2",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-localstorage-simple": "^2.4.0",
