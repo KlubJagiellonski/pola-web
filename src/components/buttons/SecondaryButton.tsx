@@ -2,11 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from './Button';
 import { ButtonColor, getButtonColor } from '../../styles/button-theme';
-import { color } from '../../styles/theme';
+import { color, Device, fontSize } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
   border-radius: 20px;
   border: 2px solid ${color.border.white};
+  font-weight: 300;
+  text-transform: uppercase; 
+
+  @media ${Device.mobile} {
+    display: none;
+    font-size: ${fontSize.tiny};
+  }
 `;
 
 export interface ISecondaryButton {
@@ -18,7 +25,7 @@ export interface ISecondaryButton {
   className?: string;
   children?: React.ReactNode;
 
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export const SecondaryButton: React.FC<ISecondaryButton> = ({
@@ -33,7 +40,7 @@ export const SecondaryButton: React.FC<ISecondaryButton> = ({
 }) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    !disabled && onClick && onClick();
+    !disabled && onClick && onClick(e);
   };
 
   const themeColor = getButtonColor(color);
