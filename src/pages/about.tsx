@@ -1,13 +1,27 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import About from '../components/About';
-import { PageType } from '../domain/website';
+import { IPartner, PageType, urls } from '../domain/website';
+import { PageSection } from '../layout/PageSection';
+import { Text, TitleSection } from '../styles/GlobalStyle.css';
+import { PartnerTile } from '../components/partners/PartnerTile';
+import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
+import { PolaLogo } from '../layout/PolaLogo';
+
+const Wrapper = styled.div`
+  min-height: 32.3em;
+  grid-area: about;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+`;
 
 interface IAboutPage {
   location?: Location;
@@ -24,11 +38,87 @@ const AboutPage = (props: IAboutPage) => {
     }
   }, []);
 
+  const partners: IPartner[] = [
+    {
+      name: 'Klub Jagielloński',
+      imageSrc: 'logo_cakjv2_crop.png',
+      description: 'Algorytm',
+      sourceUrl: urls.external.klubJagiellonski.href,
+    },
+    {
+      name: 'Instytut Logistyki i Magazynowania',
+      imageSrc: 'logo_logistyka.png',
+      description: 'Baza kodów kreskowych i producentów',
+      sourceUrl: urls.external.instytutLogistyki.href,
+    },
+    {
+      name: 'Koduj dla Polski',
+      imageSrc: 'logo_kodujdlapolski.png',
+      description: 'Otwarte spotkania projektowe dla programistów',
+      sourceUrl: urls.external.mojePanstwo.href,
+    },
+  ];
+
   return (
     <PageLayout>
       <SEOMetadata pageTitle="O Poli" />
       <DevelopmentPlaceholder />
-      <About />
+      <ColumnsLayout>
+        <ContentColumn>
+          <PageSection>
+            <TitleSection>O Poli</TitleSection>
+            <Text>
+              Masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
+              Ci odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską
+              gospodarkę.
+            </Text>
+            <Text>
+              Zeskanuj kod kreskowy z dowolnego produktu i dowiedz się więcej o firmie, która go wyprodukowała. Pola
+              powie Ci, czy dany producent opiera się na polskim kapitale, ma u nas swoją produkcję, tworzy
+              wykwalifikowane miejsca pracy, jest częścią zagranicznego koncernu.
+            </Text>
+            <Text>
+              Jeśli znajdziesz firmę, której nie ma w naszej bazie, koniecznie zgłoś ją do nas. Pomożesz nam w ten
+              sposób uzupełniać unikatową bazę polskich producentów.
+            </Text>
+          </PageSection>
+          <PageSection>
+            <TitleSection>Algorytm</TitleSection>
+            <Text>
+              Każdemu producentowi Pola przypisuje od 0 do 100 punktów. Pierwsze 35 punktów przyznaje proporcjonalnie do
+              udziału polskiego kapitału w konkretnym przedsiębiorstwie. Dalsze 10 punktów otrzymuje ta firma, która
+              jest zarejestrowana w Polsce, a kolejne 30, o ile produkuje w naszym kraju. Dalsze 15 punktów zależy od
+              tego, czy zatrudnia w naszym kraju w obszarze badań i rozwoju. Wreszcie ostatnie 10 punktów otrzymują
+              firmy, które nie są częścią zagranicznych koncernów.
+            </Text>
+            <Text>
+              Liczba punktów zwizualizowana jest przy pomocy czerwonego paska. Dokładamy wszelkich starań aby dane w
+              aplikacji zawsze odpowiadały rzeczywistości i były aktualizowane na bieżąco. Prosimy o zgłaszanie
+              wszelkich uwag i niejasności.
+            </Text>
+          </PageSection>
+          <PageSection>
+            <TitleSection>Filozofia działania</TitleSection>
+            <Text>
+              Staramy się być maksymalnie przejrzyści w naszych działaniach. Całość kodu źródłowego serwisu udostępniamy
+              na zasadach otwartego oprogramowania na <a>koncie Klubu Jagiellońskiego</a> w serwisie GitHub. Wktórce
+              planujemy udostępnić w Internecie całość bazy danych producentów wraz z historią zmian i źródłami, na
+              podstawie których podejmujemy decyzję o liczbie punktów, które im przyznajemy. Działamy zgodnie z naszą{' '}
+              <a>polityką prywatności</a>.
+            </Text>
+          </PageSection>
+          <PageSection>
+            {partners.map((partner) => (
+              <PartnerTile {...partner} />
+            ))}
+          </PageSection>
+        </ContentColumn>
+        <ContentColumn hideOnMobile={true}>
+          <PageSection>
+            <PolaLogo size={320} />
+          </PageSection>
+        </ContentColumn>
+      </ColumnsLayout>
     </PageLayout>
   );
 };

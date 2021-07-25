@@ -34,6 +34,11 @@ export const urls = {
     openFoods: new URL('https://pl.openfoodfacts.org/'),
     polaGooglePlay: new URL('https://play.google.com/store/apps/details?id=pl.pola_app'),
     polaAppStore: new URL('https://itunes.apple.com/us/app/pola.-zabierz-ja-na-zakupy/id1038401148?ls=1&amp;mt=8'),
+    polaGitHub: new URL('https://github.com/KlubJagiellonski'),
+    polaPrivacyPolicy: new URL('https://pola-app.s3.amazonaws.com/docs/polityka_prywatnosci.pdf'),
+    klubJagiellonski: new URL('https://klubjagiellonski.pl/projekty/centrum-analiz/'),
+    instytutLogistyki: new URL('https://ilim.lukasiewicz.gov.pl/'),
+    mojePanstwo: new URL('https://mojepanstwo.pl/'),
   },
 };
 
@@ -47,3 +52,10 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.FAQ, label: 'FAQ', url: urls.pola.faq },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.contact },
 ];
+
+export interface IPartner {
+  name: string;
+  imageSrc: string;
+  description: string;
+  sourceUrl: string;
+}
