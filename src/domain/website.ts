@@ -52,10 +52,3 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.FAQ, label: 'FAQ', url: urls.pola.faq },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.contact },
 ];
-
-export interface IPartner {
-  name: string;
-  imageSrc: string;
-  description: string;
-  sourceUrl: string;
-}

@@ -7,21 +7,13 @@ import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import { IPartner, PageType, urls } from '../domain/website';
+import { PageType } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { PartnerTile } from '../components/partners/PartnerTile';
 import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
 import { PolaLogo } from '../layout/PolaLogo';
-
-const Wrapper = styled.div`
-  min-height: 32.3em;
-  grid-area: about;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column-reverse;
-`;
+import { PartnerService } from '../domain/partners/partners-service';
+import { PartnersList } from '../components/partners/PartnersList';
 
 interface IAboutPage {
   location?: Location;
@@ -37,27 +29,6 @@ const AboutPage = (props: IAboutPage) => {
       dispatch(SelectActivePage(PageType.ABOUT));
     }
   }, []);
-
-  const partners: IPartner[] = [
-    {
-      name: 'Klub Jagielloński',
-      imageSrc: 'logo_cakjv2_crop.png',
-      description: 'Algorytm',
-      sourceUrl: urls.external.klubJagiellonski.href,
-    },
-    {
-      name: 'Instytut Logistyki i Magazynowania',
-      imageSrc: 'logo_logistyka.png',
-      description: 'Baza kodów kreskowych i producentów',
-      sourceUrl: urls.external.instytutLogistyki.href,
-    },
-    {
-      name: 'Koduj dla Polski',
-      imageSrc: 'logo_kodujdlapolski.png',
-      description: 'Otwarte spotkania projektowe dla programistów',
-      sourceUrl: urls.external.mojePanstwo.href,
-    },
-  ];
 
   return (
     <PageLayout>
@@ -108,9 +79,7 @@ const AboutPage = (props: IAboutPage) => {
             </Text>
           </PageSection>
           <PageSection>
-            {partners.map((partner) => (
-              <PartnerTile {...partner} />
-            ))}
+            <PartnersList partners={PartnerService.getAll()} />
           </PageSection>
         </ContentColumn>
         <ContentColumn hideOnMobile={true}>
