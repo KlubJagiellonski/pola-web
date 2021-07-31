@@ -61,7 +61,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
         setCurrentPage(query.id)
       }
     }
-  }, [articles, location]);
+  }, [articles]);
 
   const handlePageClick = ({ selected: selectedPage }) => {
     setQuery(
