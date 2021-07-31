@@ -141,9 +141,6 @@ const HomePage = (props: IHomePage) => {
       <PageSection>
         <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
       </PageSection>
-      {props.activeTags && props.activeTags.length > 0 &&
-        props.activeTags[0]
-      }
     </PageLayout>
   );
 };

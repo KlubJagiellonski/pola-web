@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
 import { WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color } from '../../../styles/theme';
-import { ArticleBlockText } from './ArticleBlockText';
+import ArticleContents from './ArticleContents';
+import ArticleTitle from './ArticleTitle';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -36,21 +37,20 @@ interface IArticleBlock {
   photo?: string;
   date?: string;
   text: string;
-  category?: string;
+  tag?: string;
 }
 
-export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, category }) => {
+export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, tag }) => {
   return (
     <Wrapper color={color.background.white}>
       <ArticleImage>{photo && <ResponsiveImage imageSrc={photo} />}</ArticleImage>
       <ArticleSection>
-        <ArticleBlockText
-          title={title}
-          slug={slug}
+        <ArticleTitle title={title} slug={slug} />
+        <ArticleContents
           date={date}
           text={text}
           lines={4}
-          category={category}
+          tag={tag}
         />
       </ArticleSection>
     </Wrapper>

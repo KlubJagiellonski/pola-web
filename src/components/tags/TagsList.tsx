@@ -14,17 +14,17 @@ const Title = styled.p`
 `
 
 interface ITagsList {
-  category?: string[],
+  tag?: string[],
   activeTags?: string[]
 }
 
-const TagsList: React.FC<ITagsList> = ({ category, activeTags }) => {
+const TagsList: React.FC<ITagsList> = ({ tag, activeTags }) => {
   return (
     <div>
       <Title>kategorie</Title>
       <Wrapper>
-        {category &&
-          category.map((el, id) => (
+        {tag &&
+          tag.map((el, id) => (
             <Tag key={`tag_${id}`} label={el} active={activeTags?.includes(el)} />
           ))
         }

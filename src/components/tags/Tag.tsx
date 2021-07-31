@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { ButtonColor } from '../../styles/button-theme'
 import { fontSize } from '../../styles/theme'
-import { SecondaryButton } from '../buttons/SecondaryButton'
-import { ArrayParam, useQueryParams, withDefault, encodeQueryParams, QueryParamConfig } from 'use-query-params';
-import { urls } from '../../domain/website';
-import { navigate } from '@reach/router';
-import { stringify } from 'query-string';
+import { TagButton } from '../buttons/TagButton'
+import { ArrayParam, useQueryParams, withDefault } from 'use-query-params';
+import { tagUrl } from './url-service';
+import { Link } from 'gatsby';
 
 interface ITag {
   label?: string;
@@ -19,28 +18,22 @@ interface IQuery {
 
 const Tag: React.FC<ITag> = ({ label, active }) => {
   const [query] = useQueryParams<IQuery>({ tags: withDefault(ArrayParam, []) });
+  const [url, setUrl] = useState("");
 
-  const onClick = () => {
+  useEffect(() => {
     if (label) {
-      let tags = query.tags.slice()
-      const isTag = tags.find((tag: string) => tag === label);
-      if (!isTag) {
-        tags.push(label)
-      } else {
-        tags = tags.filter((tag: string) => tag !== label)
-      }
-      const encodedQuery = encodeQueryParams({ tags: withDefault(ArrayParam, []) }, { tags });
-      navigate(`${urls.pola.news}?${stringify(encodedQuery)}`)
+      setUrl(tagUrl(label, query))
     }
-  }
+  }, [label]);
 
   return (
-    <SecondaryButton
-      onClick={onClick}
-      label={label}
-      color={active ? ButtonColor.Gray : ButtonColor.LightGray}
-      fontSize={fontSize.small}
-    />
+    <Link to={url}>
+      <TagButton
+        label={label}
+        color={active ? ButtonColor.Gray : ButtonColor.LightGray}
+        fontSize={fontSize.small}
+      />
+    </Link>
   )
 }
 

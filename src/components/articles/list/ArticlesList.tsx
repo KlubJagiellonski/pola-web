@@ -29,7 +29,7 @@ export const ArticlesList: React.FC<IArticlesList> = ({ articles }) => {
             photo={article.imagePath}
             date={article.date}
             text={article.subTitle}
-            category={article.category}
+            tag={article.tag}
           />
         ))}
     </Wrapper>

@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { color, padding } from '../../../styles/theme';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
-import { ArticleBlockText } from './ArticleBlockText';
+import ArticleContents from './ArticleContents';
+import ArticleTitle from './ArticleTitle';
 
 interface IArticleBlock {
   title: string;
@@ -10,7 +11,7 @@ interface IArticleBlock {
   photo?: string;
   date?: string;
   text: string;
-  category?: string;
+  tag?: string;
 }
 
 const Wrapper = styled.div`
@@ -46,11 +47,11 @@ const ImageSection = styled(Image)`
 
 const TextSection = styled.div`
   flex: 4;
-  background: ${color.background.transparency};
+  background: ${color.background.transparencyGrey};
   padding: ${padding.normal};
 `
 
-const LatestArticle: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, category }) => {
+const LatestArticle: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, tag }) => {
   return (
     <Wrapper>
       <Sections>
@@ -58,13 +59,12 @@ const LatestArticle: React.FC<IArticleBlock> = ({ photo, title, slug, date, text
           {photo && <ResponsiveImage imageSrc={photo} />}
         </ImageSection>
         <TextSection>
-          <ArticleBlockText
-            title={title}
-            slug={slug}
+          <ArticleTitle title={title} slug={slug} />
+          <ArticleContents
             date={date}
             text={text}
             lines={4}
-            category={category}
+            tag={tag}
           />
         </TextSection>
       </Sections>

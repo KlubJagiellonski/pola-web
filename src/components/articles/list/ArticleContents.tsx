@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
-import { Text, TitleSection } from '../../../styles/GlobalStyle.css';
+import { Text } from '../../../styles/GlobalStyle.css';
 import { Device, fontSize, margin, color } from '../../../styles/theme';
 import { getDate } from '../../../utils/dates';
 import Tag from '../../tags/Tag';
@@ -18,12 +17,6 @@ const ArticleDate = styled(Text)`
   }
 `;
 
-const ArticleTitle = styled(TitleSection)`
-  @media ${Device.mobile} {
-    font-size: ${fontSize.tiny};
-  }
-`;
-
 const ArticleText = styled(Text) <{ lines?: number }>`
    overflow: hidden;
    text-overflow: ellipsis;
@@ -36,33 +29,25 @@ const ArticleText = styled(Text) <{ lines?: number }>`
   }
 `;
 
-const ArticleLink = styled(Link)`
-  text-decoration: none;
-`
-
-interface IArticleBlockText {
-  title: string;
-  slug: string;
+interface IArticleContents {
   date?: string;
   text: string;
   lines?: number;
-  category?: String;
+  tag?: String;
 }
 
-export const ArticleBlockText: React.FC<IArticleBlockText> = ({ title, slug, date, text, lines, category }) => {
+const ArticleContents: React.FC<IArticleContents> = ({ date, text, lines, tag }) => {
   return (
     <>
-      <ArticleLink to={slug}>
-        <ArticleTitle>{title}</ArticleTitle>
-      </ArticleLink>
-
       <ArticleText lines={lines}>{text}</ArticleText>
       {date && <ArticleDate>{getDate(date)}</ArticleDate>}
-      {category &&
+      {tag &&
         <ArticleTag>
-          <Tag label={`${category}`} />
+          <Tag label={`${tag}`} />
         </ArticleTag>
       }
     </>
   );
 };
+
+export default ArticleContents
