@@ -4,7 +4,7 @@ import { margin, Device } from './../../../styles/theme'
 import ReactPaginate from "react-paginate";
 import { Article } from './../../../domain/articles';
 import ArticlesList from './../../../components/articles/list/ArticlesList';
-import './../components/Pagination.css'
+import './../../../components/Pagination.css'
 import LatestArticle from './../../../components/articles/list/LatestArticle';
 import { DecodedValueMap, SetQuery } from "use-query-params";
 import { IArticlesTwoColumns, getArticlesTwoColumns } from './../../../utils/articles'
