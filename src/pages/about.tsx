@@ -7,7 +7,7 @@ import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import { PageType } from '../domain/website';
+import { PageType, urls } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
 import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
@@ -72,10 +72,17 @@ const AboutPage = (props: IAboutPage) => {
             <TitleSection>Filozofia działania</TitleSection>
             <Text>
               Staramy się być maksymalnie przejrzyści w naszych działaniach. Całość kodu źródłowego serwisu udostępniamy
-              na zasadach otwartego oprogramowania na <a>koncie Klubu Jagiellońskiego</a> w serwisie GitHub. Wktórce
-              planujemy udostępnić w Internecie całość bazy danych producentów wraz z historią zmian i źródłami, na
-              podstawie których podejmujemy decyzję o liczbie punktów, które im przyznajemy. Działamy zgodnie z naszą{' '}
-              <a>polityką prywatności</a>.
+              na zasadach otwartego oprogramowania na{' '}
+              <a href={urls.external.polaGitHub.href} target="__blank">
+                koncie Klubu Jagiellońskiego
+              </a>{' '}
+              w serwisie GitHub. Wktórce planujemy udostępnić w Internecie całość bazy danych producentów wraz z
+              historią zmian i źródłami, na podstawie których podejmujemy decyzję o liczbie punktów, które im
+              przyznajemy. Działamy zgodnie z naszą{' '}
+              <a href={urls.external.polaPrivacyPolicy.href} target="__blank">
+                polityką prywatności
+              </a>
+              .
             </Text>
           </PageSection>
           <PageSection>

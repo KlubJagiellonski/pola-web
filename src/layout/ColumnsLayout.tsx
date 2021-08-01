@@ -12,9 +12,10 @@ export const ColumnsLayout = styled.div<IColumnsLayout>`
   position: relative;
   width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
 
   @media ${Device.mobile} {
-    padding: 0;
+    padding: 0 ${padding.normal};
     flex-flow: column;
   }
   @media ${Device.desktop} {

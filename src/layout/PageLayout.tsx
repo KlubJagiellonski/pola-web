@@ -11,7 +11,7 @@ import { ProductModal } from '../search/product-modal';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import ErrorBoundary from '../utils/error-boundary';
 import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
-import { StateLoader2 } from './StateLoader';
+import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 
 const connector = connect(
@@ -73,7 +73,7 @@ const Layout: React.FC<IPageLayout> = ({
 
   return (
     <ErrorBoundary scope="page-layout">
-      <StateLoader2 />
+      <StateLoader />
       <LayoutContainer>
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         <PageHeader
