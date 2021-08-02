@@ -39,6 +39,11 @@ export const urls = {
     klubJagiellonski: new URL('https://klubjagiellonski.pl/projekty/centrum-analiz/'),
     instytutLogistyki: new URL('https://ilim.lukasiewicz.gov.pl/'),
     mojePanstwo: new URL('https://mojepanstwo.pl/'),
+    polaSocialMedia: {
+      facebook: new URL('https://www.facebook.com/app.pola'),
+      twitter: new URL('https://twitter.com/pola_app'),
+      instagram: new URL('https://www.instagram.com/pola_skanuj_zakupy/'),
+    },
   },
 };
 
