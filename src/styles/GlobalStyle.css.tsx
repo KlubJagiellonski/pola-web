@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, fontSize } from './theme';
+import { color, fontSize, margin } from './theme';
 
 type Color = {
   color: string;
@@ -14,8 +14,7 @@ export const WrapperSection = styled.div`
 `;
 
 export const TitleSection = styled.p`
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: ${margin.normal} 0;
   padding: 0;
   font-size: ${fontSize.normal};
   font-weight: 700;
@@ -30,4 +29,10 @@ export const Text = styled.p`
   font-size: ${fontSize.small};
   color: ${color.text.secondary};
   line-height: 1rem;
+
+  font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
 `;
