@@ -62,7 +62,7 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
-    "redux-localstorage-simple": "^2.4.0",
+    "redux-localstorage-simple": "^2.4.1",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "use-query-params": "^1.2.3",
