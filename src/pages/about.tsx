@@ -10,10 +10,16 @@ import { PageType, urls } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
 import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
-import { PolaLogo } from '../layout/PolaLogo';
 import { PartnerService } from '../domain/partners/partners-service';
 import { PartnersList } from '../components/partners/PartnersList';
 import { padding } from '../styles/theme';
+import { ResponsiveImage } from '../components/images/ResponsiveImage';
+
+const ImageContainer = styled.div`
+min-width: 20em;
+  max-width: 40em;
+  margin: 0 auto;
+`;
 
 interface IAboutPage {
   location?: Location;
@@ -87,11 +93,12 @@ const AboutPage = (props: IAboutPage) => {
           <PageSection>
             <PartnersList partners={PartnerService.getAll()} />
           </PageSection>
+
         </ContentColumn>
         <ContentColumn hideOnMobile={true}>
-          <PageSection>
-            <PolaLogo size={320} />
-          </PageSection>
+          <ImageContainer>
+            <ResponsiveImage imageSrc="sok.png" />
+          </ImageContainer>
         </ContentColumn>
       </ColumnsLayout>
     </PageLayout >
