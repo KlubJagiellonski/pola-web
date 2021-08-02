@@ -6,7 +6,6 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
 import { PageType, urls } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
@@ -14,6 +13,7 @@ import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
 import { PolaLogo } from '../layout/PolaLogo';
 import { PartnerService } from '../domain/partners/partners-service';
 import { PartnersList } from '../components/partners/PartnersList';
+import { padding } from '../styles/theme';
 
 interface IAboutPage {
   location?: Location;
@@ -31,9 +31,8 @@ const AboutPage = (props: IAboutPage) => {
   }, []);
 
   return (
-    <PageLayout>
+    <PageLayout styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="O Poli" />
-      <DevelopmentPlaceholder />
       <ColumnsLayout>
         <ContentColumn>
           <PageSection>
@@ -95,7 +94,7 @@ const AboutPage = (props: IAboutPage) => {
           </PageSection>
         </ContentColumn>
       </ColumnsLayout>
-    </PageLayout>
+    </PageLayout >
   );
 };
 

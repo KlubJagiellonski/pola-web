@@ -5,12 +5,12 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
 import { PageType, urls } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import styled from 'styled-components';
+import { padding } from '../styles/theme';
 
 const ImageContainer = styled.div`
   max-width: 40em;
@@ -33,9 +33,8 @@ const BusinessPage = (props: IBusinessPage) => {
   }, []);
 
   return (
-    <PageLayout>
+    <PageLayout styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="Oferta Biznesowa" />
-      <DevelopmentPlaceholder />
       <PageSection>
         <TitleSection>Znak towarowy</TitleSection>
         <Text>
