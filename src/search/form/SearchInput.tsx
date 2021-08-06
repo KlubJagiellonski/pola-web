@@ -27,11 +27,8 @@ const InputSection = styled.div`
   border-radius: 3em;
 
   @media ${Device.mobile} {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     padding-right: ${padding.normal};
-    min-width: 24em;
+    min-width: 0;
   }
 `;
 
@@ -50,6 +47,7 @@ const InputText = styled.input`
 
   @media ${Device.mobile} {
     max-width: none;
+    width: 70%;
   }
 `;
 

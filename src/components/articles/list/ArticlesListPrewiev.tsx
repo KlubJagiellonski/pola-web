@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Article } from '../../../domain/articles';
-import { ArticleBlock } from './ArticleBlock';
-import { Device, margin, padding } from '../../../styles/theme';
+import { ArticlePreview } from './ArticlePreview';
+import { Device, padding, margin } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   grid-area: articles;
@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   @media ${Device.mobile} {
     padding: ${padding.normal};
     margin-bottom: ${margin.normal};
-    padding-top: 0;
   }
 `;
 
@@ -18,12 +17,12 @@ interface IArticlesList {
   articles?: Article[];
 }
 
-export const ArticlesList: React.FC<IArticlesList> = ({ articles }) => {
+export const ArticlesListPreview: React.FC<IArticlesList> = ({ articles }) => {
   return (
     <Wrapper>
       {articles &&
         articles.map((article: Article) => (
-          <ArticleBlock
+          <ArticlePreview
             key={article.id}
             title={article.title}
             slug={article.slug}
@@ -37,4 +36,4 @@ export const ArticlesList: React.FC<IArticlesList> = ({ articles }) => {
   );
 };
 
-export default ArticlesList;
+export default ArticlesListPreview;
