@@ -24,12 +24,13 @@ export const ArticlesList: React.FC<IArticlesList> = ({ articles }) => {
       {articles &&
         articles.map((article: Article) => (
           <ArticleBlock
+            id={article.id}
             key={article.id}
             title={article.title}
             slug={article.slug}
-            photo={article.imagePath}
+            imagePath={article.imagePath}
             date={article.date}
-            text={article.subTitle}
+            subTitle={article.subTitle}
             tag={article.tag}
           />
         ))}

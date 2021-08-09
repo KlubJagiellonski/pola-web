@@ -5,6 +5,7 @@ import { WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color } from '../../../styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
+import { Article } from '../../../domain/articles';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -31,24 +32,15 @@ const ArticleSection = styled.div`
   }
 `;
 
-interface IArticleBlock {
-  title: string;
-  slug: string;
-  photo?: string;
-  date?: string;
-  text: string;
-  tag?: string;
-}
-
-export const ArticlePreview: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, tag }) => {
+export const ArticlePreview: React.FC<Article> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Wrapper color={color.background.white}>
-      <ArticleImage>{photo && <ResponsiveImage imageSrc={photo} />}</ArticleImage>
+      <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} />
         <ArticleContents
           date={date}
-          text={text}
+          text={subTitle}
           tag={tag}
         />
       </ArticleSection>

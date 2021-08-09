@@ -93,7 +93,7 @@ const DevelopmentSection = () => {
       <TextSection>
         <DevelopmentTitle>Zobacz jak rozwija się Aplikacja Pola i wspomóż ją!</DevelopmentTitle>
         <DevelopmentText>Dowiedz się co możesz jeszcze zrobić, aby wspierać polskich producentów.</DevelopmentText>
-        <div>
+        <div className='buttons'>
           <SecondaryButton label="Czytaj dalej..." fontSize={fontSize.small} color={ButtonColor.Red} />
         </div>
       </TextSection>

@@ -24,11 +24,12 @@ export const ArticlesListPreview: React.FC<IArticlesList> = ({ articles }) => {
         articles.map((article: Article) => (
           <ArticlePreview
             key={article.id}
+            id={article.id}
             title={article.title}
             slug={article.slug}
-            photo={article.imagePath}
+            imagePath={article.imagePath}
             date={article.date}
-            text={article.subTitle}
+            subTitle={article.subTitle}
             tag={article.tag}
           />
         ))}

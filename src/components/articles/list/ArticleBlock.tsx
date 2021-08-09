@@ -8,6 +8,7 @@ import ArticleTitle from './ArticleTitle';
 import { PrimaryButton } from '../../buttons/PrimaryButton';
 import { ButtonColor } from '../../../styles/button-theme';
 import { Link } from 'gatsby';
+import { Article } from '../../../domain/articles';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -68,28 +69,19 @@ const Contents = styled.div`
   }
 `
 
-interface IArticleBlock {
-  title: string;
-  slug: string;
-  photo?: string;
-  date?: string;
-  text: string;
-  tag?: string;
-}
-
-export const ArticleBlock: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, tag }) => {
+export const ArticleBlock: React.FC<Article> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Wrapper color={color.background.white}>
       <Link to={slug}>
         <ArticlesButton label="CZYTAJ DALEJ" color={ButtonColor.Red} />
       </Link>
-      <ArticleImage>{photo && <ResponsiveImage imageSrc={photo} />}</ArticleImage>
+      <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
         <Contents>
           <ArticleContents
             date={date}
-            text={text}
+            text={subTitle}
             tag={tag}
           />
         </Contents>
