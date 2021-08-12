@@ -1,9 +1,10 @@
 ---
-title: YPapierosy, wódka, prąd i paliwo.
+title: Papierosy, wódka, prąd i paliwo.
 subTitle: Czterdzieści największych firm wpłaciło do budżetu państwa 99 mld zł. Jest to równowartość niemal połowy wpływów budżetu państwa.
 category: "Krótko"
 cover: zdjecie-stacja.PNG
 ---
+
 
 Czterdzieści największych firm wpłaciło do budżetu państwa 99 mld zł. Jest to równowartość niemal połowy wpływów budżetu państwa. Oprócz spółek Skarbu Państwa, czołowe pozycje zajmują Philip Morris z branży tytoniowej i Stock Polska.
 
