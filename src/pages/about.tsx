@@ -91,6 +91,7 @@ const AboutPage = (props: IAboutPage) => {
             </Text>
           </PageSection>
           <PageSection>
+            <TitleSection>Partnerzy</TitleSection>
             <PartnersList partners={PartnerService.getAll()} />
           </PageSection>
 
