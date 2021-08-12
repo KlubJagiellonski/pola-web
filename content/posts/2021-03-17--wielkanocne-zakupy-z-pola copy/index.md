@@ -1,5 +1,5 @@
 ---
-title: WIELKANOCNE ZAKUPY Z POLA APP DO 60% TANIEJ
+title: WIELKANOCNE ZAKUPY Z POLA APP DO 30% TANIEJ
 subTitle: Sprawdź szczegóły promocji (wstęp artykułu) Lorem ipsum dolor sit amet enim. Etiam ullamcorper.
 category: 'savings'
 cover: pexels-pixabay-33239-2.png
