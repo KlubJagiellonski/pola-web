@@ -43,7 +43,7 @@ jobs:
       env:
         MATRIX_CONTEXT: ${{ toJSON(matrix) }}
       run: echo "$MATRIX_CONTEXT"
-    - name: Set deployment status
+    - name: ⚪️ Set deployment status
       uses: pbrandone/create-status-action@master
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
       with:
@@ -95,11 +95,11 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-    - name: "Upload preview to AWS S3"
+    - name: ⤴️ Upload preview to AWS S3
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender == 'User'
       run: aws s3 sync --delete ./public/ "s3://${AWS_BUCKET_NAME}/${PREVIEW_DIR}"
-    - name: Set success deployment status
-      if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender == 'User'
+    - name: 🟢 Set success deployment status
+      if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
       uses: pbrandone/create-status-action@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
