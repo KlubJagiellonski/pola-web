@@ -2,7 +2,7 @@
 title: Papierosy, wódka, prąd i paliwo. Najwięksi płatnicy podatków w Polsce
 subTitle: #Krótko o tym kto płaci największe podatki w Polsce
 category: 'Krótko'
-cover: pexels-nadi-lindsay-3768323-1.png
+cover: zdjęcia.PNG
 ---
 
 Czterdzieści największych firm wpłaciło do budżetu państwa 99 mld zł. Jest to równowartość niemal połowy wpływów budżetu państwa. Oprócz spółek Skarbu Państwa, czołowe pozycje zajmują Philip Morris z branży tytoniowej i Stock Polska.
