@@ -1,5 +1,5 @@
 ---
-title: You only live once
+title: You only live once test
 subTitle: But if you do it right, once is enough
 category: "sayings"
 cover: photo-1456518563096-0ff5ee08204e-cover.jpg
