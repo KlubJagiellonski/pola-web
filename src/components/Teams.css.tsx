@@ -40,6 +40,8 @@ export const ButtonTeams = styled(PrimaryButton)`
   }
 `;
 
-export const IconTeams = styled.img`
-  width: 60%;
+export const IconTeams = styled.div`
+  margin: auto;
+  width: 7.5em;
+  height: 7.5em;
 `

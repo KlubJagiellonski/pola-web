@@ -5,7 +5,7 @@ import { WrapperTeams, Title, TextSection, ButtonTeams, IconTeams } from './Team
 import { Text } from '../styles/GlobalStyle.css';
 import { color } from '../styles/theme';
 import { ButtonColor } from '../styles/button-theme';
-import Icon from './../assets/ikona-zespół.png';
+import { ResponsiveImage } from './images/ResponsiveImage';
 
 const Wrapper = styled(WrapperTeams)`
   grid-area: teams-friend;
@@ -15,7 +15,9 @@ const TeamsFriend = () => {
   return (
     <Wrapper color={color.background.white}>
       <TextSection>
-        <IconTeams src={Icon} />
+        <IconTeams>
+          <ResponsiveImage imageSrc="ikona-zespół.png" />
+        </IconTeams>
         <Title>Dołącz do Przyjaciół Poli i odnieś sukces!</Title>
         <Text>Jedno zdanie, że sekcja jest kierowana do firm</Text>
         <ButtonTeams label="POZNAJ SZCZEGÓŁY" color={ButtonColor.Red} />
