@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import styledContainerQuery from 'styled-container-query'
 
 import { color, Device } from '../styles/theme';
 import { WrapperSection, TitleSection } from '../styles/GlobalStyle.css';
@@ -7,22 +8,6 @@ import Facebbok from '../assets/social-media/facebook.png';
 import Instagram from '../assets/social-media/instagram.png';
 import Twitter from '../assets/social-media/twitter.png';
 import { urls } from '../domain/website';
-
-const Wrapper = styled(WrapperSection)`
-  min-height: 5em;
-  height: 100%;
-  grid-area: social-media;
-
-  @media ${Device.desktop} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media ${Device.mobile} {
-    padding: 30px 0;
-  }
-`;
 
 const Items = styled.div`
   align-items: center;
@@ -51,6 +36,34 @@ const Title = styled(TitleSection)`
   @media ${Device.mobile} {
     width: 100%;
     margin-bottom: 20px;
+  }
+`;
+
+const Wrapper = styledContainerQuery(WrapperSection)`
+  min-height: 5em;
+  height: 100%;
+  grid-area: social-media;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media ${Device.mobile} {
+    padding: 30px 0;
+    display: initial;
+  }
+
+  &:container(max-width: 450px){
+    padding: 30px 0;
+    display: initial;
+
+    ${Items}{
+      width: 100%;
+    }
+
+    ${Title}{
+      width: 100%;
+      margin-bottom: 20px;
+    }
   }
 `;
 

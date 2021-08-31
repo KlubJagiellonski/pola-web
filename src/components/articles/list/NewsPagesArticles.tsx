@@ -11,16 +11,9 @@ import { IArticlesTwoColumns, getArticlesTwoColumns } from './../../../utils/art
 import { ArticleBlock } from './ArticleBlock';
 
 const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
   margin-top: ${margin.veryBig};
 
-  div{
-      flex: 1;
-    }
-
   @media ${Device.mobile} {
-    flex-direction: column;
     margin-top: 0;
   }
 `
@@ -67,7 +60,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
       const sortedArticles = getArticlesTwoColumns(art);
       setArticles(sortedArticles.slice());
       setPageCount(sortedArticles.length);
-      if (query.id === undefined || query.id > sortedArticles.length) {
+      if (query.id === undefined || query.id > sortedArticles.length || query.id < 1) {
         setQuery({ tags: query.tags, id: 1 }, 'push')
       } else {
         setCurrentPage(query.id - 1)
@@ -93,7 +86,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
           photo={articles[0].imagePath}
           date={articles[0].date}
           text={articles[0].subTitle}
-          tag={articles[0].tag}
+          tag={articles[0].tags}
         />
       }
       {
@@ -113,8 +106,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
       }
       {sortedArticles && sortedArticles.length > 0 &&
         <Wrapper>
-          <ArticlesList articles={sortedArticles[currentPage].first} />
-          <ArticlesList articles={sortedArticles[currentPage].second} />
+          <ArticlesList articles={sortedArticles[currentPage]} />
         </Wrapper>
       }
       <PaginationSection>
