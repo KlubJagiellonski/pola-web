@@ -9,6 +9,7 @@ import { LoadBrowserLocation, SelectActivePage } from '../../state/app/app-actio
 import { PageType } from '../../domain/website';
 import { PageSection } from '../../layout/PageSection';
 import { ArticleHeader } from './ArticleHeader';
+import { ArticleFooter } from './ArticleFooter';
 import { Device, margin } from '../../styles/theme';
 import { Article } from '../../domain/articles';
 import SideInformations from '../SideInformations';
@@ -45,7 +46,8 @@ const Wrapper = styled.div`
 `
 
 const FirstColumn = styled.div`
-  width: 75%;
+  flex: 3;
+  flex-basis: 0;
 
   @media ${Device.mobile} {
     margin-top: ${margin.veryBig};
@@ -54,11 +56,12 @@ const FirstColumn = styled.div`
 `
 
 const SecondColumn = styled.div`
-  width: 25%;
+  flex: 1;
+  flex-basis: 0;
 `
 
 const ArticlePage = (props: IArticlePage) => {
-  const { location, article, articles } = props;
+  const { location, article, author, slug, facebook, articles } = props;
   const title = ((article || {}).frontmatter || {}).title;
   const subTitle = ((article || {}).frontmatter || {}).subTitle;
   const category = ((article || {}).frontmatter || {}).category;
