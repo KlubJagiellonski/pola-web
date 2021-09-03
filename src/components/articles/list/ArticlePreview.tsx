@@ -27,7 +27,9 @@ const ArticleImage = styled.div`
   }
 `;
 
-const Wrapper = styledContainerQuery.div`
+const Wrapper = styled(WrapperSection)``;
+
+const Container = styledContainerQuery.div`
   display: flex;
   flex-direction: row;
   min-height: 16.5em;
@@ -73,7 +75,7 @@ const ArticleSection = styled.div`
 
 export const ArticlePreview: React.FC<Article> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
-    <Wrapper color={color.background.white}>
+    <Container color={color.background.white}>
       <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} />
@@ -83,6 +85,6 @@ export const ArticlePreview: React.FC<Article> = ({ imagePath, title, slug, date
           tag={tag}
         />
       </ArticleSection>
-    </Wrapper>
+    </Container>
   );
 };

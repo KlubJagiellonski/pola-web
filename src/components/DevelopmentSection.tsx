@@ -81,7 +81,9 @@ const ImgSection = styled.div`
 }  
 `
 
-const Wrapper = styledContainerQuery.div`
+const Wrapper = styled(WrapperSection)``;
+
+const Container = styledContainerQuery(Wrapper)`
   display: flex;
   flex-direction: row;
   grid-area: development;
@@ -137,7 +139,7 @@ const Wrapper = styledContainerQuery.div`
 
 const DevelopmentSection = () => {
   return (
-    <Wrapper color={color.background.red}>
+    <Container color={color.background.red}>
       <Info>
         <ImgSection>
           <ResponsiveImage imageSrc='smutny-2.png' />
@@ -152,7 +154,7 @@ const DevelopmentSection = () => {
           </div>
         </TextSection>
       </Texts>
-    </Wrapper>
+    </Container>
   );
 };
 

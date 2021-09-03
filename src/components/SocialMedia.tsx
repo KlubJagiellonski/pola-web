@@ -39,7 +39,9 @@ const Title = styled(TitleSection)`
   }
 `;
 
-const Wrapper = styledContainerQuery.div`
+const Wrapper = styled(WrapperSection)``;
+
+const Container = styledContainerQuery.div`
   min-height: 5em;
   height: 100%;
   grid-area: social-media;
@@ -69,7 +71,7 @@ const Wrapper = styledContainerQuery.div`
 
 const SocialMedia = () => {
   return (
-    <Wrapper color={color.background.white}>
+    <Container color={color.background.white}>
       <Title>Śledź nas na:</Title>
       <Items>
         <Item href={urls.external.polaSocialMedia.facebook.href} target="blank">
@@ -84,7 +86,7 @@ const SocialMedia = () => {
         <Item>
         </Item>
       </Items>
-    </Wrapper>
+    </Container>
   );
 };
 
