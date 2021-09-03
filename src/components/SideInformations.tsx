@@ -19,13 +19,13 @@ const Title = styled.p`
   font-weight: bold;
 `
 
-const FirstSection = styled.p`
+const FirstSection = styled.div`
   @media ${Device.mobile} {
     display: none;
   }
 `
 
-const SecondSection = styled.p`
+const SecondSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${margin.normal};
