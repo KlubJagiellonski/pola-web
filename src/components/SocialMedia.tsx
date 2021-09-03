@@ -39,7 +39,7 @@ const Title = styled(TitleSection)`
   }
 `;
 
-const Wrapper = styledContainerQuery(WrapperSection)`
+const Wrapper = styledContainerQuery.div`
   min-height: 5em;
   height: 100%;
   grid-area: social-media;

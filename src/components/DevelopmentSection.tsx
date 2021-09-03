@@ -81,7 +81,7 @@ const ImgSection = styled.div`
 }  
 `
 
-const Wrapper = styledContainerQuery(WrapperSection)`
+const Wrapper = styledContainerQuery.div`
   display: flex;
   flex-direction: row;
   grid-area: development;
