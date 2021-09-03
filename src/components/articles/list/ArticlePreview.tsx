@@ -12,14 +12,14 @@ import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
 const ArticleImage = styled.div`
   width: 50%;
   text-align: left;
-  div{
+  .gatsby-image-wrapper{
     div{
       padding-bottom: 14em !important;
     }
   }
 
   @media ${Device.mobile} {
-    div{
+    .gatsby-image-wrapper{
       div{
         padding-bottom: 5em !important;
       }
@@ -53,7 +53,7 @@ const Wrapper = styledContainerQuery(WrapperSection)`
     }
 
     ${ArticleImage}{
-      div{
+      .gatsby-image-wrapper{
         div{
           padding-bottom: 5em !important;
         }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { Article } from '../domain/articles';
 import { Device, margin } from '../styles/theme';
+import { getVisibleArticles } from '../utils/articles';
 import { getTagsList } from '../utils/tags';
 import ArticlesListPreview from './articles/list/ArticlesListPrewiev';
 import DevelopmentSection from './DevelopmentSection';
@@ -44,16 +45,7 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
 
   useEffect(() => {
     if (articles) {
-      let art = articles.slice();
-      for (let i = 0; i < art.length; i++) {
-        if (art[i].id === actualArticleId) {
-          art.splice(i, 1);
-        }
-      }
-      if (art.length > 3) {
-        art = art.slice(0, 3)
-      }
-      setArticlesPreview(art)
+      setArticlesPreview(getVisibleArticles(actualArticleId, articles))
     }
   }, [articles]);
 

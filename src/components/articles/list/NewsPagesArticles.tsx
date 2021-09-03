@@ -60,7 +60,12 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
       const sortedArticles = getArticlesTwoColumns(art);
       setArticles(sortedArticles.slice());
       setPageCount(sortedArticles.length);
-      if (query.id === undefined || query.id > sortedArticles.length || query.id < 1) {
+
+      const isWrongQueryId = query.id * 1 === undefined ||
+        query.id * 1 > sortedArticles.length ||
+        query.id < 1 || !Number.isInteger(query.id);
+
+      if (isWrongQueryId) {
         setQuery({ tags: query.tags, id: 1 }, 'push')
       } else {
         setCurrentPage(query.id - 1)
@@ -86,7 +91,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
           photo={articles[0].imagePath}
           date={articles[0].date}
           text={articles[0].subTitle}
-          tag={articles[0].tags}
+          tag={articles[0].tag}
         />
       }
       {
