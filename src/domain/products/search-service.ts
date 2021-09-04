@@ -19,6 +19,23 @@ export interface ISearchError {
   error: unknown;
 }
 
+interface SearchResultItem {
+  name: string;
+  code: string;
+  company?: {
+    name: string;
+  };
+  brand?: {
+    name: string;
+  };
+}
+
+interface SearchResultCollection {
+  nextPageToken?: string;
+  products: SearchResultItem[];
+  totalItems: number;
+}
+
 export class ProductService extends ApiService {
   public static getInstance(): ProductService {
     if (!ProductService.instance) {
@@ -41,34 +58,60 @@ export class ProductService extends ApiService {
       } else {
         this.page = 0;
       }
-      const amount = 5 + this.page;
-      const response = await axios.get(`${this.apiUrl}?limit=${amount}`);
-      const products: IProductMock[] = response.data;
 
-      if (!products) {
-        throw new EmptyResponseDataError('products');
+      if (phrase !== undefined && phrase.length > 0) {
+        const response = await await axios.get(
+          `${this.apiUrl}?query=${phrase}`
+          // ,
+          // {
+          //   headers: {
+          //     Origin: 'https://www.pola-app.pl',
+          //     mode: 'cors',
+          //   },
+          // }
+        );
+
+        const result: IProductSearchSuccess = response.data;
+
+        console.log('response result', result);
+
+        return result;
       }
 
       return {
-        nextPageToken: token || 'mock_token',
-        totalItems: amount,
-        products: products.map(
-          (mock) =>
-            ({
-              id: mock.id.toString(),
-              code: getEAN(),
-              name: mock.title,
-              company: {
-                name: mock.description,
-              },
-              brand: {
-                name: mock.category,
-              },
-              score: getNumber(0, 100),
-              polishCapital: getNumber(0, 100),
-            } as IProductData)
-        ),
+        nextPageToken: 'empty',
+        products: [],
+        totalItems: 0,
       };
+
+      // const amount = 5 + this.page;
+      // const response = await axios.get(`${this.apiUrl}?limit=${amount}`);
+      // const products: IProductMock[] = response.data;
+
+      // if (!products) {
+      //   throw new EmptyResponseDataError('products');
+      // }
+
+      // return {
+      //   nextPageToken: token || 'mock_token',
+      //   totalItems: amount,
+      //   products: products.map(
+      //     (mock) =>
+      //       ({
+      //         id: mock.id.toString(),
+      //         code: getEAN(),
+      //         name: mock.title,
+      //         company: {
+      //           name: mock.description,
+      //         },
+      //         brand: {
+      //           name: mock.category,
+      //         },
+      //         score: getNumber(0, 100),
+      //         polishCapital: getNumber(0, 100),
+      //       } as IProductData)
+      //   ),
+      // };
     } catch (e) {
       throw new FetchError('Search API', e);
     }
