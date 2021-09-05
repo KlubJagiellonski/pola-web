@@ -9,13 +9,28 @@ export interface IBrand {
 }
 
 export interface IProductData {
-  id: string;
   code: string;
   name: string;
-  score: number;
-  polishCapital: number;
+  score?: number;
+  polishCapital?: number;
   company?: ICompany;
   brand?: IBrand;
+}
+
+export interface IProductSearchSuccess {
+  nextPageToken: string;
+  totalItems: number;
+  products: IProductData[];
+}
+
+export class ProductSearchResults implements IProductSearchSuccess {
+  public static Empty: IProductSearchSuccess = {
+    nextPageToken: 'empty',
+    totalItems: 0,
+    products: [],
+  };
+
+  constructor(public totalItems: number, public products: IProductData[], public nextPageToken: string) {}
 }
 
 interface IDonate {

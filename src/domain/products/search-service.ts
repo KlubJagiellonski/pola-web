@@ -1,39 +1,14 @@
 import axios from 'axios';
-import { IProductData, IProductMock } from '.';
+import { IProductSearchSuccess, ProductSearchResults } from '.';
 import { ApiService } from '../../services/api-service';
-import { getEAN, getNumber } from '../../utils/data/random-number';
 import config from '../../app-config.json';
-import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
+import { FetchError } from '../../services/api-errors';
 
 export interface ISearchParams {
   phrase: string;
 }
-
-export interface IProductSearchSuccess {
-  nextPageToken: string;
-  totalItems: number;
-  products: IProductData[];
-}
-
 export interface ISearchError {
   error: unknown;
-}
-
-interface SearchResultItem {
-  name: string;
-  code: string;
-  company?: {
-    name: string;
-  };
-  brand?: {
-    name: string;
-  };
-}
-
-interface SearchResultCollection {
-  nextPageToken?: string;
-  products: SearchResultItem[];
-  totalItems: number;
 }
 
 export class ProductService extends ApiService {
@@ -49,71 +24,43 @@ export class ProductService extends ApiService {
     super(config.searchApiURL);
   }
 
-  private page: number = 0;
-
   public async searchProducts(phrase: string, token?: string): Promise<IProductSearchSuccess> {
     try {
-      if (token) {
-        this.page += 1;
-      } else {
-        this.page = 0;
-      }
+      const phraseIsNotEmpty = phrase !== undefined && phrase.length > 0;
 
-      if (phrase !== undefined && phrase.length > 0) {
-        const response = await await axios.get(
-          `${this.apiUrl}?query=${phrase}`
-          // ,
-          // {
-          //   headers: {
-          //     Origin: 'https://www.pola-app.pl',
-          //     mode: 'cors',
-          //   },
-          // }
-        );
-
-        const result: IProductSearchSuccess = response.data;
-
-        console.log('response result', result);
-
+      if (phraseIsNotEmpty) {
+        const searchQuery = this.buildSearchQuery(phrase, token);
+        const result: IProductSearchSuccess = await this.getSearchResults(searchQuery);
         return result;
       }
 
-      return {
-        nextPageToken: 'empty',
-        products: [],
-        totalItems: 0,
-      };
-
-      // const amount = 5 + this.page;
-      // const response = await axios.get(`${this.apiUrl}?limit=${amount}`);
-      // const products: IProductMock[] = response.data;
-
-      // if (!products) {
-      //   throw new EmptyResponseDataError('products');
-      // }
-
-      // return {
-      //   nextPageToken: token || 'mock_token',
-      //   totalItems: amount,
-      //   products: products.map(
-      //     (mock) =>
-      //       ({
-      //         id: mock.id.toString(),
-      //         code: getEAN(),
-      //         name: mock.title,
-      //         company: {
-      //           name: mock.description,
-      //         },
-      //         brand: {
-      //           name: mock.category,
-      //         },
-      //         score: getNumber(0, 100),
-      //         polishCapital: getNumber(0, 100),
-      //       } as IProductData)
-      //   ),
-      // };
+      return ProductSearchResults.Empty;
     } catch (e) {
       throw new FetchError('Search API', e);
     }
+  }
+
+  private buildSearchQuery(phrase: string, token?: string): string {
+    let searchQuery = `query="${phrase}"`;
+
+    if (token) {
+      searchQuery = searchQuery + `&pageToken=${token}`;
+    }
+
+    return searchQuery;
+  }
+
+  private async getSearchResults(searchQuery: string): Promise<IProductSearchSuccess> {
+    const response = await await axios.get(`${this.apiUrl}?${searchQuery}`, {
+      headers: {
+        Origin: 'https://www.pola-app.pl',
+        mode: 'cors',
+      },
+    });
+
+    const result: IProductSearchSuccess = response.data;
+    console.log('response result', result);
+
+    return result;
   }
 }
