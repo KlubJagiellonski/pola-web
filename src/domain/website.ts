@@ -7,7 +7,6 @@ export enum PageType {
   FRIENDS = 'friends',
   BUSINESS = 'business',
   TEAM = 'team',
-  FAQ = 'faq',
   CONTACT = 'contact',
   PRODUCTS = 'products',
   ERROR_404 = '404',
@@ -28,7 +27,6 @@ export const urls = {
     friends: '/friends',
     business: '/business',
     team: '/join',
-    faq: '/faq',
     contact: '/contact',
     products: '/products',
   },
@@ -58,6 +56,5 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends },
   { type: PageType.BUSINESS, label: 'Oferta biznesowa', url: urls.pola.business },
   { type: PageType.TEAM, label: 'Dołącz do zespołu', url: urls.pola.team },
-  { type: PageType.FAQ, label: 'FAQ', url: urls.pola.faq },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.contact },
 ];
