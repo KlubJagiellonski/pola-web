@@ -40,6 +40,12 @@ export const urls = {
     klubJagiellonski: new URL('https://klubjagiellonski.pl/projekty/centrum-analiz/'),
     instytutLogistyki: new URL('https://ilim.lukasiewicz.gov.pl/'),
     mojePanstwo: new URL('https://mojepanstwo.pl/'),
+    githubAndroid: new URL('https://github.com/KlubJagiellonski/pola-android/issues'),
+    githubIos: new URL('https://github.com/KlubJagiellonski/pola-ios/issues'),
+    githubWeb: new URL('https://github.com/KlubJagiellonski/pola-backend/issues'),
+    form: new URL(
+      'https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform'
+    ),
     polaSocialMedia: {
       facebook: new URL('https://www.facebook.com/app.pola'),
       twitter: new URL('https://twitter.com/pola_app'),

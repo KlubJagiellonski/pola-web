@@ -11,7 +11,7 @@ import './accordion.css';
 
 interface ISingleAccordion {
   question: string,
-  answer: string,
+  answer: HTMLElement,
   key: number
 }
 
@@ -24,9 +24,7 @@ const SingleAccordion: React.FC<ISingleAccordion> = ({ question, answer, key }) 
         </AccordionItemButton>
       </AccordionItemHeading>
       <AccordionItemPanel>
-        <p>
-          {answer}
-        </p>
+        {answer}
       </AccordionItemPanel>
     </AccordionItem>
   )
