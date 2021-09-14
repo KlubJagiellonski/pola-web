@@ -17,12 +17,12 @@ export const InvokePhrase = (phrase: string): IAction => ({
   },
 });
 
-export const LoadResults = (phrase: string, token: string, products: IProductData[]): IAction => ({
+export const LoadResults = (products: IProductData[], phrase: string, token?: string): IAction => ({
   type: actionTypes.LOAD_RESULTS,
   payload: {
+    products,
     phrase,
     token,
-    products,
   },
 });
 

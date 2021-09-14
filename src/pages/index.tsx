@@ -20,9 +20,10 @@ import { SecondaryButton } from '../components/buttons/SecondaryButton';
 import { ButtonColor } from '../styles/button-theme';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 import { openNewTab } from '../utils/browser';
-import { SearchStateName } from '../state/search/search-reducer';
+import { ISearchResultPage, SearchStateName } from '../state/search/search-reducer';
 import { PageType, urls } from '../domain/website';
 import { Article } from '../domain/articles';
+import { concatProductPages } from '../domain/products/search-service';
 
 const Content = styled.div`
   width: 100%;
@@ -157,8 +158,7 @@ export default connect(
 
     location: state.app.location,
     phrase: state.search.phrase,
-    searchResults: state.search.products,
-    token: state.search.token,
+    searchResults: concatProductPages(state.search.resultPages),
     articles: state.articles.data,
     friends: state.friends.data,
   }),

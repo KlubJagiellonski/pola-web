@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { IProductSearchSuccess, ProductSearchResults } from '.';
+import { IProductData, IProductSearchSuccess, ProductSearchResults } from '.';
 import { ApiService } from '../../services/api-service';
 import config from '../../app-config.json';
 import { FetchError } from '../../services/api-errors';
+import { ISearchResultPage } from '../../state/search/search-reducer';
 
 export interface ISearchParams {
   phrase: string;
@@ -41,7 +42,7 @@ export class ProductService extends ApiService {
   }
 
   private buildSearchQuery(phrase: string, token?: string): string {
-    let searchQuery = `query="${phrase}"`;
+    let searchQuery = `search?query=${phrase}`;
 
     if (token) {
       searchQuery = searchQuery + `&pageToken=${token}`;
@@ -51,16 +52,17 @@ export class ProductService extends ApiService {
   }
 
   private async getSearchResults(searchQuery: string): Promise<IProductSearchSuccess> {
-    const response = await await axios.get(`${this.apiUrl}?${searchQuery}`, {
-      headers: {
-        Origin: 'https://www.pola-app.pl',
-        mode: 'cors',
-      },
-    });
+    const response = await await axios.get(`/a/v4/${searchQuery}`);
 
     const result: IProductSearchSuccess = response.data;
     console.log('response result', result);
 
     return result;
   }
+}
+
+export function concatProductPages(pages: ISearchResultPage[]) {
+  return pages.reduce((products: IProductData[], page: ISearchResultPage) => {
+    return [...products, ...page.products];
+  }, []);
 }

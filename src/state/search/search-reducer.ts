@@ -4,6 +4,11 @@ import * as actions from './search-actions';
 import { IAction, IActionReducer } from '../types';
 import { IProductData, IProductEAN } from '../../domain/products';
 
+export interface ISearchResultPage {
+  pageIndex: number;
+  products: IProductData[];
+}
+
 export enum SearchStateName {
   INITIAL = 'initial',
   LOADING = 'loading',
@@ -14,30 +19,33 @@ export enum SearchStateName {
 export type SearchState =
   | {
       stateName: SearchStateName.INITIAL;
+      resultPages: ISearchResultPage[];
     }
   | {
       stateName: SearchStateName.LOADING;
       phrase: string;
+      resultPages: ISearchResultPage[];
       error?: unknown;
     }
   | {
       stateName: SearchStateName.LOADED;
       phrase: string;
-      token: string;
-      products: IProductData[];
+      nextPageToken?: string;
+      resultPages: ISearchResultPage[];
       error?: unknown;
     }
   | {
       stateName: SearchStateName.SELECTED;
       phrase: string;
-      token: string;
-      products: IProductData[];
+      nextPageToken?: string;
+      resultPages: ISearchResultPage[];
       selectedProduct: IProductEAN;
       error?: unknown;
     };
 
 const initialState: SearchState = {
   stateName: SearchStateName.INITIAL,
+  resultPages: [],
 };
 
 const reducers: IActionReducer<SearchState> = {
@@ -46,7 +54,8 @@ const reducers: IActionReducer<SearchState> = {
       ...state,
       stateName: SearchStateName.LOADING,
       phrase: action.payload.phrase,
-      token: undefined,
+      pageToken: undefined,
+      nextPageToken: undefined,
     };
   },
 
@@ -55,8 +64,14 @@ const reducers: IActionReducer<SearchState> = {
       ...state,
       stateName: SearchStateName.LOADED,
       phrase: action.payload.phrase,
-      token: action.payload.token,
-      products: action.payload.products,
+      nextPageToken: action.payload.token,
+      resultPages: [
+        ...state.resultPages,
+        {
+          pageIndex: state.resultPages.length + 1,
+          products: action.payload.products,
+        },
+      ],
     };
   },
 

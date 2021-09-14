@@ -27,7 +27,7 @@ interface ISearchResultsList {
   results?: IProductData[];
   actions?: React.ReactNode | React.ReactNode[];
 
-  onSelect: (code: string, id: string) => void;
+  onSelect: (code: string) => void;
 }
 
 export const SearchResultsList: React.FC<ISearchResultsList> = ({ results, actions, onSelect }) => {

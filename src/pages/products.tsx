@@ -18,10 +18,12 @@ import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader'
 import { navigateTo } from '../utils/browser';
 import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
 import { PageType, urls } from '../domain/website';
+import { concatProductPages } from '../domain/products/search-service';
 
 interface IProductsPage {
   location?: Location;
   phrase: string;
+  token?: string;
   searchResults: IProductData[];
   searchState: SearchStateName;
 
@@ -75,7 +77,8 @@ export default connect(
   (state: IPolaState) => ({
     location: state.app.location,
     phrase: state.search.phrase,
-    searchResults: state.search.products,
+    searchResults: concatProductPages(state.search.resultPages),
+    token: state.search.nextPageToken,
     searchState: state.search.stateName,
   }),
   {

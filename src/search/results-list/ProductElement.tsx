@@ -29,11 +29,11 @@ const ResultElement = styled.div`
 
 interface ISearchResultElement {
   product: IProductData;
-  onSelect: (code: string, id: string) => void;
+  onSelect: (code: string) => void;
 }
 
 export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => (
-  <ListElement onClick={(e) => onSelect(product.code, product.id)}>
+  <ListElement onClick={(e) => onSelect(product.code)}>
     <ResultElement>
       {product.company && <span className="manufacturer">{product.company.name}</span>}
       {product.brand && <span className="brand">{product.brand.name}</span>}

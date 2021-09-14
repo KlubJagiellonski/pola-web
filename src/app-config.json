@@ -1,5 +1,9 @@
 {
   "fakeSearchApiURL": "https://fakestoreapi.com/products",
-  "searchApiURL": "http://testserver/a/v4/search",
+  "hosts": {
+    "test": "http://testserver",
+    "prod": "https://www.pola-app.pl"
+  },
+  "searchApiURL": "/a/v4/search",
   "eanApiURL": "https://www.pola-app.pl/a/v3"
 }
