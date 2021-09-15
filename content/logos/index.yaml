@@ -1,0 +1,5 @@
+friends:
+  - path: radziemska
+    name: radziemska
+    description: Rodzime przedsiębiorstwo chemiczne powstałe w 1982 roku. Firma specjalizuje się w produkcji chemii gospodarczej, w tym odplamiaczy, proszków do prania czy wybielaczy. Jest laureatem wielu nagród konsumenckich, a jej siedziba znajduje się w Łomiankach pod Warszawą.
+    image: !file ./images/logo_radziemska.png

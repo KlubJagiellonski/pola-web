@@ -1,17 +1,13 @@
-import { getGuid } from '../../utils/data/random-number';
+import { IFriendNode } from './friend-service';
 
-export interface IFriend {
-  id: string;
-  description: string;
-  image?: string;
-}
-
-export class Friend implements IFriend {
+export class Friend {
   public id: string;
   public image?: string;
+  public description: string;
 
-  constructor(public description: string, imageSrc?: string) {
-    this.image = imageSrc;
-    this.id = getGuid();
+  constructor(data: IFriendNode) {
+    this.id = data.id;
+    this.image = data.image.relativePath;
+    this.description = data.description;
   }
 }

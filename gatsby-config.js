@@ -61,6 +61,26 @@ module.exports = {
         path: `${__dirname}/content/posts`,
       },
     },
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/logos`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-yaml-full`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-yaml-full-file`,
+            options: {
+              path: `${__dirname}/content/logos`,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
