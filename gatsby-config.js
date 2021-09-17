@@ -69,7 +69,7 @@ module.exports = {
         path: `${__dirname}/content/posts`,
       },
     },
-    `gatsby-transformer-yaml`,
+    `gatsby-transformer-yaml-full`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
