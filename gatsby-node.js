@@ -65,7 +65,7 @@ exports.createPages = async function ({ graphql, actions }) {
       {
         allLogosFriendsYaml {
           nodes {
-            path
+            slug
           }
         }
       }
@@ -76,14 +76,14 @@ exports.createPages = async function ({ graphql, actions }) {
     throw new Error('Unable to fetch pages');
   }
 
-  friendTemplate = path.resolve('./src/templates/basicTemplate.js');
+  const friendTemplate = path.resolve('./src/templates/FriendTemplate.tsx');
 
   resultFriends.data.allLogosFriendsYaml.nodes.forEach((element) => {
     createPage({
-      path: element.path,
+      path: element.slug,
       component: friendTemplate,
       context: {
-        cos: 'cos',
+        slug: element.slug,
       },
     });
   });

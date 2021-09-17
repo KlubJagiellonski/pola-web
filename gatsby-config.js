@@ -25,6 +25,14 @@ module.exports = {
         path: `${__dirname}/content/posts/`,
       },
     },
+    //image for logos friends
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/content/logos/images/`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

@@ -54,10 +54,13 @@ export const FriendsService = {
           allLogosFriendsYaml {
             nodes {
               id
+              name
               description
               image {
-                relativePath
+                base
               }
+              page
+              slug
             }
           }
         }
@@ -67,8 +70,11 @@ export const FriendsService = {
 
 export interface IFriendNode {
   id: string;
+  name: string;
   description: string;
   image: {
-    relativePath: string;
+    base: string;
   };
+  page: string;
+  slug: string;
 }
