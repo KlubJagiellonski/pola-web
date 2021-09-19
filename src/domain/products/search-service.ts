@@ -53,15 +53,18 @@ export class ProductService extends ApiService {
 
   private async getSearchResults(searchQuery: string): Promise<IProductSearchSuccess> {
     const response = await await axios.get(`/a/v4/${searchQuery}`);
-
     const result: IProductSearchSuccess = response.data;
-    console.log('response result', result);
 
     return result;
   }
 }
 
-export function concatProductPages(pages: ISearchResultPage[]) {
+/**
+ * Reduces search result pages to one results collection
+ * @param search API response data
+ * @returns agreggated results collection
+ */
+export function reduceSearchResults(pages: ISearchResultPage[]): IProductData[] {
   return pages.reduce((products: IProductData[], page: ISearchResultPage) => {
     return [...products, ...page.products];
   }, []);

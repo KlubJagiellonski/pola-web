@@ -32,6 +32,7 @@ export type SearchState =
       phrase: string;
       nextPageToken?: string;
       resultPages: ISearchResultPage[];
+      totalItems: number;
       error?: unknown;
     }
   | {
@@ -65,11 +66,28 @@ const reducers: IActionReducer<SearchState> = {
       stateName: SearchStateName.LOADED,
       phrase: action.payload.phrase,
       nextPageToken: action.payload.token,
+      totalItems: action.payload.totalItems,
+      resultPages: [
+        {
+          pageIndex: 1,
+          products: action.payload.pageProducts,
+        },
+      ],
+    };
+  },
+
+  [actionTypes.LOAD_NEXT_PAGE]: (
+    state: SearchState = initialState,
+    action: ReturnType<typeof actions.LoadNextPage>
+  ) => {
+    return {
+      ...state,
+      stateName: SearchStateName.LOADED,
       resultPages: [
         ...state.resultPages,
         {
           pageIndex: state.resultPages.length + 1,
-          products: action.payload.products,
+          products: action.payload.pageProducts,
         },
       ],
     };

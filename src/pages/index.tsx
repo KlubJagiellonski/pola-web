@@ -20,10 +20,10 @@ import { SecondaryButton } from '../components/buttons/SecondaryButton';
 import { ButtonColor } from '../styles/button-theme';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 import { openNewTab } from '../utils/browser';
-import { ISearchResultPage, SearchStateName } from '../state/search/search-reducer';
 import { PageType, urls } from '../domain/website';
 import { Article } from '../domain/articles';
-import { concatProductPages } from '../domain/products/search-service';
+import { reduceSearchResults } from '../domain/products/search-service';
+import { SearchStateName } from '../state/search/search-reducer';
 
 const Content = styled.div`
   width: 100%;
@@ -72,100 +72,103 @@ const MissingProductInfo = styled.div`
 `;
 
 interface IHomePage {
-  searchState: SearchStateName;
+    searchState: SearchStateName;
 
-  location?: Location;
-  phrase?: string;
-  searchResults?: IProductData[];
-  token?: string;
-  articles?: Article[];
-  activeTags: string[];
-  friends?: IFriend[];
+    location?: Location;
+    phrase?: string;
+    loadedSearchResults?: IProductData[];
+    totalItems: number;
+    token?: string;
+    articles?: Article[];
+    activeTags: string[];
+    friends?: IFriend[];
 
-  invokeSearch: (phrase: string) => void;
-  invokeLoadMore: () => void;
-  clearResults: () => void;
-  selectProduct: (code: string, id: string) => void;
+    invokeSearch: (phrase: string) => void;
+    invokeLoadMore: () => void;
+    clearResults: () => void;
+    selectProduct: (code: string, id: string) => void;
 }
 
 const HomePage = (props: IHomePage) => {
-  const { phrase, searchResults, location, searchState } = props;
-  const dispatch = useDispatch();
+    const { phrase, loadedSearchResults, totalItems, location, searchState } = props;
+    const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.HOME));
-    }
-  }, []);
+    React.useEffect(() => {
+        if (location) {
+            dispatch(LoadBrowserLocation(location));
+            dispatch(SelectActivePage(PageType.HOME));
+        }
+    }, []);
 
-  const handleCancel = () => {
-    props.clearResults();
-  };
+    const handleCancel = () => {
+        props.clearResults();
+    };
 
-  const emptyResults = !searchResults || searchResults.length < 1;
-  const isLoading = searchState === SearchStateName.LOADING;
+    const emptyResults = !loadedSearchResults || loadedSearchResults.length < 1;
+    const isLoading = searchState === SearchStateName.LOADING;
 
-  return (
-    <PageLayout>
-      <SEOMetadata pageTitle="Strona główna" />
-      <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
-        <Background>
-          <ResponsiveImage imageSrc={'background.png'} />
-        </Background>
-        <Content>
-          <SearchForm onSearch={props.invokeSearch} isLoading={isLoading} />
-        </Content>
-      </PageSection>
-      <SearchResultsHeader
-        phrase={phrase}
-        searchResults={searchResults}
-        searchState={searchState}
-        resultsUrl={urls.pola.products}
-      />
-      {!emptyResults && (
-        <PageSection>
-          <SearchResultsList
-            results={searchResults}
-            actions={
-              <PrimaryButton color={ButtonColor.Gray} onClick={handleCancel}>
-                <span>Anuluj</span>
-              </PrimaryButton>
-            }
-            onSelect={props.selectProduct}
-          />
-          <MissingProductInfo>
-            <p>Nie znalazłeś czego szukasz?</p>
-            <SecondaryButton
-              onClick={() => openNewTab(urls.external.openFoods)}
-              color={ButtonColor.Red}
-              fontSize={fontSize.small}>
-              Zgłoś produkt do bazy
-            </SecondaryButton>
-          </MissingProductInfo>
-        </PageSection>
-      )}
-      <WrapperContents>
-        <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
-      </WrapperContents>
-    </PageLayout>
-  );
+    return (
+        <PageLayout>
+            <SEOMetadata pageTitle="Strona główna" />
+            <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
+                <Background>
+                    <ResponsiveImage imageSrc={'background.png'} />
+                </Background>
+                <Content>
+                    <SearchForm onSearch={props.invokeSearch} isLoading={isLoading} />
+                </Content>
+            </PageSection>
+            <SearchResultsHeader
+                phrase={phrase}
+                totalItems={totalItems}
+                searchState={searchState}
+                resultsUrl={urls.pola.products}
+            />
+            {!emptyResults && (
+                <PageSection>
+                    <SearchResultsList
+                        results={loadedSearchResults}
+                        totalItems={totalItems}
+                        actions={
+                            <PrimaryButton color={ButtonColor.Gray} onClick={handleCancel}>
+                                <span>Anuluj</span>
+                            </PrimaryButton>
+                        }
+                        onSelect={props.selectProduct}
+                    />
+                    <MissingProductInfo>
+                        <p>Nie znalazłeś czego szukasz?</p>
+                        <SecondaryButton
+                            onClick={() => openNewTab(urls.external.openFoods)}
+                            color={ButtonColor.Red}
+                            fontSize={fontSize.small}>
+                            Zgłoś produkt do bazy
+                        </SecondaryButton>
+                    </MissingProductInfo>
+                </PageSection>
+            )}
+            <WrapperContents>
+                <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
+            </WrapperContents>
+        </PageLayout>
+    );
 };
 
 export default connect(
-  (state: IPolaState) => ({
-    searchState: state.search.stateName,
+    (state: IPolaState) => ({
+        searchState: state.search.stateName,
 
-    location: state.app.location,
-    phrase: state.search.phrase,
-    searchResults: concatProductPages(state.search.resultPages),
-    articles: state.articles.data,
-    friends: state.friends.data,
-  }),
-  {
-    invokeSearch: searchDispatcher.invokeSearch,
-    invokeLoadMore: searchDispatcher.invokeLoadMore,
-    clearResults: searchDispatcher.clearResults,
-    selectProduct: searchDispatcher.selectProduct,
-  }
+        location: state.app.location,
+        phrase: state.search.phrase,
+        loadedSearchResults: reduceSearchResults(state.search.resultPages),
+        totalItems: state.search.totalItems,
+        articles: state.articles.data,
+        friends: state.friends.data,
+    }),
+    {
+        invokeSearch: searchDispatcher.invokeSearch,
+        invokeLoadMore: searchDispatcher.invokeLoadMore,
+        clearResults: searchDispatcher.clearResults,
+        selectProduct: searchDispatcher.selectProduct,
+    }
 )(HomePage);
