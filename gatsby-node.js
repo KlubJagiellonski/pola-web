@@ -59,32 +59,4 @@ exports.createPages = async function ({ graphql, actions }) {
       },
     });
   });
-
-  const resultFriends = await graphql(
-    `
-      {
-        allLogosFriendsYaml {
-          nodes {
-            slug
-          }
-        }
-      }
-    `
-  );
-  if (result.errors) {
-    console.log(result.errors);
-    throw new Error('Unable to fetch pages');
-  }
-
-  const friendTemplate = path.resolve('./src/templates/FriendTemplate.tsx');
-
-  resultFriends.data.allLogosFriendsYaml.nodes.forEach((element) => {
-    createPage({
-      path: element.slug,
-      component: friendTemplate,
-      context: {
-        slug: element.slug,
-      },
-    });
-  });
 };
