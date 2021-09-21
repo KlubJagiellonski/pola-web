@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 `
 
 const Title = styled(TitleSection)`
-  margin: ${margin.big} 0;
+  margin: ${margin.normal} 0;
   text-align: center;
 `
 
