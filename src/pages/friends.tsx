@@ -6,15 +6,15 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
+import { hash, PageType, urls } from '../domain/website';
 import { Text, TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
 import { PageSection } from '../layout/PageSection';
 import { margin, padding, Device, color, fontSize } from '../styles/theme';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import Placeholder from '../components/Placeholder';
 import { Friend } from '../domain/friends';
-import Friends from '../components/friends/Friends';
 import Card from '../components/Card';
+import FriendsSection from '../components/friends/FriendsSection';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};
@@ -60,20 +60,6 @@ const ImageSection = styled.ul`
     }
   }
 `;
-
-const FriendsSection = styled.div`
-  margin: ${margin.big} 0;
-
-  .friends_wrapper{
-    .friends_title{
-      display: none;
-    }
-  }
-
-  @media ${Device.mobile} {
-    margin: ${margin.small} 0;
-  }
-`
 
 const FullWrapperInfo = styled(WrapperSection)`
   padding: 0 ${padding.small};
@@ -153,14 +139,14 @@ const FriendsPage = (props: IFriendsPage) => {
             <li><ResponsiveImage imageSrc="PGE_logo.png" /></li>
             <li><ResponsiveImage imageSrc="polskie_kupuje.png" /></li>
           </ImageSection>
-          <TextSection>Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE akcji POLSKIE – KUPUJĘ TO! jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE wspiera rozwój aplikacji Pola.</TextSection>
+          <TextSection>
+            celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO!
+          </TextSection>
         </Wrapper>
       </PageSection>
-      <Placeholder><p>Wspieramy polskie<br />firmy - oto Przyjaciele Poli:</p></Placeholder>
+      <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>
-        <FriendsSection>
-          <Friends friends={props.friends} rows={4} />
-        </FriendsSection>
+        <FriendsSection friends={props.friends} />
       </PageSection>
       <FullWrapperInfo color={color.background.transparencyGrey}>
         <FullContentInfo>
@@ -180,10 +166,11 @@ const FriendsPage = (props: IFriendsPage) => {
           </Text>
         </FullContentInfo>
       </FullWrapperInfo>
-      <WrapperInfo>
+      <WrapperInfo id={hash.friends.profit.id}>
         <Info color={color.background.white}>
           <TitleInfo>Czym jest Klub Przyjaciół Poli?</TitleInfo>
           <Text>Głównym celem Klubu Przyjaciół Poli jest promocja oraz wsparcie polskich przedsiębiorstw. Będzie to możliwe dzięki stworzeniu silnego środowiska społeczno-biznesowego, które poprzez kooperację i wspólne działania przyczyni się do popularyzacji mody na patriotyzm gospodarczy.</Text>
+          <ResponsiveImage imageSrc="szproty.png" />
         </Info>
         <Info color={color.background.transparencyGrey}>
           <TitleInfo>Co zyskuje przyjaciel Poli?</TitleInfo>

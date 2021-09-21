@@ -5,7 +5,7 @@ import { color, padding, fontSize } from '../styles/theme'
 
 const Wrapper = styled(WrapperSection)`
   color: ${color.text.light};
-  padding: ${padding.big};
+  padding: ${padding.normal};
   display: flex;
   justify-content: center;
   text-align: center;
@@ -19,14 +19,14 @@ const Wrapper = styled(WrapperSection)`
 `
 
 interface IPlaceholder {
-  children?: React.ReactNode;
+  text: string;
 }
 
 
-const Placeholder: React.FC<IPlaceholder> = ({ children }) => {
+const Placeholder: React.FC<IPlaceholder> = ({ text }) => {
   return (
     <Wrapper color={color.background.red}>
-      {children}
+      <p>{text}</p>
     </Wrapper>
   )
 }
