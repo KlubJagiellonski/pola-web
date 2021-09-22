@@ -140,7 +140,7 @@ const FriendsPage = (props: IFriendsPage) => {
             <li><ResponsiveImage imageSrc="polskie_kupuje.png" /></li>
           </ImageSection>
           <TextSection>
-            celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO!
+            Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO! jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE wspiera rozwój aplikacji Pola.
           </TextSection>
         </Wrapper>
       </PageSection>
