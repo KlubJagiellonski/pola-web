@@ -24,26 +24,26 @@ const ResultsList = styled.div`
 `;
 
 interface ISearchResultsList {
-    results?: IProductData[];
-    totalItems: number;
-    actions?: React.ReactNode | React.ReactNode[];
+  results?: IProductData[];
+  totalItems: number;
+  actions?: React.ReactNode | React.ReactNode[];
 
-    onSelect: (code: string) => void;
+  onSelect: (code: string) => void;
 }
 
-export const SearchResultsList: React.FC<ISearchResultsList> = ({ results, totalItems, actions, onSelect }) => {
-    if (!results) {
-        return null;
-    }
+export const SearchResultsList: React.FC<ISearchResultsList> = ({ results, actions, onSelect }) => {
+  if (!results) {
+    return null;
+  }
 
-    return (
-        <ResultsList>
-            <ul className="products-list">
-                {results.map((product: IProductData, index: number) => (
-                    <SearchResultElement product={product} key={product.code} onSelect={onSelect} />
-                ))}
-            </ul>
-            {actions && <div className="actions">{actions}</div>}
-        </ResultsList>
-    );
+  return (
+    <ResultsList>
+      <ul className="products-list">
+        {results.map((product: IProductData, index: number) => (
+          <SearchResultElement product={product} key={product.code} onSelect={onSelect} />
+        ))}
+      </ul>
+      {actions && <div className="actions">{actions}</div>}
+    </ResultsList>
+  );
 };

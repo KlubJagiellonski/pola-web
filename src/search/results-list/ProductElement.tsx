@@ -39,6 +39,6 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
       {product.brand && <span className="brand">{product.brand.name}</span>}
       <span className="name">{product.name}</span>
     </ResultElement>
-    <ScoreBar value={product.score} unit="pkt" />
+    <ScoreBar value={product.score || 0} unit="pkt" />
   </ListElement>
 );

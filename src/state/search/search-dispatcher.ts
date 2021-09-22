@@ -3,6 +3,7 @@ import { ProductEANService } from '../../domain/products/ean-service';
 import { ProductService } from '../../domain/products/search-service';
 import { IPolaState } from '../types';
 import * as actions from './search-actions';
+import { SearchStateName } from './search-reducer';
 
 export const searchDispatcher = {
   invokeSearch: (phrase: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
@@ -22,14 +23,14 @@ export const searchDispatcher = {
 
   invokeLoadMore: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
-      const state = getState();
-      if (state.search.phrase && state.search.nextPageToken) {
-        await dispatch(actions.InvokePhrase(state.search.phrase));
+      const { search } = getState();
+      if (search.stateName === SearchStateName.LOADED) {
+        await dispatch(actions.InvokePhrase(search.phrase));
         const service = ProductService.getInstance();
-        const response = await service.searchProducts(state.search.phrase, state.search.nextPageToken);
+        const response = await service.searchProducts(search.phrase, search.nextPageToken);
         const { products } = response;
 
-        await dispatch(actions.LoadNextPage(state.search.phrase, products));
+        await dispatch(actions.LoadNextPage(search.phrase, products));
       }
     } catch (error) {
       console.error('cannot load more products', error);
@@ -48,10 +49,12 @@ export const searchDispatcher = {
 
   selectProduct: (EANCode: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
-      const service = ProductEANService.getInstance();
-      const product = await service.getProduct(EANCode);
-
-      await dispatch(actions.ShowProductDetails(product));
+      const { search } = getState();
+      if (search.stateName === SearchStateName.LOADED) {
+        const service = ProductEANService.getInstance();
+        const product = await service.getProduct(EANCode);
+        await dispatch(actions.ShowProductDetails(product));
+      }
     } catch (error) {
       console.error('cannot select product', error);
       await dispatch(actions.SearchFailed(error));
@@ -60,7 +63,10 @@ export const searchDispatcher = {
 
   unselectProduct: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
-      await dispatch(actions.UnselectProduct());
+      const { search } = getState();
+      if (search.stateName === SearchStateName.SELECTED) {
+        await dispatch(actions.UnselectProduct());
+      }
     } catch (error) {
       console.error('cannot unselect product', error);
       await dispatch(actions.SearchFailed(error));

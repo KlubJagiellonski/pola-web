@@ -19,18 +19,16 @@ export enum SearchStateName {
 export type SearchState =
   | {
       stateName: SearchStateName.INITIAL;
-      resultPages: ISearchResultPage[];
     }
   | {
       stateName: SearchStateName.LOADING;
       phrase: string;
-      resultPages: ISearchResultPage[];
       error?: unknown;
     }
   | {
       stateName: SearchStateName.LOADED;
       phrase: string;
-      nextPageToken?: string;
+      nextPageToken: string;
       resultPages: ISearchResultPage[];
       totalItems: number;
       error?: unknown;
@@ -38,15 +36,15 @@ export type SearchState =
   | {
       stateName: SearchStateName.SELECTED;
       phrase: string;
-      nextPageToken?: string;
+      nextPageToken: string;
       resultPages: ISearchResultPage[];
+      totalItems: number;
       selectedProduct: IProductEAN;
       error?: unknown;
     };
 
 const initialState: SearchState = {
   stateName: SearchStateName.INITIAL,
-  resultPages: [],
 };
 
 const reducers: IActionReducer<SearchState> = {
@@ -61,39 +59,47 @@ const reducers: IActionReducer<SearchState> = {
   },
 
   [actionTypes.LOAD_RESULTS]: (state: SearchState = initialState, action: ReturnType<typeof actions.LoadResults>) => {
-    return {
-      ...state,
-      stateName: SearchStateName.LOADED,
-      phrase: action.payload.phrase,
-      nextPageToken: action.payload.token,
-      totalItems: action.payload.totalItems,
-      resultPages: [
-        {
-          pageIndex: 1,
-          products: action.payload.pageProducts,
-        },
-      ],
-    };
+    if (state.stateName === SearchStateName.LOADING) {
+      return {
+        ...state,
+        stateName: SearchStateName.LOADED,
+        phrase: action.payload.phrase,
+        nextPageToken: action.payload.token,
+        totalItems: action.payload.totalItems,
+        resultPages: [
+          {
+            pageIndex: 1,
+            products: action.payload.pageProducts,
+          },
+        ],
+      };
+    }
+
+    return state;
   },
 
   [actionTypes.LOAD_NEXT_PAGE]: (
     state: SearchState = initialState,
     action: ReturnType<typeof actions.LoadNextPage>
   ) => {
-    return {
-      ...state,
-      stateName: SearchStateName.LOADED,
-      resultPages: [
-        ...state.resultPages,
-        {
-          pageIndex: state.resultPages.length + 1,
-          products: action.payload.pageProducts,
-        },
-      ],
-    };
+    if (state.stateName === SearchStateName.LOADED) {
+      return {
+        ...state,
+        stateName: SearchStateName.LOADED,
+        resultPages: [
+          ...state.resultPages,
+          {
+            pageIndex: state.resultPages.length + 1,
+            products: action.payload.pageProducts,
+          },
+        ],
+      };
+    }
+
+    return state;
   },
 
-  [actionTypes.CLEAR_RESULTS]: (state: SearchState = initialState, action: ReturnType<typeof actions.ClearResults>) => {
+  [actionTypes.CLEAR_RESULTS]: (state: SearchState = initialState) => {
     return initialState;
   },
 
@@ -108,22 +114,27 @@ const reducers: IActionReducer<SearchState> = {
     state: SearchState = initialState,
     action: ReturnType<typeof actions.ShowProductDetails>
   ) => {
-    return {
-      ...state,
-      stateName: SearchStateName.SELECTED,
-      selectedProduct: action.payload.product,
-    };
+    if (state.stateName === SearchStateName.LOADED) {
+      return {
+        ...state,
+        stateName: SearchStateName.SELECTED,
+        selectedProduct: action.payload.product,
+      };
+    }
+
+    return state;
   },
 
-  [actionTypes.UNSELECT_PRODUCT]: (
-    state: SearchState = initialState,
-    action: ReturnType<typeof actions.ShowProductDetails>
-  ) => {
-    return {
-      ...state,
-      stateName: SearchStateName.LOADED,
-      selectedProduct: undefined,
-    };
+  [actionTypes.UNSELECT_PRODUCT]: (state: SearchState = initialState) => {
+    if (state.stateName === SearchStateName.SELECTED) {
+      return {
+        ...state,
+        stateName: SearchStateName.LOADED,
+        selectedProduct: undefined,
+      };
+    }
+
+    return state;
   },
 };
 

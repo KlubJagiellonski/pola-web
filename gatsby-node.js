@@ -1,15 +1,6 @@
 const path = require('path');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
-  const config = getConfig();
-  config.devServer.proxy = {
-    '/a': 'https://www.pola-app.pl/a',
-  };
-  // This will completely replace the webpack config with the modified object.
-  actions.replaceWebpackConfig(config);
-};
-
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PageSection } from '../../layout/PageSection';
-import { IProductData } from '../../domain/products';
 import { Spinner } from '../../components/Spinner';
 import { ProductCounter } from './ProductCounter';
 import { Link } from 'gatsby';
@@ -19,8 +18,8 @@ const Header = styled.header`
 interface ISearchResultsHeader {
     searchState: SearchStateName;
     phrase: string;
-    resultsUrl: string;
     totalItems: number;
+    resultsUrl?: string;
 
     setActivePage?: (type: PageType) => void;
 }
@@ -28,8 +27,8 @@ interface ISearchResultsHeader {
 export const SearchResultsHeader: React.FC<ISearchResultsHeader> = ({
     searchState,
     phrase,
-    resultsUrl,
     totalItems,
+    resultsUrl,
     setActivePage,
 }) => {
     const isLoading = searchState === SearchStateName.LOADING;
@@ -53,9 +52,10 @@ export const SearchResultsHeader: React.FC<ISearchResultsHeader> = ({
         header = (
             <>
                 <Header>Uzyskano</Header>
-                <Link to={resultsUrl} onClick={handleClick}>
+                {resultsUrl ? (<Link to={resultsUrl} onClick={handleClick}>
                     <ProductCounter phrase={phrase} amount={totalItems} />
-                </Link>
+                </Link>) : (<ProductCounter phrase={phrase} amount={totalItems} />)
+                }
 
             </>
         );
