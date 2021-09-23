@@ -2,13 +2,14 @@ import { Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import { Friend } from '../../domain/friends'
-import { urls } from '../../domain/website'
+import { hash } from '../../domain/website'
 import { ButtonColor } from '../../styles/button-theme'
 
 import { TitleSection, WrapperSection, Text } from '../../styles/GlobalStyle.css'
 import { color, padding, margin, fontSize } from '../../styles/theme'
 import { SecondaryButton } from '../buttons/SecondaryButton'
 import { ResponsiveImage } from '../images/ResponsiveImage'
+import { friendUrl } from './friends-url-service'
 
 const Wrapper = styled(WrapperSection)`
   padding: ${padding.normal};
@@ -62,20 +63,15 @@ const FriendCard: React.FC<Friend> = (friend) => {
       }
       <Content>{friend.description}</Content>
       <ButtonSection>
-        <Link to={`/${friend.slug}`}>
-          <Button
-            label="Czytaj Więcej..."
-            color={ButtonColor.Red}
-            fontSize={fontSize.small}
-          />
-        </Link>
-        <Link to={urls.pola.friends}>
-          <Button
-            label="Poznaj pozostałych przyjaciół"
-            color={ButtonColor.Red}
-            fontSize={fontSize.small}
-          />
-        </Link>
+        {friend.slug &&
+          <Link to={friendUrl(friend.slug, hash.friends.friend.id)}>
+            <Button
+              label="Czytaj Więcej..."
+              color={ButtonColor.Red}
+              fontSize={fontSize.small}
+            />
+          </Link>
+        }
       </ButtonSection>
     </Wrapper>
   )

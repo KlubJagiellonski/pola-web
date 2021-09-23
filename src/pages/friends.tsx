@@ -85,6 +85,8 @@ const UlSection = styled.ul`
 const WrapperInfo = styled(PageSection)`
   display: flex;
   padding-bottom: 0;
+  padding-top: 120px;
+  margin-top: -120px;
 
   div{
     flex: 1;
