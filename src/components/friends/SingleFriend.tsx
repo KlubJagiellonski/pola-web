@@ -20,27 +20,17 @@ const WrapperContents = styled(PageSection)`
   } 
 `
 
-const Wrapper = styled(ColumnsLayout)`
-  gap: ${margin.small};
-
-  @media ${Device.mobile} {
-    margin-left: ${margin.normal};
-    margin-right: ${margin.normal}; 
-  }
-`
-
 const RightColumn = styled(ContentColumn)`
   flex: 1;
-  flex-basis: 0;
   position: relative;
 `
 
 const LeftColumn = styled(ContentColumn)`
   flex: 2;
-
+/* 
   @media ${Device.mobile} {
     text-align: center;
-  }
+  } */
 `
 
 const ImageSection = styled.div`
@@ -115,7 +105,7 @@ const SingleFriend: React.FC<Friend> = ({ name, description, image, page, slug }
 
   return (
     <WrapperContents>
-      <Wrapper>
+      <ColumnsLayout>
         <RightColumn>
           <ImageSection>
             {image && <ResponsiveImage imageSrc={image} />}
@@ -143,7 +133,7 @@ const SingleFriend: React.FC<Friend> = ({ name, description, image, page, slug }
             }
           </ButtonSection>
         </LeftColumn>
-      </Wrapper>
+      </ColumnsLayout>
     </WrapperContents>
   )
 }
