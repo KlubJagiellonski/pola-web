@@ -46,7 +46,7 @@ interface ISideInformations {
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
   const [articlesPreview, setArticlesPreview] = useState<Article[]>([])
-  const [friend, setFriend] = useState<Friend>()
+  const [selectedFriend, setSelectedFriend] = useState<Friend>()
 
   useEffect(() => {
     if (articles) {
@@ -56,7 +56,7 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
 
   useEffect(() => {
     if (friends) {
-      setFriend(getRandomFriend(friends))
+      setSelectedFriend(getRandomFriend(friends))
     }
   }, [friends]);
 
@@ -71,7 +71,7 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
       </SecondSection>
       <Title>Zobacz także:</Title>
       <ArticlesListPreview articles={articlesPreview} />
-      {friends && friend && <FriendCard {...friend} />}
+      {friends && selectedFriend && <FriendCard {...selectedFriend} />}
     </Wrapper>
   )
 }

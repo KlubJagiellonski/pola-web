@@ -9,7 +9,8 @@ import { TitleSection, Text, } from '../../styles/GlobalStyle.css';
 import { SecondaryButton } from '../buttons/SecondaryButton';
 import { ButtonColor } from '../../styles/button-theme';
 import { AnchorLink } from "gatsby-plugin-anchor-links";
-import { friendUrl } from './friends-url-service';
+import { buildFriendUrl } from './friends-url-service';
+import { ColumnsLayout, ContentColumn } from '../../layout/ColumnsLayout';
 
 const WrapperContents = styled(PageSection)`
   margin-top: ${margin.normal};
@@ -19,26 +20,23 @@ const WrapperContents = styled(PageSection)`
   } 
 `
 
-const Wrapper = styled.div`
-  display: flex;
+const Wrapper = styled(ColumnsLayout)`
   gap: ${margin.small};
 
   @media ${Device.mobile} {
-    flex-direction: column;
     margin-left: ${margin.normal};
     margin-right: ${margin.normal}; 
   }
 `
 
-const RightColumn = styled.div`
+const RightColumn = styled(ContentColumn)`
   flex: 1;
   flex-basis: 0;
   position: relative;
 `
 
-const LeftColumn = styled.div`
+const LeftColumn = styled(ContentColumn)`
   flex: 2;
-  flex-basis: 0;
 
   @media ${Device.mobile} {
     text-align: center;
@@ -135,7 +133,7 @@ const SingleFriend: React.FC<Friend> = ({ name, description, image, page, slug }
               />
             </a>
             {slug &&
-              <AnchorLink to={friendUrl(slug, hash.friends.profit.id)}>
+              <AnchorLink to={buildFriendUrl(slug, hash.friends.profit.id)}>
                 <ButtonWhiteRed
                   label="Wypromuj swoją firmę"
                   color={ButtonColor.WhiteRed}
