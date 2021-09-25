@@ -1,21 +1,10 @@
 import Sinon from 'sinon';
 import { expect } from 'chai';
 import { ProductService } from './search-service';
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { IProductData, IProductSearchSuccess } from '.';
-
-const mockProduct = (): IProductData => ({
-  code: 'EAN4534',
-  name: 'test product',
-  score: 55,
-  polishCapital: 55,
-  company: {
-    name: 'test company',
-  },
-  brand: {
-    name: 'test brand',
-  },
-});
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { IProductSearchSuccess } from '.';
+import { mockGETRequest, mockAxiosErrorResponse, mockProduct } from '../../utils/tests/mocks';
+import { NetworkError } from '../../services/api-errors';
 
 const mockSearchResult = (): IProductSearchSuccess => ({
   nextPageToken: 'bcvsag456345345',
@@ -23,47 +12,17 @@ const mockSearchResult = (): IProductSearchSuccess => ({
   products: [mockProduct(), mockProduct(), mockProduct(), mockProduct()],
 });
 
-const mockSearchRequest = (headers?: any, params?: any): AxiosRequestConfig => ({
-  url: 'mock.server.com',
-  method: 'GET',
-  headers,
-  params,
-});
-
-const mockSearchResponse = (data?: any, headers?: any): AxiosResponse => ({
-  data,
+const mockSearchResponse = (headers?: any): AxiosResponse => ({
+  data: mockSearchResult(),
   status: 200,
   statusText: 'OK',
   headers,
-  config: mockSearchRequest(),
+  config: mockGETRequest(),
   request: {},
 });
 
-const mockAxiosError = (status: number, statusText: string, data?: any): AxiosError => ({
-  config: mockSearchRequest(),
-  code: status.toString(),
-  response: {
-    status,
-    statusText,
-    headers: {
-      xFrameOptions: 'DENY',
-      contentLength: 167,
-      contentLanguage: 'pl',
-      vary: 'Accept-Language',
-      referrerPolicy: 'same-origin',
-      via: '1.1 vegur',
-    },
-    config: mockSearchRequest(),
-    data,
-  },
-  isAxiosError: false,
-  name: 'test name',
-  message: statusText,
-  toJSON: () => ({}),
-});
-
-const mockSearchError = (): AxiosError =>
-  mockAxiosError(400, 'Bad request', {
+const mockEmptyQueryErrorResponse = (): AxiosError =>
+  mockAxiosErrorResponse(400, 'Bad request', {
     type: 'about:blank',
     title: 'Request validation failed',
     detail: '1 errors encountered',
@@ -71,14 +30,30 @@ const mockSearchError = (): AxiosError =>
     errors: ['Value of parameter cannot be empty: query'],
   });
 
-const mockServiceUnreachableError = (): AxiosError =>
-  mockAxiosError(503, 'Service unavailable', {
-    type: 'about:blank',
-    title: 'Request validation failed',
+const mockNetworkErrorResponse = (): AxiosError => {
+  const error = mockAxiosErrorResponse(503, 'Service unavailable', {
+    type: 'connection:failed',
+    title: 'Service connecition failed',
     detail: '1 errors encountered',
-    status: 400,
-    errors: ['Value of parameter cannot be empty: query'],
+    status: 503,
   });
+
+  delete error.request;
+  delete error.response;
+
+  return error;
+};
+
+const mockServiceErrorResponse = (): AxiosError => {
+  const error = mockAxiosErrorResponse(500, 'Internal service error', {
+    type: 'service:fail',
+    title: 'Service internal failure',
+    detail: '1 errors encountered',
+    status: 500,
+  });
+
+  return error;
+};
 
 describe('Product search service', () => {
   let getProducts: Sinon.SinonStub;
@@ -91,36 +66,68 @@ describe('Product search service', () => {
     getProducts.restore();
   });
 
-  it('should return page items', async () => {
-    const expectedResult = mockSearchResult();
-    getProducts.resolves(mockSearchResponse(expectedResult));
+  describe('for correct query', () => {
+    it('should response valid search results object', async () => {
+      getProducts.resolves(mockSearchResponse());
 
-    const result = await ProductService.getInstance().searchProducts('some query');
+      const responseData = await ProductService.getInstance().searchProducts('some query');
 
-    expect(result.totalItems).equals(13, 'icorrect total number of items');
-    expect(result.products.length).equals(4, `incorrect number of page's items`);
-    expect(result.nextPageToken, 'next page token should be defined').not.undefined;
+      expect(responseData, 'response data should be an object').not.undefined;
+      expect(responseData?.totalItems).equals(13, 'icorrect total number of items');
+      expect(responseData?.products.length).equals(4, `incorrect number of page's items`);
+      expect(responseData?.nextPageToken, 'next page token should be defined').not.undefined;
+    });
   });
 
-  it('should return an empty collection for empty query', async () => {
-    getProducts.throws(mockSearchError());
+  describe('for empty query', () => {
+    it('should return a valid empty collection', async () => {
+      getProducts.throws(mockEmptyQueryErrorResponse());
 
-    const result = await ProductService.getInstance().searchProducts('');
+      const responseData = await ProductService.getInstance().searchProducts('');
 
-    expect(result.totalItems).equals(0, 'should not be items for empty query');
-    expect(result.products.length).equals(0, 'should not be products for empty query');
-    expect(result.nextPageToken, 'should not be next page token for empty query').null;
+      expect(responseData, 'response data should be an object').not.undefined;
+      expect(responseData?.totalItems).equals(0, 'should not be items for empty query');
+      expect(responseData?.products.length).equals(0, 'should not be products for empty query');
+      expect(responseData?.nextPageToken, 'should not be next page token for empty query').null;
+    });
   });
 
-  it('should throw an error when search service in unreachable', async () => {
-    getProducts.throws(mockServiceUnreachableError());
+  describe('for invalid search result', () => {
+    it('should throw an invalid data error', async () => {
+      getProducts.resolves({ invalidProperty: 1 });
 
-    const result = await ProductService.getInstance().searchProducts('some correct query');
-
-    expect(result.totalItems).equals(0, 'should not be items for empty query');
-    expect(result.products.length).equals(0, 'should not be products for empty query');
-    expect(result.nextPageToken, 'should not be next page token for empty query').null;
+      try {
+        await ProductService.getInstance().searchProducts('some valid query');
+      } catch (e: any) {
+        expect(e instanceof Error).is.true;
+        expect(e.name).equals('Invalid search result');
+      }
+    });
   });
-  it('should throw an error when request timeout exeeds');
-  it('should throw an error when request structure is broken');
+
+  describe('for network error', () => {
+    it('should throw a network error when search service in unreachable', async () => {
+      getProducts.resolves(mockNetworkErrorResponse());
+
+      try {
+        await ProductService.getInstance().searchProducts('some valid query');
+      } catch (e: any) {
+        expect(e instanceof Error).is.true;
+        expect(e.name).equals('Network error');
+      }
+    });
+  });
+
+  describe('for error response', () => {
+    it('should throw an internal service error', async () => {
+      getProducts.resolves(mockServiceErrorResponse());
+
+      try {
+        await ProductService.getInstance().searchProducts('some valid query');
+      } catch (e: any) {
+        expect(e instanceof Error).is.true;
+        expect(e.name).equals('Internal service error');
+      }
+    });
+  });
 });

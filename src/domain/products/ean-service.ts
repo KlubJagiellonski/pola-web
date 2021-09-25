@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { IProductEAN, IProductMock } from '.';
-import { ApiService } from '../../services/api-service';
+import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
 import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
 
@@ -14,7 +14,7 @@ export interface IProductEANError {
 
 const PRODUCT_EAN_API = config.searchApiURL;
 
-export class ProductEANService extends ApiService {
+export class ProductEANService extends ApiAdapter {
   public static getInstance(): ProductEANService {
     if (!ProductEANService.instance) {
       ProductEANService.instance = new ProductEANService();
@@ -24,7 +24,7 @@ export class ProductEANService extends ApiService {
   private static instance: ProductEANService;
 
   private constructor() {
-    super(PRODUCT_EAN_API);
+    super(PRODUCT_EAN_API, 'EAN API');
   }
 
   public async getProduct(code: string): Promise<IProductEAN> {

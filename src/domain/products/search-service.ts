@@ -1,8 +1,8 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { IProductData, IProductSearchSuccess, ProductSearchResults } from '.';
-import { ApiService } from '../../services/api-service';
+import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
-import { BadRequestError, FetchError, InternalServiceError, InvalidSearchResultError } from '../../services/api-errors';
+import { InvalidSearchResultError, isEmptyQueryError } from '../../services/api-errors';
 import { ISearchResultPage } from '../../state/search/search-reducer';
 
 export interface ISearchError {
@@ -14,7 +14,7 @@ export interface ISearchError {
   errors?: string[];
 }
 
-export class ProductService extends ApiService {
+export class ProductService extends ApiAdapter {
   public static getInstance(): ProductService {
     if (!ProductService.instance) {
       ProductService.instance = new ProductService();
@@ -24,22 +24,22 @@ export class ProductService extends ApiService {
   private static instance: ProductService;
 
   private constructor() {
-    super(config.searchApiURL);
+    super(config.searchApiURL, 'Search API');
   }
 
-  public async searchProducts(phrase: string, token?: string): Promise<IProductSearchSuccess> {
+  public async searchProducts(phrase: string, token?: string): Promise<IProductSearchSuccess | void> {
     try {
-      const phraseIsNotEmpty = phrase !== undefined && phrase.length > 0;
-
-      if (phraseIsNotEmpty) {
-        const searchQuery = this.buildSearchQuery(phrase, token);
-        const result: IProductSearchSuccess = await this.getSearchResults(searchQuery);
-        return result;
+      const searchQuery = this.buildSearchQuery(phrase, token);
+      const result: IProductSearchSuccess = await this.getSearchResults(searchQuery);
+      return result;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if (isEmptyQueryError(error)) {
+          return ProductSearchResults.Empty;
+        }
+      } else {
+        throw error;
       }
-
-      return ProductSearchResults.Empty;
-    } catch (e: unknown) {
-      throw new FetchError('Search API', e);
     }
   }
 
@@ -54,42 +54,25 @@ export class ProductService extends ApiService {
   }
 
   private async getSearchResults(searchQuery: string) {
-    const response = await axios.get(`/a/v4/${searchQuery}`).catch((error: AxiosError) => {
-      /**
-       * client received an error response (5xx, 4xx)
-       */
-      if (error.response) {
-        switch (error.response.status) {
-          case 200:
-            return error.response.data;
-          case 400:
-            throw new BadRequestError();
-          case 500:
-            throw new InternalServiceError();
-          default:
-            console.warn('Unhandled error', error);
-        }
-      } else if (error.request) {
-        /**
-         * something happened in setting up the request that triggered an Error
-         * client never received a response, or request never left
-         */
-        throw new FetchError('Search API', error);
-      } else {
-        console.warn('Unhandled error', error);
-      }
+    const response = await axios.get(`/a/v4/${searchQuery}`).catch((e: unknown) => {
+      const error = this.handleError(e);
+      console.log(error);
+      throw error;
     });
 
-    if (!this.isValidSearchResponse(response)) {
-      throw new InvalidSearchResultError();
-    }
+    if (response) {
+      if (response instanceof Error)
+        if (!this.isValidSearchResults(response)) {
+          throw new InvalidSearchResultError();
+        }
 
-    return response.data;
+      return response.data;
+    }
   }
 
-  private isValidSearchResponse(response: AxiosResponse): boolean {
+  private isValidSearchResults(response: AxiosResponse): boolean {
     const responseBody = response.data;
-    return !!responseBody.totalItems && !!responseBody.products;
+    return responseBody?.totalItems !== undefined && !!responseBody?.products;
   }
 }
 
