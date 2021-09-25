@@ -18,14 +18,14 @@ export interface IProductData {
 }
 
 export interface IProductSearchSuccess {
-  nextPageToken: string;
+  nextPageToken: string | null;
   totalItems: number;
   products: IProductData[];
 }
 
 export class ProductSearchResults implements IProductSearchSuccess {
   public static Empty: IProductSearchSuccess = {
-    nextPageToken: 'empty',
+    nextPageToken: null,
     totalItems: 0,
     products: [],
   };

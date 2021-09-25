@@ -22,6 +22,7 @@ export class FetchError extends ErrorHandler {
     super();
     this.name = 'Fetch Error';
     this.message = this.buildMessage(`Cannot fetch data. Check if ${apiName} is available`);
+    console.error(this.message);
   }
 }
 
@@ -35,5 +36,45 @@ export class EmptyResponseDataError extends ErrorHandler {
     super();
     this.name = 'Empty Response Error';
     this.message = this.buildMessage(`Obtained empty ${dataTypeName} collection`);
+    console.warn(this.message);
+  }
+}
+
+export class InvalidSearchResultError extends ErrorHandler {
+  /**
+   * Error describes invalid data returned for valid search query
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Ivalid search result';
+    this.message = this.buildMessage(`Obtained invalid data for search query`);
+    console.error(this.message);
+  }
+}
+
+export class BadRequestError extends ErrorHandler {
+  /**
+   * Error describes invalid request structure
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Bad request';
+    this.message = this.buildMessage(`Invalid request structure`);
+    console.error(this.message);
+  }
+}
+
+export class InternalServiceError extends ErrorHandler {
+  /**
+   * Error describes error incoming from a service side
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Internal service error';
+    this.message = this.buildMessage(`Something unexpected happed on the service. Please try later.`);
+    console.error(this.message);
   }
 }
