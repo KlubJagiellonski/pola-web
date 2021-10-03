@@ -32,6 +32,10 @@ const ImageWrapper = styled.div`
 `;
 
 const FriendsSlider = styled(Slider)`
+  .slick-dots li button::before{
+    font-size: 0.5rem;
+  }
+
   .slick-dots li.slick-active button:before {
     color: ${color.button.red} !important;
   }
@@ -101,7 +105,9 @@ const Friends: React.FC<IFriends> = ({ friends, rows }) => {
             <FriendsSlider {...settings}>
               {friends.map((el, id) => (
                 <div className="friend-item" key={`friend_${id}`}>
-                  <Image>{el.image && <ResponsiveImage imageSrc={el.image} />}</Image>
+                  <AnchorLink to={buildFriendUrl(el.slug, hash.friends.friend.id)}>
+                    <Image>{el.image && <ResponsiveImage imageSrc={el.image} />}</Image>
+                  </AnchorLink>
                   {el.slug &&
                     <FriendLink to={buildFriendUrl(el.slug, hash.friends.friend.id)}>
                       Zobacz {'>'}

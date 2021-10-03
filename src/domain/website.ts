@@ -18,19 +18,6 @@ export interface PageLinkData {
   url: string;
 }
 
-export const hash = {
-  friends: {
-    profit: {
-      id: 'profit',
-      url: '/friends#profit',
-    },
-    friend: {
-      id: 'friend',
-      url: '/friends#friend',
-    },
-  },
-};
-
 export const urls = {
   pola: {
     home: '/',
@@ -77,3 +64,22 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.TEAM, label: 'Dołącz do zespołu', url: urls.pola.team },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.contact },
 ];
+
+export const hash = {
+  friends: {
+    profit: {
+      id: 'profit',
+      url: `${urls.pola.friends}#profit`,
+    },
+    friend: {
+      id: 'friend',
+      url: `${urls.pola.friends}#friend`,
+    },
+  },
+  about: {
+    faq: {
+      id: 'faq',
+      url: `${urls.pola.about}#faq`,
+    },
+  },
+};
