@@ -15,12 +15,14 @@ const MissingProduct = styled.div`
   margin-top: ${margin.big};
 `;
 
-export const MissingProductInfo = () => (<MissingProduct>
+export const MissingProductInfo = () => (
+  <MissingProduct>
     <p>Nie znalazłeś czego szukasz?</p>
     <SecondaryButton
-        onClick={() => openNewTab(urls.external.openFoods)}
-        color={ButtonColor.Red}
-        fontSize={fontSize.small}>
-        Zgłoś produkt do bazy
+      onClick={() => openNewTab(urls.external.openFoods)}
+      color={ButtonColor.Red}
+      fontSize={fontSize.small}>
+      <p>Zgłoś produkt do bazy</p>
     </SecondaryButton>
-</MissingProduct>)
+  </MissingProduct>
+);

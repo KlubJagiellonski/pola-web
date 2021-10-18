@@ -2,7 +2,7 @@ import { AnyAction, Reducer } from 'redux';
 import { actionTypes } from './search-actions';
 import * as actions from './search-actions';
 import { IAction, IActionReducer } from '../types';
-import { IProductData, IProductEAN } from '../../domain/products';
+import { IProductData, Product } from '../../domain/products';
 
 export interface ISearchResultPage {
   pageIndex: number;
@@ -39,7 +39,7 @@ export type SearchState =
       nextPageToken: string;
       resultPages: ISearchResultPage[];
       totalItems: number;
-      selectedProduct: IProductEAN;
+      selectedProduct: Product;
       error?: unknown;
     };
 

@@ -9,17 +9,20 @@ import { SearchState, SearchStateName } from './search-reducer';
 export const searchDispatcher = {
   invokeSearch: (phrase: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
-      dispatch(actions.ClearResults());
-      await dispatch(actions.InvokePhrase(phrase));
-      const service = ProductService.getInstance();
-      const response = await service.searchProducts(phrase);
+      const { search } = getState();
+      if (search.stateName === SearchStateName.INITIAL) {
+        dispatch(actions.ClearResults());
+        await dispatch(actions.InvokePhrase(phrase));
+        const service = ProductService.getInstance();
+        const response = await service.searchProducts(phrase);
 
-      if (response) {
-        const { products, totalItems, nextPageToken } = response;
+        if (response) {
+          const { products, totalItems, nextPageToken } = response;
 
-        await dispatch(actions.LoadResults(phrase, products, totalItems, nextPageToken));
-      } else {
-        throw new Error('Search response is empty');
+          await dispatch(actions.LoadResults(phrase, products, totalItems, nextPageToken));
+        } else {
+          throw new Error('Search response is empty');
+        }
       }
     } catch (error) {
       console.error('cannot search', error);
@@ -31,7 +34,6 @@ export const searchDispatcher = {
     try {
       const { search } = getState();
       if (search.stateName === SearchStateName.LOADED) {
-        await dispatch(actions.InvokePhrase(search.phrase));
         const service = ProductService.getInstance();
         const response = await service.searchProducts(search.phrase, search.nextPageToken);
 

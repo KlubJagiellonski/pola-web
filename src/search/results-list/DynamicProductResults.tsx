@@ -11,38 +11,42 @@ import { SearchResultsHeader } from '../../search/results-list/SearchResultsHead
 import { MissingProductInfo } from '../../search/results-list/MissingProductInfo';
 
 interface IDynamicProductResults {
-    state: SearchStateName;
-    phrase: string;
-    token: string;
-    pages: IProductData[];
-    totalItems: number;
+  state: SearchStateName;
+  phrase: string;
+  token: string;
+  pages: IProductData[];
+  totalItems: number;
 
-    onSelect: (code: string) => void;
-    onLoadMore: () => void;
+  onSelect: (code: string) => void;
+  onLoadMore: () => void;
 }
 
-export const DynamicProductResults: React.FC<IDynamicProductResults> = ({ state, phrase, pages, totalItems, onSelect, onLoadMore }) => {
-    const loadButton =
-        state === SearchStateName.LOADING ? (
-            <PrimaryButton
-                disabled={true}
-                icon={<Spinner styles={{ size: 20, color: color.button.white }} />}
-                color={ButtonColor.Red}
-            />
-        ) : (
-            <PrimaryButton label="Wczytaj więcej" color={ButtonColor.Red} onClick={onLoadMore} />
-        );
+export const DynamicProductResults: React.FC<IDynamicProductResults> = ({
+  state,
+  phrase,
+  pages,
+  totalItems,
+  onSelect,
+  onLoadMore,
+}) => {
+  const loadButton =
+    state === SearchStateName.LOADING ? (
+      <PrimaryButton
+        disabled={true}
+        icon={<Spinner styles={{ size: 20, color: color.button.white }} />}
+        color={ButtonColor.Red}
+      />
+    ) : (
+      <PrimaryButton label="Wczytaj więcej" color={ButtonColor.Red} onClick={onLoadMore} />
+    );
 
-    return (<>
-        <SearchResultsHeader
-            phrase={phrase}
-            totalItems={totalItems}
-            searchState={state}
-        />
-        <PageSection>
-            <SearchResultsList results={pages} totalItems={totalItems} onSelect={onSelect} />
-            {loadButton}
-            <MissingProductInfo />
-        </PageSection>
-    </>)
-}
+  return (
+    <>
+      <SearchResultsHeader phrase={phrase} totalItems={totalItems} searchState={state} />
+      <PageSection>
+        <SearchResultsList results={pages} totalItems={totalItems} onSelect={onSelect} actions={loadButton} />
+        <MissingProductInfo />
+      </PageSection>
+    </>
+  );
+};

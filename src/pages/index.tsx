@@ -11,19 +11,14 @@ import { Device, pageWidth, padding, color } from '../styles/theme';
 import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { IProductData } from '../domain/products';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { IFriend } from '../domain/friends';
-import { SearchResultsList } from '../search/results-list/SearchResultsList';
-import { PrimaryButton } from '../components/buttons/PrimaryButton';
-import { ButtonColor } from '../styles/button-theme';
-import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
-import { PageType, urls } from '../domain/website';
+import { PageType } from '../domain/website';
 import { Article } from '../domain/articles';
 import { reduceSearchResults } from '../domain/products/search-service';
 import { SearchStateName } from '../state/search/search-reducer';
-import { MissingProductInfo } from '../search/results-list/MissingProductInfo';
 import { FirstPageResults } from '../search/results-list/FirstPageResults';
+import { IProductData } from '../domain/products';
+import { Friend } from '../domain/friends';
 
 const Content = styled.div`
   width: 100%;
@@ -59,8 +54,15 @@ const Background = styled.div<{ img?: string }>`
 const WrapperContents = styled(PageSection)`
   @media ${Device.mobile} {
     padding: 0;
-  } 
-`
+  }
+`;
+
+interface ISearchResults {
+  phrase: string;
+  pages: IProductData[];
+  totalItems: number;
+  token: string;
+}
 
 interface IHomePage {
   location?: Location;
@@ -68,7 +70,7 @@ interface IHomePage {
   searchResults?: ISearchResults;
   articles?: Article[];
   activeTags: string[];
-  friends?: IFriend[];
+  friends?: Friend[];
 
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
@@ -84,6 +86,7 @@ const HomePage = (props: IHomePage) => {
     if (location) {
       dispatch(LoadBrowserLocation(location));
       dispatch(SelectActivePage(PageType.HOME));
+      props.clearResults();
     }
   }, []);
 
@@ -100,7 +103,14 @@ const HomePage = (props: IHomePage) => {
           <SearchForm onSearch={props.invokeSearch} isLoading={isLoading} />
         </Content>
       </PageSection>
-      {searchResults && <FirstPageResults {...searchResults} state={searchState} onSelect={props.selectProduct} onClear={props.clearResults} />}
+      {searchResults && (
+        <FirstPageResults
+          {...searchResults}
+          state={searchState}
+          onSelect={props.selectProduct}
+          onClear={props.clearResults}
+        />
+      )}
       <WrapperContents>
         <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
       </WrapperContents>
@@ -114,15 +124,18 @@ export default connect(
     return {
       location: app.location,
       searchState: search.stateName,
-      searchResults: search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING ? {
-        phrase: search.phrase,
-        pages: reduceSearchResults(search.resultPages),
-        totalItems: search.totalItems,
-        token: search.nextPageToken,
-      } : undefined,
+      searchResults:
+        search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING
+          ? {
+              phrase: search.phrase,
+              pages: reduceSearchResults(search.resultPages),
+              totalItems: search.totalItems,
+              token: search.nextPageToken,
+            }
+          : undefined,
       articles: articles.data,
       friends: friends.data,
-    }
+    };
   },
   {
     invokeSearch: searchDispatcher.invokeSearch,

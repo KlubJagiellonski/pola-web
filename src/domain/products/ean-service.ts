@@ -31,7 +31,6 @@ export class ProductEANService extends ApiAdapter {
     try {
       const response = await await axios.get(`/a/v4/get_by_code?code=${code}&device_id="0"`);
       const product: IProductEAN = response.data;
-      console.log('response', response);
 
       if (!product) {
         throw new EmptyResponseDataError('product');

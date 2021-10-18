@@ -56,7 +56,6 @@ export class ProductService extends ApiAdapter {
   private async getSearchResults(searchQuery: string) {
     const response = await axios.get(`/a/v4/${searchQuery}`).catch((e: unknown) => {
       const error = this.handleError(e);
-      console.log(error);
       throw error;
     });
 
