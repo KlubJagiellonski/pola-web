@@ -1,5 +1,3 @@
-import { getGuid, getNumber } from '../../utils/data/random-number';
-
 export interface ICompany {
   name: string;
 }
@@ -61,22 +59,4 @@ export interface IProductEAN {
   report_button_type: string;
   report_button_text: string;
   donate: IDonate;
-}
-
-export interface IProductMock {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: URL;
-}
-
-export class ProductMock implements IProductMock {
-  public id: string;
-  public image: URL;
-
-  constructor(public title: string, public description: string, public category: string, imageSrc: string) {
-    this.id = getGuid();
-    this.image = new URL(imageSrc);
-  }
 }

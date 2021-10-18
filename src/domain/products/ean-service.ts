@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProductEAN, IProductMock } from '.';
+import { IProductEAN } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
 import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
