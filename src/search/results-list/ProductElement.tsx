@@ -14,12 +14,12 @@ const ListElement = styled.li`
 const ResultElement = styled.div`
   display: flex;
   flex-flow: column;
-  padding: ${padding.small} ${padding.normal};
+  padding: ${padding.normal} ${padding.normal};
 
   .name {
     font-size: ${fontSize.normal};
     font-weight: bold;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
   }
   .manufacturer,
   .brand {

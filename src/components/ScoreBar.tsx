@@ -9,8 +9,7 @@ const progressValue = (percetage: number) => keyframes`
     100% {width: ${`${percetage}%`}}
 `;
 
-
-const Bar = styled.div<{ value: number; animation?: IAniamation; }>`
+const Bar = styled.div<{ value: number; animation?: IAniamation }>`
   width: 100%;
   background-color: ${color.background.primary};
   padding: 0;
@@ -23,8 +22,8 @@ const Bar = styled.div<{ value: number; animation?: IAniamation; }>`
     background-color: ${lighten(0.1)(color.background.red)};
     height: 100%;
     z-index: 0;
-    
-    animation-name: ${props => progressValue(props.value)};
+
+    animation-name: ${(props) => progressValue(props.value)};
     animation-delay: ${({ animation }) => animation?.delay + 's' || 0};
     animation-duration: ${({ animation }) => animation?.duration + 's' || 0};
     animation-iteration-count: ${({ animation }) => animation?.iterations || 1};
