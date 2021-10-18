@@ -1,3 +1,4 @@
+export type EAN = string;
 export interface ICompany {
   name: string;
   score: number;
@@ -10,8 +11,6 @@ export interface IBrand {
 export interface IProductData {
   code: string;
   name: string;
-  score?: number;
-  polishCapital?: number;
   company?: ICompany;
   brand?: IBrand;
 }
@@ -38,26 +37,48 @@ interface IDonate {
   url: string;
 }
 
+interface IReport {
+  button_text: string;
+  button_type: string;
+  text: string;
+}
+
+export interface IManufacturer {
+  name: string;
+  plCapital: number;
+  plCapital_notes: string;
+  plNotGlobEnt: number;
+  plNotGlobEnt_notes: string;
+  plRegistered: number;
+  plRegistered_notes: string;
+  plRnD: number;
+  plRnD_notes: string;
+  plScore: number;
+  plWorkers: number;
+  plWorkers_notes: string;
+}
+
 export interface IProductEAN {
   product_id: number;
   name: string;
-  data?: IProductData;
-
-  card_type?: string;
-  altText?: string;
-  plCapital?: string;
-  plCapital_notes?: string;
-  plWorkers?: string;
-  plWorkers_notes?: string;
-  plRnD?: string;
-  plRnD_notes?: string;
-  plRegistered?: string;
-  plRegistered_notes?: string;
-  plNotGlobEnt?: string;
-  plNotGlobEnt_notes?: string;
-  plScore: number;
-  report_text: string;
-  report_button_type: string;
-  report_button_text: string;
+  altText: string;
+  card_type: string;
+  code: EAN;
   donate: IDonate;
+  companies: IManufacturer[];
+  report: IReport;
+}
+
+export class Product {
+  public code: EAN;
+  public manufacturer: IManufacturer;
+  public donate: IDonate;
+  public report: IReport;
+
+  constructor(public name: string, productEntityEAN: IProductEAN) {
+    this.code = productEntityEAN.code;
+    this.manufacturer = productEntityEAN.companies[0];
+    this.donate = productEntityEAN.donate;
+    this.report = productEntityEAN.report;
+  }
 }

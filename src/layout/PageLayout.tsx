@@ -14,12 +14,13 @@ import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme
 import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 import Download from '../components/Download';
+import { SearchStateName } from '../state/search/search-reducer';
 
 const connector = connect(
   (state: IPolaState) => ({
     activePage: state.app.activePage,
     isMenuExpanded: state.app.isMenuExpanded,
-    selectedProduct: state.search.selectedProduct,
+    selectedProduct: state.search.stateName === SearchStateName.SELECTED ? state.search.selectedProduct : undefined,
   }),
   {
     selectPage: appDispatcher.selectActivePage,

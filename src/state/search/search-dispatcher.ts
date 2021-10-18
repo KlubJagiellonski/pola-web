@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux';
+import { EAN, IProductData, IProductEAN, Product } from '../../domain/products';
 import { ProductEANService } from '../../domain/products/ean-service';
 import { ProductService } from '../../domain/products/search-service';
 import { IPolaState } from '../types';
 import * as actions from './search-actions';
-import { SearchStateName } from './search-reducer';
+import { SearchState, SearchStateName } from './search-reducer';
 
 export const searchDispatcher = {
   invokeSearch: (phrase: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
@@ -62,8 +63,14 @@ export const searchDispatcher = {
       const { search } = getState();
       if (search.stateName === SearchStateName.LOADED) {
         const service = ProductEANService.getInstance();
-        const product = await service.getProduct(EANCode);
-        await dispatch(actions.ShowProductDetails(product));
+        const productEntityEAN: IProductEAN = await service.getProduct(EANCode);
+        const prod = findProduct(productEntityEAN.code, search);
+        if (prod) {
+          const product = new Product(prod.name, productEntityEAN);
+          await dispatch(actions.ShowProductDetails(product));
+        } else {
+          throw new Error('Cannot find product');
+        }
       }
     } catch (error) {
       console.error('cannot select product', error);
@@ -82,4 +89,19 @@ export const searchDispatcher = {
       await dispatch(actions.SearchFailed(error));
     }
   },
+};
+
+const findProduct = (selectedCode: EAN, state: SearchState): IProductData | void => {
+  let product: IProductData | undefined;
+  if (state.stateName === SearchStateName.LOADED) {
+    for (const page of state.resultPages) {
+      const data = page.products.find((p) => p.code === selectedCode);
+      if (data) {
+        product = data;
+        break;
+      }
+    }
+
+    return product;
+  }
 };

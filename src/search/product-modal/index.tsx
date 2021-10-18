@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IProductEAN } from '../../domain/products';
+import { Product } from '../../domain/products';
 import { Modal } from '../../layout/modal/Modal';
 import { color, padding } from '../../styles/theme';
 import { ButtonColor } from '../../styles/button-theme';
@@ -30,7 +30,7 @@ const AppDownload = styled.div`
 `;
 
 interface IProductModal {
-  product: IProductEAN;
+  product: Product;
   onClose: () => void;
 }
 
@@ -44,9 +44,9 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
 
   return (
     <ClickOutside clickOutsideHandler={onClose}>
-      <Modal title={`EAN: ${product.data?.code}`} onClose={onClose}>
+      <Modal title={`EAN: ${product.code}`} onClose={onClose}>
         <ProductDetails product={product} />
-        <ProductModalAction actionName={product.report_text} actionCallback={reportCallbackMock}>
+        <ProductModalAction actionName={product.report.button_text} actionCallback={reportCallbackMock}>
           <span>Posiadasz aktualne dane na temat tego produktu?</span>
         </ProductModalAction>
         <ProductModalAction

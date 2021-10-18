@@ -1,4 +1,4 @@
-import { IProductData, IProductEAN } from '../../domain/products';
+import { IProductData, Product } from '../../domain/products';
 import { IAction } from '../types';
 
 export const actionTypes = {
@@ -52,7 +52,7 @@ export const SearchFailed = (error: unknown): IAction => ({
   },
 });
 
-export const ShowProductDetails = (product: IProductEAN): IAction => ({
+export const ShowProductDetails = (product: Product): IAction => ({
   type: actionTypes.SHOW_PRODUCT_DETAILS,
   payload: {
     product,
