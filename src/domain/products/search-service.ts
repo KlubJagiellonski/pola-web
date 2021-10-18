@@ -26,7 +26,7 @@ export class ProductService extends ApiAdapter {
   private static instance: ProductService;
 
   private constructor() {
-    super(config.searchEndpoint, API_NAME);
+    super(API_NAME, config.searchEndpoint);
   }
 
   public async searchProducts(phrase: string, token?: string): Promise<IProductSearchSuccess | void> {

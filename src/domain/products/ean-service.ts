@@ -24,7 +24,7 @@ export class ProductEANService extends ApiAdapter {
   private static instance: ProductEANService;
 
   private constructor() {
-    super(config.eanEndpoint, API_NAME);
+    super(API_NAME, config.eanEndpoint);
   }
 
   private buildQuery(code: EAN): string {
