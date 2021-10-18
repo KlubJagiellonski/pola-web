@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IProductData } from '../../domain/products';
+import { EAN, IProductData } from '../../domain/products';
 import { margin } from '../../styles/theme';
 import { SearchResultElement } from './ProductElement';
 
@@ -28,7 +28,7 @@ interface ISearchResultsList {
   totalItems: number;
   actions?: React.ReactNode | React.ReactNode[];
 
-  onSelect: (code: string) => void;
+  onSelect: (code: EAN) => void;
 }
 
 export const SearchResultsList: React.FC<ISearchResultsList> = ({ results, actions, onSelect }) => {

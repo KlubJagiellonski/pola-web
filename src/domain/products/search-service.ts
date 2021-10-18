@@ -14,6 +14,8 @@ export interface ISearchError {
   errors?: string[];
 }
 
+const API_NAME = 'Search Product API';
+
 export class ProductService extends ApiAdapter {
   public static getInstance(): ProductService {
     if (!ProductService.instance) {
@@ -24,7 +26,7 @@ export class ProductService extends ApiAdapter {
   private static instance: ProductService;
 
   private constructor() {
-    super(config.searchApiURL, 'Search API');
+    super(config.searchEndpoint, API_NAME);
   }
 
   public async searchProducts(phrase: string, token?: string): Promise<IProductSearchSuccess | void> {
@@ -44,7 +46,7 @@ export class ProductService extends ApiAdapter {
   }
 
   private buildSearchQuery(phrase: string, token?: string): string {
-    let searchQuery = `search?query=${phrase}`;
+    let searchQuery = `query=${phrase}`;
 
     if (token) {
       searchQuery = searchQuery + `&pageToken=${token}`;
@@ -54,7 +56,7 @@ export class ProductService extends ApiAdapter {
   }
 
   private async getSearchResults(searchQuery: string) {
-    const response = await axios.get(`/a/v4/${searchQuery}`).catch((e: unknown) => {
+    const response = await axios.get(`${this.apiUrl}?${searchQuery}`).catch((e: unknown) => {
       const error = this.handleError(e);
       throw error;
     });

@@ -1,18 +1,18 @@
 import axios from 'axios';
-import { IProductEAN } from '.';
+import { EAN, IProductEAN } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
 import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
 
 export interface IProductEANParams {
-  code: string;
+  code: EAN;
 }
 
 export interface IProductEANError {
   error: unknown;
 }
 
-const PRODUCT_EAN_API = config.searchApiURL;
+const API_NAME = 'EAN Product API';
 
 export class ProductEANService extends ApiAdapter {
   public static getInstance(): ProductEANService {
@@ -24,12 +24,17 @@ export class ProductEANService extends ApiAdapter {
   private static instance: ProductEANService;
 
   private constructor() {
-    super(PRODUCT_EAN_API, 'EAN API');
+    super(config.eanEndpoint, API_NAME);
   }
 
-  public async getProduct(code: string): Promise<IProductEAN> {
+  private buildQuery(code: EAN): string {
+    return `code=${code}&device_id="0"`;
+  }
+
+  public async getProduct(code: EAN): Promise<IProductEAN> {
     try {
-      const response = await await axios.get(`/a/v4/get_by_code?code=${code}&device_id="0"`);
+      const query = this.buildQuery(code);
+      const response = await await axios.get(`${this.apiUrl}?${query}`);
       const product: IProductEAN = response.data;
 
       if (!product) {
@@ -38,7 +43,7 @@ export class ProductEANService extends ApiAdapter {
 
       return product;
     } catch (e) {
-      throw new FetchError('EAN API', e);
+      throw new FetchError(API_NAME, e);
     }
   }
 }

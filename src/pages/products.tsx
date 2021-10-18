@@ -3,14 +3,10 @@ import { connect, useDispatch } from 'react-redux';
 
 import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
-import { color } from '../styles/theme';
 import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { IProductData } from '../domain/products';
-import { PrimaryButton } from '../components/buttons/PrimaryButton';
-import { ButtonColor } from '../styles/button-theme';
-import { Spinner } from '../components/Spinner';
+import { EAN, IProductData } from '../domain/products';
 import { SearchStateName } from '../state/search/search-reducer';
 import { navigateTo } from '../utils/browser';
 import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
@@ -26,10 +22,10 @@ interface IProductsPage {
     token: string;
     pages: IProductData[];
     totalItems: number;
-  }
+  };
 
   onLoadMore: () => void;
-  selectProduct: (code: string) => void;
+  selectProduct: (code: EAN) => void;
 }
 
 const ProductsPage = (props: IProductsPage) => {
@@ -53,7 +49,12 @@ const ProductsPage = (props: IProductsPage) => {
     <PageLayout>
       <SEOMetadata pageTitle="Znalezione produkty" />
       <DevelopmentPlaceholder text="Lista produktów" />
-      <DynamicProductResults {...searchResults} state={searchState} onSelect={props.selectProduct} onLoadMore={onLoadMore} />
+      <DynamicProductResults
+        {...searchResults}
+        state={searchState}
+        onSelect={props.selectProduct}
+        onLoadMore={onLoadMore}
+      />
     </PageLayout>
   );
 };
@@ -64,13 +65,16 @@ export default connect(
     return {
       location: app.location,
       searchState: search.stateName,
-      searchResults: search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING ? {
-        phrase: search.phrase,
-        pages: reduceSearchResults(search.resultPages),
-        totalItems: search.totalItems,
-        token: search.nextPageToken,
-      } : undefined
-    }
+      searchResults:
+        search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING
+          ? {
+              phrase: search.phrase,
+              pages: reduceSearchResults(search.resultPages),
+              totalItems: search.totalItems,
+              token: search.nextPageToken,
+            }
+          : undefined,
+    };
   },
   {
     onLoadMore: searchDispatcher.invokeLoadMore,

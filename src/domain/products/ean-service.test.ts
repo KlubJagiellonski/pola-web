@@ -7,7 +7,7 @@ const mockFailureResponse = 'Something bad happened!';
  * The mock must be declared before importing the SUT file, hence the two test fies.
  */
 // jest.mock('./ean-service', () => ({
-//   getProduct: (code: string) => {
+//   getProduct: (code: EAN) => {
 //     return Promise.reject(mockFailureResponse);
 //   },
 // }));

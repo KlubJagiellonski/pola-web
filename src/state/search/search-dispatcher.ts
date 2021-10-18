@@ -60,12 +60,12 @@ export const searchDispatcher = {
     }
   },
 
-  selectProduct: (EANCode: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
+  selectProduct: (code: EAN) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       const { search } = getState();
       if (search.stateName === SearchStateName.LOADED) {
         const service = ProductEANService.getInstance();
-        const productEntityEAN: IProductEAN = await service.getProduct(EANCode);
+        const productEntityEAN: IProductEAN = await service.getProduct(code);
         const prod = findProduct(productEntityEAN.code, search);
         if (prod) {
           const product = new Product(prod.name, productEntityEAN);

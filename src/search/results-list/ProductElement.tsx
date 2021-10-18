@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IProductData } from '../../domain/products';
+import { EAN, IProductData } from '../../domain/products';
 import { padding, color, fontSize, lineHeight } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
 
@@ -30,7 +30,7 @@ const ResultElement = styled.div`
 
 interface ISearchResultElement {
   product: IProductData;
-  onSelect: (code: string) => void;
+  onSelect: (code: EAN) => void;
 }
 
 export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => (

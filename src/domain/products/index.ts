@@ -9,7 +9,7 @@ export interface IBrand {
 }
 
 export interface IProductData {
-  code: string;
+  code: EAN;
   name: string;
   company?: ICompany;
   brand?: IBrand;

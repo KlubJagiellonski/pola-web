@@ -17,7 +17,7 @@ import { Article } from '../domain/articles';
 import { reduceSearchResults } from '../domain/products/search-service';
 import { SearchStateName } from '../state/search/search-reducer';
 import { FirstPageResults } from '../search/results-list/FirstPageResults';
-import { IProductData } from '../domain/products';
+import { EAN, IProductData } from '../domain/products';
 import { Friend } from '../domain/friends';
 
 const Content = styled.div`
@@ -75,7 +75,7 @@ interface IHomePage {
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
   clearResults: () => void;
-  selectProduct: (code: string) => void;
+  selectProduct: (code: EAN) => void;
 }
 
 const HomePage = (props: IHomePage) => {

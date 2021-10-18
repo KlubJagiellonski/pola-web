@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageSection } from '../../layout/PageSection';
 import { color } from '../../styles/theme';
-import { IProductData } from '../../domain/products';
+import { EAN, IProductData } from '../../domain/products';
 import { SearchResultsList } from '../../search/results-list/SearchResultsList';
 import { PrimaryButton } from '../../components/buttons/PrimaryButton';
 import { ButtonColor } from '../../styles/button-theme';
@@ -17,7 +17,7 @@ interface IDynamicProductResults {
   pages: IProductData[];
   totalItems: number;
 
-  onSelect: (code: string) => void;
+  onSelect: (code: EAN) => void;
   onLoadMore: () => void;
 }
 
