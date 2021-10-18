@@ -12,9 +12,14 @@ export const searchDispatcher = {
       await dispatch(actions.InvokePhrase(phrase));
       const service = ProductService.getInstance();
       const response = await service.searchProducts(phrase);
-      const { products, totalItems, nextPageToken } = response;
 
-      await dispatch(actions.LoadResults(phrase, products, totalItems, nextPageToken));
+      if (response) {
+        const { products, totalItems, nextPageToken } = response;
+
+        await dispatch(actions.LoadResults(phrase, products, totalItems, nextPageToken));
+      } else {
+        throw new Error('Search response is empty');
+      }
     } catch (error) {
       console.error('cannot search', error);
       await dispatch(actions.SearchFailed(error));
@@ -28,9 +33,14 @@ export const searchDispatcher = {
         await dispatch(actions.InvokePhrase(search.phrase));
         const service = ProductService.getInstance();
         const response = await service.searchProducts(search.phrase, search.nextPageToken);
-        const { products } = response;
 
-        await dispatch(actions.LoadNextPage(search.phrase, products));
+        if (response) {
+          const { products } = response;
+
+          await dispatch(actions.LoadNextPage(search.phrase, products));
+        } else {
+          throw new Error('Search response is empty');
+        }
       }
     } catch (error) {
       console.error('cannot load more products', error);

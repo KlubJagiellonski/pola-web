@@ -7,13 +7,13 @@ import { ScoreBar } from '../../components/ScoreBar';
 const ListElement = styled.li`
   margin-bottom: ${padding.normal};
   background-color: ${color.background.gray};
+  cursor: pointer;
 `;
 
 const ResultElement = styled.div`
   display: flex;
   flex-flow: column;
   padding: ${padding.small} ${padding.normal};
-  cursor: pointer;
 
   .manufacturer {
     font-weight: bold;
@@ -39,6 +39,6 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
       {product.brand && <span className="brand">{product.brand.name}</span>}
       <span className="name">{product.name}</span>
     </ResultElement>
-    <ScoreBar value={product.score || 0} unit="pkt" />
+    <ScoreBar value={product.company?.score || 0} unit="pkt" />
   </ListElement>
 );

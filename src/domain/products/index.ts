@@ -1,5 +1,6 @@
 export interface ICompany {
   name: string;
+  score: number;
 }
 
 export interface IBrand {

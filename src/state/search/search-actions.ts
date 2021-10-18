@@ -22,7 +22,7 @@ export const LoadResults = (
   phrase: string,
   pageProducts: IProductData[],
   totalItems: number,
-  token?: string
+  token?: string | null
 ): IAction => ({
   type: actionTypes.LOAD_RESULTS,
   payload: {

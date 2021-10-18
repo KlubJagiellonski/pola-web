@@ -31,7 +31,7 @@ paths:
         - $ref: '#/components/parameters/Code'
         - $ref: '#/components/parameters/DeviceId'
       responses:
-        '200':
+        200:
           $ref: '#/components/responses/getByCodeV4'
 
     post:
@@ -40,7 +40,7 @@ paths:
         - $ref: '#/components/parameters/Code'
         - $ref: '#/components/parameters/DeviceId'
       responses:
-        '200':
+        200:
           $ref: '#/components/responses/getByCodeV4'
 
   /a/v4/search:
@@ -49,13 +49,13 @@ paths:
         - $ref: '#/components/parameters/QueryFilter'
         - $ref: '#/components/parameters/PageToken'
       responses:
-        '200':
+        200:
           description: Success.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchResultCollection'
-        '400':
+        400:
           $ref: '#/components/responses/BadRequest'
 
 components:
@@ -96,14 +96,12 @@ components:
         type: string
 
   responses:
-    # 400
     BadRequest:
       description: Client specified an invalid argument.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-
     getByCodeV4:
       description: Success.
       content:
@@ -228,8 +226,11 @@ components:
                 properties:
                   name:
                     type: string
+                  score:
+                    type: integer
                 required:
                   - name
+                  - score
               brand:
                 type: object
                 nullable: true
