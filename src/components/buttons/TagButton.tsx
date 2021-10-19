@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from './Button';
-import { ButtonColor, getButtonColor } from '../../styles/button-theme';
+import { ButtonColor, getButtonTheme } from '../../styles/button-theme';
 import { color } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
   border-radius: 20px;
   border: 2px solid ${color.border.white};
   font-weight: 300;
-  text-transform: uppercase; 
+  text-transform: uppercase;
 `;
 
 export interface ITagButton {
@@ -38,7 +38,7 @@ export const TagButton: React.FC<ITagButton> = ({
     !disabled && onClick && onClick();
   };
 
-  const themeColor = getButtonColor(color);
+  const themeColor = getButtonTheme(color);
 
   const theme = {
     color: themeColor,

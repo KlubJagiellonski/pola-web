@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { color, padding } from '../../styles/theme';
 import { IButtonColor } from '../../styles/button-theme';
+import { color, padding } from '../../styles/theme';
 
 export const Button = styled.button<{ theme: IButtonTheme; disabled?: boolean }>`
   box-sizing: border-box;

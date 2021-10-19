@@ -1,47 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from './Button';
+import { Button, IButtonTheme } from './Button';
 import { ButtonColor, getButtonTheme } from '../../styles/button-theme';
 import { padding } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
-  padding: ${padding.normal};
-  width: 14rem;
-  height: 3.5rem;
+  padding: ${padding.small};
+  min-width: 8rem;
+  max-width: 16rem;
+  height: 2rem;
+  border-radius: 0;
 `;
 
-export interface IPrimaryButton {
+export interface ILinkButton {
   label?: string;
   icon?: React.ReactNode;
   disabled?: boolean;
-  color?: ButtonColor;
-  fontSize?: string;
+  styles: IButtonTheme;
   className?: string;
   children?: React.ReactNode;
 
   onClick?: () => void;
 }
 
-export const PrimaryButton: React.FC<IPrimaryButton> = ({
-  label,
-  icon,
-  className,
-  disabled,
-  color = ButtonColor.Red,
-  fontSize,
-  onClick,
-  children,
-}) => {
+export const LinkButton: React.FC<ILinkButton> = ({ label, icon, className, disabled, styles, onClick, children }) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     !disabled && onClick && onClick();
   };
 
-  const themeColor = getButtonTheme(color);
-
   const theme = {
-    color: themeColor,
-    fontSize,
+    color: styles.color,
+    fontSize: styles.fontSize,
   };
 
   return (
