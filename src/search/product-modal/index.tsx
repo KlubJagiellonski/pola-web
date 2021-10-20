@@ -2,15 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Product } from '../../domain/products';
 import { Modal } from '../../layout/modal/Modal';
-import { color, fontSize, padding } from '../../styles/theme';
+import { color, padding } from '../../styles/theme';
 import { ButtonColor, ButtonThemes } from '../../styles/button-theme';
 import { ClickOutside } from '../../utils/click-outside';
 import { ProductModalAction } from './ProductModalAction';
 import { navigateTo, openNewTab } from '../../utils/browser';
 import { ProductDetails } from './ProductDetails';
 import { urls } from '../../domain/website';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { PrimaryButton } from '../../components/buttons/PrimaryButton';
 import { LinkButton } from '../../components/buttons/LinkButton';
 
 const Actions = styled.div`
@@ -66,17 +64,9 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
       <Modal title={`EAN: ${product.code}`} onClose={onClose}>
         <ProductDetails product={product} />
         <Actions>
-          <LinkButton
-            label="Zobacz przyjaciół Poli"
-            styles={{ color: ButtonThemes.whiteRed, fontSize: fontSize.normal }}
-            onClick={redirectToFriends}
-          />
+          <LinkButton label="Zobacz przyjaciół Poli" styles={ButtonThemes.WhiteRed} onClick={redirectToFriends} />
           {product.donate.show_button && (
-            <LinkButton
-              label="Potrzebujemy 1 ZŁ"
-              styles={{ color: ButtonThemes.red, fontSize: fontSize.normal }}
-              onClick={handleDonate}
-            />
+            <LinkButton label="Potrzebujemy 1 ZŁ" styles={ButtonThemes.Red} onClick={handleDonate} />
           )}
         </Actions>
         <ProductModalAction actionName={product.report.button_text} actionCallback={handleReport}>

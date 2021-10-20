@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from './Button';
-import { ButtonColor, getButtonTheme } from '../../styles/button-theme';
+import { ButtonColor, ButtonThemes } from '../../styles/button-theme';
 import { color } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
@@ -15,34 +15,24 @@ export interface ITagButton {
   label?: string;
   icon?: React.ReactNode;
   disabled?: boolean;
-  color?: ButtonColor;
-  fontSize?: string;
+  styles: IButtonTheme;
   className?: string;
   children?: React.ReactNode;
 
   onClick?: () => void;
 }
 
-export const TagButton: React.FC<ITagButton> = ({
-  label,
-  icon,
-  className,
-  disabled,
-  color,
-  fontSize,
-  children,
-  onClick,
-}) => {
+export const TagButton: React.FC<ITagButton> = ({ label, icon, className, disabled, styles, children, onClick }) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     !disabled && onClick && onClick();
   };
 
-  const themeColor = getButtonTheme(color);
+  const themeColor = ButtonThemes[styles.color];
 
   const theme = {
     color: themeColor,
-    fontSize,
+    fontSize: styles.fontSize,
   };
 
   return (

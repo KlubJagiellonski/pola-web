@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, IButtonTheme } from './Button';
-import { ButtonColor, getButtonTheme } from '../../styles/button-theme';
+import { Button } from './Button';
+import { ButtonThemes, IButtonTheme } from '../../styles/button-theme';
 import { padding } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
@@ -23,14 +23,22 @@ export interface ILinkButton {
   onClick?: () => void;
 }
 
-export const LinkButton: React.FC<ILinkButton> = ({ label, icon, className, disabled, styles, onClick, children }) => {
+export const LinkButton: React.FC<ILinkButton> = ({
+  label,
+  icon,
+  className,
+  disabled,
+  styles = ButtonThemes.WhiteRed,
+  onClick,
+  children,
+}) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     !disabled && onClick && onClick();
   };
 
   const theme = {
-    color: styles.color,
+    color: styles.colors,
     fontSize: styles.fontSize,
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from './Button';
-import { ButtonColor, getButtonTheme } from '../../styles/button-theme';
+import { ButtonThemes, IButtonTheme } from '../../styles/button-theme';
 import { padding } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
@@ -14,8 +14,7 @@ export interface IPrimaryButton {
   label?: string;
   icon?: React.ReactNode;
   disabled?: boolean;
-  color?: ButtonColor;
-  fontSize?: string;
+  styles?: IButtonTheme;
   className?: string;
   children?: React.ReactNode;
 
@@ -27,8 +26,7 @@ export const PrimaryButton: React.FC<IPrimaryButton> = ({
   icon,
   className,
   disabled,
-  color = ButtonColor.Red,
-  fontSize,
+  styles = ButtonThemes.Red,
   onClick,
   children,
 }) => {
@@ -37,11 +35,11 @@ export const PrimaryButton: React.FC<IPrimaryButton> = ({
     !disabled && onClick && onClick();
   };
 
-  const themeColor = getButtonTheme(color);
+  const themeColor = ButtonThemes[styles];
 
   const theme = {
     color: themeColor,
-    fontSize,
+    fontSize: styles.fontSize,
   };
 
   return (
