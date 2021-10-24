@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from './Button';
-import { ButtonThemes, IButtonTheme } from '../../styles/button-theme';
+import { Button, ButtonThemes, IButtonTheme } from './Button';
 import { padding } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
@@ -37,13 +36,8 @@ export const LinkButton: React.FC<ILinkButton> = ({
     !disabled && onClick && onClick();
   };
 
-  const theme = {
-    color: styles.colors,
-    fontSize: styles.fontSize,
-  };
-
   return (
-    <ButtonContainer theme={theme} className={className} onClick={handleClick} disabled={disabled}>
+    <ButtonContainer theme={styles} className={className} onClick={handleClick} disabled={disabled}>
       {icon}
       {label}
       {children}

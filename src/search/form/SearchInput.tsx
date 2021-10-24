@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 
-import { ButtonColor } from '../../styles/button-theme';
+import { ButtonTheme, ButtonFlavor } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { Device, fontSize, color, padding, margin, px } from '../../styles/theme';
 import Kod from '../../assets/kod.svg';
@@ -133,7 +133,12 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch }) => {
         </InputIconSection>
       </InputSection>
       {showSubmitButton && (
-        <SubmitButton label="Sprawdź" color={ButtonColor.Red} disabled={!hasPhrase} onClick={handleSearch} />
+        <SubmitButton
+          label="Sprawdź"
+          styles={ButtonTheme[ButtonFlavor.RED]}
+          disabled={!hasPhrase}
+          onClick={handleSearch}
+        />
       )}
     </FormSearch>
   );

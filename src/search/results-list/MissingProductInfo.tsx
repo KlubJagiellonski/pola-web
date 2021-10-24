@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { padding, margin, color, fontSize } from '../../styles/theme';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { ButtonColor } from '../../styles/button-theme';
+import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { openNewTab } from '../../utils/browser';
 import { urls } from '../../domain/website';
 
@@ -20,7 +20,7 @@ export const MissingProductInfo = () => (
     <p>Nie znalazłeś czego szukasz?</p>
     <SecondaryButton
       onClick={() => openNewTab(urls.external.openFoods)}
-      color={ButtonColor.Red}
+      styles={ButtonThemes[ButtonFlavor.RED]}
       fontSize={fontSize.small}>
       <p>Zgłoś produkt do bazy</p>
     </SecondaryButton>

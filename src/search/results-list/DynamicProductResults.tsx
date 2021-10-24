@@ -4,7 +4,7 @@ import { color } from '../../styles/theme';
 import { EAN, IProductData } from '../../domain/products';
 import { SearchResultsList } from '../../search/results-list/SearchResultsList';
 import { PrimaryButton } from '../../components/buttons/PrimaryButton';
-import { ButtonColor } from '../../styles/button-theme';
+import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { Spinner } from '../../components/Spinner';
 import { SearchStateName } from '../../state/search/search-reducer';
 import { SearchResultsHeader } from '../../search/results-list/SearchResultsHeader';
@@ -34,10 +34,10 @@ export const DynamicProductResults: React.FC<IDynamicProductResults> = ({
       <PrimaryButton
         disabled={true}
         icon={<Spinner styles={{ size: 20, color: color.button.white }} />}
-        color={ButtonColor.Red}
+        color={ButtonFlavor.Red}
       />
     ) : (
-      <PrimaryButton label="Wczytaj więcej" color={ButtonColor.Red} onClick={onLoadMore} />
+      <PrimaryButton label="Wczytaj więcej" styles={ButtonThemes[ButtonFlavor.RED]} onClick={onLoadMore} />
     );
 
   return (

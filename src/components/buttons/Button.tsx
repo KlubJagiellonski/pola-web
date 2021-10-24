@@ -1,6 +1,66 @@
 import styled from 'styled-components';
-import { IButtonTheme } from '../../styles/button-theme';
-import { color, padding } from '../../styles/theme';
+import { color, padding, px } from '../../styles/theme';
+
+export interface IButtonColors {
+  background: string;
+  hover: string;
+  text: string;
+}
+
+export interface IButtonTheme {
+  colors: IButtonColors;
+  fontSize?: string;
+}
+
+export type IButtonThemes = {
+  [name in ButtonFlavor]: IButtonTheme;
+};
+
+export enum ButtonFlavor {
+  GRAY = 'Gray',
+  LIGHT_GRAY = 'LightGray',
+  RED = 'Red',
+  WHITE = 'White',
+  WHITE_RED = 'WhiteRed',
+}
+
+export const ButtonThemes: IButtonThemes = {
+  [ButtonFlavor.RED]: {
+    colors: {
+      background: color.button.red,
+      hover: color.button.redLight,
+      text: color.text.light,
+    },
+  },
+  [ButtonFlavor.WHITE_RED]: {
+    colors: {
+      background: color.button.white,
+      hover: color.button.white,
+      text: color.text.red,
+    },
+  },
+  [ButtonFlavor.WHITE]: {
+    colors: {
+      background: color.button.white,
+      hover: color.button.white,
+      text: color.text.primary,
+    },
+  },
+  [ButtonFlavor.LIGHT_GRAY]: {
+    colors: {
+      background: color.button.lightGray,
+      hover: color.background.gray,
+      text: color.text.primary,
+    },
+  },
+  [ButtonFlavor.GRAY]: {
+    colors: {
+      background: color.button.gray,
+      hover: color.button.disabled,
+      text: color.text.primary,
+    },
+  },
+};
 
 export const Button = styled.button<{ theme: IButtonTheme; disabled?: boolean }>`
   box-sizing: border-box;
@@ -12,7 +72,7 @@ export const Button = styled.button<{ theme: IButtonTheme; disabled?: boolean }>
   white-space: nowrap;
   font-weight: bold;
   transition-duration: 0.5s;
-  font-size: ${(props) => (props.theme.fontSize ? props.theme.fontSize : '18px')};
+  font-size: ${(props) => (props.theme.fontSize ? props.theme.fontSize : px(18))};
 
   &:hover {
     background-color: ${(props) => props.theme.colors.hover};

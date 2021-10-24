@@ -3,7 +3,7 @@ import { PageSection } from '../../layout/PageSection';
 import { EAN, IProductData } from '../../domain/products';
 import { SearchResultsList } from '../../search/results-list/SearchResultsList';
 import { PrimaryButton } from '../../components/buttons/PrimaryButton';
-import { ButtonColor } from '../../styles/button-theme';
+import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { SearchResultsHeader } from '../../search/results-list/SearchResultsHeader';
 import { urls } from '../../domain/website';
 import { SearchStateName } from '../../state/search/search-reducer';
@@ -35,7 +35,7 @@ export const FirstPageResults: React.FC<IFirstPageResults> = ({
         results={pages}
         totalItems={totalItems}
         actions={
-          <PrimaryButton color={ButtonColor.Gray} onClick={onClear}>
+          <PrimaryButton styles={ButtonThemes[ButtonFlavor.GRAY]} onClick={onClear}>
             <span>Anuluj</span>
           </PrimaryButton>
         }

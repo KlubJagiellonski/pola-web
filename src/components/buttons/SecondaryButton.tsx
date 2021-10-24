@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from './Button';
-import { ButtonThemes, IButtonTheme } from '../../styles/button-theme';
+import { Button, IButtonTheme } from './Button';
 import { color, Device, fontSize } from '../../styles/theme';
 
 const ButtonContainer = styled(Button)`
@@ -33,7 +32,6 @@ export const SecondaryButton: React.FC<ISecondaryButton> = ({
   className,
   disabled,
   styles,
-  fontSize,
   children,
   onClick,
 }) => {
@@ -42,15 +40,8 @@ export const SecondaryButton: React.FC<ISecondaryButton> = ({
     !disabled && onClick && onClick();
   };
 
-  const themeColor = ButtonThemes[styles.color];
-
-  const theme = {
-    color: themeColor,
-    fontSize: styles.fontSize,
-  };
-
   return (
-    <ButtonContainer theme={theme} className={className} onClick={handleClick} disabled={disabled}>
+    <ButtonContainer theme={styles} className={className} onClick={handleClick} disabled={disabled}>
       {icon}
       {label}
       {children}

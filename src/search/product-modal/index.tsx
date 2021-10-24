@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Product } from '../../domain/products';
 import { Modal } from '../../layout/modal/Modal';
 import { color, padding } from '../../styles/theme';
-import { ButtonColor, ButtonThemes } from '../../styles/button-theme';
+import { ButtonFlavor, ButtonThemes } from '../../components/buttons/Button';
 import { ClickOutside } from '../../utils/click-outside';
 import { ProductModalAction } from './ProductModalAction';
 import { navigateTo, openNewTab } from '../../utils/browser';
@@ -73,7 +73,7 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
           <span>Posiadasz aktualne dane na temat tego produktu?</span>
         </ProductModalAction>
         <ProductModalAction
-          theme={{ backgroundColor: color.background.white, buttonColor: ButtonColor.Red }}
+          theme={{ backgroundColor: color.background.white, buttonTheme: ButtonThemes[ButtonFlavor.RED] }}
           actionName="Pobierz"
           actionCallback={handleDownloadApp}>
           <AppDownload>

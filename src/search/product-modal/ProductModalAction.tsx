@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { color, padding } from '../../styles/theme';
-import { ButtonColor } from '../../styles/button-theme';
+import { IButtonTheme } from '../../components/buttons/Button';
 import { PrimaryButton } from '../../components/buttons/PrimaryButton';
 
 interface ITheme {
   backgroundColor?: string;
-  buttonColor?: ButtonColor;
+  buttonTheme?: IButtonTheme;
 }
 
 const Container = styled.div<{ theme?: ITheme }>`
@@ -32,6 +32,6 @@ interface IProductModalAction {
 export const ProductModalAction: React.FC<IProductModalAction> = ({ actionName, actionCallback, theme, children }) => (
   <Container theme={theme}>
     <div className="content">{children}</div>
-    <PrimaryButton color={theme?.buttonColor} label={actionName} className="action-btn" onClick={actionCallback} />
+    <PrimaryButton styles={theme?.buttonTheme} label={actionName} className="action-btn" onClick={actionCallback} />
   </Container>
 );
