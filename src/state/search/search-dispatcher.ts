@@ -10,7 +10,7 @@ export const searchDispatcher = {
   invokeSearch: (phrase: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       const { search } = getState();
-      if (search.stateName === SearchStateName.INITIAL) {
+      if (search.stateName !== SearchStateName.LOADING) {
         dispatch(actions.ClearResults());
         await dispatch(actions.InvokePhrase(phrase));
         const service = ProductService.getInstance();
