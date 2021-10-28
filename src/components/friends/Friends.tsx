@@ -9,7 +9,7 @@ import { Device, color, margin, padding, fontSize, width } from './../../styles/
 import { Friend } from '../../domain/friends';
 import { ResponsiveImage } from './../images/ResponsiveImage';
 import { AnchorLink } from "gatsby-plugin-anchor-links";
-import { buildFriendUrl } from './friends-url-service';
+import { buildFriendUrl } from '../../domain/friends/friend-service'
 import { hash } from '../../domain/website';
 
 const Wrapper = styled(WrapperSection)`
@@ -105,7 +105,7 @@ const Friends: React.FC<IFriends> = ({ friends, rows }) => {
             <FriendsSlider {...settings}>
               {friends.map((el, id) => (
                 <div className="friend-item" key={`friend_${id}`}>
-                  <AnchorLink to={buildFriendUrl(el.slug, hash.friends.friend.id)}>
+                  <AnchorLink to={buildFriendUrl(el.slug ? el.slug : "", hash.friends.friend.id)}>
                     <Image>{el.image && <ResponsiveImage imageSrc={el.image} />}</Image>
                   </AnchorLink>
                   {el.slug &&

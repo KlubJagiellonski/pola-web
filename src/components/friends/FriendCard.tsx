@@ -9,7 +9,7 @@ import { TitleSection, WrapperSection, Text } from '../../styles/GlobalStyle.css
 import { color, padding, margin, fontSize } from '../../styles/theme'
 import { SecondaryButton } from '../buttons/SecondaryButton'
 import { ResponsiveImage } from '../images/ResponsiveImage'
-import { buildFriendUrl } from './friends-url-service'
+import { buildFriendUrl } from './../../domain/friends/friend-service'
 
 const Wrapper = styled(WrapperSection)`
   padding: ${padding.normal};

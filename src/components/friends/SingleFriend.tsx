@@ -9,7 +9,7 @@ import { TitleSection, Text, } from '../../styles/GlobalStyle.css';
 import { SecondaryButton } from '../buttons/SecondaryButton';
 import { ButtonColor } from '../../styles/button-theme';
 import { AnchorLink } from "gatsby-plugin-anchor-links";
-import { buildFriendUrl } from './friends-url-service';
+import { buildFriendUrl } from './../../domain/friends/friend-service'
 import { ColumnsLayout, ContentColumn } from '../../layout/ColumnsLayout';
 
 const WrapperContents = styled(PageSection)`
