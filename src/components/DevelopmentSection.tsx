@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query'
+import styledContainerQuery from 'styled-container-query';
 
 import { Device, fontSize, margin, color, padding } from './../styles/theme';
 import { SecondaryButton } from './buttons/SecondaryButton';
@@ -8,6 +8,7 @@ import { ButtonColor } from '../styles/button-theme';
 import { WrapperSection } from '../styles/GlobalStyle.css';
 import { TitleSection, Text } from '../styles/GlobalStyle.css';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
+import { urls } from '../domain/website';
 
 const Info = styled.div`
   width: 50%;
@@ -45,12 +46,10 @@ const Texts = styled.div`
     margin-right: 0;
     width: 100%;
   }
-
 `;
 
 const DevelopmentTitle = styled(TitleSection)`
   margin-bottom: ${margin.normal};
-
 `;
 
 const DevelopmentText = styled(Text)`
@@ -65,21 +64,21 @@ const ImgSection = styled.div`
   top: 50%;
   transform: translateY(-50%);
 
-  @media ${Device.mobile}{
+  @media ${Device.mobile} {
     top: 0;
     transform: translateY(0px);
 
     div {
-    picture {
-      img{
-        width: auto !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+      picture {
+        img {
+          width: auto !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+        }
       }
     }
   }
-}  
-`
+`;
 
 const Wrapper = styled(WrapperSection)``;
 
@@ -142,15 +141,17 @@ const DevelopmentSection = () => {
     <Container color={color.background.red}>
       <Info>
         <ImgSection>
-          <ResponsiveImage imageSrc='smutny-2.png' />
+          <ResponsiveImage imageSrc="smutny-2.png" />
         </ImgSection>
       </Info>
       <Texts>
         <TextSection>
           <DevelopmentTitle>Zobacz jak rozwija się Aplikacja Pola i wspomóż ją!</DevelopmentTitle>
           <DevelopmentText>Dowiedz się co możesz jeszcze zrobić, aby wspierać polskich producentów.</DevelopmentText>
-          <div className='buttons'>
-            <SecondaryButton label="Czytaj dalej..." fontSize={fontSize.small} color={ButtonColor.Red} />
+          <div className="buttons">
+            <a href={urls.external.fundraising.href}>
+              <SecondaryButton label="Czytaj dalej..." fontSize={fontSize.small} color={ButtonColor.Red} />
+            </a>
           </div>
         </TextSection>
       </Texts>

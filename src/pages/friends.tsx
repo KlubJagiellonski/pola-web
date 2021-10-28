@@ -18,17 +18,17 @@ import FriendsSection from '../components/friends/FriendsSection';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};
-`
+`;
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;
   text-align: center;
-`
+`;
 
 const TextSection = styled(Text)`
   margin: ${margin.big} 0;
   text-align: center;
-`
+`;
 
 const ImageSection = styled.ul`
   display: flex;
@@ -55,7 +55,7 @@ const ImageSection = styled.ul`
     gap: ${padding.normal};
     margin: 0 ${margin.big};
 
-    li{
+    li {
       margin: 0 ${margin.normal};
     }
   }
@@ -65,7 +65,7 @@ const FullWrapperInfo = styled(WrapperSection)`
   padding: 0 ${padding.small};
   display: flex;
   justify-content: center;
-`
+`;
 
 const FullContentInfo = styled.div`
   width: 50%;
@@ -73,14 +73,14 @@ const FullContentInfo = styled.div`
   @media ${Device.mobile} {
     width: 100%;
   }
-`
+`;
 
 const UlSection = styled.ul`
   color: ${color.text.secondary};
   font-size: ${fontSize.small};
   margin: ${margin.small};
   padding: ${padding.small};
-`
+`;
 
 const WrapperInfo = styled(PageSection)`
   display: flex;
@@ -88,7 +88,7 @@ const WrapperInfo = styled(PageSection)`
   padding-top: 120px;
   margin-top: -120px;
 
-  div{
+  div {
     flex: 1;
   }
 
@@ -97,7 +97,7 @@ const WrapperInfo = styled(PageSection)`
     padding-right: 0;
     padding-left: 0;
   }
-`
+`;
 
 const Info = styled(WrapperSection)`
   padding: ${margin.normal} ${padding.big};
@@ -107,13 +107,13 @@ const Info = styled(WrapperSection)`
     padding: ${margin.big} ${padding.small};
     margin: ${margin.normal} 0;
   }
- `
+`;
 
 const TitleInfo = styled(TitleSection)`
-    @media ${Device.mobile} {
+  @media ${Device.mobile} {
     text-align: center;
   }
- `
+`;
 
 interface IFriendsPage {
   location?: Location;
@@ -138,11 +138,17 @@ const FriendsPage = (props: IFriendsPage) => {
         <Wrapper>
           <Title>Partner aplikacji Pola</Title>
           <ImageSection>
-            <li><ResponsiveImage imageSrc="PGE_logo.png" /></li>
-            <li><ResponsiveImage imageSrc="polskie_kupuje.png" /></li>
+            <li>
+              <ResponsiveImage imageSrc="PGE_logo.png" />
+            </li>
+            <li>
+              <ResponsiveImage imageSrc="polskie_kupuje.png" />
+            </li>
           </ImageSection>
           <TextSection>
-            Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO! jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE wspiera rozwój aplikacji Pola.
+            Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO!
+            jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE wspiera
+            rozwój aplikacji Pola.
           </TextSection>
         </Wrapper>
       </PageSection>
@@ -154,7 +160,8 @@ const FriendsPage = (props: IFriendsPage) => {
         <FullContentInfo>
           <Title>Jak rozpoznać polską firmę?</Title>
           <Text>
-            Można to ustalić weryfikując kilka czynników. Nasz program kierowany jest do przedsiębiorstw, które spełniają poniższe kryteria:
+            Można to ustalić weryfikując kilka czynników. Nasz program kierowany jest do przedsiębiorstw, które
+            spełniają poniższe kryteria:
           </Text>
           <UlSection>
             <li>są zarejestrowane w Polsce;</li>
@@ -164,14 +171,19 @@ const FriendsPage = (props: IFriendsPage) => {
             <li>nie są częścią zagranicznego koncernu.</li>
           </UlSection>
           <Text>
-            Ponadto przedsiębiorstwo musi charakteryzować się nieposzlakowaną opinią na swój temat oraz aktywnie angażować się w działania podejmowane na rzecz promocji patriotyzmu gospodarczego w Polsce.
+            Ponadto przedsiębiorstwo musi charakteryzować się nieposzlakowaną opinią na swój temat oraz aktywnie
+            angażować się w działania podejmowane na rzecz promocji patriotyzmu gospodarczego w Polsce.
           </Text>
         </FullContentInfo>
       </FullWrapperInfo>
       <WrapperInfo id={hash.friends.profit.id}>
         <Info color={color.background.white}>
           <TitleInfo>Czym jest Klub Przyjaciół Poli?</TitleInfo>
-          <Text>Głównym celem Klubu Przyjaciół Poli jest promocja oraz wsparcie polskich przedsiębiorstw. Będzie to możliwe dzięki stworzeniu silnego środowiska społeczno-biznesowego, które poprzez kooperację i wspólne działania przyczyni się do popularyzacji mody na patriotyzm gospodarczy.</Text>
+          <Text>
+            Głównym celem Klubu Przyjaciół Poli jest promocja oraz wsparcie polskich przedsiębiorstw. Będzie to możliwe
+            dzięki stworzeniu silnego środowiska społeczno-biznesowego, które poprzez kooperację i wspólne działania
+            przyczyni się do popularyzacji mody na patriotyzm gospodarczy.
+          </Text>
           <ResponsiveImage imageSrc="szproty.png" />
         </Info>
         <Info color={color.background.transparencyGrey}>
@@ -179,35 +191,52 @@ const FriendsPage = (props: IFriendsPage) => {
           <UlSection>
             <li>Znak Towarowy Polski produkt - 100 pkt Pola</li>
             <Text>
-              Stworzyliśmy własne oznaczenie Polski produkt - 100 pkt Pola przeznaczone wyłącznie dla produktów, które uzyskały w naszym algorytmie maksymalny wynik 100 punktów. Będzie to tym samym pierwszy znak towarowy, którego pojawienie się na etykiecie jest poparte merytoryczną analizą danego przedsiębiorstwa.
+              Stworzyliśmy własne oznaczenie Polski produkt - 100 pkt Pola przeznaczone wyłącznie dla produktów, które
+              uzyskały w naszym algorytmie maksymalny wynik 100 punktów. Będzie to tym samym pierwszy znak towarowy,
+              którego pojawienie się na etykiecie jest poparte merytoryczną analizą danego przedsiębiorstwa.
             </Text>
             <Text>
-              Głównym powodem rozszerzenia naszej działalności są doświadczenia związane z oznaczeniami funkcjonującymi na polskim rynku spożywczym. W większości przypadków w sposób jednoznaczny sugerują one polskie pochodzenie produktów, chociaż po zweryfikowaniu ich producentów okazuje się, że są własnością zagranicznych podmiotów. Znak Polski produkt - 100 pkt Pola jest naszą odpowiedzią, która w formie prostego graficznego przekazu umożliwi szybką weryfikację produktu, co będzie szczególnie ważne dla osób niekorzystających z urządzeń mobilnych.
+              Głównym powodem rozszerzenia naszej działalności są doświadczenia związane z oznaczeniami funkcjonującymi
+              na polskim rynku spożywczym. W większości przypadków w sposób jednoznaczny sugerują one polskie
+              pochodzenie produktów, chociaż po zweryfikowaniu ich producentów okazuje się, że są własnością
+              zagranicznych podmiotów. Znak Polski produkt - 100 pkt Pola jest naszą odpowiedzią, która w formie
+              prostego graficznego przekazu umożliwi szybką weryfikację produktu, co będzie szczególnie ważne dla osób
+              niekorzystających z urządzeń mobilnych.
             </Text>
             <li> Ekspozycja informacji o firmie </li>
             <Text>
-              Oprócz samego znaku towarowego status Przyjaciela Poli jest jednoznaczny z aktywnym udziałem w rozwoju aplikacji Pola. Zabierz ja na zakupy, którą używa już ponad 750 000 użytkowników. Informacja o firmie znajduje w specjalnych zakładkach w aplikacji oraz na naszej stronie internetowej, dzieki czemu każdy konsument może poznać historię oraz profil działalności wszystkich współpracujących z Klubem Jagiellońskim przedsiębiorstw. Dodatkowo po zeskanowaniu produktu należącego do Przyjaciela Poli użytkownik zostanie poinformowany o jego specjalnym statusie.
+              Oprócz samego znaku towarowego status Przyjaciela Poli jest jednoznaczny z aktywnym udziałem w rozwoju
+              aplikacji Pola. Zabierz ja na zakupy, którą używa już ponad 750 000 użytkowników. Informacja o firmie
+              znajduje w specjalnych zakładkach w aplikacji oraz na naszej stronie internetowej, dzieki czemu każdy
+              konsument może poznać historię oraz profil działalności wszystkich współpracujących z Klubem Jagiellońskim
+              przedsiębiorstw. Dodatkowo po zeskanowaniu produktu należącego do Przyjaciela Poli użytkownik zostanie
+              poinformowany o jego specjalnym statusie.
             </Text>
             <li>Działalność promocyjna oraz społeczna</li>
             <Text>
-              Wszyscy Przyjaciele Poli mają możliwość aktywnego udziału w prowadzonych przez nas kampaniach społecznych oraz internetowych, mających na celu popularyzację polskich firm i patriotyzmu gospodarczego wśród obywateli.
+              Wszyscy Przyjaciele Poli mają możliwość aktywnego udziału w prowadzonych przez nas kampaniach społecznych
+              oraz internetowych, mających na celu popularyzację polskich firm i patriotyzmu gospodarczego wśród
+              obywateli.
             </Text>
           </UlSection>
         </Info>
       </WrapperInfo>
       <WrapperInfo>
-        <Card
-          title="Dołącz do Przyjaciół Poli"
-          content="Lorem ipsum dolor sit amet."
-          buttonLabel="KONTAKT"
-          url={urls.pola.contact}
-        />
+        <Card title="Dołącz do Przyjaciół Poli" url={urls.pola.contact}>
+          <Text>Koordynator projektu Mateusz Perowicz</Text>
+          <Text>
+            <a href={urls.external.mail.Perowicz.href}>mateusz.perowicz@klubjagiellonski.pl</a>, tel. 660 010 034
+          </Text>
+        </Card>
       </WrapperInfo>
     </PageLayout>
   );
 };
 
-export default connect((state: IPolaState) => ({
-  location: state.app.location,
-  friends: state.friends.data
-}), {})(FriendsPage);
+export default connect(
+  (state: IPolaState) => ({
+    location: state.app.location,
+    friends: state.friends.data,
+  }),
+  {}
+)(FriendsPage);
