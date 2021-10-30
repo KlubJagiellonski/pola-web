@@ -30,59 +30,44 @@ export const FirstPageResults: React.FC<IFirstPageResults> = ({
   onSelect,
   onClear,
 }) => {
-  let header: React.ReactNode;
-  switch (state) {
-    case SearchStateName.LOADED:
-    case SearchStateName.SELECTED:
-      header = (
+  const isLoaded = state === SearchStateName.LOADED || state === SearchStateName.SELECTED;
+  const isLoading = state === SearchStateName.LOADING;
+  const isError = state === SearchStateName.ERROR;
+
+  return (
+    <>
+      {(isLoaded || isLoading) && (
         <SearchResultsHeader
           phrase={phrase}
           totalItems={totalItems}
           searchState={state}
-          resultsUrl={urls.pola.products}
+          resultsUrl={totalItems > 0 ? urls.pola.products : undefined}
         />
-      );
-      break;
-    case SearchStateName.LOADING:
-      header = (
-        <PageSection styles={{ textAlign: 'center' }}>
-          <Spinner text="Wyszukiwanie produktów..." />
-        </PageSection>
-      );
-      break;
-    case SearchStateName.ERROR:
-      header = (
-        <PageSection styles={{ textAlign: 'center' }}>
-          <InfoBox>
-            <h3>Błąd Wyszukiwania</h3>
-            <p>Spróbuj wprowadzić inną frazę...</p>
-          </InfoBox>
-        </PageSection>
-      );
-      break;
-    case SearchStateName.INITIAL:
-      header = null;
-      break;
-  }
-
-  return (
-    <>
-      {header}
-      {state === SearchStateName.LOADED && (
-        <PageSection>
+      )}
+      <PageSection>
+        {isLoading && <Spinner text="Wyszukiwanie produktów..." />}
+        {isLoaded && (
           <SearchResultsList
             results={products}
             totalItems={totalItems}
             actions={
-              <PrimaryButton styles={ButtonThemes[ButtonFlavor.GRAY]} onClick={onClear}>
-                <span>Anuluj</span>
-              </PrimaryButton>
+              totalItems > 0 ? (
+                <PrimaryButton styles={ButtonThemes[ButtonFlavor.GRAY]} onClick={onClear}>
+                  <span>Anuluj</span>
+                </PrimaryButton>
+              ) : undefined
             }
             onSelect={onSelect}
           />
-          <MissingProductInfo />
-        </PageSection>
-      )}
+        )}
+        {(isLoaded || isLoading) && <MissingProductInfo />}
+        {isError && (
+          <InfoBox>
+            <h3>Błąd Wyszukiwania</h3>
+            <p>Spróbuj wprowadzić inną frazę...</p>
+          </InfoBox>
+        )}
+      </PageSection>
     </>
   );
 };

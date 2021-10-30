@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 
@@ -11,25 +11,36 @@ import Microphone from '../../assets/microphone.svg';
 const FormSearch = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 
   @media ${Device.mobile} {
     flex-direction: column;
   }
 `;
 
-const InputSection = styled.div`
+const InputElement = styled.div`
   padding-left: 0.25em;
   width: 100%;
   min-width: 28em;
   height: 56px;
-  background-color: white;
   border-radius: 3em;
+`;
+
+const InputSection = styled(InputElement)`
+  background-color: white;
   display: flex;
   justify-content: flex-end;
 
   @media ${Device.mobile} {
     min-width: 0;
   }
+`;
+
+const InputOverlay = styled(InputElement)`
+  background-color: black;
+  opacity: 0.33;
+  position: absolute;
+  z-index: 10;
 `;
 
 const InputText = styled.input`
@@ -96,6 +107,7 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch, onEmpt
   const [phrase, setPhrase] = React.useState<string>('');
   const hasPhrase = !!phrase && phrase.length > 0;
   const showSubmitButton = false;
+  let inputRef = useRef<HTMLInputElement>(null);
 
   const onPhraseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handlePhraseChange(event.currentTarget.value);
@@ -124,13 +136,23 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch, onEmpt
     }
   };
 
+  useEffect(() => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [phrase, disabled]);
+
   return (
     <FormSearch>
+      {disabled && <InputOverlay />}
       <InputSection>
         <InputIconSection>
           <InputIcon imagePath={Kod} size={48} />
         </InputIconSection>
+
         <InputText
+          autoFocus
+          ref={inputRef}
           placeholder="nazwa produktu / producent / kod EAN"
           type="text"
           onChange={onPhraseChange}
