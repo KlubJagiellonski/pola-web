@@ -70,7 +70,6 @@ export const urls = {
 };
 
 export const pageLinks: PageLinkData[] = [
-  { type: PageType.HOME, label: 'Home', url: urls.pola.home },
   { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news },
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about },
   { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.pola.support },
