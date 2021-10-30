@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { WrapperSection } from '../styles/GlobalStyle.css';
-import { color, padding, fontSize } from '../styles/theme';
+import { color, padding, fontSize, desktopHeaderHeight } from '../styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   color: ${color.text.light};
@@ -12,7 +12,7 @@ const Wrapper = styled(WrapperSection)`
   text-align: center;
   font-size: ${fontSize.normal};
   font-weight: bold;
-  min-height: 8rem;
+  height: ${desktopHeaderHeight};
 
   p {
     margin: 0;

@@ -72,7 +72,7 @@ export const urls = {
 export const pageLinks: PageLinkData[] = [
   { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news },
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about },
-  { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.pola.support },
+  // type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.pola.support },
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends },
   { type: PageType.PARTNERS, label: 'Partnerzy', url: urls.pola.partners },
   { type: PageType.BUSINESS, label: 'Oferta biznesowa', url: urls.pola.business },
