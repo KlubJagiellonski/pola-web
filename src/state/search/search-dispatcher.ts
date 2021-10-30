@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { EAN, IProductEAN, Product } from '../../domain/products';
 import { ProductEANService } from '../../domain/products/ean-service';
 import { ProductService } from '../../domain/products/search-service';
+import { ErrorHandler } from '../../services/api-errors';
 import { IPolaState } from '../types';
 import { ProductSelectors } from './product-selectors';
 import * as actions from './search-actions';
@@ -27,16 +28,17 @@ export const searchDispatcher = {
 
         const service = ProductService.getInstance();
         const response = await service.searchProducts(phrase);
-        if (response) {
-          const { products, totalItems, nextPageToken } = response;
-          await dispatch(actions.LoadResults(products, totalItems, nextPageToken));
-        } else {
-          throw new Error('Search response is empty');
-        }
+        const { products, totalItems, nextPageToken } = response;
+        await dispatch(actions.LoadResults(products, totalItems, nextPageToken));
       }
-    } catch (error) {
-      console.error('[Product search error]:', error);
-      await dispatch(actions.SearchFailed(error));
+    } catch (error: unknown) {
+      if (error instanceof ErrorHandler) {
+        console.error('[Product search error]:', error);
+        await dispatch(actions.SearchFailed(error));
+      } else {
+        console.error('[Unhandled error]:', error);
+        throw error;
+      }
     }
   },
 

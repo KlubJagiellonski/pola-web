@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { IProductData, ISearchSuccessResponse, ProductSearchResults } from '.';
+import { IProductData, ISearchSuccessResponse } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
-import { InvalidSearchResultError, isEmptyQueryError } from '../../services/api-errors';
+import { InvalidSearchResultError } from '../../services/api-errors';
 import { ISearchResultPage } from '../../state/search/search-reducer';
 
 export interface ISearchError {
@@ -48,13 +48,6 @@ export class ProductService extends ApiAdapter {
     } catch (error: unknown) {
       const apiError = this.handleError(error);
       throw apiError;
-      // if (axios.isAxiosError(error)) {
-      //   if (isEmptyQueryError(error)) {
-      //     return ProductSearchResults.Empty;
-      //   }
-      // } else {
-      //   console.warn('Unhandled error', error);
-      // }
     }
   }
 

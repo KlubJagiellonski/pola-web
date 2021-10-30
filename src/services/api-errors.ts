@@ -8,7 +8,8 @@ export enum ErrorMessage {
   INVALID_REQUEST = 'Invalid request structure',
   NOT_FOUND = 'Not found',
   NETWORK_ERROR = 'Service is unreachable',
-  SERVICE_ERROR = 'Something unexpected happed on the service. Please try again later.',
+  API_ADAPTER_ERROR = 'Something unexpected happened on communication with a service.',
+  SERVICE_ERROR = 'Something unexpected happened on the service. Please try again later.',
 }
 
 export abstract class ErrorHandler extends Error {
@@ -95,6 +96,14 @@ export class MethodNotFoundError extends ErrorHandler {
 export function isEmptyQueryError(error: AxiosError) {
   const data = error.response?.data;
   return data && data.status === 400 && data.type === 'about:blank';
+}
+
+export class ApiAdapterError extends ErrorHandler {
+  constructor(public apiName: string, public handledError?: unknown) {
+    super();
+    this.name = 'API adapter error';
+    this.message = this.buildMessage(`${this.apiName}: ${ErrorMessage.API_ADAPTER_ERROR}`);
+  }
 }
 
 export class InternalServiceError extends ErrorHandler {

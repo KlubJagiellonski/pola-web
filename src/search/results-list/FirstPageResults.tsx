@@ -9,6 +9,7 @@ import { urls } from '../../domain/website';
 import { SearchStateName } from '../../state/search/search-reducer';
 import { MissingProductInfo } from '../../search/results-list/MissingProductInfo';
 import { Spinner } from '../../components/Spinner';
+import { InfoBox } from '../../components/InfoBox';
 
 interface IFirstPageResults {
   state: SearchStateName;
@@ -52,7 +53,10 @@ export const FirstPageResults: React.FC<IFirstPageResults> = ({
     case SearchStateName.ERROR:
       header = (
         <PageSection styles={{ textAlign: 'center' }}>
-          <h1>Błąd Wyszukiwania :(</h1>
+          <InfoBox>
+            <h3>Błąd Wyszukiwania</h3>
+            <p>Spróbuj wprowadzić inną frazę...</p>
+          </InfoBox>
         </PageSection>
       );
       break;

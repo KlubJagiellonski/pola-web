@@ -1,22 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-import { padding, margin, color, fontSize } from '../../styles/theme';
+import { fontSize } from '../../styles/theme';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { openNewTab } from '../../utils/browser';
 import { urls } from '../../domain/website';
-
-const MissingProduct = styled.div`
-  background-color: ${color.background.red};
-  color: ${color.text.light};
-  text-align: center;
-  font-size: ${fontSize.big};
-  padding: ${padding.normal};
-  margin-top: ${margin.big};
-`;
+import { InfoBox } from '../../components/InfoBox';
 
 export const MissingProductInfo = () => (
-  <MissingProduct>
+  <InfoBox>
     <p>Nie znalazłeś czego szukasz?</p>
     <SecondaryButton
       onClick={() => openNewTab(urls.external.openFoods)}
@@ -24,5 +15,5 @@ export const MissingProductInfo = () => (
       fontSize={fontSize.small}>
       <p>Zgłoś produkt do bazy</p>
     </SecondaryButton>
-  </MissingProduct>
+  </InfoBox>
 );
