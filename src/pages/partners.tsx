@@ -8,29 +8,12 @@ import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { PageType } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
-import { TitleSection } from '../styles/GlobalStyle.css';
 import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
 import { PartnerService } from '../domain/partners/partners-service';
 import { PartnersList } from '../components/partners/PartnersList';
-import { padding } from '../styles/theme';
+import { Device, margin, padding } from '../styles/theme';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
-
-import { connect, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { hash, PageType, urls } from '../domain/website';
-import { Text, TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
-import { PageSection } from '../layout/PageSection';
-import { margin, padding, Device, color, fontSize } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import Placeholder from '../components/Placeholder';
-import { Friend } from '../domain/friends';
-import Card from '../components/Card';
-import FriendsSection from '../components/friends/FriendsSection';
+import { Text, TitleSection } from '../styles/GlobalStyle.css';
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;

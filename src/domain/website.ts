@@ -75,6 +75,7 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about },
   { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.pola.support },
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends },
+  { type: PageType.PARTNERS, label: 'Partnerzy', url: urls.pola.partners },
   { type: PageType.BUSINESS, label: 'Oferta biznesowa', url: urls.pola.business },
   { type: PageType.TEAM, label: 'Dołącz do zespołu', url: urls.pola.team },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.contact },

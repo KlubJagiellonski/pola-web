@@ -9,7 +9,6 @@ import { PageType, urls } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import styled from 'styled-components';
 import { padding } from '../styles/theme';
 import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
 import { ImageContainer } from '../layout/ImageContainer';
