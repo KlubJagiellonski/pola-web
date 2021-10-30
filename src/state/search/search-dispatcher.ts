@@ -1,46 +1,62 @@
 import { Dispatch } from 'redux';
-import { EAN, IProductData, IProductEAN, Product } from '../../domain/products';
+import { EAN, IProductEAN, Product } from '../../domain/products';
 import { ProductEANService } from '../../domain/products/ean-service';
 import { ProductService } from '../../domain/products/search-service';
 import { IPolaState } from '../types';
+import { ProductSelectors } from './product-selectors';
 import * as actions from './search-actions';
-import { SearchState, SearchStateName } from './search-reducer';
+import { SearchStateName } from './search-reducer';
 
 export const searchDispatcher = {
+  /**
+   * Gets first page of results for specified phrase.
+   * Used by Home page.
+   * @param phrase Text from search input.
+   */
   invokeSearch: (phrase: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
-      const { search } = getState();
-      if (search.stateName !== SearchStateName.LOADING) {
-        dispatch(actions.ClearResults());
-        await dispatch(actions.InvokePhrase(phrase));
+      const {
+        search: { stateName },
+      } = getState();
+
+      if (stateName !== SearchStateName.LOADING) {
+        if (stateName !== SearchStateName.INITIAL) {
+          await dispatch(actions.ClearResults());
+        }
+        await dispatch(actions.InvokeSearch(phrase));
+
         const service = ProductService.getInstance();
         const response = await service.searchProducts(phrase);
-
         if (response) {
           const { products, totalItems, nextPageToken } = response;
-
-          await dispatch(actions.LoadResults(phrase, products, totalItems, nextPageToken));
+          await dispatch(actions.LoadResults(products, totalItems, nextPageToken));
         } else {
           throw new Error('Search response is empty');
         }
       }
     } catch (error) {
-      console.error('cannot search', error);
+      console.error('[Product search error]:', error);
       await dispatch(actions.SearchFailed(error));
     }
   },
 
+  /**
+   * Loads next page of results for phrase stored in the reducer.
+   * Used by Products list page.
+   */
   invokeLoadMore: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       const { search } = getState();
+
       if (search.stateName === SearchStateName.LOADED) {
+        const { phrase, nextPageToken } = search;
         const service = ProductService.getInstance();
-        const response = await service.searchProducts(search.phrase, search.nextPageToken);
+        const response = await service.searchProducts(phrase, nextPageToken);
 
         if (response) {
           const { products } = response;
 
-          await dispatch(actions.LoadNextPage(search.phrase, products));
+          await dispatch(actions.LoadNextPage(phrase, products));
         } else {
           throw new Error('Search response is empty');
         }
@@ -51,6 +67,10 @@ export const searchDispatcher = {
     }
   },
 
+  /**
+   * Set search reducer to its initial state.
+   * No products loaded, no search phrase stored.
+   */
   clearResults: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       dispatch(actions.ClearResults());
@@ -60,13 +80,18 @@ export const searchDispatcher = {
     }
   },
 
+  /**
+   * Stores which product from retrieved search results is selected.
+   * Loads detailed product data from EAN service.
+   * @param code EAN code of selected product
+   */
   selectProduct: (code: EAN) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
       const { search } = getState();
       if (search.stateName === SearchStateName.LOADED) {
         const service = ProductEANService.getInstance();
         const productEntityEAN: IProductEAN = await service.getProduct(code);
-        const prod = findProduct(productEntityEAN.code, search);
+        const prod = ProductSelectors.findProduct(productEntityEAN.code, search);
         if (prod) {
           const product = new Product(prod.name, productEntityEAN);
           await dispatch(actions.ShowProductDetails(product));
@@ -80,10 +105,16 @@ export const searchDispatcher = {
     }
   },
 
+  /**
+   * Clears selected product data.
+   */
   unselectProduct: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
     try {
-      const { search } = getState();
-      if (search.stateName === SearchStateName.SELECTED) {
+      const {
+        search: { stateName },
+      } = getState();
+
+      if (stateName === SearchStateName.SELECTED) {
         await dispatch(actions.UnselectProduct());
       }
     } catch (error) {
@@ -91,19 +122,4 @@ export const searchDispatcher = {
       await dispatch(actions.SearchFailed(error));
     }
   },
-};
-
-const findProduct = (selectedCode: EAN, state: SearchState): IProductData | void => {
-  let product: IProductData | undefined;
-  if (state.stateName === SearchStateName.LOADED) {
-    for (const page of state.resultPages) {
-      const data = page.products.find((p) => p.code === selectedCode);
-      if (data) {
-        product = data;
-        break;
-      }
-    }
-
-    return product;
-  }
 };

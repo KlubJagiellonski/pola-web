@@ -6,8 +6,9 @@ export enum ErrorMessage {
   EMPTY_PAYLOAD = 'Obtained empty payload',
   INVALID_DATA = 'Obtained invalid data for search query',
   INVALID_REQUEST = 'Invalid request structure',
+  NOT_FOUND = 'Not found',
   NETWORK_ERROR = 'Service is unreachable',
-  SERVICE_ERROR = 'Something unexpected happed on the service. Please try later.',
+  SERVICE_ERROR = 'Something unexpected happed on the service. Please try again later.',
 }
 
 export abstract class ErrorHandler extends Error {
@@ -17,8 +18,13 @@ export abstract class ErrorHandler extends Error {
 
   buildMessage = (message: string): string => {
     if (this.handledError) {
-      return message + `: ${this.handledError}`;
+      if (typeof this.handledError === 'string') {
+        return message + `: ${this.handledError}`;
+      } else if (this.handledError instanceof Error) {
+        return message + `: ${this.handledError.message}`;
+      }
     }
+
     return message;
   };
 }
@@ -71,6 +77,18 @@ export class BadRequestError extends ErrorHandler {
     super();
     this.name = 'Bad request';
     this.message = this.buildMessage(ErrorMessage.INVALID_REQUEST);
+  }
+}
+
+export class MethodNotFoundError extends ErrorHandler {
+  /**
+   * Error describes "NOT FOUND" case
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Method not found';
+    this.message = this.buildMessage(ErrorMessage.NOT_FOUND);
   }
 }
 

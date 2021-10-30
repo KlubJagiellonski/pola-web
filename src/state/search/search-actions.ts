@@ -1,4 +1,5 @@
 import { IProductData, Product } from '../../domain/products';
+import { ErrorHandler } from '../../services/api-errors';
 import { IAction } from '../types';
 
 export const actionTypes = {
@@ -11,7 +12,7 @@ export const actionTypes = {
   UNSELECT_PRODUCT: 'SEARCH:UNSELECT_PRODUCT',
 };
 
-export const InvokePhrase = (phrase: string): IAction => ({
+export const InvokeSearch = (phrase: string): IAction => ({
   type: actionTypes.INVOKE_SEARCH,
   payload: {
     phrase,
@@ -19,14 +20,14 @@ export const InvokePhrase = (phrase: string): IAction => ({
 });
 
 export const LoadResults = (
-  phrase: string,
+  //phrase: string,
   pageProducts: IProductData[],
   totalItems: number,
   token?: string | null
 ): IAction => ({
   type: actionTypes.LOAD_RESULTS,
   payload: {
-    phrase,
+    //phrase,
     pageProducts,
     totalItems,
     token,
@@ -45,7 +46,7 @@ export const ClearResults = (): IAction => ({
   type: actionTypes.CLEAR_RESULTS,
 });
 
-export const SearchFailed = (error: unknown): IAction => ({
+export const SearchFailed = (error: ErrorHandler): IAction => ({
   type: actionTypes.SEARCH_FAILED,
   payload: {
     error,

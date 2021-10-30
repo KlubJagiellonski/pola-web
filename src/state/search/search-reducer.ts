@@ -3,6 +3,7 @@ import { actionTypes } from './search-actions';
 import * as actions from './search-actions';
 import { IAction, IActionReducer } from '../types';
 import { IProductData, Product } from '../../domain/products';
+import { ErrorHandler } from '../../services/api-errors';
 
 export interface ISearchResultPage {
   pageIndex: number;
@@ -14,6 +15,7 @@ export enum SearchStateName {
   LOADING = 'loading',
   LOADED = 'loaded',
   SELECTED = 'selected',
+  ERROR = 'error',
 }
 
 export type SearchState =
@@ -23,7 +25,6 @@ export type SearchState =
   | {
       stateName: SearchStateName.LOADING;
       phrase: string;
-      error?: unknown;
     }
   | {
       stateName: SearchStateName.LOADED;
@@ -31,7 +32,6 @@ export type SearchState =
       nextPageToken: string;
       resultPages: ISearchResultPage[];
       totalItems: number;
-      error?: unknown;
     }
   | {
       stateName: SearchStateName.SELECTED;
@@ -40,7 +40,15 @@ export type SearchState =
       resultPages: ISearchResultPage[];
       totalItems: number;
       selectedProduct: Product;
-      error?: unknown;
+    }
+  | {
+      stateName: SearchStateName.ERROR;
+      phrase?: string;
+      nextPageToken?: string;
+      resultPages?: ISearchResultPage[];
+      totalItems?: number;
+      selectedProduct?: Product;
+      error: ErrorHandler;
     };
 
 const initialState: SearchState = {
@@ -48,7 +56,7 @@ const initialState: SearchState = {
 };
 
 const reducers: IActionReducer<SearchState> = {
-  [actionTypes.INVOKE_SEARCH]: (state: SearchState = initialState, action: ReturnType<typeof actions.InvokePhrase>) => {
+  [actionTypes.INVOKE_SEARCH]: (state: SearchState = initialState, action: ReturnType<typeof actions.InvokeSearch>) => {
     return {
       ...state,
       stateName: SearchStateName.LOADING,
@@ -63,7 +71,7 @@ const reducers: IActionReducer<SearchState> = {
       return {
         ...state,
         stateName: SearchStateName.LOADED,
-        phrase: action.payload.phrase,
+        //phrase: action.payload.phrase,
         nextPageToken: action.payload.token,
         totalItems: action.payload.totalItems,
         resultPages: [
@@ -106,6 +114,7 @@ const reducers: IActionReducer<SearchState> = {
   [actionTypes.SEARCH_FAILED]: (state: SearchState = initialState, action: ReturnType<typeof actions.SearchFailed>) => {
     return {
       ...state,
+      stateName: SearchStateName.ERROR,
       error: action.payload.error,
     };
   },

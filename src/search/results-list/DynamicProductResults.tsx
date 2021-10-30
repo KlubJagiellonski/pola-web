@@ -34,7 +34,7 @@ export const DynamicProductResults: React.FC<IDynamicProductResults> = ({
       <PrimaryButton
         disabled={true}
         icon={<Spinner styles={{ size: 20, color: color.button.white }} />}
-        color={ButtonFlavor.Red}
+        styles={ButtonThemes[ButtonFlavor.RED]}
       />
     ) : (
       <PrimaryButton label="Wczytaj więcej" styles={ButtonThemes[ButtonFlavor.RED]} onClick={onLoadMore} />

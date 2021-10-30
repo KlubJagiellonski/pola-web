@@ -2,11 +2,11 @@ import Sinon from 'sinon';
 import { expect } from 'chai';
 import { ProductService } from './search-service';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { IProductSearchSuccess } from '.';
+import { ISearchSuccessResponse } from '.';
 import { mockGETRequest, mockAxiosErrorResponse, mockProduct } from '../../utils/tests/mocks';
 import { NetworkError } from '../../services/api-errors';
 
-const mockSearchResult = (): IProductSearchSuccess => ({
+const mockSearchResult = (): ISearchSuccessResponse => ({
   nextPageToken: 'bcvsag456345345',
   totalItems: 13,
   products: [mockProduct(), mockProduct(), mockProduct(), mockProduct()],

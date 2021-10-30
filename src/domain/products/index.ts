@@ -15,14 +15,14 @@ export interface IProductData {
   brand?: IBrand;
 }
 
-export interface IProductSearchSuccess {
+export interface ISearchSuccessResponse {
   nextPageToken: string | null;
   totalItems: number;
   products: IProductData[];
 }
 
-export class ProductSearchResults implements IProductSearchSuccess {
-  public static Empty: IProductSearchSuccess = {
+export class ProductSearchResults implements ISearchSuccessResponse {
+  public static Empty: ISearchSuccessResponse = {
     nextPageToken: null,
     totalItems: 0,
     products: [],

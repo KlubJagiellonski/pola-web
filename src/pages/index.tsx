@@ -14,7 +14,7 @@ import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions'
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import { PageType } from '../domain/website';
 import { Article } from '../domain/articles';
-import { reduceSearchResults } from '../domain/products/search-service';
+import { reduceToFlatProductsList } from '../domain/products/search-service';
 import { SearchStateName } from '../state/search/search-reducer';
 import { FirstPageResults } from '../search/results-list/FirstPageResults';
 import { EAN, IProductData } from '../domain/products';
@@ -58,10 +58,10 @@ const WrapperContents = styled(PageSection)`
 `;
 
 interface ISearchResults {
-  phrase: string;
-  pages: IProductData[];
-  totalItems: number;
-  token: string;
+  phrase?: string;
+  products?: IProductData[];
+  totalItems?: number;
+  token?: string;
 }
 
 interface IHomePage {
@@ -100,17 +100,16 @@ const HomePage = (props: IHomePage) => {
           <ResponsiveImage imageSrc={'background.png'} />
         </Background>
         <Content>
-          <SearchForm onSearch={props.invokeSearch} isLoading={isLoading} />
+          <SearchForm onSearch={props.invokeSearch} onEmptyInput={props.clearResults} isLoading={isLoading} />
         </Content>
       </PageSection>
-      {searchResults && (
-        <FirstPageResults
-          {...searchResults}
-          state={searchState}
-          onSelect={props.selectProduct}
-          onClear={props.clearResults}
-        />
-      )}
+      <FirstPageResults
+        {...searchResults}
+        state={searchState}
+        onSelect={props.selectProduct}
+        onClear={props.clearResults}
+      />
+      )
       <WrapperContents>
         <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
       </WrapperContents>
@@ -125,10 +124,10 @@ export default connect(
       location: app.location,
       searchState: search.stateName,
       searchResults:
-        search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING
+        search.stateName === SearchStateName.LOADED || search.stateName === SearchStateName.SELECTED
           ? {
               phrase: search.phrase,
-              pages: reduceSearchResults(search.resultPages),
+              products: reduceToFlatProductsList(search.resultPages),
               totalItems: search.totalItems,
               token: search.nextPageToken,
             }

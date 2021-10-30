@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IProductData, IProductSearchSuccess, ProductSearchResults } from '.';
+import { IProductData, ISearchSuccessResponse, ProductSearchResults } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
 import { InvalidSearchResultError, isEmptyQueryError } from '../../services/api-errors';
@@ -29,46 +29,43 @@ export class ProductService extends ApiAdapter {
     super(API_NAME, config.searchEndpoint);
   }
 
-  public async searchProducts(phrase: string, token?: string): Promise<IProductSearchSuccess | void> {
+  public async searchProducts(phrase: string, token?: string) {
     try {
       const searchQuery = this.buildSearchQuery(phrase, token);
-      const result: IProductSearchSuccess = await this.getSearchResults(searchQuery);
-      return result;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        if (isEmptyQueryError(error)) {
-          return ProductSearchResults.Empty;
-        }
-      } else {
-        throw error;
+      const response = await axios.get<ISearchSuccessResponse>(searchQuery);
+
+      if (!response) {
+        throw new Error('Response in empty');
       }
+      if (response instanceof Error) {
+        throw new Error('Got error response');
+      }
+      if (!this.isValidSearchResults(response)) {
+        throw new InvalidSearchResultError();
+      }
+
+      return response.data;
+    } catch (error: unknown) {
+      const apiError = this.handleError(error);
+      throw apiError;
+      // if (axios.isAxiosError(error)) {
+      //   if (isEmptyQueryError(error)) {
+      //     return ProductSearchResults.Empty;
+      //   }
+      // } else {
+      //   console.warn('Unhandled error', error);
+      // }
     }
   }
 
   private buildSearchQuery(phrase: string, token?: string): string {
-    let searchQuery = `query=${phrase}`;
+    let params = `query=${phrase}`;
 
     if (token) {
-      searchQuery = searchQuery + `&pageToken=${token}`;
+      params = params + `&pageToken=${token}`;
     }
 
-    return searchQuery;
-  }
-
-  private async getSearchResults(searchQuery: string) {
-    const response = await axios.get(`${this.apiUrl}?${searchQuery}`).catch((e: unknown) => {
-      const error = this.handleError(e);
-      throw error;
-    });
-
-    if (response) {
-      if (response instanceof Error)
-        if (!this.isValidSearchResults(response)) {
-          throw new InvalidSearchResultError();
-        }
-
-      return response.data;
-    }
+    return `${this.apiUrl}?${params}`;
   }
 
   private isValidSearchResults(response: AxiosResponse): boolean {
@@ -82,7 +79,7 @@ export class ProductService extends ApiAdapter {
  * @param search API response data
  * @returns agreggated results collection
  */
-export function reduceSearchResults(pages: ISearchResultPage[]): IProductData[] {
+export function reduceToFlatProductsList(pages: ISearchResultPage[]): IProductData[] {
   return pages.reduce((products: IProductData[], page: ISearchResultPage) => {
     return [...products, ...page.products];
   }, []);

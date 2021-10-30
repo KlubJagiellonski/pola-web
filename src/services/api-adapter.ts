@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { BadRequestError, ErrorMessage, FetchError, InternalServiceError, NetworkError } from './api-errors';
+import {
+  BadRequestError,
+  ErrorMessage,
+  FetchError,
+  InternalServiceError,
+  MethodNotFoundError,
+  NetworkError,
+} from './api-errors';
 
 export abstract class ApiAdapter {
   protected readonly apiName: string;
@@ -22,8 +29,10 @@ export abstract class ApiAdapter {
         switch (error.response.data.status) {
           case 400:
             return new BadRequestError();
+          case 404:
+            return new MethodNotFoundError();
           case 500:
-            return new InternalServiceError();
+            return new InternalServiceError(error.response);
           case 503:
             return new NetworkError();
         }

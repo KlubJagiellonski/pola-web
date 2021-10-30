@@ -11,7 +11,7 @@ import { SearchStateName } from '../state/search/search-reducer';
 import { navigateTo } from '../utils/browser';
 import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
 import { PageType, urls } from '../domain/website';
-import { reduceSearchResults } from '../domain/products/search-service';
+import { reduceToFlatProductsList } from '../domain/products/search-service';
 import { DynamicProductResults } from '../search/results-list/DynamicProductResults';
 
 interface IProductsPage {
@@ -69,7 +69,7 @@ export default connect(
         search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING
           ? {
               phrase: search.phrase,
-              pages: reduceSearchResults(search.resultPages),
+              pages: reduceToFlatProductsList(search.resultPages),
               totalItems: search.totalItems,
               token: search.nextPageToken,
             }

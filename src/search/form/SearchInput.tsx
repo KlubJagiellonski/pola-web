@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 
-import { ButtonTheme, ButtonFlavor } from '../../components/buttons/Button';
+import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { Device, fontSize, color, padding, margin, px } from '../../styles/theme';
 import Kod from '../../assets/kod.svg';
@@ -18,7 +18,7 @@ const FormSearch = styled.div`
 `;
 
 const InputSection = styled.div`
-  padding-left: 1em;
+  padding-left: 0.25em;
   width: 100%;
   min-width: 28em;
   height: 56px;
@@ -87,9 +87,12 @@ const SubmitButton = styled(SecondaryButton)`
 interface ISearchInput {
   disabled: boolean;
   onSearch: (phrase: string) => void;
+  onEmptyInput: () => void;
 }
 
-export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch }) => {
+const isNotEmpty = (value: string) => !!value && value.length && value.length > 0;
+
+export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch, onEmptyInput }) => {
   const [phrase, setPhrase] = React.useState<string>('');
   const hasPhrase = !!phrase && phrase.length > 0;
   const showSubmitButton = false;
@@ -101,7 +104,11 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch }) => {
   const handlePhraseChange = debounce(
     (value: string) => {
       setPhrase(value);
-      onSearch(value);
+      if (isNotEmpty(value)) {
+        onSearch(value);
+      } else {
+        onEmptyInput();
+      }
     },
     500,
     {
@@ -120,6 +127,9 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch }) => {
   return (
     <FormSearch>
       <InputSection>
+        <InputIconSection>
+          <InputIcon imagePath={Kod} size={48} />
+        </InputIconSection>
         <InputText
           placeholder="nazwa produktu / producent / kod EAN"
           type="text"
@@ -135,7 +145,7 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onSearch }) => {
       {showSubmitButton && (
         <SubmitButton
           label="Sprawdź"
-          styles={ButtonTheme[ButtonFlavor.RED]}
+          styles={ButtonThemes[ButtonFlavor.RED]}
           disabled={!hasPhrase}
           onClick={handleSearch}
         />

@@ -16,50 +16,36 @@ const Header = styled.header`
 `;
 
 interface ISearchResultsHeader {
-    searchState: SearchStateName;
-    phrase: string;
-    totalItems: number;
-    resultsUrl?: string;
+  searchState: SearchStateName;
+  phrase: string;
+  totalItems: number;
+  resultsUrl?: string;
 
-    setActivePage?: (type: PageType) => void;
+  setActivePage?: (type: PageType) => void;
 }
 
 export const SearchResultsHeader: React.FC<ISearchResultsHeader> = ({
-    searchState,
-    phrase,
-    totalItems,
-    resultsUrl,
-    setActivePage,
+  phrase,
+  totalItems,
+  resultsUrl,
+  setActivePage,
 }) => {
-    const isLoading = searchState === SearchStateName.LOADING;
-
-    let header: React.ReactNode;
-    if (!phrase && !isLoading) {
-        return null;
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (setActivePage) {
+      setActivePage(PageType.PRODUCTS);
     }
+  };
 
-    if (isLoading) {
-        header = <Spinner text="Wyszukiwanie produktów..." />;
-    }
-
-    if (!header) {
-        const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-            if (setActivePage) {
-                setActivePage(PageType.PRODUCTS);
-            }
-        };
-
-        header = (
-            <>
-                <Header>Uzyskano</Header>
-                {resultsUrl ? (<Link to={resultsUrl} onClick={handleClick}>
-                    <ProductCounter phrase={phrase} amount={totalItems} />
-                </Link>) : (<ProductCounter phrase={phrase} amount={totalItems} />)
-                }
-
-            </>
-        );
-    }
-
-    return <PageSection styles={{ textAlign: isLoading ? 'center' : 'left' }}>{header}</PageSection>;
+  return (
+    <PageSection styles={{ textAlign: 'left' }}>
+      <Header>Uzyskano</Header>
+      {resultsUrl ? (
+        <Link to={resultsUrl} onClick={handleClick}>
+          <ProductCounter phrase={phrase} amount={totalItems} />
+        </Link>
+      ) : (
+        <ProductCounter phrase={phrase} amount={totalItems} />
+      )}
+    </PageSection>
+  );
 };
