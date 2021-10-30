@@ -14,6 +14,7 @@ import { PartnersList } from '../components/partners/PartnersList';
 import { Device, margin, padding } from '../styles/theme';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
+import Placeholder from '../components/Placeholder';
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;
@@ -76,13 +77,13 @@ const PartnersPage = (props: IPartnersPage) => {
   }, []);
 
   return (
-    <PageLayout styles={{ marginTop: padding.big }}>
+    <PageLayout>
       <SEOMetadata pageTitle="Partnerzy" />
+      <Placeholder text="Partner aplikacji Pola" />
       <ColumnsLayout>
         <ContentColumn fraction={60}>
           <PageSection>
             <Wrapper>
-              <Title>Partner aplikacji Pola</Title>
               <ImageSection>
                 <li>
                   <ResponsiveImage imageSrc="PGE_logo.png" />
