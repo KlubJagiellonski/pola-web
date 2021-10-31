@@ -8,18 +8,12 @@ import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { PageType } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
 import { PartnerService } from '../domain/partners/partners-service';
 import { PartnersList } from '../components/partners/PartnersList';
 import { Device, margin, padding } from '../styles/theme';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
 import Placeholder from '../components/Placeholder';
-
-const Title = styled(TitleSection)`
-  margin: ${margin.normal} 0;
-  text-align: center;
-`;
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};
@@ -80,32 +74,26 @@ const PartnersPage = (props: IPartnersPage) => {
     <PageLayout>
       <SEOMetadata pageTitle="Partnerzy" />
       <Placeholder text="Partner aplikacji Pola" />
-      <ColumnsLayout>
-        <ContentColumn fraction={60}>
-          <PageSection>
-            <Wrapper>
-              <ImageSection>
-                <li>
-                  <ResponsiveImage imageSrc="PGE_logo.png" />
-                </li>
-                <li>
-                  <ResponsiveImage imageSrc="polskie_kupuje.png" />
-                </li>
-              </ImageSection>
-              <TextSection>
-                Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO!
-                jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE
-                wspiera rozwój aplikacji Pola.
-              </TextSection>
-            </Wrapper>
-          </PageSection>
-          <PageSection>
-            <TitleSection>Partnerzy</TitleSection>
-            <PartnersList partners={PartnerService.getAll()} />
-          </PageSection>
-        </ContentColumn>
-        <ContentColumn hideOnMobile={true} fraction={40}></ContentColumn>
-      </ColumnsLayout>
+      <PageSection>
+        <Wrapper>
+          <ImageSection>
+            <li>
+              <ResponsiveImage imageSrc="PGE_logo.png" />
+            </li>
+            <li>
+              <ResponsiveImage imageSrc="polskie_kupuje.png" />
+            </li>
+          </ImageSection>
+          <TextSection>
+            Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO!
+            jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE wspiera
+            rozwój aplikacji Pola.
+          </TextSection>
+        </Wrapper>
+      </PageSection>
+      <PageSection>
+        <PartnersList partners={PartnerService.getAll()} />
+      </PageSection>
     </PageLayout>
   );
 };
