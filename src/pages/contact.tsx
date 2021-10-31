@@ -5,8 +5,8 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
 import { PageType } from '../domain/website';
+import Placeholder from '../components/Placeholder';
 
 interface IContactPage {
   location?: Location;
@@ -26,7 +26,7 @@ const ContactPage = (props: IContactPage) => {
   return (
     <PageLayout>
       <SEOMetadata pageTitle="Kontakt" />
-      <DevelopmentPlaceholder />
+      <Placeholder text="Strona w budowie" />
     </PageLayout>
   );
 };

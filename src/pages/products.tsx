@@ -9,10 +9,10 @@ import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions'
 import { EAN, IProductData } from '../domain/products';
 import { SearchStateName } from '../state/search/search-reducer';
 import { navigateTo } from '../utils/browser';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
 import { PageType, urls } from '../domain/website';
 import { reduceToFlatProductsList } from '../domain/products/search-service';
 import { DynamicProductResults } from '../search/results-list/DynamicProductResults';
+import Placeholder from '../components/Placeholder';
 
 interface IProductsPage {
   location?: Location;
@@ -48,7 +48,7 @@ const ProductsPage = (props: IProductsPage) => {
   return (
     <PageLayout>
       <SEOMetadata pageTitle="Znalezione produkty" />
-      <DevelopmentPlaceholder text="Lista produktów" />
+      <Placeholder text="Lista produktów" />
       <DynamicProductResults
         {...searchResults}
         state={searchState}
