@@ -2,9 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: 
-      - master
-      - deploy-stag
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -68,7 +66,7 @@ jobs:
       run: |
         echo 'PUBLIC_URL=https://klubjagiellonski.github.io/pola-web/' >> $GITHUB_ENV
     - name: "Set public URL"
-      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/deploy-stag'
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         echo 'PUBLIC_URL=https://pola-staging.herokuapp.com/' >> $GITHUB_ENV
     - name: Sanity checks - PUBLIC_URL
@@ -101,27 +99,20 @@ jobs:
         name: app
         path: ./public
         if-no-files-found: error
-    - name: 🚀 Deploy app on gh-pages branch
-      uses: JamesIves/github-pages-deploy-action@4.1.5
-      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
-      with:
-        branch: gh-pages  # The branch the action should deploy to.
-        folder: ./public  # The folder the action should deploy.
-        clean: true  # Automatically remove deleted files from the deploy branch.
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       if: |
         github.repository == 'KlubJagiellonski/pola-web' && 
         (
         (github.event_name == 'pull_request' && github.event.sender.type == 'User') ||
-        (github.event_name == 'push' && github.ref == 'refs/heads/deploy-stag')
+        (github.event_name == 'push' && github.ref == 'refs/heads/master')
         )
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
     - name: "Upload staging to AWS S3"
-      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/deploy-stag'
+      if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_STAG}/"
     - name: "Upload preview to AWS S3"
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
