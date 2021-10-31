@@ -25,7 +25,6 @@ const connector = connect(
   (state: IPolaState) => {
     const { app, search, articles, friends } = state;
     return {
-      location: app.location,
       searchState: search.stateName,
       searchResults:
         search.stateName === SearchStateName.LOADED || search.stateName === SearchStateName.SELECTED

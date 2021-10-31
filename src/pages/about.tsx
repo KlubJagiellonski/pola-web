@@ -102,4 +102,4 @@ const AboutPage = (props: IAboutPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(AboutPage);
+export default connect((state: IPolaState) => ({}))(AboutPage);

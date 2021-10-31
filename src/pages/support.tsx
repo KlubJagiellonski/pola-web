@@ -31,4 +31,4 @@ const SupportPage = (props: ISupportPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(SupportPage);
+export default connect((state: IPolaState) => ({}))(SupportPage);

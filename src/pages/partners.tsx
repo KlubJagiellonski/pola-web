@@ -98,4 +98,4 @@ const PartnersPage = (props: IPartnersPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(PartnersPage);
+export default connect((state: IPolaState) => ({}))(PartnersPage);

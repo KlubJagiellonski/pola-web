@@ -31,4 +31,4 @@ const ContactPage = (props: IContactPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(ContactPage);
+export default connect((state: IPolaState) => ({}))(ContactPage);

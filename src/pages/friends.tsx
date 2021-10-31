@@ -175,10 +175,6 @@ const FriendsPage = (props: IFriendsPage) => {
   );
 };
 
-export default connect(
-  (state: IPolaState) => ({
-    location: state.app.location,
-    friends: state.friends.data,
-  }),
-  {}
-)(FriendsPage);
+export default connect((state: IPolaState) => ({
+  friends: state.friends.data,
+}))(FriendsPage);

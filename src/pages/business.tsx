@@ -106,4 +106,4 @@ const BusinessPage = (props: IBusinessPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(BusinessPage);
+export default connect((state: IPolaState) => ({}))(BusinessPage);

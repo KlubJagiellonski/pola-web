@@ -71,8 +71,8 @@ export const urls = {
 };
 
 export const pageLinks: PageLinkData[] = [
-  { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news },
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about },
+  { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news },
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends },
   { type: PageType.PARTNERS, label: 'Partnerzy', url: urls.pola.partners },
   { type: PageType.BUSINESS, label: 'Oferta biznesowa', url: urls.pola.business },

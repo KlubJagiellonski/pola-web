@@ -63,7 +63,6 @@ export default connect(
   (state: IPolaState) => {
     const { app, search } = state;
     return {
-      location: app.location,
       searchState: search.stateName,
       searchResults:
         search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING

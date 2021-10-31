@@ -31,4 +31,4 @@ const TeamPage = (props: ITeamPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(TeamPage);
+export default connect((state: IPolaState) => ({}))(TeamPage);
