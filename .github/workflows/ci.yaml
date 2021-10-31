@@ -69,9 +69,6 @@ jobs:
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: |
         echo 'PUBLIC_URL=https://pola-staging.herokuapp.com/' >> $GITHUB_ENV
-    - name: Sanity checks - PUBLIC_URL
-      if: env.PUBLIC_URL == ''
-      run: exit 1
     - name: 🗂 Checkout
       uses: actions/checkout@v2
     - name: 🟢 Use Node.js ${{ matrix.node-version }}
