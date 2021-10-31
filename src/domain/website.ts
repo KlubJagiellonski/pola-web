@@ -47,6 +47,7 @@ export const urls = {
   },
   external: {
     openFoods: new URL('https://pl.openfoodfacts.org/'),
+    polaSupport: new URL('https://klubjagiellonski.pl/zbiorka/wspieraj-aplikacje-pola/'),
     polaGooglePlay: new URL('https://play.google.com/store/apps/details?id=pl.pola_app'),
     polaAppStore: new URL('https://itunes.apple.com/us/app/pola.-zabierz-ja-na-zakupy/id1038401148?ls=1&amp;mt=8'),
     openSearch: new URL('https://openresearch.pl/91-polakow-chce-znac-pochodzenie-produktow-ktore-kupuje/'),
@@ -72,7 +73,7 @@ export const urls = {
 export const pageLinks: PageLinkData[] = [
   { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news },
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about },
-  // type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.pola.support },
+  { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.external.polaSupport.href },
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends },
   { type: PageType.PARTNERS, label: 'Partnerzy', url: urls.pola.partners },
   { type: PageType.BUSINESS, label: 'Oferta biznesowa', url: urls.pola.business },
