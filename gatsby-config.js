@@ -1,3 +1,5 @@
+module.exports = {};
+
 module.exports = {
   pathPrefix: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).pathname) || null,
   siteMetadata: {
@@ -89,6 +91,13 @@ module.exports = {
         ],
       },
     },
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/faq`,
+      },
+    },
     `gatsby-plugin-anchor-links`,
     {
       resolve: `gatsby-transformer-remark`,
@@ -115,5 +124,13 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+  ],
+  // shadowing API request domain for development
+  // https://www.gatsbyjs.com/docs/api-proxy/
+  proxy: [
+    {
+      prefix: '/a',
+      url: 'https://www.pola-app.pl',
+    },
   ],
 };

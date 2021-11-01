@@ -14,15 +14,19 @@ import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme
 import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 import Download from '../components/Download';
+import { SearchStateName } from '../state/search/search-reducer';
+import { SearchInfoModal } from '../search/form/SearchInfoModal';
 
 const connector = connect(
   (state: IPolaState) => ({
+    isSearchInfoVisible: state.app.isSearchInfoVisible,
     activePage: state.app.activePage,
     isMenuExpanded: state.app.isMenuExpanded,
-    selectedProduct: state.search.selectedProduct,
+    isSearchInfoVisible: state.app.isSearchInfoVisible,
+    selectedProduct: state.search.stateName === SearchStateName.SELECTED ? state.search.selectedProduct : undefined,
   }),
   {
-    selectPage: appDispatcher.selectActivePage,
+    toggleSearchInfo: appDispatcher.toggleSearchInfo,
     expandMenu: appDispatcher.expandMenu,
     unselectProduct: searchDispatcher.unselectProduct,
   }
@@ -32,7 +36,7 @@ type ReduxProps = ConnectedProps<typeof connector>;
 
 type ILayoutStyles = {
   marginTop?: string;
-}
+};
 
 type IPageLayout = ReduxProps & {
   styles?: ILayoutStyles;
@@ -47,7 +51,7 @@ const LayoutContainer = styled.div`
 const PageContent = styled.main<ILayoutStyles>`
   width: 100%;
   margin: 0 auto;
-  margin-top: ${props => props.marginTop || 0};
+  margin-top: ${(props) => props.marginTop || 0};
   padding: 0;
   flex: 1 1 auto;
 
@@ -62,13 +66,12 @@ const PageContent = styled.main<ILayoutStyles>`
 const Layout: React.FC<IPageLayout> = ({
   activePage,
   isMenuExpanded,
+  isSearchInfoVisible,
   selectedProduct,
   children,
-
-  selectPage,
+  toggleSearchInfo,
   expandMenu,
   unselectProduct,
-
   styles,
 }) => {
   const data = useStaticQuery(graphql`
@@ -86,10 +89,10 @@ const Layout: React.FC<IPageLayout> = ({
       <StateLoader />
       <LayoutContainer>
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
+        {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
           activePage={activePage}
-          onSelect={selectPage}
           isMenuExpanded={isMenuExpanded}
           onExpand={expandMenu}
         />

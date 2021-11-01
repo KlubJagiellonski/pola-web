@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { WrapperTeams, Title, TextSection, ButtonTeams, IconTeams } from './Teams.css';
 import { Text } from '../styles/GlobalStyle.css';
 import { color } from '../styles/theme';
-import { ButtonColor } from '../styles/button-theme';
+import { ButtonThemes, ButtonFlavor } from '../components/buttons/Button';
 import { ResponsiveImage } from './images/ResponsiveImage';
 import { urls, hash } from '../domain/website';
 import { Link } from 'gatsby';
@@ -21,7 +21,7 @@ const Wrapper = styled(WrapperTeams)`
 const Teams = () => {
   return (
     <Wrapper color={color.background.white}>
-      <div className="content" id={hash.contact.id}>
+      <div className="content" id={'contact'}>
         <TextSection>
           <IconTeams>
             <ResponsiveImage imageSrc="ikona-przyjaciele.png" />
@@ -35,7 +35,7 @@ const Teams = () => {
             <a href={urls.external.mail.Klub.href}>pola@klubjagiellonski.pl</a>, tel. 660 010 034
           </Text>
           <Link to={urls.pola.team}>
-            <ButtonTeams label="DOŁĄCZ DO ZESPOŁU" color={ButtonColor.Red} />
+            <ButtonTeams label="DOŁĄCZ DO ZESPOŁU" styles={ButtonThemes[ButtonFlavor.RED]} />
           </Link>
         </TextSection>
       </div>

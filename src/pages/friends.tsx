@@ -6,7 +6,7 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { hash, PageType, urls } from '../domain/website';
+import { PageType, urls } from '../domain/website';
 import { Text, TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
 import { PageSection } from '../layout/PageSection';
 import { margin, padding, Device, color, fontSize } from '../styles/theme';
@@ -16,49 +16,9 @@ import { Friend } from '../domain/friends';
 import Card from '../components/Card';
 import FriendsSection from '../components/friends/FriendsSection';
 
-const Wrapper = styled.div`
-  margin-top: ${margin.veryBig};
-`;
-
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;
   text-align: center;
-`;
-
-const TextSection = styled(Text)`
-  margin: ${margin.big} 0;
-  text-align: center;
-`;
-
-const ImageSection = styled.ul`
-  display: flex;
-  flex-flow: row nowrap;
-  list-style: none;
-  align-items: center;
-  margin: 0 ${padding.veryBig};
-  padding: 0 ${padding.veryBig};
-
-  li {
-    flex: 1;
-    width: 100%;
-    margin: 0 ${padding.veryBig};
-
-    img {
-      width: 100%;
-    }
-  }
-
-  @media ${Device.mobile} {
-    padding: 0;
-    flex-flow: column;
-    max-width: 20em;
-    gap: ${padding.normal};
-    margin: 0 ${margin.big};
-
-    li {
-      margin: 0 ${margin.normal};
-    }
-  }
 `;
 
 const FullWrapperInfo = styled(WrapperSection)`
@@ -134,24 +94,6 @@ const FriendsPage = (props: IFriendsPage) => {
   return (
     <PageLayout>
       <SEOMetadata pageTitle="Klub przyjaciół Poli" />
-      <PageSection>
-        <Wrapper>
-          <Title>Partner aplikacji Pola</Title>
-          <ImageSection>
-            <li>
-              <ResponsiveImage imageSrc="PGE_logo.png" />
-            </li>
-            <li>
-              <ResponsiveImage imageSrc="polskie_kupuje.png" />
-            </li>
-          </ImageSection>
-          <TextSection>
-            Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej POLSKIE – KUPUJĘ TO!
-            jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE wspiera
-            rozwój aplikacji Pola.
-          </TextSection>
-        </Wrapper>
-      </PageSection>
       <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>
         <FriendsSection friends={props.friends} />
@@ -176,7 +118,7 @@ const FriendsPage = (props: IFriendsPage) => {
           </Text>
         </FullContentInfo>
       </FullWrapperInfo>
-      <WrapperInfo id={hash.friends.profit.id}>
+      <WrapperInfo id="profit">
         <Info color={color.background.white}>
           <TitleInfo>Czym jest Klub Przyjaciół Poli?</TitleInfo>
           <Text>
@@ -222,7 +164,7 @@ const FriendsPage = (props: IFriendsPage) => {
         </Info>
       </WrapperInfo>
       <WrapperInfo>
-        <Card title="Dołącz do Przyjaciół Poli" url={urls.pola.contact}>
+        <Card title="Dołącz do Przyjaciół Poli" url={urls.pola.home('contact')}>
           <Text>Koordynator projektu Mateusz Perowicz</Text>
           <Text>
             <a href={urls.external.mail.Perowicz.href}>mateusz.perowicz@klubjagiellonski.pl</a>, tel. 660 010 034
@@ -233,10 +175,6 @@ const FriendsPage = (props: IFriendsPage) => {
   );
 };
 
-export default connect(
-  (state: IPolaState) => ({
-    location: state.app.location,
-    friends: state.friends.data,
-  }),
-  {}
-)(FriendsPage);
+export default connect((state: IPolaState) => ({
+  friends: state.friends.data,
+}))(FriendsPage);

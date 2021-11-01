@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
 import { Device, fontSize, margin, color, padding } from './../styles/theme';
+import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
-import { ButtonColor } from '../styles/button-theme';
 import { WrapperSection } from '../styles/GlobalStyle.css';
 import { TitleSection, Text } from '../styles/GlobalStyle.css';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
+import { openNewTab } from '../utils/browser';
 import { urls } from '../domain/website';
 
 const Info = styled.div`
@@ -136,6 +137,10 @@ const Container = styledContainerQuery(Wrapper)`
   }
 `;
 
+const handleReadMore = () => {
+  openNewTab(urls.external.polaSupport);
+};
+
 const DevelopmentSection = () => {
   return (
     <Container color={color.background.red}>
@@ -149,9 +154,12 @@ const DevelopmentSection = () => {
           <DevelopmentTitle>Zobacz jak rozwija się Aplikacja Pola i wspomóż ją!</DevelopmentTitle>
           <DevelopmentText>Dowiedz się co możesz jeszcze zrobić, aby wspierać polskich producentów.</DevelopmentText>
           <div className="buttons">
-            <a href={urls.external.fundraising.href}>
-              <SecondaryButton label="Czytaj dalej..." fontSize={fontSize.small} color={ButtonColor.Red} />
-            </a>
+            <SecondaryButton
+              label="Czytaj dalej..."
+              fontSize={fontSize.small}
+              styles={ButtonThemes[ButtonFlavor.RED]}
+              onClick={handleReadMore}
+            />
           </div>
         </TextSection>
       </Texts>

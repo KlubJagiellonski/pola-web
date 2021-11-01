@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { padding, margin, color, fontSize } from '../styles/theme';
-import { ButtonColor } from '../styles/button-theme';
+import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { WrapperSection, Text, TitleSection } from '../styles/GlobalStyle.css';
 import { SecondaryButton } from './buttons/SecondaryButton';
 import { ResponsiveImage } from './images/ResponsiveImage';
@@ -55,8 +55,12 @@ const About = () => {
           odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską
           gospodarkę.
         </AboutText>
-        <Link to={urls.pola.about}>
-          <AboutButton label="Dowiedz się więcej... " color={ButtonColor.White} fontSize={fontSize.small} />
+        <Link to={urls.pola.about()}>
+          <AboutButton
+            label="Dowiedz się więcej... "
+            styles={ButtonThemes[ButtonFlavor.WHITE]}
+            fontSize={fontSize.small}
+          />
         </Link>
       </Info>
       <MockUp>

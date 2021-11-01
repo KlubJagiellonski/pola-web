@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonColor } from '../styles/button-theme';
+import { ButtonThemes, ButtonFlavor } from './buttons/Button';
 import { TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '../styles/theme';
 import { SecondaryButton } from './buttons/SecondaryButton';
@@ -47,7 +47,7 @@ const Card: React.FC<ICard> = ({ title, children, buttonLabel, url }) => {
       {buttonLabel && (
         <ButtonInfoSection>
           <Link to={url}>
-            <Button label={buttonLabel} color={ButtonColor.Red} fontSize={fontSize.small} />
+            <Button label={buttonLabel} styles={ButtonThemes[ButtonFlavor.RED]} fontSize={fontSize.small} />
           </Link>
         </ButtonInfoSection>
       )}

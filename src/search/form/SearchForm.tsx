@@ -90,25 +90,23 @@ const SearchWrapper = styled.div`
 
 interface ISearchForm {
   isLoading: boolean;
+  onInfoClicked: () => void;
   onSearch: (phrase: string) => void;
+  onEmptyInput: () => void;
 }
 
-export const SearchForm: React.FC<ISearchForm> = ({ isLoading, onSearch }) => {
+export const SearchForm: React.FC<ISearchForm> = ({ isLoading, onInfoClicked, onSearch, onEmptyInput }) => {
   return (
     <ErrorBoundary scope="search-container">
       <Container>
         <Title>Sprawdź informacje o produkcie</Title>
-        <Text>
-          <span>Wpisz tekst, podyktuj lub zeskanuj kod</span>
-          <span>
-            Nie znasz kodu?&nbsp;
-            <a target="blank" href={urls.external.openFoods.href}>
-              Znajdź go w bazie
-            </a>
-          </span>
-        </Text>
         <SearchWrapper>
-          <SearchInput onSearch={onSearch} disabled={isLoading} />
+          <SearchInput
+            onInfoClicked={onInfoClicked}
+            onSearch={onSearch}
+            onEmptyInput={onEmptyInput}
+            disabled={isLoading}
+          />
           <div className="mobile-apps">
             <AppStoreLink height={56} />
             <GooglePlayLink height={56} />
