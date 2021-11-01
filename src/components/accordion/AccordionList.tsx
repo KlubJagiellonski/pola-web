@@ -13,8 +13,8 @@ const Wrapper = styled(Accordion)`
 `
 export interface ISingleAccordion {
   question: string,
-  answer: JSX.Element,
-  id: number
+  answer: string,
+  id?: number
 }
 
 export interface IAccordionList {
@@ -24,7 +24,7 @@ export interface IAccordionList {
 const AccordionList: React.FC<IAccordionList> = ({ list }) => {
   return (
     <Wrapper allowMultipleExpanded allowZeroExpanded>
-      {list.map((item, index) =>
+      {list.map((item) =>
         <SingleAccordion question={item.question} answer={item.answer} key={item.id} />
       )}
     </Wrapper>

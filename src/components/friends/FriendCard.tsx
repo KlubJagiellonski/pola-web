@@ -2,14 +2,13 @@ import { Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import { Friend } from '../../domain/friends'
-import { hash } from '../../domain/website'
+import { urls } from '../../domain/website'
 import { ButtonColor } from '../../styles/button-theme'
 
 import { TitleSection, WrapperSection, Text } from '../../styles/GlobalStyle.css'
 import { color, padding, margin, fontSize } from '../../styles/theme'
 import { SecondaryButton } from '../buttons/SecondaryButton'
 import { ResponsiveImage } from '../images/ResponsiveImage'
-import { buildFriendUrl } from './../../domain/friends/friend-service'
 
 const Wrapper = styled(WrapperSection)`
   padding: ${padding.normal};
@@ -64,7 +63,7 @@ const FriendCard: React.FC<Friend> = (friend) => {
       <Content>{friend.description}</Content>
       <ButtonSection>
         {friend.slug &&
-          <Link to={buildFriendUrl(friend.slug, hash.friends.friend.id)}>
+          <Link to={urls.pola.friends('friend', friend.slug)}>
             <Button
               label="Czytaj Więcej..."
               color={ButtonColor.Red}

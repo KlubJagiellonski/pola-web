@@ -4,7 +4,7 @@ import styledContainerQuery from 'styled-container-query'
 
 import { color, Device } from '../../styles/theme';
 import { WrapperSection, TitleSection } from '../../styles/GlobalStyle.css';
-import { Facebook, Instagram, Twitter } from './Icon';
+import { Facebook, Instagram, Twitter } from './Icons';
 
 const Items = styled.div`
   align-items: center;

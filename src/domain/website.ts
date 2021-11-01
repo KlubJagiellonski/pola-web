@@ -1,3 +1,6 @@
+import { encodeQueryParams, StringParam } from 'use-query-params';
+import { stringify } from 'query-string';
+
 export enum PageType {
   HOME = 'home',
   NEWS = 'news',
@@ -18,16 +21,26 @@ export interface PageLinkData {
   url: string;
 }
 
+const hashableUrl = (pageName: string) => (sectionId?: FriendHash | AboutHash | HomeHash) =>
+  sectionId ? `/${pageName}#${sectionId}` : `/${pageName}`;
+
+const slugableUrl = (pageName: string) => (sectionId?: FriendHash | AboutHash | HomeHash, slug?: string) => {
+  if (slug) {
+    return sectionId ? `/${pageName}?value=${slug}#${sectionId}` : `/${pageName}?value=${slug}`;
+  } else {
+    return sectionId ? `/${pageName}#${sectionId}` : `/${pageName}`;
+  }
+};
+
 export const urls = {
   pola: {
-    home: '/',
+    home: hashableUrl(''),
     news: '/news',
-    about: '/about',
+    about: hashableUrl('about'),
     support: '/support',
-    friends: '/friends',
+    friends: slugableUrl('friends'),
     business: '/business',
     team: '/join',
-    contact: '/contact',
     products: '/products',
   },
   external: {
@@ -55,31 +68,16 @@ export const urls = {
 };
 
 export const pageLinks: PageLinkData[] = [
-  { type: PageType.HOME, label: 'Home', url: urls.pola.home },
+  { type: PageType.HOME, label: 'Home', url: urls.pola.home() },
   { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news },
-  { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about },
+  { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about() },
   { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.pola.support },
-  { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends },
+  { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends() },
   { type: PageType.BUSINESS, label: 'Oferta biznesowa', url: urls.pola.business },
   { type: PageType.TEAM, label: 'Dołącz do zespołu', url: urls.pola.team },
-  { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.contact },
+  { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.home('contact') },
 ];
 
-export const hash = {
-  friends: {
-    profit: {
-      id: 'profit',
-      url: `${urls.pola.friends}#profit`,
-    },
-    friend: {
-      id: 'friend',
-      url: `${urls.pola.friends}#friend`,
-    },
-  },
-  about: {
-    faq: {
-      id: 'faq',
-      url: `${urls.pola.about}#faq`,
-    },
-  },
-};
+type FriendHash = 'profit' | 'friend';
+type AboutHash = 'faq';
+type HomeHash = 'contact';

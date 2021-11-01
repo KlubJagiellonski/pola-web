@@ -1,7 +1,4 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { encodeQueryParams, StringParam } from 'use-query-params';
-import { urls } from '../../domain/website';
-import { stringify } from 'query-string';
 
 export interface IFriendsSuccess {
   results: IFriendsData[];
@@ -80,9 +77,4 @@ export interface IFriendNode {
   };
   page: string;
   slug: string;
-}
-
-export function buildFriendUrl(slug: string, sectionId: string) {
-  const encodedQuery = encodeQueryParams({ value: StringParam }, { value: slug });
-  return `${urls.pola.friends}?${stringify(encodedQuery)}#${sectionId}`;
 }

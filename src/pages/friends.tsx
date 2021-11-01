@@ -6,7 +6,7 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { IPolaState } from '../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { hash, PageType, urls } from '../domain/website';
+import { PageType, urls } from '../domain/website';
 import { Text, TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
 import { PageSection } from '../layout/PageSection';
 import { margin, padding, Device, color, fontSize } from '../styles/theme';
@@ -168,7 +168,7 @@ const FriendsPage = (props: IFriendsPage) => {
           </Text>
         </FullContentInfo>
       </FullWrapperInfo>
-      <WrapperInfo id={hash.friends.profit.id}>
+      <WrapperInfo id='profit'>
         <Info color={color.background.white}>
           <TitleInfo>Czym jest Klub Przyjaciół Poli?</TitleInfo>
           <Text>Głównym celem Klubu Przyjaciół Poli jest promocja oraz wsparcie polskich przedsiębiorstw. Będzie to możliwe dzięki stworzeniu silnego środowiska społeczno-biznesowego, które poprzez kooperację i wspólne działania przyczyni się do popularyzacji mody na patriotyzm gospodarczy.</Text>
@@ -200,7 +200,7 @@ const FriendsPage = (props: IFriendsPage) => {
           title="Dołącz do Przyjaciół Poli"
           content="Lorem ipsum dolor sit amet."
           buttonLabel="KONTAKT"
-          url={urls.pola.contact}
+          url={urls.pola.home('contact')}
         />
       </WrapperInfo>
     </PageLayout>

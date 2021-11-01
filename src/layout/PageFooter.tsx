@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import LogoWhite from '../assets/logo/pola-white.svg';
 import { color, Device, fontSize, padding, pageWidth, margin } from '../styles/theme';
 import { Link } from 'gatsby';
-import { hash, urls } from '../domain/website';
+import { urls } from '../domain/website';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
-import { Facebook, Instagram, Twitter } from '../components/social-media/Icon';
+import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
 
 const FooterContainer = styled.footer`
   background-color: ${color.background.dark};
@@ -114,13 +114,13 @@ export const PageFooter = () => {
         </FooterSection>
         <div className="sections">
           <FooterSection title="Informacje">
-            <Link className='link' to={urls.pola.home}>
+            <Link className='link' to={urls.pola.home()}>
               <p className="text">Home</p>
             </Link>
             <Link className='link' to={urls.pola.news}>
               <p className="text">Aktualności</p>
             </Link>
-            <Link className='link' to={urls.pola.about}>
+            <Link className='link' to={urls.pola.about()}>
               <p className="text">O Poli</p>
             </Link>
           </FooterSection>
@@ -128,7 +128,7 @@ export const PageFooter = () => {
             <Link className='link' to={urls.pola.support}>
               <p className="text">Wesprzyj aplikację</p>
             </Link>
-            <Link className='link' to={urls.pola.friends}>
+            <Link className='link' to={urls.pola.friends()}>
               <p className="text">Klub przyjaciół Poli</p>
             </Link>
             <Link className='link' to={urls.pola.team}>
@@ -136,12 +136,18 @@ export const PageFooter = () => {
             </Link>
           </FooterSection>
           <FooterSection title="Jakieś pytania?">
-            <p className="text">Kontakt</p>
-            <AnchorLink className='link' to={hash.about.faq.url}>
+            <AnchorLink className='link' to={urls.pola.home('contact')}>
+              <p className="text">Kontakt</p>
+            </AnchorLink>
+            <AnchorLink className='link' to={urls.pola.about('faq')}>
               <p className="text">FAQ</p>
             </AnchorLink>
-            <p className="text hide-desktop">Polityka prywatności</p>
-            <p className="text hide-mobile">Uzupełnij dane o firmie</p>
+            <Link className='link' to={urls.pola.home()}>
+              <p className="text hide-desktop">Polityka prywatności</p>
+            </Link>
+            <Link className='link' to={urls.pola.home()}>
+              <p className="text hide-mobile">Uzupełnij dane o firmie</p>
+            </Link>
           </FooterSection>
           <FooterSection title="Śledź nas na:">
             <div className="social-rows">

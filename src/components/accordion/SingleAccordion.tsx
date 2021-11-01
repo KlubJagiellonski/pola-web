@@ -58,7 +58,7 @@ const SingleAccordion: React.FC<ISingleAccordion> = ({ question, answer, id }) =
         </ItemButton>
       </AccordionItemHeading>
       <ItemPanel>
-        {answer}
+        <div dangerouslySetInnerHTML={{ __html: answer }} />
       </ItemPanel>
     </AccordionItem>
   )
