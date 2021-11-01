@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import { ButtonColor } from '../styles/button-theme';
-import { TitleSection, WrapperSection, Text } from '../styles/GlobalStyle.css';
+import { TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '../styles/theme';
 import { SecondaryButton } from './buttons/SecondaryButton';
 
@@ -26,11 +26,6 @@ const Title = styled(TitleSection)`
   text-align: center;
   color: ${color.text.light};
   margin-bottom: ${margin.big};
-`;
-
-const TextInfo = styled(Text)`
-  /* color: ${color.text.light};
-  text-align: center; */
 `;
 
 const ButtonInfoSection = styled.div`

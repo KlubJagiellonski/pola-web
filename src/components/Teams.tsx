@@ -28,7 +28,6 @@ const Teams = () => {
           </IconTeams>
           <Title>Kontakt</Title>
           <Text>
-            {' '}
             Działamy razem dla dobra wspólnego. Jeśli chcesz poświęcić chwilę, aby zaangażować się w prospołeczne
             działania, zachęcamy do kontaktu.
           </Text>
