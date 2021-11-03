@@ -11,7 +11,7 @@ export interface IButtonColors {
 export interface IButtonTheme {
   colors: IButtonColors;
   fontSize?: string;
-  lowercase? boolean;
+  lowercase?: boolean;
 }
 
 export type IButtonThemes = {
