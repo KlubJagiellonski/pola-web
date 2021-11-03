@@ -11,7 +11,7 @@ import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { PageType } from '../domain/website';
+import { PageType, urls } from '../domain/website';
 import { Article } from '../domain/articles';
 import { reduceToFlatProductsList } from '../domain/products/search-service';
 import { SearchStateName } from '../state/search/search-reducer';
@@ -26,6 +26,8 @@ import Teams from '../components/Teams';
 import About from '../components/About';
 import TeamsFriend from '../components/TeamsFriend';
 import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
+import { InfoBox } from '../components/InfoBox';
+import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -141,8 +143,10 @@ type IHomePage = ReduxProps & {
 const HomePage = (props: IHomePage) => {
   const { location, searchState, searchResults } = props;
   const dispatch = useDispatch();
-  const isLoading = searchState === SearchStateName.LOADING;
   const freshArticles = props.articles?.slice(0, 3);
+  const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
+  const isLoading = searchState === SearchStateName.LOADING;
+  const isError = searchState === SearchStateName.ERROR;
 
   React.useEffect(() => {
     if (location) {
@@ -168,13 +172,31 @@ const HomePage = (props: IHomePage) => {
           />
         </Content>
       </PageSection>
-      <FirstPageResults
-        {...searchResults}
-        state={searchState}
-        onSelect={props.selectProduct}
-        onClear={props.clearResults}
-      />
-      )
+      <PageSection>
+        {(isLoaded || isLoading) && (
+          <SearchResultsHeader
+            phrase={searchResults?.phrase}
+            totalItems={searchResults?.totalItems}
+            searchState={searchState}
+            resultsUrl={searchResults && searchResults.totalItems > 0 ? urls.pola.products() : undefined}
+          />
+        )}
+        {searchResults && (
+          <FirstPageResults
+            {...searchResults}
+            isLoaded={isLoaded}
+            isLoading={isLoading}
+            onSelect={props.selectProduct}
+            onClear={props.clearResults}
+          />
+        )}
+        {isError && (
+          <InfoBox>
+            <h3>Błąd Wyszukiwania</h3>
+            <p>Spróbuj wprowadzić inną frazę...</p>
+          </InfoBox>
+        )}
+      </PageSection>
       <WrapperContents>
         <Wrapper>
           <ArticlesListPreview articles={freshArticles} />
