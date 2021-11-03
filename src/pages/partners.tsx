@@ -14,7 +14,7 @@ import { Device, margin, padding } from '../styles/theme';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import { Text } from '../styles/GlobalStyle.css';
 import Placeholder from '../components/Placeholder';
-import { ExternalLink } from '../utils/navigation';
+import { ExternalLink } from '../utils/browser/links';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};

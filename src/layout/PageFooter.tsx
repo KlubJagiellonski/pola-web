@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { color, Device, fontSize, padding, pageWidth, margin } from '../styles/theme';
 import { urls } from '../domain/website';
 import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
-import { TextExternalLink, TextLink } from '../utils/navigation';
+import { TextExternalLink, TextLink } from '../utils/browser/links';
 
 import LogoWhite from '../assets/logo/pola-white.svg';
 

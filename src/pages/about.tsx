@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-import styled from 'styled-components';
 
 import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
@@ -10,8 +9,6 @@ import { PageType, urls } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import { Text, TitleSection } from '../styles/GlobalStyle.css';
 import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
-import { PartnerService } from '../domain/partners/partners-service';
-import { PartnersList } from '../components/partners/PartnersList';
 import { padding } from '../styles/theme';
 import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import Faq from '../components/Faq';

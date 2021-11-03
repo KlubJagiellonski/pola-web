@@ -1,7 +1,12 @@
 import { Link } from 'gatsby';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import React from 'react';
+import styled from 'styled-components';
 import { classNames } from '../class-names';
+
+const Anchor = styled.a`
+  text-decoration: none;
+`;
 
 interface IExternalLink {
   url: URL;
@@ -10,9 +15,9 @@ interface IExternalLink {
 }
 
 export const ExternalLink: React.FC<IExternalLink> = ({ url, newTab = true, children }) => (
-  <a href={url.href} target={newTab ? '__blank' : undefined}>
+  <Anchor href={url.href} target={newTab ? '__blank' : undefined}>
     {children}
-  </a>
+  </Anchor>
 );
 
 interface ITextLink {

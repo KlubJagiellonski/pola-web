@@ -29,7 +29,7 @@ import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev
 
 const connector = connect(
   (state: IPolaState) => {
-    const { app, search, articles, friends } = state;
+    const { search, articles, friends } = state;
     return {
       searchState: search.stateName,
       searchResults:
