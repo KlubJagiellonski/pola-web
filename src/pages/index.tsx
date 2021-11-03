@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { SearchForm } from '../search/form/SearchForm';
-import Contents from '../components/Contents';
 import { PageSection } from '../layout/PageSection';
 import { Device, pageWidth, padding, color } from '../styles/theme';
 import { IPolaState } from '../state/types';
@@ -20,6 +19,13 @@ import { FirstPageResults } from '../search/results-list/FirstPageResults';
 import { EAN, ISearchResults } from '../domain/products';
 import { Friend } from '../domain/friends';
 import { appDispatcher } from '../state/app/app-dispatcher';
+import DevelopmentSection from '../components/DevelopmentSection';
+import SocialMedia from '../components/social-media/SocialMedia';
+import Friends from '../components/friends/Friends';
+import Teams from '../components/Teams';
+import About from '../components/About';
+import TeamsFriend from '../components/TeamsFriend';
+import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -87,6 +93,36 @@ const WrapperContents = styled(PageSection)`
   }
 `;
 
+const Wrapper = styled.div`
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding-top: ${padding.normal};
+  display: grid;
+  grid-gap: 15px;
+  grid-template-areas:
+    'articles development'
+    'articles social-media'
+    'articles about'
+    'friends friends'
+    'teams-friend teams';
+
+  @media ${Device.mobile} {
+    margin: 0;
+    padding: 0;
+    grid-gap: 0px;
+    grid-template-areas:
+      'development'
+      'articles'
+      'about'
+      'social-media'
+      'friends'
+      'teams-friend'
+      'teams';
+  }
+`;
+
 type IHomePage = ReduxProps & {
   location?: Location;
   searchState: SearchStateName;
@@ -105,6 +141,8 @@ type IHomePage = ReduxProps & {
 const HomePage = (props: IHomePage) => {
   const { location, searchState, searchResults } = props;
   const dispatch = useDispatch();
+  const isLoading = searchState === SearchStateName.LOADING;
+  const freshArticles = props.articles?.slice(0, 3);
 
   React.useEffect(() => {
     if (location) {
@@ -113,8 +151,6 @@ const HomePage = (props: IHomePage) => {
       props.clearResults();
     }
   }, []);
-
-  const isLoading = searchState === SearchStateName.LOADING;
 
   return (
     <PageLayout>
@@ -140,7 +176,15 @@ const HomePage = (props: IHomePage) => {
       />
       )
       <WrapperContents>
-        <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
+        <Wrapper>
+          <ArticlesListPreview articles={freshArticles} />
+          <DevelopmentSection />
+          <SocialMedia />
+          <About />
+          <Friends friends={props.friends} />
+          <Teams />
+          <TeamsFriend />
+        </Wrapper>
       </WrapperContents>
     </PageLayout>
   );
