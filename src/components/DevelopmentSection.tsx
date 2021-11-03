@@ -138,7 +138,7 @@ const Container = styledContainerQuery(Wrapper)`
 `;
 
 const handleReadMore = () => {
-  openNewTab(urls.external.polaSupport);
+  openNewTab(urls.external.links.polaSupport);
 };
 
 const DevelopmentSection = () => {

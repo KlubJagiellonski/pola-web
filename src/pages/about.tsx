@@ -71,13 +71,13 @@ const AboutPage = (props: IAboutPage) => {
             <Text>
               Staramy się być maksymalnie przejrzyści w naszych działaniach. Całość kodu źródłowego serwisu udostępniamy
               na zasadach otwartego oprogramowania na{' '}
-              <a href={urls.external.polaGitHub.href} target="__blank">
+              <a href={urls.external.links.polaGitHub.href} target="__blank">
                 koncie Klubu Jagiellońskiego
               </a>{' '}
               w serwisie GitHub. Wktórce planujemy udostępnić w Internecie całość bazy danych producentów wraz z
               historią zmian i źródłami, na podstawie których podejmujemy decyzję o liczbie punktów, które im
               przyznajemy. Działamy zgodnie z naszą{' '}
-              <a href={urls.external.polaPrivacyPolicy.href} target="__blank">
+              <a href={urls.external.links.polaPrivacyPolicy.href} target="__blank">
                 polityką prywatności
               </a>
               .

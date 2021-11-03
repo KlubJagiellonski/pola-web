@@ -115,20 +115,20 @@ export const PageFooter = () => {
         <div className="sections">
           <FooterSection title="Informacje">
             <TextLink label="Home" href={urls.pola.home()} />
-            <TextLink label="Aktualności" href={urls.pola.news} />
+            <TextLink label="Aktualności" href={urls.pola.news()} />
             <TextLink label="O Poli" href={urls.pola.about()} />
           </FooterSection>
           <FooterSection title="Działaj z nami">
-            <TextExternalLink label="Wesprzyj aplikację" url={urls.external.polaSupport} />
+            <TextExternalLink label="Wesprzyj aplikację" url={urls.external.links.polaSupport} />
             <TextLink label="Klub przyjaciół Poli" href={urls.pola.friends()} />
-            <TextLink label="Partnerzy" href={urls.pola.partners} />
-            <TextLink label="Dołącz do zespołu" href={urls.pola.team} />
+            <TextLink label="Partnerzy" href={urls.pola.partners()} />
+            <TextLink label="Dołącz do zespołu" href={urls.pola.team()} />
           </FooterSection>
           <FooterSection title="Jakieś pytania?">
             <TextLink label="Kontakt" href={urls.pola.home('contact')} anchor={true} />
             <TextLink label="FAQ" href={urls.pola.about('faq')} anchor={true} />
-            <TextLink label="Polityka prywatności" href={urls.pola.support} hideMobile={true} />
-            <TextExternalLink label="Uzupełnij dane o firmie" url={urls.external.form} hideMobile={true} />
+            <TextLink label="Polityka prywatności" href={urls.pola.support()} hideMobile={true} />
+            <TextExternalLink label="Uzupełnij dane o firmie" url={urls.external.links.form} hideMobile={true} />
           </FooterSection>
           <FooterSection title="Śledź nas na:">
             <div className="social-rows">

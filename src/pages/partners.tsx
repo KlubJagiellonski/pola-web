@@ -79,12 +79,12 @@ const PartnersPage = (props: IPartnersPage) => {
         <Wrapper>
           <ImageSection>
             <li>
-              <ExternalLink url={urls.external.pge}>
+              <ExternalLink url={urls.external.links.pge}>
                 <ResponsiveImage imageSrc="PGE_logo.png" />
               </ExternalLink>
             </li>
             <li>
-              <ExternalLink url={urls.external.polskieKupujeTo}>
+              <ExternalLink url={urls.external.links.polskieKupujeTo}>
                 <ResponsiveImage imageSrc="polskie_kupuje.png" />
               </ExternalLink>
             </li>
