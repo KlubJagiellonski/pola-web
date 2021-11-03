@@ -5,7 +5,7 @@ const partners: IPartner[] = [
   {
     name: 'Klub Jagielloński',
     imageSrc: 'logo_cakjv2_crop.png',
-    description: 'Algorytm',
+    description: 'Opracowanie algorytmu i wydawanie aplikacji',
     sourceUrl: urls.external.klubJagiellonski.href,
   },
   {

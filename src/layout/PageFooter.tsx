@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LogoWhite from '../assets/logo/pola-white.svg';
-import { color, Device, fontSize, padding, pageWidth, margin, mobileHeaderHeight } from '../styles/theme';
-import { Link } from 'gatsby';
+import { color, Device, fontSize, padding, pageWidth, margin } from '../styles/theme';
 import { urls } from '../domain/website';
-import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
-import { classNames } from '../utils/class-names';
+import { TextExternalLink, TextLink } from '../utils/navigation';
+
+import LogoWhite from '../assets/logo/pola-white.svg';
 
 const FooterContainer = styled.footer`
   background-color: ${color.background.dark};
@@ -104,24 +103,6 @@ const FooterSection: React.FC<IFooterSection> = ({ title, children }) => (
   </Section>
 );
 
-interface IFooterLink {
-  label: string;
-  href: string;
-  anchor?: boolean;
-  hideMobile?: boolean;
-}
-
-const FooterLink: React.FC<IFooterLink> = ({ label, href, anchor = false, hideMobile = false }) =>
-  anchor ? (
-    <AnchorLink className="link" to={href}>
-      <p className={classNames('text', ['hide-mobile', hideMobile])}>{label}</p>
-    </AnchorLink>
-  ) : (
-    <Link className="link" to={href}>
-      <p className={classNames('text', ['hide-mobile', hideMobile])}>{label}</p>
-    </Link>
-  );
-
 export const PageFooter = () => {
   return (
     <FooterContainer>
@@ -133,21 +114,21 @@ export const PageFooter = () => {
         </FooterSection>
         <div className="sections">
           <FooterSection title="Informacje">
-            <FooterLink label="Home" href={urls.pola.home()} />
-            <FooterLink label="Aktualności" href={urls.pola.news} />
-            <FooterLink label="O Poli" href={urls.pola.about()} />
+            <TextLink label="Home" href={urls.pola.home()} />
+            <TextLink label="Aktualności" href={urls.pola.news} />
+            <TextLink label="O Poli" href={urls.pola.about()} />
           </FooterSection>
           <FooterSection title="Działaj z nami">
-            <FooterLink label="Wesprzyj aplikację" href={urls.external.polaSupport.href} />
-            <FooterLink label="Klub przyjaciół Poli" href={urls.pola.friends()} />
-            <FooterLink label="Partnerzy" href={urls.pola.partners} />
-            <FooterLink label="Dołącz do zespołu" href={urls.pola.team} />
+            <TextExternalLink label="Wesprzyj aplikację" url={urls.external.polaSupport} />
+            <TextLink label="Klub przyjaciół Poli" href={urls.pola.friends()} />
+            <TextLink label="Partnerzy" href={urls.pola.partners} />
+            <TextLink label="Dołącz do zespołu" href={urls.pola.team} />
           </FooterSection>
           <FooterSection title="Jakieś pytania?">
-            <FooterLink label="Kontakt" href={urls.pola.home('contact')} anchor={true} />
-            <FooterLink label="FAQ" href={urls.pola.about('faq')} anchor={true} />
-            <FooterLink label="Polityka prywatności" href={urls.pola.support} hideMobile={true} />
-            <FooterLink label="Uzupełnij dane o firmie" href={urls.external.form.href} hideMobile={true} />
+            <TextLink label="Kontakt" href={urls.pola.home('contact')} anchor={true} />
+            <TextLink label="FAQ" href={urls.pola.about('faq')} anchor={true} />
+            <TextLink label="Polityka prywatności" href={urls.pola.support} hideMobile={true} />
+            <TextExternalLink label="Uzupełnij dane o firmie" url={urls.external.form} hideMobile={true} />
           </FooterSection>
           <FooterSection title="Śledź nas na:">
             <div className="social-rows">

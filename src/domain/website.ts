@@ -57,6 +57,8 @@ export const urls = {
     githubAndroid: new URL('https://github.com/KlubJagiellonski/pola-android/issues'),
     githubIos: new URL('https://github.com/KlubJagiellonski/pola-ios/issues'),
     githubWeb: new URL('https://github.com/KlubJagiellonski/pola-backend/issues'),
+    pge: new URL('https://www.gkpge.pl/'),
+    polskieKupujeTo: new URL('https://polskiekupujeto.pl'),
     form: new URL(
       'https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform'
     ),
