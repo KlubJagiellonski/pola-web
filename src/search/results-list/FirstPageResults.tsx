@@ -41,7 +41,7 @@ export const FirstPageResults: React.FC<IFirstPageResults> = ({
           phrase={phrase}
           totalItems={totalItems}
           searchState={state}
-          resultsUrl={totalItems > 0 ? urls.pola.products : undefined}
+          resultsUrl={totalItems > 0 ? urls.pola.products() : undefined}
         />
       )}
       <PageSection>

@@ -143,7 +143,7 @@ const handleReadMore = () => {
 
 const DevelopmentSection = () => {
   return (
-    <Container color={color.background.red}>
+    <Container className="development-container" borderColor={color.background.red}>
       <Info>
         <ImgSection>
           <ResponsiveImage imageSrc="smutny-2.png" />
