@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 import LogoWhite from '../assets/logo/pola-white.svg';
-import { color, Device, fontSize, padding, pageWidth, margin } from '../styles/theme';
+import { color, Device, fontSize, padding, pageWidth, margin, mobileHeaderHeight } from '../styles/theme';
 import { Link } from 'gatsby';
 import { urls } from '../domain/website';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
+import { classNames } from '../utils/class-names';
 
 const FooterContainer = styled.footer`
   background-color: ${color.background.dark};
@@ -103,6 +104,24 @@ const FooterSection: React.FC<IFooterSection> = ({ title, children }) => (
   </Section>
 );
 
+interface IFooterLink {
+  label: string;
+  href: string;
+  anchor?: boolean;
+  hideMobile?: boolean;
+}
+
+const FooterLink: React.FC<IFooterLink> = ({ label, href, anchor = false, hideMobile = false }) =>
+  anchor ? (
+    <AnchorLink className="link" to={href}>
+      <p className={classNames('text', ['hide-mobile', hideMobile])}>{label}</p>
+    </AnchorLink>
+  ) : (
+    <Link className="link" to={href}>
+      <p className={classNames('text', ['hide-mobile', hideMobile])}>{label}</p>
+    </Link>
+  );
+
 export const PageFooter = () => {
   return (
     <FooterContainer>
@@ -114,46 +133,27 @@ export const PageFooter = () => {
         </FooterSection>
         <div className="sections">
           <FooterSection title="Informacje">
-            <Link className='link' to={urls.pola.home()}>
-              <p className="text">Home</p>
-            </Link>
-            <Link className='link' to={urls.pola.news}>
-              <p className="text">Aktualności</p>
-            </Link>
-            <Link className='link' to={urls.pola.about()}>
-              <p className="text">O Poli</p>
-            </Link>
+            <FooterLink label="Home" href={urls.pola.home()} />
+            <FooterLink label="Aktualności" href={urls.pola.news} />
+            <FooterLink label="O Poli" href={urls.pola.about()} />
           </FooterSection>
           <FooterSection title="Działaj z nami">
-            <Link className='link' to={urls.pola.support}>
-              <p className="text">Wesprzyj aplikację</p>
-            </Link>
-            <Link className='link' to={urls.pola.friends()}>
-              <p className="text">Klub przyjaciół Poli</p>
-            </Link>
-            <Link className='link' to={urls.pola.team}>
-              <p className="text">Dołącz do zespołu</p>
-            </Link>
+            <FooterLink label="Wesprzyj aplikację" href={urls.external.polaSupport.href} />
+            <FooterLink label="Klub przyjaciół Poli" href={urls.pola.friends()} />
+            <FooterLink label="Partnerzy" href={urls.pola.partners} />
+            <FooterLink label="Dołącz do zespołu" href={urls.pola.team} />
           </FooterSection>
           <FooterSection title="Jakieś pytania?">
-            <AnchorLink className='link' to={urls.pola.home('contact')}>
-              <p className="text">Kontakt</p>
-            </AnchorLink>
-            <AnchorLink className='link' to={urls.pola.about('faq')}>
-              <p className="text">FAQ</p>
-            </AnchorLink>
-            <Link className='link' to={urls.pola.home()}>
-              <p className="text hide-desktop">Polityka prywatności</p>
-            </Link>
-            <Link className='link' to={urls.pola.home()}>
-              <p className="text hide-mobile">Uzupełnij dane o firmie</p>
-            </Link>
+            <FooterLink label="Kontakt" href={urls.pola.home('contact')} anchor={true} />
+            <FooterLink label="FAQ" href={urls.pola.about('faq')} anchor={true} />
+            <FooterLink label="Polityka prywatności" href={urls.pola.support} hideMobile={true} />
+            <FooterLink label="Uzupełnij dane o firmie" href={urls.external.form.href} hideMobile={true} />
           </FooterSection>
           <FooterSection title="Śledź nas na:">
             <div className="social-rows">
-              <Facebook type='filled' />
-              <Instagram type='filled' />
-              <Twitter type='filled' />
+              <Facebook type="filled" />
+              <Instagram type="filled" />
+              <Twitter type="filled" />
             </div>
           </FooterSection>
         </div>
