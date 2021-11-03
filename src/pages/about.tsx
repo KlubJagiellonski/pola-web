@@ -90,7 +90,7 @@ const AboutPage = (props: IAboutPage) => {
         </ContentColumn>
         <ContentColumn hideOnMobile={true} fraction={40}>
           <ImageContainer>
-            <ResponsiveImage imageSrc="sok.png" />
+            <ResponsiveImage imageSrc="3-bez_loga.png" />
           </ImageContainer>
         </ContentColumn>
       </ColumnsLayout>
