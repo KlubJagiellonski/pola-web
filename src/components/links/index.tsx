@@ -24,3 +24,14 @@ export const AppStoreLink: React.FC<IIconLink> = ({ height = 'auto' }) => (
     />
   </a>
 );
+
+export const HuaweiAppGalleryLink: React.FC<IIconLink> = ({ height = 'auto' }) => (
+  <a href={urls.external.polaHuaweiAppGallery.href}>
+    <img
+      style={{ margin: '-10px' }} // for this specific PNG as there is transparent space around logotype
+      height={height}
+      src="https://www.newseria.pl/files/_uploaded/glownekonf_37779598.png"
+      alt="Pola application on Huawei Store"
+    />
+  </a>
+);
