@@ -61,6 +61,9 @@ const TeamPage = (props: ITeamPage) => {
             naszych użytkownikach, nie wyświetlamy reklam, a każda linijka naszego kodu jest publicznie dostępna i każdy
             może ją zweryfikować. Staramy się realizować w ten sposób <b> ideę prospołecznego kodowania. </b>
           </Text>
+          <Section>
+            <TitleSection>Zespół aplikacji Pola:</TitleSection>
+          </Section>
           <ColumnsLayout>
             <ContentColumn>
               <Section>
