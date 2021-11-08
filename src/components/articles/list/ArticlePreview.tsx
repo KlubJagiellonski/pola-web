@@ -1,38 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query'
+import styledContainerQuery from 'styled-container-query';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
 import { WrapperSection } from '../../../styles/GlobalStyle.css';
-import { Device, color, fontSize } from '../../../styles/theme';
+import { Device, color, fontSize, margin } from '../../../styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 import { Article } from '../../../domain/articles';
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
+import { Title } from './ArticleTitle';
 
 const ArticleImage = styled.div`
   width: 50%;
   text-align: left;
-  .gatsby-image-wrapper{
-    div{
-      padding-bottom: 14em !important;
-    }
-  }
+  height: 100%;
 
-  @media ${Device.mobile} {
-    .gatsby-image-wrapper{
-      div{
-        padding-bottom: 5em !important;
-      }
+  .gatsby-image-wrapper {
+    div {
+      padding-bottom: 100% !important;
     }
   }
 `;
 
-const Wrapper = styled(WrapperSection)``;
-
 const Container = styledContainerQuery.div`
   display: flex;
   flex-direction: row;
-  min-height: 16.5em;
   margin-bottom: 15px;
 
   @media ${Device.mobile} {
@@ -51,25 +43,30 @@ const Container = styledContainerQuery.div`
     }
 
     ${ArticleText} {
-      font-size: ${fontSize.small};
+      font-size: ${fontSize.tiny};
+      -webkit-line-clamp: 3;
     }
 
-    ${ArticleImage}{
-      .gatsby-image-wrapper{
-        div{
-          padding-bottom: 5em !important;
-        }
-      }
+    ${Title} {
+      font-size: ${fontSize.tiny};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
   }
 `;
 
 const ArticleSection = styled.div`
   width: 50%;
-  margin: 0 15px;
+  margin: ${margin.normal} ${margin.normal} 0 ${margin.normal};
+  display: flex;
+  flex-direction: column;
 
   @media ${Device.mobile} {
     width: 60%;
+    margin: 0 ${margin.normal};
   }
 `;
 
@@ -79,11 +76,7 @@ export const ArticlePreview: React.FC<Article> = ({ imagePath, title, slug, date
       <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} />
-        <ArticleContents
-          date={date}
-          text={subTitle}
-          tag={tag}
-        />
+        <ArticleContents date={date} text={subTitle} tag={tag} />
       </ArticleSection>
     </Container>
   );

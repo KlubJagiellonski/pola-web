@@ -10,7 +10,7 @@ import { Link } from 'gatsby';
 import { urls } from '../domain/website';
 
 const Wrapper = styled(WrapperSection)`
-  min-height: 32.3em;
+  min-height: 31.3em;
   grid-area: about;
   margin: 0;
   padding: 0;
@@ -23,7 +23,7 @@ const MockUp = styled.div`
 
   div {
     div {
-      padding-bottom: 21em !important;
+      padding-bottom: 20em !important;
     }
   }
 `;
@@ -35,6 +35,7 @@ const Info = styled.div`
 
 const AboutButton = styled(SecondaryButton)`
   margin: ${margin.small} 0;
+  font-weight: bold;
 `;
 
 const AboutTitle = styled(TitleSection)`
@@ -58,7 +59,7 @@ const About = () => {
         <Link to={urls.pola.about()}>
           <AboutButton
             label="Dowiedz się więcej... "
-            styles={ButtonThemes[ButtonFlavor.WHITE]}
+            styles={{ ...ButtonThemes[ButtonFlavor.WHITE], fontSize: fontSize.small }}
             fontSize={fontSize.small}
           />
         </Link>

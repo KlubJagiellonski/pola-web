@@ -34,6 +34,11 @@ const DownoladTitle = styled(TitleSection)`
 const DownloadLinks = styled.div`
   display: flex;
   align-items: center;
+
+  @media ${Device.mobile} {
+    flex-direction: column;
+  }
+
   a {
     padding: ${padding.small};
 
@@ -44,6 +49,7 @@ const DownloadLinks = styled.div`
         justify-content: center;
         flex-direction: column;
         width: 8em;
+        margin-top: ${margin.small};
       }
     }
   }

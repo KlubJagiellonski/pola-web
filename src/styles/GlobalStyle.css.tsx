@@ -20,7 +20,6 @@ export const TitleSection = styled.p`
   padding: 0;
   font-size: ${fontSize.normal};
   font-weight: 700;
-  line-height: 1rem;
   color: ${color.text.primary};
 `;
 
@@ -30,7 +29,6 @@ export const Text = styled.p`
   font-family: 'Merriweather';
   font-size: ${fontSize.small};
   color: ${color.text.secondary};
-  line-height: 1rem;
 
   font-feature-settings: 'kern', 'liga', 'clig', 'calt';
 
