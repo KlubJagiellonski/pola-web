@@ -111,7 +111,7 @@ const isNotEmpty = (value: string) => !!value && value.length && value.length > 
 export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, onSearch, onEmptyInput }) => {
   const [phrase, setPhrase] = React.useState<string>('');
   const hasPhrase = !!phrase && phrase.length > 0;
-  const showSubmitButton = false;
+  const showSubmitButton = true;
   const showBarcodeIcon = false;
   const showVoiceInputIcon = false;
   let inputRef = useRef<HTMLInputElement>(null);
@@ -172,7 +172,7 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, o
       {showSubmitButton && (
         <SubmitButton
           label="Sprawdź"
-          styles={ButtonThemes[ButtonFlavor.RED]}
+          styles={{ ...ButtonThemes[ButtonFlavor.RED], lowercase: true }}
           disabled={!hasPhrase}
           onClick={handleSearch}
         />
