@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
-import { WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color, fontSize, margin } from '../../../styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
@@ -49,24 +48,19 @@ const Container = styledContainerQuery.div`
 
     ${Title} {
       font-size: ${fontSize.tiny};
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
       -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
     }
   }
 `;
 
 const ArticleSection = styled.div`
   width: 50%;
-  margin: ${margin.normal} ${margin.normal} 0 ${margin.normal};
+  margin: 0 ${margin.normal};
   display: flex;
   flex-direction: column;
 
   @media ${Device.mobile} {
     width: 60%;
-    margin: 0 ${margin.normal};
   }
 `;
 

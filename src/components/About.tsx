@@ -10,7 +10,6 @@ import { Link } from 'gatsby';
 import { urls } from '../domain/website';
 
 const Wrapper = styled(WrapperSection)`
-  min-height: 31.3em;
   grid-area: about;
   margin: 0;
   padding: 0;
@@ -21,9 +20,9 @@ const Wrapper = styled(WrapperSection)`
 const MockUp = styled.div`
   height: 100%;
 
-  div {
+  .gatsby-image-wrapper {
     div {
-      padding-bottom: 20em !important;
+      padding-bottom: 18.8em !important;
     }
   }
 `;

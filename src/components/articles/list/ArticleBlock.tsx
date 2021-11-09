@@ -25,7 +25,7 @@ const ArticleImage = styled.div<{ img?: string }>`
   width: 50%;
   text-align: left;
 
-  div {
+  .gatsby-image-wrapper {
     div {
       padding-bottom: 100% !important;
     }

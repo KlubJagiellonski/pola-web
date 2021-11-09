@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, padding, Device } from '../../../styles/theme';
+import { color, padding, Device, margin } from '../../../styles/theme';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
@@ -16,6 +16,9 @@ interface IArticleBlock {
 
 const Wrapper = styled.div`
   position: relative;
+  background: ${color.background.gray};
+  height: 16em;
+  padding: ${margin.small};
 
   @media ${Device.mobile} {
     display: none;
@@ -25,7 +28,7 @@ const Wrapper = styled.div`
 const Image = styled.div`
   div {
     height: 16em !important;
-
+    margin: ${margin.small};
     picture {
       img {
         height: auto !important;
@@ -50,7 +53,7 @@ const ImageSection = styled(Image)`
 
 const TextSection = styled.div`
   flex: 4;
-  background: ${color.background.transparencyGrey};
+  background: ${color.background.gray};
   padding: ${padding.normal};
   display: flex;
   flex-direction: column;
@@ -66,7 +69,6 @@ const LatestArticle: React.FC<IArticleBlock> = ({ photo, title, slug, date, text
           <ArticleContents date={date} text={text} tag={tag} />
         </TextSection>
       </Sections>
-      <Image>{photo && <ResponsiveImage imageSrc={photo} />}</Image>
     </Wrapper>
   );
 };
