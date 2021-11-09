@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/brainhubeu__react-carousel": "^2.0.2",
+    "@types/brainhubeu__react-carousel": "^2.0.4",
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
     "@types/query-string": "^6.3.0",
