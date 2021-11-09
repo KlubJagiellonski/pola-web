@@ -46,7 +46,8 @@ interface IProductModal {
 
 export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
   const handleReport = () => {
-    openNewTab(urls.external.links.openFoods);
+    onClose();
+    navigateTo(urls.pola.home('contact'));
   };
   const redirectToFriends = () => {
     onClose();
