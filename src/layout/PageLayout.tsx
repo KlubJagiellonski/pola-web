@@ -10,7 +10,7 @@ import { appDispatcher } from '../state/app/app-dispatcher';
 import { ProductModal } from '../search/product-modal';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import ErrorBoundary from '../utils/error-boundary';
-import { color, desktopHeaderHeight, Device, mobileHeaderHeight, padding } from '../styles/theme';
+import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
 import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 import Download from '../components/Download';
@@ -23,7 +23,6 @@ const connector = connect(
     isSearchInfoVisible: state.app.isSearchInfoVisible,
     activePage: state.app.activePage,
     isMenuExpanded: state.app.isMenuExpanded,
-    isSearchInfoVisible: state.app.isSearchInfoVisible,
     selectedProduct: state.search.stateName === SearchStateName.SELECTED ? state.search.selectedProduct : undefined,
   }),
   {
