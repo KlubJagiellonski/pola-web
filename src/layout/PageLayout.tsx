@@ -10,12 +10,13 @@ import { appDispatcher } from '../state/app/app-dispatcher';
 import { ProductModal } from '../search/product-modal';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import ErrorBoundary from '../utils/error-boundary';
-import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
+import { color, desktopHeaderHeight, Device, mobileHeaderHeight, padding } from '../styles/theme';
 import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 import Download from '../components/Download';
 import { SearchStateName } from '../state/search/search-reducer';
 import { SearchInfoModal } from '../search/form/SearchInfoModal';
+import { CustomScrollbarDiv } from './CustomScrollbar';
 
 const connector = connect(
   (state: IPolaState) => ({
@@ -42,7 +43,7 @@ type IPageLayout = ReduxProps & {
   styles?: ILayoutStyles;
 };
 
-const LayoutContainer = styled.div`
+const LayoutContainer = styled(CustomScrollbarDiv)`
   display: flex;
   flex-flow: column;
   height: 100vh;
