@@ -20,7 +20,7 @@ export enum PolishPropertyName {
   REGISTERED = 'plRegistered',
   CAPITAL = 'plCapital',
   RnD = 'plRnD',
-  GLOBAL = 'plNotGlobEnt',
+  NOT_GLOBAL = 'plNotGlobEnt',
 }
 
 export const getPropertiesFromManufacturer = (
@@ -62,13 +62,13 @@ export const ResearchField: React.FC<IPolishPropertyField> = ({ property: { valu
 };
 
 export const RegisteredField: React.FC<IPolishPropertyField> = ({ property: { value, notes } }) => {
-  const checked = value > 50;
+  const checked = value === 100;
   const label = checked ? 'zajerestrowana w Polsce' : 'zajerestrowana poza terytorium Polski';
   return <ValueCheckboxField checked={checked} label={label} notes={notes} />;
 };
 
-export const GlobalEntityField: React.FC<IPolishPropertyField> = ({ property: { value, notes } }) => {
-  const checked = value === 0;
+export const NotGlobalEntityField: React.FC<IPolishPropertyField> = ({ property: { value, notes } }) => {
+  const checked = value === 100;
   const label = checked ? 'nie jest częścią zagranicznego koncernu' : 'jest częścią zagranicznego koncernu';
   return <ValueCheckboxField checked={checked} label={label} notes={notes} />;
 };

@@ -8,7 +8,7 @@ import {
   ProductionField,
   ResearchField,
   RegisteredField,
-  GlobalEntityField,
+  NotGlobalEntityField,
   getPropertiesFromManufacturer,
   PolishPropertyName,
 } from './PolishValues';
@@ -47,7 +47,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const workersProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.WORKERS);
   const researchProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.RnD);
   const registeredProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.REGISTERED);
-  const globalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.GLOBAL);
+  const notGlobalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.NOT_GLOBAL);
   const capitalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.CAPITAL);
 
   return (
@@ -70,7 +70,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       <ProductionField property={workersProperty} />
       <ResearchField property={researchProperty} />
       <RegisteredField property={registeredProperty} />
-      <GlobalEntityField property={globalProperty} />
+      <NotGlobalEntityField property={notGlobalProperty} />
     </DetailsContainer>
   );
 };
