@@ -4,6 +4,7 @@ import { Product } from '../../domain/products';
 import { padding, fontSize, color } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
 import { Field, getPropertiesFromManufacturer, PolishPropertyName, ValueCheckboxField } from './PolishValues';
+import { AppSettings } from '../../state/app-settings';
 
 const DetailsContainer = styled.div`
   padding: ${padding.normal};
@@ -57,7 +58,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       <Field>
         <p className="property">udział polskiego kapitału:</p>
         <ScoreBar value={capitalProperty.value || 0} unit="%" animation={{ duration: 1, delay: 0.2 }} />
-        <p className="notes">{capitalProperty.notes}</p>
+        {AppSettings.SHOW_POLISH_VALUE_NOTES && <p className="notes">{capitalProperty.notes}</p>}
       </Field>
       <ValueCheckboxField
         condition={workersProperty.value === 100}
