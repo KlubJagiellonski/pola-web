@@ -3,15 +3,7 @@ import styled from 'styled-components';
 import { Product } from '../../domain/products';
 import { padding, fontSize, color } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
-import {
-  Field,
-  ProductionField,
-  ResearchField,
-  RegisteredField,
-  NotGlobalEntityField,
-  getPropertiesFromManufacturer,
-  PolishPropertyName,
-} from './PolishValues';
+import { Field, getPropertiesFromManufacturer, PolishPropertyName, ValueCheckboxField } from './PolishValues';
 
 const DetailsContainer = styled.div`
   padding: ${padding.normal};
@@ -67,10 +59,30 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
         <ScoreBar value={capitalProperty.value || 0} unit="%" animation={{ duration: 1, delay: 0.2 }} />
         <p className="notes">{capitalProperty.notes}</p>
       </Field>
-      <ProductionField property={workersProperty} />
-      <ResearchField property={researchProperty} />
-      <RegisteredField property={registeredProperty} />
-      <NotGlobalEntityField property={notGlobalProperty} />
+      <ValueCheckboxField
+        condition={workersProperty.value === 100}
+        trueLabel="produkuje w Polsce"
+        falseLabel="produkuje poza terytorium Polski"
+        notes={workersProperty.notes}
+      />
+      <ValueCheckboxField
+        condition={researchProperty.value === 100}
+        trueLabel="prowadzi badania i rozwój w Polsce"
+        falseLabel="prowadzi badania i rozwój poza terytorium Polski"
+        notes={researchProperty.notes}
+      />
+      <ValueCheckboxField
+        condition={registeredProperty.value === 100}
+        trueLabel="zajerestrowana w Polsce"
+        falseLabel="zajerestrowana poza terytorium Polski"
+        notes={registeredProperty.notes}
+      />
+      <ValueCheckboxField
+        condition={notGlobalProperty.value === 100}
+        trueLabel="nie jest częścią zagranicznego koncernu"
+        falseLabel="jest częścią zagranicznego koncernu"
+        notes={notGlobalProperty.notes}
+      />
     </DetailsContainer>
   );
 };
