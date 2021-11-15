@@ -1,7 +1,7 @@
 ---
 title: Edukacja dla najmłodszych
 subTitle: Pola partnerem targów Trends 4 Kids
-category: PatriotyzmC 'Edukacja'
+category: 'Patriotyzm Edukacja'
 cover: Trends4kids.jpg
 ---
 
