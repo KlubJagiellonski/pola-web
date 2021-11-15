@@ -1,7 +1,7 @@
 ---
 title: Edukujemy na temat patriotyzmu gospodarczego
 subTitle: Dzień polskiego produktu w Myślenicach
-category: 'Patriotyzm' 'Edukacja'
+category: 'Patriotyzm Edukacja'
 cover: myslenice2.jpg
 ---
 
