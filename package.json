@@ -50,7 +50,7 @@
     "gatsby-transformer-json": "^4.0.0",
     "gatsby-transformer-remark": "^2.16.1",
     "gatsby-transformer-sharp": "^2.12.1",
-    "gatsby-transformer-yaml": "^3.13.0",
+    "gatsby-transformer-yaml": "^4.1.0",
     "gatsby-transformer-yaml-full": "^0.2.0",
     "gatsby-yaml-full-file": "^0.2.1",
     "gatsby-yaml-full-markdown": "^0.4.6",
