@@ -2,7 +2,7 @@
 title: Edukujemy na temat patriotyzmu gospodarczego
 subTitle: Dzień polskiego produktu w Myślenicach
 category: 'Patriotyzm Edukacja'
-cover: myslenice2.jpg
+cover: myslenice2.png
 ---
 
 Otrzymaliśmy zaproszenie do wzięcia udziału w Dniu Produktu Polskiego organizowanego przez Fundację Owocna w Myślenicach.
