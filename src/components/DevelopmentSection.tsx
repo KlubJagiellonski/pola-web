@@ -115,6 +115,14 @@ const Container = styledContainerQuery(Wrapper)`
       height: 10em;
     }
 
+    ${Columns}{
+      flex-direction: column;
+    }
+
+    ${Column}{
+      width: 100%;
+    }
+
     ${ImgSection}{
       .gatsby-image-wrapper {
         picture {
