@@ -123,6 +123,10 @@ const Container = styledContainerQuery(Wrapper)`
       width: 100%;
     }
 
+    ${Info}{
+      height: 10em;
+    }
+
     ${ImgSection}{
       .gatsby-image-wrapper {
         picture {
