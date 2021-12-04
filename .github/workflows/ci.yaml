@@ -17,7 +17,10 @@ env:
 
 jobs:
   build:
-
+    permissions:
+      id-token: write  # This is required for aws-actions/configure-aws-credentials
+      contents: write  # This is required for actions/checkout
+      statuses: write  # This is required for pbrandone/create-status-action
     runs-on: ubuntu-latest
 
     steps:
@@ -78,8 +81,6 @@ jobs:
         cache: 'npm'
     - name: 🟢 Install dependencies
       run: npm ci
-    # - name: 🔎 Run the tests
-      # run: npm test -- --coverage
     - name: 🔧 Build app
       run: npm run build
     - name: 🚀 Upload app as artifact
@@ -98,8 +99,8 @@ jobs:
         (github.event_name == 'push' && github.ref == 'refs/heads/prod')
         )
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        role-session-name: GitHubActions-${{ github.run_id }}
         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
     - name: 🚀 Upload staging app to AWS S3
       if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
