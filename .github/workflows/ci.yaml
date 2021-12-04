@@ -20,7 +20,6 @@ jobs:
     permissions:
       id-token: write  # This is required for aws-actions/configure-aws-credentials
       contents: write  # This is required for actions/checkout
-      # deployments: write  # This is required for pbrandone/create-status-action
       statuses: write  # This is required for pbrandone/create-status-action
     runs-on: ubuntu-latest
 
