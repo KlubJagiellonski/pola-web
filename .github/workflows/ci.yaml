@@ -20,6 +20,7 @@ jobs:
     permissions:
       id-token: write
       contents: write  # This is required for actions/checkout@v2
+      deployments: write
     runs-on: ubuntu-latest
 
     steps:
