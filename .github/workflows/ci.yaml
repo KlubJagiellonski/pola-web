@@ -18,11 +18,10 @@ env:
 jobs:
   build:
     permissions:
-      id-token: write
-      contents: write  # This is required for actions/checkout@v2
-      deployments: write
-      # checks: write
-      statuses: write
+      id-token: write  # This is required for aws-actions/configure-aws-credentials
+      contents: write  # This is required for actions/checkout
+      deployments: write  # This is required for pbrandone/create-status-action
+      statuses: write  # This is required for pbrandone/create-status-action
     runs-on: ubuntu-latest
 
     steps:
