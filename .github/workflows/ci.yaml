@@ -22,7 +22,7 @@ jobs:
       contents: write  # This is required for actions/checkout@v2
       deployments: write
       checks: write
-      statuses: write
+      # statuses: write
     runs-on: ubuntu-latest
 
     steps:
