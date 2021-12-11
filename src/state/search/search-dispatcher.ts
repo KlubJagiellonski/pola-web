@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { EAN, IProductEAN, Product } from '../../domain/products';
+import { EAN, IProductData, IProductEAN, Product } from '../../domain/products';
 import { ProductEANService } from '../../domain/products/ean-service';
 import { ProductService } from '../../domain/products/search-service';
 import { ErrorHandler, EmptyResponseDataError, ProductNotFoundError } from '../../services/api-errors';
