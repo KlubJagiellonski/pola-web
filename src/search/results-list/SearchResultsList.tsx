@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { EAN, IProductData } from '../../domain/products';
-import { margin } from '../../styles/theme';
+import { Device, margin, padding } from '../../styles/theme';
 import { SearchResultElement } from './ProductElement';
 
 const ResultsList = styled.div`
@@ -13,6 +13,12 @@ const ResultsList = styled.div`
     padding: 0;
     list-style: none;
     max-width: 50em;
+
+    @media ${Device.mobile} {
+      min-width: unset;
+      width: 100%;
+      padding: 0 ${padding.normal};
+    }
   }
 
   .actions {

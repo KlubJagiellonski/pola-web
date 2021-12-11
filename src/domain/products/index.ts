@@ -1,3 +1,5 @@
+import { Dictionary } from '../generic';
+
 export type EAN = string;
 export interface ICompany {
   name: string;
@@ -52,6 +54,8 @@ interface IReport {
 
 export interface IManufacturer {
   name: string;
+  description: string;
+  is_friend: boolean;
   plCapital: number;
   plCapital_notes: string;
   plNotGlobEnt: number;
@@ -63,6 +67,7 @@ export interface IManufacturer {
   plScore: number;
   plWorkers: number;
   plWorkers_notes: string;
+  sources: Dictionary<string>;
 }
 
 export interface IProductEAN {

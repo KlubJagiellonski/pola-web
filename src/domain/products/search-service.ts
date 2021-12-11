@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IProductData, ISearchSuccessResponse } from '.';
+import { IProductData, ISearchSuccessResponse, Product } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import config from '../../app-config.json';
 import { InvalidSearchResultError } from '../../services/api-errors';
@@ -46,7 +46,11 @@ export class ProductService extends ApiAdapter {
           throw new InvalidSearchResultError();
         }
 
-        return response.data;
+        this.validateProducts(response.data.products);
+
+        return {
+          ...response.data,
+        };
       }
       throw new Error('cannot search for empty phrase');
     } catch (error: unknown) {
@@ -69,6 +73,15 @@ export class ProductService extends ApiAdapter {
     const responseBody = response.data;
     return responseBody?.totalItems !== undefined && !!responseBody?.products;
   }
+
+  private validateProducts(products: IProductData[]): void {
+    products.forEach((product: IProductData) => {
+      const errors = validateProduct(product);
+      if (errors) {
+        console.error(`Product ${product.name} is invalid: ${errors.join(', ')}`);
+      }
+    });
+  }
 }
 
 /**
@@ -81,3 +94,12 @@ export function reduceToFlatProductsList(pages: ISearchResultPage[]): IProductDa
     return [...products, ...page.products];
   }, []);
 }
+
+const validateProduct = (product: IProductData): string[] | undefined => {
+  const errorMessages: string[] = [];
+  if (!product.brand) errorMessages.push('missing brand');
+  if (!product.company) errorMessages.push('missing company');
+  if (product.code.length < 1) errorMessages.push('empty EAN code');
+  if (product.name.length < 1) errorMessages.push('empty name');
+  return errorMessages.length > 1 ? errorMessages : undefined;
+};

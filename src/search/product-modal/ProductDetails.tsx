@@ -22,6 +22,10 @@ const DetailsContainer = styled.div`
     margin-top: 0.5em;
   }
 
+  .underline {
+    text-decoration: underline;
+  }
+
   .notes {
     font-size: ${fontSize.small};
   }
@@ -49,15 +53,26 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
         <h3>{product.name}</h3>
       </header>
       <Field>
-        <p className="property">Producent: {product.manufacturer.name}</p>
+        <p className="property underline">{product.manufacturer.name}</p>
+        <p className="property">{product.manufacturer.description}</p>
       </Field>
       <Field>
-        <p className="property">Punkty w rankingu Poli:</p>
-        <ScoreBar value={product.manufacturer.plScore || 0} unit="pkt" animation={{ duration: 1, delay: 0.2 }} />
+        <p className="property underline">Punkty w rankingu Poli:</p>
+        <ScoreBar
+          value={product.manufacturer.plScore}
+          unit="pkt"
+          missingValuePlaceholder="brak punktacji w rankingu Poli"
+          animation={{ duration: 1, delay: 0.2 }}
+        />
       </Field>
       <Field>
-        <p className="property">udział polskiego kapitału:</p>
-        <ScoreBar value={capitalProperty.value || 0} unit="%" animation={{ duration: 1, delay: 0.2 }} />
+        <p className="property underline">Udział polskiego kapitału:</p>
+        <ScoreBar
+          value={capitalProperty.value}
+          unit="%"
+          missingValuePlaceholder="nieznany udział kapitału"
+          animation={{ duration: 1, delay: 0.2 }}
+        />
         {AppSettings.SHOW_POLISH_VALUE_NOTES && <p className="notes">{capitalProperty.notes}</p>}
       </Field>
       <ValueCheckboxField

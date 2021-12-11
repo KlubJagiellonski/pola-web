@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { EAN, IProductData } from '../../domain/products';
-import { padding, color, fontSize, lineHeight } from '../../styles/theme';
+import { padding, color, fontSize, lineHeight, Device } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
 
 const ListElement = styled.li`
-  max-width: 40em;
+  min-width: 40em;
   margin-bottom: ${padding.normal};
   background-color: ${color.background.lightGray};
   cursor: pointer;
+
+  @media ${Device.mobile} {
+    min-width: unset;
+    width: 100%;
+  }
 `;
 
 const ResultElement = styled.div`
@@ -25,8 +30,29 @@ const ResultElement = styled.div`
   .brand {
     font-size: ${fontSize.small};
     line-height: ${lineHeight.normal};
+    padding-left: ${padding.small};
+  }
+
+  .underline {
+    font-size: ${fontSize.small};
+    text-decoration: underline;
   }
 `;
+
+interface IResultProperty {
+  value?: number | string;
+  label: string;
+  missingValuePlaceholder?: number | string;
+}
+const ResultProperty: React.FC<IResultProperty> = ({ value, label, missingValuePlaceholder }) =>
+  !!value ? (
+    <div>
+      <span className="underline">{`${label}:`}</span>
+      <span className="brand">{value}</span>
+    </div>
+  ) : (
+    <span>{missingValuePlaceholder}</span>
+  );
 
 interface ISearchResultElement {
   product: IProductData;
@@ -37,9 +63,14 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
   <ListElement onClick={(e) => onSelect(product.code)}>
     <ResultElement>
       <span className="name">{product.name}</span>
-      {product.brand && <span className="brand">{product.brand.name}</span>}
-      {product.company && <span className="manufacturer">{product.company.name}</span>}
+      <ResultProperty value={product.brand?.name} label="Marka" missingValuePlaceholder="nieznana marka" />
+      <ResultProperty value={product.company?.name} label="Producent" missingValuePlaceholder="nieznay producent" />
     </ResultElement>
-    <ScoreBar value={product.company?.score || 0} unit="pkt" animation={{ duration: 1, delay: 0.2 }} />
+    <ScoreBar
+      value={product.company?.score}
+      unit="pkt"
+      missingValuePlaceholder="Brak wyniku w rankingu Poli"
+      animation={{ duration: 1, delay: 0.2 }}
+    />
   </ListElement>
 );
