@@ -1,3 +1,5 @@
+import { Dictionary } from './generic';
+
 export enum PageType {
   HOME = 'home',
   NEWS = 'news',
@@ -40,8 +42,8 @@ const sluggableUrl = (pageName: string) => (sectionId?: HashSection, slug?: stri
   }
 };
 
-type HrefDictionary = { [name: string]: HrefFunction };
-type UrlDictionary = { [name: string]: URL };
+type HrefDictionary = Dictionary<HrefFunction>;
+type UrlDictionary = Dictionary<URL>;
 
 type WebsiteMap = {
   pola: HrefDictionary;

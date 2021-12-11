@@ -6,4 +6,6 @@ export type seconds = number;
 /**
  * Represents period in miliseconds
  */
-export type miliseconds = number;
+export type milliseconds = number;
+
+export type Dictionary<T> = { [name: string]: T };

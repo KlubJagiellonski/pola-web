@@ -4,20 +4,30 @@ import { lighten } from 'polished';
 import { color, fontSize, lineHeight, padding } from '../styles/theme';
 import { seconds } from '../domain/generic';
 
-const progressValue = (percetage: number) => keyframes`
+const progressValue = (percentage?: number) => keyframes`
     0% {width: 0}
-    100% {width: ${`${percetage}%`}}
+    100% {width: ${`${percentage || 0}%`}}
 `;
 
-const Bar = styled.div<{ value: number; animation?: IAniamation }>`
+const BarComponent = styled.div`
   width: 100%;
   background-color: ${color.background.primary};
   padding: 0;
-  text-align: right;
   height: ${lineHeight.big};
   position: relative;
 
-  .value {
+  .label {
+    position: absolute;
+    font-size: ${fontSize.small};
+    width: 100%;
+    z-index: 1;
+  }
+`;
+
+const ValueBar = styled(BarComponent)<{ value?: number; animation?: IAnimation }>`
+  text-align: right;
+
+  .value-belt {
     position: absolute;
     background-color: ${lighten(0.1)(color.background.red)};
     height: 100%;
@@ -32,33 +42,46 @@ const Bar = styled.div<{ value: number; animation?: IAniamation }>`
     animation-play-state: running;
   }
 
-  .score {
-    position: absolute;
-    font-size: ${fontSize.small};
+  .label {
     right: ${padding.small};
-    width: 100%;
-    z-index: 1;
   }
 `;
 
-export interface IAniamation {
+const TextBar = styled(BarComponent)`
+  text-align: left;
+  .label {
+    right: auto;
+    left: ${padding.normal};
+  }
+`;
+
+export interface IAnimation {
   duration: seconds;
   delay?: seconds;
   iterations?: number;
 }
 
 interface IScoreBar {
-  value: number;
+  value?: number;
   unit?: string;
-  animation?: IAniamation;
+  animation?: IAnimation;
+  missingValuePlaceholder?: number | string;
 }
 
-export const ScoreBar: React.FC<IScoreBar> = ({ value, unit, animation }) => {
-  const scoreText = unit ? `${value} ${unit}` : value.toString();
-  return (
-    <Bar value={value} animation={animation}>
-      <div className="value" />
-      <div className="score">{scoreText}</div>
-    </Bar>
-  );
+export const ScoreBar: React.FC<IScoreBar> = ({ value, unit, animation, missingValuePlaceholder }) => {
+  if (value) {
+    const scoreText = unit ? `${value} ${unit}` : value.toString();
+    return (
+      <ValueBar value={value} animation={animation}>
+        <div className="value-belt" />
+        <div className="label">{scoreText}</div>
+      </ValueBar>
+    );
+  } else {
+    return (
+      <TextBar>
+        <div className="label">{missingValuePlaceholder}</div>
+      </TextBar>
+    );
+  }
 };
