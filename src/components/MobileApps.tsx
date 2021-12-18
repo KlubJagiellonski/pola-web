@@ -37,9 +37,9 @@ interface IMobileApps {
 export const MobileApps: React.FC<IMobileApps> = ({ size = 64 }) => {
   return (
     <DownloadLinks>
-      {AppSettings.mobile.SHOW_APPLE_STORE_LINK && <AppStoreLink size={size} />}
-      {AppSettings.mobile.SHOW_GOOGLE_PLAY_LINK && <GooglePlayLink size={size} />}
-      {AppSettings.mobile.SHOW_HUAWEI_GALLERY_LINK && <HuaweiAppGalleryLink size={size * 1.4} />}
+      {AppSettings.mobile?.SHOW_APPLE_STORE_LINK && <AppStoreLink size={size} />}
+      {AppSettings.mobile?.SHOW_GOOGLE_PLAY_LINK && <GooglePlayLink size={size} />}
+      {AppSettings.mobile?.SHOW_HUAWEI_GALLERY_LINK && <HuaweiAppGalleryLink size={size * 1.4} />}
     </DownloadLinks>
   );
 };

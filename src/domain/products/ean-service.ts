@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { EAN, IProductEAN } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
-import config from '../../app-config.json';
 import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
+import { AppSettings } from '../../state/app-settings';
 
 export interface IProductEANParams {
   code: EAN;
@@ -24,7 +24,7 @@ export class ProductEANService extends ApiAdapter {
   private static instance: ProductEANService;
 
   private constructor() {
-    super(API_NAME, config.eanEndpoint);
+    super(API_NAME, AppSettings.eanEndpoint);
   }
 
   private buildQuery(code: EAN): string {

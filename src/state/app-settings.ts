@@ -1,7 +1,15 @@
 export const AppSettings = {
+  hosts: {
+    test: 'http://testserver',
+    prod: 'https://www.pola-app.pl',
+  },
+  searchEndpoint: 'https://www.pola-app.pl/a/v4/search',
+  eanEndpoint: 'https://www.pola-app.pl/a/v4/get_by_code',
   search: {
     SHOW_SUBMIT_BUTTON: true,
     SHOW_BARCODE_ICON: false,
+    SHOW_RESULT_BRAND: false,
+    SHOW_RESULT_MANUFACTURER: true,
     SHOW_VOICE_INPUT_ICON: false,
     SEARCH_ON_INPUT_CHANGE: false,
   },
