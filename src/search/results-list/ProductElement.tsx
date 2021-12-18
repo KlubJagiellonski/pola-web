@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { EAN, IProductData } from '../../domain/products';
 import { padding, color, fontSize, lineHeight, Device } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
+import { AppSettings } from '../../state/app-settings';
 
 const ListElement = styled.li`
   min-width: 40em;
@@ -63,8 +64,12 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
   <ListElement onClick={(e) => onSelect(product.code)}>
     <ResultElement>
       <span className="name">{product.name}</span>
-      <ResultProperty value={product.brand?.name} label="Marka" missingValuePlaceholder="nieznana marka" />
-      <ResultProperty value={product.company?.name} label="Producent" missingValuePlaceholder="nieznay producent" />
+      {AppSettings.search?.SHOW_RESULT_BRAND && (
+        <ResultProperty value={product.brand?.name} label="Marka" missingValuePlaceholder="nieznana marka" />
+      )}
+      {AppSettings.search?.SHOW_RESULT_MANUFACTURER && (
+        <ResultProperty value={product.company?.name} label="Producent" missingValuePlaceholder="nieznay producent" />
+      )}
     </ResultElement>
     <ScoreBar
       value={product.company?.score}

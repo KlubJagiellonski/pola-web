@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import debounce from 'lodash.debounce';
 
 import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
@@ -8,9 +7,9 @@ import { Device, fontSize, color, padding, margin, px } from '../../styles/theme
 import Kod from '../../assets/kod.svg';
 import Microphone from '../../assets/microphone.svg';
 import InfoIcon from '../../assets/info-2.png';
-import { AppSettings } from '../../state/app-settings';
 import { isNotEmpty } from '../../utils/strings';
 import { keys } from '../../utils/keyboard';
+import { AppSettings } from '../../state/app-settings';
 
 const FormSearch = styled.div`
   display: flex;
@@ -131,7 +130,7 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, o
     const value = event.currentTarget.value;
     setPhrase(value);
 
-    if (AppSettings.search.SEARCH_ON_INPUT_CHANGE) {
+    if (AppSettings.search?.SEARCH_ON_INPUT_CHANGE) {
       search();
     }
   };
@@ -167,12 +166,12 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, o
             disabled={disabled}
           />
           <InputIconSection>
-            {AppSettings.search.SHOW_BARCODE_ICON && <InputIcon imagePath={Kod} width={48} />}
-            {AppSettings.search.SHOW_VOICE_INPUT_ICON && <InputIcon imagePath={Microphone} width={48} />}
+            {AppSettings.search?.SHOW_BARCODE_ICON && <InputIcon imagePath={Kod} width={48} />}
+            {AppSettings.search?.SHOW_VOICE_INPUT_ICON && <InputIcon imagePath={Microphone} width={48} />}
           </InputIconSection>
         </InputSection>
       </InputWrapper>
-      {AppSettings.search.SHOW_SUBMIT_BUTTON && (
+      {AppSettings.search?.SHOW_SUBMIT_BUTTON && (
         <SubmitButton
           label="Sprawdź"
           styles={{ ...submitButtonTheme, lowercase: true, fontWeight: 'lighter' }}

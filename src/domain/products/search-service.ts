@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { IProductData, ISearchSuccessResponse, Product } from '.';
+import { IProductData, ISearchSuccessResponse } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
-import config from '../../app-config.json';
 import { InvalidSearchResultError } from '../../services/api-errors';
+import { AppSettings } from '../../state/app-settings';
 import { ISearchResultPage } from '../../state/search/search-reducer';
 import { isNotEmpty } from '../../utils/strings';
 
@@ -27,7 +27,7 @@ export class ProductService extends ApiAdapter {
   private static instance: ProductService;
 
   private constructor() {
-    super(API_NAME, config.searchEndpoint);
+    super(API_NAME, AppSettings.searchEndpoint);
   }
 
   public async searchProducts(phrase: string, token?: string) {

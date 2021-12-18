@@ -4,6 +4,7 @@ import { actionTypes } from './app-actions';
 import * as actions from './app-actions';
 import { IAction, IActionReducer } from '../types';
 import { PageType } from '../../domain/website';
+import { AppSettings } from '../app-settings';
 
 export interface IAppState {
   initialized: boolean;
@@ -11,6 +12,7 @@ export interface IAppState {
   activePage: PageType;
   isMenuExpanded: boolean;
   isSearchInfoVisible: boolean;
+  flags: any;
 }
 
 const initialState: IAppState = {
@@ -18,6 +20,7 @@ const initialState: IAppState = {
   activePage: PageType.HOME,
   isMenuExpanded: false,
   isSearchInfoVisible: false,
+  flags: AppSettings,
 };
 
 const reducers: IActionReducer<IAppState> = {
