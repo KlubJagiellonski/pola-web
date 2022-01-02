@@ -27,7 +27,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "@reach/router": "^1.3.4",
     "@sentry/gatsby": "^6.16.1",
     "axios": "^0.21.2",
