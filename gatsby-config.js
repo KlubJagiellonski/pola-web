@@ -131,33 +131,27 @@ module.exports = {
     },
     {
       resolve: '@sentry/gatsby',
+      dsn: 'https://76785631b189463b86823d54c0cffc44@o1100740.ingest.sentry.io/6126100',
+      integrations: [new Integrations.BrowserTracing()],
+      tracesSampleRate: 1.0,
+      sampleRate: 1.0,
     },
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        // only Google Analytics / GA
-        trackingIds: ['GA-TRACKING_ID'],
-        // This object gets passed directly to the gtag config command
-        // This config will be shared across all trackingIds
+        trackingIds: ['UA-68999963-1'],
         gtagConfig: {
           optimize_id: 'OPT_CONTAINER_ID',
           anonymize_ip: true,
           cookie_expires: 0,
         },
-        // This object is used for configuration specific to this plugin
         pluginConfig: {
-          // Puts tracking script in the head instead of the body
           head: false,
-          // Setting this parameter is also optional
           respectDNT: true,
-          // Avoids sending pageview hits from custom paths
           exclude: [],
         },
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
   // shadowing API request domain for development
   // https://www.gatsbyjs.com/docs/api-proxy/
