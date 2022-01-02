@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/gatsby';
+import { Integrations } from '@sentry/gatsby';
 
 var sendEmails = false;
 
