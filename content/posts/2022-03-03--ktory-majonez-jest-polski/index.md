@@ -47,4 +47,3 @@ Wśród 30 najpopularniejszych majonezów znajdują się również
 - Majonez klasyczny z kodem 20014421 i liczbą skanowań wynoszącą 579, który został sklasyfikowany jako marka własna sieci Lidl, ocenianej na 10 pkt.
 
 ### Czegoś zabrakło? Chcesz wiedzeić więcej? Napisz do nas [pola@klubjagiellonski.pl](mailto:pola@klubjagiellonski.pl) lub daj znać w mediach społecznościowych [facebook](https://www.facebook.com/app.pola), [twitter](https://twitter.com/pola_app).
-
