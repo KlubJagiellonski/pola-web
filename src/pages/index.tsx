@@ -28,6 +28,7 @@ import TeamsFriend from '../components/TeamsFriend';
 import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
 import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
+import { Newsletter } from '../layout/newsletter';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -161,7 +162,9 @@ const HomePage = (props: IHomePage) => {
         <Background>
           <ResponsiveImage imageSrc={'background2.jpg'} />
         </Background>
+
         <Content>
+          <Newsletter />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
