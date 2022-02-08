@@ -5,6 +5,7 @@ export const AppSettings = {
   },
   searchEndpoint: 'https://www.pola-app.pl/a/v4/search',
   eanEndpoint: 'https://www.pola-app.pl/a/v4/get_by_code',
+  getResponseEndpoint: 'https://api.getresponse.com/v3/',
   search: {
     SHOW_SUBMIT_BUTTON: true,
     SHOW_BARCODE_ICON: false,
