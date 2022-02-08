@@ -34,14 +34,8 @@ export class GetResponseService extends ApiAdapter {
           console.log('Follower successfully subscribed to newsletter', context);
         })
         .catch((error: AxiosError) => {
-          switch (error.response!.status) {
-            case 401:
-            case 409:
-            case 429:
-            case 400:
-            default:
-              console.error(JSON.stringify(error.response));
-          }
+          console.error(JSON.stringify(error.response));
+          throw this.handleError(error);
         });
     } catch (e) {
       throw new FetchError(API_NAME, e);

@@ -3,6 +3,9 @@ import { AxiosError } from 'axios';
 export enum ErrorMessage {
   UNEXPECTED_ERROR = 'Unexpected error',
   FETCH_UNSUCCESSFUL = 'Cannot fetch data, check if endpoint is available',
+  UNAUTHENTICATED_REQUEST = 'Cannot authenticate request',
+  RESOURCE_CONFLICT = 'Operation conflicting with existing resource state',
+  REQUESTS_LIMIT_EXCEEDED = 'Limit of requests in a time-frame has been reached. Try again later.',
   EMPTY_PAYLOAD = 'Obtained empty payload',
   INVALID_DATA = 'Obtained invalid data for search query',
   INVALID_REQUEST = 'Invalid request structure',
@@ -79,6 +82,42 @@ export class BadRequestError extends ErrorHandler {
     super();
     this.name = 'Bad request';
     this.message = this.buildMessage(ErrorMessage.INVALID_REQUEST);
+  }
+}
+
+export class AuthenticationError extends ErrorHandler {
+  /**
+   * Error describes authentication problem
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Authentication error';
+    this.message = this.buildMessage(ErrorMessage.UNAUTHENTICATED_REQUEST);
+  }
+}
+
+export class ResourceConflictError extends ErrorHandler {
+  /**
+   * Error describes invalid operation conflicting with existing resource state
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Resource conflict error';
+    this.message = this.buildMessage(ErrorMessage.RESOURCE_CONFLICT);
+  }
+}
+
+export class RequestsLimitExceeded extends ErrorHandler {
+  /**
+   * Error describes exceeding limit for requests in one time-frame
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Requests limit exceeded';
+    this.message = this.buildMessage(ErrorMessage.REQUESTS_LIMIT_EXCEEDED);
   }
 }
 

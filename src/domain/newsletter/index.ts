@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 /**
  * Represents the contact resource in GetResponse API
  * https://apireference.getresponse.com/?_ga=2.190951978.1273476293.1644271128-1725880598.1644271128#
