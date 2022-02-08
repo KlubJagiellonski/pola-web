@@ -22,7 +22,6 @@ export abstract class ApiAdapter {
   }
 
   protected handleError(error: unknown) {
-    console.error('handle error');
     if (!(error instanceof Error)) {
       return new ApiAdapterError(this.apiName);
     } else if (axios.isAxiosError(error)) {

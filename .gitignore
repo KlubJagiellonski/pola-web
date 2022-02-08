@@ -1,6 +1,9 @@
 build
 public
 
+# Security
+get-response.json
+
 # Logs
 logs
 *.log

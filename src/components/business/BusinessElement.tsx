@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import Img, { FluidObject } from 'gatsby-image';
 import { ColumnsLayout, ContentColumn } from '../../layout/ColumnsLayout';
-import { fontSize, color, lineHeight, Device, padding } from '../../styles/theme';
+import { fontSize, color, lineHeight, Device, padding, introHeight } from '../../styles/theme';
 
 interface BusinessElement {
   html: any;
@@ -10,8 +10,8 @@ interface BusinessElement {
 }
 
 const Wrapper = styled.div`
-  padding-top: 260px;
-  margin-top: -260px;
+  padding-top: ${introHeight};
+  margin-top: -${introHeight};
 
   @media ${Device.mobile} {
     padding-top: 120px;

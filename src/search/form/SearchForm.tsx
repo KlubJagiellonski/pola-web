@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SearchInput } from './SearchInput';
 import ErrorBoundary from '../../utils/error-boundary';
-import { Device, fontSize, color, margin, lineHeight } from '../../styles/theme';
+import { Device, fontSize, color, margin, lineHeight, introHeight } from '../../styles/theme';
 import { TitleSection } from '../../styles/GlobalStyle.css';
 import { MobileApps } from '../../components/MobileApps';
 
@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-flow: column;
   width: 100%;
-  padding-top: 260px;
+  padding-top: ${introHeight};
   padding-bottom: 70px;
   position: relative;
   text-align: left;

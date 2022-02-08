@@ -6,9 +6,13 @@ import * as actions from './newsletter-actions';
 
 export const newsletterDispatcher = {
   subscribeEmail: (email: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
-    const service = GetResponseService.getInstance();
-    const follower = Follower.create(email, 'campaign_id_placeholder');
-    //service.subscribeFollower(follower);
-    await dispatch(actions.Subscribe(follower));
+    try {
+      const follower = Follower.create(email, 'campaign_id_placeholder');
+      const service = GetResponseService.getInstance();
+      service.subscribeFollower(follower);
+      await dispatch(actions.Subscribe(follower));
+    } catch (error: unknown) {
+      console.error(error);
+    }
   },
 };

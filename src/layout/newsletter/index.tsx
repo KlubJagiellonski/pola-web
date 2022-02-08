@@ -1,14 +1,14 @@
-import debounce from 'lodash.debounce';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ButtonThemes } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { FormInput } from '../../components/form-input';
-import { fontSize, Device, color, padding } from '../../styles/theme';
+import { fontSize, color, padding } from '../../styles/theme';
 import { validateEmail } from '../../utils/strings';
 
 const Container = styled.div`
   max-width: 30em;
+  padding-top: 60px;
 `;
 
 const SubscribeForm = styled.div`

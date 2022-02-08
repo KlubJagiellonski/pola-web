@@ -33,8 +33,9 @@ export class Follower {
   }
 
   public static create(email: string, campaignId: string) {
-    if (!validateEmail(email)) {
-      throw Error('invalid email');
+    const errorMessage = validateEmail(email);
+    if (errorMessage) {
+      throw Error(errorMessage);
     }
 
     return new Follower(email, campaignId);
