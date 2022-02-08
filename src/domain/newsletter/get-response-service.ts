@@ -19,10 +19,8 @@ export class GetResponseService extends ApiAdapter {
     super(API_NAME, AppSettings.getResponseEndpoint);
   }
 
-  public subscribeNewsletter(email: string) {
+  public subscribeFollower(follower: Follower) {
     try {
-      const follower = Follower.create(email, 'campaign_id_placeholder');
-
       axios
         .post(`${this.apiUrl}/contacts`, follower, {
           headers: {
@@ -31,7 +29,7 @@ export class GetResponseService extends ApiAdapter {
         })
         .then((response: AxiosResponse) => {
           const context = new NewsletterApiResponseContext(response.headers);
-          console.log('Follower successfully subscribed to newsletter', context);
+          console.log('Follower successfully subscribed to the newsletter', context);
         })
         .catch((error: AxiosError) => {
           console.error(JSON.stringify(error.response));

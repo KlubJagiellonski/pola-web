@@ -19,6 +19,7 @@ import { FirstPageResults } from '../search/results-list/FirstPageResults';
 import { EAN, ISearchResults } from '../domain/products';
 import { Friend } from '../domain/friends';
 import { appDispatcher } from '../state/app/app-dispatcher';
+import { newsletterDispatcher } from '../state/newsletter/newsletter-dispatcher';
 import DevelopmentSection from '../components/DevelopmentSection';
 import SocialMedia from '../components/social-media/SocialMedia';
 import Friends from '../components/friends/Friends';
@@ -54,6 +55,7 @@ const connector = connect(
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
+    subscribeEmail: newsletterDispatcher.subscribeEmail,
   }
 );
 
@@ -140,7 +142,7 @@ type IHomePage = ReduxProps & {
 };
 
 const HomePage = (props: IHomePage) => {
-  const { location, searchState, searchResults } = props;
+  const { location, searchState, searchResults, subscribeEmail } = props;
   const dispatch = useDispatch();
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
@@ -164,7 +166,7 @@ const HomePage = (props: IHomePage) => {
         </Background>
 
         <Content>
-          <Newsletter />
+          <Newsletter onSubscribe={subscribeEmail} />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}

@@ -1,3 +1,5 @@
+import { validateEmail } from '../../utils/strings';
+
 /**
  * Represents the contact resource in GetResponse API
  * https://apireference.getresponse.com/?_ga=2.190951978.1273476293.1644271128-1725880598.1644271128#
@@ -30,14 +32,8 @@ export class Follower {
     this.campaign.campaignId = campaignId;
   }
 
-  private static emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  private static isEmailValid = (email?: string): boolean => {
-    return email ? Follower.emailRegex.test(email) : false;
-  };
-
   public static create(email: string, campaignId: string) {
-    if (!Follower.isEmailValid(email)) {
+    if (!validateEmail(email)) {
       throw Error('invalid email');
     }
 

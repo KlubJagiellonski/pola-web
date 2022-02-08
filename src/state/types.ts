@@ -20,3 +20,5 @@ export interface IAction extends AnyAction {
 export interface IActionReducer<TState> {
   [actionName: string]: Reducer<TState, IAction>;
 }
+
+export type Validator<T> = (value: T) => string | undefined;
