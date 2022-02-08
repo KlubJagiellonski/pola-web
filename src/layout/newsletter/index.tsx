@@ -1,16 +1,34 @@
 import debounce from 'lodash.debounce';
-import { em } from 'polished';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ButtonThemes } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { Input } from '../../components/input';
+import { FormInput } from '../../components/form-input';
+import { fontSize, Device, color, padding } from '../../styles/theme';
 import { validateEmail } from '../../utils/strings';
 
 const Container = styled.div`
-  position: absolute;
-  top: 20em;
+  max-width: 30em;
+`;
+
+const SubscribeForm = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  background-color: ${color.background.white};
+  border-radius: 1.5em;
   z-index: 10;
+  padding: 0.2em 0.2em 0.2em 1.5em;
+`;
+
+const ErrorMessage = styled.div`
+  background-color: ${color.background.transparencyGrey};
+  color: ${color.text.red};
+  border-radius: 0.2em;
+  font-size: ${fontSize.small};
+  margin: ${padding.small} ${padding.normal};
+  line-height: ${fontSize.small};
+  padding: ${padding.small};
 `;
 
 interface INewsletter {
@@ -19,27 +37,27 @@ interface INewsletter {
 
 export const Newsletter: React.FC<INewsletter> = ({ onSubscribe }) => {
   const [email, setEmail] = useState<string>();
+  const [message, setMessage] = useState<string>();
 
-  const handleChange = debounce((value: string) => setEmail(value), 1000);
+  const handleChange = (value: string) => setEmail(value);
 
   const handleSubscribe = () => {
-    console.log('subscribed!');
-    if (email && email.length > 0) {
+    const validationMessage = email && validateEmail(email);
+    if (validationMessage) {
+      setMessage(validationMessage);
+    } else if (email && email.length > 0) {
       onSubscribe(email);
     }
   };
 
   return (
     <Container>
-      <Input
-        name="follower-email"
-        type="email"
-        value={email}
-        placeholder="Twój email"
-        onChange={handleChange}
-        validator={validateEmail}
-      />
-      <SecondaryButton label="Subscribe" onClick={handleSubscribe} styles={ButtonThemes.WhiteRed} />
+      <h2>NEWSLETTER</h2>
+      <SubscribeForm>
+        <FormInput name="follower-email" type="email" value={email} placeholder="Twój email" onChange={handleChange} />
+        <SecondaryButton label="Zapisz" onClick={handleSubscribe} styles={ButtonThemes.Red} />
+      </SubscribeForm>
+      {message && <ErrorMessage>Nieprawidłowy adres email</ErrorMessage>}
     </Container>
   );
 };
