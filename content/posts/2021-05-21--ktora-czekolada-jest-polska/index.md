@@ -7,7 +7,7 @@ cover: zestawienie-czekolada.png
 
 E. Wedel a właściwie teraz Lotte Wedel Sp. z o.o. to najstarsza w Polsce fabryka czekolady, która została założona przez Karola Wedla. Po roku 1989 zaczęto proces prywatyzacji spółki. W wyniku tego aplikacja Pola przyznaje 55 pkt na możliwe 100.
 
-![](zestawienie-czekolada.png) Najczęściej skanowaną czekoladą w naszej aplikacji jest E. Wedel Czekolada gorzka 100g o kodzie 5901588016030 z liczbą 8182 skanowań. Natomiast produktem Lindt’a, który był najwięcej razy skanowany jest Lindt Excellence 85% czekolada ciemna 100 g z kodem 3046920028363 i 648 liczbą skanowań. Jeden z najbardziej znanych producentów czekolady na świecie otrzymał zgodnie z punktacją Poli 10 pkt.
+Najczęściej skanowaną czekoladą w naszej aplikacji jest E. Wedel Czekolada gorzka 100g o kodzie 5901588016030 z liczbą 8182 skanowań. Natomiast produktem Lindt’a, który był najwięcej razy skanowany jest Lindt Excellence 85% czekolada ciemna 100 g z kodem 3046920028363 i 648 liczbą skanowań. Jeden z najbardziej znanych producentów czekolady na świecie otrzymał zgodnie z punktacją Poli 10 pkt.
 
 **„Colian to polska grupa kapitałowa, w której zdecydowaną większość udziałów posiada rodzina Kolańskich. Należy do niej kilka marek oferujących słodycze, bakalie, napoje, przyprawy itp. Siedziba Grupy Colian znajduje się w Opatówku k. Kalisza. Tam mieści się też jeden z zakładów produkcyjnych. Pozostałe fabryki działają w Bydgoszczy, Poznaniu, Lublinie, Kaliszu i Wykrotach. Colian konsekwentnie realizuje ekspansję na rynki zagraniczne.”.** - taki opis firmy [możemy znaleźć](https://www.pola-app.pl/) skanując marki należące do grupy Colian w aplikacji Pola. Są to między innymi takie nazwy handlowe jak Helena, Goplana, appetita, Solidarnosć czy Jeżyki.
 

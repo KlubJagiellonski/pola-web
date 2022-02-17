@@ -1,7 +1,6 @@
 ---
 title: Kolejny okrągły stół z Allegro
 subTitle: Wspólny projekt Klubu Jagiellońskiego i Allegro
-category: brak
 cover: allegro.PNG
 ---
 
