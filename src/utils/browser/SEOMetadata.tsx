@@ -7,6 +7,7 @@ interface ISEOMetadata {
   lang?: string;
   meta?: any[];
   description?: string;
+  image?: string;
 }
 
 /**
@@ -15,7 +16,7 @@ interface ISEOMetadata {
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-const SEOMetadata: React.FC<ISEOMetadata> = ({ pageTitle, description = '', lang = 'en', meta = [] }) => {
+const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, description = '', lang = 'en', meta = [] }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -24,6 +25,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ pageTitle, description = '', lang
             title
             description
             author
+            siteUrl
           }
         }
       }
@@ -73,6 +75,22 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ pageTitle, description = '', lang
           name: 'twitter:description',
           content: metaDescription,
         },
+        ...(image
+          ? [
+              {
+                name: 'og:image',
+                content: `${site.siteMetadata.siteUrl}${image}`,
+              },
+              {
+                name: 'twitter:image',
+                content: `${site.siteMetadata.siteUrl}${image}`,
+              },
+              {
+                name: 'og:image:width',
+                content: '1200',
+              },
+            ]
+          : []),
       ].concat(meta)}
     />
   );
