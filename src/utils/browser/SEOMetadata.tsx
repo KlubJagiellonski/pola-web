@@ -76,11 +76,11 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
         },
         {
           name: 'og:image',
-          content: image,
+          content: 'https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg',
         },
         {
           name: 'twitter:image',
-          content: image,
+          content: 'https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg',
         },
       ].concat(meta)}
     />
