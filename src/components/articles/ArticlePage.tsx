@@ -80,7 +80,7 @@ const ArticlePage = (props: IArticlePage) => {
 
   return (
     <PageLayout>
-      <SEOMetadata pageTitle={`Pola Web | ${title}`} />
+      <SEOMetadata pageTitle={`Pola Web | ${title}`} image={fluid.src} />
       <PageSection>
         <Wrapper>
           <FirstColumn>

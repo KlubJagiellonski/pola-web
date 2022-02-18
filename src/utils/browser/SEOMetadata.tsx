@@ -74,6 +74,10 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           name: 'twitter:description',
           content: metaDescription,
         },
+        {
+          name: 'og:image',
+          content: image,
+        },
       ].concat(meta)}
     />
   );
