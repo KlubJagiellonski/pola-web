@@ -21,6 +21,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
     graphql`
       query {
         site {
+          pathPrefix
           siteMetadata {
             title
             description
@@ -48,7 +49,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
         },
         {
           property: 'og:title',
-          content: 'test',
+          content: browserTabTitle,
         },
         {
           property: 'og:description',
@@ -74,18 +75,22 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           name: 'twitter:description',
           content: metaDescription,
         },
-        {
-          name: 'og:image',
-          content: 'https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg',
-        },
-        {
-          name: 'twitter:image',
-          content: 'https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg',
-        },
-        {
-          name: 'og:image:width',
-          content: '1200',
-        },
+        ...(image
+          ? [
+              {
+                name: 'og:image',
+                content: `${site.pathPrefix}${image}`,
+              },
+              {
+                name: 'twitter:image',
+                content: `${site.pathPrefix}${image}`,
+              },
+              {
+                name: 'og:image:width',
+                content: '1200',
+              },
+            ]
+          : []),
       ].concat(meta)}
     />
   );
