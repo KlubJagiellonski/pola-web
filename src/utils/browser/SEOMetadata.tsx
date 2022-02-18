@@ -21,11 +21,11 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
     graphql`
       query {
         site {
-          pathPrefix
           siteMetadata {
             title
             description
             author
+            siteUrl
           }
         }
       }
@@ -79,11 +79,11 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           ? [
               {
                 name: 'og:image',
-                content: `${site.pathPrefix}${image}`,
+                content: `${site.siteMetadata.siteUrl}${image}`,
               },
               {
                 name: 'twitter:image',
-                content: `${site.pathPrefix}${image}`,
+                content: `${site.siteMetadata.siteUrl}${image}`,
               },
               {
                 name: 'og:image:width',
