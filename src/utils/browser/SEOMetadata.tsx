@@ -82,6 +82,10 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           name: 'twitter:image',
           content: 'https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg',
         },
+        {
+          name: 'og:image:width',
+          content: '1200',
+        },
       ].concat(meta)}
     />
   );
