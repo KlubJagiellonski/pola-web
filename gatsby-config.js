@@ -6,7 +6,7 @@ module.exports = {
     title: `Pola Web`,
     description: `Strona aplikacji Pola`,
     author: `Klub Jagielloński`,
-    siteUrl: process.env.PUBLIC_URL || 'http://localhost:8000',
+    siteUrl: new URL(process.env.PUBLIC_URL).origin || 'http://localhost:8000',
   },
   plugins: [
     'gatsby-plugin-use-query-params',
