@@ -5,6 +5,7 @@ import { padding, fontSize, color } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
 import { Field, getPropertiesFromManufacturer, PolishPropertyName, ValueCheckboxField } from './PolishValues';
 import { AppSettings } from '../../state/app-settings';
+import { RussiaInfoBox } from '../RussiaInfoBox';
 
 const DetailsContainer = styled.div`
   padding: ${padding.normal};
@@ -52,6 +53,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       <header>
         <h3>{product.name}</h3>
       </header>
+      <RussiaInfoBox product={product} />
       <Field>
         <p className="property underline">{product.manufacturer.name}</p>
         <p className="property">{product.manufacturer.description}</p>
