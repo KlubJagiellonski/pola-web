@@ -4,6 +4,7 @@ import { EAN, IProductData } from '../../domain/products';
 import { padding, color, fontSize, lineHeight, Device } from '../../styles/theme';
 import { ScoreBar } from '../../components/ScoreBar';
 import { AppSettings } from '../../state/app-settings';
+import { RussiaInfoBox } from '../RussiaInfoBox';
 
 const ListElement = styled.li`
   min-width: 40em;
@@ -60,22 +61,25 @@ interface ISearchResultElement {
   onSelect: (code: EAN) => void;
 }
 
-export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => (
-  <ListElement onClick={(e) => onSelect(product.code)}>
-    <ResultElement>
-      <span className="name">{product.name}</span>
-      {AppSettings.search?.SHOW_RESULT_BRAND && (
-        <ResultProperty value={product.brand?.name} label="Marka" missingValuePlaceholder="nieznana marka" />
-      )}
-      {AppSettings.search?.SHOW_RESULT_MANUFACTURER && (
-        <ResultProperty value={product.company?.name} label="Producent" missingValuePlaceholder="nieznay producent" />
-      )}
-    </ResultElement>
-    <ScoreBar
-      value={product.company?.score}
-      unit="pkt"
-      missingValuePlaceholder="Brak wyniku w rankingu Poli"
-      animation={{ duration: 1, delay: 0.2 }}
-    />
-  </ListElement>
-);
+export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => {
+  return (
+    <ListElement onClick={(e) => onSelect(product.code)}>
+      <ResultElement>
+        <span className="name">{product.name}</span>
+        {AppSettings.search?.SHOW_RESULT_BRAND && (
+          <ResultProperty value={product.brand?.name} label="Marka" missingValuePlaceholder="nieznana marka" />
+        )}
+        {AppSettings.search?.SHOW_RESULT_MANUFACTURER && (
+          <ResultProperty value={product.company?.name} label="Producent" missingValuePlaceholder="nieznay producent" />
+        )}
+        <RussiaInfoBox product={product} />
+      </ResultElement>
+      <ScoreBar
+        value={product.company?.score}
+        unit="pkt"
+        missingValuePlaceholder="Brak wyniku w rankingu Poli"
+        animation={{ duration: 1, delay: 0.2 }}
+      />
+    </ListElement>
+  );
+};
