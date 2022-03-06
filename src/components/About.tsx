@@ -22,7 +22,7 @@ const MockUp = styled.div`
 
   .gatsby-image-wrapper {
     div {
-      padding-bottom: 18.8em !important;
+      padding-bottom: 17.8em !important;
     }
   }
 `;
