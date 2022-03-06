@@ -73,7 +73,7 @@ jobs:
       run: |
         echo 'PUBLIC_URL=https://pola-staging.herokuapp.com/' >> $GITHUB_ENV
     - name: 🗂 Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: 🟢 Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2.5.1
       with:
