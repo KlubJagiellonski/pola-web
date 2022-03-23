@@ -3,6 +3,7 @@ title: Marki własne Lidla w aplikacji Pola
 subTitle: Nawet 90% Polaków chce znać pochodzenie produktu przed jego zakupem. Największą tajemnicę na sklepowych półkach stanowią marki własne sieci handlowych. Lidl zdecydował się przekazać aplikacji Pola informacje o swoich markach własnych.
 category: 'Pola'
 cover: lidl.jpg
+twitter: WEST
 ---
 
 „Użytkownicy naszej aplikacji wielokrotnie zwracali uwagę na problem z rozpoznawaniem marek własnych sieci handlowych. Dlatego doceniamy działanie firmy Lidl Polska. Transparentność w zakresie dostawców i pochodzenia produktów to wzorcowa, prokonsumencka postawa. Dzięki temu wzmocni się dyskusja na temat definicji polskości produktów.

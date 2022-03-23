@@ -3,6 +3,7 @@ title: Tarczyński, Lidl, Trans.eu, ERBUD, Arche
 subTitle: Biznes wspiera Ukrainę 2
 category: Solidarni
 cover: biznes.png
+twitter: WEST
 ---
 
 ###Branża spożywcza wspiera Ukraińców.

@@ -3,6 +3,7 @@ title: 100% celu naszej zbiórki. Dziękujemy!
 subTitle: Po raz kolejny zbiórka na dalszy rozówj aplikacji osiągnęła pierwszy próg
 category: 'Pola'
 cover: piniondz.jpg
+twitter: WEST
 ---
 
 Dzięki waszemu wsparciu możemy się dalej rozwijać!

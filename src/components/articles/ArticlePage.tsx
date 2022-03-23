@@ -68,6 +68,9 @@ const ArticlePage = (props: IArticlePage) => {
   const date = ((article || {}).fields || {}).prefix;
   const html = (article || {}).html;
   const fluid = ((article || {}).frontmatter || {}).cover.childImageSharp.fluid;
+  const fixed = ((article || {}).frontmatter || {}).cover.childImageSharp.twitter;
+
+  console.log(fixed);
 
   const dispatch = useDispatch();
 
@@ -80,7 +83,7 @@ const ArticlePage = (props: IArticlePage) => {
 
   return (
     <PageLayout>
-      <SEOMetadata pageTitle={title} image={fluid.src} />
+      <SEOMetadata pageTitle={title} image={fixed.src} />
       <PageSection>
         <Wrapper>
           <FirstColumn>
