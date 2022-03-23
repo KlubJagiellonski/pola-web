@@ -9,12 +9,8 @@ import { Title } from '../../components/Teams.css';
 import { Text } from '../../styles/GlobalStyle.css';
 import styled from 'styled-components';
 
-const Content = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  gap: ${padding.big};
-  width: 100%;
-  justify-content: center;
+const InfoTile = styled.div`
+  padding-bottom: ${padding.big};
 `;
 
 const buttonStyle = { ...ButtonThemes[ButtonFlavor.RED], fontSize: fontSize.small, lowercase: true };
@@ -22,21 +18,21 @@ const buttonStyle = { ...ButtonThemes[ButtonFlavor.RED], fontSize: fontSize.smal
 export const MissingProductInfo = () => (
   <InfoBox>
     <Title>Nie znalazłeś czego szukasz?</Title>
-    <Content>
-      <div className="info-tile">
+    <div className="content">
+      <InfoTile>
         <Text>Zgłoś brakującą firmę, produkt lub błąd w danych.</Text>
         <a href={urls.external.mail.Klub.href}>
           <SecondaryButton styles={buttonStyle}>
             <p>pola@klubjagiellonski.pl</p>
           </SecondaryButton>
         </a>
-      </div>
-      <div className="info-tile">
+      </InfoTile>
+      <InfoTile>
         <Text>Twojej firmy nie ma w bazie?</Text>
         <SecondaryButton onClick={() => openNewTab(urls.external.links.form)} styles={buttonStyle}>
           <p>Wypełnij formularz</p>
         </SecondaryButton>
-      </div>
-    </Content>
+      </InfoTile>
+    </div>
   </InfoBox>
 );
