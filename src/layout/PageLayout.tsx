@@ -87,7 +87,7 @@ const Layout: React.FC<IPageLayout> = ({
   return (
     <ErrorBoundary scope="page-layout">
       <StateLoader />
-      <LayoutContainer>
+      <LayoutContainer id="layout-container">
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
         <PageHeader

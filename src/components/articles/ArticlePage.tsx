@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     display: inline;
     gap: 0;
   }
-`
+`;
 
 const FirstColumn = styled.div`
   flex: 3;
@@ -52,14 +52,13 @@ const FirstColumn = styled.div`
 
   @media ${Device.mobile} {
     margin-top: ${margin.veryBig};
-
   }
-`
+`;
 
 const SecondColumn = styled.div`
   flex: 1;
   flex-basis: 0;
-`
+`;
 
 const ArticlePage = (props: IArticlePage) => {
   const { location, article, author, slug, facebook, articles, friends } = props;
@@ -81,18 +80,12 @@ const ArticlePage = (props: IArticlePage) => {
 
   return (
     <PageLayout>
-      <SEOMetadata pageTitle={`Pola Web | ${title}`} />
+      <SEOMetadata pageTitle={title} image={fluid.src} />
       <PageSection>
         <Wrapper>
           <FirstColumn>
             <PageSection>
-              <ArticleHeader
-                title={title}
-                subTitle={subTitle}
-                date={date}
-                fluid={fluid}
-                category={category}
-              />
+              <ArticleHeader title={title} subTitle={subTitle} date={date} fluid={fluid} category={category} />
             </PageSection>
             <PageSection>
               <Content html={html} />
@@ -107,8 +100,11 @@ const ArticlePage = (props: IArticlePage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({
-  location: state.app.location,
-  articles: state.articles.data,
-  friends: state.friends.data
-}), {})(ArticlePage);
+export default connect(
+  (state: IPolaState) => ({
+    location: state.app.location,
+    articles: state.articles.data,
+    friends: state.friends.data,
+  }),
+  {}
+)(ArticlePage);

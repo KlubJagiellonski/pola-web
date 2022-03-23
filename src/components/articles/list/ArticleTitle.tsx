@@ -22,7 +22,7 @@ export const Title = styled(TitleSection)`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  line-height: 22px;
+  line-height: 24px;
 `;
 
 const ArticleLink = styled(Link)`
