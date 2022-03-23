@@ -70,8 +70,6 @@ const ArticlePage = (props: IArticlePage) => {
   const fluid = ((article || {}).frontmatter || {}).cover.childImageSharp.fluid;
   const fixed = ((article || {}).frontmatter || {}).cover.childImageSharp.twitter;
 
-  console.log(fixed);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
