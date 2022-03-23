@@ -1,8 +1,9 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { PageLinkData, PageType } from '../../domain/website';
+import { ExternalLinkData, PageLinkData, PageType } from '../../domain/website';
 import { color, Device, margin } from '../../styles/theme';
+import { ExternalLink } from '../../utils/browser/links';
 
 const Item = styled.div<{ selected: boolean }>`
   display: flex;
@@ -46,10 +47,30 @@ interface INavItem {
 
 export const NavItem: React.FC<INavItem> = ({ data, activePage }) => {
   const selected = data.type === activePage;
+  const href = typeof data.url === 'function' ? data.url() : data.url;
 
   return (
     <Item className={data.type} selected={selected}>
-      <Link to={data.url}>{data.label}</Link>
+      <Link to={href}>{data.label}</Link>
+      {selected && <Cricle />}
+    </Item>
+  );
+};
+
+interface IExtNavItem {
+  data: ExternalLinkData;
+  activePage: PageType;
+}
+
+export const ExtNavItem: React.FC<IExtNavItem> = ({ data, activePage }) => {
+  const selected = data.type === activePage;
+  const href = typeof data.url === 'function' ? data.url() : data.url;
+
+  return (
+    <Item className={data.type} selected={selected}>
+      <ExternalLink url={href} newTab={true}>
+        {data.label}
+      </ExternalLink>
       {selected && <Cricle />}
     </Item>
   );
