@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { Device, fontSize, color, padding, margin, px } from '../../styles/theme';
+import { Device, color, padding, margin, px, fontSize } from '../../styles/theme';
 import Kod from '../../assets/kod.svg';
 import Microphone from '../../assets/microphone.svg';
 import InfoIcon from '../../assets/info-2.png';
@@ -45,20 +45,12 @@ const InputSection = styled(InputElement)`
   }
 `;
 
-const InputOverlay = styled(InputElement)`
-  background-color: black;
-  opacity: 0.1;
-  position: absolute;
-  z-index: 10;
-`;
-
 const InputText = styled.input`
   background-color: transparent;
   border: none;
   font-size: ${fontSize.normal};
   width: 100%;
   height: 100%;
-  padding: 0 ${padding.small};
 
   &:focus,
   &:active {
@@ -70,6 +62,13 @@ const InputText = styled.input`
     max-width: none;
     width: 100%;
   }
+`;
+
+const InputOverlay = styled(InputElement)`
+  background-color: black;
+  opacity: 0.1;
+  position: absolute;
+  z-index: 10;
 `;
 
 const InputIconSection = styled.div`

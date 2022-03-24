@@ -24,10 +24,7 @@ export enum PolishPropertyName {
   NOT_GLOBAL = 'plNotGlobEnt',
 }
 
-export const getPropertiesFromManufacturer = (
-  manufacturer: IManufacturer,
-  name: PolishPropertyName
-): IPolishProperty => {
+export const getPropertiesFromManufacturer = (manufacturer: IManufacturer, name: PolishPropertyName) => {
   const value = manufacturer[name];
   const notes = manufacturer[(name + '_notes') as keyof IManufacturer] as string;
 
