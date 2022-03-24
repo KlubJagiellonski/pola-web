@@ -11,7 +11,7 @@ export const ToastMessage = styled.div<IToastMessage>`
   border-radius: 0.2em;
   font-size: ${fontSize.small};
   line-height: ${lineHeight.normal};
-  margin: 0 ${({ marginHorizontal }) => marginHorizontal || 0};
+  margin: 0 ${({ styles }) => styles?.marginHorizontal || 0};
   padding: ${padding.tiny} ${padding.small};
 `;
 

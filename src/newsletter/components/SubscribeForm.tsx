@@ -8,9 +8,15 @@ import { validateEmail } from '../../utils/strings';
 import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscribeInput } from './SubscribeInput';
 
-const Container = styled.div`
+interface INewsletterFormStyles {
+  spaceTop?: string;
+  spaceBottom?: string;
+}
+
+const Container = styled.div<{ styles?: INewsletterFormStyles }>`
   max-width: 25em;
-  padding-top: 60px;
+  padding-top: ${({ styles }) => styles?.spaceTop || 0};
+  padding-bottom: ${({ styles }) => styles?.spaceBottom || 0};
 `;
 
 const Form = styled.div`
@@ -22,10 +28,11 @@ const Form = styled.div`
 
 interface ISubscribeForm {
   status: SubscriptionStatus;
+  styles?: INewsletterFormStyles;
   onSubmit: (email: string, name?: string) => void;
 }
 
-export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, onSubmit }) => {
+export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubmit }) => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>();
@@ -42,8 +49,8 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, onSubmit }) =>
   };
 
   return (
-    <Container>
-      <h2>Newsletter</h2>
+    <Container styles={styles}>
+      <h2>Zapisz się do newslettera Poli</h2>
       <Form>
         <SubscribeInput
           name="follower-name"

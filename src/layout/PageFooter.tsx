@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { color, Device, fontSize, padding, pageWidth, margin } from '../styles/theme';
@@ -7,13 +8,17 @@ import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
 import { TextExternalLink, TextLink } from '../utils/browser/links';
 
 import LogoWhite from '../assets/logo/pola-white.svg';
+import { SubscribeForm } from '../newsletter/components/SubscribeForm';
+import { IPolaState } from '../state/types';
+import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
 
 const FooterContainer = styled.footer`
   background-color: ${color.background.dark};
   color: ${color.text.light};
   margin: 0 auto;
   width: 100%;
-  padding: ${padding.big} 0;
+  padding-top: ${padding.big};
+  padding-bottom: ${padding.big};
 
   .footer-content {
     display: flex;
@@ -107,9 +112,32 @@ const FooterSection: React.FC<IFooterSection> = ({ title, children }) => (
   </Section>
 );
 
-export const PageFooter = () => {
+const connector = connect(
+  (state: IPolaState) => {
+    const { newsletter } = state;
+    return {
+      newsletterStatus: newsletter.status,
+    };
+  },
+  {
+    subscribeEmail: newsletterDispatcher.subscribeEmail,
+  }
+);
+
+type PageFooterProps = ConnectedProps<typeof connector> & {};
+
+const FlexHorizontal = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+`;
+
+const PageFooter: React.FC<PageFooterProps> = ({ subscribeEmail, newsletterStatus }) => {
   return (
     <FooterContainer>
+      <FlexHorizontal className="newsletter-container">
+        <SubscribeForm styles={{ spaceBottom: '2rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
+      </FlexHorizontal>
       <div className="footer-content">
         <FooterSection>
           <div className="logo">
@@ -146,3 +174,5 @@ export const PageFooter = () => {
     </FooterContainer>
   );
 };
+
+export default connector(PageFooter);
