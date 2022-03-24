@@ -7,7 +7,7 @@ import { appReducer } from './app/app-reducer';
 import { searchReducer } from './search/search-reducer';
 import { articlesReducer } from './articles/articles-reducer';
 import { friendsReducer } from './friends/friends-reducer';
-import { newsletterReducer } from './newsletter/newsletter-reducer';
+import { newsletterReducer } from '../newsletter/state/newsletter-reducer';
 
 const reducers = combineReducers({
   app: appReducer,

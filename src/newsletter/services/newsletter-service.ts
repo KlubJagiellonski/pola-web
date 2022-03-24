@@ -1,10 +1,10 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
-import { Follower, NewsletterApiResponseContext } from '.';
+import { Follower, NewsletterApiResponseContext } from '..';
 import { ApiAdapter } from '../../services/api-adapter';
 import { FetchError, SubscriptionError } from '../../services/api-errors';
 import { AppSettings } from '../../state/app-settings';
 
-const API_NAME = 'GetResponse API';
+const API_NAME = 'Newsletter API';
 
 export class NewsletterService extends ApiAdapter {
   public static getInstance(): NewsletterService {
@@ -32,7 +32,7 @@ export class NewsletterService extends ApiAdapter {
           return context;
         })
         .catch((error: AxiosError) => {
-          console.error(JSON.stringify(error.response));
+          console.error('Cannot subscribe follower to the newsletter', JSON.stringify(error.response));
           throw new SubscriptionError(error);
         });
     } catch (e) {

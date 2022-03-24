@@ -2,8 +2,8 @@ import { AnyAction, Reducer } from 'redux';
 
 import { actionTypes } from './newsletter-actions';
 import * as actions from './newsletter-actions';
-import { IAction, IActionReducer } from '../types';
-import { Follower, NewsletterApiResponseContext } from '../../domain/newsletter';
+import { IAction, IActionReducer } from '../../state/types';
+import { Follower, NewsletterApiResponseContext } from '..';
 
 export type SubscriptionStatus = 'initial' | 'subscribing' | 'subscribed' | 'failure';
 

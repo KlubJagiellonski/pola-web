@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
-import { Follower } from '../../domain/newsletter';
-import { NewsletterService } from '../../domain/newsletter/newsletter-service';
+import { Follower } from '..';
+import { NewsletterService } from '../services/newsletter-service';
 import { SubscriptionError } from '../../services/api-errors';
-import { IPolaState } from '../types';
+import { IPolaState } from '../../state/types';
 import * as actions from './newsletter-actions';
 
 export const newsletterDispatcher = {

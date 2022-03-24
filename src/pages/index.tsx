@@ -19,7 +19,6 @@ import { FirstPageResults } from '../search/results-list/FirstPageResults';
 import { EAN, ISearchResults } from '../domain/products';
 import { Friend } from '../domain/friends';
 import { appDispatcher } from '../state/app/app-dispatcher';
-import { newsletterDispatcher } from '../state/newsletter/newsletter-dispatcher';
 import DevelopmentSection from '../components/DevelopmentSection';
 import SocialMedia from '../components/social-media/SocialMedia';
 import Friends from '../components/friends/Friends';
@@ -29,11 +28,13 @@ import TeamsFriend from '../components/TeamsFriend';
 import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
 import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
-import { SubscribeForm } from '../layout/newsletter/SubscribeForm';
+
+import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
+import { SubscribeForm } from '../newsletter/components/SubscribeForm';
 
 const connector = connect(
   (state: IPolaState) => {
-    const { search, articles, friends } = state;
+    const { search, newsletter, articles, friends } = state;
     return {
       searchState: search.stateName,
       searchResults:
@@ -45,6 +46,7 @@ const connector = connect(
               token: search.nextPageToken,
             }
           : undefined,
+      newsletterStatus: newsletter.status,
       articles: articles.data,
       friends: friends.data,
     };
@@ -143,7 +145,7 @@ type IHomePage = ReduxProps & {
 };
 
 const HomePage = (props: IHomePage) => {
-  const { location, searchState, searchResults, subscribeEmail } = props;
+  const { location, searchState, searchResults, subscribeEmail, newsletterStatus } = props;
   const dispatch = useDispatch();
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
@@ -167,7 +169,7 @@ const HomePage = (props: IHomePage) => {
         </Background>
 
         <Content>
-          <SubscribeForm onSubscribe={subscribeEmail} />
+          <SubscribeForm status={newsletterStatus} onSubmit={subscribeEmail} />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
