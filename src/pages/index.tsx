@@ -30,7 +30,7 @@ import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
-import { SubscribeForm } from '../newsletter/components/SubscribeForm';
+import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -169,7 +169,7 @@ const HomePage = (props: IHomePage) => {
         </Background>
 
         <Content>
-          <SubscribeForm styles={{ spaceTop: '60px' }} status={newsletterStatus} onSubmit={subscribeEmail} />
+          <SubscribeDialog styles={{ spaceTop: '3rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}

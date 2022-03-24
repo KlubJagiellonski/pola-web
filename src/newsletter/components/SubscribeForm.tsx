@@ -67,7 +67,7 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubm
           placeholder="Twój email"
           onChange={updateEmail}
         />
-        <SecondaryButton label="Zapisz" onClick={handleSubscribe} styles={ButtonThemes.Red} />
+        <SecondaryButton label="Wyślij" onClick={handleSubscribe} styles={ButtonThemes.Red} />
         {status === 'subscribed' && (
           <SuccessMessage>Twój email został dopisany do bazy newslettera Poli!</SuccessMessage>
         )}

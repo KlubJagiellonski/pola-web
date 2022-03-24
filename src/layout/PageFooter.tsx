@@ -8,7 +8,7 @@ import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
 import { TextExternalLink, TextLink } from '../utils/browser/links';
 
 import LogoWhite from '../assets/logo/pola-white.svg';
-import { SubscribeForm } from '../newsletter/components/SubscribeForm';
+import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
 import { IPolaState } from '../state/types';
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
 
@@ -136,7 +136,7 @@ const PageFooter: React.FC<PageFooterProps> = ({ subscribeEmail, newsletterStatu
   return (
     <FooterContainer>
       <FlexHorizontal className="newsletter-container">
-        <SubscribeForm styles={{ spaceBottom: '2rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
+        <SubscribeDialog styles={{ spaceBottom: '1rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
       </FlexHorizontal>
       <div className="footer-content">
         <FooterSection>
