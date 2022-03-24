@@ -6,6 +6,7 @@ export enum PageType {
   ARTICLE = 'article',
   ABOUT = 'about',
   SUPPORT = 'support',
+  COMPANY_FORM = 'company-form',
   FRIENDS = 'friends',
   PARTNERS = 'partners',
   BUSINESS = 'business',
@@ -24,6 +25,12 @@ type HashSection = HomeHash | AboutHash | FriendHash;
 type HrefFunction = (sectionId?: HashSection) => string;
 
 export interface PageLinkData {
+  type: PageType;
+  label: string;
+  url: string | HrefFunction;
+}
+
+export interface ExternalLinkData {
   type: PageType;
   label: string;
   url: string | HrefFunction;
@@ -90,7 +97,7 @@ export const urls: WebsiteMap = {
         'https://www.getresponse.pl/email-marketing/Informacje-prawne/polityka-prywatnosci.html'
       ),
       amazonawsRegulamin: new URL('https://s3.eu-central-1.amazonaws.com/secure-pliki/regulamin.pdf'),
-      form: new URL(
+      newCompanyForm: new URL(
         'https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform'
       ),
       fundraising: new URL('https://klubjagiellonski.pl/zbiorka/wspieraj-aplikacje-pola/'),
@@ -112,7 +119,7 @@ export const urls: WebsiteMap = {
   },
 };
 
-export const pageLinks: PageLinkData[] = [
+export const pageLinks: (PageLinkData | ExternalLinkData)[] = [
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about() },
   { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news() },
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends() },
@@ -121,4 +128,5 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.TEAM, label: 'Dołącz do zespołu', url: urls.pola.team() },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.home('contact') },
   { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.external.links.polaSupport.href },
+  { type: PageType.COMPANY_FORM, label: 'Dodaj firmę', url: urls.external.links.newCompanyForm.href },
 ];

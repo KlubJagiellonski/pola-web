@@ -33,6 +33,7 @@ export const color = {
   },
 };
 
+export const introHeight = '160px';
 export const mobileHeaderHeight = '40px';
 export const desktopHeaderHeight = '112px';
 

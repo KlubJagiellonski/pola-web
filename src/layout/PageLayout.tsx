@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { PageHeader } from './PageHeader';
-import { PageFooter } from './PageFooter';
+import PageFooter from './PageFooter';
 import { IPolaState } from '../state/types';
 import { appDispatcher } from '../state/app/app-dispatcher';
 import { ProductModal } from '../search/product-modal';

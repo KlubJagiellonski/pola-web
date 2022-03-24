@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SearchInput } from './SearchInput';
 import ErrorBoundary from '../../utils/error-boundary';
-import { Device, fontSize, color, margin, lineHeight } from '../../styles/theme';
+import { Device, fontSize, color, margin, lineHeight, introHeight } from '../../styles/theme';
 import { TitleSection } from '../../styles/GlobalStyle.css';
 import { MobileApps } from '../../components/MobileApps';
 
@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-flow: column;
   width: 100%;
-  padding-top: 260px;
+  padding-top: ${introHeight};
   padding-bottom: 70px;
   position: relative;
   text-align: left;
@@ -33,27 +33,6 @@ const Title = styled(TitleSection)`
     width: 100%;
     text-align: center;
     margin-bottom: ${margin.normal};
-  }
-`;
-
-const Text = styled.div`
-  display: flex;
-  flex-flow: column;
-  margin: ${margin.small} 0;
-  padding: 0;
-  font-size: ${fontSize.normal};
-  text-align: left;
-  line-height: ${lineHeight.big};
-  color: ${color.text.secondary};
-
-  @media ${Device.mobile} {
-    text-align: center;
-    font-size: ${fontSize.small};
-    line-height: ${lineHeight.normal};
-  }
-
-  a {
-    color: ${color.text.red};
   }
 `;
 

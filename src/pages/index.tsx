@@ -29,9 +29,12 @@ import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev
 import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
+import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
+import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
+
 const connector = connect(
   (state: IPolaState) => {
-    const { search, articles, friends } = state;
+    const { search, newsletter, articles, friends } = state;
     return {
       searchState: search.stateName,
       searchResults:
@@ -43,6 +46,7 @@ const connector = connect(
               token: search.nextPageToken,
             }
           : undefined,
+      newsletterStatus: newsletter.status,
       articles: articles.data,
       friends: friends.data,
     };
@@ -53,6 +57,7 @@ const connector = connect(
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
+    subscribeEmail: newsletterDispatcher.subscribeEmail,
   }
 );
 
@@ -62,6 +67,7 @@ const Content = styled.div`
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+  position: relative;
 
   @media ${Device.mobile} {
     padding: ${padding.normal};
@@ -139,7 +145,7 @@ type IHomePage = ReduxProps & {
 };
 
 const HomePage = (props: IHomePage) => {
-  const { location, searchState, searchResults } = props;
+  const { location, searchState, searchResults, subscribeEmail, newsletterStatus } = props;
   const dispatch = useDispatch();
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
@@ -161,7 +167,9 @@ const HomePage = (props: IHomePage) => {
         <Background>
           <ResponsiveImage imageSrc={'background2.jpg'} />
         </Background>
+
         <Content>
+          <SubscribeDialog styles={{ spaceTop: '3rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
