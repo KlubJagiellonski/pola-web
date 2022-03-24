@@ -6,29 +6,28 @@ import { AppSettings } from '../../state/app-settings';
 
 const API_NAME = 'GetResponse API';
 
-export class GetResponseService extends ApiAdapter {
-  public static getInstance(): GetResponseService {
-    if (!GetResponseService.instance) {
-      GetResponseService.instance = new GetResponseService();
+export class NewsletterService extends ApiAdapter {
+  public static getInstance(): NewsletterService {
+    if (!NewsletterService.instance) {
+      NewsletterService.instance = new NewsletterService();
     }
-    return GetResponseService.instance;
+    return NewsletterService.instance;
   }
-  private static instance: GetResponseService;
+  private static instance: NewsletterService;
 
   private constructor() {
-    super(API_NAME, AppSettings.getResponseEndpoint);
+    super(API_NAME, AppSettings.newsletterEndpoint);
   }
 
-  public subscribeFollower(follower: Follower) {
+  public subscribeNewsletter(follower: Follower) {
     try {
       axios
-        .post(`${this.apiUrl}/contacts`, follower, {
-          headers: {
-            'X-Auth-Token': 'api-key key_placeholder',
-          },
+        .post(this.apiUrl, {
+          contact_name: follower.name,
+          contact_email: follower.email,
         })
         .then((response: AxiosResponse) => {
-          const context = new NewsletterApiResponseContext(response.headers);
+          const context: NewsletterApiResponseContext = response.data;
           console.log('Follower successfully subscribed to the newsletter', context);
         })
         .catch((error: AxiosError) => {

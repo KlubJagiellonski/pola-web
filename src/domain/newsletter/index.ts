@@ -5,10 +5,6 @@ import { validateEmail } from '../../utils/strings';
  * https://apireference.getresponse.com/?_ga=2.190951978.1273476293.1644271128-1725880598.1644271128#
  */
 export class Follower {
-  public readonly campaign = {
-    campaignId: '',
-  };
-
   /**
    * The day on which the contact is in the Autoresponder cycle.
    * null indicates the contacts is not in the cycle.
@@ -28,39 +24,22 @@ export class Follower {
   public readonly tags?: { tagId: string }[];
   public readonly customFieldValues?: { customFieldId: string; value: string[] }[];
 
-  private constructor(public email: string, campaignId: string, public name?: string) {
-    this.campaign.campaignId = campaignId;
-  }
+  private constructor(public email: string, public name?: string) {}
 
-  public static create(email: string, campaignId: string) {
+  public static create(email: string, name?: string) {
     const errorMessage = validateEmail(email);
     if (errorMessage) {
       throw Error(errorMessage);
     }
 
-    return new Follower(email, campaignId);
+    return new Follower(email, name);
   }
 }
 
-export class NewsletterApiResponseContext {
-  /**
-   * The total number of requests available per time frame
-   */
-  public readonly limit: number;
-
-  /**
-   * The number of requests left in the current time frame
-   */
-  public readonly remaining: number;
-
-  /**
-   * Seconds left in the current time frame, e.g. "432 seconds"
-   */
-  public readonly reset: string;
-
-  public constructor(headers: { [tag: string]: string | number }) {
-    this.limit = headers['X-RateLimit-Limit'] as number;
-    this.remaining = headers['X-RateLimit-Remaining'] as number;
-    this.reset = headers['X-RateLimit-Reset'] as string;
-  }
+export interface NewsletterApiResponseContext {
+  type: string;
+  title: string;
+  status: number;
+  detail: string;
+  instance: string;
 }

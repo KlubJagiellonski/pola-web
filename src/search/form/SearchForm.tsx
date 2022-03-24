@@ -36,27 +36,6 @@ const Title = styled(TitleSection)`
   }
 `;
 
-const Text = styled.div`
-  display: flex;
-  flex-flow: column;
-  margin: ${margin.small} 0;
-  padding: 0;
-  font-size: ${fontSize.normal};
-  text-align: left;
-  line-height: ${lineHeight.big};
-  color: ${color.text.secondary};
-
-  @media ${Device.mobile} {
-    text-align: center;
-    font-size: ${fontSize.small};
-    line-height: ${lineHeight.normal};
-  }
-
-  a {
-    color: ${color.text.red};
-  }
-`;
-
 const SearchWrapper = styled.div`
   margin-top: ${margin.normal};
   display: flex;

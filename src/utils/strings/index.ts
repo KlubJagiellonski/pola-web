@@ -9,10 +9,14 @@ export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @param email
  * @returns undefined for valid email; otherwise error message (string)
  */
-export const validateEmail: Validator<string> = (email: string): string | undefined => {
+export const validateEmail: Validator<string | undefined> = (email: string | undefined): string | undefined => {
+  if (!email || email.length === 0) {
+    return 'brakuje adresu email';
+  }
+
   const isValid = email ? emailRegex.test(email) : false;
   if (!isValid) {
-    return 'email does not match email pattern';
+    return 'nieprawidłowy adres email';
   }
   return;
 };

@@ -1,7 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { Validator } from '../../state/types';
-import { color, fontSize, padding } from '../../styles/theme';
+import { color, fontSize } from '../../styles/theme';
 import { getGuid } from '../../utils/data/random-number';
 
 const InputContainer = styled.div`

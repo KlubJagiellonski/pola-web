@@ -29,7 +29,7 @@ import TeamsFriend from '../components/TeamsFriend';
 import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
 import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
-import { Newsletter } from '../layout/newsletter';
+import { SubscribeForm } from '../layout/newsletter/SubscribeForm';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -167,7 +167,7 @@ const HomePage = (props: IHomePage) => {
         </Background>
 
         <Content>
-          <Newsletter onSubscribe={subscribeEmail} />
+          <SubscribeForm onSubscribe={subscribeEmail} />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
