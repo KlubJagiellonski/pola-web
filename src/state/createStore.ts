@@ -7,10 +7,12 @@ import { appReducer } from './app/app-reducer';
 import { searchReducer } from './search/search-reducer';
 import { articlesReducer } from './articles/articles-reducer';
 import { friendsReducer } from './friends/friends-reducer';
+import { newsletterReducer } from './newsletter/newsletter-reducer';
 
 const reducers = combineReducers({
   app: appReducer,
   search: searchReducer,
+  newsletter: newsletterReducer,
   articles: articlesReducer,
   friends: friendsReducer,
 });

@@ -14,6 +14,7 @@ export enum ErrorMessage {
   NETWORK_ERROR = 'Service is unreachable',
   API_ADAPTER_ERROR = 'Something unexpected happened on communication with a service.',
   SERVICE_ERROR = 'Something unexpected happened on the service. Please try again later.',
+  SUBSCRIPTION_ERROR = 'Cannot subscribe contact to a newsletter',
 }
 
 export abstract class ErrorHandler extends Error {
@@ -179,5 +180,17 @@ export class NetworkError extends ErrorHandler {
     super();
     this.name = 'Network error';
     this.message = this.buildMessage(ErrorMessage.NETWORK_ERROR);
+  }
+}
+
+export class SubscriptionError extends ErrorHandler {
+  /**
+   * Error describes failure of subscribing contact to a newsletter
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Newsletter subscription error';
+    this.message = this.buildMessage(ErrorMessage.SUBSCRIPTION_ERROR);
   }
 }

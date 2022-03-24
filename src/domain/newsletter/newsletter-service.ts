@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Follower, NewsletterApiResponseContext } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
-import { FetchError } from '../../services/api-errors';
+import { FetchError, SubscriptionError } from '../../services/api-errors';
 import { AppSettings } from '../../state/app-settings';
 
 const API_NAME = 'GetResponse API';
@@ -19,9 +19,9 @@ export class NewsletterService extends ApiAdapter {
     super(API_NAME, AppSettings.newsletterEndpoint);
   }
 
-  public subscribeNewsletter(follower: Follower) {
+  public async subscribeNewsletter(follower: Follower) {
     try {
-      axios
+      return axios
         .post(this.apiUrl, {
           contact_name: follower.name,
           contact_email: follower.email,
@@ -29,10 +29,11 @@ export class NewsletterService extends ApiAdapter {
         .then((response: AxiosResponse) => {
           const context: NewsletterApiResponseContext = response.data;
           console.log('Follower successfully subscribed to the newsletter', context);
+          return context;
         })
         .catch((error: AxiosError) => {
           console.error(JSON.stringify(error.response));
-          throw this.handleError(error);
+          throw new SubscriptionError(error);
         });
     } catch (e) {
       throw new FetchError(API_NAME, e);

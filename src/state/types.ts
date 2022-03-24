@@ -3,10 +3,12 @@ import { IAppState } from './app/app-reducer';
 import { IArticlesState } from './articles/articles-reducer';
 import { SearchState } from './search/search-reducer';
 import { IFriendsState } from './friends/friends-reducer';
+import { ISubscribeState } from './newsletter/newsletter-reducer';
 
 export interface IPolaState {
   app: IAppState;
   search: SearchState;
+  nesletter: ISubscribeState;
   articles: IArticlesState;
   friends: IFriendsState;
 }
