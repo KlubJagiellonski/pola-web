@@ -169,7 +169,6 @@ const HomePage = (props: IHomePage) => {
         </Background>
 
         <Content>
-          <SubscribeDialog styles={{ spaceTop: '3rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}

@@ -80,7 +80,9 @@ export const urls: WebsiteMap = {
       polaSupport: new URL('https://klubjagiellonski.pl/zbiorka/wspieraj-aplikacje-pola/'),
       polaGooglePlay: new URL('https://play.google.com/store/apps/details?id=pl.pola_app'),
       polaAppStore: new URL('https://itunes.apple.com/us/app/pola.-zabierz-ja-na-zakupy/id1038401148?ls=1&amp;mt=8'),
-      polaHuaweiAppGallery: new URL('https://consumer.huawei.com/pl/mobileservices/appgallery/'),
+      polaHuaweiAppGallery: new URL(
+        'https://appgallery.huawei.com/app/C105876503?fbclid=IwAR1ODHLJkpxMTkEgnigWNHaDeaQPOHNTf6kNrdoRT6UYhWkU6PQA7QL2Nq8'
+      ),
       openSearch: new URL('https://openresearch.pl/91-polakow-chce-znac-pochodzenie-produktow-ktore-kupuje/'),
       polaGitHub: new URL('https://github.com/KlubJagiellonski'),
       polaPrivacyPolicy: new URL('https://pola-app.s3.amazonaws.com/docs/polityka_prywatnosci.pdf'),

@@ -15,17 +15,17 @@ const Image = styled.img<IIconLink>`
 const DownloadLinks = styled.div`
   display: flex;
   align-items: center;
+
   a {
     padding: ${padding.small};
+  }
 
-    img {
-      @media ${Device.mobile} {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width: 8em;
-      }
+  @media ${Device.mobile} {
+    flex-direction: column;
+    width: 8em;
+
+    a {
+      padding: 0;
     }
   }
 `;
@@ -39,36 +39,35 @@ export const MobileApps: React.FC<IMobileApps> = ({ size = 64 }) => {
     <DownloadLinks>
       {AppSettings.mobile?.SHOW_APPLE_STORE_LINK && <AppStoreLink size={size} />}
       {AppSettings.mobile?.SHOW_GOOGLE_PLAY_LINK && <GooglePlayLink size={size} />}
-      {AppSettings.mobile?.SHOW_HUAWEI_GALLERY_LINK && <HuaweiAppGalleryLink size={size * 1.4} />}
+      {AppSettings.mobile?.SHOW_HUAWEI_GALLERY_LINK && <HuaweiAppGalleryLink size={size} />}
     </DownloadLinks>
   );
 };
 
-export const GooglePlayLink: React.FC<IIconLink> = ({ size = 'auto' }) => (
+export const GooglePlayLink: React.FC<IIconLink> = ({ size = 64 }) => (
   <a href={urls.external.links.polaGooglePlay.href}>
     <Image
-      height={size}
-      src="https://pola-app.s3.amazonaws.com/images/badge-googleplay.png"
+      size={64}
+      src="https://play.google.com/intl/en_us/badges/static/images/badges/pl_badge_web_generic.png"
       alt="Pola application on Google Play"
     />
   </a>
 );
-
-export const AppStoreLink: React.FC<IIconLink> = ({ size = 'auto' }) => (
+export const AppStoreLink: React.FC<IIconLink> = ({ size = 0 }) => (
   <a href={urls.external.links.polaAppStore.href}>
     <Image
-      height={size}
-      src="https://pola-app.s3.amazonaws.com/images/badge-appstore.png"
+      size={48}
+      src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1447113600&h=8701e986920497e467c5544770be8a5c"
       alt="Pola application on App Store"
     />
   </a>
 );
 
-export const HuaweiAppGalleryLink: React.FC<IIconLink> = ({ size = 'auto' }) => (
+export const HuaweiAppGalleryLink: React.FC<IIconLink> = ({ size = 0 }) => (
   <a href={urls.external.links.polaHuaweiAppGallery.href}>
     <Image
       style={{ margin: '-10px' }} // for this specific PNG as there is transparent space around logotype
-      height={size}
+      size={64}
       src="https://www.newseria.pl/files/_uploaded/glownekonf_37779598.png"
       alt="Pola application on Huawei Store"
     />
