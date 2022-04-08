@@ -57,7 +57,7 @@ export const AppStoreLink: React.FC<IIconLink> = ({ size = 0 }) => (
   <a href={urls.external.links.polaAppStore.href}>
     <Image
       size={48}
-      src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1447113600&h=8701e986920497e467c5544770be8a5c"
+      src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/pl-pl?size=250x83&amp;releaseDate=1447113600&h=8701e986920497e467c5544770be8a5c"
       alt="Pola application on App Store"
     />
   </a>
