@@ -84,7 +84,7 @@ jobs:
     - name: 🔧 Build app
       run: npm run build
     - name: 🚀 Upload app as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: app
         path: ./public
