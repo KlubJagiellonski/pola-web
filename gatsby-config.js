@@ -9,6 +9,22 @@ module.exports = {
     siteUrl: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).origin) || 'http://localhost:8000',
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: ['UA-68999963-1'],
+        pluginConfig: {
+          head: true,
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-68999963-1',
+        head: true,
+      },
+    },
     'gatsby-plugin-use-query-params',
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
