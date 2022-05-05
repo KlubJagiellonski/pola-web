@@ -18,13 +18,6 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'UA-68999963-1',
-        head: true,
-      },
-    },
     'gatsby-plugin-use-query-params',
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
