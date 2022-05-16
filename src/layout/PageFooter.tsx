@@ -132,12 +132,9 @@ const FlexHorizontal = styled.div`
   justify-content: center;
 `;
 
-const PageFooter: React.FC<PageFooterProps> = ({ subscribeEmail, newsletterStatus }) => {
+const PageFooter: React.FC = () => {
   return (
     <FooterContainer>
-      <FlexHorizontal className="newsletter-container">
-        <SubscribeDialog styles={{ spaceBottom: '1rem' }} status={newsletterStatus} onSubmit={subscribeEmail} />
-      </FlexHorizontal>
       <div className="footer-content">
         <FooterSection>
           <div className="logo">
