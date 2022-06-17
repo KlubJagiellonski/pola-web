@@ -8,6 +8,14 @@ module.exports = {
     author: `Klub Jagielloński`,
     siteUrl: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).origin) || 'http://localhost:8000',
   },
+  flags: {
+    FAST_DEV: false,
+    FAST_REFRESH: false,
+    DEV_SSR: false,
+    PRESERVE_WEBPACK_CACHE: false,
+    PRESERVE_FILE_DOWNLOAD_CACHE: false,
+    PARALLEL_SOURCING: false,
+  },
   plugins: [
     {
       resolve: `gatsby-plugin-google-gtag`,
@@ -56,7 +64,7 @@ module.exports = {
         background_color: `#FFFFFF`,
         theme_color: `#D8152F`,
         display: `minimal-ui`,
-        icon: `src/assets/logo/pola-color.svg`, // This path is relative to the root of the site.
+        icon: `./src/assets/logo/pola-color.svg`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-typescript`,
