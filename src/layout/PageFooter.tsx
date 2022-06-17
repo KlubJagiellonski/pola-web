@@ -52,66 +52,6 @@ const FooterContainer = styled.footer`
   }
 `;
 
-const Section = styled.div`
-  flex: 1 1 25%;
-
-  .link {
-    text-decoration: none;
-  }
-
-  .text {
-    font-size: ${fontSize.normal};
-    font-weight: 400;
-    line-height: 21px;
-    color: ${color.text.light};
-  }
-
-  .title {
-    font-size: ${fontSize.normal};
-    font-weight: bold;
-    line-height: 21px;
-  }
-
-  .social-rows {
-    display: flex;
-    flex-direction: row;
-  }
-
-  @media ${Device.mobile} {
-    background-color: transparent;
-    text-align: right;
-    margin-right: ${margin.normal};
-
-    .title,
-    .social-rows,
-    .hide-mobile {
-      display: none;
-    }
-
-    .logo {
-      padding-left: ${padding.normal};
-    }
-  }
-
-  @media ${Device.desktop} {
-    padding: ${padding.normal};
-    .hide-desktop {
-      display: none;
-    }
-  }
-`;
-
-interface IFooterSection {
-  title?: string;
-}
-
-const FooterSection: React.FC<IFooterSection> = ({ title, children }) => (
-  <Section>
-    <p className="title">{title}</p>
-    {children}
-  </Section>
-);
-
 const connector = connect(
   (state: IPolaState) => {
     const { newsletter } = state;
@@ -132,15 +72,19 @@ const FlexHorizontal = styled.div`
   justify-content: center;
 `;
 
-const PageFooter: React.FC = () => {
+const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, subscribeEmail }) => {
   return (
     <FooterContainer>
+      <FlexHorizontal>
+        <SubscribeDialog status={newsletterStatus} onSubmit={subscribeEmail} />
+      </FlexHorizontal>
       <div className="footer-content">
         <FooterSection>
           <div className="logo">
             <img src={LogoWhite} />
           </div>
         </FooterSection>
+
         <div className="sections">
           <FooterSection title="Informacje">
             <TextLink label="Home" href={urls.pola.home()} />
