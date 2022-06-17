@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { color, Device, fontSize, padding, pageWidth, margin } from 'styles/theme';
+import { color, Device, fontSize, padding, margin } from 'styles/theme';
 
 const Section = styled.div`
   flex: 1 1 25%;
