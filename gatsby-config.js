@@ -1,6 +1,15 @@
 const path = require('path');
+const fs = require('fs');
 
-module.exports = {};
+const getGatsbyRootDirs = () => {
+  const srcSubdirectories = fs.readdirSync(path.resolve(__dirname, 'src'));
+  const rootImportsConfig = srcSubdirectories.reduce((config, directoryName) => {
+    config[directoryName] = path.resolve(__dirname, 'src', directoryName);
+    return config;
+  }, {});
+
+  return rootImportsConfig;
+};
 
 module.exports = {
   pathPrefix: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).pathname) || null,
@@ -72,15 +81,7 @@ module.exports = {
     `gatsby-plugin-typescript`,
     {
       resolve: 'gatsby-plugin-root-import',
-      options: {
-        src: path.join(__dirname, 'src'),
-        assets: path.join(__dirname, 'src/assets'),
-        components: path.join(__dirname, 'src/components'),
-        domain: path.join(__dirname, 'src/domain'),
-        layout: path.join(__dirname, 'src/layout'),
-        pages: path.join(__dirname, 'src/pages'),
-        styles: path.join(__dirname, 'src/styles'),
-      },
+      options: getGatsbyRootDirs(),
     },
     {
       resolve: `gatsby-plugin-react-redux`,
