@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Follower } from '..';
+import { Follower, SubscriptionResponseContext } from '..';
 import { NewsletterService } from '../services/newsletter-service';
 import { SubscriptionError } from '../../services/api-errors';
 import { IPolaState } from '../../state/types';
@@ -10,10 +10,13 @@ export const newsletterDispatcher = {
     try {
       const follower = Follower.create(email, name);
       const service = NewsletterService.getInstance();
-      await dispatch(actions.Subscribing(follower));
+      await dispatch(actions.SubscriptionRequested(follower));
 
       try {
-        const context = await service.subscribeNewsletter(follower);
+        const context =
+          process.env.NODE_ENV !== 'development'
+            ? await service.subscribeNewsletter(follower)
+            : SubscriptionResponseContext.Empty; // do not perform real subscription request on development environment
         await dispatch(actions.SubscriptionSuccess(follower, context));
       } catch (error: unknown) {
         const subscriptionError = error instanceof SubscriptionError ? error : new SubscriptionError(error);

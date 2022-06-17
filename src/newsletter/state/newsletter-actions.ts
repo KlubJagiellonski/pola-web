@@ -1,20 +1,20 @@
-import { Follower, NewsletterApiResponseContext } from '..';
+import { Follower, ISubscriptionResponseContext } from '..';
 import { IAction } from '../../state/types';
 
 export const actionTypes = {
-  SUBSCRIBING: 'NEWSLETTER:SUBSCRIBING',
+  SUBSCRIPTION_REQUESTED: 'NEWSLETTER:SUBSCRIPTION_REQUESTED',
   SUBSCRIPTION_SUCCESS: 'NEWSLETTER:SUBSCRIPTION_SUCCESS',
   SUBSCRIPTION_FAILURE: 'NEWSLETTER:SUBSCRIPTION_FAILURE',
 };
 
-export const Subscribing = (follower: Follower): IAction => ({
-  type: actionTypes.SUBSCRIBING,
+export const SubscriptionRequested = (follower: Follower): IAction => ({
+  type: actionTypes.SUBSCRIPTION_REQUESTED,
   payload: {
     follower,
   },
 });
 
-export const SubscriptionSuccess = (follower: Follower, context: NewsletterApiResponseContext): IAction => ({
+export const SubscriptionSuccess = (follower: Follower, context: ISubscriptionResponseContext): IAction => ({
   type: actionTypes.SUBSCRIPTION_SUCCESS,
   payload: {
     follower,

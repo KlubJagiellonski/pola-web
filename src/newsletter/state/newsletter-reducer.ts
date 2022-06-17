@@ -3,7 +3,7 @@ import { AnyAction, Reducer } from 'redux';
 import { actionTypes } from './newsletter-actions';
 import * as actions from './newsletter-actions';
 import { IAction, IActionReducer } from '../../state/types';
-import { Follower, NewsletterApiResponseContext } from '..';
+import { Follower, ISubscriptionResponseContext } from '..';
 
 export type SubscriptionStatus = 'initial' | 'subscribing' | 'subscribed' | 'failure';
 
@@ -18,7 +18,7 @@ export type ISubscribeState =
   | {
       status: 'subscribed';
       follower: Follower;
-      context: NewsletterApiResponseContext;
+      context: ISubscriptionResponseContext;
     }
   | {
       status: 'failure';
@@ -29,9 +29,9 @@ export type ISubscribeState =
 const initialState: ISubscribeState = { status: 'initial' };
 
 const reducers: IActionReducer<ISubscribeState> = {
-  [actionTypes.SUBSCRIBING]: (
+  [actionTypes.SUBSCRIPTION_REQUESTED]: (
     state: ISubscribeState = initialState,
-    action: ReturnType<typeof actions.Subscribing>
+    action: ReturnType<typeof actions.SubscriptionRequested>
   ) => {
     return {
       ...state,

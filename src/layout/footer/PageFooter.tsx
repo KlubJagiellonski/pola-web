@@ -54,7 +54,11 @@ const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, subscribeEmai
   return (
     <FooterContainer>
       <FlexHorizontal>
-        <SubscribeDialog status={newsletterStatus} onSubmit={subscribeEmail} />
+        <SubscribeDialog
+          status={newsletterStatus}
+          onSubmit={subscribeEmail}
+          styles={{ spaceTop: '1rem', spaceBottom: '3rem' }}
+        />
       </FlexHorizontal>
       <div className="footer-content">
         <FooterSection>

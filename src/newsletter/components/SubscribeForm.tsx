@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ButtonThemes } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { ErrorMessage, SuccessMessage } from '../../components/form-input/FormToast';
-import { fontSize, color, padding } from '../../styles/theme';
 import { validateEmail } from '../../utils/strings';
 import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscribeInput } from './SubscribeInput';
@@ -69,7 +68,9 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubm
         />
         <SecondaryButton label="Wyślij" onClick={handleSubscribe} styles={ButtonThemes.Red} />
         {status === 'subscribed' && (
-          <SuccessMessage>Twój email został dopisany do bazy newslettera Poli!</SuccessMessage>
+          <SuccessMessage>
+            {`${process.env.NODE_ENV} Wysłano link potwierdzający na adres "${email}". Otwórz wiadomość i kliknij link, aby dopisać Twój adres do newslettera Poli.`}
+          </SuccessMessage>
         )}
         {status === 'failure' && (
           <ErrorMessage>Wystąpił błąd podczas dopisywania Twojego emaila do newslettera Poli.</ErrorMessage>

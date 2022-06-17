@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
-import { Follower, NewsletterApiResponseContext } from '..';
+import { Follower, ISubscriptionResponseContext } from '..';
 import { ApiAdapter } from '../../services/api-adapter';
 import { FetchError, SubscriptionError } from '../../services/api-errors';
 import { AppSettings } from '../../state/app-settings';
@@ -27,7 +27,7 @@ export class NewsletterService extends ApiAdapter {
           contact_email: follower.email,
         })
         .then((response: AxiosResponse) => {
-          const context: NewsletterApiResponseContext = response.data;
+          const context: ISubscriptionResponseContext = response.data;
           console.log('Follower successfully subscribed to the newsletter', context);
           return context;
         })
