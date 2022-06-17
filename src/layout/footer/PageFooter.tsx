@@ -59,7 +59,7 @@ const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, follower, sub
         <SubscribeDialog
           status={newsletterStatus}
           follower={follower}
-          styles={{ spaceTop: '1rem', spaceBottom: '3rem' }}
+          styles={{ spaceBottom: '3rem' }}
           onSubmit={subscribeEmail}
           onClear={clearForm}
         />

@@ -13,6 +13,7 @@ export const newsletterDispatcher = {
       await dispatch(actions.SubscriptionRequested(follower));
 
       try {
+        //throw new Error();
         const context =
           process.env.NODE_ENV !== 'development'
             ? await service.subscribeNewsletter(follower)

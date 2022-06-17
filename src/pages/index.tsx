@@ -31,6 +31,8 @@ import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader'
 
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
 import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
+import { SecondaryButton } from 'components/buttons/SecondaryButton';
+import { ButtonThemes } from 'components/buttons/Button';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -160,6 +162,8 @@ const HomePage = (props: IHomePage) => {
     }
   }, []);
 
+  const handleNewsletter = () => {};
+
   return (
     <PageLayout>
       <SEOMetadata pageTitle="Strona główna" />
@@ -169,6 +173,11 @@ const HomePage = (props: IHomePage) => {
         </Background>
 
         <Content>
+          <SecondaryButton
+            label="Zapisz się do newslettera Poli"
+            onClick={handleNewsletter}
+            styles={ButtonThemes.Red}
+          />
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}

@@ -19,9 +19,9 @@
     "body": [
       "import * as React from 'react';",
       "",
-      "export interface I${1:CompName}Props { }",
+      "export interface I${1:CompName} { }",
       "",
-      "export const ${1:CompName}: React.FC<I${1:CompName}Props> = (props) => (",
+      "export const ${1:CompName}: React.FC<I${1:CompName}> = (props) => (",
       "  <div>",
       "    $0",
       "  </div>",
