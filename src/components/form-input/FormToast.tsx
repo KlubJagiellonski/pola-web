@@ -13,6 +13,11 @@ export const ToastMessage = styled.div<IToastMessage>`
   line-height: ${lineHeight.normal};
   margin: 0 ${({ styles }) => styles?.marginHorizontal || 0};
   padding: ${padding.tiny} ${padding.small};
+  text-align: center;
+
+  &:not(:last-child) {
+    margin-bottom: ${padding.small};
+  }
 `;
 
 export const SuccessMessage = styled(ToastMessage)`

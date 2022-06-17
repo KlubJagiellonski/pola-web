@@ -26,4 +26,12 @@ export const newsletterDispatcher = {
       console.error(error);
     }
   },
+
+  clearSubscriptionData: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
+    try {
+      await dispatch(actions.SubscriptionCleared());
+    } catch (error: unknown) {
+      console.error(error);
+    }
+  },
 };

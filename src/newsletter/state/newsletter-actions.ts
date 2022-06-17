@@ -5,6 +5,7 @@ export const actionTypes = {
   SUBSCRIPTION_REQUESTED: 'NEWSLETTER:SUBSCRIPTION_REQUESTED',
   SUBSCRIPTION_SUCCESS: 'NEWSLETTER:SUBSCRIPTION_SUCCESS',
   SUBSCRIPTION_FAILURE: 'NEWSLETTER:SUBSCRIPTION_FAILURE',
+  SUBSCRIPTION_CLEARED: 'NEWSLETTER:SUBSCRIPTION_CLEARED',
 };
 
 export const SubscriptionRequested = (follower: Follower): IAction => ({
@@ -28,4 +29,8 @@ export const SubscriptionFailure = (follower: Follower, error: Error): IAction =
     follower,
     error,
   },
+});
+
+export const SubscriptionCleared = (): IAction => ({
+  type: actionTypes.SUBSCRIPTION_CLEARED,
 });

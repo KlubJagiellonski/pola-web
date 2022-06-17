@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { ButtonThemes } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { ErrorMessage, SuccessMessage } from '../../components/form-input/FormToast';
 import { validateEmail } from '../../utils/strings';
-import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscribeInput } from './SubscribeInput';
 
 interface INewsletterFormStyles {
@@ -26,12 +25,11 @@ const Form = styled.div`
 `;
 
 interface ISubscribeForm {
-  status: SubscriptionStatus;
   styles?: INewsletterFormStyles;
   onSubmit: (email: string, name?: string) => void;
 }
 
-export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubmit }) => {
+export const SubscribeForm: React.FC<ISubscribeForm> = ({ styles, onSubmit }) => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [emailErrorMessage, setEmailErrorMessage] = useState<string>();
@@ -47,9 +45,15 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubm
     }
   };
 
+  useEffect(() => {
+    return () => {
+      setName(undefined);
+      setEmail(undefined);
+    };
+  }, []);
+
   return (
     <Container styles={styles}>
-      <h2>Zapisz się do newslettera Poli</h2>
       <Form>
         <SubscribeInput
           name="follower-name"
@@ -67,14 +71,6 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubm
           onChange={updateEmail}
         />
         <SecondaryButton label="Wyślij" onClick={handleSubscribe} styles={ButtonThemes.Red} />
-        {status === 'subscribed' && (
-          <SuccessMessage>
-            {`${process.env.NODE_ENV} Wysłano link potwierdzający na adres "${email}". Otwórz wiadomość i kliknij link, aby dopisać Twój adres do newslettera Poli.`}
-          </SuccessMessage>
-        )}
-        {status === 'failure' && (
-          <ErrorMessage>Wystąpił błąd podczas dopisywania Twojego emaila do newslettera Poli.</ErrorMessage>
-        )}
       </Form>
     </Container>
   );

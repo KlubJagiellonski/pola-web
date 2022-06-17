@@ -35,10 +35,12 @@ const connector = connect(
     const { newsletter } = state;
     return {
       newsletterStatus: newsletter.status,
+      follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
     };
   },
   {
     subscribeEmail: newsletterDispatcher.subscribeEmail,
+    clearForm: newsletterDispatcher.clearSubscriptionData,
   }
 );
 
@@ -50,14 +52,16 @@ const FlexHorizontal = styled.div`
   justify-content: center;
 `;
 
-const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, subscribeEmail }) => {
+const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, follower, subscribeEmail, clearForm }) => {
   return (
     <FooterContainer>
       <FlexHorizontal>
         <SubscribeDialog
           status={newsletterStatus}
-          onSubmit={subscribeEmail}
+          follower={follower}
           styles={{ spaceTop: '1rem', spaceBottom: '3rem' }}
+          onSubmit={subscribeEmail}
+          onClear={clearForm}
         />
       </FlexHorizontal>
       <div className="footer-content">

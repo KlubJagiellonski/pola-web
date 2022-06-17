@@ -34,7 +34,6 @@ const reducers: IActionReducer<ISubscribeState> = {
     action: ReturnType<typeof actions.SubscriptionRequested>
   ) => {
     return {
-      ...state,
       status: 'subscribing',
       follower: action.payload.follower,
     };
@@ -45,7 +44,6 @@ const reducers: IActionReducer<ISubscribeState> = {
     action: ReturnType<typeof actions.SubscriptionSuccess>
   ) => {
     return {
-      ...state,
       status: 'subscribed',
       follower: action.payload.follower,
       context: action.payload.context,
@@ -57,10 +55,18 @@ const reducers: IActionReducer<ISubscribeState> = {
     action: ReturnType<typeof actions.SubscriptionFailure>
   ) => {
     return {
-      ...state,
       status: 'failure',
       follower: action.payload.follower,
       error: action.payload.error,
+    };
+  },
+
+  [actionTypes.SUBSCRIPTION_CLEARED]: (
+    state: ISubscribeState = initialState,
+    action: ReturnType<typeof actions.SubscriptionCleared>
+  ) => {
+    return {
+      status: 'initial',
     };
   },
 };
