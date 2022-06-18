@@ -59,7 +59,7 @@ const connector = connect(
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
-    subscribeEmail: newsletterDispatcher.subscribeEmail,
+    subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
   }
 );
 

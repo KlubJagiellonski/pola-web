@@ -22,18 +22,18 @@ const InputContainer = styled.div`
 `;
 
 interface ISubscribeInput {
+  value: string;
   name?: string;
   type?: InputType;
-  value?: string;
   errorMessage?: string;
   placeholder?: string;
   onChange: (value: string) => void;
 }
 
 export const SubscribeInput: React.FC<ISubscribeInput> = ({
+  value,
   name,
   type = 'text',
-  value,
   placeholder,
   onChange,
   errorMessage,

@@ -30,9 +30,9 @@ interface ISubscribeForm {
 }
 
 export const SubscribeForm: React.FC<ISubscribeForm> = ({ styles, onSubmit }) => {
-  const [name, setName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [emailErrorMessage, setEmailErrorMessage] = useState<string>();
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | undefined>();
 
   const updateName = (value: string) => setName(value);
   const updateEmail = (value: string) => setEmail(value);
@@ -47,8 +47,9 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ styles, onSubmit }) =>
 
   useEffect(() => {
     return () => {
-      setName(undefined);
-      setEmail(undefined);
+      setName('');
+      setEmail('');
+      setEmailErrorMessage(undefined);
     };
   }, []);
 

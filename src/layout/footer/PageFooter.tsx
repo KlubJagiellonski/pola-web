@@ -39,8 +39,8 @@ const connector = connect(
     };
   },
   {
-    subscribeEmail: newsletterDispatcher.subscribeEmail,
-    clearForm: newsletterDispatcher.clearSubscriptionData,
+    subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
+    clearForm: newsletterDispatcher.clearSubscriptionFormData,
   }
 );
 

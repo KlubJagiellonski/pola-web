@@ -1,36 +1,46 @@
-import { Follower, ISubscriptionResponseContext } from '..';
+import { ISubscriptionResponseContext } from 'newsletter/services/subscription-response-context';
+import { Follower } from '..';
 import { IAction } from '../../state/types';
 
 export const actionTypes = {
-  SUBSCRIPTION_REQUESTED: 'NEWSLETTER:SUBSCRIPTION_REQUESTED',
-  SUBSCRIPTION_SUCCESS: 'NEWSLETTER:SUBSCRIPTION_SUCCESS',
-  SUBSCRIPTION_FAILURE: 'NEWSLETTER:SUBSCRIPTION_FAILURE',
-  SUBSCRIPTION_CLEARED: 'NEWSLETTER:SUBSCRIPTION_CLEARED',
+  REQUEST_SUBSCRIPTION: 'NEWSLETTER:REQUEST_SUBSCRIPTION',
+  REGISTER_SUBSCRIPTION: 'NEWSLETTER:REGISTER_SUBSCRIPTION',
+  NOTICE_REPEATED_SUBSCRIPTION: 'NEWSLETTER:NOTICE_REPEATED_SUBSCRIPTION',
+  REJECT_SUBSCRIPTION: 'NEWSLETTER:REJECT_SUBSCRIPTION',
+  CLEAR_SUBSCRIPTION_DATA: 'NEWSLETTER:CLEAR_SUBSCRIPTION_DATA',
 };
 
-export const SubscriptionRequested = (follower: Follower): IAction => ({
-  type: actionTypes.SUBSCRIPTION_REQUESTED,
+export const RequestSubscription = (follower: Follower): IAction => ({
+  type: actionTypes.REQUEST_SUBSCRIPTION,
   payload: {
     follower,
   },
 });
 
-export const SubscriptionSuccess = (follower: Follower, context: ISubscriptionResponseContext): IAction => ({
-  type: actionTypes.SUBSCRIPTION_SUCCESS,
+export const RegisterSubscription = (follower: Follower, context: ISubscriptionResponseContext): IAction => ({
+  type: actionTypes.REGISTER_SUBSCRIPTION,
   payload: {
     follower,
     context,
   },
 });
 
-export const SubscriptionFailure = (follower: Follower, error: Error): IAction => ({
-  type: actionTypes.SUBSCRIPTION_FAILURE,
+export const NoticeRepeatedSubscription = (follower: Follower, context: ISubscriptionResponseContext): IAction => ({
+  type: actionTypes.NOTICE_REPEATED_SUBSCRIPTION,
+  payload: {
+    follower,
+    context,
+  },
+});
+
+export const RejectSubscription = (follower: Follower, error: Error): IAction => ({
+  type: actionTypes.REJECT_SUBSCRIPTION,
   payload: {
     follower,
     error,
   },
 });
 
-export const SubscriptionCleared = (): IAction => ({
-  type: actionTypes.SUBSCRIPTION_CLEARED,
+export const ClearSubscriptionData = (): IAction => ({
+  type: actionTypes.CLEAR_SUBSCRIPTION_DATA,
 });
