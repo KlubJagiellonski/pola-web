@@ -33,7 +33,7 @@
     "axios": "^0.21.2",
     "babel-plugin-styled-components": "^1.12.0",
     "ean-generator": "0.0.8",
-    "gatsby": "^3.14.6",
+    "gatsby": "^4.16.0",
     "gatsby-image": "^3.9.0",
     "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-google-analytics": "^4.13.0",
