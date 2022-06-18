@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { error } from 'loglevel';
+// import { error } from 'loglevel';
 
 export interface ErrorBoundaryProps {
   scope?: string;
