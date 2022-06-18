@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import styled from 'styled-components';
 
-import { color, Device, padding, pageWidth } from '../../styles/theme';
+import { color, Device, padding, pageWidth, margin } from '../../styles/theme';
 
 import LogoWhite from 'assets/logo/pola-white.svg';
 import { SubscribeDialog } from '../../newsletter/components/SubscribeDialog';
@@ -59,7 +59,7 @@ const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, follower, sub
         <SubscribeDialog
           status={newsletterStatus}
           follower={follower}
-          styles={{ spaceBottom: '3rem' }}
+          styles={{ spaceBottom: margin.big }}
           onSubmit={subscribeEmail}
           onClear={clearForm}
         />
