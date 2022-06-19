@@ -76,3 +76,7 @@ Deploy
 ```
 npx gatsby deploy
 ```
+
+# Upgrades
+
+npm outdated - to check obsolate packages (in particular Gatsby plugins)

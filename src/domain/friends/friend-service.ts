@@ -47,26 +47,25 @@ export const FriendsService = {
       results: friends,
     };
   },
-  getAll: () => {
-    // useStaticQuery(
-    //   graphql`
-    //     {
-    //       allLogosFriendsYaml {
-    //         nodes {
-    //           id
-    //           name
-    //           description
-    //           image {
-    //             base
-    //           }
-    //           page
-    //           slug
-    //         }
-    //       }
-    //     }
-    //   `
-    // ),
-  },
+  getAll: () =>
+    useStaticQuery(
+      graphql`
+        {
+          allFriendsYaml {
+            nodes {
+              id
+              name
+              description
+              image {
+                base
+              }
+              page
+              slug
+            }
+          }
+        }
+      `
+    ),
 };
 
 export interface IFriendNode {

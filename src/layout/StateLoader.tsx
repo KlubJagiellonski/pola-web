@@ -26,16 +26,16 @@ const Loader = (props: IStateLoader) => {
     bootApplication();
   }, []);
 
-  const isUpgradingChanges = true;
+  const isUpgradingChanges = false;
 
   if (isUpgradingChanges && props.loadFriends) {
     props.loadFriends([]);
   } else {
-    // const queryResultFriend = FriendsService.getAll();
-    // if (!props.isFriendsLoaded && queryResultFriend?.allLogosFriendsYaml?.nodes && props.loadFriends) {
-    //   const data = queryResultFriend.allLogosFriendsYaml.nodes;
-    //   props.loadFriends(data);
-    // }
+    const queryResultFriend = FriendsService.getAll();
+    if (!props.isFriendsLoaded && queryResultFriend?.allLogosFriendsYaml?.nodes && props.loadFriends) {
+      const data = queryResultFriend.allLogosFriendsYaml.nodes;
+      props.loadFriends(data);
+    }
   }
 
   const queryResult = ArticleService.getAll();
