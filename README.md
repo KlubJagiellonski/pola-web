@@ -79,4 +79,10 @@ npx gatsby deploy
 
 # Upgrades
 
+We actually use Gatsby version 4 what requires usage of Gatsby plugins in proper versions too
+
+Migration:
+https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v2-to-v3/
+https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v3-to-v4/
+
 npm outdated - to check obsolate packages (in particular Gatsby plugins)
