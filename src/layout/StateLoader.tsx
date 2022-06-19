@@ -26,10 +26,16 @@ const Loader = (props: IStateLoader) => {
     bootApplication();
   }, []);
 
-  const queryResultFriend = FriendsService.getAll();
-  if (!props.isFriendsLoaded && queryResultFriend?.allLogosFriendsYaml?.nodes && props.loadFriends) {
-    const data = queryResultFriend.allLogosFriendsYaml.nodes;
-    props.loadFriends(data);
+  const isUpgradingChanges = true;
+
+  if (isUpgradingChanges && props.loadFriends) {
+    props.loadFriends([]);
+  } else {
+    // const queryResultFriend = FriendsService.getAll();
+    // if (!props.isFriendsLoaded && queryResultFriend?.allLogosFriendsYaml?.nodes && props.loadFriends) {
+    //   const data = queryResultFriend.allLogosFriendsYaml.nodes;
+    //   props.loadFriends(data);
+    // }
   }
 
   const queryResult = ArticleService.getAll();
