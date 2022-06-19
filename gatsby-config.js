@@ -47,7 +47,14 @@ module.exports = {
         path: `${__dirname}/content/logos/images/`,
       },
     },
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-transformer-sharp`,
+      options: {
+        // The option defaults to true
+        // issue: https://github.com/gatsbyjs/gatsby/issues/21776
+        checkSupportedExtensions: false,
+      },
+    },
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
