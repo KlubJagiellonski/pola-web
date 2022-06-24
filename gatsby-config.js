@@ -47,6 +47,7 @@ module.exports = {
         path: `${__dirname}/content/logos/images/`,
       },
     },
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-transformer-sharp`,
       options: {

@@ -40,6 +40,7 @@ type ILayoutStyles = {
 
 type IPageLayout = ReduxProps & {
   styles?: ILayoutStyles;
+  children: JSX.Element | JSX.Element[];
 };
 
 const LayoutContainer = styled(CustomScrollbarDiv)`

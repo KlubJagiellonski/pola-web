@@ -8,6 +8,7 @@ export interface ErrorBoundaryProps {
   noFallbackRender?: boolean;
   onError?: () => void;
   customMessage?: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
 }
 
 export interface ErrorBoundaryState {

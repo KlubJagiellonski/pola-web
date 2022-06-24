@@ -12,7 +12,7 @@ import { PageSection } from '../layout/PageSection';
 import './../components/Pagination.css';
 import SocialMedia from '../components/social-media/SocialMedia';
 import TagsList from '../components/tags/TagsList';
-import { ArrayParam, withDefault, useQueryParams, NumberParam } from 'use-query-params';
+import { ArrayParam, withDefault, useQueryParams, NumberParam, QueryParamConfig } from 'use-query-params';
 import { getTagsList } from './../utils/tags';
 import NewsPageArticles from '../components/articles/list/NewsPagesArticles';
 import Placeholder from '../components/Placeholder';
@@ -46,8 +46,8 @@ interface NewsPage {
 }
 
 interface IQuery {
-  tags: string[];
-  id: number;
+  tags?: string[];
+  id?: number;
 }
 
 const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
