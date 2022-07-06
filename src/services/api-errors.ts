@@ -15,6 +15,7 @@ export enum ErrorMessage {
   API_ADAPTER_ERROR = 'Something unexpected happened on communication with a service.',
   SERVICE_ERROR = 'Something unexpected happened on the service. Please try again later.',
   SUBSCRIPTION_ERROR = 'Cannot subscribe contact to a newsletter',
+  STATE_MACHINE_ERROR = 'Attempt to perform an action forbidden in current redux state',
 }
 
 export abstract class ErrorHandler extends Error {
@@ -192,5 +193,17 @@ export class SubscriptionError extends ErrorHandler {
     super();
     this.name = 'Newsletter subscription error';
     this.message = this.buildMessage(ErrorMessage.SUBSCRIPTION_ERROR);
+  }
+}
+
+export class StateMachineError extends ErrorHandler {
+  /**
+   * Error describes performing Redux action in some state forbidden for such action type
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Redux state machine error';
+    this.message = this.buildMessage(ErrorMessage.STATE_MACHINE_ERROR);
   }
 }

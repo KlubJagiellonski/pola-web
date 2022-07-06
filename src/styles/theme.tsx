@@ -18,6 +18,8 @@ export const color = {
     light: '#ffffff',
     dark: '#000000',
     red: '#D8152F',
+    success: '#03c900',
+    fail: '#ff0000',
   },
   button: {
     white: '#ffffff',

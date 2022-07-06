@@ -1,4 +1,15 @@
-module.exports = {};
+const path = require('path');
+const fs = require('fs');
+
+const getGatsbyRootDirs = () => {
+  const srcSubdirectories = fs.readdirSync(path.resolve(__dirname, 'src'));
+  const rootImportsConfig = srcSubdirectories.reduce((config, directoryName) => {
+    config[directoryName] = path.resolve(__dirname, 'src', directoryName);
+    return config;
+  }, {});
+
+  return rootImportsConfig;
+};
 
 module.exports = {
   pathPrefix: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).pathname) || null,
@@ -7,6 +18,14 @@ module.exports = {
     description: `Strona aplikacji Pola`,
     author: `Klub Jagielloński`,
     siteUrl: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).origin) || 'http://localhost:8000',
+  },
+  flags: {
+    FAST_DEV: false,
+    FAST_REFRESH: false,
+    DEV_SSR: false,
+    PRESERVE_WEBPACK_CACHE: false,
+    PRESERVE_FILE_DOWNLOAD_CACHE: false,
+    PARALLEL_SOURCING: false,
   },
   plugins: [
     {
@@ -56,10 +75,14 @@ module.exports = {
         background_color: `#FFFFFF`,
         theme_color: `#D8152F`,
         display: `minimal-ui`,
-        icon: `src/assets/logo/pola-color.svg`, // This path is relative to the root of the site.
+        icon: `./src/assets/logo/pola-color.svg`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-typescript`,
+    {
+      resolve: 'gatsby-plugin-root-import',
+      options: getGatsbyRootDirs(),
+    },
     {
       resolve: `gatsby-plugin-react-redux`,
       options: {
