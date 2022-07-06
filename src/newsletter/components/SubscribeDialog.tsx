@@ -4,7 +4,10 @@ import { ButtonThemes } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscribeForm } from './SubscribeForm';
-import { classNames } from '../../utils/class-names';
+import { Follower } from 'newsletter';
+import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
+import { SubscriptionRegisteredResult, SubscriptionRepeatedResult, SubscriptionFailureResult } from './SubscribeResult';
+import { Spinner } from 'components/Spinner';
 
 interface INewsletterFormStyles {
   spaceTop?: string;
@@ -16,40 +19,83 @@ const Container = styled.div<{ styles?: INewsletterFormStyles }>`
   padding-top: ${({ styles }) => styles?.spaceTop || 0};
   padding-bottom: ${({ styles }) => styles?.spaceBottom || 0};
 
-  .newsletter-form-container {
+  .newsletter-frame-container {
     height: 0em;
     overflow: hidden;
 
     &.expanded {
       transition: height 0.5s;
-      height: 13.5rem;
+      height: 14.5rem;
     }
   }
 `;
 
 interface ISubscribeDialog {
   status: SubscriptionStatus;
+  follower?: Follower;
   styles?: INewsletterFormStyles;
   onSubmit: (email: string, name?: string) => void;
+  onClear: () => void;
 }
 
-export const SubscribeDialog: React.FC<ISubscribeDialog> = ({ status, styles, onSubmit }) => {
+export const SubscribeDialog: React.FC<ISubscribeDialog> = ({ status, follower, styles, onSubmit, onClear }) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = () => {
+  const handleExpand = () => {
     const container = containerRef.current;
     container?.classList.add('expanded');
     setExpanded(true);
   };
 
+  const handleClear = () => {
+    onClear();
+  };
+
+  const clearButton = (
+    <SecondaryButton label="Lub zapisz inny adres email" onClick={handleClear} styles={ButtonThemes.White} />
+  );
+
+  let frameContent;
+  switch (status) {
+    case SubscriptionStatus.INITIAL:
+      frameContent = (
+        <SubscibeDialogFrame title="Zapisz się do newslettera Poli">
+          <SubscribeForm styles={styles} onSubmit={onSubmit} />
+        </SubscibeDialogFrame>
+      );
+      break;
+
+    case SubscriptionStatus.REQUESTED:
+      frameContent = <Spinner />;
+      break;
+
+    case SubscriptionStatus.REGISTERED:
+      if (follower) {
+        frameContent = <SubscriptionRegisteredResult follower={follower} clearButton={clearButton} />;
+      }
+      break;
+
+    case SubscriptionStatus.REPEATED:
+      if (follower) {
+        frameContent = <SubscriptionRepeatedResult follower={follower} clearButton={clearButton} />;
+      }
+      break;
+
+    case SubscriptionStatus.REJECTED:
+      frameContent = <SubscriptionFailureResult clearButton={clearButton} />;
+      break;
+  }
+
   return (
     <Container styles={styles}>
       {!isExpanded && (
-        <SecondaryButton label="Zapisz się do newslettera Poli" onClick={handleClick} styles={ButtonThemes.Red} />
+        <div className="buttons">
+          <SecondaryButton label="Zapisz się do newslettera Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
+        </div>
       )}
-      <div ref={containerRef} className="newsletter-form-container">
-        <SubscribeForm styles={styles} status={status} onSubmit={onSubmit} />
+      <div ref={containerRef} className="newsletter-frame-container">
+        {frameContent}
       </div>
     </Container>
   );

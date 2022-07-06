@@ -8,6 +8,11 @@ type InputType = 'text' | 'email';
 
 const Container = styled.div`
   min-width: 20em;
+  .error-message {
+    line-height: 1.8em;
+    padding-left: 1em;
+    color: ${(p) => color.text.fail};
+  }
 `;
 
 const InputContainer = styled.div`
@@ -17,18 +22,18 @@ const InputContainer = styled.div`
 `;
 
 interface ISubscribeInput {
+  value: string;
   name?: string;
   type?: InputType;
-  value?: string;
   errorMessage?: string;
   placeholder?: string;
   onChange: (value: string) => void;
 }
 
 export const SubscribeInput: React.FC<ISubscribeInput> = ({
+  value,
   name,
   type = 'text',
-  value,
   placeholder,
   onChange,
   errorMessage,
@@ -38,7 +43,7 @@ export const SubscribeInput: React.FC<ISubscribeInput> = ({
       <InputContainer>
         <FormInput name={name} type={type} value={value} placeholder={placeholder} onChange={onChange} />
       </InputContainer>
-      {errorMessage && <ErrorMessage styles={{ marginHorizontal: '1em' }}>{errorMessage}</ErrorMessage>}
+      {errorMessage && <span className="error-message">{errorMessage}</span>}
     </Container>
   );
 };

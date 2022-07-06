@@ -6,7 +6,7 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { SearchForm } from '../search/form/SearchForm';
 import { PageSection } from '../layout/PageSection';
-import { Device, pageWidth, padding, color } from '../styles/theme';
+import { Device, pageWidth, padding, color, margin } from '../styles/theme';
 import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
@@ -47,6 +47,7 @@ const connector = connect(
             }
           : undefined,
       newsletterStatus: newsletter.status,
+      follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
       articles: articles.data,
       friends: friends.data,
     };
@@ -57,7 +58,8 @@ const connector = connect(
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
-    subscribeEmail: newsletterDispatcher.subscribeEmail,
+    subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
+    clearForm: newsletterDispatcher.clearSubscriptionFormData,
   }
 );
 
@@ -140,12 +142,13 @@ type IHomePage = ReduxProps & {
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
+  subscribeEmail: (email: string, name?: string | undefined) => void;
   clearResults: () => void;
   selectProduct: (code: EAN) => void;
 };
 
 const HomePage = (props: IHomePage) => {
-  const { location, searchState, searchResults, subscribeEmail, newsletterStatus } = props;
+  const { location, searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const dispatch = useDispatch();
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
@@ -160,6 +163,8 @@ const HomePage = (props: IHomePage) => {
     }
   }, []);
 
+  const handleNewsletter = () => {};
+
   return (
     <PageLayout>
       <SEOMetadata pageTitle="Strona główna" />
@@ -167,7 +172,6 @@ const HomePage = (props: IHomePage) => {
         <Background>
           <ResponsiveImage imageSrc={'background2.jpg'} />
         </Background>
-
         <Content>
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
@@ -175,6 +179,17 @@ const HomePage = (props: IHomePage) => {
             onEmptyInput={props.clearResults}
             isLoading={isLoading}
           />
+          <div
+            className="newsletter-container"
+            style={{ display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', margin: '1rem' }}>
+            <SubscribeDialog
+              status={newsletterStatus}
+              follower={follower}
+              styles={{ spaceBottom: margin.small }}
+              onSubmit={subscribeEmail}
+              onClear={clearForm}
+            />
+          </div>
         </Content>
       </PageSection>
       <PageSection>

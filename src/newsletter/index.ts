@@ -35,11 +35,3 @@ export class Follower {
     return new Follower(email, name);
   }
 }
-
-export interface NewsletterApiResponseContext {
-  type: string;
-  title: string;
-  status: number;
-  detail: string;
-  instance: string;
-}
