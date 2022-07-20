@@ -101,7 +101,7 @@
     "babel-jest": "^27.0.1",
     "babel-preset-gatsby": "^0.2.26",
     "chai": "^4.3.4",
-    "cypress": "^7.7.0",
+    "cypress": "^10.3.1",
     "cypress-cucumber-preprocessor": "^4.1.1",
     "gatsby-plugin-root-import": "^2.0.8",
     "gh-pages": "^3.2.0",
