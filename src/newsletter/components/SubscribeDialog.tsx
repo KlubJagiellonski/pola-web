@@ -63,7 +63,6 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
       const container = containerRef.current;
       container?.classList.remove('expanded');
       setExpanded(false);
-      console.log(stopExpanded, 'kkk');
     }
   }, [stopExpanded]);
 
