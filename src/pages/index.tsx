@@ -172,12 +172,6 @@ const HomePage = (props: IHomePage) => {
     }
   }, []);
 
-  React.useEffect(() => {
-    if (searchResults) {
-      clearForm();
-    }
-  }, [searchResults]);
-
   const handleNewsletter = () => {};
 
   return (
