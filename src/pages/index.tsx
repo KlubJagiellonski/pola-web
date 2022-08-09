@@ -101,6 +101,15 @@ const WrapperContents = styled(PageSection)`
   }
 `;
 
+const WrapperResult = styled(PageSection)`
+  @media ${Device.mobile} {
+    position: realtive;
+    top: -18em;
+    background-color: ${color.background.white};
+    margin-left: 5px;
+  }
+`;
+
 const Wrapper = styled.div`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -188,11 +197,12 @@ const HomePage = (props: IHomePage) => {
               styles={{ spaceBottom: margin.small }}
               onSubmit={subscribeEmail}
               onClear={clearForm}
+              stopExpanded={!!searchResults}
             />
           </div>
         </Content>
       </PageSection>
-      <PageSection>
+      <WrapperResult>
         {(isLoaded || isLoading) && (
           <SearchResultsHeader
             phrase={searchResults?.phrase}
@@ -216,7 +226,7 @@ const HomePage = (props: IHomePage) => {
             <p>Spróbuj wprowadzić inną frazę...</p>
           </InfoBox>
         )}
-      </PageSection>
+      </WrapperResult>
       <WrapperContents>
         <Wrapper>
           <ArticlesListPreview articles={freshArticles} />
