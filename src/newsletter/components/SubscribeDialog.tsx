@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ButtonThemes } from '../../components/buttons/Button';
 import { SecondaryButton } from '../../components/buttons/SecondaryButton';
@@ -8,6 +8,7 @@ import { Follower } from 'newsletter';
 import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
 import { SubscriptionRegisteredResult, SubscriptionRepeatedResult, SubscriptionFailureResult } from './SubscribeResult';
 import { Spinner } from 'components/Spinner';
+import { Device } from 'styles/theme';
 
 interface INewsletterFormStyles {
   spaceTop?: string;
@@ -30,17 +31,40 @@ const Container = styled.div<{ styles?: INewsletterFormStyles }>`
   }
 `;
 
+const Buttons = styled.div`
+  @media ${Device.mobile} {
+    display: flex;
+    justify-content: center;
+  }
+`;
+
 interface ISubscribeDialog {
   status: SubscriptionStatus;
   follower?: Follower;
   styles?: INewsletterFormStyles;
   onSubmit: (email: string, name?: string) => void;
   onClear: () => void;
+  stopExpanded?: boolean;
 }
 
-export const SubscribeDialog: React.FC<ISubscribeDialog> = ({ status, follower, styles, onSubmit, onClear }) => {
+export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
+  status,
+  follower,
+  styles,
+  onSubmit,
+  onClear,
+  stopExpanded,
+}) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (stopExpanded) {
+      const container = containerRef.current;
+      container?.classList.remove('expanded');
+      setExpanded(false);
+    }
+  }, [stopExpanded]);
 
   const handleExpand = () => {
     const container = containerRef.current;
@@ -60,7 +84,7 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({ status, follower, 
   switch (status) {
     case SubscriptionStatus.INITIAL:
       frameContent = (
-        <SubscibeDialogFrame title="Zapisz się do newslettera Poli">
+        <SubscibeDialogFrame title="Newsletter Poli">
           <SubscribeForm styles={styles} onSubmit={onSubmit} />
         </SubscibeDialogFrame>
       );
@@ -90,9 +114,9 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({ status, follower, 
   return (
     <Container styles={styles}>
       {!isExpanded && (
-        <div className="buttons">
-          <SecondaryButton label="Zapisz się do newslettera Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
-        </div>
+        <Buttons>
+          <SecondaryButton label="Newsletter Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
+        </Buttons>
       )}
       <div ref={containerRef} className="newsletter-frame-container">
         {frameContent}
