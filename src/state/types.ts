@@ -4,6 +4,7 @@ import { IArticlesState } from './articles/articles-reducer';
 import { SearchState } from './search/search-reducer';
 import { IFriendsState } from './friends/friends-reducer';
 import { ISubscribeState } from '../newsletter/state/newsletter-reducer';
+import { ISuppliersState } from 'suppliers/state/suppliers-reducer';
 
 export interface IPolaState {
   app: IAppState;
@@ -11,6 +12,7 @@ export interface IPolaState {
   newsletter: ISubscribeState;
   articles: IArticlesState;
   friends: IFriendsState;
+  suppliers: ISuppliersState;
 }
 
 export interface IAction extends AnyAction {

@@ -1,3 +1,4 @@
+import { IInquiry } from 'suppliers';
 import { IAction } from '../../state/types';
 
 export const actionTypes = {
@@ -6,18 +7,18 @@ export const actionTypes = {
   SUBMIT_SUPPLIERS_FORM: 'SUPPLIERS_FORM:SUBMIT',
 };
 
-export const LoadSuppliersForm = (data: any): IAction => ({
+export const LoadSuppliersForm = (inquiryData: IInquiry): IAction => ({
   type: actionTypes.LOAD_SUPPLIERS_FORM,
   payload: {
-    data,
+    inquiryData,
   },
 });
 
-export const SelectMainSupplier = (categoryId: string, companyName: string): IAction => ({
+export const SelectMainSupplier = (questionId: string, selectedOptionId: string): IAction => ({
   type: actionTypes.SELECT_MAIN_SUPPLIER,
   payload: {
-    categoryId,
-    companyName,
+    questionId,
+    selectedOptionId,
   },
 });
 

@@ -1,17 +1,19 @@
 import { Dispatch } from 'redux';
+import { IInquiry, ISuppliersData, SuppliersInquiryData } from 'suppliers';
 import { IPolaState } from '../../state/types';
 import * as actions from './suppliers-actions';
 
 export const suppliersDispatcher = {
-  loadFormData: (data: any) => async (dispatch: Dispatch) => {
-    await dispatch(actions.LoadSuppliersForm(data));
+  loadFormData: (data: ISuppliersData) => async (dispatch: Dispatch) => {
+    const inquiry: IInquiry = new SuppliersInquiryData(data.categories);
+    await dispatch(actions.LoadSuppliersForm(inquiry));
   },
 
   selectMainSupplier:
-    (categoryId: string, optionId: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
+    (questionId: string, selectedOptionId: string) => async (dispatch: Dispatch, getState: () => IPolaState) => {
       try {
-        //const service = SuppliersService.getInstance();
-        await dispatch(actions.SelectMainSupplier(categoryId, optionId));
+        console.log('dispatcher', questionId, selectedOptionId);
+        await dispatch(actions.SelectMainSupplier(questionId, selectedOptionId));
       } catch (error: unknown) {
         console.error(error);
       }

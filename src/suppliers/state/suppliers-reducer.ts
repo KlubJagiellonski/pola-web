@@ -2,7 +2,7 @@ import { AnyAction, Reducer } from 'redux';
 import { actionTypes } from './suppliers-actions';
 import * as actions from './suppliers-actions';
 import { IAction, IActionReducer } from '../../state/types';
-import { IFormQuestion } from '..';
+import { InquiryQuestion } from '..';
 import { assertStatus } from 'state/assert-status';
 
 export enum SuppliersFormStatus {
@@ -17,11 +17,11 @@ export type ISuppliersState =
     }
   | {
       status: SuppliersFormStatus.LOADED;
-      questions: IFormQuestion[];
+      questions: InquiryQuestion[];
     }
   | {
       status: SuppliersFormStatus.SUBMITTED;
-      questions: IFormQuestion[];
+      questions: InquiryQuestion[];
     };
 
 const initialState: ISuppliersState = { status: SuppliersFormStatus.INITIAL };
@@ -31,10 +31,11 @@ const reducers: IActionReducer<ISuppliersState> = {
     state: ISuppliersState = initialState,
     action: ReturnType<typeof actions.LoadSuppliersForm>
   ) => {
+    console.log('incoming action', action);
     assertStatus(state, SuppliersFormStatus.INITIAL);
     return {
       status: SuppliersFormStatus.LOADED,
-      categories: action.payload.data,
+      questions: action.payload.inquiryData.questions,
     };
   },
 
@@ -43,19 +44,21 @@ const reducers: IActionReducer<ISuppliersState> = {
     action: ReturnType<typeof actions.SelectMainSupplier>
   ) => {
     assertStatus(state, SuppliersFormStatus.LOADED);
+    const { questionId, selectedOptionId } = action.payload;
+    const updatedQuestions =
+      state.status !== SuppliersFormStatus.INITIAL
+        ? state.questions.map((question) =>
+            question.questionId === questionId
+              ? {
+                  ...question,
+                  selectedOptionId,
+                }
+              : question
+          )
+        : undefined;
     return {
       status: SuppliersFormStatus.LOADED,
-      categories:
-        state.status === SuppliersFormStatus.LOADED
-          ? state.questions.map((question) =>
-              question.questionId === action.payload.categoryId
-                ? {
-                    ...question,
-                    selectOptionId: action.payload.companyName,
-                  }
-                : question
-            )
-          : undefined,
+      questions: updatedQuestions,
     };
   },
 
@@ -70,7 +73,7 @@ const reducers: IActionReducer<ISuppliersState> = {
   },
 };
 
-export const newsletterReducer: Reducer<ISuppliersState, AnyAction> = (
+export const suppliersReducer: Reducer<ISuppliersState, AnyAction> = (
   state: ISuppliersState = initialState,
   action: IAction
 ) => {

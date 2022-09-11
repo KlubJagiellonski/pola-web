@@ -4,7 +4,7 @@
       "categoryId": "energy1",
       "order": 1,
       "header": "Twój dostawca energii elektrycznej?",
-      "options": [
+      "suppliers": [
         {
           "name": "Energa",
           "score": 100
@@ -47,7 +47,7 @@
       "categoryId": "mobile",
       "order": 2,
       "header": "Twój operator sieci komórkowej?",
-      "options": [
+      "suppliers": [
         {
           "name": "Plush",
           "score": 60
@@ -90,7 +90,7 @@
       "categoryId": "car",
       "order": 3,
       "header": "Twój ubezpieczyciel samochód?",
-      "options": [
+      "suppliers": [
         {
           "name": "Liberty",
           "score": 40
@@ -141,7 +141,7 @@
       "categoryId": "estate",
       "order": 4,
       "header": "Twój ubezpieczyciel samochód?",
-      "options": [
+      "suppliers": [
         {
           "name": "Generali",
           "score": 60
@@ -177,7 +177,7 @@
       "categoryId": "energy2",
       "order": 5,
       "header": "Twój dostawca prądu?",
-      "options": [
+      "suppliers": [
         {
           "name": "Axpo",
           "score": 70
@@ -216,7 +216,7 @@
       "categoryId": "television",
       "order": 6,
       "header": "Twój dostawca telewizji?",
-      "options": [
+      "suppliers": [
         {
           "name": "Canal+",
           "score": 50
@@ -251,7 +251,7 @@
       "categoryId": "finances",
       "order": 7,
       "header": "Twój bank?",
-      "options": [
+      "suppliers": [
         {
           "name": "Citi Handlowy",
           "score": 80
@@ -302,7 +302,7 @@
       "categoryId": "internet",
       "order": 8,
       "header": "Twój dostawca internetu?",
-      "options": [
+      "suppliers": [
         {
           "name": "Inea",
           "score": 60
