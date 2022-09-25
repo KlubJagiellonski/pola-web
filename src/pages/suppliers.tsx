@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { color, margin } from '../styles/theme';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
 
 import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
@@ -11,101 +9,69 @@ import { PageType } from '../domain/website';
 import Placeholder from '../components/Placeholder';
 import { graphql, useStaticQuery } from 'gatsby';
 import { PageSection } from 'layout/PageSection';
-import { InquiryQuestion, ISuppliersData } from 'suppliers';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
 import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
+import { SuppliersInquiry } from 'suppliers/components/SuppliersInquiry';
+import { Modal } from 'layout/modal/Modal';
+import { ClickOutside } from 'utils/click-outside';
 
-const InquiryContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-`;
+const connector = connect(
+  (state: IPolaState) => {
+    const { app, suppliers } = state;
 
-const InquiryQuestionContainer = styled.div`
-  border-left: ${margin.small} solid ${color.text.red};
-  padding-left: ${margin.normal};
-  margin-bottom: ${margin.big};
-`;
-
-const InquiryOptionsList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  li {
-    margin: 0;
-    padding: 0;
-
-    .container {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      font-size: 22px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-
-      input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-
-        &:checked ~ .checkmark {
-          background-color: #2196f3;
-        }
-
-        &:checked ~ .checkmark:after {
-          display: block;
-        }
-      }
-
-      .checkmark:after {
-        top: 9px;
-        left: 9px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: white;
-      }
-
-      &:hover input ~ .checkmark {
-        background-color: #ccc;
-      }
+    switch (suppliers.status) {
+      case SuppliersFormStatus.LOADED:
+        return {
+          inquiryQuestions: suppliers.questions,
+          isResultVisible: suppliers.isResultDialogVisible,
+        };
+      case SuppliersFormStatus.CALCULATED:
+        return {
+          inquiryQuestions: suppliers.questions,
+          totalScore: suppliers.totalScore,
+          resultMessage: suppliers.resultMessage,
+          isResultVisible: suppliers.isResultDialogVisible,
+        };
+      case SuppliersFormStatus.INITIAL:
+      default:
+        return {
+          inquiryQuestions: [],
+        };
     }
-
-    /* Create a custom radio button */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 25px;
-      width: 25px;
-      background-color: #eee;
-      border-radius: 50%;
-
-      &:after {
-        content: '';
-        position: absolute;
-        display: none;
-      }
-    }
+  },
+  {
+    onLoadSuppliers: suppliersDispatcher.loadFormData,
+    onSelectSupplier: suppliersDispatcher.selectMainSupplier,
+    onSelectNew: suppliersDispatcher.proposeNewSupplier,
+    onSelectNone: suppliersDispatcher.unselectSupplier,
+    calculateTotalScore: suppliersDispatcher.calculateTotalScore,
+    showResultDialog: suppliersDispatcher.showDialog,
+    hideResultDialog: suppliersDispatcher.hideDialog,
+    submitResult: suppliersDispatcher.submitForm,
   }
-`;
+);
 
-interface ISuppliersPage {
+type ReduxProps = ConnectedProps<typeof connector>;
+
+type ISuppliersPage = ReduxProps & {
   location?: Location;
-  inquiryQuestions: InquiryQuestion[];
-
-  onLoadSuppliers: (data: ISuppliersData) => void;
-  onSelectSupplier: (questionId: string, selectedOptionId: string) => void;
-}
+};
 
 const SuppliersPage = (props: ISuppliersPage) => {
-  const { location, inquiryQuestions, onLoadSuppliers, onSelectSupplier } = props;
+  const {
+    location,
+    inquiryQuestions,
+    totalScore,
+    isResultVisible,
+
+    onLoadSuppliers,
+    onSelectSupplier,
+    onSelectNew,
+    onSelectNone,
+    calculateTotalScore,
+    hideResultDialog,
+    submitResult,
+  } = props;
   const dispatch = useDispatch();
 
   const data = useStaticQuery(graphql`
@@ -138,47 +104,25 @@ const SuppliersPage = (props: ISuppliersPage) => {
       <SEOMetadata pageTitle="Przykładowy formularz dostawców" />
       <Placeholder text="Strona w budowie" />
       <PageSection>
-        <InquiryContainer className="suppliers-inquiry">
-          {inquiryQuestions
-            .sort((x) => x.order)
-            .map((question) => (
-              <InquiryQuestionContainer className="suppliers-category" key={question.questionId}>
-                <header>{question.text}</header>
-                <InquiryOptionsList>
-                  {question.options.map((option) => (
-                    <li key={option.optionId}>
-                      <label className="container">
-                        <input
-                          type="radio"
-                          name="radio"
-                          onChange={(e) => {
-                            console.log(e.currentTarget.checked, option.text, option.optionId);
-                            onSelectSupplier(question.questionId, option.optionId);
-                          }}
-                        />
-                        <span className="checkmark"></span>
-                        <span>{`${option.text} (${option.score.value})`}</span>
-                      </label>
-                    </li>
-                  ))}
-                </InquiryOptionsList>
-              </InquiryQuestionContainer>
-            ))}
-        </InquiryContainer>
+        <div>
+          {totalScore?.value && (
+            <label name="result">
+              <span>{totalScore.value}</span>
+            </label>
+          )}
+          <button onClick={(e: React.FromEvent<HTMLInputElement>) => calculateTotalScore()}>Przelicz</button>
+        </div>
+        <SuppliersInquiry
+          questions={inquiryQuestions}
+          totalScore={totalScore}
+          onSelectSupplier={onSelectSupplier}
+          onSelectNew={onSelectNew}
+          onSelectNone={onSelectNone}
+          OnCalculateClicked={calculateTotalScore}
+        />
       </PageSection>
     </PageLayout>
   );
 };
 
-export default connect(
-  (state: IPolaState) => {
-    const { app, suppliers } = state;
-    return {
-      inquiryQuestions: suppliers.status !== SuppliersFormStatus.INITIAL ? suppliers.questions : [],
-    };
-  },
-  {
-    onLoadSuppliers: suppliersDispatcher.loadFormData,
-    onSelectSupplier: suppliersDispatcher.selectMainSupplier,
-  }
-)(SuppliersPage);
+export default connector(SuppliersPage);

@@ -1,4 +1,5 @@
-import { getGuid } from 'utils/data/random-number';
+import { color, margin } from 'styles/theme';
+import { getGuid, guid } from 'utils/data/random-number';
 
 export interface ISupplier {
   name: string;
@@ -16,12 +17,7 @@ export interface ISuppliersData {
   categories: ISupplierCategory[];
 }
 
-export interface IInquiry {
-  questions: InquiryQuestion[];
-  calculateTotalScore: () => number;
-}
-
-export class SuppliersInquiryData implements IInquiry {
+export class SuppliersInquiryData {
   public questions: InquiryQuestion[];
 
   public constructor(categories: ISupplierCategory[]) {
@@ -32,21 +28,13 @@ export class SuppliersInquiryData implements IInquiry {
       return question;
     });
   }
-
-  public calculateTotalScore = (): number => {
-    const totalScore = this.questions.reduce((total: number, question) => {
-      const selectedOption = question.options.find((option) => option.optionId === question.selectedOptionId);
-      const questionValue = selectedOption?.score?.value || 0;
-      return total + questionValue;
-    }, 0);
-    return totalScore;
-  };
 }
 
 export class InquiryQuestion {
   public readonly questionId: string;
   public readonly options: InquiryOption[];
   public selectedOptionId?: string;
+  public expanded: boolean;
 
   constructor(
     public readonly text: string,
@@ -55,6 +43,7 @@ export class InquiryQuestion {
   ) {
     this.questionId = title;
     this.options = [];
+    this.expanded = false;
   }
 
   public AddOptions(options: InquiryOption[]) {
@@ -63,7 +52,7 @@ export class InquiryQuestion {
 }
 
 export class InquiryOption {
-  public readonly optionId: string;
+  public readonly optionId: guid;
   constructor(public readonly text: string, public readonly score?: Score) {
     this.optionId = getGuid();
   }
@@ -96,3 +85,21 @@ export class Score {
     return this.value === score.value;
   }
 }
+
+export const theme = {
+  colors: {
+    line: color.text.red,
+    option: color.border.grey,
+    optionHover: color.button.redLight,
+    optionSelected: color.text.red,
+  },
+  space: {
+    small: margin.small,
+    normal: margin.normal,
+    large: margin.big,
+    checkmark: 25,
+    checkmarkCenter: 9,
+  },
+};
+
+export const px = (size: number): string => size + 'px';
