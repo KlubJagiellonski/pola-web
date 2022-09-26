@@ -2,8 +2,9 @@ import { AnyAction, Reducer } from 'redux';
 import { actionTypes } from './suppliers-actions';
 import * as actions from './suppliers-actions';
 import { IAction, IActionReducer } from '../../state/types';
-import { InquiryOption, InquiryQuestion, Score } from '..';
+import { InquiryOption, InquiryQuestion, ISuppliersInquiryMessages, Score } from '..';
 import { assertStatus } from 'state/assert-status';
+import { IInquiryCalculationResult } from './suppliers-serivce';
 
 export enum SuppliersFormStatus {
   INITIAL = 'initial',
@@ -19,27 +20,31 @@ export type ISuppliersState =
     }
   | {
       status: SuppliersFormStatus.LOADED;
+      messages: ISuppliersInquiryMessages;
       questions: InquiryQuestion[];
       isResultDialogVisible: boolean;
     }
   | {
       status: SuppliersFormStatus.CALCULATED;
+      messages: ISuppliersInquiryMessages;
       questions: InquiryQuestion[];
-      totalScore?: Score;
+      totalScore?: IInquiryCalculationResult;
       resultMessage: string;
       isResultDialogVisible: boolean;
     }
   | {
       status: SuppliersFormStatus.SUBMITTED;
+      messages: ISuppliersInquiryMessages;
       questions: InquiryQuestion[];
-      totalScore?: Score;
+      totalScore?: IInquiryCalculationResult;
       resultMessage: string;
       isResultDialogVisible: boolean;
     }
   | {
       status: SuppliersFormStatus.ERROR;
+      messages: ISuppliersInquiryMessages;
       questions: InquiryQuestion[];
-      totalScore?: Score;
+      totalScore?: IInquiryCalculationResult;
       errorMessage: string;
     };
 
@@ -54,6 +59,7 @@ const reducers: IActionReducer<ISuppliersState> = {
     assertStatus(state, SuppliersFormStatus.INITIAL);
     return {
       status: SuppliersFormStatus.LOADED,
+      messages: action.payload.inquiryData.messages,
       questions: action.payload.inquiryData.questions,
     };
   },
@@ -76,6 +82,7 @@ const reducers: IActionReducer<ISuppliersState> = {
           )
         : undefined;
     return {
+      ...state,
       status: SuppliersFormStatus.LOADED,
       questions: updatedQuestions,
     };
@@ -85,7 +92,7 @@ const reducers: IActionReducer<ISuppliersState> = {
     state: ISuppliersState = initialState,
     action: ReturnType<typeof actions.ProposeNewSupplier>
   ) => {
-    assertStatus(state, SuppliersFormStatus.LOADED);
+    assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
     const { questionId, newSupplierName } = action.payload;
     const newOption = new InquiryOption(newSupplierName);
     const updatedQuestions =
@@ -94,13 +101,14 @@ const reducers: IActionReducer<ISuppliersState> = {
             question.questionId === questionId
               ? {
                   ...question,
-                  options: { ...question.options, newOption },
+                  options: [...question.options, newOption],
                   selectedOptionId: newOption.optionId,
                 }
               : question
           )
         : undefined;
     return {
+      ...state,
       status: SuppliersFormStatus.LOADED,
       questions: updatedQuestions,
     };
@@ -110,7 +118,7 @@ const reducers: IActionReducer<ISuppliersState> = {
     state: ISuppliersState = initialState,
     action: ReturnType<typeof actions.UnselectSupplier>
   ) => {
-    assertStatus(state, SuppliersFormStatus.LOADED);
+    assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
     const { questionId } = action.payload;
     const updatedQuestions =
       state.status !== SuppliersFormStatus.INITIAL
@@ -124,6 +132,7 @@ const reducers: IActionReducer<ISuppliersState> = {
           )
         : undefined;
     return {
+      ...state,
       status: SuppliersFormStatus.LOADED,
       questions: updatedQuestions,
     };
@@ -136,10 +145,10 @@ const reducers: IActionReducer<ISuppliersState> = {
     assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
     if (state.status === SuppliersFormStatus.LOADED || state.status === SuppliersFormStatus.CALCULATED) {
       return {
+        ...state,
         status: SuppliersFormStatus.CALCULATED,
         questions: [...state.questions],
         totalScore: action.payload.score,
-        resultMessage: action.payload.message,
         isResultDialogVisible: true,
       };
     }

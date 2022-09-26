@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { guid } from 'utils/data/random-number';
 import { InquiryOption, InquiryQuestion, theme, px } from '..';
-import { fontSize } from '../../styles/theme';
+import { color, fontSize } from '../../styles/theme';
 import { InquiryListOption } from './InquiryListOption';
 
 import {
@@ -24,13 +24,9 @@ const ItemButton = styled(AccordionItemButton)`
   text-align: left;
   border: none;
 
-  &[aria-expanded='true']::before,
-  &[aria-selected='true']::before {
-    transform: rotate(45deg);
-  }
-
   .question-header {
     margin: 1em 0;
+    user-select: none;
   }
 `;
 
@@ -52,7 +48,7 @@ const InquiryOptionsList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  max-width: 20em;
+  max-width: 30em;
   margin-bottom: 1rem;
   font-size: ${fontSize.normal};
 `;
@@ -62,6 +58,7 @@ const ListElement = styled.li`
   padding: 0;
   display: flex;
   flex-flow: row nowrap;
+  gap: 0.5em;
 
   :last-of-type {
     margin-bottom: 0;
@@ -69,6 +66,14 @@ const ListElement = styled.li`
 
   input.new-supplier {
     width: 20em;
+    font-size: 1rem;
+    padding: 0 1em;
+    border: 1px solid ${color.border.white};
+    &::hover,
+    &:focus,
+    &:active {
+      border: 1px solid ${color.border.grey};
+    }
   }
 `;
 
@@ -89,7 +94,7 @@ export const SupplierSelectionList: React.FC<ISupplierSelectionList> = (props: I
   };
 
   return (
-    <InquiryQuestionContainer className="suppliers-category" exs>
+    <InquiryQuestionContainer className="suppliers-category">
       <AccordionItemHeading>
         <ItemButton>
           <h3 className="question-header">{question.text}</h3>
