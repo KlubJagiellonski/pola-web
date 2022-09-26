@@ -1,13 +1,51 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { guid } from 'utils/data/random-number';
 import { InquiryOption, InquiryQuestion, theme, px } from '..';
+import { fontSize } from '../../styles/theme';
 import { InquiryListOption } from './InquiryListOption';
 
-const InquiryQuestionContainer = styled.div`
+import {
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
+
+const InquiryQuestionContainer = styled(AccordionItem)`
   border-left: ${theme.space.small} solid ${theme.colors.line};
   padding-left: ${theme.space.normal};
-  margin-bottom: ${theme.space.large};
+  margin-bottom: ${theme.space.normal};
+`;
+
+const ItemButton = styled(AccordionItemButton)`
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+
+  &[aria-expanded='true']::before,
+  &[aria-selected='true']::before {
+    transform: rotate(45deg);
+  }
+
+  .question-header {
+    margin: 1em 0;
+  }
+`;
+
+const fadein = keyframes`
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+`;
+
+const ItemPanel = styled(AccordionItemPanel)`
+  font-size: ${fontSize.small};
+  animation: ${fadein} 1s ease-in;
 `;
 
 const InquiryOptionsList = styled.ul`
@@ -15,6 +53,8 @@ const InquiryOptionsList = styled.ul`
   margin: 0;
   padding: 0;
   max-width: 20em;
+  margin-bottom: 1rem;
+  font-size: ${fontSize.normal};
 `;
 
 const ListElement = styled.li`
@@ -49,43 +89,49 @@ export const SupplierSelectionList: React.FC<ISupplierSelectionList> = (props: I
   };
 
   return (
-    <InquiryQuestionContainer className="suppliers-category">
-      <h3>{question.text}</h3>
-      <InquiryOptionsList>
-        {question.options.sort(sortOptions).map((option: InquiryOption) => (
-          <ListElement key={option.optionId}>
+    <InquiryQuestionContainer className="suppliers-category" exs>
+      <AccordionItemHeading>
+        <ItemButton>
+          <h3 className="question-header">{question.text}</h3>
+        </ItemButton>
+      </AccordionItemHeading>
+      <ItemPanel>
+        <InquiryOptionsList>
+          {question.options.sort(sortOptions).map((option: InquiryOption) => (
+            <ListElement key={option.optionId}>
+              <InquiryListOption
+                name={option.text}
+                score={option?.score?.value}
+                groupName={question.questionId}
+                onSelect={() => onSelectSupplier(question.questionId, option.optionId)}
+              />
+            </ListElement>
+          ))}
+
+          <ListElement>
             <InquiryListOption
-              name={option.text}
-              score={option?.score?.value}
+              name="Inny"
               groupName={question.questionId}
-              onSelect={() => onSelectSupplier(question.questionId, option.optionId)}
+              onSelect={() => onSelectNew(question.questionId, newSupplierName)}
+            />
+            <input
+              className="new-supplier"
+              type="text"
+              name={question.questionId}
+              placeholder="nazwa Twojego dostawcy"
+              value={newSupplierName}
+              onChange={handleNewSupplierName}
             />
           </ListElement>
-        ))}
-
-        <ListElement>
-          <InquiryListOption
-            name="Inny"
-            groupName={question.questionId}
-            onSelect={() => onSelectNew(question.questionId, newSupplierName)}
-          />
-          <input
-            className="new-supplier"
-            type="text"
-            name={question.questionId}
-            placeholder="nazwa Twojego dostawcy"
-            value={newSupplierName}
-            onChange={handleNewSupplierName}
-          />
-        </ListElement>
-        <ListElement>
-          <InquiryListOption
-            name="Brak"
-            groupName={question.questionId}
-            onSelect={() => onSelectNone(question.questionId)}
-          />
-        </ListElement>
-      </InquiryOptionsList>
+          <ListElement>
+            <InquiryListOption
+              name="Brak"
+              groupName={question.questionId}
+              onSelect={() => onSelectNone(question.questionId)}
+            />
+          </ListElement>
+        </InquiryOptionsList>
+      </ItemPanel>
     </InquiryQuestionContainer>
   );
 };
