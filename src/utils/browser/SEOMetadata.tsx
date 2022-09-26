@@ -49,7 +49,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
         },
         {
           property: 'og:title',
-          content: browserTabTitle,
+          content: pageTitle,
         },
         {
           property: 'og:description',
@@ -69,7 +69,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
         },
         {
           name: 'twitter:title',
-          content: browserTabTitle,
+          content: pageTitle,
         },
         {
           name: 'twitter:description',

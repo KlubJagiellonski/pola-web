@@ -1,12 +1,15 @@
 import axios from 'axios';
 import {
   ApiAdapterError,
+  AuthenticationError,
   BadRequestError,
   ErrorMessage,
   FetchError,
   InternalServiceError,
   MethodNotFoundError,
   NetworkError,
+  RequestsLimitExceeded,
+  ResourceConflictError,
 } from './api-errors';
 
 export abstract class ApiAdapter {
@@ -19,7 +22,6 @@ export abstract class ApiAdapter {
   }
 
   protected handleError(error: unknown) {
-    console.error('handle error');
     if (!(error instanceof Error)) {
       return new ApiAdapterError(this.apiName);
     } else if (axios.isAxiosError(error)) {
@@ -27,11 +29,17 @@ export abstract class ApiAdapter {
         /**
          * client received an error response (5xx, 4xx)
          */
-        switch (error.response.data.status) {
+        switch (error.response!.status) {
           case 400:
             return new BadRequestError(error.response);
+          case 401:
+            return new AuthenticationError(error.response);
           case 404:
             return new MethodNotFoundError(error.response);
+          case 409:
+            return new ResourceConflictError(error.response);
+          case 429:
+            return new RequestsLimitExceeded(error.response);
           case 500:
             return new InternalServiceError(error.response);
           case 503:

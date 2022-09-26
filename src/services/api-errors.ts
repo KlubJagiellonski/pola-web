@@ -3,6 +3,9 @@ import { AxiosError } from 'axios';
 export enum ErrorMessage {
   UNEXPECTED_ERROR = 'Unexpected error',
   FETCH_UNSUCCESSFUL = 'Cannot fetch data, check if endpoint is available',
+  UNAUTHENTICATED_REQUEST = 'Cannot authenticate request',
+  RESOURCE_CONFLICT = 'Operation conflicting with existing resource state',
+  REQUESTS_LIMIT_EXCEEDED = 'Limit of requests in a time-frame has been reached. Try again later.',
   EMPTY_PAYLOAD = 'Obtained empty payload',
   INVALID_DATA = 'Obtained invalid data for search query',
   INVALID_REQUEST = 'Invalid request structure',
@@ -11,6 +14,8 @@ export enum ErrorMessage {
   NETWORK_ERROR = 'Service is unreachable',
   API_ADAPTER_ERROR = 'Something unexpected happened on communication with a service.',
   SERVICE_ERROR = 'Something unexpected happened on the service. Please try again later.',
+  SUBSCRIPTION_ERROR = 'Cannot subscribe contact to a newsletter',
+  STATE_MACHINE_ERROR = 'Attempt to perform an action forbidden in current redux state',
 }
 
 export abstract class ErrorHandler extends Error {
@@ -82,6 +87,42 @@ export class BadRequestError extends ErrorHandler {
   }
 }
 
+export class AuthenticationError extends ErrorHandler {
+  /**
+   * Error describes authentication problem
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Authentication error';
+    this.message = this.buildMessage(ErrorMessage.UNAUTHENTICATED_REQUEST);
+  }
+}
+
+export class ResourceConflictError extends ErrorHandler {
+  /**
+   * Error describes invalid operation conflicting with existing resource state
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Resource conflict error';
+    this.message = this.buildMessage(ErrorMessage.RESOURCE_CONFLICT);
+  }
+}
+
+export class RequestsLimitExceeded extends ErrorHandler {
+  /**
+   * Error describes exceeding limit for requests in one time-frame
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Requests limit exceeded';
+    this.message = this.buildMessage(ErrorMessage.REQUESTS_LIMIT_EXCEEDED);
+  }
+}
+
 export class MethodNotFoundError extends ErrorHandler {
   /**
    * Error describes "NOT FOUND" case
@@ -140,5 +181,29 @@ export class NetworkError extends ErrorHandler {
     super();
     this.name = 'Network error';
     this.message = this.buildMessage(ErrorMessage.NETWORK_ERROR);
+  }
+}
+
+export class SubscriptionError extends ErrorHandler {
+  /**
+   * Error describes failure of subscribing contact to a newsletter
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Newsletter subscription error';
+    this.message = this.buildMessage(ErrorMessage.SUBSCRIPTION_ERROR);
+  }
+}
+
+export class StateMachineError extends ErrorHandler {
+  /**
+   * Error describes performing Redux action in some state forbidden for such action type
+   * @param handledError Handled incoming error object
+   */
+  constructor(public handledError?: unknown) {
+    super();
+    this.name = 'Redux state machine error';
+    this.message = this.buildMessage(ErrorMessage.STATE_MACHINE_ERROR);
   }
 }

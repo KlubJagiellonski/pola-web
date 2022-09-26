@@ -18,6 +18,8 @@ export const color = {
     light: '#ffffff',
     dark: '#000000',
     red: '#D8152F',
+    success: '#03c900',
+    fail: '#ff0000',
   },
   button: {
     white: '#ffffff',
@@ -33,6 +35,7 @@ export const color = {
   },
 };
 
+export const introHeight = '160px';
 export const mobileHeaderHeight = '40px';
 export const desktopHeaderHeight = '112px';
 

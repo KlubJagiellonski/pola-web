@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { HamburgerMenu } from './nav/HamburgerMenu';
 import { NavbarMenu } from './nav/NavbarMenu';
 import { desktopHeaderHeight, Device, pageWidth, color } from '../styles/theme';
-import { NavItem } from './nav/NavItem';
-import { pageLinks, PageType } from '../domain/website';
+import { ExtNavItem, NavItem } from './nav/NavItem';
+import { pageLinks, PageType, PageLinkData, ExternalLinkData } from '../domain/website';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -13,7 +13,7 @@ const HeaderContainer = styled.header`
   justify-content: center;
   position: absolute;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   background: ${color.background.white};
   box-shadow: 0 1px 10px ${color.background.secondary};
@@ -47,7 +47,18 @@ interface IPageHeader {
 }
 
 export const PageHeader = (props: IPageHeader) => {
-  const navItems = pageLinks.map((link) => <NavItem key={link.type} data={link} activePage={props.activePage} />);
+  const isExternalLink = (link: PageLinkData | ExternalLinkData) => {
+    const href = typeof link.url === 'function' ? link.url() : link.url;
+    return href.startsWith('http');
+  };
+
+  const navItems = pageLinks.map((link) => {
+    if (!isExternalLink(link)) {
+      return <NavItem key={link.type} data={link} activePage={props.activePage} />;
+    } else {
+      return <ExtNavItem key={link.type} data={link} activePage={props.activePage} />;
+    }
+  });
 
   return (
     <HeaderContainer>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { PageHeader } from './PageHeader';
-import { PageFooter } from './PageFooter';
+import PageFooter from './footer/PageFooter';
 import { IPolaState } from '../state/types';
 import { appDispatcher } from '../state/app/app-dispatcher';
 import { ProductModal } from '../search/product-modal';
@@ -17,18 +17,33 @@ import Download from '../components/Download';
 import { SearchStateName } from '../state/search/search-reducer';
 import { SearchInfoModal } from '../search/form/SearchInfoModal';
 import { CustomScrollbarDiv } from './CustomScrollbar';
+import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
+import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
+import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
 
 const connector = connect(
-  (state: IPolaState) => ({
-    isSearchInfoVisible: state.app.isSearchInfoVisible,
-    activePage: state.app.activePage,
-    isMenuExpanded: state.app.isMenuExpanded,
-    selectedProduct: state.search.stateName === SearchStateName.SELECTED ? state.search.selectedProduct : undefined,
-  }),
+  (state: IPolaState) => {
+    const { app, search, suppliers } = state;
+    return {
+      isSearchInfoVisible: app.isSearchInfoVisible,
+      activePage: app.activePage,
+      isMenuExpanded: app.isMenuExpanded,
+      selectedProduct: search.stateName === SearchStateName.SELECTED ? search.selectedProduct : undefined,
+      suppliers: {
+        isInquiryResultVisible:
+          suppliers.status === SuppliersFormStatus.LOADED || suppliers.status === SuppliersFormStatus.CALCULATED
+            ? suppliers.isResultDialogVisible
+            : false,
+        totalScore: suppliers.status === SuppliersFormStatus.CALCULATED ? suppliers.totalScore : undefined,
+      },
+    };
+  },
   {
     toggleSearchInfo: appDispatcher.toggleSearchInfo,
     expandMenu: appDispatcher.expandMenu,
     unselectProduct: searchDispatcher.unselectProduct,
+    hideResultDialog: suppliersDispatcher.hideDialog,
+    submitResult: suppliersDispatcher.submitForm,
   }
 );
 
@@ -67,6 +82,9 @@ const Layout: React.FC<IPageLayout> = ({
   activePage,
   isMenuExpanded,
   isSearchInfoVisible,
+  suppliers,
+  hideResultDialog,
+  submitResult,
   selectedProduct,
   children,
   toggleSearchInfo,
@@ -90,6 +108,9 @@ const Layout: React.FC<IPageLayout> = ({
       <LayoutContainer id="layout-container">
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
+        {suppliers.isInquiryResultVisible && (
+          <InquiryResultModal onClose={hideResultDialog} onSubmit={submitResult} totalScore={suppliers.totalScore} />
+        )}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
           activePage={activePage}

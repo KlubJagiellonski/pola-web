@@ -6,7 +6,9 @@ export enum PageType {
   ARTICLE = 'article',
   ABOUT = 'about',
   SUPPORT = 'support',
+  COMPANY_FORM = 'company-form',
   FRIENDS = 'friends',
+  SUPPLIERS = 'suppliers',
   PARTNERS = 'partners',
   BUSINESS = 'business',
   TEAM = 'team',
@@ -24,6 +26,12 @@ type HashSection = HomeHash | AboutHash | FriendHash;
 type HrefFunction = (sectionId?: HashSection) => string;
 
 export interface PageLinkData {
+  type: PageType;
+  label: string;
+  url: string | HrefFunction;
+}
+
+export interface ExternalLinkData {
   type: PageType;
   label: string;
   url: string | HrefFunction;
@@ -73,7 +81,9 @@ export const urls: WebsiteMap = {
       polaSupport: new URL('https://klubjagiellonski.pl/zbiorka/wspieraj-aplikacje-pola/'),
       polaGooglePlay: new URL('https://play.google.com/store/apps/details?id=pl.pola_app'),
       polaAppStore: new URL('https://itunes.apple.com/us/app/pola.-zabierz-ja-na-zakupy/id1038401148?ls=1&amp;mt=8'),
-      polaHuaweiAppGallery: new URL('https://consumer.huawei.com/pl/mobileservices/appgallery/'),
+      polaHuaweiAppGallery: new URL(
+        'https://appgallery.huawei.com/app/C105876503?fbclid=IwAR1ODHLJkpxMTkEgnigWNHaDeaQPOHNTf6kNrdoRT6UYhWkU6PQA7QL2Nq8'
+      ),
       openSearch: new URL('https://openresearch.pl/91-polakow-chce-znac-pochodzenie-produktow-ktore-kupuje/'),
       polaGitHub: new URL('https://github.com/KlubJagiellonski'),
       polaPrivacyPolicy: new URL('https://pola-app.s3.amazonaws.com/docs/polityka_prywatnosci.pdf'),
@@ -90,7 +100,7 @@ export const urls: WebsiteMap = {
         'https://www.getresponse.pl/email-marketing/Informacje-prawne/polityka-prywatnosci.html'
       ),
       amazonawsRegulamin: new URL('https://s3.eu-central-1.amazonaws.com/secure-pliki/regulamin.pdf'),
-      form: new URL(
+      newCompanyForm: new URL(
         'https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform'
       ),
       fundraising: new URL('https://klubjagiellonski.pl/zbiorka/wspieraj-aplikacje-pola/'),
@@ -112,7 +122,7 @@ export const urls: WebsiteMap = {
   },
 };
 
-export const pageLinks: PageLinkData[] = [
+export const pageLinks: (PageLinkData | ExternalLinkData)[] = [
   { type: PageType.ABOUT, label: 'O Poli', url: urls.pola.about() },
   { type: PageType.NEWS, label: 'Aktualności', url: urls.pola.news() },
   { type: PageType.FRIENDS, label: 'Klub przyjaciół Poli', url: urls.pola.friends() },
@@ -121,4 +131,5 @@ export const pageLinks: PageLinkData[] = [
   { type: PageType.TEAM, label: 'Dołącz do zespołu', url: urls.pola.team() },
   { type: PageType.CONTACT, label: 'Kontakt', url: urls.pola.home('contact') },
   { type: PageType.SUPPORT, label: 'Wesprzyj aplikację', url: urls.external.links.polaSupport.href },
+  { type: PageType.COMPANY_FORM, label: 'Dodaj firmę', url: urls.external.links.newCompanyForm.href },
 ];

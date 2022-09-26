@@ -12,7 +12,7 @@ Producentem Riviv’y jest Sokpol sp. z o.o. z siedzibą w Myszkowie. Jest to sp
 **„Tymbark jest obecny na polskim rynku od 1936 r. Obecnie Tymbark to zdecydowany lider rynkowy w kategorii soków, nektarów i napojów w Polsce, którego produkty trafiają do prawie 30 krajów na całym świecie. W Tymbarku opracowano i zainstalowano pierwszą w Polsce stację wyparną do zagęszczania soków, opracowano w 1967 roku pierwszą w Polsce recepturę soku z czarnej porzeczki oraz wprowadzono w 2004 roku Top Aseptic – nowoczesną technologię aseptycznego rozlewu soków i napojów do opakowań plastikowych.”.** - taki opis firmy [możemy znaleźć](https://www.pola-app.pl/) skanując produkty jednej z najbardziej rozpoznawalnych polskich marek aplikacją Pola.
 
 Tymbark to również najczęściej skanowana firma w historii aplikacji Pola. Z okazji 10 milionów skanowań dokonanych za pomocą aplikacji Pola, opublikowaliśmy zestawienie najczęściej skanowanych firm, w którym pierwsze miejsce zajął Tymbark.
-![](ranking.PNG)
+![](ranking1.png)
 
 W kategorii soków najwięcej skanowań uzyskały:
 
@@ -24,6 +24,6 @@ W kategorii soków najwięcej skanowań uzyskały:
 
 Jak istotny jest patriotyzm gospodarczy, pisaliśmy na łamach portalu Klubu Jagiellońskiego, wydawcy aplikacji Pola w dziale [Podmiotowa Gospodarka](https://klubjagiellonski.pl/2018/08/07/patriotyzm-konsumencki-na-powaznie-aplikacja-pola-startuje-ze-znakiem-towarowym/).
 
-![](PG.PNG)
+![](PG1.png)
 
 ### Czegoś zabrakło? Chcesz wiedzieć więcej? Napisz do nas **pola@klubjagiellonski.pl** lub daj znać w mediach społecznościowych [facebook](https://www.facebook.com/app.pola), [twitter](https://twitter.com/pola_app).

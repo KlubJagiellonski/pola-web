@@ -9,13 +9,13 @@ const Anchor = styled.a`
 `;
 
 interface IExternalLink {
-  url: URL;
+  url: string | URL;
   newTab?: boolean;
   children: React.ReactNode | React.ReactNode[];
 }
 
 export const ExternalLink: React.FC<IExternalLink> = ({ url, newTab = true, children }) => (
-  <Anchor href={url.href} target={newTab ? '__blank' : undefined}>
+  <Anchor href={url instanceof URL ? url.href : url} target={newTab ? '__blank' : undefined}>
     {children}
   </Anchor>
 );

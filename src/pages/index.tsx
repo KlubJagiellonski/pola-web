@@ -6,7 +6,7 @@ import { PageLayout } from '../layout/PageLayout';
 import SEOMetadata from '../utils/browser/SEOMetadata';
 import { SearchForm } from '../search/form/SearchForm';
 import { PageSection } from '../layout/PageSection';
-import { Device, pageWidth, padding, color } from '../styles/theme';
+import { Device, pageWidth, padding, color, margin } from '../styles/theme';
 import { IPolaState } from '../state/types';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
@@ -29,9 +29,12 @@ import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev
 import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
+import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
+import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
+
 const connector = connect(
   (state: IPolaState) => {
-    const { search, articles, friends } = state;
+    const { search, newsletter, articles, friends } = state;
     return {
       searchState: search.stateName,
       searchResults:
@@ -43,6 +46,8 @@ const connector = connect(
               token: search.nextPageToken,
             }
           : undefined,
+      newsletterStatus: newsletter.status,
+      follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
       articles: articles.data,
       friends: friends.data,
     };
@@ -53,6 +58,8 @@ const connector = connect(
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
+    subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
+    clearForm: newsletterDispatcher.clearSubscriptionFormData,
   }
 );
 
@@ -62,6 +69,7 @@ const Content = styled.div`
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+  position: relative;
 
   @media ${Device.mobile} {
     padding: ${padding.normal};
@@ -90,6 +98,15 @@ const Background = styled.div<{ img?: string }>`
 const WrapperContents = styled(PageSection)`
   @media ${Device.mobile} {
     padding: 0;
+  }
+`;
+
+const WrapperResult = styled(PageSection)`
+  @media ${Device.mobile} {
+    position: realtive;
+    top: -18em;
+    background-color: ${color.background.white};
+    margin-left: 5px;
   }
 `;
 
@@ -134,12 +151,13 @@ type IHomePage = ReduxProps & {
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
+  subscribeEmail: (email: string, name?: string | undefined) => void;
   clearResults: () => void;
   selectProduct: (code: EAN) => void;
 };
 
 const HomePage = (props: IHomePage) => {
-  const { location, searchState, searchResults } = props;
+  const { location, searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const dispatch = useDispatch();
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
@@ -153,6 +171,8 @@ const HomePage = (props: IHomePage) => {
       props.clearResults();
     }
   }, []);
+
+  const handleNewsletter = () => {};
 
   return (
     <PageLayout>
@@ -168,9 +188,21 @@ const HomePage = (props: IHomePage) => {
             onEmptyInput={props.clearResults}
             isLoading={isLoading}
           />
+          <div
+            className="newsletter-container"
+            style={{ display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', margin: '1rem' }}>
+            <SubscribeDialog
+              status={newsletterStatus}
+              follower={follower}
+              styles={{ spaceBottom: margin.small }}
+              onSubmit={subscribeEmail}
+              onClear={clearForm}
+              stopExpanded={!!searchResults}
+            />
+          </div>
         </Content>
       </PageSection>
-      <PageSection>
+      <WrapperResult>
         {(isLoaded || isLoading) && (
           <SearchResultsHeader
             phrase={searchResults?.phrase}
@@ -194,7 +226,7 @@ const HomePage = (props: IHomePage) => {
             <p>Spróbuj wprowadzić inną frazę...</p>
           </InfoBox>
         )}
-      </PageSection>
+      </WrapperResult>
       <WrapperContents>
         <Wrapper>
           <ArticlesListPreview articles={freshArticles} />

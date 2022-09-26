@@ -1,25 +1,17 @@
 {
   "react typescript import styles": {
     "prefix": "importStyles",
-    "body": [
-      "import styles from './${TM_FILENAME_BASE}.module.scss';",
-      ""
-    ],
+    "body": ["import styles from './${TM_FILENAME_BASE}.module.scss';", ""],
     "description": "react typescript import styles"
   },
   "react typescript import bfc bridge": {
     "prefix": "importBFCBridge",
-    "body": [
-      "import * as Bridge from '@BFC/domain/ndt-domain';",
-      ""
-    ],
+    "body": ["import * as Bridge from '@BFC/domain/ndt-domain';", ""],
     "description": "react typescript import styles"
   },
   "import base component scss": {
     "prefix": "importScssComponentBase",
-    "body": [
-      "@import 'Scripts/client/styles/component-base.scss';"
-    ],
+    "body": ["@import 'Scripts/client/styles/component-base.scss';"],
     "description": "import base component scss"
   },
   "react typescript function": {
@@ -27,9 +19,9 @@
     "body": [
       "import * as React from 'react';",
       "",
-      "export interface I${1:CompName}Props { }",
+      "export interface I${1:$TM_FILENAME_BASE} { }",
       "",
-      "export const ${1:CompName}: React.FC<I${1:CompName}Props> = (props) => (",
+      "export const ${1:$TM_FILENAME_BASE}: React.FC<I${1:$TM_FILENAME_BASE}> = (props: I${1:$TM_FILENAME_BASE}) => (",
       "  <div>",
       "    $0",
       "  </div>",
@@ -39,20 +31,25 @@
   },
   "react short typescript function": {
     "prefix": "scf",
-    "body": [
-      "export const ${1:CompName}: React.FC<{}> = (props) => (",
-      "  <div>",
-      "    $0",
-      "  </div>",
-      ");"
-    ],
+    "body": ["export const ${1:CompName}: React.FC<{}> = (props) => (", "  <div>", "    $0", "  </div>", ");"],
     "description": "react typescript function"
+  },
+  "redux typescript action": {
+    "prefix": "rxa",
+    "body": [
+      "export const ${1:ActionName} = (prop: any): IAction => ({",
+      "  type: 'ACTION_TYPE',",
+      "  meta: {},",
+      "  payload: {",
+      "    prop",
+      "  }",
+      "});"
+    ],
+    "description": "redux typescript template for action builder"
   },
   "react typescript props deconstruct": {
     "prefix": "rrsp",
-    "body": [
-      "const {$0} = this.props;"
-    ],
+    "body": ["const {$0} = this.props;"],
     "description": "react typescript props deconstruct"
   },
   "react component": {
