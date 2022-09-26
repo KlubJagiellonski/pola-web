@@ -8,6 +8,7 @@ import { searchReducer } from './search/search-reducer';
 import { articlesReducer } from './articles/articles-reducer';
 import { friendsReducer } from './friends/friends-reducer';
 import { newsletterReducer } from '../newsletter/state/newsletter-reducer';
+import { suppliersReducer } from 'suppliers/state/suppliers-reducer';
 
 const reducers = combineReducers({
   app: appReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   newsletter: newsletterReducer,
   articles: articlesReducer,
   friends: friendsReducer,
+  suppliers: suppliersReducer,
 });
 
 export default (preloadedState: IPolaState) => {

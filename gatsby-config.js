@@ -111,6 +111,13 @@ module.exports = {
         path: `${__dirname}/content/business`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `suppliers`,
+        path: `${__dirname}/content/suppliers`,
+      },
+    },
     `gatsby-transformer-remark`,
     `gatsby-transformer-yaml-full`,
     {
