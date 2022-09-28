@@ -47,8 +47,7 @@ export const UnselectSupplier = (questionId: string): IAction => ({
 export const SetCalculationResult = (result: IInquiryCalculationResult): IAction => ({
   type: actionTypes.SET_CALCULATION_RESULT,
   payload: {
-    score: result.score,
-    message: result.message,
+    score: result,
   },
 });
 

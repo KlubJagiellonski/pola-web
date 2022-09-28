@@ -34,6 +34,7 @@ const connector = connect(
           suppliers.status === SuppliersFormStatus.LOADED || suppliers.status === SuppliersFormStatus.CALCULATED
             ? suppliers.isResultDialogVisible
             : false,
+        messages: suppliers.messages,
         totalScore: suppliers.status === SuppliersFormStatus.CALCULATED ? suppliers.totalScore : undefined,
       },
     };
@@ -109,7 +110,12 @@ const Layout: React.FC<IPageLayout> = ({
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
         {suppliers.isInquiryResultVisible && (
-          <InquiryResultModal onClose={hideResultDialog} onSubmit={submitResult} totalScore={suppliers.totalScore} />
+          <InquiryResultModal
+            totalScore={suppliers.totalScore}
+            messages={suppliers.messages}
+            onClose={hideResultDialog}
+            onSubmit={submitResult}
+          />
         )}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
