@@ -98,7 +98,7 @@
     "@types/sinon": "^10.0.4",
     "@types/styled-components": "^5.1.11",
     "@types/uuid": "^8.3.0",
-    "babel-jest": "^27.0.1",
+    "babel-jest": "^29.1.0",
     "babel-preset-gatsby": "^0.2.26",
     "chai": "^4.3.4",
     "cypress": "^7.7.0",
