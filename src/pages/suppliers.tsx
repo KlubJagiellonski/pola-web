@@ -12,21 +12,22 @@ import { PageSection } from 'layout/PageSection';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
 import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
 import { SuppliersInquiry } from 'suppliers/components/SuppliersInquiry';
-import { Modal } from 'layout/modal/Modal';
-import { ClickOutside } from 'utils/click-outside';
+import { ISuppliersInquiryMessages } from 'suppliers';
 
 const connector = connect(
   (state: IPolaState) => {
-    const { app, suppliers } = state;
+    const { suppliers } = state;
 
     switch (suppliers.status) {
       case SuppliersFormStatus.LOADED:
         return {
+          messages: suppliers.messages,
           inquiryQuestions: suppliers.questions,
           isResultVisible: suppliers.isResultDialogVisible,
         };
       case SuppliersFormStatus.CALCULATED:
         return {
+          messages: suppliers.messages,
           inquiryQuestions: suppliers.questions,
           totalScore: suppliers.totalScore,
           resultMessage: suppliers.resultMessage,
@@ -60,23 +61,27 @@ type ISuppliersPage = ReduxProps & {
 const SuppliersPage = (props: ISuppliersPage) => {
   const {
     location,
+    messages,
     inquiryQuestions,
     totalScore,
-    isResultVisible,
 
     onLoadSuppliers,
     onSelectSupplier,
     onSelectNew,
     onSelectNone,
     calculateTotalScore,
-    hideResultDialog,
-    submitResult,
   } = props;
   const dispatch = useDispatch();
 
   const data = useStaticQuery(graphql`
     {
       suppliersJson {
+        messages {
+          entryHeader
+          resultHeader
+          countButtonText
+          submitButtonText
+        }
         categories {
           categoryId
           header
@@ -104,21 +109,13 @@ const SuppliersPage = (props: ISuppliersPage) => {
       <SEOMetadata pageTitle="Przykładowy formularz dostawców" />
       <Placeholder text="Strona w budowie" />
       <PageSection>
-        <div>
-          {totalScore?.value && (
-            <label name="result">
-              <span>{totalScore.value}</span>
-            </label>
-          )}
-          <button onClick={(e: React.FromEvent<HTMLInputElement>) => calculateTotalScore()}>Przelicz</button>
-        </div>
         <SuppliersInquiry
+          messages={messages || ({} as ISuppliersInquiryMessages)}
           questions={inquiryQuestions}
-          totalScore={totalScore}
           onSelectSupplier={onSelectSupplier}
           onSelectNew={onSelectNew}
           onSelectNone={onSelectNone}
-          OnCalculateClicked={calculateTotalScore}
+          onCalculate={calculateTotalScore}
         />
       </PageSection>
     </PageLayout>

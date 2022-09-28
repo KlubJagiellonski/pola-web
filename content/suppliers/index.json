@@ -1,4 +1,10 @@
 {
+  "messages": {
+    "entryHeader": "Czy Twoje rachunki są polskie?",
+    "resultHeader": "Twój wynik",
+    "countButtonText": "Przelicz",
+    "submitButtonText": "Wyślij"
+  },
   "categories": [
     {
       "categoryId": "energy1",

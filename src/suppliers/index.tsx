@@ -13,14 +13,22 @@ export interface ISupplierCategory {
   suppliers: ISupplier[];
 }
 
+export interface ISuppliersInquiryMessages {
+  entryHeader: string;
+  resultHeader: string;
+  countButtonText: string;
+  submitButtonText: string;
+}
+
 export interface ISuppliersData {
+  messages: ISuppliersInquiryMessages;
   categories: ISupplierCategory[];
 }
 
 export class SuppliersInquiryData {
   public questions: InquiryQuestion[];
 
-  public constructor(categories: ISupplierCategory[]) {
+  public constructor(categories: ISupplierCategory[], public messages: ISuppliersInquiryMessages) {
     this.questions = categories.map((category) => {
       const question = new InquiryQuestion(category.header, category.order, category.categoryId);
       const options = category.suppliers.map((option) => new InquiryOption(option.name, Score.create(option.score)));

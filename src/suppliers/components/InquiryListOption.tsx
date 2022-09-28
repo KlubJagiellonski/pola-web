@@ -3,13 +3,11 @@ import styled from 'styled-components';
 import { theme, px } from '..';
 
 const OptionContainer = styled.label`
-  display: flex;
   align-items: flex-start;
   position: relative;
   padding-left: ${theme.space.large};
   cursor: pointer;
   user-select: none;
-  width: 100%;
 
   input {
     position: absolute;
