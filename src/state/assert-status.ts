@@ -6,6 +6,6 @@ export function assertStatus<T extends string>(
   ...validStatuses: T[]
 ): asserts state is StateMember<T> {
   if (!validStatuses.includes(state.status as T)) {
-    throw new StateMachineError(`Invalid state ${state.status} (expected one of: ${validStatuses})`);
+    throw new StateMachineError(`Invalid state "${state.status}" (expected one of: ${validStatuses})`);
   }
 }
