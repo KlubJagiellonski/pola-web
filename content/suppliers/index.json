@@ -95,7 +95,7 @@
     {
       "categoryId": "car",
       "order": 3,
-      "header": "Twój ubezpieczyciel samochód?",
+      "header": "Twój ubezpieczyciel samochodu?",
       "suppliers": [
         {
           "name": "Liberty",
@@ -146,7 +146,7 @@
     {
       "categoryId": "estate",
       "order": 4,
-      "header": "Twój ubezpieczyciel samochód?",
+      "header": "Twój ubezpieczyciel mieszkania?",
       "suppliers": [
         {
           "name": "Generali",
