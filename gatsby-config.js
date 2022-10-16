@@ -28,15 +28,6 @@ module.exports = {
     PARALLEL_SOURCING: false,
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        trackingIds: ['UA-68999963-1'],
-        pluginConfig: {
-          head: true,
-        },
-      },
-    },
     'gatsby-plugin-use-query-params',
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
@@ -174,22 +165,6 @@ module.exports = {
       dsn: 'https://76785631b189463b86823d54c0cffc44@o1100740.ingest.sentry.io/6126100',
       tracesSampleRate: 1.0,
       sampleRate: 1.0,
-    },
-    {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        trackingIds: ['UA-68999963-1'],
-        gtagConfig: {
-          optimize_id: 'OPT_CONTAINER_ID',
-          anonymize_ip: true,
-          cookie_expires: 0,
-        },
-        pluginConfig: {
-          head: false,
-          respectDNT: true,
-          exclude: [],
-        },
-      },
     },
   ],
   // shadowing API request domain for development
