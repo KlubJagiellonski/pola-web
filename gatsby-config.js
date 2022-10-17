@@ -100,14 +100,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/friends`,
-        plugins: [
-          {
-            resolve: `gatsby-yaml-full-file`,
-            options: {
-              path: `${__dirname}/content/friends/logos`,
-            },
-          },
-        ],
+        // plugins: [
+        //   {
+        //     resolve: `gatsby-yaml-full-file`,
+        //     options: {
+        //       path: `${__dirname}/content/friends/logos`,
+        //     },
+        //   },
+        // ],
       },
     },
     {

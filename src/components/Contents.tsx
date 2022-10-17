@@ -10,7 +10,7 @@ import TeamsFriend from './TeamsFriend';
 import { Friend } from '../domain/friends';
 import { Device, padding } from './../styles/theme';
 import { Article } from '../domain/articles';
-import ArticlesListPreview from './articles/list/ArticlesListPrewiev';
+import ArticlesListPreview from '../posts/components/list/ArticlesListPrewiev';
 
 const Wrapper = styled.div`
   -webkit-box-sizing: border-box;

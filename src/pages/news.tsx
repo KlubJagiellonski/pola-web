@@ -11,11 +11,13 @@ import { PageType } from '../domain/website';
 import { PageSection } from '../layout/PageSection';
 import './../components/Pagination.css';
 import SocialMedia from '../components/social-media/SocialMedia';
-import TagsList from '../components/tags/TagsList';
-import { ArrayParam, withDefault, useQueryParams, NumberParam, QueryParamConfig } from 'use-query-params';
+import TagsList from '../posts/tags/TagsList';
+import { ArrayParam, withDefault, useQueryParams, NumberParam } from 'use-query-params';
 import { getTagsList } from './../utils/tags';
-import NewsPageArticles from '../components/articles/list/NewsPagesArticles';
+import NewsPageArticles from '../posts/articles/list/NewsPagesArticles';
 import Placeholder from '../components/Placeholder';
+
+import { useQueryParamString } from 'react-use-query-param-string';
 
 const Title = styled.p`
   margin-top: ${margin.veryBig};
@@ -54,9 +56,13 @@ const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
   const [tag, setTag] = useState<string[]>([]);
   const dispatch = useDispatch();
   const [query, setQuery] = useQueryParams<IQuery>({
-    tags: withDefault(ArrayParam, []),
+    tags: withDefault(ArrayParam, ['a', 'b', 'c']),
     id: NumberParam,
   });
+  // const [query, setQuery] = useQueryParamString<IQuery>({
+  //   tags: withDefault(ArrayParam, ['a', 'b', 'c']),
+  //   id: NumberParam,
+  // });
 
   useEffect(() => {
     if (location) {
@@ -69,7 +75,9 @@ const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
     if (articles) {
       setTag(getTagsList(articles));
     }
-    window.document.getElementById('layout-container')?.scrollTo(0, 0);
+
+    // commented as this line break NEWS page
+    //window.document.getElementById('layout-container')?.scrollTo(0, 0);
   }, [articles, query]);
 
   return (

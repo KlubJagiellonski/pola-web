@@ -11,7 +11,7 @@ import { PageSection } from '../../layout/PageSection';
 import { ArticleHeader } from './ArticleHeader';
 import { Device, margin } from '../../styles/theme';
 import { Article } from '../../domain/articles';
-import SideInformations from '../SideInformations';
+import SideInformations from '../../components/SideInformations';
 import { Friend } from '../../domain/friends';
 
 const Content = (props: any) => {

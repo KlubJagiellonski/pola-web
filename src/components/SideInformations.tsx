@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Article } from '../domain/articles';
 import { Friend } from '../domain/friends';
@@ -6,27 +6,27 @@ import { Device, margin } from '../styles/theme';
 import { getVisibleArticles } from '../utils/articles';
 import { getRandomFriend } from '../utils/friends';
 import { getTagsList } from '../utils/tags';
-import ArticlesListPreview from './articles/list/ArticlesListPrewiev';
+import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import DevelopmentSection from './DevelopmentSection';
 import FriendCard from './friends/FriendCard';
 import SocialMedia from './social-media/SocialMedia';
-import TagsList from './tags/TagsList';
+import TagsList from '../posts/tags/TagsList';
 
 const Wrapper = styled.div`
   gap: ${margin.normal};
   display: flex;
   flex-direction: column;
-`
+`;
 
 const Title = styled.p`
   font-weight: bold;
-`
+`;
 
 const FirstSection = styled.div`
   @media ${Device.mobile} {
     display: none;
   }
-`
+`;
 
 const SecondSection = styled.div`
   display: flex;
@@ -36,27 +36,27 @@ const SecondSection = styled.div`
   @media ${Device.mobile} {
     flex-direction: column-reverse;
   }
-`
+`;
 
 interface ISideInformations {
-  actualArticleId: string,
-  articles: Article[],
-  friends?: Friend[]
+  actualArticleId: string;
+  articles: Article[];
+  friends?: Friend[];
 }
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
-  const [articlesPreview, setArticlesPreview] = useState<Article[]>([])
-  const [selectedFriend, setSelectedFriend] = useState<Friend>()
+  const [articlesPreview, setArticlesPreview] = useState<Article[]>([]);
+  const [selectedFriend, setSelectedFriend] = useState<Friend>();
 
   useEffect(() => {
     if (articles) {
-      setArticlesPreview(getVisibleArticles(actualArticleId, articles))
+      setArticlesPreview(getVisibleArticles(actualArticleId, articles));
     }
   }, [articles]);
 
   useEffect(() => {
     if (friends) {
-      setSelectedFriend(getRandomFriend(friends))
+      setSelectedFriend(getRandomFriend(friends));
     }
   }, [friends]);
 
@@ -73,7 +73,7 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
       <ArticlesListPreview articles={articlesPreview} />
       {friends && selectedFriend && <FriendCard {...selectedFriend} />}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default SideInformations;

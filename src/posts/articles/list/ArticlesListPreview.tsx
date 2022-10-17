@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Article } from '../../../domain/articles';
 import { ArticlePreview } from './ArticlePreview';
 import { Device, padding, margin } from '../../../styles/theme';
-import { PrimaryButton } from '../../buttons/PrimaryButton';
+import { PrimaryButton } from '../../../components/buttons/PrimaryButton';
 import { Link } from 'gatsby';
 import { urls } from '../../../domain/website';
 import { ButtonThemes, ButtonFlavor } from '../../../components/buttons/Button';

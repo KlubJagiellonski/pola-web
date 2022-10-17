@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { color, padding, Device, margin } from '../../../styles/theme';
-import { ResponsiveImage } from '../../images/ResponsiveImage';
+import { ResponsiveImage } from '../../../components/images/ResponsiveImage';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 

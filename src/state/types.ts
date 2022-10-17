@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
 import { IAppState } from './app/app-reducer';
-import { IArticlesState } from './articles/articles-reducer';
+import { IArticlesState } from '../posts/state/articles-reducer';
 import { SearchState } from './search/search-reducer';
 import { IFriendsState } from './friends/friends-reducer';
 import { ISubscribeState } from '../newsletter/state/newsletter-reducer';

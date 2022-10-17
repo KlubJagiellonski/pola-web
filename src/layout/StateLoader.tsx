@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { ArticleService, IArticleEdge } from '../domain/articles/article-service';
+import { ArticleService, IArticleEdge } from '../posts/services/article-service';
 import { FriendsService, IFriendNode } from '../domain/friends/friend-service';
 import { appDispatcher } from '../state/app/app-dispatcher';
-import { articlesDispatcher } from '../state/articles/articles-dispatcher';
+import { articlesDispatcher } from '../posts/state/articles-dispatcher';
 import { friendsDispatcher } from '../state/friends/friends-dispatcher';
 import { IPolaState } from '../state/types';
 

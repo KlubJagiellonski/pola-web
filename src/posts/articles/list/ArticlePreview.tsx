@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
-import { ResponsiveImage } from '../../images/ResponsiveImage';
+import { ResponsiveImage } from '../../../components/images/ResponsiveImage';
 import { Device, color, fontSize, margin } from '../../../styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';

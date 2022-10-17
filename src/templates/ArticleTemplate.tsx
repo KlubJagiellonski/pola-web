@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticlePage from '../components/articles/ArticlePage';
+import ArticlePage from '../posts/articles/ArticlePage';
 import { graphql } from 'gatsby';
 
 interface IArticleTemplate {

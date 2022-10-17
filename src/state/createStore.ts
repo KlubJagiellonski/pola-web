@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { IPolaState } from './types';
 import { appReducer } from './app/app-reducer';
 import { searchReducer } from './search/search-reducer';
-import { articlesReducer } from './articles/articles-reducer';
+import { articlesReducer } from '../posts/state/articles-reducer';
 import { friendsReducer } from './friends/friends-reducer';
 import { newsletterReducer } from '../newsletter/state/newsletter-reducer';
 

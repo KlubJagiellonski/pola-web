@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ResponsiveImage } from '../../images/ResponsiveImage';
+import { ResponsiveImage } from '../../../components/images/ResponsiveImage';
 import { WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color, margin, padding } from '../../../styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
-import { PrimaryButton } from '../../buttons/PrimaryButton';
+import { PrimaryButton } from '../../../components/buttons/PrimaryButton';
 import { ButtonThemes, ButtonFlavor } from '../../../components/buttons/Button';
 import { Link } from 'gatsby';
 import { Article } from '../../../domain/articles';

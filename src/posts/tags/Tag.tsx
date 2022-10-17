@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
-import { TagButton } from '../buttons/TagButton';
+import { TagButton } from '../../components/buttons/TagButton';
 import { ArrayParam, useQueryParams, withDefault } from 'use-query-params';
 import { tagUrl } from './url-service';
 import { Link } from 'gatsby';

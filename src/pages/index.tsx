@@ -25,12 +25,11 @@ import Friends from '../components/friends/Friends';
 import Teams from '../components/Teams';
 import About from '../components/About';
 import TeamsFriend from '../components/TeamsFriend';
-import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
+import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import { InfoBox } from '../components/InfoBox';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
-import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
 
 const connector = connect(
   (state: IPolaState) => {
