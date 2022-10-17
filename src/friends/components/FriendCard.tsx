@@ -6,8 +6,8 @@ import { urls } from '../../domain/website';
 
 import { TitleSection, WrapperSection, Text } from '../../styles/GlobalStyle.css';
 import { color, padding, margin, fontSize } from '../../styles/theme';
-import { SecondaryButton } from '../buttons/SecondaryButton';
-import { ResponsiveImage } from '../images/ResponsiveImage';
+import { SecondaryButton } from '../../components/buttons/SecondaryButton';
+import { ResponsiveImage } from '../../components/images/ResponsiveImage';
 import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
 
 const Wrapper = styled(WrapperSection)`

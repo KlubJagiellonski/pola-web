@@ -1,5 +1,5 @@
 import { IFriend } from '../../domain/friends';
-import { IAction } from '../types';
+import { IAction } from '../../state/types';
 
 export const actionTypes = {
   LOAD_FRIENDS: 'FRIENDS:LOAD',

@@ -14,7 +14,7 @@ import { ResponsiveImage } from '../components/images/ResponsiveImage';
 import Placeholder from '../components/Placeholder';
 import { Friend } from '../domain/friends';
 import Card from '../components/Card';
-import FriendsSection from '../components/friends/FriendsSection';
+import FriendsSection from '../friends/components/FriendsSection';
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;

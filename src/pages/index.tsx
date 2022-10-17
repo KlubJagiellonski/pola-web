@@ -21,7 +21,7 @@ import { Friend } from '../domain/friends';
 import { appDispatcher } from '../state/app/app-dispatcher';
 import DevelopmentSection from '../components/DevelopmentSection';
 import SocialMedia from '../components/social-media/SocialMedia';
-import Friends from '../components/friends/Friends';
+import Friends from '../friends/components/Friends';
 import Teams from '../components/Teams';
 import About from '../components/About';
 import TeamsFriend from '../components/TeamsFriend';

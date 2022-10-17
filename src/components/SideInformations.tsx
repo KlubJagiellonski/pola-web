@@ -8,7 +8,7 @@ import { getRandomFriend } from '../utils/friends';
 import { getTagsList } from '../utils/tags';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import DevelopmentSection from './DevelopmentSection';
-import FriendCard from './friends/FriendCard';
+import FriendCard from '../friends/components/FriendCard';
 import SocialMedia from './social-media/SocialMedia';
 import TagsList from '../posts/tags/TagsList';
 

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { WrapperSection } from '../../styles/GlobalStyle.css';
 import { Friend } from '../../domain/friends';
-import { ResponsiveImage } from './../images/ResponsiveImage';
+import { ResponsiveImage } from '../../components/images/ResponsiveImage';
 import { urls } from '../../domain/website';
-import { SliderContainer, SliderElement } from '../SliderComponent';
+import { SliderContainer, SliderElement } from '../../components/SliderComponent';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;

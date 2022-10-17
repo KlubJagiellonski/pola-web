@@ -1,5 +1,3 @@
-import { IFriendNode } from './friend-service';
-
 export class Friend {
   public id: string;
   public name: string;
@@ -16,4 +14,15 @@ export class Friend {
     this.page = data.page;
     this.slug = data.slug;
   }
+}
+
+export interface IFriendNode {
+  id: string;
+  name: string;
+  description: string;
+  image: {
+    base: string;
+  };
+  page: string;
+  slug: string;
 }

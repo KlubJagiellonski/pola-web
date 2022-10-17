@@ -6,7 +6,7 @@ import { IPolaState } from './types';
 import { appReducer } from './app/app-reducer';
 import { searchReducer } from './search/search-reducer';
 import { articlesReducer } from '../posts/state/articles-reducer';
-import { friendsReducer } from './friends/friends-reducer';
+import { friendsReducer } from '../friends/state/friends-reducer';
 import { newsletterReducer } from '../newsletter/state/newsletter-reducer';
 
 const reducers = combineReducers({
