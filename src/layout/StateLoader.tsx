@@ -27,8 +27,8 @@ const Loader = (props: IStateLoader) => {
   }, []);
 
   const queryResultFriend = FriendsService.getAll();
-  if (!props.isFriendsLoaded && queryResultFriend?.allLogosFriendsYaml?.nodes && props.loadFriends) {
-    const data = queryResultFriend.allLogosFriendsYaml.nodes;
+  if (!props.isFriendsLoaded && queryResultFriend?.allFriendsYaml?.nodes && props.loadFriends) {
+    const data = queryResultFriend.allFriendsYaml.nodes;
     props.loadFriends(data);
   }
 

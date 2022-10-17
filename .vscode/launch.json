@@ -5,40 +5,51 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Chrome against localhost",
-      "type": "pwa-chrome",
-      "request": "launch",
-      "url": "http://localhost:8080",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
-      "name": "React develop",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:8000",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
       "name": "Gatsby develop",
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
-      "protocol": "inspector",
-      "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby",
+      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
+      "windows": {
+        "name": "Gatsby develop",
+        "type": "pwa-node",
+        "request": "launch",
+        "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby"
+      },
       "args": ["develop"],
-      "stopOnEntry": false,
+      "env": {
+        "PARCEL_WORKERS": "0",
+        "GATSBY_CPU_COUNT": "1"
+      },
       "runtimeArgs": ["--nolazy"],
-      "sourceMaps": false
+      "console": "integratedTerminal"
+      //"cwd": "${workspaceRoot}/gatsby"
     },
     {
       "name": "Gatsby build",
       "type": "node",
       "request": "launch",
-      "protocol": "inspector",
-      "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby",
+      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
+      "windows": {
+        "name": "Gatsby build",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby"
+      },
       "args": ["build"],
-      "stopOnEntry": false,
+      "env": {
+        "PARCEL_WORKERS": "0",
+        "GATSBY_CPU_COUNT": "1"
+      },
       "runtimeArgs": ["--nolazy"],
-      "sourceMaps": false
+      "console": "integratedTerminal"
+      //"cwd": "${workspaceRoot}/gatsby"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Client side in Chrome",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}/gatsby"
     }
   ]
 }

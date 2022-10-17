@@ -11,18 +11,20 @@ module.exports = {
     siteUrl: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).origin) || 'http://localhost:8000',
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        trackingIds: ['UA-68999963-1'],
-        pluginConfig: {
-          head: true,
-        },
-      },
-    },
     'gatsby-plugin-use-query-params',
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
+
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-sharp`,
+      options: {
+        // The option defaults to true
+        // issue: https://github.com/gatsbyjs/gatsby/issues/21776
+        checkSupportedExtensions: false,
+      },
+    },
     // generic images
     {
       resolve: `gatsby-source-filesystem`,
@@ -39,24 +41,15 @@ module.exports = {
         path: `${__dirname}/content/posts/`,
       },
     },
-    //image for logos friends
+    //images for friends' logos
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/content/logos/images/`,
+        path: `${__dirname}/content/friends/logos/`,
       },
     },
-    `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-transformer-sharp`,
-      options: {
-        // The option defaults to true
-        // issue: https://github.com/gatsbyjs/gatsby/issues/21776
-        checkSupportedExtensions: false,
-      },
-    },
-    `gatsby-plugin-sharp`,
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -83,7 +76,9 @@ module.exports = {
         windowKey: '__PRELOADED_STATE__',
       },
     },
+
     // Markdown
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -98,27 +93,31 @@ module.exports = {
         path: `${__dirname}/content/business`,
       },
     },
-    `gatsby-transformer-remark`,
+
+    // YAML
     `gatsby-transformer-yaml-full`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/logos`,
-      },
-    },
-    {
-      resolve: `gatsby-transformer-yaml-full`,
-      options: {
+        path: `${__dirname}/content/friends`,
         plugins: [
           {
             resolve: `gatsby-yaml-full-file`,
             options: {
-              path: `${__dirname}/content/logos`,
+              path: `${__dirname}/content/friends/logos`,
             },
           },
         ],
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/friends/logos`,
+      },
+    },
+
+    // JSON
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -126,6 +125,7 @@ module.exports = {
         path: `${__dirname}/content/faq`,
       },
     },
+
     `gatsby-plugin-anchor-links`,
     {
       resolve: `gatsby-transformer-remark`,
@@ -159,15 +159,8 @@ module.exports = {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         trackingIds: ['UA-68999963-1'],
-        gtagConfig: {
-          optimize_id: 'OPT_CONTAINER_ID',
-          anonymize_ip: true,
-          cookie_expires: 0,
-        },
         pluginConfig: {
-          head: false,
-          respectDNT: true,
-          exclude: [],
+          head: true,
         },
       },
     },
