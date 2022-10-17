@@ -18,8 +18,6 @@
     "clean": "gatsby clean",
     "test": "ts-mocha --require ignore-styles --paths \"./src/**/*.test.ts\"",
     "testw": "ts-mocha --require ignore-styles --paths \"./src/**/*.test.ts\" -w --watch-extensions ts",
-    "e2e": "node_modules/.bin/cypress open",
-    "e2e-headless": "node_modules/.bin/cypress run",
     "deploy-ghold": "git push origin :gh-pages && git subtree push --prefix public/ origin gh-pages",
     "deploy-gh": "gh-pages -d public",
     "deploy-s3": "gatsby-plugin-s3 deploy --yes"
@@ -109,8 +107,6 @@
     "babel-plugin-styled-components": "^2.0.7",
     "babel-preset-gatsby": "^2.16.0",
     "chai": "^4.3.6",
-    "cypress": "^7.7.0",
-    "cypress-cucumber-preprocessor": "^4.1.1",
     "gh-pages": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "ignore-styles": "^5.0.1",
