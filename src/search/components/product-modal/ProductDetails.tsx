@@ -6,7 +6,7 @@ import { AppSettings } from '@State/app-settings';
 
 import { ScoreBar } from '@Components/ScoreBar';
 
-import { RussiaInfoBox } from '../RussiaInfoBox';
+import { RussiaInfoBox } from '../results-list/RussiaInfoBox';
 import { Field, PolishPropertyName, ValueCheckboxField, getPropertiesFromManufacturer } from './PolishValues';
 
 import { color, fontSize, padding } from '@Styles/theme';

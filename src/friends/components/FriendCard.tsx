@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Friend } from '@Domain/friends';
+import { FFriend } from '@Domain/friends';
 import { urls } from '@Domain/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
@@ -53,7 +53,7 @@ const ButtonSection = styled.div`
   gap: ${margin.small};
 `;
 
-const FriendCard: React.FC<Friend> = (friend) => {
+const FriendCard: React.FC<FFriend> = (friend) => {
   return (
     <Wrapper color={color.background.white}>
       <TitleSection>Oto jeden Przyjaciel z wielu Przyjaciół Poli</TitleSection>

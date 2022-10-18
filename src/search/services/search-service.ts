@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
 
+import { IProductData, ISearchSuccessResponse } from '@Domain/products';
 import { AppSettings } from '@State/app-settings';
-import { ISearchResultPage } from '@State/search/search-reducer';
 
 import { isNotEmpty } from '@Utils/strings';
 
-import { IProductData, ISearchSuccessResponse } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import { InvalidSearchResultError } from '../../services/api-errors';
+import { ISearchResultPage } from '../state/search-reducer';
 
 export interface ISearchError {
   type: string;

@@ -6,7 +6,7 @@ import { AppSettings } from '@State/app-settings';
 
 import { ScoreBar } from '@Components/ScoreBar';
 
-import { RussiaInfoBox } from '../RussiaInfoBox';
+import { RussiaInfoBox } from './RussiaInfoBox';
 
 import { Device, color, fontSize, lineHeight, padding } from '@Styles/theme';
 

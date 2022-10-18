@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { EAN, IProductData } from '@Domain/products';
-import { SearchStateName } from '@State/search/search-reducer';
 
 import { Spinner } from '@Components/Spinner';
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { PrimaryButton } from '@Components/buttons/PrimaryButton';
 import { PageSection } from '@Layout/PageSection';
 
-import { MissingProductInfo } from '../../search/results-list/MissingProductInfo';
-import { SearchResultsHeader } from '../../search/results-list/SearchResultsHeader';
-import { SearchResultsList } from '../../search/results-list/SearchResultsList';
+import { SearchStateName } from '../../state/search-reducer';
+import { MissingProductInfo } from './MissingProductInfo';
+import { SearchResultsHeader } from './SearchResultsHeader';
+import { SearchResultsList } from './SearchResultsList';
 
 import { color } from '@Styles/theme';
 

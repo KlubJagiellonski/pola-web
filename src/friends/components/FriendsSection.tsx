@@ -1,11 +1,10 @@
+import { getFriendBySlug } from 'friends/services/friend-service';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
-import { Friend } from '@Domain/friends';
-
-import { getFriendBySlug } from '@Utils/friends';
+import { FFriend } from '@Domain/friends';
 
 import Friends from './Friends';
 import SingleFriend from './SingleFriend';
@@ -26,14 +25,14 @@ const Wrapper = styled.div`
   }
 `;
 interface IFriendsSection {
-  friends?: Friend[];
+  friends?: FFriend[];
 }
 
 const FriendsSection: React.FC<IFriendsSection> = ({ friends }) => {
   const [query] = useQueryParams({
     value: StringParam,
   });
-  const [friend, setFriend] = useState<Friend>();
+  const [friend, setFriend] = useState<FFriend>();
 
   useEffect(() => {
     if (friends && query.value) {

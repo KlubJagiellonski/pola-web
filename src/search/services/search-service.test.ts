@@ -2,9 +2,10 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { expect } from 'chai';
 import Sinon from 'sinon';
 
+import { ISearchSuccessResponse } from '@Domain/products';
+
 import { mockAxiosErrorResponse, mockGETRequest, mockProduct } from '@Utils/tests/mocks';
 
-import { ISearchSuccessResponse } from '.';
 import { NetworkError } from '../../services/api-errors';
 import { ProductService } from './search-service';
 

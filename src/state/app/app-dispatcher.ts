@@ -2,8 +2,8 @@ import { Dispatch } from 'redux';
 
 import { PageType } from '@Domain/website';
 
-import * as searchActions from '../search/search-actions';
-import { SearchStateName } from '../search/search-reducer';
+import * as searchActions from '../../search/state/search-actions';
+import { SearchStateName } from '../../search/state/search-reducer';
 import { IPolaState } from '../types';
 import * as actions from './app-actions';
 

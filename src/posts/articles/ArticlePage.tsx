@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { Article } from '@Domain/articles';
-import { Friend } from '@Domain/friends';
+import { ArticleData } from '@Domain/articles';
+import { FFriend } from '@Domain/friends';
 import { PageType } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
@@ -30,8 +30,8 @@ const Content = (props: any) => {
 interface IArticlePage {
   location?: Location;
   article: any;
-  articles: Article[];
-  friends: Friend[];
+  articles: ArticleData[];
+  friends: FFriend[];
   author?: any;
   slug?: string;
   facebook?: any;

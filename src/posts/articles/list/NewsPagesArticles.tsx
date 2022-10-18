@@ -1,12 +1,12 @@
+import { IArticlesTwoColumns, getArticlesTwoColumns } from 'posts/services/article-service';
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 import { DecodedValueMap, SetQuery } from 'use-query-params';
 
-import { Article } from '@Domain/articles';
+import { ArticleData } from '@Domain/articles';
 
 import '@Components/Pagination.css';
-import { IArticlesTwoColumns, getArticlesTwoColumns } from '@Utils/articles';
 
 import { ArticleBlock } from './ArticleBlock';
 import ArticlesList from './ArticlesList';
@@ -38,7 +38,7 @@ const FirstArticle = styled.div<{ inVisible?: boolean }>`
 `;
 
 interface NewsPage {
-  articles?: Article[];
+  articles?: ArticleData[];
   query: DecodedValueMap<IQuery>;
   setQuery: SetQuery<IQuery>;
 }
@@ -55,11 +55,11 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
 
   useEffect(() => {
     if (articles) {
-      let art: Article[] = articles.slice();
+      let art: ArticleData[] = articles.slice();
       art.shift();
 
       if (query.tags.length > 0) {
-        art = art.filter((article: Article) => query.tags.includes(article.tag));
+        art = art.filter((article: ArticleData) => query.tags.includes(article.tag));
       }
       const sortedArticles = getArticlesTwoColumns(art);
       setArticles(sortedArticles.slice());

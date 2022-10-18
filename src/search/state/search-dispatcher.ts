@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux';
 
 import { EAN, IProductData, IProductEAN, Product } from '@Domain/products';
-import { ProductEANService } from '@Domain/products/ean-service';
-import { ProductService } from '@Domain/products/search-service';
+import { IPolaState } from '@State/types';
 
 import { isNotEmpty } from '@Utils/strings';
 
 import { EmptyResponseDataError, ErrorHandler, ProductNotFoundError } from '../../services/api-errors';
-import { IPolaState } from '../types';
+import { ProductEANService } from '../services/ean-service';
+import { ProductService } from '../services/search-service';
 import { ProductSelectors } from './product-selectors';
 import * as actions from './search-actions';
 import { SearchStateName } from './search-reducer';

@@ -1,10 +1,11 @@
+import { getTagsList } from 'posts/services/article-service';
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useQueryParamString } from 'react-use-query-param-string';
 import styled from 'styled-components';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
-import { Article } from '@Domain/articles';
+import { ArticleData } from '@Domain/articles';
 import { PageType } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
@@ -15,7 +16,6 @@ import SocialMedia from '@Components/social-media/SocialMedia';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { getTagsList } from '@Utils/tags';
 
 import NewsPageArticles from '../posts/articles/list/NewsPagesArticles';
 import TagsList from '../posts/tags/TagsList';
@@ -47,7 +47,7 @@ const InfoSection = styled.div`
 
 interface NewsPage {
   location?: Location;
-  articles?: Article[];
+  articles?: ArticleData[];
 }
 
 interface IQuery {

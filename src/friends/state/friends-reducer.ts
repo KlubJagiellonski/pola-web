@@ -1,34 +1,27 @@
-import { AnyAction, Reducer } from 'redux';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IFriend } from '@Domain/friends';
-
-import { IAction, IActionReducer } from '../types';
-import { actionTypes } from './friends-actions';
-import * as actions from './friends-actions';
+import { FFriend } from '@Domain/friends';
 
 export interface IFriendsState {
   initialized: boolean;
-  data?: IFriend[];
+  data: FFriend[];
 }
 
 const initialState: IFriendsState = {
   initialized: false,
+  data: [],
 };
 
-const reducers: IActionReducer<IFriendsState> = {
-  [actionTypes.LOAD_FRIENDS]: (state: IFriendsState = initialState, action: ReturnType<typeof actions.LoadFriends>) => {
-    return {
-      ...state,
-      initialized: true,
-      data: action.payload.friends,
-    };
+const friendsSlice = createSlice({
+  name: 'friends',
+  initialState,
+  reducers: {
+    loadFriends: (state, action) => {
+      state.initialized = true;
+      state.data = action.payload;
+    },
   },
-};
+});
 
-export const friendsReducer: Reducer<IFriendsState, AnyAction> = (
-  state: IFriendsState = initialState,
-  action: IAction
-) => {
-  const reducer: any = reducers[action.type];
-  return reducer ? reducer(state, action) : state;
-};
+export const { loadFriends } = friendsSlice.actions;
+export default friendsSlice.reducer;

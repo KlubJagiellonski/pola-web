@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { Friend } from '@Domain/friends';
+import { FFriend } from '@Domain/friends';
 import { PageType, urls } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
@@ -74,7 +74,7 @@ const TitleInfo = styled(TitleSection)`
 
 interface IFriendsPage {
   location?: Location;
-  friends?: Friend[];
+  friends?: FFriend[];
 }
 
 const FriendsPage = (props: IFriendsPage) => {

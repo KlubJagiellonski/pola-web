@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Article } from '@Domain/articles';
+import { ArticleData } from '@Domain/articles';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { PrimaryButton } from '@Components/buttons/PrimaryButton';
@@ -73,7 +73,7 @@ const Contents = styled.div`
   }
 `;
 
-export const ArticleBlock: React.FC<Article> = ({ imagePath, title, slug, date, subTitle, tag }) => {
+export const ArticleBlock: React.FC<ArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Wrapper color={color.background.white}>
       <Link to={slug}>

@@ -26,3 +26,12 @@ export interface IFriendNode {
   page: string;
   slug: string;
 }
+
+export interface FFriend {
+  id: string;
+  name: string;
+  image?: string;
+  description: string;
+  page: string;
+  slug?: string;
+}

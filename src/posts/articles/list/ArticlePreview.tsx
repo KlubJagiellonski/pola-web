@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
-import { Article } from '@Domain/articles';
+import { ArticleData } from '@Domain/articles';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 
@@ -68,7 +68,7 @@ const ArticleSection = styled.div`
   }
 `;
 
-export const ArticlePreview: React.FC<Article> = ({ imagePath, title, slug, date, subTitle, tag }) => {
+export const ArticlePreview: React.FC<ArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Container color={color.background.white}>
       <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>

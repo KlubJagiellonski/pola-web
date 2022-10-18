@@ -1,12 +1,10 @@
+import { getRandomFriend } from 'friends/services/friend-service';
+import { getTagsList, getVisibleArticles } from 'posts/services/article-service';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { Article } from '@Domain/articles';
-import { Friend } from '@Domain/friends';
-
-import { getVisibleArticles } from '@Utils/articles';
-import { getRandomFriend } from '@Utils/friends';
-import { getTagsList } from '@Utils/tags';
+import { ArticleData } from '@Domain/articles';
+import { FFriend } from '@Domain/friends';
 
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
@@ -44,13 +42,13 @@ const SecondSection = styled.div`
 
 interface ISideInformations {
   actualArticleId: string;
-  articles: Article[];
-  friends?: Friend[];
+  articles: ArticleData[];
+  friends?: FFriend[];
 }
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
-  const [articlesPreview, setArticlesPreview] = useState<Article[]>([]);
-  const [selectedFriend, setSelectedFriend] = useState<Friend>();
+  const [articlesPreview, setArticlesPreview] = useState<ArticleData[]>([]);
+  const [selectedFriend, setSelectedFriend] = useState<FFriend>();
 
   useEffect(() => {
     if (articles) {

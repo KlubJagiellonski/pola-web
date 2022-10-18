@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Article } from '@Domain/articles';
+import { ArticleData } from '@Domain/articles';
 import { urls } from '@Domain/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
@@ -30,14 +30,14 @@ const ArticlesButton = styled(PrimaryButton)`
 `;
 
 interface IArticlesList {
-  articles?: Article[];
+  articles?: ArticleData[];
 }
 
 export const ArticlesListPreview: React.FC<IArticlesList> = ({ articles }) => {
   return (
     <Wrapper>
       {articles &&
-        articles.map((article: Article) => (
+        articles.map((article: ArticleData) => (
           <ArticlePreview
             key={article.id}
             id={article.id}

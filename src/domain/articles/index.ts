@@ -1,4 +1,4 @@
-import { IArticleNode } from './article-service';
+import { IArticleNode } from 'posts/services/article-service';
 
 export class Article {
   public id: string;
@@ -18,4 +18,14 @@ export class Article {
     this.imagePath = data.frontmatter.cover.relativePath;
     this.tag = data.frontmatter.category;
   }
+}
+
+export interface ArticleData {
+  id: string;
+  title: string;
+  subTitle: string;
+  slug: string;
+  date?: string;
+  imagePath?: string;
+  tag: string;
 }

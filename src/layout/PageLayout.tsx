@@ -4,15 +4,15 @@ import { ConnectedProps, connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { appDispatcher } from '@State/app/app-dispatcher';
-import { searchDispatcher } from '@State/search/search-dispatcher';
-import { SearchStateName } from '@State/search/search-reducer';
 import { IPolaState } from '@State/types';
 
 import Download from '@Components/Download';
 import ErrorBoundary from '@Utils/error-boundary';
 
-import { SearchInfoModal } from '../search/form/SearchInfoModal';
-import { ProductModal } from '../search/product-modal';
+import { SearchInfoModal } from '../search/components/form/SearchInfoModal';
+import { ProductModal } from '../search/components/product-modal';
+import { searchDispatcher } from '../search/state/search-dispatcher';
+import { SearchStateName } from '../search/state/search-reducer';
 import { CustomScrollbarDiv } from './CustomScrollbar';
 import PageFooter from './PageFooter';
 import { PageHeader } from './PageHeader';

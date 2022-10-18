@@ -2,15 +2,12 @@ import React from 'react';
 import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { Article } from '@Domain/articles';
-import { Friend } from '@Domain/friends';
+import { ArticleData } from '@Domain/articles';
+import { FFriend } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
-import { reduceToFlatProductsList } from '@Domain/products/search-service';
 import { PageType, urls } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { appDispatcher } from '@State/app/app-dispatcher';
-import { searchDispatcher } from '@State/search/search-dispatcher';
-import { SearchStateName } from '@State/search/search-reducer';
 import { IPolaState } from '@State/types';
 
 import About from '@Components/About';
@@ -27,9 +24,12 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 import Friends from '../friends/components/Friends';
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
-import { SearchForm } from '../search/form/SearchForm';
-import { FirstPageResults } from '../search/results-list/FirstPageResults';
-import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
+import { SearchForm } from '../search/components/form/SearchForm';
+import { FirstPageResults } from '../search/components/results-list/FirstPageResults';
+import { SearchResultsHeader } from '../search/components/results-list/SearchResultsHeader';
+import { reduceToFlatProductsList } from '../search/services/search-service';
+import { searchDispatcher } from '../search/state/search-dispatcher';
+import { SearchStateName } from '../search/state/search-reducer';
 
 import { Device, color, padding, pageWidth } from '@Styles/theme';
 
@@ -134,9 +134,9 @@ type IHomePage = ReduxProps & {
   location?: Location;
   searchState: SearchStateName;
   searchResults?: ISearchResults;
-  articles?: Article[];
+  articles?: ArticleData[];
   activeTags: string[];
-  friends?: Friend[];
+  friends?: FFriend[];
 
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;
