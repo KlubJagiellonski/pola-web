@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IconButton } from '../../components/buttons/IconButton';
-import { color, Device, fontSize, padding } from '../../styles/theme';
+import { IconButton } from '@Components/buttons/IconButton';
+import { color, Device, fontSize, padding } from '@Styles/theme';
 
 const Header = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Follower, NewsletterApiResponseContext } from '..';
 import { ApiAdapter } from '../../services/api-adapter';
 import { FetchError, SubscriptionError } from '../../services/api-errors';
-import { AppSettings } from '../../state/app-settings';
+import { AppSettings } from '@State/app-settings';
 
 const API_NAME = 'Newsletter API';
 

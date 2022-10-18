@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { PageType, urls } from '../domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { IPolaState } from '../state/types';
+import { PageType, urls } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
 import styled from 'styled-components';
-import { PageLayout } from '../layout/PageLayout';
-import { PageSection } from '../layout/PageSection';
-import SEOMetadata from '../utils/browser/SEOMetadata';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { Link } from 'gatsby';
-import { margin, padding } from '../styles/theme';
+import { margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};

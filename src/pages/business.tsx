@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { Device, margin, padding } from '../styles/theme';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType, urls } from '@Domain/website';
+import { PageSection } from '@Layout/PageSection';
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { Device, margin, padding } from '@Styles/theme';
 import styled from 'styled-components';
 import BusinessTemplates from '../templates/BusinessTemplate';
 

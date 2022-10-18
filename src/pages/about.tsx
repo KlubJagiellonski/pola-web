@@ -2,17 +2,17 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
-import { margin, padding } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import Faq from '../components/Faq';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType, urls } from '@Domain/website';
+import { PageSection } from '@Layout/PageSection';
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { margin, padding } from '@Styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import Faq from '@Components/Faq';
 
 const Image = styled.div`
   height: 100%;

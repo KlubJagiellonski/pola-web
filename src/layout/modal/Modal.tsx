@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, Device, padding } from '../../styles/theme';
+import { color, Device, padding } from '@Styles/theme';
 import { CustomScrollbarDiv } from '../CustomScrollbar';
 import { ModalHeader } from './ModalHeader';
 

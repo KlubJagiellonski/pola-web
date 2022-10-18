@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Article } from '../domain/articles';
-import { Friend } from '../domain/friends';
-import { Device, margin } from '../styles/theme';
-import { getVisibleArticles } from '../utils/articles';
-import { getRandomFriend } from '../utils/friends';
-import { getTagsList } from '../utils/tags';
+import { Article } from '@Domain/articles';
+import { Friend } from '@Domain/friends';
+import { Device, margin } from '@Styles/theme';
+import { getVisibleArticles } from '@Utils/articles';
+import { getRandomFriend } from '@Utils/friends';
+import { getTagsList } from '@Utils/tags';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import DevelopmentSection from './DevelopmentSection';
 import FriendCard from '../friends/components/FriendCard';

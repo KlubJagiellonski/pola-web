@@ -1,10 +1,10 @@
 import Img, { FluidObject } from 'gatsby-image';
 import styled from 'styled-components';
 import React from 'react';
-import { urls } from '../../domain/website';
+import { urls } from '@Domain/website';
 import { SliderElement } from '../SliderComponent';
-import { Text } from './../../styles/GlobalStyle.css';
-import { padding, fontSize, Device } from '../../styles/theme';
+import { Text } from '@Styles/GlobalStyle.css';
+import { padding, fontSize, Device } from '@Styles/theme';
 
 const Image = styled.div`
   height: 5.6em;

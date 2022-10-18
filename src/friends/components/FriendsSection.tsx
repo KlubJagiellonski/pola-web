@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { Friend } from '../../domain/friends'
-import { margin, Device } from '../../styles/theme'
-import SingleFriend from './SingleFriend'
-import Friends from './Friends'
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { Friend } from '@Domain/friends';
+import { margin, Device } from '@Styles/theme';
+import SingleFriend from './SingleFriend';
+import Friends from './Friends';
 import { StringParam, useQueryParams } from 'use-query-params';
-import { useState } from 'react'
-import { getFriendBySlug } from '../../utils/friends'
+import { useState } from 'react';
+import { getFriendBySlug } from '@Utils/friends';
 
 const Wrapper = styled.div`
   margin: ${margin.small} 0;
 
-  .friends_wrapper{
-    .friends_title{
+  .friends_wrapper {
+    .friends_title {
       display: none;
     }
   }
@@ -20,16 +20,16 @@ const Wrapper = styled.div`
   @media ${Device.mobile} {
     margin: ${margin.small} 0;
   }
-`
+`;
 interface IFriendsSection {
-  friends?: Friend[]
+  friends?: Friend[];
 }
 
 const FriendsSection: React.FC<IFriendsSection> = ({ friends }) => {
   const [query] = useQueryParams({
-    value: StringParam
+    value: StringParam,
   });
-  const [friend, setFriend] = useState<Friend>()
+  const [friend, setFriend] = useState<Friend>();
 
   useEffect(() => {
     if (friends && query.value) {
@@ -41,11 +41,11 @@ const FriendsSection: React.FC<IFriendsSection> = ({ friends }) => {
   }, [friends, query]);
 
   return (
-    <Wrapper id='friend'>
+    <Wrapper id="friend">
       <Friends friends={friends} />
       {friend && friends && <SingleFriend {...friend} />}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default FriendsSection
+export default FriendsSection;

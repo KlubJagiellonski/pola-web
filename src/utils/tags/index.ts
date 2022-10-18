@@ -1,4 +1,4 @@
-import { Article } from '../../domain/articles';
+import { Article } from '@Domain/articles';
 
 export function getTagsList(articles: Article[]) {
   const cat: string[] = articles

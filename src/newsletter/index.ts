@@ -1,4 +1,4 @@
-import { validateEmail } from '../utils/strings';
+import { validateEmail } from '@Utils/strings';
 
 /**
  * Represents the contact resource in GetResponse API

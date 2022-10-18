@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query'
+import styledContainerQuery from 'styled-container-query';
 
-import { color, Device } from '../../styles/theme';
-import { WrapperSection, TitleSection } from '../../styles/GlobalStyle.css';
+import { color, Device } from '@Styles/theme';
+import { WrapperSection, TitleSection } from '@Styles/GlobalStyle.css';
 import { Facebook, Instagram, Twitter } from './Icons';
 
 const Items = styled.div`

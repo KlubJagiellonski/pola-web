@@ -1,5 +1,5 @@
-import { IArticle } from '../../domain/articles';
-import { IAction } from '../../state/types';
+import { IArticle } from '@Domain/articles';
+import { IAction } from '@State/types';
 
 export const actionTypes = {
   LOAD_ARTICLES: 'ARTICLES:LOAD',

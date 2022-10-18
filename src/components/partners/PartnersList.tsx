@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PartnerTile } from '../../components/partners/PartnerTile';
-import { IPartner } from '../../domain/partners';
-import { Device, padding } from '../../styles/theme';
+import { PartnerTile } from '@Components/partners/PartnerTile';
+import { IPartner } from '@Domain/partners';
+import { Device, padding } from '@Styles/theme';
 
 interface IPartnersList {
   partners: IPartner[];

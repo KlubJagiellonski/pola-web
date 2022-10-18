@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { urls } from '../domain/website';
-import { AppSettings } from '../state/app-settings';
-import { Device, padding, px } from './../styles/theme';
+import { urls } from '@Domain/website';
+import { AppSettings } from '@State/app-settings';
+import { Device, padding, px } from '@Styles/theme';
 
 interface IIconLink {
   size?: number;

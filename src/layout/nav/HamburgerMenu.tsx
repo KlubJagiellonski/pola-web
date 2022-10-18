@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import LogoColor from '../../assets/logo/pola-color.svg';
-import { Device, mobileHeaderHeight, padding, color } from '../../styles/theme';
-import { classNames } from '../../utils/class-names';
-import { urls } from '../../domain/website';
+import LogoColor from '@Assets/logo/pola-color.svg';
+import { Device, mobileHeaderHeight, padding, color } from '@Styles/theme';
+import { classNames } from '@Utils/class-names';
+import { urls } from '@Domain/website';
 import { Link } from 'gatsby';
 
 const HamburgerLayout = styled.nav`

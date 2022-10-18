@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { EAN, IProductData } from '../../domain/products';
-import { padding, color, fontSize, lineHeight, Device } from '../../styles/theme';
-import { ScoreBar } from '../../components/ScoreBar';
-import { AppSettings } from '../../state/app-settings';
+import { EAN, IProductData } from '@Domain/products';
+import { padding, color, fontSize, lineHeight, Device } from '@Styles/theme';
+import { ScoreBar } from '@Components/ScoreBar';
+import { AppSettings } from '@State/app-settings';
 import { RussiaInfoBox } from '../RussiaInfoBox';
 
 const ListElement = styled.li`

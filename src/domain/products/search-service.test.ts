@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { ProductService } from './search-service';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ISearchSuccessResponse } from '.';
-import { mockGETRequest, mockAxiosErrorResponse, mockProduct } from '../../utils/tests/mocks';
+import { mockGETRequest, mockAxiosErrorResponse, mockProduct } from '@Utils/tests/mocks';
 import { NetworkError } from '../../services/api-errors';
 
 const mockSearchResult = (): ISearchSuccessResponse => ({

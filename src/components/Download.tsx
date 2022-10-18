@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { color, fontSize, Device, padding, margin } from './../styles/theme';
-import { TitleSection } from './../styles/GlobalStyle.css';
+import { color, fontSize, Device, padding, margin } from '@Styles/theme';
+import { TitleSection } from '@Styles/GlobalStyle.css';
 import { MobileApps } from './MobileApps';
 
 const Wrapper = styled.div`

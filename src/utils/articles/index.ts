@@ -1,4 +1,4 @@
-import { Article } from '../../domain/articles';
+import { Article } from '@Domain/articles';
 
 export interface IArticlesTwoColumns {
   first: Article;

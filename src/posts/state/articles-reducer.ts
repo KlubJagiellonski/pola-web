@@ -3,7 +3,7 @@ import { AnyAction, Reducer } from 'redux';
 import { actionTypes } from './articles-actions';
 import * as actions from './articles-actions';
 import { IAction, IActionReducer } from '../types';
-import { IArticle } from '../../domain/articles';
+import { IArticle } from '@Domain/articles';
 
 export interface IArticlesState {
   initialized: boolean;

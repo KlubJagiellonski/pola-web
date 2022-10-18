@@ -4,8 +4,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { TitleSection, WrapperSection } from './../styles/GlobalStyle.css';
-import { Device, color, margin, padding, fontSize, width } from './../styles/theme';
+import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color, margin, padding, fontSize, width } from '@Styles/theme';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
 
 const Wrapper = styled(WrapperSection)`

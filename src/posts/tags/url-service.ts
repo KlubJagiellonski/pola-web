@@ -1,5 +1,5 @@
 import { withDefault, encodeQueryParams, ArrayParam } from 'use-query-params';
-import { urls } from '../../domain/website';
+import { urls } from '@Domain/website';
 import { stringify } from 'query-string';
 
 export function tagUrl(label: string, query: any) {

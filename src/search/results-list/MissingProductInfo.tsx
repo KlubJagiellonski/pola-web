@@ -1,12 +1,12 @@
 import React from 'react';
-import { fontSize, padding } from '../../styles/theme';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
-import { openNewTab } from '../../utils/browser';
-import { urls } from '../../domain/website';
-import { InfoBox } from '../../components/InfoBox';
-import { Title } from '../../components/Teams.css';
-import { Text } from '../../styles/GlobalStyle.css';
+import { fontSize, padding } from '@Styles/theme';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+import { openNewTab } from '@Utils/browser';
+import { urls } from '@Domain/website';
+import { InfoBox } from '@Components/InfoBox';
+import { Title } from '@Components/Teams.css';
+import { Text } from '@Styles/GlobalStyle.css';
 import styled from 'styled-components';
 
 const InfoTile = styled.div`

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { margin, Device } from '../../../styles/theme';
+import { margin, Device } from '@Styles/theme';
 import ReactPaginate from 'react-paginate';
-import { Article } from '../../../domain/articles';
+import { Article } from '@Domain/articles';
 import ArticlesList from './ArticlesList';
-import './../../../components/Pagination.css';
+import '@Components/Pagination.css';
 import LatestArticle from './LatestArticle';
 import { DecodedValueMap, SetQuery } from 'use-query-params';
-import { IArticlesTwoColumns, getArticlesTwoColumns } from '../../../utils/articles';
+import { IArticlesTwoColumns, getArticlesTwoColumns } from '@Utils/articles';
 import { ArticleBlock } from './ArticleBlock';
 
 const Wrapper = styled.div`

@@ -1,11 +1,26 @@
 {
   "name": "pola-app",
-  "version": "0.2.0",
+  "version": "0.9.1",
   "private": true,
   "author": {
     "name": "Klub Jagielloński",
     "url": "https://klubjagiellonski.pl/"
   },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KlubJagiellonski/pola-web"
+  },
+  "bugs": {
+    "url": "https://github.com/KlubJagiellonski/pola-web/issues"
+  },
+  "keywords": [
+    "gatsby",
+    "Polish",
+    "product",
+    "score",
+    "scanner"
+  ],
   "description": "The web version of Pola application",
   "scripts": {
     "build": "gatsby build --prefix-paths",
@@ -107,6 +122,7 @@
     "babel-plugin-styled-components": "^2.0.7",
     "babel-preset-gatsby": "^2.16.0",
     "chai": "^4.3.6",
+    "gatsby-plugin-tsconfig-paths": "^1.0.5",
     "gh-pages": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "ignore-styles": "^5.0.1",
@@ -122,19 +138,5 @@
     "ts-mocha": "^8.0.0",
     "tslint": "^6.1.3",
     "typescript": "^4.7.4"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KlubJagiellonski/pola-web"
-  },
-  "bugs": {
-    "url": "https://github.com/KlubJagiellonski/pola-web/issues"
-  },
-  "env": {
-    "cypress/globals": true
   }
 }

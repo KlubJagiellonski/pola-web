@@ -1,3 +1,5 @@
+const path = require('path');
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -149,6 +151,15 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-tsconfig-paths`,
+      options: {
+        configFile: `${__dirname}/tsconfig.json`,
+        silent: true,
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      },
+    },
+
     {
       resolve: '@sentry/gatsby',
       dsn: 'https://76785631b189463b86823d54c0cffc44@o1100740.ingest.sentry.io/6126100',

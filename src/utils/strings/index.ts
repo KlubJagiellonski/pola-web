@@ -1,4 +1,4 @@
-import { Validator } from '../../state/types';
+import { Validator } from '@State/types';
 
 export const isNotEmpty = (value: string) => !!value && value.length && value.length > 0;
 

@@ -1,4 +1,4 @@
-import { Friend } from '../../domain/friends';
+import { Friend } from '@Domain/friends';
 
 export function getRandomFriend(friends: Friend[]) {
   const randomNumber = Math.floor(Math.random() * friends.length);

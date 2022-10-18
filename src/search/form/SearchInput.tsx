@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { Device, color, padding, margin, px, fontSize } from '../../styles/theme';
-import Kod from '../../assets/kod.svg';
-import Microphone from '../../assets/microphone.svg';
-import InfoIcon from '../../assets/info-2.png';
-import { isNotEmpty } from '../../utils/strings';
-import { keys } from '../../utils/keyboard';
-import { AppSettings } from '../../state/app-settings';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { Device, color, padding, margin, px, fontSize } from '@Styles/theme';
+import Kod from '@Assets/kod.svg';
+import Microphone from '@Assets/microphone.svg';
+import InfoIcon from '@Assets/info-2.png';
+import { isNotEmpty } from '@Utils/strings';
+import { keys } from '@Utils/keyboard';
+import { AppSettings } from '@State/app-settings';
 
 const FormSearch = styled.div`
   display: flex;

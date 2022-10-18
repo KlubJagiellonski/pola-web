@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color } from '../styles/theme';
+import { color } from '@Styles/theme';
 import { PageSection } from './PageSection';
 
 const Container = styled.div`

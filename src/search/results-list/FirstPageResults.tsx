@@ -1,11 +1,11 @@
 import React from 'react';
-import { EAN, IProductData } from '../../domain/products';
+import { EAN, IProductData } from '@Domain/products';
 import { SearchResultsList } from '../../search/results-list/SearchResultsList';
-import { PrimaryButton } from '../../components/buttons/PrimaryButton';
-import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
-import { SearchStateName } from '../../state/search/search-reducer';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+import { SearchStateName } from '@State/search/search-reducer';
 import { MissingProductInfo } from '../../search/results-list/MissingProductInfo';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '@Components/Spinner';
 
 interface IFirstPageResults {
   phrase: string;

@@ -1,12 +1,12 @@
 import React from 'react';
-import { PageSection } from '../../layout/PageSection';
-import { color } from '../../styles/theme';
-import { EAN, IProductData } from '../../domain/products';
+import { PageSection } from '@Layout/PageSection';
+import { color } from '@Styles/theme';
+import { EAN, IProductData } from '@Domain/products';
 import { SearchResultsList } from '../../search/results-list/SearchResultsList';
-import { PrimaryButton } from '../../components/buttons/PrimaryButton';
-import { ButtonThemes, ButtonFlavor } from '../../components/buttons/Button';
-import { Spinner } from '../../components/Spinner';
-import { SearchStateName } from '../../state/search/search-reducer';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+import { Spinner } from '@Components/Spinner';
+import { SearchStateName } from '@State/search/search-reducer';
 import { SearchResultsHeader } from '../../search/results-list/SearchResultsHeader';
 import { MissingProductInfo } from '../../search/results-list/MissingProductInfo';
 

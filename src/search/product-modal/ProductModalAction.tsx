@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, padding } from '../../styles/theme';
-import { IButtonTheme } from '../../components/buttons/Button';
-import { PrimaryButton } from '../../components/buttons/PrimaryButton';
+import { color, padding } from '@Styles/theme';
+import { IButtonTheme } from '@Components/buttons/Button';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
 
 interface ITheme {
   backgroundColor?: string;

@@ -3,7 +3,7 @@ import { AnyAction, Reducer } from 'redux';
 import { actionTypes } from './friends-actions';
 import * as actions from './friends-actions';
 import { IAction, IActionReducer } from '../types';
-import { IFriend } from '../../domain/friends';
+import { IFriend } from '@Domain/friends';
 
 export interface IFriendsState {
   initialized: boolean;

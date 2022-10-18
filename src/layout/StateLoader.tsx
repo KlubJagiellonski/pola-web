@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ArticleService, IArticleEdge } from '../posts/services/article-service';
 import { FriendsService } from '../friends/services/friend-service';
-import { appDispatcher } from '../state/app/app-dispatcher';
+import { appDispatcher } from '@State/app/app-dispatcher';
 import { articlesDispatcher } from '../posts/state/articles-dispatcher';
 import { friendsDispatcher } from '../friends/state/friends-dispatcher';
-import { IPolaState } from '../state/types';
-import { IFriendNode } from '../domain/friends';
+import { IPolaState } from '@State/types';
+import { IFriendNode } from '@Domain/friends';
 
 interface IStateLoader {
   isArticlesLoaded?: boolean;

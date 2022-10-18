@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { WrapperTeams, Title, TextSection, ButtonTeams, IconTeams } from './Teams.css';
-import { Text } from '../styles/GlobalStyle.css';
-import { color } from '../styles/theme';
-import { ButtonThemes, ButtonFlavor } from '../components/buttons/Button';
+import { Text } from '@Styles/GlobalStyle.css';
+import { color } from '@Styles/theme';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
 import { ResponsiveImage } from './images/ResponsiveImage';
-import { urls } from '../domain/website';
+import { urls } from '@Domain/website';
 import { Link } from 'gatsby';
 
 const Wrapper = styled(WrapperTeams)`

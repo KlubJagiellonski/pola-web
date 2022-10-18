@@ -1,7 +1,7 @@
 import React from 'react';
 import { Rings } from 'react-loader-spinner';
 import styled from 'styled-components';
-import { color, pixels } from '../styles/theme';
+import { color, pixels } from '@Styles/theme';
 
 const Container = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-import { EAN, IProductData } from '../../domain/products';
+import { EAN, IProductData } from '@Domain/products';
 import { SearchState, SearchStateName } from './search-reducer';
 
 export namespace ProductSelectors {

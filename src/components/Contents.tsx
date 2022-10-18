@@ -7,9 +7,9 @@ import Friends from './friends/Friends';
 import Teams from './Teams';
 import About from './About';
 import TeamsFriend from './TeamsFriend';
-import { Friend } from '../domain/friends';
-import { Device, padding } from './../styles/theme';
-import { Article } from '../domain/articles';
+import { Friend } from '@Domain/friends';
+import { Device, padding } from '@Styles/theme';
+import { Article } from '@Domain/articles';
 import ArticlesListPreview from '../posts/components/list/ArticlesListPrewiev';
 
 const Wrapper = styled.div`

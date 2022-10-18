@@ -2,19 +2,19 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import { PartnerService } from '../domain/partners/partners-service';
-import { PartnersList } from '../components/partners/PartnersList';
-import { Device, margin, padding } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { Text } from '../styles/GlobalStyle.css';
-import Placeholder from '../components/Placeholder';
-import { ExternalLink } from '../utils/browser/links';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType, urls } from '@Domain/website';
+import { PageSection } from '@Layout/PageSection';
+import { PartnerService } from '@Domain/partners/partners-service';
+import { PartnersList } from '@Components/partners/PartnersList';
+import { Device, margin, padding } from '@Styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { Text } from '@Styles/GlobalStyle.css';
+import Placeholder from '@Components/Placeholder';
+import { ExternalLink } from '@Utils/browser/links';
 
 const Wrapper = styled.div`
   text-align: center;

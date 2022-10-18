@@ -2,7 +2,7 @@ import axios from 'axios';
 import { EAN, IProductEAN } from '.';
 import { ApiAdapter } from '../../services/api-adapter';
 import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
-import { AppSettings } from '../../state/app-settings';
+import { AppSettings } from '@State/app-settings';
 
 export interface IProductEANParams {
   code: EAN;

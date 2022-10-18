@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Product } from '../../domain/products';
-import { padding, fontSize, color } from '../../styles/theme';
-import { ScoreBar } from '../../components/ScoreBar';
+import { Product } from '@Domain/products';
+import { padding, fontSize, color } from '@Styles/theme';
+import { ScoreBar } from '@Components/ScoreBar';
 import { Field, getPropertiesFromManufacturer, PolishPropertyName, ValueCheckboxField } from './PolishValues';
-import { AppSettings } from '../../state/app-settings';
+import { AppSettings } from '@State/app-settings';
 import { RussiaInfoBox } from '../RussiaInfoBox';
 
 const DetailsContainer = styled.div`

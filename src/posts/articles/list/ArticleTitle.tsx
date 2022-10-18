@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import { TitleSection, Text } from '../../../styles/GlobalStyle.css';
-import { Device, fontSize, margin } from '../../../styles/theme';
-import { getDate } from '../../../utils/dates';
+import { TitleSection, Text } from '@Styles/GlobalStyle.css';
+import { Device, fontSize, margin } from '@Styles/theme';
+import { getDate } from '@Utils/dates';
 
 const Wrapper = styled.div`
   margin-bottom: ${margin.normal};

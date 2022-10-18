@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ResponsiveImage } from '../../../components/images/ResponsiveImage';
-import { WrapperSection } from '../../../styles/GlobalStyle.css';
-import { Device, color, margin, padding } from '../../../styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color, margin, padding } from '@Styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
-import { PrimaryButton } from '../../../components/buttons/PrimaryButton';
-import { ButtonThemes, ButtonFlavor } from '../../../components/buttons/Button';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
 import { Link } from 'gatsby';
-import { Article } from '../../../domain/articles';
+import { Article } from '@Domain/articles';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;

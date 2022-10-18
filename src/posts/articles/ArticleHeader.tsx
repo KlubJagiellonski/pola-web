@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getDate } from '../../utils/dates';
+import { getDate } from '@Utils/dates';
 import Img, { FluidObject } from 'gatsby-image';
-import { Text } from '../../styles/GlobalStyle.css';
+import { Text } from '@Styles/GlobalStyle.css';
 
 const Title = styled.h1`
   padding: 0;

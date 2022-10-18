@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { WrapperSection } from '../../styles/GlobalStyle.css';
-import { Friend } from '../../domain/friends';
-import { ResponsiveImage } from '../../components/images/ResponsiveImage';
-import { urls } from '../../domain/website';
-import { SliderContainer, SliderElement } from '../../components/SliderComponent';
+import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { Friend } from '@Domain/friends';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { urls } from '@Domain/website';
+import { SliderContainer, SliderElement } from '@Components/SliderComponent';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;

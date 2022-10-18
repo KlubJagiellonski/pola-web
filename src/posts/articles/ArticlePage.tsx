@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect, useDispatch } from 'react-redux';
 
-import { PageLayout } from '../../layout/PageLayout';
-import SEOMetadata from '../../utils/browser/SEOMetadata';
-import { IPolaState } from '../../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../../state/app/app-actions';
-import { PageType } from '../../domain/website';
-import { PageSection } from '../../layout/PageSection';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType } from '@Domain/website';
+import { PageSection } from '@Layout/PageSection';
 import { ArticleHeader } from './ArticleHeader';
-import { Device, margin } from '../../styles/theme';
-import { Article } from '../../domain/articles';
-import SideInformations from '../../components/SideInformations';
-import { Friend } from '../../domain/friends';
+import { Device, margin } from '@Styles/theme';
+import { Article } from '@Domain/articles';
+import SideInformations from '@Components/SideInformations';
+import { Friend } from '@Domain/friends';
 
 const Content = (props: any) => {
   const { html, children } = props;

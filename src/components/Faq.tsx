@@ -1,8 +1,8 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { TitleSection } from '../styles/GlobalStyle.css';
-import { margin } from '../styles/theme';
+import { TitleSection } from '@Styles/GlobalStyle.css';
+import { margin } from '@Styles/theme';
 import AccordionList, { ISingleAccordion } from './accordion/AccordionList';
 
 const Wrapper = styled.div`

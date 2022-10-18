@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { HamburgerMenu } from './nav/HamburgerMenu';
 import { NavbarMenu } from './nav/NavbarMenu';
-import { desktopHeaderHeight, Device, pageWidth, color } from '../styles/theme';
+import { desktopHeaderHeight, Device, pageWidth, color } from '@Styles/theme';
 import { ExtNavItem, NavItem } from './nav/NavItem';
-import { pageLinks, PageType, PageLinkData, ExternalLinkData } from '../domain/website';
+import { pageLinks, PageType, PageLinkData, ExternalLinkData } from '@Domain/website';
 
 const HeaderContainer = styled.header`
   display: flex;

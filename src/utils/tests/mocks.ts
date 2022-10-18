@@ -1,5 +1,5 @@
 import { AxiosError, AxiosRequestConfig } from 'axios';
-import { IProductData } from '../../domain/products';
+import { IProductData } from '@Domain/products';
 
 export const mockAxiosErrorResponse = (status: number, statusText: string, data?: any, request?: any): AxiosError => ({
   config: mockGETRequest(),

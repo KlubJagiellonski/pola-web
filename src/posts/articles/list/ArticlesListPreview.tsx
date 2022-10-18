@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Article } from '../../../domain/articles';
+import { Article } from '@Domain/articles';
 import { ArticlePreview } from './ArticlePreview';
-import { Device, padding, margin } from '../../../styles/theme';
-import { PrimaryButton } from '../../../components/buttons/PrimaryButton';
+import { Device, padding, margin } from '@Styles/theme';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
 import { Link } from 'gatsby';
-import { urls } from '../../../domain/website';
-import { ButtonThemes, ButtonFlavor } from '../../../components/buttons/Button';
+import { urls } from '@Domain/website';
+import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
 
 const Wrapper = styled.div`
   grid-area: articles;

@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Friend } from '../../domain/friends';
-import { urls } from '../../domain/website';
-import { PageSection } from '../../layout/PageSection';
-import { color, Device, fontSize, margin } from '../../styles/theme';
-import { ResponsiveImage } from '../../components/images/ResponsiveImage';
-import { TitleSection, Text } from '../../styles/GlobalStyle.css';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { ButtonFlavor, ButtonThemes } from '../../components/buttons/Button';
+import { Friend } from '@Domain/friends';
+import { urls } from '@Domain/website';
+import { PageSection } from '@Layout/PageSection';
+import { color, Device, fontSize, margin } from '@Styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { TitleSection, Text } from '@Styles/GlobalStyle.css';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
-import { ColumnsLayout, ContentColumn } from '../../layout/ColumnsLayout';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 
 const WrapperContents = styled(PageSection)`
   margin-top: ${margin.normal};

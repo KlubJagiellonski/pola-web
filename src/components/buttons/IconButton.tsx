@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, fontSize, padding } from '../../styles/theme';
+import { color, fontSize, padding } from '@Styles/theme';
 
 const Button = styled.button`
   display: flex;

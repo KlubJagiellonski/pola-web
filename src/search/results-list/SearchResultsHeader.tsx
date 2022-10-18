@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PageSection } from '../../layout/PageSection';
+import { PageSection } from '@Layout/PageSection';
 import { ProductCounter } from './ProductCounter';
 import { Link } from 'gatsby';
-import { fontSize, lineHeight, margin } from '../../styles/theme';
-import { SearchStateName } from '../../state/search/search-reducer';
-import { PageType } from '../../domain/website';
+import { fontSize, lineHeight, margin } from '@Styles/theme';
+import { SearchStateName } from '@State/search/search-reducer';
+import { PageType } from '@Domain/website';
 
 const Header = styled.header`
   font-size: ${fontSize.big};

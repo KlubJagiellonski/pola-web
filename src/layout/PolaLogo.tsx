@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../assets/logo/pola-color.svg';
-import { padding, color, px } from '../styles/theme';
+import Logo from '@Assets/logo/pola-color.svg';
+import { padding, color, px } from '@Styles/theme';
 
 interface IPolaLogo {
   size?: number;

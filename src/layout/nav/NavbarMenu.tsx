@@ -3,8 +3,8 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import { PolaLogo } from '../PolaLogo';
-import { Device } from '../../styles/theme';
-import { urls } from '../../domain/website';
+import { Device } from '@Styles/theme';
+import { urls } from '@Domain/website';
 
 interface INavbarMenu {}
 

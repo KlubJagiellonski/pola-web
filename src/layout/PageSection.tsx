@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Device, pageWidth, padding, color } from '../styles/theme';
+import { Device, pageWidth, padding, color } from '@Styles/theme';
 
 interface IPageSection {
   size?: 'narrow' | 'full';
@@ -21,7 +21,7 @@ export const PageSection = styled.section<IPageSection>`
 
   @media ${Device.mobile} {
     padding: 0 ${padding.tiny};
-  } 
+  }
   @media ${Device.desktop} {
     max-width: ${(props) => (props.size === 'full' ? undefined : pageWidth)};
     padding-bottom: ${(props) => (props.size === 'full' ? 0 : padding.normal)};

@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Friend } from '../../domain/friends';
+import { Friend } from '@Domain/friends';
 import { IFriendNode } from '../../friends/services/friend-service';
 import { IPolaState } from '../types';
 import * as actions from './friends-actions';

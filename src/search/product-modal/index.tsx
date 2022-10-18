@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Product } from '../../domain/products';
-import { Modal } from '../../layout/modal/Modal';
-import { color, padding } from '../../styles/theme';
-import { ButtonFlavor, ButtonThemes } from '../../components/buttons/Button';
-import { ClickOutside } from '../../utils/click-outside';
+import { Product } from '@Domain/products';
+import { Modal } from '@Layout/modal/Modal';
+import { color, padding } from '@Styles/theme';
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+import { ClickOutside } from '@Utils/click-outside';
 import { ProductModalAction } from './ProductModalAction';
-import { navigateTo, openNewTab } from '../../utils/browser';
+import { navigateTo, openNewTab } from '@Utils/browser';
 import { ProductDetails } from './ProductDetails';
-import { urls } from '../../domain/website';
-import { LinkButton } from '../../components/buttons/LinkButton';
-import { MobileApps } from '../../components/MobileApps';
+import { urls } from '@Domain/website';
+import { LinkButton } from '@Components/buttons/LinkButton';
+import { MobileApps } from '@Components/MobileApps';
 
 const Actions = styled.div`
   display: flex;

@@ -2,14 +2,14 @@ import React from 'react';
 import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { color, Device, fontSize, padding, pageWidth, margin } from '../styles/theme';
-import { urls } from '../domain/website';
-import { Facebook, Instagram, Twitter } from '../components/social-media/Icons';
-import { TextExternalLink, TextLink } from '../utils/browser/links';
+import { color, Device, fontSize, padding, pageWidth, margin } from '@Styles/theme';
+import { urls } from '@Domain/website';
+import { Facebook, Instagram, Twitter } from '@Components/social-media/Icons';
+import { TextExternalLink, TextLink } from '@Utils/browser/links';
 
-import LogoWhite from '../assets/logo/pola-white.svg';
+import LogoWhite from '@Assets/logo/pola-white.svg';
 import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
-import { IPolaState } from '../state/types';
+import { IPolaState } from '@State/types';
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
 
 const FooterContainer = styled.footer`

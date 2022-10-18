@@ -2,15 +2,15 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { fontSize, margin, padding, Device, lineHeight } from '../styles/theme';
-import { PageSection } from '../layout/PageSection';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType, urls } from '@Domain/website';
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { fontSize, margin, padding, Device, lineHeight } from '@Styles/theme';
+import { PageSection } from '@Layout/PageSection';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 
 interface ITeamPage {
   location?: Location;

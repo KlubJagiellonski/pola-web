@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { WrapperSection, TitleSection } from '../styles/GlobalStyle.css';
-import { Device, margin, padding } from '../styles/theme';
+import { WrapperSection, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, margin, padding } from '@Styles/theme';
 import { PrimaryButton } from './buttons/PrimaryButton';
 
 export const WrapperTeams = styled(WrapperSection)`

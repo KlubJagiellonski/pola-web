@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { margin } from '../../styles/theme';
+import { margin } from '@Styles/theme';
 import Tag from './Tag';
 
 const Wrapper = styled.div`

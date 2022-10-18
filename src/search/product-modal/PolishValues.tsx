@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Checkbox } from '../../components/checkbox';
-import { IManufacturer } from '../../domain/products';
-import { AppSettings } from '../../state/app-settings';
-import { padding } from '../../styles/theme';
+import { Checkbox } from '@Components/checkbox';
+import { IManufacturer } from '@Domain/products';
+import { AppSettings } from '@State/app-settings';
+import { padding } from '@Styles/theme';
 
 export const Field = styled.div`
   margin-bottom: ${padding.normal};

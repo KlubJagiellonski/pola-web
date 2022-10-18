@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
-import { ResponsiveImage } from '../../../components/images/ResponsiveImage';
-import { Device, color, fontSize, margin } from '../../../styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { Device, color, fontSize, margin } from '@Styles/theme';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
-import { Article } from '../../../domain/articles';
+import { Article } from '@Domain/articles';
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
 import { Title } from './ArticleTitle';
 

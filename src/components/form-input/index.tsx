@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { color, fontSize } from '../../styles/theme';
-import { getGuid } from '../../utils/data/random-number';
+import { color, fontSize } from '@Styles/theme';
+import { getGuid } from '@Utils/data/random-number';
 
 const InputContainer = styled.div`
   display: flex;

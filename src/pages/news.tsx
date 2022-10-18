@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { margin, Device } from '../styles/theme';
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { Article } from '../domain/articles';
+import { margin, Device } from '@Styles/theme';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { Article } from '@Domain/articles';
 import { connect, useDispatch } from 'react-redux';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import './../components/Pagination.css';
-import SocialMedia from '../components/social-media/SocialMedia';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType } from '@Domain/website';
+import { PageSection } from '@Layout/PageSection';
+import '@Components/Pagination.css';
+import SocialMedia from '@Components/social-media/SocialMedia';
 import TagsList from '../posts/tags/TagsList';
 import { ArrayParam, withDefault, useQueryParams, NumberParam } from 'use-query-params';
-import { getTagsList } from './../utils/tags';
+import { getTagsList } from '@Utils/tags';
 import NewsPageArticles from '../posts/articles/list/NewsPagesArticles';
-import Placeholder from '../components/Placeholder';
+import Placeholder from '@Components/Placeholder';
 
 import { useQueryParamString } from 'react-use-query-param-string';
 

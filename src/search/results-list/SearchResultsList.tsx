@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { EAN, IProductData } from '../../domain/products';
-import { Device, margin, padding } from '../../styles/theme';
+import { EAN, IProductData } from '@Domain/products';
+import { Device, margin, padding } from '@Styles/theme';
 import { SearchResultElement } from './ProductElement';
 
 const ResultsList = styled.div`

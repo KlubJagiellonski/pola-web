@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { PageType } from '../../domain/website';
+import { PageType } from '@Domain/website';
 import { SearchStateName } from '../search/search-reducer';
 import { IPolaState } from '../types';
 import * as actions from './app-actions';

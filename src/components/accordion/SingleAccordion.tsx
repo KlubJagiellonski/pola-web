@@ -8,7 +8,7 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import { ISingleAccordion } from './AccordionList';
-import { fontSize } from '../../styles/theme';
+import { fontSize } from '@Styles/theme';
 
 const ItemButton = styled(AccordionItemButton)`
   cursor: pointer;

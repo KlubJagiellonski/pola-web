@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { PageType } from '../domain/website';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import { PageLayout } from '../layout/PageLayout';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import SEOMetadata from '../utils/browser/SEOMetadata';
+import { PageType } from '@Domain/website';
+import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
+import { PageLayout } from '@Layout/PageLayout';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 interface INotFoundPage {
   location?: Location;

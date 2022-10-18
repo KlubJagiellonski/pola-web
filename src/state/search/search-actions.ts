@@ -1,4 +1,4 @@
-import { IProductData, Product } from '../../domain/products';
+import { IProductData, Product } from '@Domain/products';
 import { ErrorHandler } from '../../services/api-errors';
 import { IAction } from '../types';
 

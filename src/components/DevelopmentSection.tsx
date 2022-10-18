@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
-import { Device, fontSize, margin, color, padding } from './../styles/theme';
+import { Device, fontSize, margin, color, padding } from '@Styles/theme';
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
-import { WrapperSection } from '../styles/GlobalStyle.css';
-import { TitleSection, Text } from '../styles/GlobalStyle.css';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { openNewTab } from '../utils/browser';
-import { urls } from '../domain/website';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
+import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { TitleSection, Text } from '@Styles/GlobalStyle.css';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { openNewTab } from '@Utils/browser';
+import { urls } from '@Domain/website';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 
 const Info = styled.div`
   width: 100%;

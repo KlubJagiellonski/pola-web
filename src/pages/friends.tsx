@@ -2,18 +2,18 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { Text, TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
-import { PageSection } from '../layout/PageSection';
-import { margin, padding, Device, color, fontSize } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import Placeholder from '../components/Placeholder';
-import { Friend } from '../domain/friends';
-import Card from '../components/Card';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { IPolaState } from '@State/types';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { PageType, urls } from '@Domain/website';
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { PageSection } from '@Layout/PageSection';
+import { margin, padding, Device, color, fontSize } from '@Styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import Placeholder from '@Components/Placeholder';
+import { Friend } from '@Domain/friends';
+import Card from '@Components/Card';
 import FriendsSection from '../friends/components/FriendsSection';
 
 const Title = styled(TitleSection)`
