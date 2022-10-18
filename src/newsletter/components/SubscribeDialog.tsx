@@ -1,10 +1,13 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import { SubscriptionStatus } from '@State/newsletter-reducer';
+
 import { ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
-import { SubscriptionStatus } from '@State/newsletter-reducer';
-import { SubscribeForm } from './SubscribeForm';
 import { classNames } from '@Utils/class-names';
+
+import { SubscribeForm } from './SubscribeForm';
 
 interface INewsletterFormStyles {
   spaceTop?: string;

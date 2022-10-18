@@ -1,6 +1,7 @@
-import React from 'react';
-import ArticlePage from '../posts/articles/ArticlePage';
 import { graphql } from 'gatsby';
+import React from 'react';
+
+import ArticlePage from '../posts/articles/ArticlePage';
 
 interface IArticleTemplate {
   data: any;

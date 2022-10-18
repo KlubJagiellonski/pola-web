@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { getDate } from '@Utils/dates';
+
 import Tag from '../../tags/Tag';
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
 

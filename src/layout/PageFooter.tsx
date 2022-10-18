@@ -1,16 +1,19 @@
 import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { color, Device, fontSize, padding, pageWidth, margin } from '@Styles/theme';
 import { urls } from '@Domain/website';
+import { IPolaState } from '@State/types';
+
 import { Facebook, Instagram, Twitter } from '@Components/social-media/Icons';
 import { TextExternalLink, TextLink } from '@Utils/browser/links';
 
-import LogoWhite from '@Assets/logo/pola-white.svg';
 import { SubscribeDialog } from '../newsletter/components/SubscribeDialog';
-import { IPolaState } from '@State/types';
 import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
+
+import { Device, color, fontSize, margin, padding, pageWidth } from '@Styles/theme';
+
+import LogoWhite from '@Assets/logo/pola-white.svg';
 
 const FooterContainer = styled.footer`
   background-color: ${color.background.dark};

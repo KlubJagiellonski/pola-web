@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { EAN, IProductData } from '@Domain/products';
-import { Device, margin, padding } from '@Styles/theme';
+
 import { SearchResultElement } from './ProductElement';
+
+import { Device, margin, padding } from '@Styles/theme';
 
 const ResultsList = styled.div`
   display: flex;

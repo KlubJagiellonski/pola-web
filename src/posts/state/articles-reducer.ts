@@ -1,9 +1,10 @@
 import { AnyAction, Reducer } from 'redux';
 
+import { IArticle } from '@Domain/articles';
+
+import { IAction, IActionReducer } from '../types';
 import { actionTypes } from './articles-actions';
 import * as actions from './articles-actions';
-import { IAction, IActionReducer } from '../types';
-import { IArticle } from '@Domain/articles';
 
 export interface IArticlesState {
   initialized: boolean;

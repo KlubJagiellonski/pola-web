@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { color, fontSize, padding, margin } from '@Styles/theme';
+
+import { color, fontSize, margin, padding } from '@Styles/theme';
 
 export const InfoBox = styled.div`
   background-color: ${color.background.red};

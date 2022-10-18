@@ -1,17 +1,20 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { PageType, urls } from '@Domain/website';
-import { PageSection } from '@Layout/PageSection';
-import { Text, TitleSection } from '@Styles/GlobalStyle.css';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { Device, margin, padding } from '@Styles/theme';
 import styled from 'styled-components';
+
+import { PageType, urls } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
 import BusinessTemplates from '../templates/BusinessTemplate';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   margin-top: ${margin.normal};

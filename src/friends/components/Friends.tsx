@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { WrapperSection } from '@Styles/GlobalStyle.css';
 import { Friend } from '@Domain/friends';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { urls } from '@Domain/website';
+
 import { SliderContainer, SliderElement } from '@Components/SliderComponent';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+
+import { WrapperSection } from '@Styles/GlobalStyle.css';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;

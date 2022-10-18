@@ -1,14 +1,16 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+
 import { Friend } from '@Domain/friends';
 import { urls } from '@Domain/website';
 
-import { TitleSection, WrapperSection, Text } from '@Styles/GlobalStyle.css';
-import { color, padding, margin, fontSize } from '@Styles/theme';
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   padding: ${padding.normal};

@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { urls } from '@Domain/website';
+
 import { Modal } from '@Layout/modal/Modal';
-import { padding } from '@Styles/theme';
 import { ClickOutside } from '@Utils/click-outside';
+
+import { padding } from '@Styles/theme';
 
 const Info = styled.div`
   display: flex;

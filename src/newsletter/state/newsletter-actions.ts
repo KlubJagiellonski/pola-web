@@ -1,5 +1,6 @@
-import { Follower, NewsletterApiResponseContext } from '..';
 import { IAction } from '@State/types';
+
+import { Follower, NewsletterApiResponseContext } from '..';
 
 export const actionTypes = {
   SUBSCRIBING: 'NEWSLETTER:SUBSCRIBING',

@@ -2,15 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
-import { Device, fontSize, margin, color, padding } from '@Styles/theme';
+import { urls } from '@Domain/website';
+
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { openNewTab } from '@Utils/browser';
+
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
+
 import { WrapperSection } from '@Styles/GlobalStyle.css';
-import { TitleSection, Text } from '@Styles/GlobalStyle.css';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { openNewTab } from '@Utils/browser';
-import { urls } from '@Domain/website';
-import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Info = styled.div`
   width: 100%;

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { WrapperSection } from '@Styles/GlobalStyle.css';
-import { color, margin, padding, fontSize, desktopHeaderHeight } from '@Styles/theme';
+import { color, desktopHeaderHeight, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   color: ${color.text.light};

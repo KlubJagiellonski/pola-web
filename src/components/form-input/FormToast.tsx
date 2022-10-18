@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { color, fontSize, lineHeight, padding } from '@Styles/theme';
 
 interface IToastMessage {

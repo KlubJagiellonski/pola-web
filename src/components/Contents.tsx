@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import DevelopmentSection from './DevelopmentSection';
-import SocialMedia from './social-media/SocialMedia';
-import Friends from './friends/Friends';
-import Teams from './Teams';
-import About from './About';
-import TeamsFriend from './TeamsFriend';
-import { Friend } from '@Domain/friends';
-import { Device, padding } from '@Styles/theme';
 import { Article } from '@Domain/articles';
+import { Friend } from '@Domain/friends';
+
 import ArticlesListPreview from '../posts/components/list/ArticlesListPrewiev';
+import About from './About';
+import DevelopmentSection from './DevelopmentSection';
+import Teams from './Teams';
+import TeamsFriend from './TeamsFriend';
+import Friends from './friends/Friends';
+import SocialMedia from './social-media/SocialMedia';
+
+import { Device, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   -webkit-box-sizing: border-box;

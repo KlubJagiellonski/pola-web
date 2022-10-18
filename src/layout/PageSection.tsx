@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Device, pageWidth, padding, color } from '@Styles/theme';
+
+import { Device, color, padding, pageWidth } from '@Styles/theme';
 
 interface IPageSection {
   size?: 'narrow' | 'full';

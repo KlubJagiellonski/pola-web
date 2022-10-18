@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { Friend } from '@Domain/friends';
-import { margin, Device } from '@Styles/theme';
-import SingleFriend from './SingleFriend';
-import Friends from './Friends';
-import { StringParam, useQueryParams } from 'use-query-params';
 import { useState } from 'react';
+import styled from 'styled-components';
+import { StringParam, useQueryParams } from 'use-query-params';
+
+import { Friend } from '@Domain/friends';
+
 import { getFriendBySlug } from '@Utils/friends';
+
+import Friends from './Friends';
+import SingleFriend from './SingleFriend';
+
+import { Device, margin } from '@Styles/theme';
 
 const Wrapper = styled.div`
   margin: ${margin.small} 0;

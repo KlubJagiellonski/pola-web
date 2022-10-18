@@ -2,19 +2,22 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { PageType, urls } from '@Domain/website';
-import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
-import { PageSection } from '@Layout/PageSection';
-import { margin, padding, Device, color, fontSize } from '@Styles/theme';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import Placeholder from '@Components/Placeholder';
 import { Friend } from '@Domain/friends';
+import { PageType, urls } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
 import Card from '@Components/Card';
+import Placeholder from '@Components/Placeholder';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
 import FriendsSection from '../friends/components/FriendsSection';
+
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;

@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, Device, padding } from '@Styles/theme';
+
 import { CustomScrollbarDiv } from '../CustomScrollbar';
 import { ModalHeader } from './ModalHeader';
+
+import { Device, color, padding } from '@Styles/theme';
 
 const ModalLayout = styled.div`
   position: fixed;

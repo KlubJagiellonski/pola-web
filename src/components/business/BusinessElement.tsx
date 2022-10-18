@@ -1,8 +1,10 @@
-import styled from 'styled-components';
-import React from 'react';
 import Img, { FluidObject } from 'gatsby-image';
+import React from 'react';
+import styled from 'styled-components';
+
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
-import { fontSize, color, lineHeight, Device, padding, introHeight } from '@Styles/theme';
+
+import { Device, color, fontSize, introHeight, lineHeight, padding } from '@Styles/theme';
 
 interface BusinessElement {
   html: any;

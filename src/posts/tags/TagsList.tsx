@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { margin } from '@Styles/theme';
+
 import Tag from './Tag';
+
+import { margin } from '@Styles/theme';
 
 const Wrapper = styled.div`
   display: flex;

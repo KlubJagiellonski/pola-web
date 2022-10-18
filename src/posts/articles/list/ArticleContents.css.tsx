@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Device, padding, color, fontSize } from '@Styles/theme';
+
 import { Text } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, padding } from '@Styles/theme';
 
 export const ArticleTag = styled.div`
   display: flex;

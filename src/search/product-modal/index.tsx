@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { Product } from '@Domain/products';
-import { Modal } from '@Layout/modal/Modal';
-import { color, padding } from '@Styles/theme';
-import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
-import { ClickOutside } from '@Utils/click-outside';
-import { ProductModalAction } from './ProductModalAction';
-import { navigateTo, openNewTab } from '@Utils/browser';
-import { ProductDetails } from './ProductDetails';
 import { urls } from '@Domain/website';
-import { LinkButton } from '@Components/buttons/LinkButton';
+
 import { MobileApps } from '@Components/MobileApps';
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+import { LinkButton } from '@Components/buttons/LinkButton';
+import { Modal } from '@Layout/modal/Modal';
+import { navigateTo, openNewTab } from '@Utils/browser';
+import { ClickOutside } from '@Utils/click-outside';
+
+import { ProductDetails } from './ProductDetails';
+import { ProductModalAction } from './ProductModalAction';
+
+import { color, padding } from '@Styles/theme';
 
 const Actions = styled.div`
   display: flex;
@@ -72,7 +76,8 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
           <span>Posiadasz aktualne dane na temat tego produktu?</span>
         </ProductModalAction>
         <ProductModalAction
-          theme={{ backgroundColor: color.background.white, buttonTheme: ButtonThemes[ButtonFlavor.RED] }}>
+          theme={{ backgroundColor: color.background.white, buttonTheme: ButtonThemes[ButtonFlavor.RED] }}
+        >
           <AppDownload>
             <p>Zabierz Polę na zakupy! Skanuj kody w aplikacji:</p>
             <MobileApps size={64} />

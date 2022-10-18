@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { connect, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { PageType } from '@Domain/website';
-import { PageSection } from '@Layout/PageSection';
-import { ArticleHeader } from './ArticleHeader';
-import { Device, margin } from '@Styles/theme';
 import { Article } from '@Domain/articles';
-import SideInformations from '@Components/SideInformations';
 import { Friend } from '@Domain/friends';
+import { PageType } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
+import SideInformations from '@Components/SideInformations';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { ArticleHeader } from './ArticleHeader';
+
+import { Device, margin } from '@Styles/theme';
 
 const Content = (props: any) => {
   const { html, children } = props;

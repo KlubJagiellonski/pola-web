@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchInput } from './SearchInput';
-import ErrorBoundary from '@Utils/error-boundary';
-import { Device, fontSize, color, margin, lineHeight, introHeight } from '@Styles/theme';
-import { TitleSection } from '@Styles/GlobalStyle.css';
+
 import { MobileApps } from '@Components/MobileApps';
+import ErrorBoundary from '@Utils/error-boundary';
+
+import { SearchInput } from './SearchInput';
+
+import { TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, introHeight, lineHeight, margin } from '@Styles/theme';
 
 const Container = styled.div`
   display: flex;

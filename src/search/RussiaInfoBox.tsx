@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Product, IProductData } from '@Domain/products';
-import { padding, fontSize, color } from '@Styles/theme';
+
+import { IProductData, Product } from '@Domain/products';
+
+import { color, fontSize, padding } from '@Styles/theme';
 
 const InfoBox = styled.div`
   background-color: white;

@@ -1,12 +1,16 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+
 import { Article } from '@Domain/articles';
-import { ArticlePreview } from './ArticlePreview';
-import { Device, padding, margin } from '@Styles/theme';
-import { PrimaryButton } from '@Components/buttons/PrimaryButton';
-import { Link } from 'gatsby';
 import { urls } from '@Domain/website';
-import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
+
+import { ArticlePreview } from './ArticlePreview';
+
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   grid-area: articles;

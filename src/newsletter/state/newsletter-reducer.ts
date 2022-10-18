@@ -1,9 +1,10 @@
 import { AnyAction, Reducer } from 'redux';
 
+import { IAction, IActionReducer } from '@State/types';
+
+import { Follower, NewsletterApiResponseContext } from '..';
 import { actionTypes } from './newsletter-actions';
 import * as actions from './newsletter-actions';
-import { IAction, IActionReducer } from '@State/types';
-import { Follower, NewsletterApiResponseContext } from '..';
 
 export type SubscriptionStatus = 'initial' | 'subscribing' | 'subscribed' | 'failure';
 

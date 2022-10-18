@@ -1,18 +1,20 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { searchDispatcher } from '@State/search/search-dispatcher';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { EAN, IProductData } from '@Domain/products';
-import { SearchStateName } from '@State/search/search-reducer';
-import { navigateTo } from '@Utils/browser';
-import { PageType, urls } from '@Domain/website';
 import { reduceToFlatProductsList } from '@Domain/products/search-service';
-import { DynamicProductResults } from '../search/results-list/DynamicProductResults';
+import { PageType, urls } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { searchDispatcher } from '@State/search/search-dispatcher';
+import { SearchStateName } from '@State/search/search-reducer';
+import { IPolaState } from '@State/types';
+
 import Placeholder from '@Components/Placeholder';
+import { PageLayout } from '@Layout/PageLayout';
+import { navigateTo } from '@Utils/browser';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { DynamicProductResults } from '../search/results-list/DynamicProductResults';
 
 interface IProductsPage {
   location?: Location;

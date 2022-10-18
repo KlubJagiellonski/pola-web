@@ -1,7 +1,9 @@
+import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
+
 import { getDate } from '@Utils/dates';
-import Img, { FluidObject } from 'gatsby-image';
+
 import { Text } from '@Styles/GlobalStyle.css';
 
 const Title = styled.h1`

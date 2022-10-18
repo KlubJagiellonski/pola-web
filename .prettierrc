@@ -4,5 +4,16 @@
   "trailingComma": "es5",
   "printWidth": 120,
   "tabWidth": 2,
-  "jsxBracketSameLine": true
+  "jsxBracketSameLine": true,
+  "importOrder": [
+    "^-@[./]",
+    "^@(Domain|State)/(.*)$",
+    "^@(Layout|Components|Utils)/(.*)$",
+    "^[./]",
+    "^@Styles/(.*)$",
+    "^@Assets/(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "organizeImportsSkipDestructiveCodeActions": true
 }

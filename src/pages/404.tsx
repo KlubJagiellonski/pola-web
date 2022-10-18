@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
 import { PageType } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+
 import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
 import { PageLayout } from '@Layout/PageLayout';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 interface INotFoundPage {

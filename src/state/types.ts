@@ -1,9 +1,10 @@
 import { AnyAction, Reducer } from 'redux';
-import { IAppState } from './app/app-reducer';
-import { IArticlesState } from '../posts/state/articles-reducer';
-import { SearchState } from './search/search-reducer';
+
 import { IFriendsState } from '../friends/state/friends-reducer';
 import { ISubscribeState } from '../newsletter/state/newsletter-reducer';
+import { IArticlesState } from '../posts/state/articles-reducer';
+import { IAppState } from './app/app-reducer';
+import { SearchState } from './search/search-reducer';
 
 export interface IPolaState {
   app: IAppState;

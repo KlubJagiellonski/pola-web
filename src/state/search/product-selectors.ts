@@ -1,4 +1,5 @@
 import { EAN, IProductData } from '@Domain/products';
+
 import { SearchState, SearchStateName } from './search-reducer';
 
 export namespace ProductSelectors {

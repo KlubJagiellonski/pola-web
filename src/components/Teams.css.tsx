@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import { WrapperSection, TitleSection } from '@Styles/GlobalStyle.css';
-import { Device, margin, padding } from '@Styles/theme';
 import { PrimaryButton } from './buttons/PrimaryButton';
+
+import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, margin, padding } from '@Styles/theme';
 
 export const WrapperTeams = styled(WrapperSection)`
   height: 100%;

@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Checkbox } from '@Components/checkbox';
+
 import { IManufacturer } from '@Domain/products';
 import { AppSettings } from '@State/app-settings';
+
+import { Checkbox } from '@Components/checkbox';
+
 import { padding } from '@Styles/theme';
 
 export const Field = styled.div`

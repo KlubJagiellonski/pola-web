@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { EAN, IProductData } from '@Domain/products';
-import { padding, color, fontSize, lineHeight, Device } from '@Styles/theme';
-import { ScoreBar } from '@Components/ScoreBar';
 import { AppSettings } from '@State/app-settings';
+
+import { ScoreBar } from '@Components/ScoreBar';
+
 import { RussiaInfoBox } from '../RussiaInfoBox';
+
+import { Device, color, fontSize, lineHeight, padding } from '@Styles/theme';
 
 const ListElement = styled.li`
   min-width: 40em;

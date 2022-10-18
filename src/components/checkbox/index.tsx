@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { color, fontSize } from '@Styles/theme';
 
 type CheckboxStyles = {

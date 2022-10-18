@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 
+import { PageType } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
+import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { PageType } from '@Domain/website';
-import Placeholder from '@Components/Placeholder';
 
 interface IContactPage {
   location?: Location;

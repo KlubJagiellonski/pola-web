@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { Device, color, fontSize, margin } from '@Styles/theme';
-import ArticleContents from './ArticleContents';
-import ArticleTitle from './ArticleTitle';
+
 import { Article } from '@Domain/articles';
+
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+
+import ArticleContents from './ArticleContents';
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
+import ArticleTitle from './ArticleTitle';
 import { Title } from './ArticleTitle';
+
+import { Device, color, fontSize, margin } from '@Styles/theme';
 
 const ArticleImage = styled.div`
   width: 50%;

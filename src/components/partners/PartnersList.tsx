@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PartnerTile } from '@Components/partners/PartnerTile';
+
 import { IPartner } from '@Domain/partners';
+
+import { PartnerTile } from '@Components/partners/PartnerTile';
+
 import { Device, padding } from '@Styles/theme';
 
 interface IPartnersList {

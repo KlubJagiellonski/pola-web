@@ -1,13 +1,16 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { WrapperTeams, Title, TextSection, ButtonTeams, IconTeams } from './Teams.css';
+import { urls } from '@Domain/website';
+
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+
+import { ButtonTeams, IconTeams, TextSection, Title, WrapperTeams } from './Teams.css';
+import { ResponsiveImage } from './images/ResponsiveImage';
+
 import { Text } from '@Styles/GlobalStyle.css';
 import { color } from '@Styles/theme';
-import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
-import { ResponsiveImage } from './images/ResponsiveImage';
-import { urls } from '@Domain/website';
-import { Link } from 'gatsby';
 
 const Wrapper = styled(WrapperTeams)`
   grid-area: teams-friend;

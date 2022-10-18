@@ -2,19 +2,21 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { PageType, urls } from '@Domain/website';
-import { PageSection } from '@Layout/PageSection';
 import { PartnerService } from '@Domain/partners/partners-service';
-import { PartnersList } from '@Components/partners/PartnersList';
-import { Device, margin, padding } from '@Styles/theme';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { Text } from '@Styles/GlobalStyle.css';
+import { PageType, urls } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
 import Placeholder from '@Components/Placeholder';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { PartnersList } from '@Components/partners/PartnersList';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { ExternalLink } from '@Utils/browser/links';
+
+import { Text } from '@Styles/GlobalStyle.css';
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   text-align: center;

@@ -1,11 +1,12 @@
 import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import SingleBusinessSlider from './SingleBusinessSlider';
+import { StringParam, useQueryParams } from 'use-query-params';
+
+import { IBusinessTemplate } from '../../templates/BusinessTemplate';
 import { SliderContainer } from '../SliderComponent';
 import BusinessElement from './BusinessElement';
-import { IBusinessTemplate } from '../../templates/BusinessTemplate';
-import { useEffect } from 'react';
-import { useQueryParams, StringParam } from 'use-query-params';
+import SingleBusinessSlider from './SingleBusinessSlider';
 
 const H = styled.div`
   .slick-slider {

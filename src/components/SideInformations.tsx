@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { Article } from '@Domain/articles';
 import { Friend } from '@Domain/friends';
-import { Device, margin } from '@Styles/theme';
+
 import { getVisibleArticles } from '@Utils/articles';
 import { getRandomFriend } from '@Utils/friends';
 import { getTagsList } from '@Utils/tags';
-import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
-import DevelopmentSection from './DevelopmentSection';
+
 import FriendCard from '../friends/components/FriendCard';
-import SocialMedia from './social-media/SocialMedia';
+import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import TagsList from '../posts/tags/TagsList';
+import DevelopmentSection from './DevelopmentSection';
+import SocialMedia from './social-media/SocialMedia';
+
+import { Device, margin } from '@Styles/theme';
 
 const Wrapper = styled.div`
   gap: ${margin.normal};

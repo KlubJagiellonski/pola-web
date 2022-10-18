@@ -1,35 +1,37 @@
 import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { SearchForm } from '../search/form/SearchForm';
-import { PageSection } from '@Layout/PageSection';
-import { Device, pageWidth, padding, color } from '@Styles/theme';
-import { IPolaState } from '@State/types';
-import { searchDispatcher } from '@State/search/search-dispatcher';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { PageType, urls } from '@Domain/website';
 import { Article } from '@Domain/articles';
-import { reduceToFlatProductsList } from '@Domain/products/search-service';
-import { SearchStateName } from '@State/search/search-reducer';
-import { FirstPageResults } from '../search/results-list/FirstPageResults';
-import { EAN, ISearchResults } from '@Domain/products';
 import { Friend } from '@Domain/friends';
+import { EAN, ISearchResults } from '@Domain/products';
+import { reduceToFlatProductsList } from '@Domain/products/search-service';
+import { PageType, urls } from '@Domain/website';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { appDispatcher } from '@State/app/app-dispatcher';
-import DevelopmentSection from '@Components/DevelopmentSection';
-import SocialMedia from '@Components/social-media/SocialMedia';
-import Friends from '../friends/components/Friends';
-import Teams from '@Components/Teams';
+import { searchDispatcher } from '@State/search/search-dispatcher';
+import { SearchStateName } from '@State/search/search-reducer';
+import { IPolaState } from '@State/types';
+
 import About from '@Components/About';
-import TeamsFriend from '@Components/TeamsFriend';
-import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
+import DevelopmentSection from '@Components/DevelopmentSection';
 import { InfoBox } from '@Components/InfoBox';
+import Teams from '@Components/Teams';
+import TeamsFriend from '@Components/TeamsFriend';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import SocialMedia from '@Components/social-media/SocialMedia';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import Friends from '../friends/components/Friends';
+import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
+import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
+import { SearchForm } from '../search/form/SearchForm';
+import { FirstPageResults } from '../search/results-list/FirstPageResults';
 import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
-import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
+import { Device, color, padding, pageWidth } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {

@@ -1,9 +1,11 @@
 import { Dispatch } from 'redux';
+
 import { PageType } from '@Domain/website';
+
+import * as searchActions from '../search/search-actions';
 import { SearchStateName } from '../search/search-reducer';
 import { IPolaState } from '../types';
 import * as actions from './app-actions';
-import * as searchActions from '../search/search-actions';
 
 export const appDispatcher = {
   initialize: () => async (dispatch: Dispatch, getState: () => IPolaState) => {

@@ -2,17 +2,19 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { PageType, urls } from '@Domain/website';
-import { PageSection } from '@Layout/PageSection';
-import { Text, TitleSection } from '@Styles/GlobalStyle.css';
-import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
-import { margin, padding } from '@Styles/theme';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
 import Faq from '@Components/Faq';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { margin, padding } from '@Styles/theme';
 
 const Image = styled.div`
   height: 100%;

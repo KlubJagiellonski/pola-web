@@ -1,15 +1,18 @@
+import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import React from 'react';
 import styled from 'styled-components';
+
 import { Friend } from '@Domain/friends';
 import { urls } from '@Domain/website';
-import { PageSection } from '@Layout/PageSection';
-import { color, Device, fontSize, margin } from '@Styles/theme';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { TitleSection, Text } from '@Styles/GlobalStyle.css';
-import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
-import { AnchorLink } from 'gatsby-plugin-anchor-links';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { PageSection } from '@Layout/PageSection';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin } from '@Styles/theme';
 
 const WrapperContents = styled(PageSection)`
   margin-top: ${margin.normal};

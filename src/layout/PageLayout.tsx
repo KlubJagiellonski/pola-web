@@ -1,22 +1,25 @@
+import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { ConnectedProps, connect } from 'react-redux';
 import styled from 'styled-components';
-import { useStaticQuery, graphql } from 'gatsby';
 
-import { PageHeader } from './PageHeader';
-import PageFooter from './PageFooter';
-import { IPolaState } from '@State/types';
 import { appDispatcher } from '@State/app/app-dispatcher';
-import { ProductModal } from '../search/product-modal';
 import { searchDispatcher } from '@State/search/search-dispatcher';
-import ErrorBoundary from '@Utils/error-boundary';
-import { desktopHeaderHeight, Device, mobileHeaderHeight } from '@Styles/theme';
-import { StateLoader } from './StateLoader';
-import '@Styles/pola-web.css';
-import Download from '@Components/Download';
 import { SearchStateName } from '@State/search/search-reducer';
+import { IPolaState } from '@State/types';
+
+import Download from '@Components/Download';
+import ErrorBoundary from '@Utils/error-boundary';
+
 import { SearchInfoModal } from '../search/form/SearchInfoModal';
+import { ProductModal } from '../search/product-modal';
 import { CustomScrollbarDiv } from './CustomScrollbar';
+import PageFooter from './PageFooter';
+import { PageHeader } from './PageHeader';
+import { StateLoader } from './StateLoader';
+
+import '@Styles/pola-web.css';
+import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => ({

@@ -1,12 +1,12 @@
+import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import React from 'react';
-import styled from 'styled-components';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import styled from 'styled-components';
 
 import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
-import { Device, color, margin, padding, fontSize, width } from '@Styles/theme';
-import { AnchorLink } from 'gatsby-plugin-anchor-links';
+import { Device, color, fontSize, margin, padding, width } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   width: 100%;

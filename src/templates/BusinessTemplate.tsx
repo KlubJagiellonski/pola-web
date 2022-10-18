@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
 import { FluidObject } from 'gatsby-image';
+import React from 'react';
+
 import BusinessElements from '@Components/business/BusinessElements';
 
 export interface IBusinessTemplate {

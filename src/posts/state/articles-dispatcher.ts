@@ -1,6 +1,8 @@
 import { Dispatch } from 'redux';
+
 import { Article } from '@Domain/articles';
 import { IArticleEdge } from '@Domain/articles/article-service';
+
 import { IPolaState } from '../types';
 import * as actions from './articles-actions';
 

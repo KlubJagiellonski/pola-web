@@ -1,10 +1,12 @@
-import Sinon from 'sinon';
-import { expect } from 'chai';
-import { ProductService } from './search-service';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { expect } from 'chai';
+import Sinon from 'sinon';
+
+import { mockAxiosErrorResponse, mockGETRequest, mockProduct } from '@Utils/tests/mocks';
+
 import { ISearchSuccessResponse } from '.';
-import { mockGETRequest, mockAxiosErrorResponse, mockProduct } from '@Utils/tests/mocks';
 import { NetworkError } from '../../services/api-errors';
+import { ProductService } from './search-service';
 
 const mockSearchResult = (): ISearchSuccessResponse => ({
   nextPageToken: 'bcvsag456345345',

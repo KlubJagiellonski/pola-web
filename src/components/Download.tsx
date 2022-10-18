@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { color, fontSize, Device, padding, margin } from '@Styles/theme';
-import { TitleSection } from '@Styles/GlobalStyle.css';
 import { MobileApps } from './MobileApps';
+
+import { TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   display: flex;

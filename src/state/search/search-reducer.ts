@@ -1,9 +1,11 @@
 import { AnyAction, Reducer } from 'redux';
+
+import { IProductData, Product } from '@Domain/products';
+
+import { ErrorHandler } from '../../services/api-errors';
+import { IAction, IActionReducer } from '../types';
 import { actionTypes } from './search-actions';
 import * as actions from './search-actions';
-import { IAction, IActionReducer } from '../types';
-import { IProductData, Product } from '@Domain/products';
-import { ErrorHandler } from '../../services/api-errors';
 
 export interface ISearchResultPage {
   pageIndex: number;

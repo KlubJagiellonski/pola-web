@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { IPartner } from '@Domain/partners';
+
 import { ResponsiveImage } from '../images/ResponsiveImage';
 
 const Tile = styled.div`

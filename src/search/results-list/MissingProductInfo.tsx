@@ -1,13 +1,16 @@
 import React from 'react';
-import { fontSize, padding } from '@Styles/theme';
-import { SecondaryButton } from '@Components/buttons/SecondaryButton';
-import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
-import { openNewTab } from '@Utils/browser';
+import styled from 'styled-components';
+
 import { urls } from '@Domain/website';
+
 import { InfoBox } from '@Components/InfoBox';
 import { Title } from '@Components/Teams.css';
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { openNewTab } from '@Utils/browser';
+
 import { Text } from '@Styles/GlobalStyle.css';
-import styled from 'styled-components';
+import { fontSize, padding } from '@Styles/theme';
 
 const InfoTile = styled.div`
   padding-bottom: ${padding.big};

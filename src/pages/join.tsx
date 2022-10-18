@@ -2,15 +2,17 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '@Layout/PageLayout';
-import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { IPolaState } from '@State/types';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { PageType, urls } from '@Domain/website';
-import { Text, TitleSection } from '@Styles/GlobalStyle.css';
-import { fontSize, margin, padding, Device, lineHeight } from '@Styles/theme';
-import { PageSection } from '@Layout/PageSection';
+import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
+import { IPolaState } from '@State/types';
+
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, fontSize, lineHeight, margin, padding } from '@Styles/theme';
 
 interface ITeamPage {
   location?: Location;

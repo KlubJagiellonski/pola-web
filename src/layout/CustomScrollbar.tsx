@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { color, padding } from '@Styles/theme';
 
 export const CustomScrollbarDiv = styled.div`

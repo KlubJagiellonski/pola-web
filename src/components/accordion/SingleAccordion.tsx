@@ -1,13 +1,14 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-
 import {
   AccordionItem,
-  AccordionItemHeading,
   AccordionItemButton,
+  AccordionItemHeading,
   AccordionItemPanel,
 } from 'react-accessible-accordion';
+import styled, { keyframes } from 'styled-components';
+
 import { ISingleAccordion } from './AccordionList';
+
 import { fontSize } from '@Styles/theme';
 
 const ItemButton = styled(AccordionItemButton)`

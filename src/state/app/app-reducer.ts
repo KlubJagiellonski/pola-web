@@ -1,10 +1,11 @@
 import { AnyAction, Reducer } from 'redux';
 
+import { PageType } from '@Domain/website';
+
+import { AppSettings } from '../app-settings';
+import { IAction, IActionReducer } from '../types';
 import { actionTypes } from './app-actions';
 import * as actions from './app-actions';
-import { IAction, IActionReducer } from '../types';
-import { PageType } from '@Domain/website';
-import { AppSettings } from '../app-settings';
 
 export interface IAppState {
   initialized: boolean;

@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, padding, Device, margin } from '@Styles/theme';
+
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
+
+import { Device, color, margin, padding } from '@Styles/theme';
 
 interface IArticleBlock {
   title: string;

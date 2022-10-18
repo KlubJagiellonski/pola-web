@@ -1,4 +1,5 @@
 import { AxiosError, AxiosRequestConfig } from 'axios';
+
 import { IProductData } from '@Domain/products';
 
 export const mockAxiosErrorResponse = (status: number, statusText: string, data?: any, request?: any): AxiosError => ({

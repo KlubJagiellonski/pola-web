@@ -1,13 +1,15 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { padding, margin, color, fontSize } from '@Styles/theme';
+import { urls } from '@Domain/website';
+
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
-import { WrapperSection, Text, TitleSection } from '@Styles/GlobalStyle.css';
 import { SecondaryButton } from './buttons/SecondaryButton';
 import { ResponsiveImage } from './images/ResponsiveImage';
-import { Link } from 'gatsby';
-import { urls } from '@Domain/website';
+
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: about;

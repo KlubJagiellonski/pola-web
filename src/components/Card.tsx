@@ -1,10 +1,12 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonThemes, ButtonFlavor } from './buttons/Button';
+
+import { ButtonFlavor, ButtonThemes } from './buttons/Button';
+import { SecondaryButton } from './buttons/SecondaryButton';
+
 import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '@Styles/theme';
-import { SecondaryButton } from './buttons/SecondaryButton';
 
 const Wrapper = styled(WrapperSection)`
   margin: 0;

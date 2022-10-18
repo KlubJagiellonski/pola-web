@@ -1,11 +1,15 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { PageSection } from '@Layout/PageSection';
-import { ProductCounter } from './ProductCounter';
-import { Link } from 'gatsby';
-import { fontSize, lineHeight, margin } from '@Styles/theme';
-import { SearchStateName } from '@State/search/search-reducer';
+
 import { PageType } from '@Domain/website';
+import { SearchStateName } from '@State/search/search-reducer';
+
+import { PageSection } from '@Layout/PageSection';
+
+import { ProductCounter } from './ProductCounter';
+
+import { fontSize, lineHeight, margin } from '@Styles/theme';
 
 const Header = styled.header`
   font-size: ${fontSize.big};

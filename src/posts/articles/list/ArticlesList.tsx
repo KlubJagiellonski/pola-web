@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ArticleBlock } from './ArticleBlock';
-import { Device, margin, padding } from '@Styles/theme';
+
 import { IArticlesTwoColumns } from '@Utils/articles';
+
+import { ArticleBlock } from './ArticleBlock';
+
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   @media ${Device.mobile} {

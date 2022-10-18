@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-
-import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
-import { TagButton } from '@Components/buttons/TagButton';
-import { ArrayParam, useQueryParams, withDefault } from 'use-query-params';
-import { tagUrl } from './url-service';
 import { Link } from 'gatsby';
+import React, { useEffect, useState } from 'react';
+import { ArrayParam, useQueryParams, withDefault } from 'use-query-params';
+
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+import { TagButton } from '@Components/buttons/TagButton';
+
+import { tagUrl } from './url-service';
 
 interface ITag {
   label?: string;

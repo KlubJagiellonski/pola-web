@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { Product } from '@Domain/products';
-import { padding, fontSize, color } from '@Styles/theme';
-import { ScoreBar } from '@Components/ScoreBar';
-import { Field, getPropertiesFromManufacturer, PolishPropertyName, ValueCheckboxField } from './PolishValues';
 import { AppSettings } from '@State/app-settings';
+
+import { ScoreBar } from '@Components/ScoreBar';
+
 import { RussiaInfoBox } from '../RussiaInfoBox';
+import { Field, PolishPropertyName, ValueCheckboxField, getPropertiesFromManufacturer } from './PolishValues';
+
+import { color, fontSize, padding } from '@Styles/theme';
 
 const DetailsContainer = styled.div`
   padding: ${padding.normal};

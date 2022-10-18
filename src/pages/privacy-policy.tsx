@@ -1,13 +1,16 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
 import { PageType, urls } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
-import styled from 'styled-components';
+
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
-import { Link } from 'gatsby';
+
 import { margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`

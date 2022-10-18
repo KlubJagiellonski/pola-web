@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { margin, Device } from '@Styles/theme';
+import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { Article } from '@Domain/articles';
-import ArticlesList from './ArticlesList';
-import '@Components/Pagination.css';
-import LatestArticle from './LatestArticle';
+import styled from 'styled-components';
 import { DecodedValueMap, SetQuery } from 'use-query-params';
+
+import { Article } from '@Domain/articles';
+
+import '@Components/Pagination.css';
 import { IArticlesTwoColumns, getArticlesTwoColumns } from '@Utils/articles';
+
 import { ArticleBlock } from './ArticleBlock';
+import ArticlesList from './ArticlesList';
+import LatestArticle from './LatestArticle';
+
+import { Device, margin } from '@Styles/theme';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};
