@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { PageType } from 'app/website';
+import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
-import { PageType } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import SideInformations from '@Components/SideInformations';
@@ -64,7 +63,7 @@ const SecondColumn = styled.div`
 `;
 
 const ArticlePage = (props: IArticlePage) => {
-  const { location, article, author, slug, facebook, articles, friends } = props;
+  const { article, articles, friends } = props;
   const title = ((article || {}).frontmatter || {}).title;
   const subTitle = ((article || {}).frontmatter || {}).subTitle;
   const category = ((article || {}).frontmatter || {}).category;
@@ -72,17 +71,8 @@ const ArticlePage = (props: IArticlePage) => {
   const html = (article || {}).html;
   const fluid = ((article || {}).frontmatter || {}).cover.childImageSharp.fluid;
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.ARTICLE));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.ARTICLE}>
       <SEOMetadata pageTitle={title} image={fluid.src} />
       <PageSection>
         <Wrapper>

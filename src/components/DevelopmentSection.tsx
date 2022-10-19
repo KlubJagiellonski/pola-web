@@ -1,8 +1,7 @@
+import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
-
-import { urls } from '@Domain/website';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';

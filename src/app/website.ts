@@ -1,4 +1,4 @@
-import { Dictionary } from './generic';
+import { Dictionary } from './generics';
 
 export enum PageType {
   HOME = 'home',

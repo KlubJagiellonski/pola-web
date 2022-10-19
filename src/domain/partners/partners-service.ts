@@ -1,5 +1,5 @@
 import { IPartner } from '.';
-import { urls } from '../website';
+import { urls } from '../../app/website';
 
 const partners: IPartner[] = [
   {

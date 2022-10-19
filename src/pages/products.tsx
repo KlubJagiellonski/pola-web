@@ -1,9 +1,8 @@
+import { PageType, urls } from 'app/website';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { EAN, IProductData } from '@Domain/products';
-import { PageType, urls } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import Placeholder from '@Components/Placeholder';
@@ -31,16 +30,7 @@ interface IProductsPage {
 }
 
 const ProductsPage = (props: IProductsPage) => {
-  const { location, searchState, searchResults, onLoadMore } = props;
-
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.PRODUCTS));
-    }
-  }, []);
+  const { searchState, searchResults, onLoadMore } = props;
 
   if (!searchResults) {
     navigateTo(urls.pola.home());
@@ -48,7 +38,7 @@ const ProductsPage = (props: IProductsPage) => {
   }
 
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.PRODUCTS}>
       <SEOMetadata pageTitle="Znalezione produkty" />
       <Placeholder text="Lista produktów" />
       <DynamicProductResults

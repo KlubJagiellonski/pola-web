@@ -1,9 +1,8 @@
+import { PageType, urls } from 'app/website';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageType, urls } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
@@ -45,18 +44,8 @@ const Info = styled(Text)`
 `;
 
 const TeamPage = (props: ITeamPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.TEAM));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.TEAM}>
       <Wrapper>
         <SEOMetadata pageTitle="Dołącz do zespołu" />
         <PageSection>

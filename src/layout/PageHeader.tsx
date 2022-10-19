@@ -1,7 +1,6 @@
+import { ExternalLinkData, PageLinkData, PageType, pageLinks } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
-
-import { ExternalLinkData, PageLinkData, PageType, pageLinks } from '@Domain/website';
 
 import { HamburgerMenu } from './nav/HamburgerMenu';
 import { ExtNavItem, NavItem } from './nav/NavItem';

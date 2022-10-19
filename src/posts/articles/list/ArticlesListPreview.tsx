@@ -1,9 +1,9 @@
+import { urls } from 'app/website';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
 import { ArticleData } from '@Domain/articles';
-import { urls } from '@Domain/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { PrimaryButton } from '@Components/buttons/PrimaryButton';

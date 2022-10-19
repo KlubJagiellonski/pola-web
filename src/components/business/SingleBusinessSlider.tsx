@@ -1,8 +1,7 @@
+import { urls } from 'app/website';
 import Img, { FluidObject } from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
-
-import { urls } from '@Domain/website';
 
 import { SliderElement } from '../SliderComponent';
 

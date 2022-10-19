@@ -1,4 +1,4 @@
-import { Dictionary } from '../generic';
+import { Dictionary } from '../../app/generics';
 
 export type EAN = string;
 export interface ICompany {

@@ -1,8 +1,8 @@
+import { urls } from 'app/website';
 import React from 'react';
 import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { urls } from '@Domain/website';
 import { IPolaState } from '@State/types';
 
 import { Facebook, Instagram, Twitter } from '@Components/social-media/Icons';

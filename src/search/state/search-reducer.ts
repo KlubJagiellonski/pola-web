@@ -1,10 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { IAction, IActionReducer } from 'app/state';
 import { AnyAction, Reducer } from 'redux';
 
 import { IProductData, Product } from '@Domain/products';
-import { IAction, IActionReducer } from '@State/types';
 
-import { ErrorHandler } from '../../services/api-errors';
+import { ErrorHandler } from '../../app/api-errors';
 import { actionTypes } from './search-actions';
 import * as actions from './search-actions';
 
@@ -57,22 +56,6 @@ export type SearchState =
 const initialState: SearchState = {
   stateName: SearchStateName.INITIAL,
 };
-
-// const searchSlice = createSlice({
-//   name: 'search',
-//   initialState,
-//   reducers: {
-//     invokeSearch: (state, action) => {
-
-//         return {
-//           stateName: SearchStateName.LOADING,
-//           phrase: ''
-//         };
-
-//       }
-//     }
-//   }
-// });
 
 const reducers: IActionReducer<SearchState> = {
   [actionTypes.INVOKE_SEARCH]: (state: SearchState = initialState, action: ReturnType<typeof actions.InvokeSearch>) => {

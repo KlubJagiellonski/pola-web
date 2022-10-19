@@ -1,13 +1,12 @@
+import { PageType } from 'app/website';
 import { getTagsList } from 'posts/services/article-service';
 import React, { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { useQueryParamString } from 'react-use-query-param-string';
 import styled from 'styled-components';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
 import { ArticleData } from '@Domain/articles';
-import { PageType } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import '@Components/Pagination.css';
@@ -57,7 +56,6 @@ interface IQuery {
 
 const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
   const [tag, setTag] = useState<string[]>([]);
-  const dispatch = useDispatch();
   const [query, setQuery] = useQueryParams<IQuery>({
     tags: withDefault(ArrayParam, ['a', 'b', 'c']),
     id: NumberParam,
@@ -66,13 +64,6 @@ const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
   //   tags: withDefault(ArrayParam, ['a', 'b', 'c']),
   //   id: NumberParam,
   // });
-
-  useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.NEWS));
-    }
-  }, []);
 
   useEffect(() => {
     if (articles) {
@@ -84,7 +75,7 @@ const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
   }, [articles, query]);
 
   return (
-    <PageLayout>
+    <PageLayout location={location} page={PageType.NEWS}>
       <SEOMetadata pageTitle="Aktualności" />
       <Placeholder text="Aktualności" />
       <PageSection>

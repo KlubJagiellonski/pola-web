@@ -1,10 +1,9 @@
+import { PageType, urls } from 'app/website';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { PartnerService } from '@Domain/partners/partners-service';
-import { PageType, urls } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import Placeholder from '@Components/Placeholder';
@@ -69,18 +68,8 @@ interface IPartnersPage {
 }
 
 const PartnersPage = (props: IPartnersPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.PARTNERS));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.PARTNERS}>
       <SEOMetadata pageTitle="Partnerzy" />
       <Placeholder text="Partner aplikacji Pola" />
       <PageSection>

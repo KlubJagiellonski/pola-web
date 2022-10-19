@@ -1,10 +1,9 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { urls } from 'app/website';
 import { Link } from 'gatsby';
 import React, { createRef } from 'react';
 import styled from 'styled-components';
-
-import { urls } from '@Domain/website';
 
 import { classNames } from '@Utils/class-names';
 

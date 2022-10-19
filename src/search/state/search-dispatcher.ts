@@ -5,7 +5,7 @@ import { IPolaState } from '@State/types';
 
 import { isNotEmpty } from '@Utils/strings';
 
-import { EmptyResponseDataError, ErrorHandler, ProductNotFoundError } from '../../services/api-errors';
+import { EmptyResponseDataError, ErrorHandler, ProductNotFoundError } from '../../app/api-errors';
 import { ProductEANService } from '../services/ean-service';
 import { ProductService } from '../services/search-service';
 import { ProductSelectors } from './product-selectors';

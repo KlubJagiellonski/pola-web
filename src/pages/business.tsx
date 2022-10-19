@@ -1,9 +1,8 @@
+import { PageType, urls } from 'app/website';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageType, urls } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
@@ -45,18 +44,8 @@ interface IBusinessPage {
 }
 
 const BusinessPage = (props: IBusinessPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.BUSINESS));
-    }
-  }, []);
-
   return (
-    <PageLayout styles={{ marginTop: padding.big }}>
+    <PageLayout location={props.location} page={PageType.BUSINESS} styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="Oferta Biznesowa" />
       <PageSection>
         <Wrapper>

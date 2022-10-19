@@ -1,8 +1,8 @@
+import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
 
 import { Product } from '@Domain/products';
-import { urls } from '@Domain/website';
 
 import { MobileApps } from '@Components/MobileApps';
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
@@ -76,8 +76,7 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
           <span>Posiadasz aktualne dane na temat tego produktu?</span>
         </ProductModalAction>
         <ProductModalAction
-          theme={{ backgroundColor: color.background.white, buttonTheme: ButtonThemes[ButtonFlavor.RED] }}
-        >
+          theme={{ backgroundColor: color.background.white, buttonTheme: ButtonThemes[ButtonFlavor.RED] }}>
           <AppDownload>
             <p>Zabierz Polę na zakupy! Skanuj kody w aplikacji:</p>
             <MobileApps size={64} />

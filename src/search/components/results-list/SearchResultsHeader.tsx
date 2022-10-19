@@ -1,8 +1,8 @@
+import { PageType } from 'app/website';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { PageType } from '@Domain/website';
 import { SearchStateName } from '@State/search/search-reducer';
 
 import { PageSection } from '@Layout/PageSection';

@@ -1,9 +1,9 @@
+import { urls } from 'app/website';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
 import { FriendData } from '@Domain/friends';
-import { urls } from '@Domain/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';

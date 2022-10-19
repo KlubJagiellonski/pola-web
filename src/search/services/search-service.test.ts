@@ -6,7 +6,7 @@ import { ISearchSuccessResponse } from '@Domain/products';
 
 import { mockAxiosErrorResponse, mockGETRequest, mockProduct } from '@Utils/tests/mocks';
 
-import { NetworkError } from '../../services/api-errors';
+import { NetworkError } from '../../app/api-errors';
 import { ProductService } from './search-service';
 
 const mockSearchResult = (): ISearchSuccessResponse => ({

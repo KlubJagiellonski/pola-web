@@ -1,10 +1,10 @@
+import { AppSettings } from 'app/app-settings';
 import axios from 'axios';
 
-import { AppSettings } from '@State/app-settings';
+import { EAN, IProductEAN } from '@Domain/products';
 
-import { EAN, IProductEAN } from '.';
-import { ApiAdapter } from '../../services/api-adapter';
-import { EmptyResponseDataError, FetchError } from '../../services/api-errors';
+import { ApiAdapter } from '../../app/api-adapter';
+import { EmptyResponseDataError, FetchError } from '../../app/api-errors';
 
 export interface IProductEANParams {
   code: EAN;

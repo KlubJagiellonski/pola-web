@@ -1,8 +1,8 @@
+import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
 
 import { FriendData } from '@Domain/friends';
-import { urls } from '@Domain/website';
 
 import { SliderContainer, SliderElement } from '@Components/SliderComponent';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';

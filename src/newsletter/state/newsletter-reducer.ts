@@ -1,6 +1,5 @@
+import { IAction, IActionReducer } from 'app/state';
 import { AnyAction, Reducer } from 'redux';
-
-import { IAction, IActionReducer } from '@State/types';
 
 import { Follower, NewsletterApiResponseContext } from '..';
 import { actionTypes } from './newsletter-actions';

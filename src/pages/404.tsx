@@ -1,8 +1,5 @@
+import { PageType } from 'app/website';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
-import { PageType } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 
 import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
 import { PageLayout } from '@Layout/PageLayout';
@@ -13,18 +10,8 @@ interface INotFoundPage {
 }
 
 const NotFoundPage = (props: INotFoundPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.ERROR_404));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.ERROR_404}>
       <SEOMetadata pageTitle="404: Not found" />
       <DevelopmentPlaceholder text="Strona nie istnieje" />
     </PageLayout>

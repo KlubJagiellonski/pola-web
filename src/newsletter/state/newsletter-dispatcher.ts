@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { IPolaState } from '@State/types';
 
 import { Follower } from '..';
-import { SubscriptionError } from '../../services/api-errors';
+import { SubscriptionError } from '../../app/api-errors';
 import { NewsletterService } from '../services/newsletter-service';
 import * as actions from './newsletter-actions';
 

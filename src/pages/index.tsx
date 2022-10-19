@@ -1,13 +1,12 @@
+import { appDispatcher } from 'app/state/app-dispatcher';
+import { PageType, urls } from 'app/website';
 import React from 'react';
-import { ConnectedProps, connect, useDispatch } from 'react-redux';
+import { ConnectedProps, connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
-import { PageType, urls } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
-import { appDispatcher } from '@State/app/app-dispatcher';
 import { IPolaState } from '@State/types';
 
 import About from '@Components/About';
@@ -146,23 +145,14 @@ type IHomePage = ReduxProps & {
 };
 
 const HomePage = (props: IHomePage) => {
-  const { location, searchState, searchResults, subscribeEmail, newsletterStatus } = props;
-  const dispatch = useDispatch();
+  const { searchState, searchResults } = props;
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
 
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.HOME));
-      props.clearResults();
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.HOME}>
       <SEOMetadata pageTitle="Strona główna" />
       <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>

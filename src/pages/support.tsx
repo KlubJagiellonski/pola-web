@@ -1,8 +1,7 @@
+import { PageType } from 'app/website';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-import { PageType } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import Placeholder from '@Components/Placeholder';
@@ -14,18 +13,8 @@ interface ISupportPage {
 }
 
 const SupportPage = (props: ISupportPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.SUPPORT));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.SUPPORT}>
       <SEOMetadata pageTitle="Wesprzyj aplikację" />
       <Placeholder text="Strona w budowie" />
     </PageLayout>

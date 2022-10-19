@@ -1,7 +1,6 @@
+import { urls } from 'app/website';
 import { stringify } from 'query-string';
 import { ArrayParam, encodeQueryParams, withDefault } from 'use-query-params';
-
-import { urls } from '@Domain/website';
 
 export function tagUrl(label: string, query: any) {
   let tags = query.tags.slice();

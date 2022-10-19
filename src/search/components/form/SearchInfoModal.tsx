@@ -1,7 +1,6 @@
+import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
-
-import { urls } from '@Domain/website';
 
 import { Modal } from '@Layout/modal/Modal';
 import { ClickOutside } from '@Utils/click-outside';

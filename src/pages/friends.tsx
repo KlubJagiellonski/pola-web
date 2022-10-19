@@ -1,10 +1,9 @@
+import { PageType, urls } from 'app/website';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { FriendData } from '@Domain/friends';
-import { PageType, urls } from '@Domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
 
 import Card from '@Components/Card';
@@ -78,18 +77,8 @@ interface IFriendsPage {
 }
 
 const FriendsPage = (props: IFriendsPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.FRIENDS));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.FRIENDS}>
       <SEOMetadata pageTitle="Klub przyjaciół Poli" />
       <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>

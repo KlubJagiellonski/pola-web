@@ -1,7 +1,6 @@
+import { AppSettings } from 'app/app-settings';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-
-import { AppSettings } from '@State/app-settings';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';

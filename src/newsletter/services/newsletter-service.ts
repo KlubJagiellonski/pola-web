@@ -1,10 +1,9 @@
+import { AppSettings } from 'app/app-settings';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-import { AppSettings } from '@State/app-settings';
-
 import { Follower, NewsletterApiResponseContext } from '..';
-import { ApiAdapter } from '../../services/api-adapter';
-import { FetchError, SubscriptionError } from '../../services/api-errors';
+import { ApiAdapter } from '../../app/api-adapter';
+import { FetchError, SubscriptionError } from '../../app/api-errors';
 
 const API_NAME = 'Newsletter API';
 

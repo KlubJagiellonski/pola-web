@@ -1,9 +1,11 @@
+import { appDispatcher } from 'app/state/app-dispatcher';
+import { loadBrowserLocation, selectActivePage } from 'app/state/app-reducer';
+import { PageType } from 'app/website';
 import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
-import { ConnectedProps, connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { appDispatcher } from '@State/app/app-dispatcher';
 import { IPolaState } from '@State/types';
 
 import Download from '@Components/Download';
@@ -42,6 +44,9 @@ type ILayoutStyles = {
 };
 
 type IPageLayout = ReduxProps & {
+  page: PageType;
+  location?: Location;
+
   styles?: ILayoutStyles;
   children: JSX.Element | JSX.Element[];
 };
@@ -68,6 +73,8 @@ const PageContent = styled.main<ILayoutStyles>`
 `;
 
 const Layout: React.FC<IPageLayout> = ({
+  location,
+  page,
   activePage,
   isMenuExpanded,
   isSearchInfoVisible,
@@ -87,6 +94,15 @@ const Layout: React.FC<IPageLayout> = ({
       }
     }
   `);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (location) {
+      dispatch(loadBrowserLocation(location));
+      dispatch(selectActivePage(page));
+    }
+  }, []);
 
   return (
     <ErrorBoundary scope="page-layout">

@@ -1,8 +1,7 @@
+import { AppSettings } from 'app/app-settings';
+import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
-
-import { urls } from '@Domain/website';
-import { AppSettings } from '@State/app-settings';
 
 import { Device, padding, px } from '@Styles/theme';
 

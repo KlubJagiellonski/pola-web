@@ -1,8 +1,8 @@
+import { appDispatcher } from 'app/state/app-dispatcher';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { IFriendNode } from '@Domain/friends';
-import { appDispatcher } from '@State/app/app-dispatcher';
 import { IPolaState } from '@State/types';
 
 import { FriendsService } from '../friends/services/friend-service';

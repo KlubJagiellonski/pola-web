@@ -1,8 +1,8 @@
+import { AppSettings } from 'app/app-settings';
 import React from 'react';
 import styled from 'styled-components';
 
 import { Product } from '@Domain/products';
-import { AppSettings } from '@State/app-settings';
 
 import { ScoreBar } from '@Components/ScoreBar';
 
