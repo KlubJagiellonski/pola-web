@@ -8,6 +8,10 @@ import { SearchStateName } from '@State/search/search-reducer';
 import { PageSection } from '@Layout/PageSection';
 
 import { ProductCounter } from './ProductCounter';
+import { Link } from 'gatsby';
+import { Device, fontSize, lineHeight, margin, padding } from '../../styles/theme';
+import { SearchStateName } from '../../state/search/search-reducer';
+import { PageType } from '../../domain/website';
 
 import { fontSize, lineHeight, margin } from '@Styles/theme';
 
@@ -16,6 +20,10 @@ const Header = styled.header`
   font-weight: bold;
   line-height: ${lineHeight.normal};
   margin: ${margin.normal} 0 ${margin.small} 0;
+
+  @media ${Device.mobile} {
+    padding-top: ${padding.normal};
+  }
 `;
 
 interface ISearchResultsHeader {

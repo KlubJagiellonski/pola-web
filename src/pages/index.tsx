@@ -8,6 +8,32 @@ import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
 import { IPolaState } from '@State/types';
+import { PageLayout } from '../layout/PageLayout';
+import SEOMetadata from '../utils/browser/SEOMetadata';
+import { SearchForm } from '../search/form/SearchForm';
+import { PageSection } from '../layout/PageSection';
+import { Device, pageWidth, padding, color, margin } from '../styles/theme';
+import { IPolaState } from '../state/types';
+import { searchDispatcher } from '../state/search/search-dispatcher';
+import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
+import { ResponsiveImage } from '../components/images/ResponsiveImage';
+import { PageType, urls } from '../domain/website';
+import { Article } from '../domain/articles';
+import { reduceToFlatProductsList } from '../domain/products/search-service';
+import { SearchStateName } from '../state/search/search-reducer';
+import { FirstPageResults } from '../search/results-list/FirstPageResults';
+import { EAN, ISearchResults } from '../domain/products';
+import { Friend } from '../domain/friends';
+import { appDispatcher } from '../state/app/app-dispatcher';
+import DevelopmentSection from '../components/DevelopmentSection';
+import SocialMedia from '../components/social-media/SocialMedia';
+import Friends from '../components/friends/Friends';
+import Teams from '../components/Teams';
+import About from '../components/About';
+import TeamsFriend from '../components/TeamsFriend';
+import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
+import { InfoBox } from '../components/InfoBox';
+import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
 import About from '@Components/About';
 import DevelopmentSection from '@Components/DevelopmentSection';
@@ -47,6 +73,7 @@ const connector = connect(
             }
           : undefined,
       newsletterStatus: newsletter.status,
+      follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
       articles: articles.data,
       friends: friends.data,
     };
@@ -57,7 +84,8 @@ const connector = connect(
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
     selectProduct: searchDispatcher.selectProduct,
-    subscribeEmail: newsletterDispatcher.subscribeEmail,
+    subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
+    clearForm: newsletterDispatcher.clearSubscriptionFormData,
   }
 );
 
@@ -96,6 +124,15 @@ const Background = styled.div<{ img?: string }>`
 const WrapperContents = styled(PageSection)`
   @media ${Device.mobile} {
     padding: 0;
+  }
+`;
+
+const WrapperResult = styled(PageSection)`
+  @media ${Device.mobile} {
+    position: realtive;
+    top: -18em;
+    background-color: ${color.background.white};
+    margin-left: 5px;
   }
 `;
 
@@ -140,6 +177,7 @@ type IHomePage = ReduxProps & {
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;
   invokeLoadMore: () => void;
+  subscribeEmail: (email: string, name?: string | undefined) => void;
   clearResults: () => void;
   selectProduct: (code: EAN) => void;
 };
@@ -151,6 +189,8 @@ const HomePage = (props: IHomePage) => {
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
 
+  const handleNewsletter = () => {};
+
   return (
     <PageLayout location={props.location} page={PageType.HOME}>
       <SEOMetadata pageTitle="Strona główna" />
@@ -158,7 +198,6 @@ const HomePage = (props: IHomePage) => {
         <Background>
           <ResponsiveImage imageSrc={'background2.jpg'} />
         </Background>
-
         <Content>
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
@@ -166,9 +205,21 @@ const HomePage = (props: IHomePage) => {
             onEmptyInput={props.clearResults}
             isLoading={isLoading}
           />
+          <div
+            className="newsletter-container"
+            style={{ display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', margin: '1rem' }}>
+            <SubscribeDialog
+              status={newsletterStatus}
+              follower={follower}
+              styles={{ spaceBottom: margin.small }}
+              onSubmit={subscribeEmail}
+              onClear={clearForm}
+              stopExpanded={!!searchResults}
+            />
+          </div>
         </Content>
       </PageSection>
-      <PageSection>
+      <WrapperResult>
         {(isLoaded || isLoading) && (
           <SearchResultsHeader
             phrase={searchResults?.phrase}
@@ -192,7 +243,7 @@ const HomePage = (props: IHomePage) => {
             <p>Spróbuj wprowadzić inną frazę...</p>
           </InfoBox>
         )}
-      </PageSection>
+      </WrapperResult>
       <WrapperContents>
         <Wrapper>
           <ArticlesListPreview articles={freshArticles} />

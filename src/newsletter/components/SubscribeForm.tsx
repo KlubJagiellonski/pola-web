@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { SubscriptionStatus } from '@State/newsletter-reducer';
@@ -8,6 +9,9 @@ import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { ErrorMessage, SuccessMessage } from '@Components/form-input/FormToast';
 import { validateEmail } from '@Utils/strings';
 
+import { ButtonThemes } from '../../components/buttons/Button';
+import { SecondaryButton } from '../../components/buttons/SecondaryButton';
+import { validateEmail } from '../../utils/strings';
 import { SubscribeInput } from './SubscribeInput';
 
 import { color, fontSize, padding } from '@Styles/theme';
@@ -31,15 +35,14 @@ const Form = styled.div`
 `;
 
 interface ISubscribeForm {
-  status: SubscriptionStatus;
   styles?: INewsletterFormStyles;
   onSubmit: (email: string, name?: string) => void;
 }
 
-export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubmit }) => {
-  const [name, setName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [emailErrorMessage, setEmailErrorMessage] = useState<string>();
+export const SubscribeForm: React.FC<ISubscribeForm> = ({ styles, onSubmit }) => {
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState<string | undefined>();
 
   const updateName = (value: string) => setName(value);
   const updateEmail = (value: string) => setEmail(value);
@@ -52,9 +55,16 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubm
     }
   };
 
+  useEffect(() => {
+    return () => {
+      setName('');
+      setEmail('');
+      setEmailErrorMessage(undefined);
+    };
+  }, []);
+
   return (
     <Container styles={styles}>
-      <h2>Zapisz się do newslettera Poli</h2>
       <Form>
         <SubscribeInput
           name="follower-name"
@@ -72,12 +82,6 @@ export const SubscribeForm: React.FC<ISubscribeForm> = ({ status, styles, onSubm
           onChange={updateEmail}
         />
         <SecondaryButton label="Wyślij" onClick={handleSubscribe} styles={ButtonThemes.Red} />
-        {status === 'subscribed' && (
-          <SuccessMessage>Twój email został dopisany do bazy newslettera Poli!</SuccessMessage>
-        )}
-        {status === 'failure' && (
-          <ErrorMessage>Wystąpił błąd podczas dopisywania Twojego emaila do newslettera Poli.</ErrorMessage>
-        )}
       </Form>
     </Container>
   );

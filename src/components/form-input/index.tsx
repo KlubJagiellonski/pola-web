@@ -20,7 +20,7 @@ const StyledInput = styled.input`
 `;
 
 interface IFormInput {
-  value?: string;
+  value: string;
   type?: 'text' | 'email';
   name?: string;
   placeholder?: string;

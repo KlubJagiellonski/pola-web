@@ -59,7 +59,7 @@ const ModalOverlay = styled.div`
 `;
 
 interface IModal {
-  title: string;
+  title?: string;
   styles?: {
     height?: string;
   };
@@ -70,7 +70,7 @@ export const Modal: React.FC<IModal> = ({ title, onClose, children, styles }) =>
   <ModalLayout>
     <ModalOverlay />
     <ModalContainer height={styles?.height}>
-      <ModalHeader title={title} onClose={onClose} />
+      <ModalHeader title={title || ''} onClose={onClose} />
       <ModalContent>{children}</ModalContent>
     </ModalContainer>
   </ModalLayout>
