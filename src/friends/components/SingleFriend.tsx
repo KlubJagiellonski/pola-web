@@ -2,7 +2,7 @@ import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import React from 'react';
 import styled from 'styled-components';
 
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 import { urls } from '@Domain/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
@@ -98,7 +98,7 @@ const ButtonRed = styled(Button)`
   border-color: ${color.background.red};
 `;
 
-const SingleFriend: React.FC<FFriend> = ({ name, description, image, page, slug }) => {
+const SingleFriend: React.FC<FriendData> = ({ name, description, image, page, slug }) => {
   return (
     <WrapperContents>
       <ColumnsLayout>

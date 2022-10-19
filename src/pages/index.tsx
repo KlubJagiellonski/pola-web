@@ -3,7 +3,7 @@ import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { ArticleData } from '@Domain/articles';
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
 import { PageType, urls } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
@@ -136,7 +136,7 @@ type IHomePage = ReduxProps & {
   searchResults?: ISearchResults;
   articles?: ArticleData[];
   activeTags: string[];
-  friends?: FFriend[];
+  friends?: FriendData[];
 
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;

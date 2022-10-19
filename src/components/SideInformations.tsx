@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ArticleData } from '@Domain/articles';
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
@@ -43,12 +43,12 @@ const SecondSection = styled.div`
 interface ISideInformations {
   actualArticleId: string;
   articles: ArticleData[];
-  friends?: FFriend[];
+  friends?: FriendData[];
 }
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
   const [articlesPreview, setArticlesPreview] = useState<ArticleData[]>([]);
-  const [selectedFriend, setSelectedFriend] = useState<FFriend>();
+  const [selectedFriend, setSelectedFriend] = useState<FriendData>();
 
   useEffect(() => {
     if (articles) {

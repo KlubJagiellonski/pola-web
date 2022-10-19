@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import friendsSlice from '../friends/state/friends-reducer';
 import { newsletterReducer } from '../newsletter/state/newsletter-reducer';
-import { articlesReducer } from '../posts/state/articles-reducer';
+import articlesReducer from '../posts/state/articles-reducer';
 import { searchReducer } from '../search/state/search-reducer';
 import { IAppState, appReducer } from './app/app-reducer';
 import { IPolaState } from './types';
@@ -23,11 +23,7 @@ const store = configureStore({
         state.initialized = true;
       });
     }),
-    articles: createReducer({}, (builder) => {
-      builder.addCase('X', (state: IAppState, action) => {
-        state.initialized = true;
-      });
-    }),
+    articles: articlesReducer,
     friends: friendsSlice,
     // newsletter: newsletterReducer,
     // articles: articlesReducer,

@@ -41,7 +41,7 @@ exports.createPages = async function ({ graphql, actions }) {
     `
   );
   if (result.errors) {
-    console.log(result.errors);
+    console.error(result.errors);
     throw new Error('Unable to fetch pages');
   }
 

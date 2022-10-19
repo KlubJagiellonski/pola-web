@@ -7,14 +7,14 @@ import { IPolaState } from '@State/types';
 
 import { FriendsService } from '../friends/services/friend-service';
 import { friendsDispatcher } from '../friends/state/friends-dispatcher';
-import { ArticleService, IArticleEdge } from '../posts/services/article-service';
+import { ArticleService, IArticleNode } from '../posts/services/article-service';
 import { articlesDispatcher } from '../posts/state/articles-dispatcher';
 
 interface IStateLoader {
   isArticlesLoaded?: boolean;
   isFriendsLoaded?: boolean;
   initApp?: () => void;
-  loadArticles?: (edges: IArticleEdge[]) => void;
+  loadArticles?: (edges: IArticleNode[]) => void;
   loadFriends?: (node: IFriendNode[]) => void;
 }
 
@@ -36,10 +36,10 @@ const Loader = (props: IStateLoader) => {
   }
 
   const queryResult = ArticleService.getAll();
-  if (!props.isArticlesLoaded && queryResult?.allMarkdownRemark?.edges && props.loadArticles) {
-    const data = queryResult.allMarkdownRemark.edges;
-    data.sort((a: IArticleEdge, b: IArticleEdge) => {
-      return Date.parse(b.node.fields.prefix) - Date.parse(a.node.fields.prefix);
+  if (!props.isArticlesLoaded && queryResult?.allMarkdownRemark?.nodes && props.loadArticles) {
+    const data = queryResult.allMarkdownRemark.nodes;
+    data.sort((a: IArticleNode, b: IArticleNode) => {
+      return Date.parse(b.fields.prefix) - Date.parse(a.fields.prefix);
     });
     props.loadArticles(data);
   }

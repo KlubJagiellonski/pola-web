@@ -1,37 +1,26 @@
-import { AnyAction, Reducer } from 'redux';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IArticle } from '@Domain/articles';
-
-import { IAction, IActionReducer } from '../types';
-import { actionTypes } from './articles-actions';
-import * as actions from './articles-actions';
+import { ArticleData } from '@Domain/articles';
 
 export interface IArticlesState {
   initialized: boolean;
-  data?: IArticle[];
+  data?: ArticleData[];
 }
 
 const initialState: IArticlesState = {
   initialized: false,
 };
 
-const reducers: IActionReducer<IArticlesState> = {
-  [actionTypes.LOAD_ARTICLES]: (
-    state: IArticlesState = initialState,
-    action: ReturnType<typeof actions.LoadArticles>
-  ) => {
-    return {
-      ...state,
-      initialized: true,
-      data: action.payload.articles,
-    };
+const articlesSlice = createSlice({
+  name: 'articles',
+  initialState,
+  reducers: {
+    loadArticles: (state, action) => {
+      state.initialized = true;
+      state.data = action.payload;
+    },
   },
-};
+});
 
-export const articlesReducer: Reducer<IArticlesState, AnyAction> = (
-  state: IArticlesState = initialState,
-  action: IAction
-) => {
-  const reducer: any = reducers[action.type];
-  return reducer ? reducer(state, action) : state;
-};
+export const { loadArticles } = articlesSlice.actions;
+export default articlesSlice.reducer;

@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 
 export const FriendsService = {
   getAll: () =>
@@ -24,11 +24,11 @@ export const FriendsService = {
     ),
 };
 
-export function getRandomFriend(friends: FFriend[]) {
+export function getRandomFriend(friends: FriendData[]) {
   const randomNumber = Math.floor(Math.random() * friends.length);
   return friends[randomNumber];
 }
 
-export function getFriendBySlug(slug: string, friends: FFriend[]) {
+export function getFriendBySlug(slug: string, friends: FriendData[]) {
   return friends.find((friend) => friend.slug === slug);
 }

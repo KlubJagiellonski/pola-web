@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 
 import Friends from './Friends';
 import SingleFriend from './SingleFriend';
@@ -25,14 +25,14 @@ const Wrapper = styled.div`
   }
 `;
 interface IFriendsSection {
-  friends?: FFriend[];
+  friends?: FriendData[];
 }
 
 const FriendsSection: React.FC<IFriendsSection> = ({ friends }) => {
   const [query] = useQueryParams({
     value: StringParam,
   });
-  const [friend, setFriend] = useState<FFriend>();
+  const [friend, setFriend] = useState<FriendData>();
 
   useEffect(() => {
     if (friends && query.value) {

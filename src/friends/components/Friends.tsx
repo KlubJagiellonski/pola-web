@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 import { urls } from '@Domain/website';
 
 import { SliderContainer, SliderElement } from '@Components/SliderComponent';
@@ -34,7 +34,7 @@ const Element = styled.div`
 `;
 
 interface IFriends {
-  friends?: FFriend[];
+  friends?: FriendData[];
   rows?: number;
 }
 

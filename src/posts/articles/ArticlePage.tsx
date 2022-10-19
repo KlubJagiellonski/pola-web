@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { ArticleData } from '@Domain/articles';
-import { FFriend } from '@Domain/friends';
+import { FriendData } from '@Domain/friends';
 import { PageType } from '@Domain/website';
 import { LoadBrowserLocation, SelectActivePage } from '@State/app/app-actions';
 import { IPolaState } from '@State/types';
@@ -31,7 +31,7 @@ interface IArticlePage {
   location?: Location;
   article: any;
   articles: ArticleData[];
-  friends: FFriend[];
+  friends: FriendData[];
   author?: any;
   slug?: string;
   facebook?: any;
