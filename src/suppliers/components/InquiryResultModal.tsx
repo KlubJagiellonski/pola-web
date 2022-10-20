@@ -1,12 +1,13 @@
 import { PrimaryButton } from 'components/buttons/PrimaryButton';
 import { FormInput } from 'components/form-input';
 import { Modal } from 'layout/modal/Modal';
-import { padding } from 'polished';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ISuppliersInquiryMessages, Score } from 'suppliers';
 import { CalculationResultType, IInquiryCalculationResult } from 'suppliers/state/suppliers-serivce';
 import { ClickOutside } from 'utils/click-outside';
+
+import { padding } from '@Styles/theme';
 
 const ContentWrapper = styled.div`
   display: flex;

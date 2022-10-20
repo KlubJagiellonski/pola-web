@@ -1,13 +1,12 @@
+import { NewsletterService, SUBSCRIPTION_REPEATED_CODE } from 'newsletter/services/newsletter-service';
+import { SubscriptionResponseContext } from 'newsletter/services/subscription-response-context';
 import { Dispatch } from 'redux';
 
-import { IPolaState } from '@State/types';
+import { IPolaState } from '@App/state';
 
 import { Follower } from '..';
 import { SubscriptionError } from '../../app/api-errors';
-import { NewsletterService } from '../services/newsletter-service';
-import { NewsletterService, SUBSCRIPTION_REPEATED_CODE } from '../services/newsletter-service';
 import * as actions from './newsletter-actions';
-import { SubscriptionResponseContext } from 'newsletter/services/subscription-response-context';
 
 export const newsletterDispatcher = {
   requestSubscriptionForEmail:

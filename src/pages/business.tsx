@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { IPolaState } from '@State/types';
+import { IPolaState } from '@App/state';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { PageLayout } from '@Layout/PageLayout';

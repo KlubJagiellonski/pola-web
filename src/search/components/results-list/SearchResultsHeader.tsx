@@ -1,19 +1,14 @@
-import { PageType } from 'app/website';
 import { Link } from 'gatsby';
-import React from 'react';
+import { SearchStateName } from 'search/state/search-reducer';
 import styled from 'styled-components';
 
-import { SearchStateName } from '@State/search/search-reducer';
+import { PageType } from '@App/website';
 
 import { PageSection } from '@Layout/PageSection';
 
 import { ProductCounter } from './ProductCounter';
-import { Link } from 'gatsby';
-import { Device, fontSize, lineHeight, margin, padding } from '../../styles/theme';
-import { SearchStateName } from '../../state/search/search-reducer';
-import { PageType } from '../../domain/website';
 
-import { fontSize, lineHeight, margin } from '@Styles/theme';
+import { Device, fontSize, lineHeight, margin, padding } from '@Styles/theme';
 
 const Header = styled.header`
   font-size: ${fontSize.big};

@@ -2,19 +2,11 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
-import { SubscriptionStatus } from '@State/newsletter-reducer';
-
 import { ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
-import { ErrorMessage, SuccessMessage } from '@Components/form-input/FormToast';
 import { validateEmail } from '@Utils/strings';
 
-import { ButtonThemes } from '../../components/buttons/Button';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { validateEmail } from '../../utils/strings';
 import { SubscribeInput } from './SubscribeInput';
-
-import { color, fontSize, padding } from '@Styles/theme';
 
 interface INewsletterFormStyles {
   spaceTop?: string;

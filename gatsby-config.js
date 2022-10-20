@@ -1,20 +1,6 @@
-const path = require('path');
-const path = require('path');
-const fs = require('fs');
-
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
-
-const getGatsbyRootDirs = () => {
-  const srcSubdirectories = fs.readdirSync(path.resolve(__dirname, 'src'));
-  const rootImportsConfig = srcSubdirectories.reduce((config, directoryName) => {
-    config[directoryName] = path.resolve(__dirname, 'src', directoryName);
-    return config;
-  }, {});
-
-  return rootImportsConfig;
-};
 
 module.exports = {
   pathPrefix: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).pathname) || null,
@@ -26,11 +12,10 @@ module.exports = {
   },
   flags: {
     FAST_DEV: false,
-    FAST_REFRESH: false,
     DEV_SSR: false,
-    PRESERVE_WEBPACK_CACHE: false,
     PRESERVE_FILE_DOWNLOAD_CACHE: false,
     PARALLEL_SOURCING: false,
+    DETECT_NODE_MUTATIONS: true,
   },
   plugins: [
     'gatsby-plugin-use-query-params',
@@ -85,10 +70,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-typescript`,
-    {
-      resolve: 'gatsby-plugin-root-import',
-      options: getGatsbyRootDirs(),
-    },
     {
       resolve: `gatsby-plugin-react-redux`,
       options: {

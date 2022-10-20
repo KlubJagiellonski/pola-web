@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { IPolaState } from '@App/state';
 import { PartnerService } from '@Domain/partners/partners-service';
-import { IPolaState } from '@State/types';
 
 import Placeholder from '@Components/Placeholder';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';

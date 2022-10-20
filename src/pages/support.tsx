@@ -2,8 +2,6 @@ import { PageType } from 'app/website';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { IPolaState } from '@State/types';
-
 import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';
 import SEOMetadata from '@Utils/browser/SEOMetadata';

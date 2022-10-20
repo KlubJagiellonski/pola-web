@@ -1,18 +1,18 @@
-import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
-
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType } from '../domain/website';
-import Placeholder from '../components/Placeholder';
 import { graphql, useStaticQuery } from 'gatsby';
-import { PageSection } from 'layout/PageSection';
+import { Placeholder } from 'gatsby-plugin-image';
+import React from 'react';
+import { ConnectedProps, connect } from 'react-redux';
+import { ISuppliersInquiryMessages } from 'suppliers';
+import { SuppliersInquiry } from 'suppliers/components/SuppliersInquiry';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
 import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
-import { SuppliersInquiry } from 'suppliers/components/SuppliersInquiry';
-import { ISuppliersInquiryMessages } from 'suppliers';
+
+import { IPolaState } from '@App/state';
+import { PageType } from '@App/website';
+
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -60,7 +60,6 @@ type ISuppliersPage = ReduxProps & {
 
 const SuppliersPage = (props: ISuppliersPage) => {
   const {
-    location,
     messages,
     inquiryQuestions,
     totalScore,
@@ -71,7 +70,6 @@ const SuppliersPage = (props: ISuppliersPage) => {
     onSelectNone,
     calculateTotalScore,
   } = props;
-  const dispatch = useDispatch();
 
   const data = useStaticQuery(graphql`
     {
@@ -96,16 +94,11 @@ const SuppliersPage = (props: ISuppliersPage) => {
   `);
 
   React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.SUPPLIERS));
-    }
-    console.log('suppliers', data);
     onLoadSuppliers(data.suppliersJson);
   }, []);
 
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.SUPPLIERS}>
       <SEOMetadata pageTitle="Przykładowy formularz dostawców" />
       <Placeholder text="Strona w budowie" />
       <PageSection>

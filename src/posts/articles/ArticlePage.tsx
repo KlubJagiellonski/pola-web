@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { IPolaState } from '@App/state';
 import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
-import { IPolaState } from '@State/types';
 
 import SideInformations from '@Components/SideInformations';
 import { PageLayout } from '@Layout/PageLayout';

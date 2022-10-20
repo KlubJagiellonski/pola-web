@@ -1,9 +1,11 @@
 import { AnyAction, Reducer } from 'redux';
+import { ISuppliersInquiryMessages, InquiryOption, InquiryQuestion } from 'suppliers';
+
+import { IAction, IActionReducer } from '@State/types';
+
+import { assertStatus } from '@Utils/assert-status';
+
 import { actionTypes } from './suppliers-actions';
-import * as actions from './suppliers-actions';
-import { IAction, IActionReducer } from '../../state/types';
-import { InquiryOption, InquiryQuestion, ISuppliersInquiryMessages, Score } from '..';
-import { assertStatus } from 'state/assert-status';
 import { IInquiryCalculationResult } from './suppliers-serivce';
 
 export enum SuppliersFormStatus {

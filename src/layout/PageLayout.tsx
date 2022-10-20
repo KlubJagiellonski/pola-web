@@ -1,34 +1,29 @@
-import { appDispatcher } from 'app/state/app-dispatcher';
-import { loadBrowserLocation, selectActivePage } from 'app/state/app-reducer';
-import { PageType } from 'app/website';
-import { graphql, useStaticQuery } from 'gatsby';
-import React, { useEffect } from 'react';
-import { ConnectedProps, connect, useDispatch } from 'react-redux';
+import { ErrorBoundary } from '@sentry/gatsby';
+import { SearchInfoModal } from 'search/components/form/SearchInfoModal';
+import { ProductModal } from 'search/components/product-modal';
+import { searchDispatcher } from 'search/state/search-dispatcher';
+import { SearchStateName } from 'search/state/search-reducer';
 import styled from 'styled-components';
-
-import { IPolaState } from '@State/types';
-
-import Download from '@Components/Download';
-import ErrorBoundary from '@Utils/error-boundary';
-
-import { SearchInfoModal } from '../search/components/form/SearchInfoModal';
-import { ProductModal } from '../search/components/product-modal';
-import { searchDispatcher } from '../search/state/search-dispatcher';
-import { SearchStateName } from '../search/state/search-reducer';
-import { CustomScrollbarDiv } from './CustomScrollbar';
-import PageFooter from './PageFooter';
-import { PageHeader } from './PageHeader';
-import PageFooter from './footer/PageFooter';
-import { IPolaState } from '../state/types';
-import { appDispatcher } from '../state/app/app-dispatcher';
-import { ProductModal } from '../search/product-modal';
-import { searchDispatcher } from '../state/search/search-dispatcher';
-import ErrorBoundary from '../utils/error-boundary';
-import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
-import { StateLoader } from './StateLoader';
-import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
 import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
+import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
+
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { useEffect } from 'react';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
+
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
+import { PageType } from '@App/website';
+
+import Download from '@Components/Download';
+
+import { CustomScrollbarDiv } from './CustomScrollbar';
+import { PageHeader } from './PageHeader';
+import { StateLoader } from './StateLoader';
+import PageFooter from './footer/PageFooter';
 
 import '@Styles/pola-web.css';
 import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';

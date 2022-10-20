@@ -1,18 +1,17 @@
+import { Spinner } from 'components/Spinner';
+import { Follower } from 'newsletter';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import { SubscriptionStatus } from '@State/newsletter-reducer';
+import { Device } from 'styles/theme';
 
 import { ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { classNames } from '@Utils/class-names';
 
-import { SubscribeForm } from './SubscribeForm';
-import { Follower } from 'newsletter';
+import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
-import { SubscriptionRegisteredResult, SubscriptionRepeatedResult, SubscriptionFailureResult } from './SubscribeResult';
-import { Spinner } from 'components/Spinner';
-import { Device } from 'styles/theme';
+import { SubscribeForm } from './SubscribeForm';
+import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRepeatedResult } from './SubscribeResult';
 
 interface INewsletterFormStyles {
   spaceTop?: string;

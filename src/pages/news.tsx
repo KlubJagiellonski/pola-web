@@ -6,8 +6,8 @@ import { useQueryParamString } from 'react-use-query-param-string';
 import styled from 'styled-components';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
+import { IPolaState } from '@App/state';
 import { ArticleData } from '@Domain/articles';
-import { IPolaState } from '@State/types';
 
 import '@Components/Pagination.css';
 import Placeholder from '@Components/Placeholder';

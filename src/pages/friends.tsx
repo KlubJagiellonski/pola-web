@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { IPolaState } from '@App/state';
 import { FriendData } from '@Domain/friends';
-import { IPolaState } from '@State/types';
 
 import Card from '@Components/Card';
 import Placeholder from '@Components/Placeholder';

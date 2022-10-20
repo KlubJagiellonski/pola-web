@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { color, Device, fontSize, padding, margin } from 'styles/theme';
+import { Device, color, fontSize, margin, padding } from 'styles/theme';
 
 const Section = styled.div`
   flex: 1 1 25%;
@@ -54,6 +53,7 @@ const Section = styled.div`
 
 interface IFooterSection {
   title?: string;
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 export const FooterSection: React.FC<IFooterSection> = ({ title, children }) => (

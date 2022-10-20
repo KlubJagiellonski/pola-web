@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { EAN, IProductData } from '@Domain/products';
-import { IPolaState } from '@State/types';
 
 import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';

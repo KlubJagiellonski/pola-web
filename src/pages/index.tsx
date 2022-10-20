@@ -1,41 +1,24 @@
-import { appDispatcher } from 'app/state/app-dispatcher';
-import { PageType, urls } from 'app/website';
-import React from 'react';
-import { ConnectedProps, connect } from 'react-redux';
+import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
+import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
+import ArticlesListPreview from 'posts/articles/list/ArticlesListPreview';
+import { SearchForm } from 'search/components/form/SearchForm';
+import { FirstPageResults } from 'search/components/results-list/FirstPageResults';
+import { SearchResultsHeader } from 'search/components/results-list/SearchResultsHeader';
+import { reduceToFlatProductsList } from 'search/services/search-service';
+import { searchDispatcher } from 'search/state/search-dispatcher';
+import { SearchStateName } from 'search/state/search-reducer';
 import styled from 'styled-components';
 
+import React from 'react';
+import { ConnectedProps, connect } from 'react-redux';
+
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { PageType, urls } from '@App/website';
 import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
-import { IPolaState } from '@State/types';
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { SearchForm } from '../search/form/SearchForm';
-import { PageSection } from '../layout/PageSection';
-import { Device, pageWidth, padding, color, margin } from '../styles/theme';
-import { IPolaState } from '../state/types';
-import { searchDispatcher } from '../state/search/search-dispatcher';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { PageType, urls } from '../domain/website';
-import { Article } from '../domain/articles';
-import { reduceToFlatProductsList } from '../domain/products/search-service';
-import { SearchStateName } from '../state/search/search-reducer';
-import { FirstPageResults } from '../search/results-list/FirstPageResults';
-import { EAN, ISearchResults } from '../domain/products';
-import { Friend } from '../domain/friends';
-import { appDispatcher } from '../state/app/app-dispatcher';
-import DevelopmentSection from '../components/DevelopmentSection';
-import SocialMedia from '../components/social-media/SocialMedia';
-import Friends from '../components/friends/Friends';
-import Teams from '../components/Teams';
-import About from '../components/About';
-import TeamsFriend from '../components/TeamsFriend';
-import ArticlesListPreview from '../components/articles/list/ArticlesListPrewiev';
-import { InfoBox } from '../components/InfoBox';
-import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
 
-import About from '@Components/About';
 import DevelopmentSection from '@Components/DevelopmentSection';
 import { InfoBox } from '@Components/InfoBox';
 import Teams from '@Components/Teams';
@@ -46,17 +29,10 @@ import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-import Friends from '../friends/components/Friends';
-import { newsletterDispatcher } from '../newsletter/state/newsletter-dispatcher';
-import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
-import { SearchForm } from '../search/components/form/SearchForm';
-import { FirstPageResults } from '../search/components/results-list/FirstPageResults';
-import { SearchResultsHeader } from '../search/components/results-list/SearchResultsHeader';
-import { reduceToFlatProductsList } from '../search/services/search-service';
-import { searchDispatcher } from '../search/state/search-dispatcher';
-import { SearchStateName } from '../search/state/search-reducer';
+import About from './about';
+import Friends from './friends';
 
-import { Device, color, padding, pageWidth } from '@Styles/theme';
+import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -183,13 +159,11 @@ type IHomePage = ReduxProps & {
 };
 
 const HomePage = (props: IHomePage) => {
-  const { searchState, searchResults } = props;
+  const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
-
-  const handleNewsletter = () => {};
 
   return (
     <PageLayout location={props.location} page={PageType.HOME}>

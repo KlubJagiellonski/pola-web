@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { IPolaState } from '@State/types';
+import { IPolaState } from '@App/state';
 
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
@@ -29,7 +29,11 @@ const LetterList = styled.p`
   padding-left: ${padding.small};
 `;
 
-const PrivacyPolicy = (props: IContactPage) => {
+interface IPrivacyPolicyPage {
+  location?: Location;
+}
+
+const PrivacyPolicy = (props: IPrivacyPolicyPage) => {
   return (
     <PageLayout location={props.location} page={PageType.PRIVACY_POLICY}>
       <SEOMetadata pageTitle="Polityka prywatności" />
