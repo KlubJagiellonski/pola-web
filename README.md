@@ -1,6 +1,6 @@
 # Pola Web
 
-Celem tego projektu jest zbudowanie interfejsu Web w technologii React dla aplikacji [Pola. Zabierz ją na zakupy](https://www.pola-app.pl/). W tym celu ściślę współpracuje z [pola-backend](https://github.com/KlubJagiellonski/pola-backend).
+Celem tego projektu jest zbudowanie interfejsu Web w technologii React dla aplikacji [Pola. Zabierz ją na zakupy](https://www.pola-app.pl/). W tym celu ściśle współpracuje z [pola-backend](https://github.com/KlubJagiellonski/pola-backend).
 
 Masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże Ci odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską gospodarkę.
 
@@ -9,6 +9,20 @@ Zeskanuj kod kreskowy z dowolnego produktu i dowiedz się więcej o firmie, któ
 Ten projekt został rozpoczęty wykorzystując starter [https://evaluates2.github.io/Gatsby-Starter-TypeScript-Redux-TDD-BDD](https://evaluates2.github.io/Gatsby-Starter-TypeScript-Redux-TDD-BDD).
 
 Podgląd wersji deweloperskiej: [https://pola-staging.herokuapp.com/](https://pola-staging.herokuapp.com/)
+
+# Packages
+
+We actually use Gatsby version 4 what requires usage of Gatsby plugins in proper versions too
+
+Migration:
+https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v2-to-v3/
+https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v3-to-v4/
+
+to check obsolate packages (in particular Gatsby plugins)
+
+```
+npm outdated
+```
 
 ## Dostępne skrypty
 
@@ -22,7 +36,9 @@ Odtwórz [http://localhost:8000](http://localhost:8000) aby wyświetlić go w pr
 Strona zostanie załadowana ponownie, jeśli wprowadzisz zmiany.
 W konsoli zostaną również wyświetlone wszelkie błędy analizy statycznej (ang. lint).
 
-### `npm test`
+Otwórz [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) aby testować bazę danych aplikacji (artykuły, grafiki, faq)
+
+### `npm run test`
 
 Uruchamia test runner w interaktywnym trybie obserwującym zmiany.
 
@@ -31,58 +47,19 @@ Uruchamia test runner w interaktywnym trybie obserwującym zmiany.
 Kompiluje aplikację do produkcji do folderu `build`.
 Prawidłowo buduje aplikacje Reacta w trybie produkcyjnym i optymalizuje ją pod kątem najlepszej wydajności.
 
-```
-npm run build
-```
-
-Serve local build
-
-```
-npm run serve
-```
-
-Run Unit Tests (TDD watch-mode style)
-
-```
-npm test
-```
-
-Run Unit Tests (Single run for CI and with code coverage output)
-
-```
-npm run test-once
-```
-
-Run BDD / E2e Tests (Locally With UI)
-
-```
-npm run e2e
-```
-
-Run BDD / E2e Tests (Headless Mode for CI):
-
-```
-node_modules/.bin/cypress run
-```
-
 Run linting (calls both prettier linting and tslint)
 
 ```
 npm run lint
 ```
 
-Deploy
+# Deploy
+
+Deployments go through Github actions process and Github pages. All pushes to **prod** branch are automatically deployed. Pola API is hosted on Heroku cloud infrastructure.
 
 ```
-npx gatsby deploy
+git checkout prod
+git merge master
+git commit -m "merge master to production ver. X.Y.Z"
+git push
 ```
-
-# Upgrades
-
-We actually use Gatsby version 4 what requires usage of Gatsby plugins in proper versions too
-
-Migration:
-https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v2-to-v3/
-https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v3-to-v4/
-
-npm outdated - to check obsolate packages (in particular Gatsby plugins)

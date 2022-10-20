@@ -11,7 +11,7 @@ export const mockAxiosErrorResponse = (status: number, statusText: string, data?
     statusText,
     headers: {
       xFrameOptions: 'DENY',
-      contentLength: 167,
+      contentLength: '167',
       contentLanguage: 'pl',
       vary: 'Accept-Language',
       referrerPolicy: 'same-origin',
@@ -36,10 +36,9 @@ export const mockGETRequest = (headers?: any, params?: any): AxiosRequestConfig 
 export const mockProduct = (): IProductData => ({
   code: 'EAN4534',
   name: 'test product',
-  score: 55,
-  polishCapital: 55,
   company: {
     name: 'test company',
+    score: 100,
   },
   brand: {
     name: 'test brand',

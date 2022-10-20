@@ -11,6 +11,7 @@ import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
 
+import About from '@Components/About';
 import DevelopmentSection from '@Components/DevelopmentSection';
 import { InfoBox } from '@Components/InfoBox';
 import Teams from '@Components/Teams';
@@ -21,6 +22,7 @@ import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
+import Friends from 'friends/components/Friends';
 import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
 import ArticlesListPreview from 'posts/articles/list/ArticlesListPreview';
@@ -30,9 +32,6 @@ import { SearchResultsHeader } from 'search/components/results-list/SearchResult
 import { reduceToFlatProductsList } from 'search/services/search-service';
 import { searchDispatcher } from 'search/state/search-dispatcher';
 import { SearchStateName } from 'search/state/search-reducer';
-
-import About from './about';
-import Friends from './friends';
 
 import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
 
@@ -53,7 +52,6 @@ const connector = connect(
       newsletterStatus: newsletter.status,
       follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
       articles: articles.data,
-      friends: friends.data,
     };
   },
   {
@@ -150,7 +148,7 @@ type IHomePage = GatsbyPage &
     searchResults?: ISearchResults;
     articles?: ArticleData[];
     activeTags: string[];
-    friends?: FriendData[];
+    //friends?: FriendData[];
 
     toggleSearchInfo: () => void;
     invokeSearch: (phrase: string) => void;
@@ -226,7 +224,7 @@ const HomePage = (props: IHomePage) => {
           <DevelopmentSection />
           <SocialMedia />
           <About />
-          <Friends friends={props.friends} />
+          <Friends />
           <Teams />
           <TeamsFriend />
         </Wrapper>

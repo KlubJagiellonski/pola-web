@@ -70,8 +70,7 @@ const NewsPage: React.FC<INewsPage> = ({ location, articles }) => {
       setTag(getTagsList(articles));
     }
 
-    // commented as this line break NEWS page
-    //window.document.getElementById('layout-container')?.scrollTo(0, 0);
+    window.document.getElementById('layout-container')?.scrollTo(0, 0);
   }, [articles, query]);
 
   return (

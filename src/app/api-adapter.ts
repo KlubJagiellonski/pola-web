@@ -45,6 +45,8 @@ export abstract class ApiAdapter {
             return new InternalServiceError(error.response);
           case 503:
             return new NetworkError(error.response);
+          default:
+            return;
         }
       } else if (error.request) {
         /**

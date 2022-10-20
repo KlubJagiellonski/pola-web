@@ -1,12 +1,11 @@
+import { NetworkError } from '../../app/api-errors';
+import { mockAxiosErrorResponse, mockGETRequest, mockProduct } from '../../utils/tests/mocks';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { expect } from 'chai';
 import Sinon from 'sinon';
 
 import { ISearchSuccessResponse } from '@Domain/products';
 
-import { mockAxiosErrorResponse, mockGETRequest, mockProduct } from '@Utils/tests/mocks';
-
-import { NetworkError } from '../../app/api-errors';
 import { ProductService } from './search-service';
 
 const mockSearchResult = (): ISearchSuccessResponse => ({
@@ -70,7 +69,7 @@ describe('Product search service', () => {
   });
 
   describe('for correct query', () => {
-    it('should response valid search results object', async () => {
+    test('should response valid search results object', async () => {
       getProducts.resolves(mockSearchResponse());
 
       const responseData = await ProductService.getInstance().searchProducts('some query');
@@ -83,7 +82,7 @@ describe('Product search service', () => {
   });
 
   describe('for empty query', () => {
-    it('should return a valid empty collection', async () => {
+    test('should return a valid empty collection', async () => {
       getProducts.throws(mockEmptyQueryErrorResponse());
 
       const responseData = await ProductService.getInstance().searchProducts('');
@@ -96,7 +95,7 @@ describe('Product search service', () => {
   });
 
   describe('for invalid search result', () => {
-    it('should throw an invalid data error', async () => {
+    test('should throw an invalid data error', async () => {
       getProducts.resolves({ invalidProperty: 1 });
 
       try {
@@ -109,7 +108,7 @@ describe('Product search service', () => {
   });
 
   describe('for network error', () => {
-    it('should throw a network error when search service in unreachable', async () => {
+    test('should throw a network error when search service in unreachable', async () => {
       getProducts.resolves(mockNetworkErrorResponse());
 
       try {
@@ -122,7 +121,7 @@ describe('Product search service', () => {
   });
 
   describe('for error response', () => {
-    it('should throw an internal service error', async () => {
+    test('should throw an internal service error', async () => {
       getProducts.resolves(mockServiceErrorResponse());
 
       try {
