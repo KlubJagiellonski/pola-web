@@ -15,7 +15,7 @@ module.exports = {
     DEV_SSR: false,
     PRESERVE_FILE_DOWNLOAD_CACHE: false,
     PARALLEL_SOURCING: false,
-    DETECT_NODE_MUTATIONS: true,
+    DETECT_NODE_MUTATIONS: false,
   },
   plugins: [
     'gatsby-plugin-use-query-params',

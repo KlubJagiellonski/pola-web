@@ -7,16 +7,12 @@
   "jsxBracketSameLine": true,
   "importOrder": [
     "^(react|gatsby)(.*)$",
-    "^-[./]$",
-    "^-@[-(.|..)[./]",
-    "^-@[(.|..)[./]",
-    "^@[./]",
     "^(@(App|Domain|State|Templates)|(app|domain|pages|templates))/(.*)$",
     "^(@(Layout|Components|Utils)|(layout|components|utils))/(.*)$",
     "(newsletter|posts|friends|search)/(.*)$",
+    "^(./)",
     "^@Styles/(.*)$",
-    "^@Assets/(.*)$",
-    "^(./)"
+    "^@Assets/(.*)$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
