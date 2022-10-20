@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import React from 'react';
-import { connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 import BusinessTemplates from 'templates/BusinessTemplate';
@@ -39,9 +39,7 @@ const Title = styled(TitleSection)`
   text-align: center;
 `;
 
-interface IBusinessPage {
-  location?: Location;
-}
+interface IBusinessPage extends GatsbyPage {}
 
 const BusinessPage = (props: IBusinessPage) => {
   return (
@@ -94,4 +92,4 @@ const BusinessPage = (props: IBusinessPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(BusinessPage);
+export default BusinessPage;

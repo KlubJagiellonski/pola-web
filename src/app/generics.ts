@@ -1,5 +1,9 @@
 import { guid } from '@Utils/data/random-number';
 
+export type GatsbyPage = {
+  location?: Location;
+};
+
 export interface IGatsbyNode {
   id: guid;
 }

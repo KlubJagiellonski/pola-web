@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { IPolaState } from '@App/state';
+import { GatsbyPage } from '@App/generics';
 import { PageType, urls } from 'app/website';
 
 import Faq from '@Components/Faq';
@@ -37,9 +36,7 @@ const Image = styled.div`
   }
 `;
 
-interface IAboutPage {
-  location?: Location;
-}
+interface IAboutPage extends GatsbyPage {}
 
 const AboutPage = (props: IAboutPage) => {
   return (
@@ -110,4 +107,4 @@ const AboutPage = (props: IAboutPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(AboutPage);
+export default AboutPage;

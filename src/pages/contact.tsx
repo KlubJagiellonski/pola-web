@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType } from 'app/website';
 
@@ -8,9 +8,7 @@ import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-interface IContactPage {
-  location?: Location;
-}
+interface IContactPage extends GatsbyPage {}
 
 const ContactPage = (props: IContactPage) => {
   return (
@@ -21,4 +19,4 @@ const ContactPage = (props: IContactPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(ContactPage);
+export default ContactPage;

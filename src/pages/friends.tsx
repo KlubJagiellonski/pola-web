@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
-import { FriendData } from '@Domain/friends';
 import { PageType, urls } from 'app/website';
 
 import Card from '@Components/Card';
@@ -72,18 +72,17 @@ const TitleInfo = styled(TitleSection)`
   }
 `;
 
-interface IFriendsPage {
-  location?: Location;
-  friends?: FriendData[];
-}
+interface IFriendsPage extends GatsbyPage {}
 
 const FriendsPage = (props: IFriendsPage) => {
+  const friendData = useSelector((state: IPolaState) => state.friends.data);
+
   return (
     <PageLayout location={props.location} page={PageType.FRIENDS}>
       <SEOMetadata pageTitle="Klub przyjaciół Poli" />
       <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>
-        <FriendsSection friends={props.friends} />
+        <FriendsSection friends={friendData} />
       </PageSection>
       <PageSection style={{ paddingBottom: 0, marginBottom: 0 }}>
         <Info style={{ paddingBottom: 0, marginBottom: 0 }}>
@@ -162,6 +161,4 @@ const FriendsPage = (props: IFriendsPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({
-  friends: state.friends.data,
-}))(FriendsPage);
+export default FriendsPage;

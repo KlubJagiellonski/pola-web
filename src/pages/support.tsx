@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
 import { PageType } from 'app/website';
 
 import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-interface ISupportPage {
-  location?: Location;
-}
+interface ISupportPage extends GatsbyPage {}
 
 const SupportPage = (props: ISupportPage) => {
   return (
@@ -20,4 +19,4 @@ const SupportPage = (props: ISupportPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(SupportPage);
+export default SupportPage;

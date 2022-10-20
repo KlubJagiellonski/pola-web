@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useQueryParamString } from 'react-use-query-param-string';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType } from '@App/website';
 import { ArticleData } from '@Domain/articles';
@@ -45,17 +46,15 @@ const InfoSection = styled.div`
   }
 `;
 
-interface NewsPage {
-  location?: Location;
-  articles?: ArticleData[];
-}
+interface INewsPage extends GatsbyPage {}
 
 interface IQuery {
   tags?: string[];
   id?: number;
 }
 
-const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
+const NewsPage: React.FC<INewsPage> = ({ location, articles }) => {
+  const articledData = useSelector((state: IPolaState) => state.articles.data);
   const [tag, setTag] = useState<string[]>([]);
   const [query, setQuery] = useQueryParams<IQuery>({
     tags: withDefault(ArrayParam, ['a', 'b', 'c']),
@@ -80,7 +79,7 @@ const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
       <SEOMetadata pageTitle="Aktualności" />
       <Placeholder text="Aktualności" />
       <PageSection>
-        <NewsPageArticles articles={articles} query={query} setQuery={setQuery} />
+        <NewsPageArticles articles={articledData} query={query} setQuery={setQuery} />
         <InfoSection>
           <TagsList tag={tag} activeTags={query.tags} />
           <SocialMedia />
@@ -89,6 +88,5 @@ const NewsPage: React.FC<NewsPage> = ({ location, articles }) => {
     </PageLayout>
   );
 };
-export default connect((state: IPolaState) => ({
-  articles: state.articles.data,
-}))(NewsPage);
+
+export default INewsPage;

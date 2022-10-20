@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import React from 'react';
-import { connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PartnerService } from '@Domain/partners/partners-service';
 import { PageType, urls } from 'app/website';
@@ -64,9 +64,7 @@ const ImageSection = styled.ul`
   }
 `;
 
-interface IPartnersPage {
-  location?: Location;
-}
+interface IPartnersPage extends GatsbyPage {}
 
 const PartnersPage = (props: IPartnersPage) => {
   return (
@@ -106,4 +104,4 @@ const PartnersPage = (props: IPartnersPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(PartnersPage);
+export default PartnersPage;

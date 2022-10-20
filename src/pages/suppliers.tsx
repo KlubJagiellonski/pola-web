@@ -8,6 +8,7 @@ import { Placeholder } from 'gatsby-plugin-image';
 import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType } from '@App/website';
 
@@ -55,9 +56,7 @@ const connector = connect(
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
-type ISuppliersPage = ReduxProps & {
-  location?: Location;
-};
+type ISuppliersPage = GatsbyPage & ReduxProps & {};
 
 const SuppliersPage = (props: ISuppliersPage) => {
   const {

@@ -1,4 +1,19 @@
+import { CustomScrollbarDiv } from './CustomScrollbar';
+import { PageHeader } from './PageHeader';
+import { StateLoader } from './StateLoader';
+import PageFooter from './footer/PageFooter';
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
+import { PageType } from '@App/website';
+import Download from '@Components/Download';
+import '@Styles/pola-web.css';
+import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 import { ErrorBoundary } from '@sentry/gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { useEffect } from 'react';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
 import { SearchInfoModal } from 'search/components/form/SearchInfoModal';
 import { ProductModal } from 'search/components/product-modal';
 import { searchDispatcher } from 'search/state/search-dispatcher';
@@ -7,26 +22,6 @@ import styled from 'styled-components';
 import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
 import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
-
-import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
-import { useEffect } from 'react';
-import { ConnectedProps, connect, useDispatch } from 'react-redux';
-
-import { IPolaState } from '@App/state';
-import { appDispatcher } from '@App/state/app-dispatcher';
-import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
-import { PageType } from '@App/website';
-
-import Download from '@Components/Download';
-
-import { CustomScrollbarDiv } from './CustomScrollbar';
-import { PageHeader } from './PageHeader';
-import { StateLoader } from './StateLoader';
-import PageFooter from './footer/PageFooter';
-
-import '@Styles/pola-web.css';
-import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {

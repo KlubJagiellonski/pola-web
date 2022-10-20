@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
 import { PageType, urls } from '@App/website';
@@ -30,10 +31,10 @@ import { reduceToFlatProductsList } from 'search/services/search-service';
 import { searchDispatcher } from 'search/state/search-dispatcher';
 import { SearchStateName } from 'search/state/search-reducer';
 
-import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
-
 import About from './about';
 import Friends from './friends';
+
+import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -143,21 +144,21 @@ const Wrapper = styled.div`
   }
 `;
 
-type IHomePage = ReduxProps & {
-  location?: Location;
-  searchState: SearchStateName;
-  searchResults?: ISearchResults;
-  articles?: ArticleData[];
-  activeTags: string[];
-  friends?: FriendData[];
+type IHomePage = GatsbyPage &
+  ReduxProps & {
+    searchState: SearchStateName;
+    searchResults?: ISearchResults;
+    articles?: ArticleData[];
+    activeTags: string[];
+    friends?: FriendData[];
 
-  toggleSearchInfo: () => void;
-  invokeSearch: (phrase: string) => void;
-  invokeLoadMore: () => void;
-  subscribeEmail: (email: string, name?: string | undefined) => void;
-  clearResults: () => void;
-  selectProduct: (code: EAN) => void;
-};
+    toggleSearchInfo: () => void;
+    invokeSearch: (phrase: string) => void;
+    invokeLoadMore: () => void;
+    subscribeEmail: (email: string, name?: string | undefined) => void;
+    clearResults: () => void;
+    selectProduct: (code: EAN) => void;
+  };
 
 const HomePage = (props: IHomePage) => {
   const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;

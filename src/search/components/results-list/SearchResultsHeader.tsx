@@ -1,10 +1,13 @@
-import { Link } from 'gatsby';
-import { SearchStateName } from 'search/state/search-reducer';
 import styled from 'styled-components';
+
+import { Link } from 'gatsby';
+import React from 'react';
 
 import { PageType } from '@App/website';
 
 import { PageSection } from '@Layout/PageSection';
+
+import { SearchStateName } from 'search/state/search-reducer';
 
 import { ProductCounter } from './ProductCounter';
 

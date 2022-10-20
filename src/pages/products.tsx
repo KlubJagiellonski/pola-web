@@ -1,7 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { ConnectedProps, connect } from 'react-redux';
 
-import { EAN, IProductData } from '@Domain/products';
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
 import Placeholder from '@Components/Placeholder';
@@ -14,19 +15,30 @@ import { reduceToFlatProductsList } from '../search/services/search-service';
 import { searchDispatcher } from '../search/state/search-dispatcher';
 import { SearchStateName } from '../search/state/search-reducer';
 
-interface IProductsPage {
-  location?: Location;
-  searchState: SearchStateName;
-  searchResults?: {
-    phrase: string;
-    token: string;
-    pages: IProductData[];
-    totalItems: number;
-  };
+const connector = connect(
+  (state: IPolaState) => {
+    const { search } = state;
+    return {
+      searchState: search.stateName,
+      searchResults:
+        search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING
+          ? {
+              phrase: search.phrase,
+              pages: search.resultPages ? reduceToFlatProductsList(search.resultPages) : [],
+              totalItems: search.totalItems,
+            }
+          : undefined,
+    };
+  },
+  {
+    onLoadMore: searchDispatcher.invokeLoadMore,
+    selectProduct: searchDispatcher.selectProduct,
+  }
+);
 
-  onLoadMore: () => void;
-  selectProduct: (code: EAN) => void;
-}
+type ReduxProps = ConnectedProps<typeof connector>;
+
+type IProductsPage = GatsbyPage & ReduxProps & {};
 
 const ProductsPage = (props: IProductsPage) => {
   const { searchState, searchResults, onLoadMore } = props;
@@ -40,34 +52,16 @@ const ProductsPage = (props: IProductsPage) => {
     <PageLayout location={props.location} page={PageType.PRODUCTS}>
       <SEOMetadata pageTitle="Znalezione produkty" />
       <Placeholder text="Lista produktów" />
-      <DynamicProductResults
-        {...searchResults}
-        state={searchState}
-        onSelect={props.selectProduct}
-        onLoadMore={onLoadMore}
-      />
+      {searchResults && (
+        <DynamicProductResults
+          {...searchResults}
+          state={searchState}
+          onSelect={props.selectProduct}
+          onLoadMore={onLoadMore}
+        />
+      )}
     </PageLayout>
   );
 };
 
-export default connect(
-  (state: IPolaState) => {
-    const { app, search } = state;
-    return {
-      searchState: search.stateName,
-      searchResults:
-        search.stateName !== SearchStateName.INITIAL && search.stateName !== SearchStateName.LOADING
-          ? {
-              phrase: search.phrase,
-              pages: reduceToFlatProductsList(search.resultPages),
-              totalItems: search.totalItems,
-              token: search.nextPageToken,
-            }
-          : undefined,
-    };
-  },
-  {
-    onLoadMore: searchDispatcher.invokeLoadMore,
-    selectProduct: searchDispatcher.selectProduct,
-  }
-)(ProductsPage);
+export default connector(ProductsPage);

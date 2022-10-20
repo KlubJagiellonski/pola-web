@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import React from 'react';
-import { connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
@@ -12,11 +12,9 @@ import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
-import { Device, fontSize, lineHeight, margin, padding } from '@Styles/theme';
+import { Device, fontSize, margin, padding } from '@Styles/theme';
 
-interface ITeamPage {
-  location?: Location;
-}
+interface ITeamPage extends GatsbyPage {}
 
 const Wrapper = styled.div`
   margin: ${padding.veryBig} 0 ${margin.normal} 0;
@@ -38,10 +36,6 @@ const List = styled.ul`
 
 const Section = styled.div`
   margin-top: ${margin.big};
-`;
-
-const Info = styled(Text)`
-  line-height: ${lineHeight.normal};
 `;
 
 const TeamPage = (props: ITeamPage) => {
@@ -156,4 +150,4 @@ const TeamPage = (props: ITeamPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(TeamPage);
+export default TeamPage;

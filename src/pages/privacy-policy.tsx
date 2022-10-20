@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import { Link } from 'gatsby';
 import React from 'react';
-import { connect } from 'react-redux';
 
+import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
@@ -30,9 +30,7 @@ const LetterList = styled.p`
   padding-left: ${padding.small};
 `;
 
-interface IPrivacyPolicyPage {
-  location?: Location;
-}
+interface IPrivacyPolicyPage extends GatsbyPage {}
 
 const PrivacyPolicy = (props: IPrivacyPolicyPage) => {
   return (
@@ -149,4 +147,4 @@ const PrivacyPolicy = (props: IPrivacyPolicyPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(PrivacyPolicy);
+export default PrivacyPolicy;
