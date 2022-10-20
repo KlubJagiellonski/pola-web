@@ -1,5 +1,6 @@
-import { PageType } from 'app/website';
 import React from 'react';
+
+import { PageType } from 'app/website';
 
 import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
 import { PageLayout } from '@Layout/PageLayout';

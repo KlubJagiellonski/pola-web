@@ -1,6 +1,7 @@
-import { PageType } from 'app/website';
 import React from 'react';
 import { connect } from 'react-redux';
+
+import { PageType } from 'app/website';
 
 import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';

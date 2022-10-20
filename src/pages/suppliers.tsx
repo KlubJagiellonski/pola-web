@@ -1,11 +1,12 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import { Placeholder } from 'gatsby-plugin-image';
-import React from 'react';
-import { ConnectedProps, connect } from 'react-redux';
 import { ISuppliersInquiryMessages } from 'suppliers';
 import { SuppliersInquiry } from 'suppliers/components/SuppliersInquiry';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
 import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
+
+import { graphql, useStaticQuery } from 'gatsby';
+import { Placeholder } from 'gatsby-plugin-image';
+import React from 'react';
+import { ConnectedProps, connect } from 'react-redux';
 
 import { IPolaState } from '@App/state';
 import { PageType } from '@App/website';

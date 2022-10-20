@@ -11,13 +11,15 @@
     "^-@[-(.|..)[./]",
     "^-@[(.|..)[./]",
     "^@[./]",
-    "^@(App|Domain|State)/(.*)$",
-    "^@(Layout|Components|Utils)/(.*)$",
-    "^[./]",
+    "^(@(App|Domain|State|Templates)|(app|domain|pages|templates))/(.*)$",
+    "^(@(Layout|Components|Utils)|(layout|components|utils))/(.*)$",
+    "(newsletter|posts|friends|search)/(.*)$",
     "^@Styles/(.*)$",
-    "^@Assets/(.*)$"
+    "^@Assets/(.*)$",
+    "^(./)"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": false,
   "organizeImportsSkipDestructiveCodeActions": true
 }

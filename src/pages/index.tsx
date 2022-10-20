@@ -1,12 +1,3 @@
-import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
-import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
-import ArticlesListPreview from 'posts/articles/list/ArticlesListPreview';
-import { SearchForm } from 'search/components/form/SearchForm';
-import { FirstPageResults } from 'search/components/results-list/FirstPageResults';
-import { SearchResultsHeader } from 'search/components/results-list/SearchResultsHeader';
-import { reduceToFlatProductsList } from 'search/services/search-service';
-import { searchDispatcher } from 'search/state/search-dispatcher';
-import { SearchStateName } from 'search/state/search-reducer';
 import styled from 'styled-components';
 
 import React from 'react';
@@ -29,10 +20,20 @@ import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-import About from './about';
-import Friends from './friends';
+import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
+import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
+import ArticlesListPreview from 'posts/articles/list/ArticlesListPreview';
+import { SearchForm } from 'search/components/form/SearchForm';
+import { FirstPageResults } from 'search/components/results-list/FirstPageResults';
+import { SearchResultsHeader } from 'search/components/results-list/SearchResultsHeader';
+import { reduceToFlatProductsList } from 'search/services/search-service';
+import { searchDispatcher } from 'search/state/search-dispatcher';
+import { SearchStateName } from 'search/state/search-reducer';
 
 import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
+
+import About from './about';
+import Friends from './friends';
 
 const connector = connect(
   (state: IPolaState) => {

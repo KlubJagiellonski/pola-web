@@ -1,10 +1,11 @@
-import { PageType, urls } from 'app/website';
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { IPolaState } from '@App/state';
+import { PageType, urls } from 'app/website';
 
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';

@@ -1,10 +1,11 @@
-import { PageType, urls } from 'app/website';
+import styled from 'styled-components';
+
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { IPolaState } from '@App/state';
 import { PartnerService } from '@Domain/partners/partners-service';
+import { PageType, urls } from 'app/website';
 
 import Placeholder from '@Components/Placeholder';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';

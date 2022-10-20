@@ -1,9 +1,10 @@
-import { PageType, urls } from 'app/website';
-import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import React from 'react';
+import { connect } from 'react-redux';
+
 import { IPolaState } from '@App/state';
+import { PageType, urls } from 'app/website';
 
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 import { PageLayout } from '@Layout/PageLayout';

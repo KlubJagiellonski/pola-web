@@ -59,8 +59,9 @@
       "@Components/*": ["components/*"],
       "@Domain/*": ["domain/*"],
       "@Layout/*": ["layout/*"],
-      "@State/*": ["state/*"],
+      "@State/*": ["app/state/*"],
       "@Styles/*": ["styles/*"],
+      "@Templates/*": ["templates/*"],
       "@Utils/*": ["utils/*"]
     }
   }

@@ -1,16 +1,16 @@
-import { PageType, urls } from 'app/website';
-import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import React from 'react';
+import { connect } from 'react-redux';
+
 import { IPolaState } from '@App/state';
+import { PageType, urls } from 'app/website';
+import BusinessTemplates from 'templates/BusinessTemplate';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
-
-import BusinessTemplates from '../templates/BusinessTemplate';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
 import { Device, margin, padding } from '@Styles/theme';

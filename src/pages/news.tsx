@@ -1,12 +1,12 @@
-import { PageType } from 'app/website';
-import { getTagsList } from 'posts/services/article-service';
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { useQueryParamString } from 'react-use-query-param-string';
 import styled from 'styled-components';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useQueryParamString } from 'react-use-query-param-string';
+
 import { IPolaState } from '@App/state';
+import { PageType } from '@App/website';
 import { ArticleData } from '@Domain/articles';
 
 import '@Components/Pagination.css';
@@ -18,6 +18,7 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import NewsPageArticles from '../posts/articles/list/NewsPagesArticles';
 import TagsList from '../posts/tags/TagsList';
+import { getTagsList } from 'posts/services/article-service';
 
 import { Device, margin } from '@Styles/theme';
 

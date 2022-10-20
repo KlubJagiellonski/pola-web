@@ -1,10 +1,11 @@
-import { PageType, urls } from 'app/website';
+import styled from 'styled-components';
+
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { IPolaState } from '@App/state';
 import { FriendData } from '@Domain/friends';
+import { PageType, urls } from 'app/website';
 
 import Card from '@Components/Card';
 import Placeholder from '@Components/Placeholder';
@@ -13,7 +14,7 @@ import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-import FriendsSection from '../friends/components/FriendsSection';
+import FriendsSection from 'friends/components/FriendsSection';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { Device, color, fontSize, margin, padding } from '@Styles/theme';
