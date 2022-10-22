@@ -147,11 +147,6 @@ export class ProductNotFoundError extends ErrorHandler {
   }
 }
 
-export function isEmptyQueryError(error: AxiosError) {
-  const data = error.response?.data;
-  return data && data.status === 400 && data.type === 'about:blank';
-}
-
 export class ApiAdapterError extends ErrorHandler {
   constructor(public apiName: string, public handledError?: unknown) {
     super();
