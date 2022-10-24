@@ -22,40 +22,32 @@ export abstract class ApiAdapter {
     this.apiUrl = apiUrl;
   }
 
-  protected handleError(error: unknown) {
-    if (!(error instanceof Error)) {
-      return new ApiAdapterError(this.apiName);
-    } else if (axios.isAxiosError(error)) {
-      if (error.response) {
-        /**
-         * client received an error response (5xx, 4xx)
-         */
-        switch (error.response!.status) {
-          case 400:
-            return new BadRequestError(error.response);
-          case 401:
-            return new AuthenticationError(error.response);
-          case 404:
-            return new MethodNotFoundError(error.response);
-          case 409:
-            return new ResourceConflictError(error.response);
-          case 429:
-            return new RequestsLimitExceeded(error.response);
-          case 500:
-            return new InternalServiceError(error.response);
-          case 503:
-            return new NetworkError(error.response);
-          default:
-            return;
-        }
-      } else if (error.request) {
-        /**
-         * something happened in setting up the request that triggered an Error
-         * client never received a response, or request never left
-         */
-        return new FetchError(this.apiName, error.request);
-      } else {
-        return new NetworkError(error);
+  protected handleError(error: any) {
+    if (error.code && error.code >= 400) {
+      /**
+       * client received an error response (5xx, 4xx)
+       */
+      switch (parseInt(error.code)) {
+        case 400:
+          return new BadRequestError(error.response);
+        case 401:
+          return new AuthenticationError(error.response);
+        case 404:
+          return new MethodNotFoundError(error.response);
+        case 409:
+          return new ResourceConflictError(error.response);
+        case 429:
+          return new RequestsLimitExceeded(error.response);
+        case 500:
+          return new InternalServiceError(error.response);
+        case 503:
+          return new NetworkError(error.response);
+        default:
+          /**
+           * something happened in setting up the request that triggered an Error
+           * client never received a response, or request never left
+           */
+          return new FetchError(this.apiName, error.request);
       }
     } else {
       console.error(ErrorMessage.UNEXPECTED_ERROR);

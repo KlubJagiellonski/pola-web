@@ -1,27 +1,26 @@
 /* eslint-disable import/order */
 
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { pathsToModuleNameMapper } from 'ts-jest';
 import type { JestConfigWithTsJest } from 'ts-jest';
 
-import { compilerOptions } from './tsconfig.json';
-
 const config: JestConfigWithTsJest = {
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json',
-      diagnostics: true,
-    },
-    NODE_ENV: 'test',
-  },
   setupFiles: [`<rootDir>/loadershim.js`],
   setupFilesAfterEnv: [`${__dirname}/src/setupTests.ts`, 'jest-expect-message'],
   verbose: true,
   preset: 'ts-jest',
-  clearMocks: true,
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { useESM: true }),
+  moduleNameMapper: {
+    '^@App/(.*)$': '<rootDir>/src/app/$1',
+    '^@Assets/(.*)$': '<rootDir>/src/assets/$1',
+    '^@Components/(.*)$': '<rootDir>/src/components/$1',
+    '^@Domain/(.*)$': '<rootDir>/src/domain/$1',
+    '^@Layout/(.*)$': '<rootDir>/src/layout/$1',
+    '^@State/(.*)$': '<rootDir>/src/app/state/$1',
+    '^@Styles/(.*)$': '<rootDir>/src/styles/$1',
+    '^@Templates/(.*)$': '<rootDir>/src/templates/$1',
+    '^@Utils/(.*)$': '<rootDir>/src/utils/$1',
+  },
   testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-  testPathIgnorePatterns: [`node_modules`, `.cache`, `public`],
+  testPathIgnorePatterns: [`node_modules`, `.cache`, `public`, `src/utils/test`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   testEnvironment: 'jest-environment-node',

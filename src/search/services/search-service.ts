@@ -2,7 +2,7 @@ import { ApiAdapter } from '../../app/api-adapter';
 import { InvalidSearchResultError } from '../../app/api-errors';
 import { AppSettings } from '../../app/app-settings';
 import { ISearchResultPage } from '../state/search-reducer';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import { IProductData, ISearchSuccessResponse } from '@Domain/products';
 
@@ -18,6 +18,10 @@ export interface ISearchError {
 }
 
 const API_NAME = 'Search Product API';
+
+function typeCheck(response: any): response is ISearchSuccessResponse {
+  return response.code;
+}
 
 export class ProductService extends ApiAdapter {
   public static getInstance(): ProductService {
@@ -41,8 +45,8 @@ export class ProductService extends ApiAdapter {
         if (!response) {
           throw new Error('Response in empty');
         }
-        if (response instanceof Error) {
-          throw new Error('Got error response');
+        if ((response as any).isAxiosError) {
+          throw response;
         }
         if (!this.isValidSearchResults(response)) {
           throw new InvalidSearchResultError();
@@ -54,8 +58,11 @@ export class ProductService extends ApiAdapter {
           ...response.data,
         };
       }
-      throw new Error('cannot search for empty phrase');
+      return null;
     } catch (error: unknown) {
+      if (error instanceof InvalidSearchResultError) {
+        throw error;
+      }
       const apiError = this.handleError(error);
       throw apiError;
     }
