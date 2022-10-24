@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactPaginate from 'react-paginate';
 
 import { ArticleData } from '@Domain/articles';
 
 import '@Components/Pagination.css';
 
-import { IArticlesTwoColumns, getArticlesTwoColumns } from 'posts/services/article-service';
+import { IQuery, getArticlesTwoColumns } from 'posts/services/article-service';
 
 import { ArticleBlock } from './ArticleBlock';
 import ArticlesList from './ArticlesList';

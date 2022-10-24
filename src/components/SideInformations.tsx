@@ -9,7 +9,8 @@ import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import TagsList from '../posts/tags/TagsList';
 import { getRandomFriend } from 'friends/services/friend-service';
-import { getUniqueTags, getVisibleArticles } from 'posts/services/article-service';
+import { getVisibleArticles } from 'posts/services/article-service';
+import { getUniqueTags } from 'posts/services/url-service';
 
 import DevelopmentSection from './DevelopmentSection';
 import SocialMedia from './social-media/SocialMedia';

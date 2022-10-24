@@ -27,7 +27,6 @@ interface ITagsList {
 }
 
 const TagsList: React.FC<ITagsList> = ({ availableTags, activeTags, onTagSelected, onTagUnselected }) => {
-  const encodedTags = availableTags.map((tag) => encodeStringToBase64(tag));
   const encodedActiveTags = activeTags ? activeTags.map((tag) => encodeStringToBase64(tag)) : [];
   const handleClick = (tag: string) => {
     encodedActiveTags?.includes(tag) ? onTagUnselected(tag) : onTagSelected(tag);

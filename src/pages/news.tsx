@@ -17,7 +17,8 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import TagsList from '../posts/tags/TagsList';
 import NewsPageArticles from 'posts/articles/list/NewsPagesArticles';
-import { buildArticlesQuery, getUniqueTags, useArticlesParams } from 'posts/services/article-service';
+import { buildArticlesQuery, useArticlesParams } from 'posts/services/article-service';
+import { getUniqueTags } from 'posts/services/url-service';
 
 import { Device, margin } from '@Styles/theme';
 
@@ -51,6 +52,7 @@ export type Action = { type: 'setTag'; payload: string[] } | { type: 'setPage'; 
 const NewsPage: React.FC<INewsPage> = ({ location }) => {
   const articlesData = useSelector((state: IPolaState) => state.articles.data);
   const queryParams = useArticlesParams();
+  const tags = getUniqueTags(articlesData);
 
   useEffect(() => {
     window.document.getElementById('layout-container')?.scrollTo(0, 0);
@@ -84,8 +86,6 @@ const NewsPage: React.FC<INewsPage> = ({ location }) => {
     }
   };
 
-  const tags = getUniqueTags(articlesData);
-  console.log('TAGS', tags);
   return (
     <PageLayout location={location} page={PageType.NEWS}>
       <SEOMetadata pageTitle="Aktualności" />
