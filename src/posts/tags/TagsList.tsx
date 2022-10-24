@@ -1,5 +1,9 @@
-import React from 'react';
+import { encodeStringToBase64 } from '../services/url-service';
 import styled from 'styled-components';
+
+import React from 'react';
+
+import { getGuid } from '@Utils/data/random-number';
 
 import Tag from './Tag';
 
@@ -16,16 +20,31 @@ const Title = styled.p`
 `;
 
 interface ITagsList {
-  tag?: string[];
+  availableTags: string[];
   activeTags?: string[];
+  onTagSelected: (tag: string) => void;
+  onTagUnselected: (tag: string) => void;
 }
 
-const TagsList: React.FC<ITagsList> = ({ tag, activeTags }) => {
+const TagsList: React.FC<ITagsList> = ({ availableTags, activeTags, onTagSelected, onTagUnselected }) => {
+  const encodedTags = availableTags.map((tag) => encodeStringToBase64(tag));
+  const encodedActiveTags = activeTags ? activeTags.map((tag) => encodeStringToBase64(tag)) : [];
+  const handleClick = (tag: string) => {
+    encodedActiveTags?.includes(tag) ? onTagUnselected(tag) : onTagSelected(tag);
+  };
+
   return (
     <div>
-      <Title>kategorie</Title>
+      <Title>Kategorie</Title>
       <Wrapper>
-        {tag && tag.map((el, id) => <Tag key={`tag_${id}`} label={el} active={activeTags?.includes(el)} />)}
+        {availableTags.map((tag: string) => (
+          <Tag
+            key={`tag_${getGuid()}`}
+            label={tag}
+            active={activeTags?.includes(encodeStringToBase64(tag))}
+            onClick={() => handleClick(encodeStringToBase64(tag))}
+          />
+        ))}
       </Wrapper>
     </div>
   );

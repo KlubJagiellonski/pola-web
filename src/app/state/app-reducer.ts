@@ -1,11 +1,13 @@
+import { AppSettings } from '../app-settings';
 import { createSlice } from '@reduxjs/toolkit';
+
 import { PageType } from 'app/website';
 
-import { AppSettings } from '../app-settings';
+import { IBrowserLocation } from '@Utils/browser/location';
 
 export interface IAppState {
   initialized: boolean;
-  location?: Location;
+  location?: IBrowserLocation;
   activePage: PageType;
   isMenuExpanded: boolean;
   isSearchInfoVisible: boolean;

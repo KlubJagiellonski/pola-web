@@ -1,19 +1,12 @@
-import React from 'react';
-
-import { ArticleBlock } from './ArticleBlock';
-import { Device, margin, padding } from '@Styles/theme';
-import { IArticlesTwoColumns } from '@Utils/articles';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  @media ${Device.mobile} {
-    padding: ${padding.normal};
-    margin-bottom: ${margin.normal};
-    padding-top: 0;
-    display: flex;
-    flex-direction: column;
-  }
-`;
+import React from 'react';
+
+import { IArticlesTwoColumns } from 'posts/services/article-service';
+
+import { ArticleBlock } from './ArticleBlock';
+
+import { Device } from '@Styles/theme';
 
 const Row = styled.div`
   display: flex;
@@ -35,7 +28,7 @@ interface IArticlesList {
 
 export const ArticlesList: React.FC<IArticlesList> = ({ articles }) => {
   return (
-    <Wrapper>
+    <>
       {articles &&
         articles.map((article: IArticlesTwoColumns) => (
           <Row key={article.first.id}>
@@ -63,7 +56,7 @@ export const ArticlesList: React.FC<IArticlesList> = ({ articles }) => {
             )}
           </Row>
         ))}
-    </Wrapper>
+    </>
   );
 };
 

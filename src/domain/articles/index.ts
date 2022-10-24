@@ -1,38 +1,18 @@
 import { IGatsbyNode, IReduxData } from '@State/app';
 
-export class Article {
-  public id: string;
-  public title: string;
-  public subTitle: string;
-  public slug: string;
-  public date?: string;
-  public imagePath?: string;
-  public tag: string;
+import { encodeStringToBase64 } from 'posts/services/url-service';
 
-  constructor(data: IArticleNode) {
-    this.id = data.id;
-    this.title = data.frontmatter.title;
-    this.subTitle = data.frontmatter.subTitle;
-    this.slug = data.fields.slug;
-    this.date = data.fields.prefix;
-    this.imagePath = data.frontmatter.cover.relativePath;
-    this.tag = data.frontmatter.category;
-  }
-
-  public static fromNode(node: IArticleNode): Article {
-    return new Article(node);
-  }
-
-  public toDataModel = (): ArticleData => ({
-    id: this.id,
-    title: this.title,
-    subTitle: this.subTitle,
-    slug: this.slug,
-    date: this.date,
-    imagePath: this.imagePath,
-    tag: this.tag,
-  });
-}
+export const mapArticlesToDataModel = (nodes: IArticleNode[]): ArticleData[] =>
+  nodes.map((node) => ({
+    id: node.id,
+    title: node.frontmatter.title,
+    subTitle: node.frontmatter.subTitle,
+    slug: node.fields.slug,
+    date: node.fields.prefix,
+    imagePath: node.frontmatter.cover.relativePath,
+    tag: node.frontmatter.category,
+    urlTag: node.frontmatter.category ? encodeStringToBase64(node.frontmatter.category) : undefined,
+  }));
 
 export interface IArticleNode extends IGatsbyNode {
   wordCount: {
@@ -71,10 +51,12 @@ export interface IArticleNode extends IGatsbyNode {
 }
 
 export interface ArticleData extends IReduxData {
+  id: string;
   title: string;
   subTitle: string;
   slug: string;
   date?: string;
   imagePath?: string;
-  tag: string;
+  tag?: string;
+  urlTag?: string;
 }

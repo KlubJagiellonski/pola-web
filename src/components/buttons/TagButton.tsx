@@ -1,5 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
+
+import React from 'react';
+
+import { TAG_SEPARATOR } from '@Domain/articles';
 
 import { Button, IButtonTheme } from './Button';
 
@@ -33,7 +36,7 @@ export const TagButton: React.FC<ITagButton> = ({ label, icon, className, disabl
   return (
     <ButtonContainer theme={styles} className={className} onClick={handleClick} disabled={disabled}>
       {icon}
-      {label}
+      {label.replaceAll(TAG_SEPARATOR, ' ')}
       {children}
     </ButtonContainer>
   );

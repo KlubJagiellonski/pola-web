@@ -1,21 +1,30 @@
+import styled from 'styled-components';
+
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+
+import { ArticleData } from '@Domain/articles';
+
+import '@Components/Pagination.css';
+
+import { IArticlesTwoColumns, getArticlesTwoColumns } from 'posts/services/article-service';
 
 import { ArticleBlock } from './ArticleBlock';
 import ArticlesList from './ArticlesList';
 import LatestArticle from './LatestArticle';
-import '@Components/Pagination.css';
-import { ArticleData } from '@Domain/articles';
-import { Device, margin } from '@Styles/theme';
-import { IArticlesTwoColumns, getArticlesTwoColumns } from 'posts/services/article-service';
-import styled from 'styled-components';
-import { DecodedValueMap, SetQuery } from 'use-query-params';
+
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};
 
   @media ${Device.mobile} {
     margin-top: 0;
+    padding: ${padding.normal};
+    margin-bottom: ${margin.normal};
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -36,80 +45,41 @@ const FirstArticle = styled.div<{ inVisible?: boolean }>`
 
 interface NewsPage {
   articles?: ArticleData[];
-  query: DecodedValueMap<IQuery>;
-  setQuery: SetQuery<IQuery>;
+  query: IQuery;
+  onPageSelected: (page: number) => void;
 }
 
-interface IQuery {
-  tags: string[];
-  id: number;
-}
+const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, onPageSelected }) => {
+  if (!articles) {
+    console.warn('No articles to show');
+    return null;
+  }
 
-const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => {
-  const [sortedArticles, setArticles] = useState<IArticlesTwoColumns[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  const isAnyTagSelected = query.tags && query.tags.length > 0;
+  const visibleArticles = isAnyTagSelected
+    ? articles.filter((article: ArticleData) => query.tags.includes(article.urlTag))
+    : articles;
 
-  useEffect(() => {
-    if (articles) {
-      let art: ArticleData[] = articles.slice();
-      art.shift();
+  const data = visibleArticles.slice();
+  const latestArticleData = data.shift();
+  const articlePages = getArticlesTwoColumns(data);
+  const pageCount = articlePages.length;
 
-      if (query.tags.length > 0) {
-        art = art.filter((article: ArticleData) => query.tags.includes(article.tag));
-      }
-      const sortedArticles = getArticlesTwoColumns(art);
-      setArticles(sortedArticles.slice());
-      setPageCount(sortedArticles.length);
-
-      const isWrongQueryId =
-        query.id * 1 === undefined ||
-        query.id * 1 > sortedArticles.length ||
-        query.id < 1 ||
-        !Number.isInteger(query.id);
-
-      if (isWrongQueryId) {
-        setQuery({ tags: query.tags, id: 1 }, 'push');
-      } else {
-        setCurrentPage(query.id - 1);
-      }
-    }
-  }, [articles, query]);
-
-  const handlePageClick = ({ selected: selectedPage }) => {
-    setQuery({ tags: query.tags, id: selectedPage + 1 }, 'push');
+  const handlePageClick = ({ selected }) => {
+    onPageSelected(selected + 1);
   };
 
   return (
     <>
-      {articles && (
-        <LatestArticle
-          key={articles[0].id}
-          title={articles[0].title}
-          slug={articles[0].slug}
-          photo={articles[0].imagePath}
-          date={articles[0].date}
-          text={articles[0].subTitle}
-          tag={articles[0].tag}
-        />
-      )}
-      {currentPage === 0 && articles && (query.tags.includes(articles[0].tag) || query.tags.length === 0) && (
+      {latestArticleData && <LatestArticle {...latestArticleData} />}
+      {latestArticleData && (
         <FirstArticle>
-          <ArticleBlock
-            key={articles[0].id}
-            id={articles[0].id}
-            title={articles[0].title}
-            slug={articles[0].slug}
-            imagePath={articles[0].imagePath}
-            date={articles[0].date}
-            subTitle={articles[0].subTitle}
-            tag={articles[0].tag}
-          />
+          <ArticleBlock {...latestArticleData} />
         </FirstArticle>
       )}
-      {sortedArticles && sortedArticles.length > 0 && (
+      {articlePages && articlePages.length > 0 && (
         <Wrapper>
-          <ArticlesList articles={sortedArticles[currentPage]} />
+          <ArticlesList articles={articlePages[query.page - 1]} />
         </Wrapper>
       )}
       <PaginationSection>
@@ -124,7 +94,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, setQuery }) => 
             nextLinkClassName={'pagination__link'}
             disabledClassName={'pagination__link--disabled'}
             activeClassName={'pagination__link--active'}
-            forcePage={currentPage}
+            forcePage={query.page - 1}
           />
         )}
       </PaginationSection>

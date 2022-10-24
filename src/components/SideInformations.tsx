@@ -1,7 +1,6 @@
-import { getRandomFriend } from 'friends/services/friend-service';
-import { getTagsList, getVisibleArticles } from 'posts/services/article-service';
-import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import React, { useEffect, useState } from 'react';
 
 import { ArticleData } from '@Domain/articles';
 import { FriendData } from '@Domain/friends';
@@ -9,6 +8,9 @@ import { FriendData } from '@Domain/friends';
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import TagsList from '../posts/tags/TagsList';
+import { getRandomFriend } from 'friends/services/friend-service';
+import { getUniqueTags, getVisibleArticles } from 'posts/services/article-service';
+
 import DevelopmentSection from './DevelopmentSection';
 import SocialMedia from './social-media/SocialMedia';
 
@@ -69,7 +71,7 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
       </FirstSection>
       <SecondSection>
         <SocialMedia />
-        <TagsList tag={articles && getTagsList(articles)} />
+        <TagsList availableTags={articles && getUniqueTags(articles)} />
       </SecondSection>
       <Title>Zobacz także:</Title>
       <ArticlesListPreview articles={articlesPreview} />

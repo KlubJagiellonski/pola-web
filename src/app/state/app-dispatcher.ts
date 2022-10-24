@@ -1,12 +1,14 @@
-import { PageType } from 'app/website';
+import { IPolaState } from '.';
 import { Dispatch } from 'redux';
 
-import { IPolaState } from '.';
+import { PageType } from 'app/website';
+
+import { IBrowserLocation } from '@Utils/browser/location';
+
 import * as searchActions from '../../search/state/search-actions';
 import { SearchStateName } from '../../search/state/search-reducer';
-import { expandMenu, initializeApp, loadBrowserLocation, selectActivePage, toggleSearchInfo } from './app-reducer';
 
-// import * as actions from './app-actions';
+import { expandMenu, initializeApp, loadBrowserLocation, selectActivePage, toggleSearchInfo } from './app-reducer';
 
 export const appDispatcher = {
   initialize: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
@@ -14,7 +16,18 @@ export const appDispatcher = {
   },
 
   loadBrowserLocation: (location: Location) => async (dispatch: any, getState: () => IPolaState) => {
-    await dispatch(loadBrowserLocation(location));
+    const locationParams: IBrowserLocation = {
+      hash: location.hash,
+      search: location.search,
+      host: location.host,
+      hostname: location.hostname,
+      href: location.href,
+      origin: location.origin,
+      pathname: location.pathname,
+      port: location.port,
+      protocol: location.protocol,
+    };
+    await dispatch(loadBrowserLocation(locationParams));
   },
 
   selectActivePage: (type: PageType) => async (dispatch: Dispatch, getState: () => IPolaState) => {

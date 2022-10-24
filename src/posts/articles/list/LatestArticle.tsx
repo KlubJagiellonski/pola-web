@@ -1,5 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
+
+import React from 'react';
+
+import { ArticleData } from '@Domain/articles';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 
@@ -7,15 +10,6 @@ import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 
 import { Device, color, margin, padding } from '@Styles/theme';
-
-interface IArticleBlock {
-  title: string;
-  slug: string;
-  photo?: string;
-  date?: string;
-  text: string;
-  tag?: string;
-}
 
 const Wrapper = styled.div`
   position: relative;
@@ -61,11 +55,11 @@ const TextSection = styled.div`
   flex-direction: column;
 `;
 
-const LatestArticle: React.FC<IArticleBlock> = ({ photo, title, slug, date, text, tag }) => {
+const LatestArticle: React.FC<ArticleData> = ({ imagePath, title, slug, date, text, tag }) => {
   return (
     <Wrapper>
       <Sections>
-        <ImageSection>{photo && <ResponsiveImage imageSrc={photo} />}</ImageSection>
+        <ImageSection>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ImageSection>
         <TextSection>
           <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
           <ArticleContents date={date} text={text} tag={tag} />

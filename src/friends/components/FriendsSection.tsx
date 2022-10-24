@@ -1,10 +1,13 @@
-import { getFriendBySlug } from 'friends/services/friend-service';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import { useLocation } from '@reach/router';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+
 import { FriendData } from '@Domain/friends';
+
+import { getFriendBySlug } from 'friends/services/friend-service';
 
 import Friends from './Friends';
 import SingleFriend from './SingleFriend';
@@ -29,6 +32,7 @@ interface IFriendsSection {
 }
 
 const FriendsSection: React.FC<IFriendsSection> = ({ friends }) => {
+  const location = useLocation();
   const [query] = useQueryParams({
     value: StringParam,
   });

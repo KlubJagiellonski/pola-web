@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
+import { navigate } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useQueryParamString } from 'react-use-query-param-string';
 
 import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType } from '@App/website';
-import { ArticleData } from '@Domain/articles';
 
 import '@Components/Pagination.css';
 import Placeholder from '@Components/Placeholder';
@@ -17,9 +15,9 @@ import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-import NewsPageArticles from '../posts/articles/list/NewsPagesArticles';
 import TagsList from '../posts/tags/TagsList';
-import { getTagsList } from 'posts/services/article-service';
+import NewsPageArticles from 'posts/articles/list/NewsPagesArticles';
+import { buildArticlesQuery, getUniqueTags, useArticlesParams } from 'posts/services/article-service';
 
 import { Device, margin } from '@Styles/theme';
 
@@ -48,39 +46,63 @@ const InfoSection = styled.div`
 
 interface INewsPage extends GatsbyPage {}
 
-interface IQuery {
-  tags?: string[];
-  id?: number;
-}
+export type Action = { type: 'setTag'; payload: string[] } | { type: 'setPage'; payload: number };
 
-const NewsPage: React.FC<INewsPage> = ({ location, articles }) => {
-  const articledData = useSelector((state: IPolaState) => state.articles.data);
-  const [tag, setTag] = useState<string[]>([]);
-  const [query, setQuery] = useQueryParams<IQuery>({
-    tags: withDefault(ArrayParam, ['a', 'b', 'c']),
-    id: NumberParam,
-  });
-  // const [query, setQuery] = useQueryParamString<IQuery>({
-  //   tags: withDefault(ArrayParam, ['a', 'b', 'c']),
-  //   id: NumberParam,
-  // });
+const NewsPage: React.FC<INewsPage> = ({ location }) => {
+  const articlesData = useSelector((state: IPolaState) => state.articles.data);
+  const queryParams = useArticlesParams();
 
   useEffect(() => {
-    if (articles) {
-      setTag(getTagsList(articles));
-    }
-
     window.document.getElementById('layout-container')?.scrollTo(0, 0);
-  }, [articles, query]);
+  }, [articlesData]);
 
+  const navigateToPage = (page: number) => {
+    const url = buildArticlesQuery({
+      ...queryParams,
+      page,
+    });
+    if (url) {
+      navigate(url);
+    }
+  };
+  const selectTag = (tag: string) => {
+    const url = buildArticlesQuery({
+      ...queryParams,
+      tags: [...queryParams.tags, tag],
+    });
+    if (url) {
+      navigate(url);
+    }
+  };
+  const unselectTag = (tag: string) => {
+    const url = buildArticlesQuery({
+      ...queryParams,
+      tags: queryParams.tags.filter((t: string) => t != tag),
+    });
+    if (url) {
+      navigate(url);
+    }
+  };
+
+  const tags = getUniqueTags(articlesData);
+  console.log('TAGS', tags);
   return (
     <PageLayout location={location} page={PageType.NEWS}>
       <SEOMetadata pageTitle="Aktualności" />
       <Placeholder text="Aktualności" />
       <PageSection>
-        <NewsPageArticles articles={articledData} query={query} setQuery={setQuery} />
+        {articlesData && (
+          <NewsPageArticles articles={articlesData} query={queryParams} onPageSelected={navigateToPage} />
+        )}
         <InfoSection>
-          <TagsList tag={tag} activeTags={query.tags} />
+          {articlesData && (
+            <TagsList
+              availableTags={tags}
+              activeTags={queryParams.tags}
+              onTagSelected={selectTag}
+              onTagUnselected={unselectTag}
+            />
+          )}
           <SocialMedia />
         </InfoSection>
       </PageSection>
@@ -88,4 +110,4 @@ const NewsPage: React.FC<INewsPage> = ({ location, articles }) => {
   );
 };
 
-export default INewsPage;
+export default NewsPage;
