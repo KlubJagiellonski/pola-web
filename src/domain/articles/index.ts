@@ -33,17 +33,24 @@ export interface IArticleNode extends IGatsbyNode {
       name: string;
       childImageSharp: {
         id: string;
-        fixed: {
-          src: string;
-          width: number;
-          height: number;
-        };
-        fluid: {
-          src: string;
-          presentationWidth: number;
-          presentationHeight: number;
+        gatsbyImageData: {
+          layout: string;
+          // width: number;
+          // height: number;
           aspectRatio: number;
         };
+
+        // fixed: {
+        //   src: string;
+        //   width: number;
+        //   height: number;
+        // };
+        // fluid: {
+        //   src: string;
+        //   presentationWidth: number;
+        //   presentationHeight: number;
+        //   aspectRatio: number;
+        // };
       };
       relativePath: string;
     };

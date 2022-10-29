@@ -1,11 +1,13 @@
-import { urls } from 'app/website';
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
+
+import { urls } from 'app/website';
 
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
-import { ResponsiveImage } from './images/ResponsiveImage';
+import { AssetImage } from './images/AssetImage';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '@Styles/theme';
@@ -65,7 +67,7 @@ const About = () => {
         </Link>
       </Info>
       <MockUp>
-        <ResponsiveImage imageSrc="1-prom-strona.png" />
+        <AssetImage imageSrc="1-prom-strona.png" />
       </MockUp>
     </Wrapper>
   );

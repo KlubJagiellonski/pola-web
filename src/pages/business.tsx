@@ -75,11 +75,11 @@ const BusinessPage = (props: IBusinessPage) => {
             Pozostała <a href={urls.external.links.biznesKlub.href}>oferta Centrum Analiz Klubu Jagiellońskiego</a>
           </Title>
           <ImageSection>
-            <ResponsiveImage imageSrc="nawigator-legislacyjny.jpg" />
-            <ResponsiveImage imageSrc="nawigator-polityczny.jpg" />
-            <ResponsiveImage imageSrc="raport-branzowy.jpg" />
-            <ResponsiveImage imageSrc="partnerstwo-dzialu.jpg" />
-            <ResponsiveImage imageSrc="okragle-stoly.jpg" />
+            <ResponsiveImage title="nawigator legislacyjny" imageSrc="nawigator-legislacyjny.jpg" />
+            <ResponsiveImage title="nawigator polityczny" imageSrc="nawigator-polityczny.jpg" />
+            <ResponsiveImage title="raport branzowy" imageSrc="raport-branzowy.jpg" />
+            <ResponsiveImage title="partnerstwo dzialu" imageSrc="partnerstwo-dzialu.jpg" />
+            <ResponsiveImage title="okragle stoly" imageSrc="okragle-stoly.jpg" />
           </ImageSection>
           <Text>
             Kontakt: Marta Wenclewska,{' '}

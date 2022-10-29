@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-import { TAG_SEPARATOR } from '@Domain/articles';
+import { TAG_SEPARATOR } from 'posts/services/url-service';
 
 import { Button, IButtonTheme } from './Button';
 

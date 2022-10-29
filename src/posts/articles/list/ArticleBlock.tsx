@@ -80,7 +80,7 @@ export const ArticleBlock: React.FC<ArticleData> = ({ imagePath, title, slug, da
       <Link to={slug}>
         <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
       </Link>
-      <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
+      <ArticleImage>{imagePath && <ResponsiveImage title={title} imageSrc={imagePath} />}</ArticleImage>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
         <Contents>

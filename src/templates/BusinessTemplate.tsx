@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
+//import { FluidObject } from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import BusinessElements from '@Components/business/BusinessElements';
@@ -12,13 +13,17 @@ export interface IBusinessTemplate {
           title: string;
           slug: string;
           cover: {
+            extension;
+            relativePath;
             childImageSharp: {
-              fluid: FluidObject | FluidObject[];
+              gatsbyImageData: any | any[];
             };
           };
           icon: {
+            extension;
+            relativePath;
             childImageSharp: {
-              fluid: FluidObject | FluidObject[];
+              gatsbyImageData: any | any[];
             };
           };
         };
@@ -37,17 +42,17 @@ const BusinessTemplate = () => {
             title
             slug
             cover {
+              extension
+              relativePath
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(layout: CONSTRAINED)
               }
             }
             icon {
+              extension
+              relativePath
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(layout: CONSTRAINED)
               }
             }
           }

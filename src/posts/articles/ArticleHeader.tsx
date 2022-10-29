@@ -1,6 +1,8 @@
-import Img, { FluidObject } from 'gatsby-image';
-import React from 'react';
+//import Img, { FluidObject } from 'gatsby-image';
 import styled from 'styled-components';
+
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React from 'react';
 
 import { getDate } from '@Utils/dates';
 
@@ -15,7 +17,7 @@ interface IArticleHeader {
   title: string;
   subTitle: string;
   date: string;
-  fluid: FluidObject | FluidObject[];
+  fluid: any | any[];
   category?: string;
 }
 
@@ -26,6 +28,6 @@ export const ArticleHeader: React.FC<IArticleHeader> = ({ title, subTitle, date,
       {category} | {getDate(date)}
     </Text>
     <p>{subTitle}</p>
-    <Img fluid={fluid} />
+    <GatsbyImage alt={`${title} - ${subTitle}`} image={getImage(fluid)} />
   </>
 );

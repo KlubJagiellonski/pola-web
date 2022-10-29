@@ -7,7 +7,7 @@ export const FriendImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => 
   <StaticQuery
     query={graphql`
       query {
-        images: allFile(filter: { sourceInstanceName: { eq: "asset-images" } }) {
+        images: allFile(filter: { sourceInstanceName: { eq: "friend-images" } }) {
           nodes {
             extension
             relativePath

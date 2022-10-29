@@ -41,20 +41,25 @@ const BusinessElements: React.FC<IBusinessElements> = ({ data }) => {
     <>
       <H>
         <SliderContainer rows={1}>
-          {data.allMarkdownRemark.nodes?.map((el) => (
+          {data.allMarkdownRemark.nodes?.map((node) => (
             <SingleBusinessSlider
-              slug={el.frontmatter.slug}
-              title={el.frontmatter.title}
-              iconFluid={el.frontmatter.icon.childImageSharp.fluid}
+              key={node.frontmatter.slug}
+              slug={node.frontmatter.slug}
+              title={node.frontmatter.title}
+              iconFluid={node.frontmatter.icon.relativePath}
             />
           ))}
         </SliderContainer>
       </H>
-      {data.allMarkdownRemark.nodes
-        ?.filter((el) => el.frontmatter.slug === query.value)
-        .map((el) => (
-          <BusinessElement html={el.html} imgFluid={el.frontmatter.cover?.childImageSharp?.fluid} />
-        ))}
+      {/* {data.allMarkdownRemark.nodes
+        ?.filter((node) => node.frontmatter.slug === query.value)
+        .map((node) => (
+          <BusinessElement
+            key={node.frontmatter.slug}
+            html={node.html}
+            imgFluid={node.frontmatter.cover?.relativePath}
+          />
+        ))} */}
     </>
   );
 };
