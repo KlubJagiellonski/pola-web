@@ -34,6 +34,9 @@ exports.createPages = async function ({ graphql, actions }) {
                 slug
                 prefix
               }
+              frontmatter {
+                twitter
+              }
             }
           }
         }
@@ -50,12 +53,14 @@ exports.createPages = async function ({ graphql, actions }) {
   // Create articles
   result.data.allMarkdownRemark.edges.forEach((edge) => {
     const { slug } = edge.node.fields;
+    const { twitter } = edge.node.frontmatter;
 
     createPage({
       path: slug,
       component: articleTemplate,
       context: {
         slug,
+        twitter,
       },
     });
   });

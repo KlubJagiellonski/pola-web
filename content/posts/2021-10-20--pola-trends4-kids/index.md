@@ -3,6 +3,7 @@ title: Edukacja dla najmłodszych
 subTitle: Pola partnerem targów Trends 4 Kids
 category: 'Patriotyzm Edukacja'
 cover: Trends4kids.png
+twitter: WEST
 ---
 
 Aplikacja Pola po raz kolejny została partnerem targów [Trends 4 Kids](https://trends4kids.pl/)

@@ -3,6 +3,7 @@ title: LPP, 4F, CCC, Cirkle K, Warta
 subTitle: Biznes wspiera Ukrainę 1
 category: Solidarni
 cover: biznes.png
+twitter: WEST
 ---
 
 ###Polska odzież, buty i ubezpieczenia dla wszystkich potrzebujących uchodźców.

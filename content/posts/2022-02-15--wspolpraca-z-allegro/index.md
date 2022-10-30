@@ -2,6 +2,7 @@
 title: Kolejny okrągły stół z Allegro
 subTitle: Wspólny projekt Klubu Jagiellońskiego i Allegro
 cover: allegro.PNG
+twitter: WEST
 ---
 
 „W internecie dane na nasz temat są zbierane i wykorzystywane przez firmy, który dzięki temu zarabiają. Wydaje się, że użytkownicy globalnej sieci są w ten sposób poszkodowani. Cierpi nie tylko ich prywatność, lecz także ich udział w zyskach. Odpowiedzią mogłoby być prawo do własności danych. Jednak bliższy rzut oka na problem pokazuje, że to wcale nie jest takie proste”.

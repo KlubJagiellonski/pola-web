@@ -1,8 +1,9 @@
 ---
 title: Kawa Pluton w Klubie Przyjaciół Poli
 subTitle: Kolejna firma ze znakiem towarowym Poli
-category: "Znak towarowy"
+category: 'Znak towarowy'
 cover: pluton.jpg
+twitter: WEST
 ---
 
 Przygotowaliśmy program wsparcia dla przedsiębiorców, dzięki któremu ocena firmy może być widoczna bezpośrednio na opakowaniu produktów.
@@ -16,7 +17,6 @@ Nasz znak towarowy jest przeznaczony tylko i wyłącznie dla firm, które otrzym
 Historia tej firmy sięga XIX wieku. Jej założycielem był Tadeusz Tarasiewicz, który założył pierwszą na ziemiach polskich palarnię kawy, pod nazywą Pluton. Firma przetrwała do 1950 r. W 2017 r. została reaktywowana. Pluton Kawa kultywuje tradycje i z powodzeniem stosuje współcześnie wartości kupieckie XX-lecia międzywojennego.
 
 ## [Odwiedź stronę Pluton Kawa](https://sklep.kawapluton.com/)
-
 
 Więcej o naszym znaku towarowym [znajdziesz tu](https://klubjagiellonski.github.io/pola-web/friends).
 

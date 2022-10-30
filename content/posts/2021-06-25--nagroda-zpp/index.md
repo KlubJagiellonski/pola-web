@@ -3,6 +3,7 @@ title: Nagroda ZPP dla Klubu Jagiellońskiego
 subTitle: Związek Pracodawców i Przedsiębiorców przyznał nagrodę wydawcy aplikacji Pola
 category: 'Klub Jagiellonski'
 cover: ZPP.png
+twitter: WEST
 ---
 
 W dniu 24 czerwca odbyła się gala z okazji 10-lecia działalności Związku Przedsiębiorców i Pracodawców. Uczestniczyło w niej około 250 przedstawicieli życia gospodarczego, politycznego i świata mediów.

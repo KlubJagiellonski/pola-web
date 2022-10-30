@@ -3,18 +3,18 @@ title: Który majonez jest Polski?
 subTitle: Sprawdź ile punktów uzyskuje twój ulubiony majonez
 category: 'Ranking'
 cover: zestawienie.png
+twitter: WEST
 ---
 
 W naszej bazie znaleźć można 272 majonezy. Najpopularniejszy z nich skanowano 11 tys. razy. Sprawdź jak popularny jest ten, który Ty wybierasz najczęściej.
 
 <div style="max-width: 500px; margin: 0 auto;">
 
-![](winiary.jpg) 
+![](winiary.jpg)
 
 Wśród 10. najczęściej skanowanych majonezów, aż cztery należą do marki Winiary, będącej częścią koncernu Nestle ocenianego przez aplikację Pola na 55 pkt.
 
 </div>
-
 
 Aplikacja Pola działa już od ponad 6. lat. Pobrano ją ponad 750 tys. razy, a liczba zeskanowanych produktów zbliża się do 10 mln.
 
@@ -22,7 +22,7 @@ Najczęściej skanowano majonez z kodem: 5900085011012, czyli Majonez Dekoracyjn
 
 <div style="max-width: 500px; margin: 0 auto;">
 
-![](kielecki.jpg) 
+![](kielecki.jpg)
 
 Trzecią pozycję zajmuje Kielecki z kodem 5900242001566 i liczbą 7441 skanowań. Marka należy do WSP Społem ocenianej na 100 pkt.
 
@@ -44,7 +44,7 @@ Następne pozycje również zajmują produkty WSP Społek i Nestle:
 
 </div>
 
-Dziewiate miesce zajmuje kod: 5901926027018, czyli Mosso Majonez napoleoński 320 ml z liczbą 2152 skanowań. Marka należy do firmy 	MOSSO Kwaśniewscy Sp. j., która również oceniana jest na 100 pkt.
+Dziewiate miesce zajmuje kod: 5901926027018, czyli Mosso Majonez napoleoński 320 ml z liczbą 2152 skanowań. Marka należy do firmy MOSSO Kwaśniewscy Sp. j., która również oceniana jest na 100 pkt.
 
 <div style="max-width: 500px; margin: 0 auto;">
 

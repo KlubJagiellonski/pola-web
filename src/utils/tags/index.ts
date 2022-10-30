@@ -7,7 +7,6 @@ export function getTagsList(articles: Article[]) {
       return el.tag;
     })
     .sort();
-  console.log(cat);
   const unique = new Set(cat);
   return Array.from(unique);
 }

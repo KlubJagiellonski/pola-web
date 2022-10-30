@@ -15,7 +15,7 @@ export default ArticleTemplate;
 
 //eslint-disable-next-line no-undef
 export const postQuery = graphql`
-  query PostBySlug($slug: String!) {
+  query PostBySlug($slug: String!, $twitter: ImageCropFocus) {
     post: markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
@@ -32,6 +32,9 @@ export const postQuery = graphql`
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid
+            }
+            twitter: fixed(cropFocus: $twitter, width: 400, height: 400, quality: 90) {
+              ...GatsbyImageSharpFixed_noBase64
             }
           }
         }
