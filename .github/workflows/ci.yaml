@@ -82,7 +82,7 @@ jobs:
       - name: 🟢 Install dependencies
         run: npm ci
       - name: 🔧 Build app
-        run: npm run build && cp -r mobile-web/m/ public/
+        run: npm run build
       - name: 🚀 Upload app as artifact
         uses: actions/upload-artifact@v2
         with:
