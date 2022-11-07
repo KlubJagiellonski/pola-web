@@ -4,17 +4,14 @@ import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import SEOMetadata from '../../utils/browser/SEOMetadata';
 import { IPolaState } from '../../state/types';
 import { LoadBrowserLocation, SelectActivePage } from '../../state/app/app-actions';
-import { PageType, urls } from '../../domain/website';
+import { PageType } from '../../domain/website';
 import { PageSection } from '../../layout/PageSection';
 import { ResponsiveImage } from '../../components/images/ResponsiveImage';
 import { color, Device, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
 import styled from 'styled-components';
-import BusinessTemplates from '../../templates/BusinessTemplate';
 import { WebViewLayout } from 'layout/WebViewLayout';
 import { reduceToFlatProductsList } from 'domain/products/search-service';
-import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
-import { SearchForm } from 'search/form/SearchForm';
 import { appDispatcher } from 'state/app/app-dispatcher';
 import { searchDispatcher } from 'state/search/search-dispatcher';
 import { SearchStateName } from 'state/search/search-reducer';
@@ -147,8 +144,7 @@ type ISearchPage = ConnectedProps<typeof connector> & {
 };
 
 const SearchPage = (props: ISearchPage) => {
-  const { location, searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower, onLoadMore } =
-    props;
+  const { location, searchState, searchResults, onLoadMore } = props;
   const dispatch = useDispatch();
   const isLoading = searchState === SearchStateName.LOADING;
 
