@@ -3,7 +3,7 @@ import React from 'react';
 
 import { IResponsiveImage, renderFromQuery } from './render-image';
 
-export const FriendImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
+export const ResponsiveImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -18,6 +18,6 @@ export const FriendImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => 
         }
       }
     `}
-    render={(data) => renderFromQuery(data, imageSrc, title)}
+    render={(data) => renderFromQuery(data.images.nodes, imageSrc, title)}
   />
 );

@@ -16,7 +16,7 @@ const config: JestConfigWithTsJest = {
     '^@Layout/(.*)$': '<rootDir>/src/layout/$1',
     '^@State/(.*)$': '<rootDir>/src/app/state/$1',
     '^@Styles/(.*)$': '<rootDir>/src/styles/$1',
-    '^@Templates/(.*)$': '<rootDir>/src/templates/$1',
+    '^@Templates/(.*)$': '<rootDir>/src/gatsby-templates/$1',
     '^@Utils/(.*)$': '<rootDir>/src/utils/$1',
   },
   testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',

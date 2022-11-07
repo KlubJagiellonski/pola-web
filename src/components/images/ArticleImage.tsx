@@ -7,17 +7,25 @@ export const ArticleImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) =>
   <StaticQuery
     query={graphql`
       query {
-        images: allFile(filter: { sourceInstanceName: { eq: "article-images" } }) {
+        images: allFile(
+          filter: {
+            sourceInstanceName: { eq: "article-images" }
+            childrenImageSharp: { elemMatch: { gatsbyImageData: { ne: "null" } } }
+          }
+        ) {
           nodes {
             extension
             relativePath
             childImageSharp {
+              fluid {
+                src
+              }
               gatsbyImageData(layout: CONSTRAINED)
             }
           }
         }
       }
     `}
-    render={(data) => renderFromQuery(data, imageSrc, title)}
+    render={(data) => renderFromQuery(data.images.nodes, imageSrc, title)}
   />
 );

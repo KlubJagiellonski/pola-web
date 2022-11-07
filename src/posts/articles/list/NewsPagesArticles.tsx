@@ -7,7 +7,7 @@ import { ArticleData } from '@Domain/articles';
 
 import '@Components/Pagination.css';
 
-import { IQuery, getArticlesTwoColumns } from 'posts/services/article-service';
+import { IArticleQuery, getArticlesTwoColumns } from 'posts/services/article-service';
 
 import { ArticleBlock } from './ArticleBlock';
 import ArticlesList from './ArticlesList';
@@ -45,7 +45,7 @@ const FirstArticle = styled.div<{ inVisible?: boolean }>`
 
 interface NewsPage {
   articles?: ArticleData[];
-  query: IQuery;
+  query: IArticleQuery;
   onPageSelected: (page: number) => void;
 }
 

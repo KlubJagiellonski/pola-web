@@ -7,10 +7,10 @@ import { urls } from 'app/website';
 
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
-import { AssetImage } from './images/AssetImage';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '@Styles/theme';
+import { ResponsiveImage } from './images/ResponsiveImage';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: about;
@@ -67,7 +67,7 @@ const About = () => {
         </Link>
       </Info>
       <MockUp>
-        <AssetImage imageSrc="1-prom-strona.png" />
+        <ResponsiveImage imageSrc="1-prom-strona.png" title={'info'} />
       </MockUp>
     </Wrapper>
   );

@@ -7,7 +7,7 @@
   "jsxBracketSameLine": true,
   "importOrder": [
     "^(react|gatsby)(.*)$",
-    "^(@(App|Domain|State|Templates)|(app|domain|pages|templates))/(.*)$",
+    "^(@(App|Domain|State|Templates)|(app|domain|pages|gatsby-templates))/(.*)$",
     "^(@(Layout|Components|Utils)|(layout|components|utils))/(.*)$",
     "(newsletter|posts|friends|search)/(.*)$",
     "^(./)",

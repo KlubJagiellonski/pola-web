@@ -4,12 +4,11 @@ import React from 'react';
 
 import { ArticleData } from '@Domain/articles';
 
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 
 import { Device, color, margin, padding } from '@Styles/theme';
+import { ArticleImage } from '@Components/images/ArticleImage';
 
 const Wrapper = styled.div`
   position: relative;
@@ -59,7 +58,7 @@ const LatestArticle: React.FC<ArticleData> = ({ imagePath, title, slug, date, te
   return (
     <Wrapper>
       <Sections>
-        <ImageSection>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ImageSection>
+        <ImageSection>{imagePath && <ArticleImage title={title} imageSrc={imagePath} />}</ImageSection>
         <TextSection>
           <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
           <ArticleContents date={date} text={text} tag={tag} />

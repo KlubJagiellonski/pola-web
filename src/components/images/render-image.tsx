@@ -1,15 +1,38 @@
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React from 'react';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { pixels } from '@Styles/theme';
 
 export interface IResponsiveImage {
   imageSrc: string;
   title: string;
 }
 
+// export interface GatsbyImageSource {
+//   srcSet: string;
+//   type: string;
+//   sizes: string;
+// }
+
+// export interface GatsbyImageData {
+//   layout: 'fixed' | 'constrained' | 'full-width';
+//   backgroundColor: string;
+//   images: {
+//     fallback: {
+//       src: string;
+//       srcSet: string;
+//       sizes: string;
+//     }
+//     sources:GatsbyImageSource[];
+//   };
+//   width: pixels;
+//   height: pixels;
+// }
+
 export interface IGatsbyImageNode {
   extension: string;
   relativePath: string;
   childImageSharp: {
-    gatsbyImageData: any;
+    gatsbyImageData: IGatsbyImageData;
   };
 }
 

@@ -7,13 +7,13 @@ import { ArticleData } from '@Domain/articles';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { PrimaryButton } from '@Components/buttons/PrimaryButton';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ArticleImage } from '@Components/images/ArticleImage';
 
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 
 import { WrapperSection } from '@Styles/GlobalStyle.css';
-import { Device, color, margin, padding } from '@Styles/theme';
+import { Device, color, margin } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -26,7 +26,7 @@ const Wrapper = styled(WrapperSection)`
   }
 `;
 
-const ArticleImage = styled.div<{ img?: string }>`
+const ImageWrapper = styled.div<{ img?: string }>`
   width: 50%;
   text-align: left;
 
@@ -80,7 +80,7 @@ export const ArticleBlock: React.FC<ArticleData> = ({ imagePath, title, slug, da
       <Link to={slug}>
         <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
       </Link>
-      <ArticleImage>{imagePath && <ResponsiveImage title={title} imageSrc={imagePath} />}</ArticleImage>
+      <ImageWrapper>{imagePath && <ArticleImage title={title} imageSrc={imagePath} />}</ImageWrapper>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
         <Contents>

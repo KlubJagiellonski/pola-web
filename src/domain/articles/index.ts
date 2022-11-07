@@ -1,4 +1,5 @@
 import { IGatsbyNode, IReduxData } from '@State/app';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 import { encodeStringToBase64 } from 'posts/services/url-service';
 
@@ -15,6 +16,8 @@ export const mapArticlesToDataModel = (nodes: IArticleNode[]): ArticleData[] =>
   }));
 
 export interface IArticleNode extends IGatsbyNode {
+  id: string;
+  html: any;
   wordCount: {
     paragraphs: number;
     sentences: number;
@@ -33,12 +36,10 @@ export interface IArticleNode extends IGatsbyNode {
       name: string;
       childImageSharp: {
         id: string;
-        gatsbyImageData: {
-          layout: string;
-          // width: number;
-          // height: number;
-          aspectRatio: number;
+        fluid: {
+          src: string;
         };
+        gatsbyImageData: IGatsbyImageData;
 
         // fixed: {
         //   src: string;

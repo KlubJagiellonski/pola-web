@@ -1,9 +1,16 @@
 import { graphql, useStaticQuery } from 'gatsby';
-//import { FluidObject } from 'gatsby-image';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage, IGatsbyImageData, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import BusinessElements from '@Components/business/BusinessElements';
+
+export interface IGatsbyImageWrapper {
+  extension: string;
+  relativePath: string;
+  childImageSharp: {
+    gatsbyImageData: IGatsbyImageData;
+  };
+}
 
 export interface IBusinessTemplate {
   allMarkdownRemark: {
@@ -12,20 +19,8 @@ export interface IBusinessTemplate {
         frontmatter: {
           title: string;
           slug: string;
-          cover: {
-            extension;
-            relativePath;
-            childImageSharp: {
-              gatsbyImageData: any | any[];
-            };
-          };
-          icon: {
-            extension;
-            relativePath;
-            childImageSharp: {
-              gatsbyImageData: any | any[];
-            };
-          };
+          cover: IGatsbyImageWrapper;
+          icon: IGatsbyImageWrapper;
         };
         html: string;
       }

@@ -5,7 +5,7 @@ import React from 'react';
 
 import { ArticleData } from '@Domain/articles';
 
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ArticleImage } from '@Components/images/ArticleImage';
 
 import ArticleContents from './ArticleContents';
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
@@ -14,7 +14,7 @@ import { Title } from './ArticleTitle';
 
 import { Device, color, fontSize, margin } from '@Styles/theme';
 
-const ArticleImage = styled.div`
+const ImageWrapper = styled.div`
   width: 50%;
   text-align: left;
   height: 100%;
@@ -72,7 +72,7 @@ const ArticleSection = styled.div`
 export const ArticlePreview: React.FC<ArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Container color={color.background.white}>
-      <ArticleImage>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
+      <ImageWrapper>{imagePath && <ArticleImage title={title} imageSrc={imagePath} />}</ImageWrapper>
       <ArticleSection>
         <ArticleTitle title={title} slug={slug} />
         <ArticleContents date={date} text={subTitle} tag={tag} />

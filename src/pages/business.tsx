@@ -4,7 +4,7 @@ import React from 'react';
 
 import { GatsbyPage } from '@App/generics';
 import { PageType, urls } from 'app/website';
-import BusinessTemplates from 'templates/BusinessTemplate';
+import BusinessTemplates from 'gatsby-templates/BusinessTemplate';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { PageLayout } from '@Layout/PageLayout';

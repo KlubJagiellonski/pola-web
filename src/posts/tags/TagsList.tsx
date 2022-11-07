@@ -22,28 +22,31 @@ const Title = styled.p`
 interface ITagsList {
   availableTags: string[];
   activeTags?: string[];
-  onTagSelected: (tag: string) => void;
-  onTagUnselected: (tag: string) => void;
+  onTagSelected?: (tag: string) => void;
+  onTagUnselected?: (tag: string) => void;
 }
 
 const TagsList: React.FC<ITagsList> = ({ availableTags, activeTags, onTagSelected, onTagUnselected }) => {
   const encodedActiveTags = activeTags ? activeTags.map((tag) => encodeStringToBase64(tag)) : [];
   const handleClick = (tag: string) => {
-    encodedActiveTags?.includes(tag) ? onTagUnselected(tag) : onTagSelected(tag);
+    if (onTagSelected && onTagUnselected) {
+      encodedActiveTags?.includes(tag) ? onTagUnselected(tag) : onTagSelected(tag);
+    }
   };
 
   return (
     <div>
       <Title>Kategorie</Title>
       <Wrapper>
-        {availableTags.map((tag: string) => (
-          <Tag
-            key={`tag_${getGuid()}`}
-            label={tag}
-            active={activeTags?.includes(encodeStringToBase64(tag))}
-            onClick={() => handleClick(encodeStringToBase64(tag))}
-          />
-        ))}
+        {availableTags &&
+          availableTags.map((tag: string) => (
+            <Tag
+              key={`tag_${getGuid()}`}
+              label={tag}
+              active={activeTags?.includes(encodeStringToBase64(tag))}
+              onClick={() => handleClick(encodeStringToBase64(tag))}
+            />
+          ))}
       </Wrapper>
     </div>
   );

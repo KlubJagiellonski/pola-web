@@ -15,6 +15,7 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { ArticleHeader } from './ArticleHeader';
 
 import { Device, margin } from '@Styles/theme';
+import { IArticleNode } from 'domain/articles';
 
 const Content = (props: any) => {
   const { html, children } = props;
@@ -25,17 +26,6 @@ const Content = (props: any) => {
     return <div>{children}</div>;
   }
 };
-
-interface IArticlePage {
-  location?: Location;
-  article: any;
-  articles: ArticleData[];
-  friends: FriendData[];
-  author?: any;
-  slug?: string;
-  facebook?: any;
-  cover?: any;
-}
 
 const Wrapper = styled.div`
   display: flex;
@@ -62,14 +52,30 @@ const SecondColumn = styled.div`
   flex-basis: 0;
 `;
 
+interface IArticlePage {
+  article: IArticleNode;
+  articles: ArticleData[];
+  friends: FriendData[];
+  location?: Location;
+  author?: any;
+  slug?: string;
+  facebook?: any;
+  cover?: any;
+}
+
 const ArticlePage = (props: IArticlePage) => {
   const { article, articles, friends } = props;
-  const title = ((article || {}).frontmatter || {}).title;
-  const subTitle = ((article || {}).frontmatter || {}).subTitle;
-  const category = ((article || {}).frontmatter || {}).category;
-  const date = ((article || {}).fields || {}).prefix;
-  const html = (article || {}).html;
-  const fluid = ((article || {}).frontmatter || {}).cover.childImageSharp.fluid;
+  const { frontmatter } = article;
+  const { title, subTitle, category } = frontmatter;
+  const date = article.fields.prefix;
+  const html = article.html;
+  const fluid = article.frontmatter.cover.childImageSharp.fluid;
+  // const title = ((article || {}).frontmatter || {}).title;
+  // const subTitle = ((article || {}).frontmatter || {}).subTitle;
+  // const category = ((article || {}).frontmatter || {}).category;
+  // const date = ((article || {}).fields || {}).prefix;
+  // const html = (article || {}).html;
+  // const fluid = ((article || {}).frontmatter || {}).cover.childImageSharp.fluid;
 
   return (
     <PageLayout location={props.location} page={PageType.ARTICLE}>

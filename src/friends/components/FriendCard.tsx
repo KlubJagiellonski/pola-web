@@ -11,6 +11,7 @@ import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '@Styles/theme';
+import { FriendLogo } from '@Components/images/FriendLogo';
 
 const Wrapper = styled(WrapperSection)`
   padding: ${padding.normal};
@@ -59,7 +60,7 @@ const FriendCard: React.FC<FriendData> = (friend) => {
       <TitleSection>Oto jeden Przyjaciel z wielu Przyjaciół Poli</TitleSection>
       {friend.image && (
         <ImageSection>
-          <ResponsiveImage imageSrc={friend.image} />
+          <FriendLogo title={friend.name} imageSrc={friend.image} />
         </ImageSection>
       )}
       <Content>{friend.description}</Content>

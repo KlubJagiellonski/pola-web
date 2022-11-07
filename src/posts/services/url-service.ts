@@ -2,6 +2,7 @@ import { stringify } from 'query-string';
 import { ArrayParam, encodeQueryParams, withDefault } from 'use-query-params';
 
 import { urls } from 'app/website';
+import { ArticleData } from '@Domain/articles';
 
 export function tagUrl(label: string, query: any) {
   let tags = query.tags.slice();
@@ -28,7 +29,7 @@ export const encodeStringToBase64 = (tag: string) => {
         .replaceAll('ó', 'o')
         .replaceAll('ź', 'z')
         .replaceAll('ż', 'z')
-    : undefined;
+    : '';
 };
 
 export function getUniqueTags(articles: ArticleData[] | undefined) {

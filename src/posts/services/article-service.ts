@@ -82,12 +82,12 @@ export function getArticlesTwoColumns(articles: ArticleData[]) {
   return sortedArticles;
 }
 
-export interface IQuery {
+export interface IArticleQuery {
   tags: string[];
   page: number;
 }
 
-export const buildArticlesQuery = (query: IQuery): string | undefined => {
+export const buildArticlesQuery = (query: IArticleQuery): string | undefined => {
   const { page, tags } = query;
   let url = '';
   const hasAnyTags = tags && tags.length > 0;
@@ -104,7 +104,7 @@ export const buildArticlesQuery = (query: IQuery): string | undefined => {
   return url;
 };
 
-export const useArticlesParams = (withUseQueryParams: boolean = false): IQuery => {
+export const useArticlesParams = (withUseQueryParams: boolean = false): IArticleQuery => {
   const location = useLocation();
   if (withUseQueryParams) {
     const [query, setQuery] = useQueryParams({
@@ -112,13 +112,13 @@ export const useArticlesParams = (withUseQueryParams: boolean = false): IQuery =
       page: NumberParam,
     });
 
-    return query as IQuery;
+    return query as IArticleQuery;
   } else {
-    const [storedQuery, setStoredQuery] = useState<IQuery>({ page: 1, tags: [] });
+    const [storedQuery, setStoredQuery] = useState<IArticleQuery>({ page: 1, tags: [] });
 
     useEffect(() => {
       const parsedSearch = location?.search ? queryString.parse(location.search, { arrayFormat: 'comma' }) : undefined;
-      const query: IQuery = {
+      const query: IArticleQuery = {
         page: parsedSearch?.page && !Array.isArray(parsedSearch.page) ? parseInt(parsedSearch.page) : 1,
         tags:
           parsedSearch?.tags && parsedSearch.tags.length > 0
@@ -132,6 +132,22 @@ export const useArticlesParams = (withUseQueryParams: boolean = false): IQuery =
 
     return storedQuery;
   }
+};
+
+export const useQueryParam = (paramName: string, initialValue: string): string => {
+  const location = useLocation();
+
+  const [storedQuery, setStoredQuery] = useState<T>(initialValue);
+
+  useEffect(() => {
+    const parsedSearch = location?.search ? queryString.parse(location.search, { arrayFormat: 'comma' }) : undefined;
+    if (parsedSearch && parsedSearch[paramName]) {
+      const value = parsedSearch[paramName];
+      setStoredQuery(value);
+    }
+  }, [location]);
+
+  return storedQuery;
 };
 
 export function getVisibleArticles(actualArticleId: string, articles: ArticleData[]) {

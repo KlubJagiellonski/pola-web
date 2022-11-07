@@ -8,6 +8,7 @@ import { SliderContainer, SliderElement } from '@Components/SliderComponent';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 
 import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { FriendLogo } from '@Components/images/FriendLogo';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;
@@ -42,11 +43,11 @@ const Friends: React.FC<IFriends> = ({ friends, rows }) => {
   return (
     <Wrapper>
       <SliderContainer title="Przyjaciele Poli" rows={rows}>
-        {friends?.map((el) => (
-          <SliderElement to={urls.pola.friends('friend', el.slug)} key={el.id}>
+        {friends?.map((friend) => (
+          <SliderElement to={urls.pola.friends('friend', friend.slug)} key={friend.id}>
             <Element>
-              <Image>{el.image && <ResponsiveImage imageSrc={el.image} />}</Image>
-              {el.slug && <>Zobacz {'>'}</>}
+              <Image>{friend.image && <FriendLogo title={friend.name} imageSrc={friend.image} />}</Image>
+              {friend.slug && <>Zobacz {'>'}</>}
             </Element>
           </SliderElement>
         ))}

@@ -32,7 +32,7 @@
       "@Layout/*": ["layout/*"],
       "@State/*": ["app/state/*"],
       "@Styles/*": ["styles/*"],
-      "@Templates/*": ["templates/*"],
+      "@Templates/*": ["gatsby-templates/*"],
       "@Utils/*": ["utils/*"]
     }
   },

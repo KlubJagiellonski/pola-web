@@ -1,6 +1,5 @@
-import { graphql } from 'gatsby';
 import React from 'react';
-
+import { graphql } from 'gatsby';
 import ArticlePage from '../posts/articles/ArticlePage';
 
 interface IArticleTemplate {
@@ -32,8 +31,9 @@ export const postQuery = graphql`
         cover {
           childImageSharp {
             fluid {
-              ...GatsbyImageSharpFluid
+              src
             }
+            gatsbyImageData(layout: CONSTRAINED)
           }
         }
       }
