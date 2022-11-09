@@ -87,7 +87,6 @@ const SearchTitle = styled(TitleSection)`
 const WrapperResult = styled(PageSection)`
   @media ${Device.mobile} {
     position: realtive;
-    top: -18em;
     background-color: ${color.background.white};
     margin-left: 5px;
   }
@@ -183,6 +182,7 @@ const SearchPage = (props: ISearchPage) => {
             state={searchState}
             onSelect={props.selectProduct}
             onLoadMore={onLoadMore}
+            hideMissingProductInfo={true}
           />
         )}
       </WrapperResult>
