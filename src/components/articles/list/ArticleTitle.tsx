@@ -40,21 +40,14 @@ interface IArticleTitle {
   slug: string;
   tag?: string;
   date?: string;
-  externalLink?: boolean;
 }
 
-const ArticleTitle: React.FC<IArticleTitle> = ({ title, slug, tag, date, externalLink }) => {
+const ArticleTitle: React.FC<IArticleTitle> = ({ title, slug, tag, date }) => {
   return (
     <Wrapper>
-      {!externalLink ? (
-        <ArticleLink to={slug}>
-          <Title>{title}</Title>
-        </ArticleLink>
-      ) : (
-        <a href={slug} target="_blank">
-          <Title>{title}</Title>
-        </a>
-      )}
+      <ArticleLink to={slug}>
+        <Title>{title}</Title>
+      </ArticleLink>
       {tag && date && (
         <TextInfo>
           {tag} | {getDate(date)}
