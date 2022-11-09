@@ -156,7 +156,7 @@ const SearchPage = (props: ISearchPage) => {
   }, []);
 
   return (
-    <WebViewLayout styles={{ marginTop: padding.big }}>
+    <WebViewLayout>
       <SEOMetadata pageTitle="Wyszukiwarka tekstowa" />
       <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>
