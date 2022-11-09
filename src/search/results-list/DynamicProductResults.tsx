@@ -16,6 +16,7 @@ interface IDynamicProductResults {
   token: string;
   pages: IProductData[];
   totalItems: number;
+  hideMissingProductInfo?: boolean;
 
   onSelect: (code: EAN) => void;
   onLoadMore: () => void;
@@ -28,6 +29,7 @@ export const DynamicProductResults: React.FC<IDynamicProductResults> = ({
   totalItems,
   onSelect,
   onLoadMore,
+  hideMissingProductInfo,
 }) => {
   const loadButton =
     state === SearchStateName.LOADING ? (
@@ -45,7 +47,7 @@ export const DynamicProductResults: React.FC<IDynamicProductResults> = ({
       <SearchResultsHeader phrase={phrase} totalItems={totalItems} searchState={state} />
       <PageSection>
         <SearchResultsList results={pages} totalItems={totalItems} onSelect={onSelect} actions={loadButton} />
-        <MissingProductInfo />
+        {!hideMissingProductInfo && <MissingProductInfo />}
       </PageSection>
     </>
   );

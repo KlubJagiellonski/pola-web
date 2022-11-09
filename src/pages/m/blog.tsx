@@ -1,18 +1,13 @@
-import { ArticleBlock } from 'components/articles/list/ArticleBlock';
-import LatestArticle from 'components/articles/list/LatestArticle';
-import { MainArticleCard } from 'components/articles/list/MainArticleCard';
+import { MobileArticleBlock } from 'components/articles/list/MobileArticleBlock';
 import { ButtonThemes, ButtonFlavor } from 'components/buttons/Button';
 import { SecondaryButton } from 'components/buttons/SecondaryButton';
-import Friends from 'components/friends/Friends';
 import { MobileFriendsCarousel } from 'components/friends/MobileFriendsCarousel';
-import { Article } from 'domain/articles';
 import { PageType, urls } from 'domain/website';
-import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import { PageSection } from 'layout/PageSection';
 import { WebViewLayout } from 'layout/WebViewLayout';
 import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect, ConnectedProps, useDispatch } from 'react-redux';
 import { LoadBrowserLocation, SelectActivePage } from 'state/app/app-actions';
 import { IPolaState } from 'state/types';
@@ -67,6 +62,14 @@ const ButtonRed = styled(Button)`
   border-color: ${color.background.red};
 `;
 
+const MobileNewsletterContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 0;
+  padding-top: 1rem;
+`;
+
 const connector = connect(
   (state: IPolaState) => {
     const { newsletter, articles, friends } = state;
@@ -104,7 +107,7 @@ const BlogPage: React.FC<INewsPage> = (props) => {
       <SEOMetadata pageTitle="blog" />
       <PageSection>
         {newestArticle && (
-          <ArticleBlock
+          <MobileArticleBlock
             key={newestArticle.id}
             title={newestArticle.title}
             slug={newestArticle.slug}
@@ -113,16 +116,13 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             subTitle={newestArticle.subTitle}
             tag={newestArticle.tag}
             styles={{
-              smallWidth: true,
+              smallWidth: false,
             }}
-            externalLink={true}
           />
         )}
       </PageSection>
-      <PageSection>
-        <div
-          className="newsletter-container"
-          style={{ display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', margin: '1rem' }}>
+      <PageSection styles={{ backgroundColor: color.background.gray }}>
+        <MobileNewsletterContainer className="newsletter-container">
           <SubscribeDialog
             status={newsletterStatus}
             follower={follower}
@@ -130,9 +130,9 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             onClear={clearForm}
             isInitiallyExpanded={true}
           />
-        </div>
+        </MobileNewsletterContainer>
       </PageSection>
-      <PageSection styles={{ backgroundColor: color.background.primary }}>
+      <PageSection>
         <ButtonSection>
           <a
             href={'https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform'}

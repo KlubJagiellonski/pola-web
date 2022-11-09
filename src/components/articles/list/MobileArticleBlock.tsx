@@ -1,13 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
-import { WrapperSection } from '../../../styles/GlobalStyle.css';
+import { TitleSection, Text, WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color, margin } from '../../../styles/theme';
 import ArticleContents from './ArticleContents';
-import ArticleTitle from './ArticleTitle';
 import { PrimaryButton } from '../../buttons/PrimaryButton';
-import { ButtonThemes, ButtonFlavor } from '../../../components/buttons/Button';
-import { Link } from 'gatsby';
+import { ButtonThemes, ButtonFlavor } from '../../buttons/Button';
+import { ExternalLink } from 'utils/browser/links';
+import { getDate } from 'utils/dates';
+
+export const Title = styled(TitleSection)`
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 24px;
+`;
+
+const TextInfo = styled(Text)`
+  @media ${Device.desktop} {
+    display: none;
+  }
+`;
 
 const Wrapper = styled(WrapperSection)`
   display: flex;
@@ -23,6 +40,7 @@ const Wrapper = styled(WrapperSection)`
 const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
   width: 50%;
   text-align: left;
+  position: relative;
 
   .gatsby-image-wrapper {
     div {
@@ -82,15 +100,34 @@ interface IArticleBlock {
   externalLink?: boolean;
 }
 
-export const ArticleBlock: React.FC<IArticleBlock> = ({ imagePath, title, slug, date, subTitle, tag, styles }) => {
+export const MobileArticleBlock: React.FC<IArticleBlock> = ({
+  imagePath,
+  title,
+  slug,
+  date,
+  subTitle,
+  tag,
+  styles,
+}) => {
   return (
     <Wrapper color={color.background.white}>
-      <Link to={slug}>
-        <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
-      </Link>
-      <ArticleImage {...styles}>{imagePath && <ResponsiveImage imageSrc={imagePath} />}</ArticleImage>
+      <ArticleImage {...styles}>
+        {imagePath && <ResponsiveImage imageSrc={imagePath} />}
+        <div style={{ position: 'absolute', bottom: 0, right: '1em' }}>
+          <ExternalLink url={slug}>
+            <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
+          </ExternalLink>
+        </div>
+      </ArticleImage>
       <ArticleSection>
-        <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
+        <a href={slug} target="_blank">
+          <Title>{title}</Title>
+        </a>
+        {tag && date && (
+          <TextInfo>
+            {tag} | {getDate(date)}
+          </TextInfo>
+        )}
         <Contents>
           <ArticleContents date={date} text={subTitle} tag={tag} />
         </Contents>
