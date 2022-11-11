@@ -18,6 +18,8 @@ export enum PageType {
   PRIVACY_POLICY = 'privacyPolicy',
 }
 
+export const MobilePagesPrefix = 'm';
+
 type FriendHash = 'profit' | 'friend';
 type AboutHash = 'faq';
 type HomeHash = 'contact';
