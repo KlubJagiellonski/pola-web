@@ -42,6 +42,7 @@ const SliderLink = styled(AnchorLink)`
   bottom: 0;
   color: ${color.text.secondary};
   height: 100%;
+  target: string;
 `;
 
 const SliderItem = styled.div`
@@ -50,13 +51,20 @@ const SliderItem = styled.div`
 
 interface ISliderElement {
   to: string;
+  newTab?: boolean;
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export const SliderElement: React.FC<ISliderElement> = ({ to, children }) => {
+export const SliderElement: React.FC<ISliderElement> = ({ to, newTab, children }) => {
   return (
     <SliderItem>
-      <SliderLink to={to}>{children}</SliderLink>
+      {newTab ? (
+        <SliderLink to={to} target="_blank">
+          {children}
+        </SliderLink>
+      ) : (
+        <SliderLink to={to}>{children}</SliderLink>
+      )}
     </SliderItem>
   );
 };

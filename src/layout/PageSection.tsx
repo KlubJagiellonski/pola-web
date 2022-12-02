@@ -8,6 +8,7 @@ interface IPageSection {
     backgroundColor?: string;
     textColor?: string;
     textAlign?: string;
+    marginBottom?: string;
   };
 }
 
@@ -19,6 +20,7 @@ export const PageSection = styled.section<IPageSection>`
   text-align: ${({ styles }) => styles?.textAlign || 'left'};
   position: relative;
   box-sizing: border-box;
+  margin-bottom: ${({ styles }) => styles?.marginBottom || 0};
 
   @media ${Device.mobile} {
     padding: 0 ${padding.tiny};

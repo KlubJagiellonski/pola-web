@@ -1,6 +1,15 @@
-import styled from 'styled-components';
-
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { PageLayout } from '../layout/PageLayout';
+import SEOMetadata from '../utils/browser/SEOMetadata';
+import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
+import { PageType } from '../domain/website';
+import { PageSection } from '../layout/PageSection';
+import { PartnerService } from '../domain/partners/partners-service';
+import { PartnersList } from '../components/partners/PartnersList';
+import Placeholder from '../components/Placeholder';
+import { BuyPolishInitiative } from 'components/partners/BuyPolishInitiative';
 
 import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
@@ -72,30 +81,7 @@ const PartnersPage = (props: IPartnersPage) => {
       <SEOMetadata pageTitle="Partnerzy" />
       <Placeholder text="Partner aplikacji Pola" />
       <PageSection>
-        <Wrapper>
-          <ImageSection>
-            <li>
-              <ExternalLink url={urls.external.links.pge}>
-                <ResponsiveImage imageSrc="PGE_logo.png" />
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink url={urls.external.links.polskieKupujeTo}>
-                <ResponsiveImage imageSrc="polskie_kupuje.png" />
-              </ExternalLink>
-            </li>
-          </ImageSection>
-          <TextWrapper>
-            <TextSection styles={{ maxWidth: '32rem' }}>
-              Celem zainicjowanej przez Pracowników oraz Grupę Kapitałową PGE kampanii społecznej&nbsp;
-              <ExternalLink url={urls.external.links.polskieKupujeTo}>
-                <span>POLSKIE – KUPUJĘ TO!</span>
-              </ExternalLink>
-              &nbsp;jest zachęcanie Polaków do kupowania rodzimych produktów i usług. W ramach tego przedsięwzięcia PGE
-              wspiera rozwój aplikacji Pola.
-            </TextSection>
-          </TextWrapper>
-        </Wrapper>
+        <BuyPolishInitiative />
       </PageSection>
       <PageSection>
         <PartnersList partners={PartnerService.getAll()} />

@@ -12,6 +12,7 @@ import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
 import { SubscribeForm } from './SubscribeForm';
 import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRepeatedResult } from './SubscribeResult';
+import { classNames } from 'utils/class-names';
 
 interface INewsletterFormStyles {
   spaceTop?: string;
@@ -48,6 +49,7 @@ interface ISubscribeDialog {
   onSubmit: (email: string, name?: string) => void;
   onClear: () => void;
   stopExpanded?: boolean;
+  isInitiallyExpanded: boolean;
 }
 
 export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
@@ -57,8 +59,9 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   onSubmit,
   onClear,
   stopExpanded,
+  isInitiallyExpanded = false,
 }) => {
-  const [isExpanded, setExpanded] = useState<boolean>(false);
+  const [isExpanded, setExpanded] = useState<boolean>(isInitiallyExpanded);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -121,7 +124,7 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
           <SecondaryButton label="Newsletter Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
         </Buttons>
       )}
-      <div ref={containerRef} className="newsletter-frame-container">
+      <div ref={containerRef} className={classNames('newsletter-frame-container', ['expanded', isExpanded])}>
         {frameContent}
       </div>
     </Container>

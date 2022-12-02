@@ -188,6 +188,20 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `webviews`,
+        path: `${__dirname}/webviews/`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-copy-files',
+      options: {
+        source: `${__dirname}/webviews/`,
+        destination: 'm'
+      }
+    },
   ],
   // shadowing API request domain for development
   // https://www.gatsbyjs.com/docs/api-proxy/
