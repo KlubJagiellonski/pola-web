@@ -1,19 +1,19 @@
 import { MobileArticleBlock } from 'components/articles/list/MobileArticleBlock';
 import { ButtonThemes, ButtonFlavor } from 'components/buttons/Button';
 import { SecondaryButton } from 'components/buttons/SecondaryButton';
-import { MobileFriendsCarousel } from 'components/friends/MobileFriendsCarousel';
-import { PageType, urls } from 'domain/website';
+import { PageType, urls } from '@App/website';
 import { PageSection } from 'layout/PageSection';
 import { WebViewLayout } from 'layout/WebViewLayout';
 import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps, useDispatch } from 'react-redux';
-import { LoadBrowserLocation, SelectActivePage } from 'state/app/app-actions';
-import { IPolaState } from 'state/types';
 import styled from 'styled-components';
 import { color, Device, fontSize, margin } from 'styles/theme';
 import SEOMetadata from 'utils/browser/SEOMetadata';
+import { IPolaState } from '@App/state';
+import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
+import { MobileFriendsCarousel } from 'friends/components/MobileFriendsCarousel';
 
 const Title = styled.p`
   margin-top: ${margin.veryBig};
@@ -97,8 +97,8 @@ const BlogPage: React.FC<INewsPage> = (props) => {
 
   useEffect(() => {
     if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.NEWS));
+      dispatch(loadBrowserLocation(location));
+      dispatch(selectActivePage(PageType.NEWS));
     }
   }, []);
 

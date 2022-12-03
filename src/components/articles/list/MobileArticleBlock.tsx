@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { ResponsiveImage } from '../../images/ResponsiveImage';
 import { TitleSection, Text, WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color, margin } from '../../../styles/theme';
-import ArticleContents from './ArticleContents';
-import { PrimaryButton } from '../../buttons/PrimaryButton';
 import { ButtonThemes, ButtonFlavor } from '../../buttons/Button';
 import { ExternalLink } from 'utils/browser/links';
 import { getDate } from 'utils/dates';
+import { PrimaryButton } from '@Components/buttons/PrimaryButton';
+import ArticleContents from 'posts/articles/list/ArticleContents';
 
 export const Title = styled(TitleSection)`
   padding: 0;
@@ -91,9 +91,9 @@ interface IArticleBlock {
   title: string;
   subTitle: string;
   slug: string;
-  imagePath: string;
-  date: string;
-  tag: string;
+  imagePath?: string;
+  date?: string;
+  tag?: string;
   styles?: {
     smallWidth?: boolean;
   };
@@ -112,7 +112,7 @@ export const MobileArticleBlock: React.FC<IArticleBlock> = ({
   return (
     <Wrapper color={color.background.white}>
       <ArticleImage {...styles}>
-        {imagePath && <ResponsiveImage imageSrc={imagePath} />}
+        {imagePath && <ResponsiveImage title={title} imageSrc={imagePath} />}
         <div style={{ position: 'absolute', bottom: 0, right: '1em' }}>
           <ExternalLink url={slug}>
             <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { urls } from '../../domain/website';
+import { urls } from '@App/website';
 import { ResponsiveImage } from '../../components/images/ResponsiveImage';
 import { Device, margin, padding } from '../../styles/theme';
 import styled from 'styled-components';
@@ -58,12 +58,12 @@ export const BuyPolishInitiative: React.FC<IBuyPolishInitiative> = () => (
     <ImageSection className="images-sections">
       <div className="image-element">
         <ExternalLink url={urls.external.links.pge}>
-          <ResponsiveImage imageSrc="PGE_logo.png" />
+          <ResponsiveImage title="PGE logo" imageSrc="PGE_logo.png" />
         </ExternalLink>
       </div>
       <div className="image-element">
         <ExternalLink url={urls.external.links.polskieKupujeTo}>
-          <ResponsiveImage imageSrc="polskie_kupuje.png" />
+          <ResponsiveImage title="Polskie Kupuję" imageSrc="polskie_kupuje.png" />
         </ExternalLink>
       </div>
     </ImageSection>

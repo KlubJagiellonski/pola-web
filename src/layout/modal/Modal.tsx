@@ -64,6 +64,7 @@ interface IModal {
     height?: string;
   };
   onClose: () => void;
+  children?: React.ReactNode;
 }
 
 export const Modal: React.FC<IModal> = ({ title, onClose, children, styles }) => (

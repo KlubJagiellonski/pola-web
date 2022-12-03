@@ -1,4 +1,4 @@
-import { ErrorBoundary } from '@sentry/gatsby';
+import ErrorBoundary from 'utils/error-boundary';
 import styled from 'styled-components';
 import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
@@ -36,14 +36,6 @@ const connector = connect(
       activePage: app.activePage,
       isMenuExpanded: app.isMenuExpanded,
       selectedProduct: search.stateName === SearchStateName.SELECTED ? search.selectedProduct : undefined,
-      suppliers: {
-        isInquiryResultVisible:
-          suppliers.status === SuppliersFormStatus.LOADED || suppliers.status === SuppliersFormStatus.CALCULATED
-            ? suppliers.isResultDialogVisible
-            : false,
-        messages: suppliers.messages,
-        totalScore: suppliers.status === SuppliersFormStatus.CALCULATED ? suppliers.totalScore : undefined,
-      },
     };
   },
   {
@@ -98,9 +90,6 @@ const Layout: React.FC<IPageLayout> = ({
   activePage,
   isMenuExpanded,
   isSearchInfoVisible,
-  suppliers,
-  hideResultDialog,
-  submitResult,
   selectedProduct,
   children,
   toggleSearchInfo,
@@ -133,14 +122,6 @@ const Layout: React.FC<IPageLayout> = ({
       <LayoutContainer id="layout-container">
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
-        {suppliers.isInquiryResultVisible && (
-          <InquiryResultModal
-            totalScore={suppliers.totalScore}
-            messages={suppliers.messages}
-            onClose={hideResultDialog}
-            onSubmit={submitResult}
-          />
-        )}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
           activePage={activePage}

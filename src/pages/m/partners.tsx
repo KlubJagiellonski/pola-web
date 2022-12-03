@@ -1,20 +1,14 @@
 import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import SEOMetadata from '../../utils/browser/SEOMetadata';
-import { IPolaState } from '../../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../../state/app/app-actions';
-import { PageType } from '../../domain/website';
 import { PageSection } from '../../layout/PageSection';
 import { WebViewLayout } from 'layout/WebViewLayout';
-import { reduceToFlatProductsList } from 'domain/products/search-service';
-import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
-import { appDispatcher } from 'state/app/app-dispatcher';
-import { searchDispatcher } from 'state/search/search-dispatcher';
-import { SearchStateName } from 'state/search/search-reducer';
 import { PartnerService } from 'domain/partners/partners-service';
 import { PartnersList } from 'components/partners/PartnersList';
 import { BuyPolishInitiative } from 'components/partners/BuyPolishInitiative';
+import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
+import { PageType } from '@App/website';
 
 type IPartnersPage = {
   location?: Location;
@@ -26,8 +20,8 @@ const PartnersPage = (props: IPartnersPage) => {
 
   React.useEffect(() => {
     if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.PARTNERS));
+      dispatch(loadBrowserLocation(location));
+      dispatch(selectActivePage(PageType.PARTNERS));
     }
   }, []);
 

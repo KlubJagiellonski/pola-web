@@ -3,12 +3,13 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { IFriendNode } from '@Domain/friends';
-import { IPolaState } from '@State/types';
 
 import { FriendsService } from '../friends/services/friend-service';
 import { friendsDispatcher } from '../friends/state/friends-dispatcher';
-import { ArticleService, IArticleNode } from '../posts/services/article-service';
+import { ArticleService } from '../posts/services/article-service';
 import { articlesDispatcher } from '../posts/state/articles-dispatcher';
+import { IPolaState } from '@App/state';
+import { IArticleNode } from '@Domain/articles';
 
 interface IStateLoader {
   isArticlesLoaded?: boolean;

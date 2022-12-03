@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { WrapperSection } from '../../styles/GlobalStyle.css';
-import { Friend } from '../../domain/friends';
-import { ResponsiveImage } from '../images/ResponsiveImage';
-import { urls } from '../../domain/website';
-import { SliderContainer, SliderElement } from '../SliderComponent';
+import { FriendData } from '../../domain/friends';
+import { urls } from '@App/website';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { SliderContainer, SliderElement } from '@Components/SliderComponent';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;
@@ -32,7 +32,7 @@ const Element = styled.div`
 `;
 
 interface IFriends {
-  friends?: Friend[];
+  friends?: FriendData[];
   rows?: number;
 }
 
@@ -42,9 +42,9 @@ export const MobileFriendsCarousel: React.FC<IFriends> = ({ friends, rows }) => 
       <SliderContainer title="Przyjaciele Poli" rows={rows}>
         {friends?.map((el) => (
           <a key={el.id} href={urls.pola.friends('friend', el.slug)} target="_blank">
-            <SliderElement>
+            <SliderElement to={''}>
               <Element>
-                <Image>{el.image && <ResponsiveImage imageSrc={el.image} />}</Image>
+                <Image>{el.image && <ResponsiveImage title={el.name} imageSrc={el.image} />}</Image>
                 {el.slug && <>Zobacz {'>'}</>}
               </Element>
             </SliderElement>

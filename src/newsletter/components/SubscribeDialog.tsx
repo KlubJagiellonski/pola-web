@@ -12,7 +12,6 @@ import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
 import { SubscribeForm } from './SubscribeForm';
 import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRepeatedResult } from './SubscribeResult';
-import { classNames } from 'utils/class-names';
 
 interface INewsletterFormStyles {
   spaceTop?: string;

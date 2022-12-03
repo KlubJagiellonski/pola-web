@@ -1,5 +1,4 @@
 import { IBusinessTemplate } from '../../gatsby-templates/BusinessTemplate';
-import { SliderContainer } from '../SliderComponent';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
@@ -9,6 +8,7 @@ import { useQueryParam } from 'posts/services/article-service';
 
 import BusinessElement from './BusinessElement';
 import SingleBusinessSlider from './SingleBusinessSlider';
+import { SliderContainer } from '@Components/SliderComponent';
 
 const SliderOrientation = styled.div`
   .slick-slider {

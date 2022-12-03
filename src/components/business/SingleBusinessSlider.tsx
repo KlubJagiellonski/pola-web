@@ -42,12 +42,12 @@ const Slider = styled(SliderElement)`
 `;
 
 interface ISingleBusinessSlider {
-  title: string;
+  title?: string;
   iconFluid: ImageDataLike;
   slug: string;
 }
 
-export const SingleBusinessSlider: React.FC<ISingleBusinessSlider> = ({ slug, title, iconFluid }) => {
+export const SingleBusinessSlider: React.FC<ISingleBusinessSlider> = ({ slug, title = '', iconFluid }) => {
   return (
     <Slider to={urls.pola.business('business-element', slug)}>
       <Title>{title}</Title>

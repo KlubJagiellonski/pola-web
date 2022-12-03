@@ -33,6 +33,7 @@ interface IModalAction {
 interface IProductModalAction {
   action?: IModalAction;
   theme?: ITheme;
+  children?: React.ReactNode;
 }
 
 export const ProductModalAction: React.FC<IProductModalAction> = ({ action, theme, children }) => (
