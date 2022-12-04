@@ -1,9 +1,9 @@
-import { IAction, IActionReducer } from 'app/state';
-import { AnyAction, Reducer } from 'redux';
-
-import { IProductData, Product } from '@Domain/products';
-
 import { ErrorHandler } from '../../app/api-errors';
+import { AnyAction, Reducer } from 'redux';
+import { IProductData, Product } from 'search';
+
+import { IAction, IActionReducer } from 'app/state';
+
 import { actionTypes } from './search-actions';
 import * as actions from './search-actions';
 

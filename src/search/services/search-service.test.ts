@@ -2,8 +2,7 @@ import { mockAxiosErrorResponse, mockGETRequest, mockProduct } from '../../utils
 import axios, { AxiosError, AxiosResponse, AxiosStatic } from 'axios';
 import 'jest';
 import 'jest-expect-message';
-
-import { ISearchSuccessResponse } from '@Domain/products';
+import { ISearchSuccessResponse } from 'search';
 
 import { ProductService } from './search-service';
 

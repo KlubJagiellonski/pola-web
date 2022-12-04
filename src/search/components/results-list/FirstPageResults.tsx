@@ -1,6 +1,6 @@
-import React from 'react';
+import { EAN, IProductData } from 'search';
 
-import { EAN, IProductData } from '@Domain/products';
+import React from 'react';
 
 import { Spinner } from '@Components/Spinner';
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';

@@ -1,7 +1,7 @@
-import React from 'react';
+import { IProductData, Product } from 'search';
 import styled from 'styled-components';
 
-import { IProductData, Product } from '@Domain/products';
+import React from 'react';
 
 import { color, fontSize, padding } from '@Styles/theme';
 

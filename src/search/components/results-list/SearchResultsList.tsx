@@ -1,7 +1,7 @@
-import React from 'react';
+import { EAN, IProductData } from 'search';
 import styled from 'styled-components';
 
-import { EAN, IProductData } from '@Domain/products';
+import React from 'react';
 
 import { SearchResultElement } from './ProductElement';
 

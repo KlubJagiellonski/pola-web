@@ -1,8 +1,9 @@
-import { AppSettings } from 'app/app-settings';
-import React from 'react';
+import { IManufacturer } from 'search';
 import styled from 'styled-components';
 
-import { IManufacturer } from '@Domain/products';
+import React from 'react';
+
+import { AppSettings } from 'app/app-settings';
 
 import { Checkbox } from '@Components/checkbox';
 

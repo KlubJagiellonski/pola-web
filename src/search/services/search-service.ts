@@ -3,8 +3,7 @@ import { InvalidSearchResultError } from '../../app/api-errors';
 import { AppSettings } from '../../app/app-settings';
 import { ISearchResultPage } from '../state/search-reducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-
-import { IProductData, ISearchSuccessResponse } from '@Domain/products';
+import { IProductData, ISearchSuccessResponse } from 'search';
 
 import { isNotEmpty } from '@Utils/strings';
 

@@ -1,17 +1,22 @@
 import { useLocation } from '@reach/router';
-import { urls } from 'app/website';
-import { Button, ButtonFlavor, ButtonThemes } from 'components/buttons/Button';
-import { LinkButton } from 'components/buttons/LinkButton';
-import { MobileApps } from 'components/MobileApps';
-import { Product } from 'domain/products';
-import { Modal } from 'layout/modal/Modal';
+import { Product } from 'search';
 import styled from 'styled-components';
 import { color, padding } from 'styles/theme';
+
+import React from 'react';
+
+import { urls } from 'app/website';
+import { MobilePagesPrefix } from 'app/website';
+
+import { MobileApps } from 'components/MobileApps';
+import { Button, ButtonFlavor, ButtonThemes } from 'components/buttons/Button';
+import { LinkButton } from 'components/buttons/LinkButton';
+import { Modal } from 'layout/modal/Modal';
 import { navigateTo, openNewTab } from 'utils/browser';
 import { ClickOutside } from 'utils/click-outside';
+
 import { ProductDetails } from './ProductDetails';
 import { ProductModalAction } from './ProductModalAction';
-import { MobilePagesPrefix } from 'app/website';
 
 const ButtonContainer = styled(Button)`
   padding: ${padding.small};

@@ -1,8 +1,7 @@
 import { SearchStateName } from '../../state/search-reducer';
+import { EAN, IProductData } from 'search';
 
 import React from 'react';
-
-import { EAN, IProductData } from '@Domain/products';
 
 import { Spinner } from '@Components/Spinner';
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';

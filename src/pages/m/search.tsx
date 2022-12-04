@@ -4,6 +4,7 @@ import { Device, color, fontSize, introHeight, lineHeight, margin, padding, page
 import SEOMetadata from '../../utils/browser/SEOMetadata';
 import { IFriendData } from 'friends';
 import { ArticleData } from 'posts';
+import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 import { TitleSection } from 'styles/GlobalStyle.css';
 
@@ -14,7 +15,6 @@ import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
 import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
 import { PageType } from '@App/website';
-import { EAN, ISearchResults } from 'domain/products';
 
 import { WebViewLayout } from 'layout/WebViewLayout';
 import ErrorBoundary from 'utils/error-boundary';

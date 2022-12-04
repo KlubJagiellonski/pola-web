@@ -1,8 +1,9 @@
-import { AppSettings } from 'app/app-settings';
-import React from 'react';
+import { EAN, IProductData } from 'search';
 import styled from 'styled-components';
 
-import { EAN, IProductData } from '@Domain/products';
+import React from 'react';
+
+import { AppSettings } from 'app/app-settings';
 
 import { ScoreBar } from '@Components/ScoreBar';
 
@@ -39,9 +40,9 @@ const ResultElement = styled.div`
     padding-left: ${padding.small};
   }
 
-  .underline {
+  .heading {
     font-size: ${fontSize.small};
-    text-decoration: underline;
+    font-weight: 600;
   }
 `;
 
@@ -53,7 +54,7 @@ interface IResultProperty {
 const ResultProperty: React.FC<IResultProperty> = ({ value, label, missingValuePlaceholder }) =>
   !!value ? (
     <div>
-      <span className="underline">{`${label}:`}</span>
+      <span className="heading">{`${label}:`}</span>
       <span className="brand">{value}</span>
     </div>
   ) : (

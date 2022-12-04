@@ -1,12 +1,13 @@
-import { AppSettings } from 'app/app-settings';
-import React from 'react';
+import { RussiaInfoBox } from '../results-list/RussiaInfoBox';
+import { Product } from 'search';
 import styled from 'styled-components';
 
-import { Product } from '@Domain/products';
+import React from 'react';
+
+import { AppSettings } from 'app/app-settings';
 
 import { ScoreBar } from '@Components/ScoreBar';
 
-import { RussiaInfoBox } from '../results-list/RussiaInfoBox';
 import { Field, PolishPropertyName, ValueCheckboxField, getPropertiesFromManufacturer } from './PolishValues';
 
 import { color, fontSize, padding } from '@Styles/theme';
@@ -27,8 +28,8 @@ const DetailsContainer = styled.div`
     margin-top: 0.5em;
   }
 
-  .underline {
-    text-decoration: underline;
+  .heading {
+    font-weight: 600;
   }
 
   .notes {
@@ -59,11 +60,11 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       </header>
       <RussiaInfoBox product={product} />
       <Field>
-        <p className="property underline">{product.manufacturer.name}</p>
+        <p className="property heading">{product.manufacturer.name}</p>
         <p className="property">{product.manufacturer.description}</p>
       </Field>
       <Field>
-        <p className="property underline">Punkty w rankingu Poli:</p>
+        <p className="property heading">Punkty w rankingu Poli:</p>
         <ScoreBar
           value={product.manufacturer.plScore}
           unit="pkt"
@@ -72,7 +73,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
         />
       </Field>
       <Field>
-        <p className="property underline">Udział polskiego kapitału:</p>
+        <p className="property heading">Udział polskiego kapitału:</p>
         <ScoreBar
           value={capitalProperty.value}
           unit="%"

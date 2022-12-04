@@ -1,5 +1,6 @@
 import { IFriendData } from 'friends';
 import { ArticleData } from 'posts';
+import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
 import React from 'react';
@@ -9,7 +10,6 @@ import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
 import { PageType, urls } from '@App/website';
-import { EAN, ISearchResults } from '@Domain/products';
 
 import About from '@Components/About';
 import DevelopmentSection from '@Components/DevelopmentSection';

@@ -1,4 +1,4 @@
-import { EAN, IProductData } from '@Domain/products';
+import { EAN, IProductData } from 'search';
 
 import { SearchState, SearchStateName } from './search-reducer';
 

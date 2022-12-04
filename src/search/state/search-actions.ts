@@ -1,7 +1,6 @@
-import { IProductData, Product } from '@Domain/products';
-
 import { ErrorHandler } from '../../app/api-errors';
 import { IAction } from '../types';
+import { IProductData, Product } from 'search';
 
 export const actionTypes = {
   INVOKE_SEARCH: 'SEARCH:INVOKE_SEARCH',
