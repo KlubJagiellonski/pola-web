@@ -20,10 +20,10 @@ export interface IFriendsGraph {
   };
 }
 
-export class FriendService {
+export class FriendLoader {
   public static getAllData() {
-    const nodes = FriendService.getAllNodes();
-    const friends = nodes.map((node) => FriendService.toDataModel(node));
+    const nodes = FriendLoader.getAllNodes();
+    const friends = nodes.map((node) => FriendLoader.toDataModel(node));
     return friends;
   }
 
@@ -58,13 +58,4 @@ export class FriendService {
     page: node.page,
     slug: node.slug,
   });
-}
-
-export function getRandomFriend(friends: IFriendData[]) {
-  const randomNumber = Math.floor(Math.random() * friends.length);
-  return friends[randomNumber];
-}
-
-export function getFriendBySlug(slug: string, friends: IFriendData[]) {
-  return friends.find((friend) => friend.slug === slug);
 }

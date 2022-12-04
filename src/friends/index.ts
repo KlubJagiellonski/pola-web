@@ -1,6 +1,4 @@
-import { IGatsbyNode, IReduxData } from '@App/generics';
-
-import { guid } from '@Utils/data/random-number';
+import { IReduxData } from '@App/generics';
 
 export interface IFriendData extends IReduxData {
   name: string;

@@ -5,7 +5,7 @@ import { IPolaState } from '@App/state';
 import { IArticleNode } from '@Domain/articles';
 import { appDispatcher } from 'app/state/app-dispatcher';
 
-import { FriendService } from '../friends/state/friend-service';
+import { FriendLoader } from '../friends/state/friend-loader';
 import { ArticleService } from '../posts/services/article-service';
 import { articlesDispatcher } from '../posts/state/articles-dispatcher';
 import { loadFriends } from 'friends/state/friends-reducer';
@@ -33,7 +33,7 @@ const Loader = (props: IStateLoader) => {
     //const friendNodes = getAllNodes();
     if (!props.isFriendsLoaded) {
       //const friends = friendNodes.map((node) => Friend.fromNode(node)).map((friend) => friend.toDataModel());
-      const friends = FriendService.getAllData();
+      const friends = FriendLoader.getAllData();
       dispatch(loadFriends(friends));
     }
   } catch (error: unknown) {
