@@ -1,5 +1,6 @@
+import { GatsbyImage, GatsbyImageProps, IGatsbyImageData, getImage } from 'gatsby-plugin-image';
 import React from 'react';
-import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+
 import { pixels } from '@Styles/theme';
 
 export interface IResponsiveImage {
@@ -7,47 +8,26 @@ export interface IResponsiveImage {
   title: string;
 }
 
-// export interface GatsbyImageSource {
-//   srcSet: string;
-//   type: string;
-//   sizes: string;
-// }
-
-// export interface GatsbyImageData {
-//   layout: 'fixed' | 'constrained' | 'full-width';
-//   backgroundColor: string;
-//   images: {
-//     fallback: {
-//       src: string;
-//       srcSet: string;
-//       sizes: string;
-//     }
-//     sources:GatsbyImageSource[];
-//   };
-//   width: pixels;
-//   height: pixels;
-// }
-
 export interface IGatsbyImageNode {
   extension: string;
   relativePath: string;
+  name: string;
   childImageSharp: {
+    id: string;
     gatsbyImageData: IGatsbyImageData;
   };
 }
 
-export const renderFromQuery = (
-  imageNodes: IGatsbyImageNode[],
-  imageSrc: string,
-  title: string
-): JSX.Element | undefined => {
+export const renderFromQuery = (imageNodes: IGatsbyImageNode[], imageSrc: string, title: string) => {
   const image = findImage(imageNodes, imageSrc);
-  if (image) {
-    return renderImage(image, title);
+
+  if (!image) {
+    return console.error(`Cannot render image "${imageSrc}" from static query`);
   }
 
-  console.error(`Cannot render image "${imageSrc}" from static query`);
-  return;
+  const imageComponent = renderImage(image, title);
+
+  return imageComponent;
 };
 
 function findImage(imageNodes: IGatsbyImageNode[], imageSrc: string) {
@@ -62,14 +42,13 @@ function findImage(imageNodes: IGatsbyImageNode[], imageSrc: string) {
 
 function renderImage(image: IGatsbyImageNode, title: string) {
   try {
-    const gatsbyImage = getImage(image.childImageSharp.gatsbyImageData);
-    if (gatsbyImage) {
-      const component = <GatsbyImage alt={title} image={gatsbyImage} />;
-      return component;
+    const imageMetadata = getImage(image.childImageSharp.gatsbyImageData);
+    if (!imageMetadata) {
+      return console.error(`Cannot read Gatsby image data "${image.relativePath}"`);
     }
 
-    console.error(`Cannot read Gatsby image data "${image.relativePath}"`);
-    return;
+    const component = <GatsbyImage alt={title} image={imageMetadata} />;
+    return component;
   } catch (error: unknown) {
     console.error(`Cannot render image "${image.relativePath}"`, error);
     return;

@@ -33,19 +33,7 @@ export const ArticleService = {
                   name
                   childImageSharp {
                     id
-                    fixed {
-                      src
-                      originalName
-                      width
-                      height
-                    }
-                    fluid {
-                      originalName
-                      src
-                      presentationWidth
-                      presentationHeight
-                      aspectRatio
-                    }
+                    gatsbyImageData(layout: CONSTRAINED)
                   }
                   relativePath
                 }

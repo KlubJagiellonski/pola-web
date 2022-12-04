@@ -1,11 +1,13 @@
-import React from 'react';
+import { IFriendData } from '..';
+import { WrapperSection } from '../../styles/GlobalStyle.css';
 import styled from 'styled-components';
 
-import { WrapperSection } from '../../styles/GlobalStyle.css';
-import { FriendData } from '../../domain/friends';
+import React from 'react';
+
 import { urls } from '@App/website';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+
 import { SliderContainer, SliderElement } from '@Components/SliderComponent';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;
@@ -32,7 +34,7 @@ const Element = styled.div`
 `;
 
 interface IFriends {
-  friends?: FriendData[];
+  friends?: IFriendData[];
   rows?: number;
 }
 

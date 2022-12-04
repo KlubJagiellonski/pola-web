@@ -1,11 +1,13 @@
-import { PageType } from 'app/website';
+import { IFriendData } from 'friends';
+import styled from 'styled-components';
+
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { IPolaState } from '@App/state';
 import { ArticleData } from '@Domain/articles';
-import { FriendData } from '@Domain/friends';
+import { PageType } from 'app/website';
+import { IArticleNode } from 'domain/articles';
 
 import SideInformations from '@Components/SideInformations';
 import { PageLayout } from '@Layout/PageLayout';
@@ -15,7 +17,6 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { ArticleHeader } from './ArticleHeader';
 
 import { Device, margin } from '@Styles/theme';
-import { IArticleNode } from 'domain/articles';
 
 const Content = (props: any) => {
   const { html, children } = props;
@@ -55,7 +56,7 @@ const SecondColumn = styled.div`
 interface IArticlePage {
   article: IArticleNode;
   articles: ArticleData[];
-  friends: FriendData[];
+  friends: IFriendData[];
   location?: Location;
   author?: any;
   slug?: string;
@@ -69,7 +70,7 @@ const ArticlePage = (props: IArticlePage) => {
   const { title, subTitle, category } = frontmatter;
   const date = article.fields.prefix;
   const html = article.html;
-  const fluid = article.frontmatter.cover.childImageSharp.fluid;
+  const fluid = article.frontmatter.cover.childImageSharp.gatsbyImageData;
   // const title = ((article || {}).frontmatter || {}).title;
   // const subTitle = ((article || {}).frontmatter || {}).subTitle;
   // const category = ((article || {}).frontmatter || {}).category;
@@ -91,6 +92,7 @@ const ArticlePage = (props: IArticlePage) => {
             </PageSection>
           </FirstColumn>
           <SecondColumn>
+            AmeriPol-Trading.png
             <SideInformations actualArticleId={article.id} articles={articles} friends={friends} />
           </SecondColumn>
         </Wrapper>

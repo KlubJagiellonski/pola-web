@@ -1,29 +1,30 @@
-import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
-
-import SEOMetadata from '../../utils/browser/SEOMetadata';
-
-import { PageSection } from '../../layout/PageSection';
 import { ResponsiveImage } from '../../components/images/ResponsiveImage';
-import { color, Device, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
+import { PageSection } from '../../layout/PageSection';
+import { Device, color, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
+import SEOMetadata from '../../utils/browser/SEOMetadata';
+import { IFriendData } from 'friends';
 import styled from 'styled-components';
-import { WebViewLayout } from 'layout/WebViewLayout';
-
-import { Friend } from 'domain/friends';
-import { ISearchResults, EAN } from 'domain/products';
 import { TitleSection } from 'styles/GlobalStyle.css';
+
+import React from 'react';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
+
 import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
+import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
 import { PageType } from '@App/website';
+import { ArticleData } from '@Domain/articles';
+import { EAN, ISearchResults } from 'domain/products';
+
+import { WebViewLayout } from 'layout/WebViewLayout';
+import ErrorBoundary from 'utils/error-boundary';
+
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
 import { SearchInput } from 'search/components/form/SearchInput';
 import { DynamicProductResults } from 'search/components/results-list/DynamicProductResults';
 import { reduceToFlatProductsList } from 'search/services/search-service';
 import { searchDispatcher } from 'search/state/search-dispatcher';
 import { SearchStateName } from 'search/state/search-reducer';
-import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
-import { ArticleData } from '@Domain/articles';
-import ErrorBoundary from 'utils/error-boundary';
 
 const Content = styled.div`
   width: 100%;
@@ -133,7 +134,7 @@ type ISearchPage = ConnectedProps<typeof connector> & {
   searchResults?: ISearchResults;
   articles?: ArticleData[];
   activeTags: string[];
-  friends?: Friend[];
+  friends?: IFriendData[];
 
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;

@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-import { FriendData } from '@Domain/friends';
+import { IFriendData } from 'friends';
 
 export interface IFriendsState {
   initialized: boolean;
-  data: FriendData[];
+  data: IFriendData[];
 }
 
 const initialState: IFriendsState = {

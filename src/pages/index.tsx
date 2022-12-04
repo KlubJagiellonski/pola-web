@@ -8,7 +8,6 @@ import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
 import { PageType, urls } from '@App/website';
 import { ArticleData } from '@Domain/articles';
-import { FriendData } from '@Domain/friends';
 import { EAN, ISearchResults } from '@Domain/products';
 
 import About from '@Components/About';
@@ -51,6 +50,7 @@ const connector = connect(
           : undefined,
       newsletterStatus: newsletter.status,
       follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
+      friends: friends.data,
       articles: articles.data,
     };
   },
@@ -148,7 +148,7 @@ type IHomePage = GatsbyPage &
     searchResults?: ISearchResults;
     articles?: ArticleData[];
     activeTags: string[];
-    //friends?: FriendData[];
+    friends?: IFriendData[];
 
     toggleSearchInfo: () => void;
     invokeSearch: (phrase: string) => void;
@@ -170,7 +170,7 @@ const HomePage = (props: IHomePage) => {
       <SEOMetadata pageTitle="Strona główna" />
       <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>
-          <ResponsiveImage imageSrc={'background2.jpg'} />
+          <ResponsiveImage title="main background" imageSrc={'background2.jpg'} />
         </Background>
         <Content>
           <SearchForm
@@ -224,7 +224,7 @@ const HomePage = (props: IHomePage) => {
           <DevelopmentSection />
           <SocialMedia />
           <About />
-          <Friends />
+          <Friends friends={props.friends} />
           <Teams />
           <TeamsFriend />
         </Wrapper>

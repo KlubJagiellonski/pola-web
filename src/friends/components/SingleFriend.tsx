@@ -1,15 +1,17 @@
-import { urls } from 'app/website';
-import { AnchorLink } from 'gatsby-plugin-anchor-links';
-import React from 'react';
+import { IFriendData } from 'friends';
 import styled from 'styled-components';
 
-import { FriendData } from '@Domain/friends';
+import { AnchorLink } from 'gatsby-plugin-anchor-links';
+import React from 'react';
+
+import { urls } from 'app/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
-import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 import { PageSection } from '@Layout/PageSection';
+
+import { FriendLogo } from 'friends/components/FriendLogo';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
 import { Device, color, fontSize, margin } from '@Styles/theme';
@@ -98,12 +100,12 @@ const ButtonRed = styled(Button)`
   border-color: ${color.background.red};
 `;
 
-const SingleFriend: React.FC<FriendData> = ({ name, description, image, page, slug }) => {
+const SingleFriend: React.FC<IFriendData> = ({ name, description, image, page, slug }) => {
   return (
     <WrapperContents>
       <ColumnsLayout>
         <RightColumn>
-          <ImageSection>{image && <ResponsiveImage imageSrc={image} />}</ImageSection>
+          <ImageSection>{image && <FriendLogo title={name} imageSrc={image} />}</ImageSection>
         </RightColumn>
         <LeftColumn>
           <TitleSection>{name}</TitleSection>

@@ -1,14 +1,14 @@
+import { IFriendData } from 'friends';
 import styled from 'styled-components';
 
 import React, { useEffect, useState } from 'react';
 
 import { ArticleData } from '@Domain/articles';
-import { FriendData } from '@Domain/friends';
 
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import TagsList from '../posts/tags/TagsList';
-import { getRandomFriend } from 'friends/services/friend-service';
+import { getRandomFriend } from 'friends/state/friend-service';
 import { getVisibleArticles } from 'posts/services/article-service';
 import { getUniqueTags } from 'posts/services/url-service';
 
@@ -46,12 +46,12 @@ const SecondSection = styled.div`
 interface ISideInformations {
   actualArticleId: string;
   articles: ArticleData[];
-  friends?: FriendData[];
+  friends?: IFriendData[];
 }
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
   const [articlesPreview, setArticlesPreview] = useState<ArticleData[]>([]);
-  const [selectedFriend, setSelectedFriend] = useState<FriendData>();
+  const [selectedFriend, setSelectedFriend] = useState<IFriendData>();
 
   useEffect(() => {
     if (articles) {

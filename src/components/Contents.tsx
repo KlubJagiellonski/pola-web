@@ -1,15 +1,17 @@
-import React from 'react';
+import { IFriendData } from 'friends';
 import styled from 'styled-components';
 
+import React from 'react';
+
 import { Article } from '@Domain/articles';
-import { Friend } from '@Domain/friends';
 
 import ArticlesListPreview from '../posts/components/list/ArticlesListPrewiev';
+import Friends from './friends/Friends';
+
 import About from './About';
 import DevelopmentSection from './DevelopmentSection';
 import Teams from './Teams';
 import TeamsFriend from './TeamsFriend';
-import Friends from './friends/Friends';
 import SocialMedia from './social-media/SocialMedia';
 
 import { Device, padding } from '@Styles/theme';
@@ -46,7 +48,7 @@ const Wrapper = styled.div`
 
 interface IContent {
   articles?: Article[];
-  friends?: Friend[];
+  friends?: IFriendData[];
 }
 
 const Contents: React.FC<IContent> = ({ articles, friends }) => {

@@ -5,7 +5,7 @@ import friendsSlice, { IFriendsState } from '../../friends/state/friends-reducer
 import { ISubscribeState, newsletterReducer } from '../../newsletter/state/newsletter-reducer';
 import articlesReducer, { IArticlesState } from '../../posts/state/articles-reducer';
 import { SearchState, searchReducer } from '../../search/state/search-reducer';
-import { ISuppliersState, suppliersReducer } from '../../suppliers/state/suppliers-reducer';
+
 import appReducer, { IAppState } from './app-reducer';
 
 export interface IPolaState {
@@ -14,7 +14,6 @@ export interface IPolaState {
   newsletter: ISubscribeState;
   articles: IArticlesState;
   friends: IFriendsState;
-  suppliers: ISuppliersState;
 }
 
 export interface IAction extends AnyAction {
@@ -36,7 +35,6 @@ const store = configureStore({
     newsletter: newsletterReducer,
     articles: articlesReducer,
     friends: friendsSlice,
-    suppliers: suppliersReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

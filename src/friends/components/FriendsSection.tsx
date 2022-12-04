@@ -1,13 +1,11 @@
-import { useLocation } from '@reach/router';
+import { IFriendData } from 'friends';
 import styled from 'styled-components';
 import { StringParam, useQueryParams } from 'use-query-params';
 
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-import { FriendData } from '@Domain/friends';
-
-import { getFriendBySlug } from 'friends/services/friend-service';
+import { getFriendBySlug } from 'friends/state/friend-service';
 
 import Friends from './Friends';
 import SingleFriend from './SingleFriend';
@@ -28,15 +26,14 @@ const Wrapper = styled.div`
   }
 `;
 interface IFriendsSection {
-  friends?: FriendData[];
+  friends: IFriendData[];
 }
 
 const FriendsSection: React.FC<IFriendsSection> = ({ friends }) => {
-  const location = useLocation();
   const [query] = useQueryParams({
     value: StringParam,
   });
-  const [friend, setFriend] = useState<FriendData>();
+  const [friend, setFriend] = useState<IFriendData>();
 
   useEffect(() => {
     if (friends && query.value) {

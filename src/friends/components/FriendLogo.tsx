@@ -1,7 +1,7 @@
 import { StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 
-import { IResponsiveImage, renderFromQuery } from './render-image';
+import { IResponsiveImage, renderFromQuery } from '../../components/images/render-image';
 
 export const FriendLogo: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
   <StaticQuery
@@ -12,7 +12,7 @@ export const FriendLogo: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
             extension
             relativePath
             childImageSharp {
-              gatsbyImageData(layout: CONSTRAINED)
+              gatsbyImageData(layout: FULL_WIDTH)
             }
           }
         }

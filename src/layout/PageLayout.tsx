@@ -1,4 +1,3 @@
-import ErrorBoundary from 'utils/error-boundary';
 import styled from 'styled-components';
 import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
 import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
@@ -14,6 +13,7 @@ import { appDispatcher } from '@App/state/app-dispatcher';
 import { PageType } from '@App/website';
 
 import Download from '@Components/Download';
+import ErrorBoundary from 'utils/error-boundary';
 
 import { SearchInfoModal } from 'search/components/form/SearchInfoModal';
 import { ProductModal } from 'search/components/product-modal';
@@ -118,7 +118,9 @@ const Layout: React.FC<IPageLayout> = ({
 
   return (
     <ErrorBoundary scope="page-layout">
-      <StateLoader />
+      <ErrorBoundary scope="app-state-loader">
+        <StateLoader />
+      </ErrorBoundary>
       <LayoutContainer id="layout-container">
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}

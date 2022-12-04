@@ -1,5 +1,8 @@
-import { IGatsbyNode, IReduxData } from '@State/app';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
+
+import { IGatsbyNode, IReduxData } from '@State/app';
+
+import { IGatsbyImageNode } from '@Components/images/render-image';
 
 import { encodeStringToBase64 } from 'posts/services/url-service';
 
@@ -31,30 +34,7 @@ export interface IArticleNode extends IGatsbyNode {
     title: string;
     subTitle: string;
     category: string;
-    cover: {
-      extension: string;
-      name: string;
-      childImageSharp: {
-        id: string;
-        fluid: {
-          src: string;
-        };
-        gatsbyImageData: IGatsbyImageData;
-
-        // fixed: {
-        //   src: string;
-        //   width: number;
-        //   height: number;
-        // };
-        // fluid: {
-        //   src: string;
-        //   presentationWidth: number;
-        //   presentationHeight: number;
-        //   aspectRatio: number;
-        // };
-      };
-      relativePath: string;
-    };
+    cover: IGatsbyImageNode;
   };
 }
 

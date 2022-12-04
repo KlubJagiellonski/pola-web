@@ -1,25 +1,24 @@
-import { appDispatcher } from 'app/state/app-dispatcher';
 import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
-import { IFriendNode } from '@Domain/friends';
-
-import { FriendsService } from '../friends/services/friend-service';
-import { friendsDispatcher } from '../friends/state/friends-dispatcher';
-import { ArticleService } from '../posts/services/article-service';
-import { articlesDispatcher } from '../posts/state/articles-dispatcher';
 import { IPolaState } from '@App/state';
 import { IArticleNode } from '@Domain/articles';
+import { appDispatcher } from 'app/state/app-dispatcher';
+
+import { FriendService } from '../friends/state/friend-service';
+import { ArticleService } from '../posts/services/article-service';
+import { articlesDispatcher } from '../posts/state/articles-dispatcher';
+import { loadFriends } from 'friends/state/friends-reducer';
 
 interface IStateLoader {
   isArticlesLoaded?: boolean;
   isFriendsLoaded?: boolean;
   initApp?: () => void;
   loadArticles?: (edges: IArticleNode[]) => void;
-  loadFriends?: (node: IFriendNode[]) => void;
 }
 
 const Loader = (props: IStateLoader) => {
+  const dispatch = useDispatch();
   const bootApplication = async () => {
     if (props.initApp) {
       await props.initApp();
@@ -30,19 +29,32 @@ const Loader = (props: IStateLoader) => {
     bootApplication();
   }, []);
 
-  const queryResultFriend = FriendsService.getAll();
-  if (!props.isFriendsLoaded && queryResultFriend?.allFriendsYaml?.nodes && props.loadFriends) {
-    const data = queryResultFriend.allFriendsYaml.nodes;
-    props.loadFriends(data);
+  try {
+    //const friendNodes = getAllNodes();
+    if (!props.isFriendsLoaded) {
+      //const friends = friendNodes.map((node) => Friend.fromNode(node)).map((friend) => friend.toDataModel());
+      const friends = FriendService.getAllData();
+      dispatch(loadFriends(friends));
+    }
+  } catch (error: unknown) {
+    dispatch(loadFriends([]));
+    throw new Error('Cannot load friends data');
   }
 
-  const queryResult = ArticleService.getAll();
-  if (!props.isArticlesLoaded && queryResult?.allMarkdownRemark?.nodes && props.loadArticles) {
-    const data = queryResult.allMarkdownRemark.nodes;
-    data.sort((a: IArticleNode, b: IArticleNode) => {
-      return Date.parse(b.fields.prefix) - Date.parse(a.fields.prefix);
-    });
-    props.loadArticles(data);
+  try {
+    const queryResult = ArticleService.getAll();
+    const articleNodes: IArticleNode[] = queryResult?.allMarkdownRemark?.nodes;
+    if (!props.isArticlesLoaded && articleNodes && props.loadArticles) {
+      articleNodes.sort((a: IArticleNode, b: IArticleNode) => {
+        return Date.parse(b.fields.prefix) - Date.parse(a.fields.prefix);
+      });
+      props.loadArticles(articleNodes);
+    }
+  } catch (error: unknown) {
+    if (props.loadArticles) {
+      props.loadArticles([]);
+    }
+    throw new Error('Cannot load friends data');
   }
 
   return null;
@@ -56,6 +68,5 @@ export const StateLoader = connect(
   {
     initApp: appDispatcher.initialize,
     loadArticles: articlesDispatcher.loadArticles,
-    loadFriends: friendsDispatcher.loadFriends,
   }
 )(Loader);

@@ -3,14 +3,7 @@ import { GatsbyImage, IGatsbyImageData, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import BusinessElements from '@Components/business/BusinessElements';
-
-export interface IGatsbyImageWrapper {
-  extension: string;
-  relativePath: string;
-  childImageSharp: {
-    gatsbyImageData: IGatsbyImageData;
-  };
-}
+import { IGatsbyImageNode } from '@Components/images/render-image';
 
 export interface IBusinessTemplate {
   allMarkdownRemark: {
@@ -19,8 +12,8 @@ export interface IBusinessTemplate {
         frontmatter: {
           title: string;
           slug: string;
-          cover: IGatsbyImageWrapper;
-          icon: IGatsbyImageWrapper;
+          cover: IGatsbyImageNode;
+          icon: IGatsbyImageNode;
         };
         html: string;
       }
@@ -37,16 +30,20 @@ const BusinessTemplate = () => {
             title
             slug
             cover {
+              name
               extension
               relativePath
               childImageSharp {
+                id
                 gatsbyImageData(layout: CONSTRAINED)
               }
             }
             icon {
+              name
               extension
               relativePath
               childImageSharp {
+                id
                 gatsbyImageData(layout: CONSTRAINED)
               }
             }

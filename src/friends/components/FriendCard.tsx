@@ -1,17 +1,19 @@
-import { urls } from 'app/website';
-import { Link } from 'gatsby';
-import React from 'react';
+import { IFriendData } from 'friends';
 import styled from 'styled-components';
 
-import { FriendData } from '@Domain/friends';
+import { Link } from 'gatsby';
+import React from 'react';
+
+import { urls } from 'app/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 
+import { FriendLogo } from 'friends/components/FriendLogo';
+
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '@Styles/theme';
-import { FriendLogo } from '@Components/images/FriendLogo';
 
 const Wrapper = styled(WrapperSection)`
   padding: ${padding.normal};
@@ -54,7 +56,7 @@ const ButtonSection = styled.div`
   gap: ${margin.small};
 `;
 
-const FriendCard: React.FC<FriendData> = (friend) => {
+const FriendCard: React.FC<IFriendData> = (friend) => {
   return (
     <Wrapper color={color.background.white}>
       <TitleSection>Oto jeden Przyjaciel z wielu Przyjaciół Poli</TitleSection>
