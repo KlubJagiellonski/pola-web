@@ -1,9 +1,8 @@
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-
-import { ArticleData } from '@Domain/articles';
 
 import '@Components/Pagination.css';
 

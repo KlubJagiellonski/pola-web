@@ -1,11 +1,13 @@
+import { BusinessLoader } from 'business/state/business-loader';
+import { loadServices } from 'business/state/business-reducer';
 import { PartnersLoader } from 'partners/state/partners-loader';
 import { loadPartners } from 'partners/state/partners-reducer';
+import { IArticleNode } from 'posts';
 
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import { IPolaState } from '@App/state';
-import { IArticleNode } from '@Domain/articles';
 import { appDispatcher } from 'app/state/app-dispatcher';
 
 import { FriendsLoader } from '../friends/state/friends-loader';
@@ -17,6 +19,7 @@ interface IStateLoader {
   isArticlesLoaded?: boolean;
   isFriendsLoaded?: boolean;
   isPartnersLoaded?: boolean;
+  isBusinessLoaded?: boolean;
   initApp?: () => void;
   loadArticles?: (edges: IArticleNode[]) => void;
 }
@@ -34,9 +37,7 @@ const Loader = (props: IStateLoader) => {
   }, []);
 
   try {
-    //const friendNodes = getAllNodes();
     if (!props.isFriendsLoaded) {
-      //const friends = friendNodes.map((node) => Friend.fromNode(node)).map((friend) => friend.toDataModel());
       const friends = FriendsLoader.getAllData();
       dispatch(loadFriends(friends));
     }
@@ -46,15 +47,23 @@ const Loader = (props: IStateLoader) => {
   }
 
   try {
-    //const friendNodes = getAllNodes();
     if (!props.isPartnersLoaded) {
-      //const friends = friendNodes.map((node) => Friend.fromNode(node)).map((friend) => friend.toDataModel());
       const partners = PartnersLoader.getAllData();
       dispatch(loadPartners(partners));
     }
   } catch (error: unknown) {
     dispatch(loadPartners([]));
     logError(error, 'Cannot load partners data');
+  }
+
+  try {
+    if (!props.isBusinessLoaded) {
+      const services = BusinessLoader.getAllData();
+      dispatch(loadServices(services));
+    }
+  } catch (error: unknown) {
+    dispatch(loadServices([]));
+    logError(error, 'Cannot load business services data');
   }
 
   try {
@@ -88,6 +97,7 @@ export const StateLoader = connect(
     isArticlesLoaded: state.articles.initialized,
     isFriendsLoaded: state.friends.initialized,
     isPartnersLoaded: state.partners.initialized,
+    isBusinessLoaded: state.partners.initialized,
   }),
   {
     initApp: appDispatcher.initialize,

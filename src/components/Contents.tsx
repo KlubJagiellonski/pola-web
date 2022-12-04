@@ -1,9 +1,8 @@
 import { IFriendData } from 'friends';
+import { Article } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
-
-import { Article } from '@Domain/articles';
 
 import ArticlesListPreview from '../posts/components/list/ArticlesListPrewiev';
 import Friends from './friends/Friends';

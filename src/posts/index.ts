@@ -1,6 +1,4 @@
-import { IGatsbyImageData } from 'gatsby-plugin-image';
-
-import { IGatsbyNode, IReduxData } from '@State/app';
+import { IGatsbyNode, IReduxData } from '@App/generics';
 
 import { IGatsbyImageNode } from '@Components/images/render-image';
 

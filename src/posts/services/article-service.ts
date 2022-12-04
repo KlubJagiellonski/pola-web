@@ -1,11 +1,10 @@
 import { useLocation } from '@reach/router';
+import { ArticleData } from 'posts';
 import queryString from 'query-string';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
 import { graphql, useStaticQuery } from 'gatsby';
 import { useEffect, useState } from 'react';
-
-import { ArticleData } from '@Domain/articles';
 
 export const ArticleService = {
   getAll: () =>

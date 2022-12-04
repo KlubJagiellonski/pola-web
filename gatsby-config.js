@@ -64,6 +64,14 @@ module.exports = {
         path: `${__dirname}/content/partners/logos/`,
       },
     },
+    //images for business' logos
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `business-images`,
+        path: `${__dirname}/content/business/images/`,
+      },
+    },
 
     {
       resolve: `gatsby-plugin-manifest`,

@@ -1,14 +1,14 @@
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
 
-import { ArticleData } from '@Domain/articles';
+import { ArticleImage } from '@Components/images/ArticleImage';
 
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 
 import { Device, color, margin, padding } from '@Styles/theme';
-import { ArticleImage } from '@Components/images/ArticleImage';
 
 const Wrapper = styled.div`
   position: relative;

@@ -1,8 +1,8 @@
+import { ArticleData } from 'posts';
 import { stringify } from 'query-string';
 import { ArrayParam, encodeQueryParams, withDefault } from 'use-query-params';
 
 import { urls } from 'app/website';
-import { ArticleData } from '@Domain/articles';
 
 export function tagUrl(label: string, query: any) {
   let tags = query.tags.slice();

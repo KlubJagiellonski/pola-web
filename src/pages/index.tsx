@@ -1,4 +1,5 @@
 import { IFriendData } from 'friends';
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
@@ -8,7 +9,6 @@ import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
 import { PageType, urls } from '@App/website';
-import { ArticleData } from '@Domain/articles';
 import { EAN, ISearchResults } from '@Domain/products';
 
 import About from '@Components/About';

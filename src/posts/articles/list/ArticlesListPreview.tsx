@@ -1,10 +1,10 @@
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 
 import { Link } from 'gatsby';
 import React from 'react';
 
 import { urls } from '@App/website';
-import { ArticleData } from '@Domain/articles';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { PrimaryButton } from '@Components/buttons/PrimaryButton';

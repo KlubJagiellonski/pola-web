@@ -1,9 +1,8 @@
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
 import React from 'react';
-
-import { ArticleData } from '@Domain/articles';
 
 import { ArticleImage } from '@Components/images/ArticleImage';
 

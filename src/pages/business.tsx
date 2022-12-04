@@ -1,10 +1,12 @@
+import BusinessElements from 'business/components/BusinessElements';
 import styled from 'styled-components';
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
-import BusinessTemplates from 'gatsby-templates/BusinessTemplate';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { PageLayout } from '@Layout/PageLayout';
@@ -41,6 +43,8 @@ const Title = styled(TitleSection)`
 interface IBusinessPage extends GatsbyPage {}
 
 const BusinessPage = (props: IBusinessPage) => {
+  const services = useSelector((state: IPolaState) => state.business.data);
+
   return (
     <PageLayout location={props.location} page={PageType.BUSINESS} styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="Oferta Biznesowa" />
@@ -60,7 +64,7 @@ const BusinessPage = (props: IBusinessPage) => {
             Chętnie podejmiemy wspólne działania, które mogą zwiększyć pozycje rynkową Twojej firmy, a także stać się
             wyrazem społecznej odpowiedzialności biznesu.
           </Text>
-          <BusinessTemplates />
+          <BusinessElements services={services} />
           <Text>
             Chcemy dostarczać użytkownikom informacji niezbędnych do podjęcia świadomych decyzji. Transparentność w
             zakresie udostępniania danych to wzorcowa prokonsumencka postawa. Możemy dodać do bazy zgromadzoną przez

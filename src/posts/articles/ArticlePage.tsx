@@ -1,13 +1,13 @@
 import { IFriendData } from 'friends';
+import { ArticleData } from 'posts';
+import { IArticleNode } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { IPolaState } from '@App/state';
-import { ArticleData } from '@Domain/articles';
 import { PageType } from 'app/website';
-import { IArticleNode } from 'domain/articles';
 
 import SideInformations from '@Components/SideInformations';
 import { PageLayout } from '@Layout/PageLayout';

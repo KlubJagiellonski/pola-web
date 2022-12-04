@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import businessReducer, { IBusinessState } from 'business/state/business-reducer';
 import partnersReducer, { IPartnersState } from 'partners/state/partners-reducer';
 import { AnyAction, Reducer } from 'redux';
 
@@ -16,6 +17,7 @@ export interface IPolaState {
   articles: IArticlesState;
   friends: IFriendsState;
   partners: IPartnersState;
+  business: IBusinessState;
 }
 
 export interface IAction extends AnyAction {
@@ -38,6 +40,7 @@ const store = configureStore({
     articles: articlesReducer,
     friends: friendsSlice,
     partners: partnersReducer,
+    business: businessReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

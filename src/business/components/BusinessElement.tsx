@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
-//import Img, { FluidObject } from 'gatsby-image';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 
+import { BusinessImage } from './BusinessImage';
+
 import { Device, color, fontSize, introHeight, lineHeight, padding } from '@Styles/theme';
 
-interface BusinessElement {
+interface IBusinessElement {
+  title: string;
+  imageSrc: string;
   html: any;
-  imgFluid?: any | any[] | null;
 }
 
 const Wrapper = styled.div`
@@ -50,17 +51,16 @@ const Columns = styled(ColumnsLayout)`
   }
 `;
 
-const BusinessElement: React.FC<BusinessElement> = ({ html, imgFluid }) => {
+const BusinessElement: React.FC<IBusinessElement> = ({ html, title, imageSrc }) => {
   return (
     <Wrapper id="business-element">
       <Columns>
         <ContentColumn fraction={50}>
           <TextSection dangerouslySetInnerHTML={{ __html: html }} />
         </ContentColumn>
-        {imgFluid && (
+        {imageSrc && (
           <ContentColumn fraction={50}>
-            {' '}
-            <GatsbyImage alt={imgFluid} image={getImage(imgFluid)} />
+            <BusinessImage title={title} imageSrc={imageSrc} />
           </ContentColumn>
         )}
       </Columns>

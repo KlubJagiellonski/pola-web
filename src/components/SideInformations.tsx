@@ -1,9 +1,8 @@
 import { IFriendData } from 'friends';
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React, { useEffect, useState } from 'react';
-
-import { ArticleData } from '@Domain/articles';
 
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';

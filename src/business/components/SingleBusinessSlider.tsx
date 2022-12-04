@@ -1,11 +1,12 @@
-import { SliderElement } from '../SliderComponent';
 import styled from 'styled-components';
 
-//import Img, { FluidObject } from 'gatsby-image';
-import { GatsbyImage, ImageDataLike, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 import { urls } from 'app/website';
+
+import { SliderElement } from '@Components/SliderComponent';
+
+import { BusinessImage } from './BusinessImage';
 
 import { Text } from '@Styles/GlobalStyle.css';
 import { Device, fontSize, padding } from '@Styles/theme';
@@ -43,16 +44,16 @@ const Slider = styled(SliderElement)`
 
 interface ISingleBusinessSlider {
   title?: string;
-  iconFluid: ImageDataLike;
+  imageSrc: string;
   slug: string;
 }
 
-export const SingleBusinessSlider: React.FC<ISingleBusinessSlider> = ({ slug, title = '', iconFluid }) => {
+export const SingleBusinessSlider: React.FC<ISingleBusinessSlider> = ({ slug, title = '', imageSrc }) => {
   return (
     <Slider to={urls.pola.business('business-element', slug)}>
       <Title>{title}</Title>
       <Image>
-        <GatsbyImage alt={title} image={getImage(iconFluid)} />
+        <BusinessImage title={title} imageSrc={imageSrc} />
       </Image>
     </Slider>
   );

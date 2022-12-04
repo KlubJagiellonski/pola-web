@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-import { ArticleData } from '@Domain/articles';
+import { ArticleData } from 'posts';
 
 export interface IArticlesState {
   initialized: boolean;

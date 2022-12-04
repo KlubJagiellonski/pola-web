@@ -3,6 +3,7 @@ import { PageSection } from '../../layout/PageSection';
 import { Device, color, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
 import SEOMetadata from '../../utils/browser/SEOMetadata';
 import { IFriendData } from 'friends';
+import { ArticleData } from 'posts';
 import styled from 'styled-components';
 import { TitleSection } from 'styles/GlobalStyle.css';
 
@@ -13,7 +14,6 @@ import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
 import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
 import { PageType } from '@App/website';
-import { ArticleData } from '@Domain/articles';
 import { EAN, ISearchResults } from 'domain/products';
 
 import { WebViewLayout } from 'layout/WebViewLayout';
