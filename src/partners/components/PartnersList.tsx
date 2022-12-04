@@ -1,14 +1,14 @@
-import React from 'react';
+import { IPartnerData } from 'partners';
 import styled from 'styled-components';
 
-import { IPartner } from '@Domain/partners';
+import React from 'react';
 
-import { PartnerTile } from '@Components/partners/PartnerTile';
+import { PartnerTile } from './PartnerTile';
 
 import { Device, padding } from '@Styles/theme';
 
 interface IPartnersList {
-  partners: IPartner[];
+  partners: IPartnerData[];
 }
 
 const List = styled.div`

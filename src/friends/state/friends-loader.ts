@@ -20,10 +20,10 @@ export interface IFriendsGraph {
   };
 }
 
-export class FriendLoader {
+export class FriendsLoader {
   public static getAllData() {
-    const nodes = FriendLoader.getAllNodes();
-    const friends = nodes.map((node) => FriendLoader.toDataModel(node));
+    const nodes = FriendsLoader.getAllNodes();
+    const friends = nodes.map((node) => FriendsLoader.toDataModel(node));
     return friends;
   }
 

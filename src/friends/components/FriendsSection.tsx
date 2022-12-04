@@ -5,7 +5,7 @@ import { StringParam, useQueryParams } from 'use-query-params';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-import { getFriendBySlug } from 'friends/state/friend-loader';
+import { getFriendBySlug } from 'friends/state/friends-selectors';
 
 import Friends from './Friends';
 import SingleFriend from './SingleFriend';

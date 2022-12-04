@@ -56,6 +56,14 @@ module.exports = {
         path: `${__dirname}/content/friends/logos/`,
       },
     },
+    //images for partners' logos
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `partner-images`,
+        path: `${__dirname}/content/partners/logos/`,
+      },
+    },
 
     {
       resolve: `gatsby-plugin-manifest`,
@@ -115,20 +123,24 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/friends`,
-        // plugins: [
-        //   {
-        //     resolve: `gatsby-yaml-full-file`,
-        //     options: {
-        //       path: `${__dirname}/content/friends/logos`,
-        //     },
-        //   },
-        // ],
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/friends/logos`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/partners`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/partners/logos`,
       },
     },
 
@@ -199,8 +211,8 @@ module.exports = {
       resolve: 'gatsby-plugin-copy-files',
       options: {
         source: `${__dirname}/webviews/`,
-        destination: 'm'
-      }
+        destination: 'm',
+      },
     },
   ],
   // shadowing API request domain for development

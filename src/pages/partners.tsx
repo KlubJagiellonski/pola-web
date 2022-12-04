@@ -1,10 +1,14 @@
+import { BuyPolishInitiative } from 'partners/components/BuyPolishInitiative';
+import { PartnersList } from 'partners/components/PartnersList';
+
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
 import { PageType } from '@App/website';
-import { BuyPolishInitiative } from '@Components/partners/BuyPolishInitiative';
-import { PartnersList } from '@Components/partners/PartnersList';
+
 import Placeholder from '@Components/Placeholder';
-import { PartnerService } from '@Domain/partners/partners-service';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
@@ -12,6 +16,7 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 interface IPartnersPage extends GatsbyPage {}
 
 const PartnersPage = (props: IPartnersPage) => {
+  const partners = useSelector((state: IPolaState) => state.partners.data);
   return (
     <PageLayout location={props.location} page={PageType.PARTNERS}>
       <SEOMetadata pageTitle="Partnerzy" />
@@ -20,7 +25,7 @@ const PartnersPage = (props: IPartnersPage) => {
         <BuyPolishInitiative />
       </PageSection>
       <PageSection>
-        <PartnersList partners={PartnerService.getAll()} />
+        <PartnersList partners={partners} />
       </PageSection>
     </PageLayout>
   );

@@ -1,6 +1,7 @@
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
 
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
@@ -39,6 +40,7 @@ interface ICard {
   chidlren?: JSX.Element;
   buttonLabel?: string;
   url: string;
+  children?: React.ResctNone;
 }
 
 const Card: React.FC<ICard> = ({ title, children, buttonLabel, url }) => {

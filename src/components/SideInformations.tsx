@@ -8,7 +8,7 @@ import { ArticleData } from '@Domain/articles';
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import TagsList from '../posts/tags/TagsList';
-import { getRandomFriend } from 'friends/state/friend-loader';
+import { getRandomFriend } from 'friends/state/friends-selectors';
 import { getVisibleArticles } from 'posts/services/article-service';
 import { getUniqueTags } from 'posts/services/url-service';
 

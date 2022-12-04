@@ -1,14 +1,16 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-
-import SEOMetadata from '../../utils/browser/SEOMetadata';
 import { PageSection } from '../../layout/PageSection';
-import { WebViewLayout } from 'layout/WebViewLayout';
-import { PartnerService } from 'domain/partners/partners-service';
-import { PartnersList } from 'components/partners/PartnersList';
-import { BuyPolishInitiative } from 'components/partners/BuyPolishInitiative';
+import SEOMetadata from '../../utils/browser/SEOMetadata';
+import { BuyPolishInitiative } from 'partners/components/BuyPolishInitiative';
+import { PartnersList } from 'partners/components/PartnersList';
+
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IPolaState } from '@App/state';
 import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
 import { PageType } from '@App/website';
+
+import { WebViewLayout } from 'layout/WebViewLayout';
 
 type IPartnersPage = {
   location?: Location;
@@ -17,6 +19,7 @@ type IPartnersPage = {
 const PartnersPage = (props: IPartnersPage) => {
   const { location } = props;
   const dispatch = useDispatch();
+  const partners = useSelector((state: IPolaState) => state.partners.data);
 
   React.useEffect(() => {
     if (location) {
@@ -32,7 +35,7 @@ const PartnersPage = (props: IPartnersPage) => {
         <BuyPolishInitiative />
       </PageSection>
       <PageSection>
-        <PartnersList partners={PartnerService.getAll()} />
+        <PartnersList partners={partners} />
       </PageSection>
     </WebViewLayout>
   );

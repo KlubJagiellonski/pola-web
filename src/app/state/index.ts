@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import partnersReducer, { IPartnersState } from 'partners/state/partners-reducer';
 import { AnyAction, Reducer } from 'redux';
 
 import friendsSlice, { IFriendsState } from '../../friends/state/friends-reducer';
@@ -14,6 +15,7 @@ export interface IPolaState {
   newsletter: ISubscribeState;
   articles: IArticlesState;
   friends: IFriendsState;
+  partners: IPartnersState;
 }
 
 export interface IAction extends AnyAction {
@@ -35,19 +37,10 @@ const store = configureStore({
     newsletter: newsletterReducer,
     articles: articlesReducer,
     friends: friendsSlice,
+    partners: partnersReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
-
-// export type AppDispatch = typeof store.dispatch;
-// export const useAppDispatch: () => AppDispatch = useDispatch; // Export a hook that can be reused to resolve types
-
-// export default store;
-
-// function withPayloadType<T>() {
-//   return (t: T) => ({ payload: t });
-// }
-// createAction('test', withPayloadType<string>());
 
 export default (preloadedState: IPolaState) => {
   return store;

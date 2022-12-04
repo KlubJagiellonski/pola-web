@@ -1,11 +1,14 @@
+import styled from 'styled-components';
+
 import * as React from 'react';
 
 import { urls } from '@App/website';
-import { ResponsiveImage } from '../../components/images/ResponsiveImage';
-import { Device, margin, padding } from '../../styles/theme';
-import styled from 'styled-components';
+
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { ExternalLink } from 'utils/browser/links';
-import { Text } from '../../styles/GlobalStyle.css';
+
+import { Text } from '@Styles/GlobalStyle.css';
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   text-align: center;

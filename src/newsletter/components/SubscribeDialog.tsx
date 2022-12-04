@@ -1,14 +1,15 @@
-import { Spinner } from 'components/Spinner';
+import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { Follower } from 'newsletter';
-import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Device } from 'styles/theme';
+
+import React, { useEffect, useRef, useState } from 'react';
 
 import { ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { classNames } from '@Utils/class-names';
+import { Spinner } from 'components/Spinner';
 
-import { SubscriptionStatus } from '../state/newsletter-reducer';
 import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
 import { SubscribeForm } from './SubscribeForm';
 import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRepeatedResult } from './SubscribeResult';
@@ -48,7 +49,7 @@ interface ISubscribeDialog {
   onSubmit: (email: string, name?: string) => void;
   onClear: () => void;
   stopExpanded?: boolean;
-  isInitiallyExpanded: boolean;
+  isInitiallyExpanded?: boolean;
 }
 
 export const SubscribeDialog: React.FC<ISubscribeDialog> = ({

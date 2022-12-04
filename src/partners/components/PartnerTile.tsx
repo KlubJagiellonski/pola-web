@@ -1,9 +1,11 @@
-import React from 'react';
+import { IPartnerData } from 'partners';
 import styled from 'styled-components';
 
-import { IPartner } from '@Domain/partners';
+import React from 'react';
 
-import { ResponsiveImage } from '../images/ResponsiveImage';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+
+import { PartnerLogo } from './PartnerLogo';
 
 const Tile = styled.div`
   text-align: center;
@@ -25,11 +27,11 @@ const ImageContainer = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const PartnerTile: React.FC<IPartner> = ({ name, imageSrc, description, sourceUrl }) => (
+export const PartnerTile: React.FC<IPartnerData> = ({ name, image, description, sourceUrl }) => (
   <Tile>
     <a href={sourceUrl} target="__blank">
       <ImageContainer>
-        <ResponsiveImage imageSrc={imageSrc} />
+        <PartnerLogo title={name} imageSrc={image} />
       </ImageContainer>
       <p className="title">{description}</p>
     </a>
