@@ -8,7 +8,6 @@ export enum PageType {
   SUPPORT = 'support',
   COMPANY_FORM = 'company-form',
   FRIENDS = 'friends',
-  SUPPLIERS = 'suppliers',
   PARTNERS = 'partners',
   BUSINESS = 'business',
   TEAM = 'team',

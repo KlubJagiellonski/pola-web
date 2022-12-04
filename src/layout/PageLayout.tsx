@@ -1,12 +1,9 @@
 import styled from 'styled-components';
-import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
-import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
-import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
 
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
 import { useEffect } from 'react';
-import { ConnectedProps, connect, useDispatch } from 'react-redux';
+import { ConnectedProps, connect } from 'react-redux';
 
 import { IPolaState } from '@App/state';
 import { appDispatcher } from '@App/state/app-dispatcher';
@@ -30,7 +27,7 @@ import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {
-    const { app, search, suppliers } = state;
+    const { app, search } = state;
     return {
       isSearchInfoVisible: app.isSearchInfoVisible,
       activePage: app.activePage,
@@ -44,8 +41,6 @@ const connector = connect(
     toggleSearchInfo: appDispatcher.toggleSearchInfo,
     expandMenu: appDispatcher.expandMenu,
     unselectProduct: searchDispatcher.unselectProduct,
-    hideResultDialog: suppliersDispatcher.hideDialog,
-    submitResult: suppliersDispatcher.submitForm,
   }
 );
 
