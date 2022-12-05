@@ -22,7 +22,7 @@ const TeamsFriend = () => {
     <Wrapper color={color.background.white}>
       <TextSection>
         <IconTeams>
-          <ResponsiveImage imageSrc="ikona-zespół.png" />
+          <ResponsiveImage title="team icon" imageSrc="ikona-zespół.png" />
         </IconTeams>
         <Title>Dołącz do Przyjaciół Poli i odnieś sukces!</Title>
         <Text>

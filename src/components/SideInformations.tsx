@@ -2,14 +2,16 @@ import { IFriendData } from 'friends';
 import { IArticleData } from 'posts';
 import styled from 'styled-components';
 
+import { navigate } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
 import TagsList from '../posts/tags/TagsList';
 import { getRandomFriend } from 'friends/state/friends-selectors';
-import { getVisibleArticles } from 'posts/services/article-service';
+import { buildArticlesQuery, getVisibleArticles, useArticlesParams } from 'posts/services/article-service';
 import { getUniqueTags } from 'posts/services/url-service';
+import { TagLinks } from 'posts/tags/TagLinks';
 
 import DevelopmentSection from './DevelopmentSection';
 import SocialMedia from './social-media/SocialMedia';
@@ -51,7 +53,6 @@ interface ISideInformations {
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
   const [articlesPreview, setArticlesPreview] = useState<IArticleData[]>([]);
   const [selectedFriend, setSelectedFriend] = useState<IFriendData>();
-
   useEffect(() => {
     if (articles) {
       setArticlesPreview(getVisibleArticles(actualArticleId, articles));
@@ -71,7 +72,7 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
       </FirstSection>
       <SecondSection>
         <SocialMedia />
-        <TagsList availableTags={articles && getUniqueTags(articles)} />
+        <TagLinks tags={articles && getUniqueTags(articles)} />
       </SecondSection>
       <Title>Zobacz także:</Title>
       <ArticlesListPreview articles={articlesPreview} />

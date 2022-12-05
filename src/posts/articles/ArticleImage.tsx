@@ -1,9 +1,20 @@
 import { IResponsiveImage, renderFromQuery } from '../../components/images/render-image';
+import styled from 'styled-components';
 
 import { StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 
-export const ArticleImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
+export type ArticleStyles = {
+  fullSize?: boolean;
+};
+
+const ArticleCoverWrapper = styled.div<ArticleStyles>`
+  .gatsby-image-wrapper {
+    height: ${(p) => (p.fullSize ? undefined : '16em')};
+  }
+`;
+
+export const ArticleImage: React.FC<ArticleStyles & IResponsiveImage> = ({ imageSrc, title, fullSize }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -21,12 +32,16 @@ export const ArticleImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) =>
               fluid {
                 src
               }
-              gatsbyImageData(layout: CONSTRAINED)
+              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
             }
           }
         }
       }
     `}
-    render={(data) => renderFromQuery(data.images.nodes, imageSrc, title)}
+    render={(data) => (
+      <ArticleCoverWrapper className="article-cover" fullSize={fullSize}>
+        {renderFromQuery(data.images.nodes, imageSrc, title)}
+      </ArticleCoverWrapper>
+    )}
   />
 );

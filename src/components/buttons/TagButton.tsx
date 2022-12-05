@@ -36,7 +36,7 @@ export const TagButton: React.FC<ITagButton> = ({ label, icon, className, disabl
   return (
     <ButtonContainer theme={styles} className={className} onClick={handleClick} disabled={disabled}>
       {icon}
-      {label.replaceAll(TAG_SEPARATOR, ' ')}
+      {label && label.replaceAll(TAG_SEPARATOR, ' ')}
       {children}
     </ButtonContainer>
   );

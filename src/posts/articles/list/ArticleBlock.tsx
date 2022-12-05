@@ -30,12 +30,6 @@ const ArticleImageWrapper = styled.div<{ img?: string; smallWidth?: boolean }>`
   width: 50%;
   text-align: left;
 
-  .gatsby-image-wrapper {
-    div {
-      padding-bottom: 100% !important;
-    }
-  }
-
   @media ${Device.mobile} {
     width: ${(props) => (props.smallWidth ? '50%' : '100%')};
     margin: auto;

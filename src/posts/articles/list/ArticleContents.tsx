@@ -2,13 +2,14 @@ import React from 'react';
 
 import { getDate } from '@Utils/dates';
 
-import Tag from '../../tags/Tag';
+import { TagLink } from 'posts/tags/TagLinks';
+
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
 
 interface IArticleContents {
   date?: string;
   text: string;
-  tag?: String;
+  tag?: string;
 }
 
 const ArticleContents: React.FC<IArticleContents> = ({ date, text, tag }) => {
@@ -21,7 +22,7 @@ const ArticleContents: React.FC<IArticleContents> = ({ date, text, tag }) => {
       {date && <ArticleDate>{getDate(date)}</ArticleDate>}
       {tag && (
         <ArticleTag>
-          <Tag label={`${tag}`} />
+          <TagLink label={tag} />
         </ArticleTag>
       )}
     </>

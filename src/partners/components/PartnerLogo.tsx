@@ -12,7 +12,7 @@ export const PartnerLogo: React.FC<IResponsiveImage> = ({ imageSrc, title }) => 
             extension
             relativePath
             childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
+              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
             }
           }
         }

@@ -15,7 +15,7 @@ export const BusinessImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) =
               fluid {
                 src
               }
-              gatsbyImageData(layout: CONSTRAINED)
+              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
             }
           }
         }

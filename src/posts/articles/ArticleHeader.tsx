@@ -29,6 +29,6 @@ export const ArticleHeader: React.FC<IArticleHeader> = ({ title, subTitle, date,
       {category} | {getDate(date)}
     </Text>
     <p>{subTitle}</p>
-    <ArticleImage title={`${title} - ${subTitle}`} imageSrc={imageSrc} />
+    <ArticleImage title={`${title} - ${subTitle}`} imageSrc={imageSrc} fullSize={true} />
   </>
 );

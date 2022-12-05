@@ -56,10 +56,11 @@ const SecondColumn = styled.div`
 
 interface IArticlePage {
   article: IArticleNode;
+  pageContext: any;
 }
 
 const ArticlePage = (props: IArticlePage) => {
-  const { article } = props;
+  const { article, pageContext } = props;
   const { frontmatter, fields, html } = article;
   const { relativePath: imageSrc } = frontmatter.cover;
   const { title, subTitle, category } = frontmatter;
