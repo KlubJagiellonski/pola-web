@@ -1,4 +1,4 @@
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import styled from 'styled-components';
 
 import { Link } from 'gatsby';
@@ -31,14 +31,14 @@ const ArticlesButton = styled(PrimaryButton)`
 `;
 
 interface IArticlesList {
-  articles?: ArticleData[];
+  articles?: IArticleData[];
 }
 
 export const ArticlesListPreview: React.FC<IArticlesList> = ({ articles }) => {
   return (
     <Wrapper>
       {articles &&
-        articles.map((article: ArticleData) => (
+        articles.map((article: IArticleData) => (
           <ArticlePreview
             key={article.id}
             id={article.id}

@@ -1,10 +1,11 @@
+import { useLocation } from '@reach/router';
 import { IFriendData } from 'friends';
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import { IArticleNode } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import { IPolaState } from '@App/state';
 import { PageType } from 'app/website';
@@ -55,44 +56,32 @@ const SecondColumn = styled.div`
 
 interface IArticlePage {
   article: IArticleNode;
-  articles: ArticleData[];
-  friends: IFriendData[];
-  location?: Location;
-  author?: any;
-  slug?: string;
-  facebook?: any;
-  cover?: any;
 }
 
 const ArticlePage = (props: IArticlePage) => {
-  const { article, articles, friends } = props;
-  const { frontmatter } = article;
+  const { article } = props;
+  const { frontmatter, fields, html } = article;
+  const { relativePath: imageSrc } = frontmatter.cover;
   const { title, subTitle, category } = frontmatter;
-  const date = article.fields.prefix;
-  const html = article.html;
-  const fluid = article.frontmatter.cover.childImageSharp.gatsbyImageData;
-  // const title = ((article || {}).frontmatter || {}).title;
-  // const subTitle = ((article || {}).frontmatter || {}).subTitle;
-  // const category = ((article || {}).frontmatter || {}).category;
-  // const date = ((article || {}).fields || {}).prefix;
-  // const html = (article || {}).html;
-  // const fluid = ((article || {}).frontmatter || {}).cover.childImageSharp.fluid;
+  const date = fields.prefix;
+  const location = useLocation();
+  const articles = useSelector((state: IPolaState) => state.articles.data);
+  const friends = useSelector((state: IPolaState) => state.friends.data);
 
   return (
-    <PageLayout location={props.location} page={PageType.ARTICLE}>
-      <SEOMetadata pageTitle={title} image={fluid.src} />
+    <PageLayout location={location} page={PageType.ARTICLE}>
+      <SEOMetadata pageTitle={title} image={imageSrc} />
       <PageSection>
         <Wrapper>
           <FirstColumn>
             <PageSection>
-              <ArticleHeader title={title} subTitle={subTitle} date={date} fluid={fluid} category={category} />
+              <ArticleHeader title={title} subTitle={subTitle} date={date} imageSrc={imageSrc} category={category} />
             </PageSection>
             <PageSection>
               <Content html={html} />
             </PageSection>
           </FirstColumn>
           <SecondColumn>
-            AmeriPol-Trading.png
             <SideInformations actualArticleId={article.id} articles={articles} friends={friends} />
           </SecondColumn>
         </Wrapper>
@@ -101,11 +90,4 @@ const ArticlePage = (props: IArticlePage) => {
   );
 };
 
-export default connect(
-  (state: IPolaState) => ({
-    location: state.app.location,
-    articles: state.articles.data,
-    friends: state.friends.data,
-  }),
-  {}
-)(ArticlePage);
+export default ArticlePage;

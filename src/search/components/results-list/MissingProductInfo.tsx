@@ -1,9 +1,11 @@
-import { urls } from 'app/website';
-import React from 'react';
 import styled from 'styled-components';
 
+import React from 'react';
+
+import { urls } from 'app/website';
+
 import { InfoBox } from '@Components/InfoBox';
-import { Title } from '@Components/Teams.css';
+import { Title } from '@Components/Teams';
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { openNewTab } from '@Utils/browser';

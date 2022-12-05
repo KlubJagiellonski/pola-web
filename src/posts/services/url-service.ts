@@ -1,4 +1,4 @@
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import { stringify } from 'query-string';
 import { ArrayParam, encodeQueryParams, withDefault } from 'use-query-params';
 
@@ -32,12 +32,12 @@ export const encodeStringToBase64 = (tag: string) => {
     : '';
 };
 
-export function getUniqueTags(articles: ArticleData[] | undefined) {
+export function getUniqueTags(articles: IArticleData[] | undefined) {
   if (!articles) {
     return [];
   }
 
-  const uniqueTags = articles.reduce((tags: Set<string>, article: ArticleData) => {
+  const uniqueTags = articles.reduce((tags: Set<string>, article: IArticleData) => {
     if (article.tag) {
       tags.add(article.tag);
     }

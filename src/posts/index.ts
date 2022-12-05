@@ -4,7 +4,7 @@ import { IGatsbyImageNode } from '@Components/images/render-image';
 
 import { encodeStringToBase64 } from 'posts/services/url-service';
 
-export const mapArticlesToDataModel = (nodes: IArticleNode[]): ArticleData[] =>
+export const mapArticlesToDataModel = (nodes: IArticleNode[]): IArticleData[] =>
   nodes.map((node) => ({
     id: node.id,
     title: node.frontmatter.title,
@@ -36,7 +36,7 @@ export interface IArticleNode extends IGatsbyNode {
   };
 }
 
-export interface ArticleData extends IReduxData {
+export interface IArticleData extends IReduxData {
   id: string;
   title: string;
   subTitle: string;

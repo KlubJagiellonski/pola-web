@@ -25,6 +25,7 @@ type HomeHash = 'contact';
 type HashSection = HomeHash | AboutHash | FriendHash;
 
 type HrefFunction = (sectionId?: HashSection) => string;
+type SlugFunction = (sectionId?: HashSection, slug?: string) => string;
 
 export interface PageLinkData {
   type: PageType;
@@ -38,20 +39,21 @@ export interface ExternalLinkData {
   url: string | HrefFunction;
 }
 
-const hashableUrl =
+const hashableUrl: (name?: string) => HrefFunction =
   (pageName: string = '') =>
   (sectionId?: HashSection) =>
     sectionId ? `/${pageName}#${sectionId}` : `/${pageName}`;
 
-const sluggableUrl = (pageName: string) => (sectionId?: HashSection, slug?: string) => {
-  if (slug) {
-    return sectionId ? `/${pageName}?value=${slug}#${sectionId}` : `/${pageName}?value=${slug}`;
-  } else {
-    return sectionId ? `/${pageName}#${sectionId}` : `/${pageName}`;
-  }
-};
+const sluggableUrl: (name?: string) => SlugFunction =
+  (pageName: string) => (sectionId?: HashSection, slug?: string) => {
+    if (slug) {
+      return sectionId ? `/${pageName}?value=${slug}#${sectionId}` : `/${pageName}?value=${slug}`;
+    } else {
+      return sectionId ? `/${pageName}#${sectionId}` : `/${pageName}`;
+    }
+  };
 
-type HrefDictionary = Dictionary<HrefFunction>;
+type HrefDictionary = Dictionary<HrefFunction | SlugFunction>;
 type UrlDictionary = Dictionary<URL>;
 
 type WebsiteMap = {

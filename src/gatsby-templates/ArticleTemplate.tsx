@@ -1,5 +1,6 @@
-import React from 'react';
 import { graphql } from 'gatsby';
+import React from 'react';
+
 import ArticlePage from '../posts/articles/ArticlePage';
 
 interface IArticleTemplate {
@@ -29,6 +30,9 @@ export const postQuery = graphql`
         subTitle
         category
         cover {
+          name
+          extension
+          relativePath
           childImageSharp {
             fluid {
               src

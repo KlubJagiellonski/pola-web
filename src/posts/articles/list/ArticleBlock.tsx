@@ -1,14 +1,19 @@
 import styled from 'styled-components';
+
+import { Link } from 'gatsby';
 import React from 'react';
-import { Device, color, margin } from '@Styles/theme';
-import { ButtonThemes, ButtonFlavor } from '@Components/buttons/Button';
+
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { PrimaryButton } from '@Components/buttons/PrimaryButton';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
-import { WrapperSection } from '@Styles/GlobalStyle.css';
-import { Link } from 'gatsby';
+
+import { ArticleImage } from 'posts/articles/ArticleImage';
+
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
-import { ArticleImage } from '@Components/images/ArticleImage';
+
+import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color, margin } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   display: flex;

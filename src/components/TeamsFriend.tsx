@@ -1,11 +1,13 @@
-import { urls } from 'app/website';
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
+
+import { urls } from 'app/website';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 
-import { ButtonTeams, IconTeams, TextSection, Title, WrapperTeams } from './Teams.css';
+import { ButtonTeams, IconTeams, TextSection, Title, WrapperTeams } from './Teams';
 import { ResponsiveImage } from './images/ResponsiveImage';
 
 import { Text } from '@Styles/GlobalStyle.css';

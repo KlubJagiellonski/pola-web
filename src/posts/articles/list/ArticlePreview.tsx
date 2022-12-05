@@ -1,10 +1,10 @@
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
 import React from 'react';
 
-import { ArticleImage } from '@Components/images/ArticleImage';
+import { ArticleImage } from 'posts/articles/ArticleImage';
 
 import ArticleContents from './ArticleContents';
 import { ArticleDate, ArticleTag, ArticleText } from './ArticleContents.css';
@@ -68,7 +68,7 @@ const ArticleSection = styled.div`
   }
 `;
 
-export const ArticlePreview: React.FC<ArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
+export const ArticlePreview: React.FC<IArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Container color={color.background.white}>
       <ImageWrapper>{imagePath && <ArticleImage title={title} imageSrc={imagePath} />}</ImageWrapper>

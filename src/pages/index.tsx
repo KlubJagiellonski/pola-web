@@ -1,5 +1,5 @@
 import { IFriendData } from 'friends';
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
@@ -147,7 +147,7 @@ type IHomePage = GatsbyPage &
   ReduxProps & {
     searchState: SearchStateName;
     searchResults?: ISearchResults;
-    articles?: ArticleData[];
+    articles?: IArticleData[];
     activeTags: string[];
     friends?: IFriendData[];
 

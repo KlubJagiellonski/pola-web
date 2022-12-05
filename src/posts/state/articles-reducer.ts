@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 
 export interface IArticlesState {
   initialized: boolean;
-  data?: ArticleData[];
+  data: IArticleData[];
 }
 
 const initialState: IArticlesState = {
   initialized: false,
+  data: [],
 };
 
 const articlesSlice = createSlice({

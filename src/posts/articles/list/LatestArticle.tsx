@@ -1,9 +1,9 @@
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
 
-import { ArticleImage } from '@Components/images/ArticleImage';
+import { ArticleImage } from 'posts/articles/ArticleImage';
 
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
@@ -54,7 +54,7 @@ const TextSection = styled.div`
   flex-direction: column;
 `;
 
-const LatestArticle: React.FC<ArticleData> = ({ imagePath, title, slug, date, text, tag }) => {
+const LatestArticle: React.FC<IArticleData> = ({ imagePath, title, slug, date, text, tag }) => {
   return (
     <Wrapper>
       <Sections>

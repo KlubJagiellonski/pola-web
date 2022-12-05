@@ -1,4 +1,4 @@
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React from 'react';
@@ -43,7 +43,7 @@ const FirstArticle = styled.div<{ inVisible?: boolean }>`
 `;
 
 interface NewsPage {
-  articles?: ArticleData[];
+  articles?: IArticleData[];
   query: IArticleQuery;
   onPageSelected: (page: number) => void;
 }
@@ -56,7 +56,7 @@ const NewsPageArticles: React.FC<NewsPage> = ({ articles, query, onPageSelected 
 
   const isAnyTagSelected = query.tags && query.tags.length > 0;
   const visibleArticles = isAnyTagSelected
-    ? articles.filter((article: ArticleData) => query.tags.includes(article.urlTag))
+    ? articles.filter((article: IArticleData) => query.tags.includes(article.urlTag))
     : articles;
 
   const data = visibleArticles.slice();

@@ -47,7 +47,7 @@ function renderImage(image: IGatsbyImageNode, title: string) {
       return console.error(`Cannot read Gatsby image data "${image.relativePath}"`);
     }
 
-    const component = <GatsbyImage alt={title} image={imageMetadata} />;
+    const component = <GatsbyImage alt={title || 'no title'} image={imageMetadata} />;
     return component;
   } catch (error: unknown) {
     console.error(`Cannot render image "${image.relativePath}"`, error);

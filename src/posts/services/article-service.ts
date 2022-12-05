@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router';
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import queryString from 'query-string';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
@@ -45,11 +45,11 @@ export const ArticleService = {
 };
 
 export interface IArticlesTwoColumns {
-  first: ArticleData;
-  second?: ArticleData;
+  first: IArticleData;
+  second?: IArticleData;
 }
 
-export function getArticlesTwoColumns(articles: ArticleData[]) {
+export function getArticlesTwoColumns(articles: IArticleData[]) {
   const sortedArticles: IArticlesTwoColumns[] = [];
   let section: IArticlesTwoColumns[] = [];
 
@@ -137,7 +137,7 @@ export const useQueryParam = (paramName: string, initialValue: string): string =
   return storedQuery;
 };
 
-export function getVisibleArticles(actualArticleId: string, articles: ArticleData[]) {
+export function getVisibleArticles(actualArticleId: string, articles: IArticleData[]) {
   let art = articles.slice();
   for (let i = 0; i < art.length; i++) {
     if (art[i].id === actualArticleId) {

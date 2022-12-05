@@ -1,7 +1,7 @@
+import { IResponsiveImage, renderFromQuery } from '../../components/images/render-image';
+
 import { StaticQuery, graphql } from 'gatsby';
 import React from 'react';
-
-import { IResponsiveImage, renderFromQuery } from './render-image';
 
 export const ArticleImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
   <StaticQuery
@@ -14,6 +14,7 @@ export const ArticleImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) =>
           }
         ) {
           nodes {
+            name
             extension
             relativePath
             childImageSharp {

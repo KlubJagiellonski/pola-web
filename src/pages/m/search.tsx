@@ -3,7 +3,7 @@ import { PageSection } from '../../layout/PageSection';
 import { Device, color, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
 import SEOMetadata from '../../utils/browser/SEOMetadata';
 import { IFriendData } from 'friends';
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 import { TitleSection } from 'styles/GlobalStyle.css';
@@ -132,7 +132,7 @@ type ISearchPage = ConnectedProps<typeof connector> & {
   location?: Location;
   searchState: SearchStateName;
   searchResults?: ISearchResults;
-  articles?: ArticleData[];
+  articles?: IArticleData[];
   activeTags: string[];
   friends?: IFriendData[];
 

@@ -1,5 +1,5 @@
 import { IFriendData } from 'friends';
-import { ArticleData } from 'posts';
+import { IArticleData } from 'posts';
 import styled from 'styled-components';
 
 import React, { useEffect, useState } from 'react';
@@ -44,12 +44,12 @@ const SecondSection = styled.div`
 
 interface ISideInformations {
   actualArticleId: string;
-  articles: ArticleData[];
+  articles: IArticleData[];
   friends?: IFriendData[];
 }
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
-  const [articlesPreview, setArticlesPreview] = useState<ArticleData[]>([]);
+  const [articlesPreview, setArticlesPreview] = useState<IArticleData[]>([]);
   const [selectedFriend, setSelectedFriend] = useState<IFriendData>();
 
   useEffect(() => {
