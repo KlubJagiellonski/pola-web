@@ -74,7 +74,7 @@ describe('Product search service', () => {
       const responseData = await ProductService.getInstance().searchProducts('some query');
 
       expect(responseData, 'response data should be an object').not.toBeUndefined;
-      expect(responseData?.totalItems, 'icorrect total number of items').toEqual(13);
+      expect(responseData?.totalItems, 'incorrect total number of items').toEqual(13);
       expect(responseData?.products.length, `incorrect number of page's items`).toEqual(4);
       expect(responseData?.nextPageToken, 'next page token should be defined').not.toBeUndefined;
     });

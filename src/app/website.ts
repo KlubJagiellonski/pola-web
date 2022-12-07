@@ -45,7 +45,7 @@ const hashableUrl: (name?: string) => HrefFunction =
     sectionId ? `/${pageName}#${sectionId}` : `/${pageName}`;
 
 const sluggableUrl: (name?: string) => SlugFunction =
-  (pageName: string) => (sectionId?: HashSection, slug?: string) => {
+  (pageName?: string) => (sectionId?: HashSection, slug?: string) => {
     if (slug) {
       return sectionId ? `/${pageName}?value=${slug}#${sectionId}` : `/${pageName}?value=${slug}`;
     } else {
