@@ -14,6 +14,7 @@ import { classNames } from 'utils/class-names';
 interface INewsletterFormStyles {
   spaceTop?: string;
   spaceBottom?: string;
+  isMobile?: boolean;
 }
 
 const Container = styled.div<{ styles?: INewsletterFormStyles }>`
@@ -27,7 +28,7 @@ const Container = styled.div<{ styles?: INewsletterFormStyles }>`
 
     &.expanded {
       transition: height 0.5s;
-      height: 14.5rem;
+      height: ${({ styles }) => (styles?.isMobile ? '10.5rem' : '14.5rem')};
     }
   }
 `;

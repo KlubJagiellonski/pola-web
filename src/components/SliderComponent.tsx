@@ -17,7 +17,7 @@ const Wrapper = styled(WrapperSection)`
 
   @media ${Device.mobile} {
     background-color: white;
-    padding: ${padding.big} 0;
+    padding: ${(p) => (p?.isMobile ? padding.normal : padding.big)} 0;
   }
 `;
 
@@ -73,9 +73,10 @@ interface ISliderContainer {
   title?: string;
   rows?: number;
   children?: React.ReactNode | React.ReactNode[];
+  isMobile?: boolean;
 }
 
-export const SliderContainer: React.FC<ISliderContainer> = ({ rows, children, title }) => {
+export const SliderContainer: React.FC<ISliderContainer> = ({ rows, children, title, isMobile }) => {
   const rowsSettingsDesktop = rows && rows > 1 ? { rows, slidesPerRow: 4 } : {};
   const rowsSettingsMobile = rows && rows > 1 ? { rows, slidesPerRow: 3 } : {};
   const slidesSettingsDesktop = rows && rows > 1 ? {} : { slidesToShow: 5, slidesToScroll: 5 };
@@ -102,7 +103,7 @@ export const SliderContainer: React.FC<ISliderContainer> = ({ rows, children, ti
   };
 
   return (
-    <Wrapper color={color.background.white}>
+    <Wrapper color={color.background.white} isMobile={isMobile}>
       <TitleSection>{title}</TitleSection>
       <ImageWrapper>
         <SliderStyled {...settings}>{children}</SliderStyled>
