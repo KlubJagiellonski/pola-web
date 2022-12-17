@@ -41,6 +41,8 @@ const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
   width: 50%;
   text-align: left;
   position: relative;
+  height: ${(props) => (props.smallWidth ? '20em' : '100%')};
+  overflow: hidden;
 
   .gatsby-image-wrapper {
     div {
@@ -49,9 +51,16 @@ const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
   }
 
   @media ${Device.mobile} {
-    width: ${(props) => (props.smallWidth ? '50%' : '100%')};
+    width: 100%;
+
     margin: auto;
   }
+`;
+
+const ArticleAction = styled.div<{ smallWidth?: boolean }>`
+  position: absolute;
+  bottom: 0;
+  right: ${(props) => (props.smallWidth ? '4%' : '1em')};
 `;
 
 const ArticleSection = styled.div`
@@ -62,7 +71,7 @@ const ArticleSection = styled.div`
 
   @media ${Device.mobile} {
     width: 100%;
-    margin: ${margin.normal} 0;
+    margin-top: ${margin.small};
   }
 `;
 
@@ -109,15 +118,16 @@ export const MobileArticleBlock: React.FC<IArticleBlock> = ({
   tag,
   styles,
 }) => {
+  const showContent = false;
   return (
     <Wrapper color={color.background.white}>
       <ArticleImage {...styles}>
         {imagePath && <ResponsiveImage imageSrc={imagePath} />}
-        <div style={{ position: 'absolute', bottom: 0, right: '1em' }}>
+        <ArticleAction smallWidth={styles?.smallWidth}>
           <ExternalLink url={slug}>
             <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
           </ExternalLink>
-        </div>
+        </ArticleAction>
       </ArticleImage>
       <ArticleSection>
         <a href={slug} target="_blank">
@@ -128,9 +138,11 @@ export const MobileArticleBlock: React.FC<IArticleBlock> = ({
             {tag} | {getDate(date)}
           </TextInfo>
         )}
-        <Contents>
-          <ArticleContents date={date} text={subTitle} tag={tag} />
-        </Contents>
+        {showContent && (
+          <Contents>
+            <ArticleContents date={date} text={subTitle} tag={tag} />
+          </Contents>
+        )}
       </ArticleSection>
     </Wrapper>
   );

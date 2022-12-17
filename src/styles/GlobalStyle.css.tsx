@@ -4,6 +4,7 @@ import { color, fontSize, margin, evalPx, lineHeight } from './theme';
 type IWrapperSection = {
   color?: string;
   borderColor?: string;
+  isMobile?: boolean;
 };
 
 export const WrapperSection = styled.div<IWrapperSection>`
@@ -21,7 +22,7 @@ export const TitleSection = styled.p`
   font-size: ${fontSize.normal};
   font-weight: 700;
   color: ${color.text.primary};
-  line-height: ${lineHeight.normall};
+  line-height: ${lineHeight.normal};
 `;
 
 interface IText {
