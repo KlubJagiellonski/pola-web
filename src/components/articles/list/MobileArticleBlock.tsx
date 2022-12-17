@@ -41,6 +41,8 @@ const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
   width: 50%;
   text-align: left;
   position: relative;
+  height: ${(props) => (props.smallWidth ? '20em' : '100%')};
+  overflow: hidden;
 
   .gatsby-image-wrapper {
     div {
@@ -50,7 +52,7 @@ const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
 
   @media ${Device.mobile} {
     width: 100%;
-    height: ${(props) => (props.smallWidth ? '20em' : '100%')};
+
     margin: auto;
   }
 `;
