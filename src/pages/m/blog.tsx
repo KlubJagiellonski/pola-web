@@ -15,29 +15,6 @@ import styled from 'styled-components';
 import { color, Device, fontSize, margin } from 'styles/theme';
 import SEOMetadata from 'utils/browser/SEOMetadata';
 
-const Title = styled.p`
-  margin-top: ${margin.veryBig};
-  font-weight: bold;
-
-  @media ${Device.mobile} {
-    display: none;
-  }
-`;
-
-const InfoSection = styled.div`
-  display: flex;
-  margin: ${margin.normal} 0;
-
-  div {
-    flex: 1;
-  }
-
-  @media ${Device.mobile} {
-    margin: ${margin.normal} ${margin.normal};
-    flex-direction: column;
-  }
-`;
-
 const ButtonSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -116,7 +93,7 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             subTitle={newestArticle.subTitle}
             tag={newestArticle.tag}
             styles={{
-              smallWidth: false,
+              smallWidth: true,
             }}
           />
         )}
@@ -129,6 +106,7 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             onSubmit={subscribeEmail}
             onClear={clearForm}
             isInitiallyExpanded={true}
+            styles={{ isMobile: true }}
           />
         </MobileNewsletterContainer>
       </PageSection>

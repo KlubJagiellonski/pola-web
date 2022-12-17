@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import styled from 'styled-components';
-import { useStaticQuery, graphql } from 'gatsby';
 
 import { IPolaState } from '../state/types';
 import { appDispatcher } from '../state/app/app-dispatcher';
 import { ProductModal } from '../search/product-modal';
 import { searchDispatcher } from '../state/search/search-dispatcher';
 import ErrorBoundary from '../utils/error-boundary';
-import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
 import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 import { SearchStateName } from '../state/search/search-reducer';
@@ -38,12 +36,14 @@ type ILayoutStyles = {
 
 type IPageLayout = ReduxProps & {
   styles?: ILayoutStyles;
+  children: React.ReactNode;
 };
 
 const LayoutContainer = styled(CustomScrollbarDiv)`
   display: flex;
   flex-flow: column;
   height: 100vh;
+  font-size: 0.7em;
 `;
 
 const PageContent = styled.main<ILayoutStyles>`
