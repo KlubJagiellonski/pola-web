@@ -12,6 +12,10 @@ const Wrapper = styled(WrapperSection)`
   grid-area: friends;
   overflow: hidden;
   border-top: 1px solid ${color.background.gray};
+
+  p {
+    margin: 0;
+  }
 `;
 
 const Image = styled.div`

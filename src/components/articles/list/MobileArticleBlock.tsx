@@ -41,7 +41,7 @@ const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
   width: 50%;
   text-align: left;
   position: relative;
-  height: ${(props) => (props.smallWidth ? '20em' : '100%')};
+  height: ${(props) => (props.smallWidth ? '14em' : '100%')};
   overflow: hidden;
 
   .gatsby-image-wrapper {
@@ -65,7 +65,7 @@ const ArticleAction = styled.div<{ smallWidth?: boolean }>`
 
 const ArticleSection = styled.div`
   width: 50%;
-  margin: 0 ${margin.normal};
+  margin: 0;
   display: flex;
   flex-direction: column;
 
