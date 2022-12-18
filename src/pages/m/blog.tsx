@@ -44,7 +44,7 @@ const MobileNewsletterContainer = styled.div`
   flex-flow: row nowrap;
   justify-content: center;
   margin: 0;
-  padding-top: 1rem;
+  padding: 0.5em 0;
 `;
 
 const connector = connect(
@@ -105,7 +105,7 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             follower={follower}
             onSubmit={subscribeEmail}
             onClear={clearForm}
-            isInitiallyExpanded={true}
+            isInitiallyExpanded={false}
             styles={{ isMobile: true }}
           />
         </MobileNewsletterContainer>
