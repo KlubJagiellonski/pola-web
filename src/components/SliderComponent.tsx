@@ -17,7 +17,8 @@ const Wrapper = styled(WrapperSection)`
 
   @media ${Device.mobile} {
     background-color: white;
-    padding: ${(p) => (p?.isMobile ? padding.normal : padding.big)} 0;
+    padding-top: ${padding.small};
+    padding-bottom: ${(p) => (p?.isMobile ? padding.normal : padding.big)};
   }
 `;
 

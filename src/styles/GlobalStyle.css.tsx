@@ -32,7 +32,6 @@ interface IText {
 }
 
 export const Text = styled.p<IText>`
-  margin-top: 5px;
   padding: 0;
   font-family: 'Merriweather';
   font-size: ${fontSize.small};
