@@ -119,7 +119,7 @@ export const urls: WebsiteMap = {
       Perowicz: new URL('mailto:mateusz.perowicz@klubjagiellonski.pl'),
       Klub: new URL('mailto:Pola@klubjagiellonski.pl'),
       biuro: new URL('mailto:biuro@klubjagiellonski.pl'),
-      Wenclewska: new URL('mailto:marta.wenclewska@klubjagiellonski.pl'),
+      Ociepka: new URL('mailto:tomasz.ociepka@klubjagiellonski.pl'),
     },
   },
 };
