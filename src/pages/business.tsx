@@ -93,8 +93,8 @@ const BusinessPage = (props: IBusinessPage) => {
             <ResponsiveImage imageSrc="okragle-stoly.jpg" />
           </ImageSection>
           <Text>
-            Kontakt: Tomasz Ociepka,{' '}
-            <a href={urls.external.mail.Wenclewska.href}>tomasz.ociepka@klubjagiellonski.pl</a>,tel. 794 263 629
+            Kontakt: Tomasz Ociepka, <a href={urls.external.mail.Ociepka.href}>tomasz.ociepka@klubjagiellonski.pl</a>
+            ,tel. 794 263 629
           </Text>
         </Wrapper>
       </PageSection>
