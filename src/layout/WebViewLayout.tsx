@@ -3,7 +3,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import styled from 'styled-components';
 
 import ErrorBoundary from '../utils/error-boundary';
-import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
 import { StateLoader } from './StateLoader';
 import '../styles/pola-web.css';
 
@@ -45,6 +44,7 @@ const LayoutContainer = styled(CustomScrollbarDiv)`
   display: flex;
   flex-flow: column;
   height: 100vh;
+  font-size: 0.7em;
 `;
 
 const PageContent = styled.main<ILayoutStyles>`

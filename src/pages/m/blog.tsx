@@ -19,29 +19,6 @@ import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
 import { MobileArticleBlock } from 'posts/articles/list/MobileArticleBlock';
 
-const Title = styled.p`
-  margin-top: ${margin.veryBig};
-  font-weight: bold;
-
-  @media ${Device.mobile} {
-    display: none;
-  }
-`;
-
-const InfoSection = styled.div`
-  display: flex;
-  margin: ${margin.normal} 0;
-
-  div {
-    flex: 1;
-  }
-
-  @media ${Device.mobile} {
-    margin: ${margin.normal} ${margin.normal};
-    flex-direction: column;
-  }
-`;
-
 const ButtonSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,7 +48,7 @@ const MobileNewsletterContainer = styled.div`
   flex-flow: row nowrap;
   justify-content: center;
   margin: 0;
-  padding-top: 1rem;
+  padding: 0.5em 0;
 `;
 
 const connector = connect(
@@ -120,7 +97,7 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             subTitle={newestArticle.subTitle}
             tag={newestArticle.tag}
             styles={{
-              smallWidth: false,
+              smallWidth: true,
             }}
           />
         )}
@@ -132,7 +109,8 @@ const BlogPage: React.FC<INewsPage> = (props) => {
             follower={follower}
             onSubmit={subscribeEmail}
             onClear={clearForm}
-            isInitiallyExpanded={true}
+            isInitiallyExpanded={false}
+            styles={{ isMobile: true }}
           />
         </MobileNewsletterContainer>
       </PageSection>

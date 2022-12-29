@@ -17,6 +17,8 @@ import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRe
 interface INewsletterFormStyles {
   spaceTop?: string;
   spaceBottom?: string;
+  isMobile?: boolean;
+  height?: string;
 }
 
 const Container = styled.div<{ styles?: INewsletterFormStyles }>`
@@ -30,7 +32,7 @@ const Container = styled.div<{ styles?: INewsletterFormStyles }>`
 
     &.expanded {
       transition: height 0.5s;
-      height: 14.5rem;
+      height: ${({ styles }) => styles?.height || '14.5rem'};
     }
   }
 `;
@@ -87,6 +89,7 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   );
 
   let frameContent;
+  let height = '14.5em';
   switch (status) {
     case SubscriptionStatus.INITIAL:
       frameContent = (
@@ -103,22 +106,25 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
     case SubscriptionStatus.REGISTERED:
       if (follower) {
         frameContent = <SubscriptionRegisteredResult follower={follower} clearButton={clearButton} />;
+        height = '20.5em';
       }
       break;
 
     case SubscriptionStatus.REPEATED:
       if (follower) {
         frameContent = <SubscriptionRepeatedResult follower={follower} clearButton={clearButton} />;
+        height = '20.5em';
       }
       break;
 
     case SubscriptionStatus.REJECTED:
       frameContent = <SubscriptionFailureResult clearButton={clearButton} />;
+      height = '20.5em';
       break;
   }
 
   return (
-    <Container styles={styles}>
+    <Container styles={{ ...styles, height }}>
       {!isExpanded && (
         <Buttons>
           <SecondaryButton label="Newsletter Poli" onClick={handleExpand} styles={ButtonThemes.Red} />

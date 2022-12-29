@@ -3,6 +3,7 @@ import { WrapperSection } from '../../styles/GlobalStyle.css';
 import styled from 'styled-components';
 
 import React from 'react';
+import { Device, color, margin, padding, fontSize, width } from '../../styles/theme';
 
 import { urls } from '@App/website';
 
@@ -12,6 +13,11 @@ import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;
   overflow: hidden;
+  border-top: 1px solid ${color.background.gray};
+
+  p {
+    margin: 0;
+  }
 `;
 
 const Image = styled.div`
@@ -41,7 +47,7 @@ interface IFriends {
 export const MobileFriendsCarousel: React.FC<IFriends> = ({ friends, rows }) => {
   return (
     <Wrapper>
-      <SliderContainer title="Przyjaciele Poli" rows={rows}>
+      <SliderContainer title="Przyjaciele Poli" rows={rows} isMobile={true}>
         {friends?.map((el) => (
           <a key={el.id} href={urls.pola.friends('friend', el.slug)} target="_blank">
             <SliderElement to={''}>
