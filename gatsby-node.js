@@ -1,5 +1,6 @@
 const path = require('path');
 const { createFilePath } = require(`gatsby-source-filesystem`);
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
@@ -41,11 +42,11 @@ exports.createPages = async function ({ graphql, actions }) {
     `
   );
   if (result.errors) {
-    console.log(result.errors);
+    console.error(result.errors);
     throw new Error('Unable to fetch pages');
   }
 
-  const articleTemplate = path.resolve('./src/templates/ArticleTemplate.tsx');
+  const articleTemplate = path.resolve('./src/gatsby-templates/ArticleTemplate.tsx');
 
   // Create articles
   result.data.allMarkdownRemark.edges.forEach((edge) => {
@@ -58,5 +59,17 @@ exports.createPages = async function ({ graphql, actions }) {
         slug,
       },
     });
+  });
+};
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    devtool: 'eval-source-map',
+    plugins: [
+      // hack source: https://robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/
+      new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
+      }),
+    ],
   });
 };

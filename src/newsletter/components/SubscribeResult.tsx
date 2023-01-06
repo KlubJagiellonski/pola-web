@@ -1,8 +1,10 @@
-import * as React from 'react';
-import { Follower } from 'newsletter';
 import { ErrorMessage, SuccessMessage } from 'components/form-input/FormToast';
+import { Follower } from 'newsletter';
+import * as React from 'react';
+
+import { urls } from '@App/website';
+
 import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
-import { urls } from 'domain/website';
 
 export const SubscriptionRegisteredResult: React.FC<{ follower: Follower; clearButton: JSX.Element }> = ({
   follower,

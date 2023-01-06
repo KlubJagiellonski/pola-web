@@ -1,50 +1,46 @@
-import React from 'react';
-import { connect, ConnectedProps } from 'react-redux';
 import styled from 'styled-components';
-import { useStaticQuery, graphql } from 'gatsby';
 
-import { PageHeader } from './PageHeader';
-import PageFooter from './footer/PageFooter';
-import { IPolaState } from '../state/types';
-import { appDispatcher } from '../state/app/app-dispatcher';
-import { ProductModal } from '../search/product-modal';
-import { searchDispatcher } from '../state/search/search-dispatcher';
-import ErrorBoundary from '../utils/error-boundary';
-import { desktopHeaderHeight, Device, mobileHeaderHeight } from '../styles/theme';
-import { StateLoader } from './StateLoader';
-import '../styles/pola-web.css';
-import Download from '../components/Download';
-import { SearchStateName } from '../state/search/search-reducer';
-import { SearchInfoModal } from '../search/form/SearchInfoModal';
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { useEffect } from 'react';
+import { ConnectedProps, connect } from 'react-redux';
+
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { PageType } from '@App/website';
+
+import Download from '@Components/Download';
+import ErrorBoundary from 'utils/error-boundary';
+
+import { SearchInfoModal } from 'search/components/form/SearchInfoModal';
+import { ProductModal } from 'search/components/product-modal';
+import { searchDispatcher } from 'search/state/search-dispatcher';
+import { SearchStateName } from 'search/state/search-reducer';
+
 import { CustomScrollbarDiv } from './CustomScrollbar';
-import { SuppliersFormStatus } from 'suppliers/state/suppliers-reducer';
-import { InquiryResultModal } from 'suppliers/components/InquiryResultModal';
-import { suppliersDispatcher } from 'suppliers/state/suppliers-dispatcher';
+import { PageHeader } from './PageHeader';
+import { StateLoader } from './StateLoader';
+import PageFooter from './footer/PageFooter';
+
+import '@Styles/pola-web.css';
+import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {
-    const { app, search, suppliers } = state;
+    const { app, search } = state;
     return {
       isSearchInfoVisible: app.isSearchInfoVisible,
       activePage: app.activePage,
       isMenuExpanded: app.isMenuExpanded,
       selectedProduct: search.stateName === SearchStateName.SELECTED ? search.selectedProduct : undefined,
-      suppliers: {
-        isInquiryResultVisible:
-          suppliers.status === SuppliersFormStatus.LOADED || suppliers.status === SuppliersFormStatus.CALCULATED
-            ? suppliers.isResultDialogVisible
-            : false,
-        messages: suppliers.messages,
-        totalScore: suppliers.status === SuppliersFormStatus.CALCULATED ? suppliers.totalScore : undefined,
-      },
     };
   },
   {
+    loadBrowserLocation: appDispatcher.loadBrowserLocation,
+    selectActivePage: appDispatcher.selectActivePage,
     toggleSearchInfo: appDispatcher.toggleSearchInfo,
     expandMenu: appDispatcher.expandMenu,
     unselectProduct: searchDispatcher.unselectProduct,
-    hideResultDialog: suppliersDispatcher.hideDialog,
-    submitResult: suppliersDispatcher.submitForm,
   }
 );
 
@@ -55,7 +51,11 @@ type ILayoutStyles = {
 };
 
 type IPageLayout = ReduxProps & {
+  page: PageType;
+  location?: Location;
+
   styles?: ILayoutStyles;
+  children: JSX.Element | JSX.Element[];
 };
 
 const LayoutContainer = styled(CustomScrollbarDiv)`
@@ -80,17 +80,18 @@ const PageContent = styled.main<ILayoutStyles>`
 `;
 
 const Layout: React.FC<IPageLayout> = ({
+  location,
+  page,
   activePage,
   isMenuExpanded,
   isSearchInfoVisible,
-  suppliers,
-  hideResultDialog,
-  submitResult,
   selectedProduct,
   children,
   toggleSearchInfo,
   expandMenu,
   unselectProduct,
+  loadBrowserLocation,
+  selectActivePage,
   styles,
 }) => {
   const data = useStaticQuery(graphql`
@@ -103,20 +104,21 @@ const Layout: React.FC<IPageLayout> = ({
     }
   `);
 
+  useEffect(() => {
+    if (location) {
+      loadBrowserLocation(location);
+      selectActivePage(page);
+    }
+  }, []);
+
   return (
     <ErrorBoundary scope="page-layout">
-      <StateLoader />
+      <ErrorBoundary scope="app-state-loader">
+        <StateLoader />
+      </ErrorBoundary>
       <LayoutContainer id="layout-container">
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
-        {suppliers.isInquiryResultVisible && (
-          <InquiryResultModal
-            totalScore={suppliers.totalScore}
-            messages={suppliers.messages}
-            onClose={hideResultDialog}
-            onSubmit={submitResult}
-          />
-        )}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
           activePage={activePage}

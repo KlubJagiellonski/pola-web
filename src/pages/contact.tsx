@@ -1,34 +1,22 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType } from '../domain/website';
-import Placeholder from '../components/Placeholder';
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
+import { PageType } from 'app/website';
 
-interface IContactPage {
-  location?: Location;
-}
+import Placeholder from '@Components/Placeholder';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+interface IContactPage extends GatsbyPage {}
 
 const ContactPage = (props: IContactPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.CONTACT));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.CONTACT}>
       <SEOMetadata pageTitle="Kontakt" />
       <Placeholder text="Strona w budowie" />
     </PageLayout>
   );
 };
 
-export default connect((state: IPolaState) => ({}))(ContactPage);
+export default ContactPage;

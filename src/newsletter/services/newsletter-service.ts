@@ -1,8 +1,9 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import { AppSettings } from 'app/app-settings';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+
 import { Follower } from '..';
-import { ApiAdapter } from '../../services/api-adapter';
-import { SubscriptionError } from '../../services/api-errors';
-import { AppSettings } from '../../state/app-settings';
+import { ApiAdapter } from '../../app/api-adapter';
+import { FetchError, SubscriptionError } from '../../app/api-errors';
 
 export const SUBSCRIPTION_REPEATED_CODE = 1001;
 const API_NAME = 'Newsletter API';

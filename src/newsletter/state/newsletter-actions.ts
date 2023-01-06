@@ -1,6 +1,7 @@
+import { Follower } from 'newsletter';
 import { ISubscriptionResponseContext } from 'newsletter/services/subscription-response-context';
-import { Follower } from '..';
-import { IAction } from '../../state/types';
+
+import { IAction } from '@App/state';
 
 export const actionTypes = {
   REQUEST_SUBSCRIPTION: 'NEWSLETTER:REQUEST_SUBSCRIPTION',

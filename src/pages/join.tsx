@@ -1,20 +1,20 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { fontSize, margin, padding, Device, lineHeight } from '../styles/theme';
-import { PageSection } from '../layout/PageSection';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
+import React from 'react';
 
-interface ITeamPage {
-  location?: Location;
-}
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
+import { PageType, urls } from 'app/website';
+
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, fontSize, margin, padding } from '@Styles/theme';
+
+interface ITeamPage extends GatsbyPage {}
 
 const Wrapper = styled.div`
   margin: ${padding.veryBig} 0 ${margin.normal} 0;
@@ -38,23 +38,9 @@ const Section = styled.div`
   margin-top: ${margin.big};
 `;
 
-const Info = styled(Text)`
-  line-height: ${lineHeight.normal};
-`;
-
 const TeamPage = (props: ITeamPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.TEAM));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.TEAM}>
       <Wrapper>
         <SEOMetadata pageTitle="Dołącz do zespołu" />
         <PageSection>
@@ -164,4 +150,4 @@ const TeamPage = (props: ITeamPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(TeamPage);
+export default TeamPage;

@@ -1,13 +1,17 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import { WrapperTeams, Title, TextSection, ButtonTeams, IconTeams } from './Teams.css';
-import { Text } from '../styles/GlobalStyle.css';
-import { color } from '../styles/theme';
-import { ButtonFlavor, ButtonThemes } from '../components/buttons/Button';
-import { ResponsiveImage } from './images/ResponsiveImage';
-import { urls } from '../domain/website';
 import { Link } from 'gatsby';
+import React from 'react';
+
+import { urls } from 'app/website';
+
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+
+import { ButtonTeams, IconTeams, TextSection, Title, WrapperTeams } from './Teams';
+import { ResponsiveImage } from './images/ResponsiveImage';
+
+import { Text } from '@Styles/GlobalStyle.css';
+import { color } from '@Styles/theme';
 
 const Wrapper = styled(WrapperTeams)`
   grid-area: teams-friend;
@@ -18,7 +22,7 @@ const TeamsFriend = () => {
     <Wrapper color={color.background.white}>
       <TextSection>
         <IconTeams>
-          <ResponsiveImage imageSrc="ikona-zespół.png" />
+          <ResponsiveImage title="team icon" imageSrc="ikona-zespół.png" />
         </IconTeams>
         <Title>Dołącz do Przyjaciół Poli i odnieś sukces!</Title>
         <Text>

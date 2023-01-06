@@ -1,10 +1,12 @@
+import { Facebook, Instagram, Twitter } from 'components/social-media/Icons';
 import * as React from 'react';
 import styled from 'styled-components';
-import { urls } from 'domain/website';
-import { FooterSection } from './FooterSection';
-import { Facebook, Instagram, Twitter } from 'components/social-media/Icons';
-import { TextLink, TextExternalLink } from 'utils/browser/links';
 import { Device, padding } from 'styles/theme';
+import { TextExternalLink, TextLink } from 'utils/browser/links';
+
+import { urls } from '@App/website';
+
+import { FooterSection } from './FooterSection';
 
 const CommunitySectionsContainer = styled.div`
   flex: 1 1 100%;

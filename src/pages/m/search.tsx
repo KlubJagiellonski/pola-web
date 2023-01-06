@@ -1,27 +1,30 @@
-import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
-
-import SEOMetadata from '../../utils/browser/SEOMetadata';
-import { IPolaState } from '../../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../../state/app/app-actions';
-import { PageType } from '../../domain/website';
-import { PageSection } from '../../layout/PageSection';
 import { ResponsiveImage } from '../../components/images/ResponsiveImage';
-import { color, Device, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
+import { PageSection } from '../../layout/PageSection';
+import { Device, color, fontSize, introHeight, lineHeight, margin, padding, pageWidth } from '../../styles/theme';
+import SEOMetadata from '../../utils/browser/SEOMetadata';
+import { IFriendData } from 'friends';
+import { IArticleData } from 'posts';
+import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
-import { WebViewLayout } from 'layout/WebViewLayout';
-import { reduceToFlatProductsList } from 'domain/products/search-service';
-import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
-import { appDispatcher } from 'state/app/app-dispatcher';
-import { searchDispatcher } from 'state/search/search-dispatcher';
-import { SearchStateName } from 'state/search/search-reducer';
-import { Article } from 'domain/articles';
-import { Friend } from 'domain/friends';
-import { ISearchResults, EAN } from 'domain/products';
-import { DynamicProductResults } from 'search/results-list/DynamicProductResults';
-import { ErrorBoundary } from '@sentry/gatsby';
-import { SearchInput } from 'search/form/SearchInput';
 import { TitleSection } from 'styles/GlobalStyle.css';
+
+import React from 'react';
+import { ConnectedProps, connect, useDispatch } from 'react-redux';
+
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
+import { PageType } from '@App/website';
+
+import { WebViewLayout } from 'layout/WebViewLayout';
+import ErrorBoundary from 'utils/error-boundary';
+
+import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
+import { SearchInput } from 'search/components/form/SearchInput';
+import { DynamicProductResults } from 'search/components/results-list/DynamicProductResults';
+import { reduceToFlatProductsList } from 'search/services/search-service';
+import { searchDispatcher } from 'search/state/search-dispatcher';
+import { SearchStateName } from 'search/state/search-reducer';
 
 const Content = styled.div`
   width: 100%;
@@ -129,9 +132,9 @@ type ISearchPage = ConnectedProps<typeof connector> & {
   location?: Location;
   searchState: SearchStateName;
   searchResults?: ISearchResults;
-  articles?: Article[];
+  articles?: IArticleData[];
   activeTags: string[];
-  friends?: Friend[];
+  friends?: IFriendData[];
 
   toggleSearchInfo: () => void;
   invokeSearch: (phrase: string) => void;
@@ -149,8 +152,8 @@ const SearchPage = (props: ISearchPage) => {
 
   React.useEffect(() => {
     if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.BUSINESS));
+      dispatch(loadBrowserLocation(location));
+      dispatch(selectActivePage(PageType.BUSINESS));
     }
   }, []);
 
@@ -159,7 +162,7 @@ const SearchPage = (props: ISearchPage) => {
       <SEOMetadata pageTitle="Wyszukiwarka tekstowa" />
       <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>
-          <ResponsiveImage imageSrc={'background2.jpg'} />
+          <ResponsiveImage title="search background" imageSrc={'background2.jpg'} />
         </Background>
         <Content>
           <ErrorBoundary scope="search-container">

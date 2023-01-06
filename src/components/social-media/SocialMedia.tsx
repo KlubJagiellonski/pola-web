@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query'
+import styledContainerQuery from 'styled-container-query';
 
-import { color, Device } from '../../styles/theme';
-import { WrapperSection, TitleSection } from '../../styles/GlobalStyle.css';
 import { Facebook, Instagram, Twitter } from './Icons';
+
+import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color } from '@Styles/theme';
 
 const Items = styled.div`
   align-items: center;

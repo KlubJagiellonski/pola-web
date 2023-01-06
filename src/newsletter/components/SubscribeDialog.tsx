@@ -1,15 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { ButtonThemes } from '../../components/buttons/Button';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { SubscriptionStatus } from '../state/newsletter-reducer';
-import { SubscribeForm } from './SubscribeForm';
 import { Follower } from 'newsletter';
-import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
-import { SubscriptionRegisteredResult, SubscriptionRepeatedResult, SubscriptionFailureResult } from './SubscribeResult';
-import { Spinner } from 'components/Spinner';
+import styled from 'styled-components';
 import { Device } from 'styles/theme';
-import { classNames } from 'utils/class-names';
+
+import React, { useEffect, useRef, useState } from 'react';
+
+import { ButtonThemes } from '@Components/buttons/Button';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { classNames } from '@Utils/class-names';
+import { Spinner } from 'components/Spinner';
+
+import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
+import { SubscribeForm } from './SubscribeForm';
+import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRepeatedResult } from './SubscribeResult';
 
 interface INewsletterFormStyles {
   spaceTop?: string;
@@ -48,7 +51,7 @@ interface ISubscribeDialog {
   onSubmit: (email: string, name?: string) => void;
   onClear: () => void;
   stopExpanded?: boolean;
-  isInitiallyExpanded: boolean;
+  isInitiallyExpanded?: boolean;
 }
 
 export const SubscribeDialog: React.FC<ISubscribeDialog> = ({

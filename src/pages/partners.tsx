@@ -1,40 +1,31 @@
+import { BuyPolishInitiative } from 'partners/components/BuyPolishInitiative';
+import { PartnersList } from 'partners/components/PartnersList';
+
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import { PartnerService } from '../domain/partners/partners-service';
-import { PartnersList } from '../components/partners/PartnersList';
-import Placeholder from '../components/Placeholder';
-import { BuyPolishInitiative } from 'components/partners/BuyPolishInitiative';
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
+import { PageType } from '@App/website';
 
-interface IPartnersPage {
-  location?: Location;
-}
+import Placeholder from '@Components/Placeholder';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+interface IPartnersPage extends GatsbyPage {}
 
 const PartnersPage = (props: IPartnersPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.PARTNERS));
-    }
-  }, []);
-
+  const partners = useSelector((state: IPolaState) => state.partners.data);
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.PARTNERS}>
       <SEOMetadata pageTitle="Partnerzy" />
       <Placeholder text="Partner aplikacji Pola" />
       <PageSection>
         <BuyPolishInitiative />
       </PageSection>
       <PageSection>
-        <PartnersList partners={PartnerService.getAll()} />
+        <PartnersList partners={partners} />
       </PageSection>
     </PageLayout>
   );

@@ -1,6 +1,6 @@
+import { error } from 'loglevel';
 import * as React from 'react';
 import styled from 'styled-components';
-import { error } from 'loglevel';
 
 export interface ErrorBoundaryProps {
   scope?: string;
@@ -8,6 +8,7 @@ export interface ErrorBoundaryProps {
   noFallbackRender?: boolean;
   onError?: () => void;
   customMessage?: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
 }
 
 export interface ErrorBoundaryState {

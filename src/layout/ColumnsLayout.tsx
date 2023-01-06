@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Device, pageWidth, padding, color } from '../styles/theme';
+
+import { Device, color, padding, pageWidth } from '@Styles/theme';
 
 interface IColumnsLayout {
   size?: 'narrow' | 'full';

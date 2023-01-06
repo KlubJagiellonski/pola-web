@@ -4,5 +4,18 @@
   "trailingComma": "es5",
   "printWidth": 120,
   "tabWidth": 2,
-  "jsxBracketSameLine": true
+  "jsxBracketSameLine": true,
+  "importOrder": [
+    "^(react|gatsby)(.*)$",
+    "^(@(App|Domain|State|Templates)|(app|domain|pages|gatsby-templates))/(.*)$",
+    "^(@(Layout|Components|Utils)|(layout|components|utils))/(.*)$",
+    "(newsletter|posts|friends|search)/(.*)$",
+    "^(./)",
+    "^@Styles/(.*)$",
+    "^@Assets/(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": false,
+  "organizeImportsSkipDestructiveCodeActions": true
 }

@@ -1,9 +1,11 @@
+import { ExternalLinkData, PageLinkData, PageType } from 'app/website';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { ExternalLinkData, PageLinkData, PageType } from '../../domain/website';
-import { color, Device, margin } from '../../styles/theme';
-import { ExternalLink } from '../../utils/browser/links';
+
+import { ExternalLink } from '@Utils/browser/links';
+
+import { Device, color, margin } from '@Styles/theme';
 
 const Item = styled.div<{ selected: boolean }>`
   display: flex;

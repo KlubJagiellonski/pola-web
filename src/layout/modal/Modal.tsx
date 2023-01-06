@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color, Device, padding } from '../../styles/theme';
+
 import { CustomScrollbarDiv } from '../CustomScrollbar';
 import { ModalHeader } from './ModalHeader';
+
+import { Device, color, padding } from '@Styles/theme';
 
 const ModalLayout = styled.div`
   position: fixed;
@@ -62,6 +64,7 @@ interface IModal {
     height?: string;
   };
   onClose: () => void;
+  children?: React.ReactNode;
 }
 
 export const Modal: React.FC<IModal> = ({ title, onClose, children, styles }) => (
