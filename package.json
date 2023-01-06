@@ -69,7 +69,7 @@
     "gatsby-transformer-json": "^4.16.0",
     "gatsby-transformer-remark": "^5.16.0",
     "gatsby-transformer-sharp": "^4.24.0",
-    "gatsby-transformer-yaml": "^4.16.0",
+    "gatsby-transformer-yaml": "^4.25.0",
     "gatsby-transformer-yaml-full": "^4.0.5",
     "gatsby-yaml-full-file": "^0.3.0",
     "gatsby-yaml-full-markdown": "^4.1.1",
