@@ -1,7 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
+
+import React from 'react';
+
+import { TAG_SEPARATOR } from 'posts/services/url-service';
+
 import { Button, IButtonTheme } from './Button';
-import { color, fontSize } from '../../styles/theme';
+
+import { color, fontSize } from '@Styles/theme';
 
 const ButtonContainer = styled(Button)`
   border-radius: 20px;
@@ -31,7 +36,7 @@ export const TagButton: React.FC<ITagButton> = ({ label, icon, className, disabl
   return (
     <ButtonContainer theme={styles} className={className} onClick={handleClick} disabled={disabled}>
       {icon}
-      {label}
+      {label && label.replaceAll(TAG_SEPARATOR, ' ')}
       {children}
     </ButtonContainer>
   );

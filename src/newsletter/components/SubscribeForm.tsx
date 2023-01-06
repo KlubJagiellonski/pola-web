@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { ButtonThemes } from '../../components/buttons/Button';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
-import { validateEmail } from '../../utils/strings';
+
+import { ButtonThemes } from '@Components/buttons/Button';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { validateEmail } from '@Utils/strings';
+
 import { SubscribeInput } from './SubscribeInput';
 
 interface INewsletterFormStyles {

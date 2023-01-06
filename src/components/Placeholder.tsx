@@ -1,7 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
-import { WrapperSection } from '../styles/GlobalStyle.css';
-import { color, margin, padding, fontSize, desktopHeaderHeight } from '../styles/theme';
+
+import React from 'react';
+
+import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { color, desktopHeaderHeight, fontSize, margin, mobileHeaderHeight, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   color: ${color.text.light};
@@ -18,6 +20,20 @@ const Wrapper = styled(WrapperSection)`
   p {
     margin: 0;
     padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    height: 72px;
+    font-size: ${fontSize.normal};
+    font-weight: normal;
+    padding: 0;
+    position: relative;
+    margin-bottom: 0;
+
+    p {
+      position: relative;
+      top: 6px;
+    }
   }
 `;
 

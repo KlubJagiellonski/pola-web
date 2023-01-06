@@ -1,14 +1,17 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { PageType, urls } from '../domain/website';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { IPolaState } from '../state/types';
 import styled from 'styled-components';
-import { PageLayout } from '../layout/PageLayout';
-import { PageSection } from '../layout/PageSection';
-import SEOMetadata from '../utils/browser/SEOMetadata';
+
 import { Link } from 'gatsby';
-import { margin, padding } from '../styles/theme';
+import React from 'react';
+
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
+import { PageType, urls } from 'app/website';
+
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   margin-top: ${margin.veryBig};
@@ -27,19 +30,11 @@ const LetterList = styled.p`
   padding-left: ${padding.small};
 `;
 
-const PrivacyPolicy = (props: IContactPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
+interface IPrivacyPolicyPage extends GatsbyPage {}
 
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.PRIVACY_POLICY));
-    }
-  }, []);
-
+const PrivacyPolicy = (props: IPrivacyPolicyPage) => {
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.PRIVACY_POLICY}>
       <SEOMetadata pageTitle="Polityka prywatności" />
       <PageSection>
         <Wrapper>
@@ -152,4 +147,4 @@ const PrivacyPolicy = (props: IContactPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(PrivacyPolicy);
+export default PrivacyPolicy;

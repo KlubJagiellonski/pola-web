@@ -1,6 +1,6 @@
+import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
 
 interface ISEOMetadata {
   pageTitle: string;
@@ -10,12 +10,6 @@ interface ISEOMetadata {
   image?: string;
 }
 
-/**
- * SEO component that queries for data with
- * Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
 const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, description = '', lang = 'en', meta = [] }) => {
   const { site } = useStaticQuery(
     graphql`

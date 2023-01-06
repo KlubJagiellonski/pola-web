@@ -1,44 +1,23 @@
-import React from 'react';
-import Img from 'gatsby-image';
 import { StaticQuery, graphql } from 'gatsby';
+import React from 'react';
 
-function renderImage(file: any) {
-  return <Img fluid={file.node.childImageSharp.fluid} />;
-}
+import { IResponsiveImage, renderFromQuery } from './render-image';
 
-interface IResponsiveImage {
-  imageSrc: string;
-}
-
-export const ResponsiveImage: React.FC<IResponsiveImage> = function ({ imageSrc }) {
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          images: allFile(filter: { sourceInstanceName: { eq: "images" } }) {
-            edges {
-              node {
-                extension
-                relativePath
-                childImageSharp {
-                  fluid {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
+export const ResponsiveImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
+  <StaticQuery
+    query={graphql`
+      query {
+        images: allFile(filter: { sourceInstanceName: { eq: "asset-images" } }) {
+          nodes {
+            extension
+            relativePath
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED)
             }
           }
         }
-      `}
-      render={(data) => {
-        try {
-          const image = data.images.edges.find((imageEdge: any) => imageEdge.node.relativePath === imageSrc);
-          return renderImage(image);
-        } catch {
-          console.error(`Cannot load image "${imageSrc}"`);
-          return;
-        }
-      }}
-    />
-  );
-};
+      }
+    `}
+    render={(data) => renderFromQuery(data.images.nodes, imageSrc, title)}
+  />
+);

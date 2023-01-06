@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FormInput } from '../../components/form-input';
-import { ErrorMessage } from '../../components/form-input/FormToast';
-import { color } from '../../styles/theme';
+
+import { FormInput } from '@Components/form-input';
+import { ErrorMessage } from '@Components/form-input/FormToast';
+
+import { color } from '@Styles/theme';
 
 type InputType = 'text' | 'email';
 

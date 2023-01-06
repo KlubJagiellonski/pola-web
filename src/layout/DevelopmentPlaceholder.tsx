@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color } from '../styles/theme';
+
 import { PageSection } from './PageSection';
+
+import { color } from '@Styles/theme';
 
 const Container = styled.div`
   display: flex;
@@ -17,7 +19,8 @@ interface IDevelopmentPlaceholder {
 export const DevelopmentPlaceholder: React.FC<IDevelopmentPlaceholder> = ({ text = 'Strona w budowie' }) => (
   <PageSection
     size="full"
-    styles={{ backgroundColor: color.background.secondary, textColor: color.text.primary, textAlign: 'center' }}>
+    styles={{ backgroundColor: color.background.secondary, textColor: color.text.primary, textAlign: 'center' }}
+  >
     <Container>
       <h2>{text}</h2>
     </Container>

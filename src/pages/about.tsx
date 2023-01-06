@@ -1,18 +1,19 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
-import { margin, padding } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import Faq from '../components/Faq';
+import React from 'react';
+
+import { GatsbyPage } from '@App/generics';
+import { PageType, urls } from 'app/website';
+
+import Faq from '@Components/Faq';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { margin, padding } from '@Styles/theme';
 
 const Image = styled.div`
   height: 100%;
@@ -35,23 +36,11 @@ const Image = styled.div`
   }
 `;
 
-interface IAboutPage {
-  location?: Location;
-}
+interface IAboutPage extends GatsbyPage {}
 
 const AboutPage = (props: IAboutPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.ABOUT));
-    }
-  }, []);
-
   return (
-    <PageLayout styles={{ marginTop: padding.big }}>
+    <PageLayout location={props.location} page={PageType.ABOUT} styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="O Poli" />
       <ColumnsLayout>
         <ContentColumn fraction={60}>
@@ -118,4 +107,4 @@ const AboutPage = (props: IAboutPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({}))(AboutPage);
+export default AboutPage;

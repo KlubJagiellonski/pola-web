@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { color, fontSize, margin, evalPx, lineHeight } from './theme';
+
+import { color, evalPx, fontSize, lineHeight, margin } from './theme';
 
 type IWrapperSection = {
   color?: string;
