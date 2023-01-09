@@ -60,7 +60,7 @@
     "gatsby-plugin-react-redux": "^1.1.0",
     "gatsby-plugin-sharp": "^4.24.0",
     "gatsby-plugin-styled-components": "^5.16.0",
-    "gatsby-plugin-typescript": "^4.16.0",
+    "gatsby-plugin-typescript": "^4.25.0",
     "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-remark-copy-linked-files": "^5.16.0",
     "gatsby-remark-images": "^6.16.0",
