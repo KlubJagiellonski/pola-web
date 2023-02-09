@@ -24,8 +24,10 @@ const MockUp = styled.div`
   height: 100%;
 
   .gatsby-image-wrapper {
+    width: 100%;
+
     div {
-      padding-bottom: 17.8em !important;
+      height: 17.8em !important;
     }
   }
 `;

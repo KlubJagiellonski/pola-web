@@ -10,32 +10,16 @@ export const ArticleService = {
   getAll: () =>
     useStaticQuery(
       graphql`
-        {
-          allMarkdownRemark(filter: { fileAbsolutePath: { regex: "//posts//" } }, limit: 1000) {
-            nodes {
-              id
-              wordCount {
-                paragraphs
-                sentences
-                words
-              }
-              fields {
-                prefix
-                slug
-              }
-              frontmatter {
-                title
-                subTitle
-                category
-                cover {
-                  extension
-                  name
-                  childImageSharp {
-                    id
-                    gatsbyImageData(layout: CONSTRAINED)
-                  }
-                  relativePath
-                }
+      {
+        allContentfulPosts(limit: 1000) {
+          nodes {
+              slug
+              date
+              subTitle
+              title
+              category
+              cover {
+                url
               }
             }
           }
