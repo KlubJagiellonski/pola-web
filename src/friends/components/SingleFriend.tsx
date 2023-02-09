@@ -62,18 +62,17 @@ const ImageSection = styled.div`
 
     .gatsby-image-wrapper {
       height: 100%;
+      width: 100%;
 
-      picture {
-        img {
-          width: auto !important;
-          max-width: 100%;
-          height: auto !important;
-          max-height: 100%;
-          left: 50% !important;
-          right: 50% !important;
-          top: 50% !important;
-          transform: translate(-50%, -50%);
-        }
+      img {
+        width: auto !important;
+        max-width: 100%;
+        height: auto !important;
+        max-height: 100%;
+        left: 50% !important;
+        right: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%);
       }
     }
   }
