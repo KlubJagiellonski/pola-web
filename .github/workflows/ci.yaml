@@ -67,7 +67,12 @@ jobs:
           echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
           echo "PUBLIC_URL=${PUBLIC_URL}" >> $GITHUB_ENV
       - name: 'Set public URL'
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/prod'
+        if: |
+          github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            (github.event_name == 'push' && github.ref == 'refs/heads/prod') ||
+            github.event_name == 'repository_dispatch'
+          )
         run: |
           echo 'PUBLIC_URL=https://www.pola-app.pl/' >> $GITHUB_ENV
       # - name: 'Set public URL'
