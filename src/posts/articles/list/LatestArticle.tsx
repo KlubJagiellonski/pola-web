@@ -54,14 +54,14 @@ const TextSection = styled.div`
   flex-direction: column;
 `;
 
-const LatestArticle: React.FC<IArticleData> = ({ imagePath, title, slug, date, text, tag }) => {
+const LatestArticle: React.FC<IArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Wrapper>
       <Sections>
         <ImageSection>{imagePath && <ArticleImage title={title} imageSrc={imagePath} />}</ImageSection>
         <TextSection>
           <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
-          <ArticleContents date={date} text={text} tag={tag} />
+          <ArticleContents date={date} text={subTitle} tag={tag} />
         </TextSection>
       </Sections>
     </Wrapper>
