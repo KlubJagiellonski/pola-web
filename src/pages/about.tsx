@@ -47,7 +47,7 @@ const AboutPage = (props: IAboutPage) => {
           <PageSection>
             <TitleSection>O Poli</TitleSection>
             <Text>
-              Masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
+              masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
               Ci odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską
               gospodarkę.
             </Text>
@@ -80,7 +80,7 @@ const AboutPage = (props: IAboutPage) => {
             <TitleSection>Filozofia działania</TitleSection>
             <Text>
               Staramy się być maksymalnie przejrzyści w naszych działaniach. Całość kodu źródłowego serwisu udostępniamy
-              na zasadach otwartego oprogramowania na{' '}
+              na zasadach otwartego oprogramowania na
               <a href={urls.external.links.polaGitHub.href} target="__blank">
                 koncie Klubu Jagiellońskiego
               </a>{' '}
