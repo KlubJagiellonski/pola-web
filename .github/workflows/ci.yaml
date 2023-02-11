@@ -127,12 +127,7 @@ jobs:
           )'
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PROD}/"
       - name: 🚀 Upload preview app to AWS S3
-        if: |
-          github.repository == 'KlubJagiellonski/pola-web' && 
-          (
-            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') ||
-              github.event_name == 'repository_dispatch'
-          )
+        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PREVIEW}/${PREVIEW_DIR}"
       - name: Set success deployment status
         if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
