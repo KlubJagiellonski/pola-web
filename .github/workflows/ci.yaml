@@ -5,8 +5,8 @@ on:
     branches: [master, prod]
   pull_request:
     branches: [master]
-	repository_dispatch:
-    	types: [publish-event]
+  repository_dispatch:
+    types: [publish-event]
 
 env:
   # Enable colors in CLI apps.
