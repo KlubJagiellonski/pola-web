@@ -239,12 +239,12 @@ const HomePage = (props: any) => {
 
 export default connector(HomePage);
 
-export const postQuery = graphql`
-  {
-    allContentfulPosts(limit: 1000) {
-      nodes {
-        slug
-      }
-    }
-  }
-`;
+// export const postQuery = graphql`
+//   {
+//     allContentfulPosts(limit: 1000) {
+//       nodes {
+//         slug
+//       }
+//     }
+//   }
+// `;

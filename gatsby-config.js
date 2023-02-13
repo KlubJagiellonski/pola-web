@@ -215,13 +215,13 @@ module.exports = {
         destination: 'm',
       },
     },
-    {
-      resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: `ob21rxt43jkz`,
-        accessToken: 'ucIhLkkPqBFYgJA-Ylaru-j7rvJR0hch1HsTNt-3tsM',
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-contentful`,
+    //   options: {
+    //     spaceId: `ob21rxt43jkz`,
+    //     accessToken: 'ucIhLkkPqBFYgJA-Ylaru-j7rvJR0hch1HsTNt-3tsM',
+    //   },
+    // },
   ],
   // shadowing API request domain for development
   // https://www.gatsbyjs.com/docs/api-proxy/
