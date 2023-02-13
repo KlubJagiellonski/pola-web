@@ -3,6 +3,7 @@ import { IArticleData } from 'posts';
 import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
+import { graphql } from 'gatsby';
 import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
@@ -159,12 +160,14 @@ type IHomePage = GatsbyPage &
     selectProduct: (code: EAN) => void;
   };
 
-const HomePage = (props: IHomePage) => {
+const HomePage = (props: any) => {
   const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
+
+  console.log(props?.data);
 
   return (
     <PageLayout location={props.location} page={PageType.HOME}>
@@ -235,3 +238,13 @@ const HomePage = (props: IHomePage) => {
 };
 
 export default connector(HomePage);
+
+export const postQuery = graphql`
+  {
+    allContentfulPosts(limit: 1000) {
+      nodes {
+        slug
+      }
+    }
+  }
+`;

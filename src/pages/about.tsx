@@ -47,7 +47,7 @@ const AboutPage = (props: IAboutPage) => {
           <PageSection>
             <TitleSection>O Poli</TitleSection>
             <Text>
-              masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
+              Masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
               Ci odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską
               gospodarkę.
             </Text>
