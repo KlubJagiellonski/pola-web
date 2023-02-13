@@ -133,10 +133,17 @@ jobs:
         if: |
           github.repository == 'KlubJagiellonski/pola-web' && 
           (
+<<<<<<< HEAD
             ( github.event_name == 'push' && github.ref == 'refs/heads/prod) ||
               github.event_name == 'repository_dispatch'
           )'
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PROD}/"
+=======
+            ( github.event_name == 'push' && github.ref == 'refs/heads/prod') ||
+              github.event_name == 'repository_dispatch'
+          )
+        run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_STAG}/"
+>>>>>>> edfa52e70a51862d1c37fb5cedb84ae2dd48268d
       - name: 🚀 Upload preview app to AWS S3
         if: |
           github.repository == 'KlubJagiellonski/pola-web' && 
