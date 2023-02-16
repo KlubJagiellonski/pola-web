@@ -1,6 +1,7 @@
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
 
 import { getDate } from '@Utils/dates';
 
@@ -47,7 +48,7 @@ interface IArticleTitle {
 const ArticleTitle: React.FC<IArticleTitle> = ({ title, slug, tag, date }) => {
   return (
     <Wrapper>
-      <ArticleLink to={slug}>
+      <ArticleLink to={`/${slug}`}>
         <Title>{title}</Title>
       </ArticleLink>
       {tag && date && (
