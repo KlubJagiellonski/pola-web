@@ -160,14 +160,12 @@ type IHomePage = GatsbyPage &
     selectProduct: (code: EAN) => void;
   };
 
-const HomePage = (props: any) => {
+const HomePage = (props: IHomePage) => {
   const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const freshArticles = props.articles?.slice(0, 3);
   const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
-
-  console.log(props?.data);
 
   return (
     <PageLayout location={props.location} page={PageType.HOME}>
@@ -236,15 +234,5 @@ const HomePage = (props: any) => {
     </PageLayout>
   );
 };
-
-export const postQuery = graphql`
-  {
-    allContentfulPosts(limit: 1000) {
-      nodes {
-        slug
-      }
-    }
-  }
-`;
 
 export default connector(HomePage);
