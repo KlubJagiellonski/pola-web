@@ -7,10 +7,10 @@ import { urls } from 'app/website';
 
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
+import { ResponsiveImage } from './images/ResponsiveImage';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { color, fontSize, margin, padding } from '@Styles/theme';
-import { ResponsiveImage } from './images/ResponsiveImage';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: about;
@@ -24,8 +24,10 @@ const MockUp = styled.div`
   height: 100%;
 
   .gatsby-image-wrapper {
+    width: 100%;
+
     div {
-      padding-bottom: 17.8em !important;
+      height: 17.8em !important;
     }
   }
 `;
