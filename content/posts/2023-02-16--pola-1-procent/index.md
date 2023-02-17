@@ -27,16 +27,16 @@ PYTANIA I ODPOWIEDZI
 7. [Mieszkam i pracuję zagranicą. Jak mogę Wam pomóc?](#section-7)
 8. Prywatyzacja czy nacjonalizacja?
 
-## <a id="#section-1">1. Dlaczego 1,5%, a nie 1%?</a>
+## <a id="section-1">1. Dlaczego 1,5%, a nie 1%?</a>
 
 Rok 2022 to pierwszy rok, za który w rozliczeniu PIT możesz przekazać organizacji pożytku publicznego 1,5% podatku, a nie 1% - jak miało to miejsce w poprzednich latach.
 
-## <a id="#section-3">3. Jak przekazać 1,5%?</a>
+## <a id="section-3">3. Jak przekazać 1,5%?</a>
 
 Tych z Was, którzy w poprzednim roku przekazali swój 1% na rzecz Klubu Jagiellońskiego, prosimy jedynie o sprawdzenie, czy Wasz PIT jest automatycznie uzupełniony o dane dotyczące 1,5%. W rubryce powinien znaleźć się numer KRS Klubu Jagiellońskiego: 0000128315. Dziękujemy, że zdecydowaliście się wesprzeć właśnie nas!
 Tych z Was, którzy w roku ubiegłym nie przekazali 1% prosimy o wypełnienie pustego pola, które znajdzie się na Waszym arkuszu e-PIT lub na formularzu, który będziecie składać indywidualnie (poza usługą e-PIT), np. przez e-Deklaracje. Wystarczy wpisać w puste pole numer KRS Klubu Jagiellońskiego: 0000128315. Dzięki temu przekażecie nam 1,5% swojego podatku.
 
-## <a id="#section-5">5. Przekazuję 1,5% na inny cel. Jak mogę Wam pomóc?</a>
+## <a id="section-5">5. Przekazuję 1,5% na inny cel. Jak mogę Wam pomóc?</a>
 
 Stabilność wsparcia jest zrozumiałą potrzebą różnych organizacji obywatelskich i dzieł charytatywnych, więc jeżeli od lat wspieracie procentem podatku inny cel - rozumiemy. W takiej sytuacji zachęcamy, by wesprzeć nas w inny sposób.
 
@@ -64,7 +64,7 @@ c. Nie stać Cię na darowizny? Wspieraj Klub kupując on-line!
 
 Wiemy, że nie każdego z Was stać na wsparcie organizacji pozarządowej. Ale każdy z nas robi zakupy! Zachęcamy do wspierania nas za pośrednictwem FaniMani. To serwis internetowy umożliwiający przekazywanie wybranej organizacji zupełnie bezpłatnie określonego procenta z kwoty zakupów, które wykonujemy przez Internet. Po zainstalowaniu wtyczki FaniMani w przeglądarce i wybraniu Klubu Jagiellońskiego od każdej transakcji w tysiącach serwisów - choćby Allegro, Booking.com czy ??? - mały ułamek wydanej przez Was kwoty trafi do nas. Nic Was to nie kosztuje, a nam - realnie pomoże!
 
-## <a id="#section-7">7. Mieszkam i pracuję zagranicą. Jak mogę Wam pomóc?</a>
+## <a id="section-7">7. Mieszkam i pracuję zagranicą. Jak mogę Wam pomóc?</a>
 
 Jeżeli mieszkać i zarabiasz wyłącznie zagranicą, to zapewne nie rozliczasz się z polskim fiskusem. Wciąż możesz jednak dokonać darowizny na konto Klubu:
 
