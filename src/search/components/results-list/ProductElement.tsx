@@ -52,7 +52,7 @@ interface IResultProperty {
   missingValuePlaceholder?: number | string;
 }
 const ResultProperty: React.FC<IResultProperty> = ({ value, label, missingValuePlaceholder }) =>
-  !!value ? (
+  value !== undefined ? (
     <div>
       <span className="heading">{`${label}:`}</span>
       <span className="brand">{value}</span>

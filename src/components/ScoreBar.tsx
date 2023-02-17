@@ -1,7 +1,9 @@
-import { seconds } from 'app/generics';
 import { lighten } from 'polished';
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
+
+import React from 'react';
+
+import { seconds } from 'app/generics';
 
 import { color, fontSize, lineHeight, padding } from '@Styles/theme';
 
@@ -70,8 +72,8 @@ interface IScoreBar {
 }
 
 export const ScoreBar: React.FC<IScoreBar> = ({ value, unit, animation, missingValuePlaceholder }) => {
-  if (value) {
-    const scoreText = unit ? `${value} ${unit}` : value.toString();
+  if (value !== undefined) {
+    const scoreText = unit ? `${value !== null ? value : 0} ${unit}` : value.toString();
     return (
       <ValueBar value={value} animation={animation}>
         <div className="value-belt" />
