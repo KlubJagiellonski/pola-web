@@ -80,7 +80,7 @@ const AboutPage = (props: IAboutPage) => {
             <TitleSection>Filozofia działania</TitleSection>
             <Text>
               Staramy się być maksymalnie przejrzyści w naszych działaniach. Całość kodu źródłowego serwisu udostępniamy
-              na zasadach otwartego oprogramowania na{' '}
+              na zasadach otwartego oprogramowania na
               <a href={urls.external.links.polaGitHub.href} target="__blank">
                 koncie Klubu Jagiellońskiego
               </a>{' '}
