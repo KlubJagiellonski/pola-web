@@ -52,14 +52,24 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - name: Set deployment status
         uses: pbrandone/create-status-action@master
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          github.repository == 'KlubJagiellonski/pola-web' && 
+            ( 
+              ( github.event_name == 'pull_request' && github.event.sender.type == 'User' ) ||
+                github.event_name == 'repository_dispatch'
+            )
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: pending
           description: Preparing deploy preview
           context: Deploy Preview URL
       - name: 'Set public URL'
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          github.repository == 'KlubJagiellonski/pola-web' && 
+            ( 
+              ( github.event_name == 'pull_request' && github.event.sender.type == 'User' ) ||
+                github.event_name == 'repository_dispatch'
+            )
         run: |
           BASE_URL="http://${AWS_S3_BUCKET_PREVIEW}.s3-website.${{secrets.AWS_DEFAULT_REGION}}.amazonaws.com"
           PREVIEW_DIR="$(echo "${GITHUB_HEAD_REF}" | tr -c '[:alnum:]._-' '-')"
