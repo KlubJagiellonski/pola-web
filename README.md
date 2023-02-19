@@ -42,6 +42,22 @@ Otwórz [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) 
 
 Uruchamia test runner w interaktywnym trybie obserwującym zmiany.
 
+When testing React components you need to import React
+
+Jest
+
+```typescript
+import React from 'react';
+```
+
+React Testing Library
+
+get
+
+query
+
+find
+
 ### `npm run build`
 
 Kompiluje aplikację do produkcji do folderu `build`.
