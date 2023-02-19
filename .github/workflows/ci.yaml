@@ -52,24 +52,14 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - name: Set deployment status
         uses: pbrandone/create-status-action@master
-        if: |
-          github.repository == 'KlubJagiellonski/pola-web' && 
-            ( 
-              ( github.event_name == 'pull_request' && github.event.sender.type == 'User' ) ||
-                github.event_name == 'repository_dispatch'
-            )
+        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: pending
           description: Preparing deploy preview
           context: Deploy Preview URL
       - name: 'Set public URL'
-        if: |
-          github.repository == 'KlubJagiellonski/pola-web' && 
-            ( 
-              ( github.event_name == 'pull_request' && github.event.sender.type == 'User' ) ||
-                github.event_name == 'repository_dispatch'
-            )
+        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
         run: |
           BASE_URL="http://${AWS_S3_BUCKET_PREVIEW}.s3-website.${{secrets.AWS_DEFAULT_REGION}}.amazonaws.com"
           PREVIEW_DIR="$(echo "${GITHUB_HEAD_REF}" | tr -c '[:alnum:]._-' '-')"
@@ -77,12 +67,7 @@ jobs:
           echo "PREVIEW_DIR=${PREVIEW_DIR}" >> $GITHUB_ENV
           echo "PUBLIC_URL=${PUBLIC_URL}" >> $GITHUB_ENV
       - name: 'Set public URL'
-        if: |
-          github.repository == 'KlubJagiellonski/pola-web' && 
-          (
-            (github.event_name == 'push' && github.ref == 'refs/heads/prod') ||
-            github.event_name == 'repository_dispatch'
-          )
+        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/prod'
         run: |
           echo 'PUBLIC_URL=https://www.pola-app.pl/' >> $GITHUB_ENV
       # - name: 'Set public URL'
@@ -98,7 +83,7 @@ jobs:
         uses: actions/checkout@v3
         if: github.event_name == 'repository_dispatch'
         with:
-          ref: 'add-cms'
+          ref: 'prod'
       - name: 🗂 Checkout
         uses: actions/checkout@v3
         if: github.event_name != 'repository_dispatch'
@@ -156,12 +141,7 @@ jobs:
           )
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PREVIEW}/${PREVIEW_DIR}"
       - name: Set success deployment status
-        if: |
-          success() && github.repository == 'KlubJagiellonski/pola-web' && 
-          (
-            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') || 
-              github.event_name == 'repository_dispatch'
-          )
+        if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -170,12 +150,7 @@ jobs:
           url: ${{ env.PUBLIC_URL }}
           context: Deploy Preview URL
       - name: Set failed deployment status
-        if: |
-          failure() && github.repository == 'KlubJagiellonski/pola-web' && 
-          (
-            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') || 
-              github.event_name == 'repository_dispatch'
-          )
+        if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
