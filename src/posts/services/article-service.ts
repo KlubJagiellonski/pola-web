@@ -18,6 +18,7 @@ export const ArticleService = {
               subTitle
               title
               category
+              id
               cover {
                 url
               }
