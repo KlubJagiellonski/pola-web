@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-import { AppSettings } from 'app/app-settings';
+import { AppSettings } from '@App/app-settings';
 
 import { ScoreBar } from '@Components/ScoreBar';
 
@@ -52,7 +52,7 @@ interface IResultProperty {
   missingValuePlaceholder?: number | string;
 }
 const ResultProperty: React.FC<IResultProperty> = ({ value, label, missingValuePlaceholder }) =>
-  !!value ? (
+  value !== undefined ? (
     <div>
       <span className="heading">{`${label}:`}</span>
       <span className="brand">{value}</span>
@@ -75,7 +75,11 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
           <ResultProperty value={product.brand?.name} label="Marka" missingValuePlaceholder="nieznana marka" />
         )}
         {AppSettings.search?.SHOW_RESULT_MANUFACTURER && (
-          <ResultProperty value={product.company?.name} label="Producent" missingValuePlaceholder="nieznay producent" />
+          <ResultProperty
+            value={product.company?.name}
+            label="Producent"
+            missingValuePlaceholder="nieznany producent"
+          />
         )}
         <RussiaInfoBox product={product} />
       </ResultElement>

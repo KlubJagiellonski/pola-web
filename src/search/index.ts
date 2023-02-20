@@ -1,9 +1,11 @@
 import { Dictionary } from '../app/generics';
 
+import { getEAN } from '@Utils/data/random-number';
+
 export type EAN = string;
 export interface ICompany {
   name: string;
-  score: number;
+  score: number | null;
 }
 
 export interface IBrand {
@@ -16,6 +18,18 @@ export interface IProductData {
   company?: ICompany;
   brand?: IBrand;
 }
+
+export const mockProductData: IProductData = {
+  code: getEAN(),
+  name: 'test product',
+  company: {
+    name: 'product manufacturer',
+    score: 80,
+  },
+  brand: {
+    name: 'brand',
+  },
+};
 
 export interface ISearchSuccessResponse {
   nextPageToken: string | null;

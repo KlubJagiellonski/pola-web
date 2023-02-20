@@ -1,7 +1,9 @@
-import { seconds } from 'app/generics';
 import { lighten } from 'polished';
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
+
+import React from 'react';
+
+import { seconds } from 'app/generics';
 
 import { color, fontSize, lineHeight, padding } from '@Styles/theme';
 
@@ -63,18 +65,19 @@ export interface IAnimation {
 }
 
 interface IScoreBar {
-  value?: number;
+  value?: number | null;
   unit?: string;
   animation?: IAnimation;
   missingValuePlaceholder?: number | string;
 }
 
 export const ScoreBar: React.FC<IScoreBar> = ({ value, unit, animation, missingValuePlaceholder }) => {
-  if (value) {
-    const scoreText = unit ? `${value} ${unit}` : value.toString();
+  if (value !== undefined) {
+    const knownValue = value !== null ? value : 0;
+    const scoreText = unit ? `${knownValue} ${unit}` : knownValue.toString();
     return (
-      <ValueBar value={value} animation={animation}>
-        <div className="value-belt" />
+      <ValueBar value={knownValue} animation={animation}>
+        <div className="value-belt" data-testid="value-belt" />
         <div className="label">{scoreText}</div>
       </ValueBar>
     );

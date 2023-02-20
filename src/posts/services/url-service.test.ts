@@ -1,7 +1,6 @@
+import { getGuid } from '../../utils/data/random-number';
 import 'jest';
 import 'jest-expect-message';
-
-import { getGuid } from '@Utils/data/random-number';
 
 import { getUniqueTags } from './url-service';
 

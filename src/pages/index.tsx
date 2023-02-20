@@ -3,7 +3,6 @@ import { IArticleData } from 'posts';
 import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
-import { graphql } from 'gatsby';
 import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
