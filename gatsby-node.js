@@ -42,7 +42,7 @@ exports.createPages = async function ({ graphql, actions }) {
     throw new Error('Unable to fetch pages');
   }
 
-  const articleTemplate = path.resolve('./src/gatsby-templates/Testowa.tsx');
+  const articleTemplate = path.resolve('./src/gatsby-templates/ArticleTemplate.tsx');
 
   // Create articles
   result.data.allContentfulPosts.edges.forEach((edge) => {

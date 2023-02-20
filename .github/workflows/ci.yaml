@@ -101,6 +101,9 @@ jobs:
         run: npm ci
       - name: 🔧 Build app
         run: npm run build
+        env:
+          CONTENTFUL_SPACE_ID: ${{secrets.CONTENTFUL_SPACE_ID}}
+          CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
       - name: 🚀 Upload app as artifact
         uses: actions/upload-artifact@v2
         with:
