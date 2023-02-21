@@ -12,7 +12,7 @@ module.exports = {
   },
   flags: {
     FAST_DEV: false,
-    DEV_SSR: false,
+    DEV_SSR: true,
     PRESERVE_FILE_DOWNLOAD_CACHE: false,
     PARALLEL_SOURCING: false,
     DETECT_NODE_MUTATIONS: false,
