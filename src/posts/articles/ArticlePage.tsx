@@ -6,7 +6,7 @@ import { IArticleData } from 'posts';
 import { IArticleNode } from 'posts';
 import styled from 'styled-components';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 
 import { IPolaState } from '@App/state';
@@ -29,8 +29,13 @@ const ContenttWrapper = styled.div`
 `;
 
 const Content = (props: any) => {
+  const [htmlString, setHtmlString] = useState('');
   const { html, children } = props;
-  const body = JSON.parse(html.raw);
+
+  useEffect(() => {
+    const body = JSON.parse(html.raw);
+    setHtmlString(decodeHtml(documentToHtmlString(body, options)));
+  }, [html]);
 
   const findImg = (id: string) => html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
 
@@ -44,7 +49,7 @@ const Content = (props: any) => {
   };
 
   if (html) {
-    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: decodeHtml(documentToHtmlString(body, options)) }} />;
+    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: htmlString }} />;
   } else {
     return <ContenttWrapper>{children}</ContenttWrapper>;
   }
