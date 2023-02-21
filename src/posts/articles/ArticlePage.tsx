@@ -1,5 +1,5 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import { BLOCKS, NodeData } from '@contentful/rich-text-types';
 import { useLocation } from '@reach/router';
 import { IFriendData } from 'friends';
 import { IArticleData } from 'posts';
@@ -16,6 +16,7 @@ import SideInformations from '@Components/SideInformations';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { decodeHtml } from '@Utils/strings';
 
 import { ArticleHeader } from './ArticleHeader';
 
@@ -43,7 +44,7 @@ const Content = (props: any) => {
   };
 
   if (html) {
-    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: documentToHtmlString(body, options) }} />;
+    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: decodeHtml(documentToHtmlString(body, options)) }} />;
   } else {
     return <ContenttWrapper>{children}</ContenttWrapper>;
   }

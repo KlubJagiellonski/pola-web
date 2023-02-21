@@ -21,3 +21,10 @@ export const validateEmail: Validator<string | undefined> = (email: string | und
   }
   return;
 };
+
+
+export const decodeHtml = (html: string) => {
+  var txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+}
