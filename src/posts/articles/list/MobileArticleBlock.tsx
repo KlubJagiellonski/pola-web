@@ -2,6 +2,7 @@ import { ButtonFlavor, ButtonThemes } from '../../../components/buttons/Button';
 import { ResponsiveImage } from '../../../components/images/ResponsiveImage';
 import { Text, TitleSection, WrapperSection } from '../../../styles/GlobalStyle.css';
 import { Device, color, margin } from '../../../styles/theme';
+import { ArticleImage } from '../ArticleImage';
 import styled from 'styled-components';
 
 import React from 'react';
@@ -40,7 +41,7 @@ const Wrapper = styled(WrapperSection)`
   }
 `;
 
-const ArticleImage = styled.div<{ img?: string; smallWidth?: boolean }>`
+const ArticleImageWrapper = styled.div<{ img?: string; smallWidth?: boolean }>`
   width: 50%;
   text-align: left;
   position: relative;
@@ -124,14 +125,14 @@ export const MobileArticleBlock: React.FC<IArticleBlock> = ({
   const showContent = false;
   return (
     <Wrapper color={color.background.white}>
-      <ArticleImage {...styles}>
-        {imagePath && <ResponsiveImage title={title} imageSrc={imagePath} />}
+      <ArticleImageWrapper {...styles}>
+        {imagePath && <ArticleImage title={title} imageSrc={imagePath} />}
         <ArticleAction smallWidth={styles?.smallWidth}>
           <ExternalLink url={slug}>
             <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
           </ExternalLink>
         </ArticleAction>
-      </ArticleImage>
+      </ArticleImageWrapper>
       <ArticleSection>
         <a href={slug} target="_blank">
           <Title>{title}</Title>
