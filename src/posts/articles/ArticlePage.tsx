@@ -1,10 +1,12 @@
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS, NodeData } from '@contentful/rich-text-types';
 import { useLocation } from '@reach/router';
 import { IFriendData } from 'friends';
 import { IArticleData } from 'posts';
 import { IArticleNode } from 'posts';
 import styled from 'styled-components';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 
 import { IPolaState } from '@App/state';
@@ -14,18 +16,42 @@ import SideInformations from '@Components/SideInformations';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
+import { decodeHtml } from '@Utils/strings';
 
 import { ArticleHeader } from './ArticleHeader';
 
 import { Device, margin } from '@Styles/theme';
 
+const ContenttWrapper = styled.div`
+  img {
+    max-width: 100%;
+  }
+`;
+
 const Content = (props: any) => {
+  const [htmlString, setHtmlString] = useState('');
   const { html, children } = props;
 
+  useEffect(() => {
+    const body = JSON.parse(html.raw);
+    setHtmlString(decodeHtml(documentToHtmlString(body, options)));
+  }, [html]);
+
+  const findImg = (id: string) => html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
+
+  const options = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+        const image = findImg(node.data.target.sys.id);
+        return `<img src=${image.url} alt=${image.title}/>`;
+      },
+    },
+  };
+
   if (html) {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: htmlString }} />;
   } else {
-    return <div>{children}</div>;
+    return <ContenttWrapper>{children}</ContenttWrapper>;
   }
 };
 
@@ -56,15 +82,12 @@ const SecondColumn = styled.div`
 
 interface IArticlePage {
   article: IArticleNode;
-  pageContext: any;
 }
 
-const ArticlePage = (props: IArticlePage) => {
-  const { article, pageContext } = props;
-  const { frontmatter, fields, html } = article;
-  const { relativePath: imageSrc } = frontmatter.cover;
-  const { title, subTitle, category } = frontmatter;
-  const date = fields.prefix;
+const ArticlePage: React.FC<IArticlePage> = (props) => {
+  const { article } = props;
+  const { title, subTitle, category, date, html } = article;
+  const { url: imageSrc } = article.cover;
   const location = useLocation();
   const articles = useSelector((state: IPolaState) => state.articles.data);
   const friends = useSelector((state: IPolaState) => state.friends.data);

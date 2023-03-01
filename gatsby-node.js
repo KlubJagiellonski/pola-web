@@ -27,14 +27,10 @@ exports.createPages = async function ({ graphql, actions }) {
   const result = await graphql(
     `
       {
-        allMarkdownRemark(filter: { fileAbsolutePath: { regex: "//posts//" } }, limit: 1000) {
+        allContentfulPosts {
           edges {
             node {
-              id
-              fields {
-                slug
-                prefix
-              }
+              slug
             }
           }
         }
@@ -49,8 +45,8 @@ exports.createPages = async function ({ graphql, actions }) {
   const articleTemplate = path.resolve('./src/gatsby-templates/ArticleTemplate.tsx');
 
   // Create articles
-  result.data.allMarkdownRemark.edges.forEach((edge) => {
-    const { slug } = edge.node.fields;
+  result.data.allContentfulPosts.edges.forEach((edge) => {
+    const { slug } = edge.node;
 
     createPage({
       path: slug,

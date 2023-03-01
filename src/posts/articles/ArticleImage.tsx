@@ -18,30 +18,33 @@ export const ArticleImage: React.FC<ArticleStyles & IResponsiveImage> = ({ image
   <StaticQuery
     query={graphql`
       query {
-        images: allFile(
-          filter: {
-            sourceInstanceName: { eq: "article-images" }
-            childrenImageSharp: { elemMatch: { gatsbyImageData: { ne: "null" } } }
-          }
-        ) {
+        images: allContentfulAsset {
           nodes {
-            name
-            extension
-            relativePath
-            childImageSharp {
-              fluid {
-                src
-              }
-              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
-            }
+            title
+            name: filename
+            relativePath: url
+            url
+            id
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
           }
         }
       }
     `}
-    render={(data) => (
-      <ArticleCoverWrapper className="article-cover" fullSize={fullSize}>
-        {renderFromQuery(data.images.nodes, imageSrc, title)}
-      </ArticleCoverWrapper>
-    )}
+    render={(data) => {
+      const images = data.images.nodes.map((node: any) => ({
+        name: node.name,
+        relativePath: node.relativePath,
+        childImageSharp: {
+          gatsbyImageData: node.gatsbyImageData,
+          id: node.id,
+        },
+      }));
+
+      return (
+        <ArticleCoverWrapper className="article-cover" fullSize={fullSize}>
+          {renderFromQuery(images, imageSrc, title)}
+        </ArticleCoverWrapper>
+      );
+    }}
   />
 );

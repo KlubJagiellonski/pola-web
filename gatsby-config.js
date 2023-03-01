@@ -215,6 +215,13 @@ module.exports = {
         destination: 'm',
       },
     },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
   ],
   // shadowing API request domain for development
   // https://www.gatsbyjs.com/docs/api-proxy/

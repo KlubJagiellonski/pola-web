@@ -8,28 +8,15 @@ import { ArticleImage } from 'posts/articles/ArticleImage';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 
-import { Device, color, margin, padding } from '@Styles/theme';
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   position: relative;
-  background: ${color.background.gray};
   height: 16em;
   padding: ${margin.small};
 
   @media ${Device.mobile} {
     display: none;
-  }
-`;
-
-const Image = styled.div`
-  div {
-    height: 16em !important;
-    margin: ${margin.small};
-    picture {
-      img {
-        height: auto !important;
-      }
-    }
   }
 `;
 
@@ -42,26 +29,25 @@ const Sections = styled.div`
   display: flex;
 `;
 
-const ImageSection = styled(Image)`
+const ImageSection = styled.div`
   flex: 3;
 `;
 
 const TextSection = styled.div`
   flex: 4;
-  background: ${color.background.gray};
   padding: ${padding.normal};
   display: flex;
   flex-direction: column;
 `;
 
-const LatestArticle: React.FC<IArticleData> = ({ imagePath, title, slug, date, text, tag }) => {
+const LatestArticle: React.FC<IArticleData> = ({ imagePath, title, slug, date, subTitle, tag }) => {
   return (
     <Wrapper>
       <Sections>
         <ImageSection>{imagePath && <ArticleImage title={title} imageSrc={imagePath} />}</ImageSection>
         <TextSection>
           <ArticleTitle title={title} slug={slug} tag={tag} date={date} />
-          <ArticleContents date={date} text={text} tag={tag} />
+          <ArticleContents date={date} text={subTitle} tag={tag} />
         </TextSection>
       </Sections>
     </Wrapper>

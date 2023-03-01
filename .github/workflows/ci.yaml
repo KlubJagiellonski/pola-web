@@ -96,6 +96,9 @@ jobs:
         run: npm ci
       - name: 🔧 Build app
         run: npm run build
+        env:
+          CONTENTFUL_SPACE_ID: ${{secrets.CONTENTFUL_SPACE_ID}}
+          CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
       - name: 🚀 Upload app as artifact
         uses: actions/upload-artifact@v2
         with:
@@ -141,7 +144,12 @@ jobs:
           )
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PREVIEW}/${PREVIEW_DIR}"
       - name: Set success deployment status
-        if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          success() && github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') || 
+              github.event_name == 'repository_dispatch'
+          )
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -150,7 +158,12 @@ jobs:
           url: ${{ env.PUBLIC_URL }}
           context: Deploy Preview URL
       - name: Set failed deployment status
-        if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          failure() && github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') || 
+              github.event_name == 'repository_dispatch'
+          )
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

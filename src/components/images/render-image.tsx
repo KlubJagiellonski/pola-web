@@ -9,7 +9,7 @@ export interface IResponsiveImage {
 }
 
 export interface IGatsbyImageNode {
-  extension: string;
+  extension?: string;
   relativePath: string;
   name: string;
   childImageSharp: {
@@ -42,12 +42,7 @@ function findImage(imageNodes: IGatsbyImageNode[], imageSrc: string) {
 
 function renderImage(image: IGatsbyImageNode, title: string) {
   try {
-    const imageMetadata = getImage(image.childImageSharp.gatsbyImageData);
-    if (!imageMetadata) {
-      return console.error(`Cannot read Gatsby image data "${image.relativePath}"`);
-    }
-
-    const component = <GatsbyImage alt={title || 'no title'} image={imageMetadata} />;
+    const component = <GatsbyImage alt={title || 'no title'} image={image.childImageSharp.gatsbyImageData} />;
     return component;
   } catch (error: unknown) {
     console.error(`Cannot render image "${image.relativePath}"`, error);
