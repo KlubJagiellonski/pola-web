@@ -1,14 +1,16 @@
 import { IFriendData } from '..';
 import { WrapperSection } from '../../styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding, width } from '../../styles/theme';
 import styled from 'styled-components';
 
 import React from 'react';
-import { Device, color, margin, padding, fontSize, width } from '../../styles/theme';
 
 import { urls } from '@App/website';
 
 import { SliderContainer, SliderElement } from '@Components/SliderComponent';
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+
+import { FriendLogo } from './FriendLogo';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: friends;
@@ -27,11 +29,11 @@ const Image = styled.div`
     width: 100%;
     height: 100%;
 
-    picture {
-      img {
-        object-fit: contain !important;
-      }
+    // picture {
+    img {
+      object-fit: contain !important;
     }
+    // }
   }
 `;
 
@@ -49,14 +51,12 @@ export const MobileFriendsCarousel: React.FC<IFriends> = ({ friends, rows }) => 
     <Wrapper>
       <SliderContainer title="Przyjaciele Poli" rows={rows} isMobile={true}>
         {friends?.map((el) => (
-          <a key={el.id} href={urls.pola.friends('friend', el.slug)} target="_blank">
-            <SliderElement to={''}>
-              <Element>
-                <Image>{el.image && <ResponsiveImage title={el.name} imageSrc={el.image} />}</Image>
-                {el.slug && <>Zobacz {'>'}</>}
-              </Element>
-            </SliderElement>
-          </a>
+          <SliderElement to={urls.pola.friends('friend', el.slug)} key={el.id}>
+            <Element>
+              <Image>{el.image && <FriendLogo title={el.name} imageSrc={el.image} />}</Image>
+              {el.slug && <>Zobacz {'>'}</>}
+            </Element>
+          </SliderElement>
         ))}
       </SliderContainer>
     </Wrapper>
