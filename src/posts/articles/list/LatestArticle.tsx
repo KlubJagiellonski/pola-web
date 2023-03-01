@@ -20,18 +20,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled.div`
-  div {
-    // // height: 16em !important;
-    // margin: ${margin.small};
-    // picture {
-    //   img {
-    //     height: auto !important;
-    //   }
-    // }
-  }
-`;
-
 const Sections = styled.div`
   position: absolute;
   top: 0;
@@ -41,7 +29,7 @@ const Sections = styled.div`
   display: flex;
 `;
 
-const ImageSection = styled(Image)`
+const ImageSection = styled.div`
   flex: 3;
 `;
 
