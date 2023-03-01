@@ -44,6 +44,12 @@ const SecondSection = styled.div`
   }
 `;
 
+const ArticlesWrapper = styled.div`
+  .gatsby-image-wrapper {
+    height: 10em !important;
+  }
+`;
+
 interface ISideInformations {
   actualArticleId: string;
   articles: IArticleData[];
@@ -75,7 +81,9 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
         <TagLinks tags={articles && getUniqueTags(articles)} />
       </SecondSection>
       <Title>Zobacz także:</Title>
-      <ArticlesListPreview articles={articlesPreview} />
+      <ArticlesWrapper>
+        <ArticlesListPreview articles={articlesPreview} />
+      </ArticlesWrapper>
       {friends && selectedFriend && <FriendCard {...selectedFriend} />}
     </Wrapper>
   );

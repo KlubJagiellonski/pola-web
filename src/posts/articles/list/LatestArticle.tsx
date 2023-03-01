@@ -8,11 +8,10 @@ import { ArticleImage } from 'posts/articles/ArticleImage';
 import ArticleContents from './ArticleContents';
 import ArticleTitle from './ArticleTitle';
 
-import { Device, color, margin, padding } from '@Styles/theme';
+import { Device, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   position: relative;
-  background: ${color.background.gray};
   height: 16em;
   padding: ${margin.small};
 
@@ -23,13 +22,13 @@ const Wrapper = styled.div`
 
 const Image = styled.div`
   div {
-    height: 16em !important;
-    margin: ${margin.small};
-    picture {
-      img {
-        height: auto !important;
-      }
-    }
+    // // height: 16em !important;
+    // margin: ${margin.small};
+    // picture {
+    //   img {
+    //     height: auto !important;
+    //   }
+    // }
   }
 `;
 
@@ -48,7 +47,6 @@ const ImageSection = styled(Image)`
 
 const TextSection = styled.div`
   flex: 4;
-  background: ${color.background.gray};
   padding: ${padding.normal};
   display: flex;
   flex-direction: column;
