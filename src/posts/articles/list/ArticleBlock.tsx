@@ -85,7 +85,7 @@ interface IArticleBlock {
 export const ArticleBlock: React.FC<IArticleBlock> = ({ imagePath, title, slug, date, subTitle, tag, styles }) => {
   return (
     <Wrapper color={color.background.white}>
-      <Link to={slug}>
+      <Link to={`/${slug}`}>
         <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
       </Link>
       <ArticleImageWrapper {...styles}>

@@ -128,13 +128,13 @@ export const MobileArticleBlock: React.FC<IArticleBlock> = ({
       <ArticleImageWrapper {...styles}>
         {imagePath && <ArticleImage title={title} imageSrc={imagePath} />}
         <ArticleAction smallWidth={styles?.smallWidth}>
-          <ExternalLink url={slug}>
+          <ExternalLink url={`/${slug}`}>
             <ArticlesButton label="CZYTAJ DALEJ" styles={ButtonThemes[ButtonFlavor.RED]} />
           </ExternalLink>
         </ArticleAction>
       </ArticleImageWrapper>
       <ArticleSection>
-        <a href={slug} target="_blank">
+        <a href={`/${slug}`} target="_blank">
           <Title>{title}</Title>
         </a>
         {tag && date && (
