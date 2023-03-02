@@ -29,13 +29,8 @@ const ContenttWrapper = styled.div`
 `;
 
 const Content = (props: any) => {
-  const [htmlString, setHtmlString] = useState('');
   const { html, children } = props;
-
-  useEffect(() => {
-    const body = JSON.parse(html.raw);
-    setHtmlString(decodeHtml(documentToHtmlString(body, options)));
-  }, [html]);
+  const body = JSON.parse(html.raw);
 
   const findImg = (id: string) => html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
 
@@ -49,7 +44,7 @@ const Content = (props: any) => {
   };
 
   if (html) {
-    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: htmlString }} />;
+    return <ContenttWrapper dangerouslySetInnerHTML={{ __html: decodeHtml(documentToHtmlString(body, options)) }} />;
   } else {
     return <ContenttWrapper>{children}</ContenttWrapper>;
   }

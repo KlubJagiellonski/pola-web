@@ -24,7 +24,21 @@ export const validateEmail: Validator<string | undefined> = (email: string | und
 
 
 export const decodeHtml = (html: string) => {
-  var txt = document.createElement('textarea');
-  txt.innerHTML = html;
-  return txt.value;
+  var entities = [
+    ['amp', '&'],
+    ['apos', '\''],
+    ['#x27', '\''],
+    ['#x2F', '/'],
+    ['#39', '\''],
+    ['#47', '/'],
+    ['lt', '<'],
+    ['gt', '>'],
+    ['nbsp', ' '],
+    ['quot', '"']
+  ];
+
+  for (var i = 0, max = entities.length; i < max; ++i) 
+  html = html.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+
+  return html;
 }
