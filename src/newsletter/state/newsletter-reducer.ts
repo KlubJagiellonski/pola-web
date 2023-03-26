@@ -1,12 +1,14 @@
 import { Follower } from 'newsletter';
-import { ISubscriptionResponseContext } from 'newsletter/services/subscription-response-context';
 import { AnyAction, Reducer } from 'redux';
 
 import { IAction, IActionReducer } from '@App/state';
 
 import { assertStatus } from '@Utils/assert-status';
 
+import { ISubscriptionResponseContext } from 'newsletter/services/subscription-response-context';
+
 import { actionTypes } from './newsletter-actions';
+import * as actions from './newsletter-actions';
 
 export enum SubscriptionStatus {
   INITIAL = 'initial',

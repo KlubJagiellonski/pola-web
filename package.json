@@ -76,6 +76,7 @@
     "gatsby-yaml-full-file": "^0.3.0",
     "gatsby-yaml-full-markdown": "^4.1.1",
     "js-yaml": "^4.1.0",
+    "lodash.debounce": "^4.0.8",
     "loglevel": "^1.8.0",
     "postcss": "^8.4.14",
     "query-string": "^7.1.1",

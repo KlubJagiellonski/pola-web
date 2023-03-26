@@ -1,0 +1,343 @@
+{
+  "messages": {
+    "entryHeader": "Czy Twoje rachunki są polskie?",
+    "resultHeader": "Twój wynik",
+    "countButtonText": "Przelicz",
+    "submitButtonText": "Wyślij"
+  },
+  "categories": [
+    {
+      "categoryId": "energy1",
+      "order": 1,
+      "header": "Twój dostawca energii elektrycznej?",
+      "suppliers": [
+        {
+          "name": "Energa",
+          "score": 100
+        },
+        {
+          "name": "PGE",
+          "score": 100
+        },
+        {
+          "name": "Tauron",
+          "score": 100
+        },
+        {
+          "name": "Enea",
+          "score": 100
+        },
+        {
+          "name": "E-on",
+          "score": 80
+        },
+        {
+          "name": "Orange",
+          "score": 90
+        },
+        {
+          "name": "Lumi",
+          "score": 100
+        },
+        {
+          "name": "Polenergia",
+          "score": 100
+        },
+        {
+          "name": "Fortum",
+          "score": 80
+        }
+      ]
+    },
+    {
+      "categoryId": "mobile",
+      "order": 2,
+      "header": "Twój operator sieci komórkowej?",
+      "suppliers": [
+        {
+          "name": "Plush",
+          "score": 60
+        },
+        {
+          "name": "NJU. Mobile",
+          "score": 70
+        },
+        {
+          "name": "Mobile Vikings",
+          "score": 80
+        },
+        {
+          "name": "Heyah",
+          "score": 60
+        },
+        {
+          "name": "Red Bull Mobile",
+          "score": 40
+        },
+        {
+          "name": "Orange",
+          "score": 90
+        },
+        {
+          "name": "Play",
+          "score": 100
+        },
+        {
+          "name": "T-Mobile",
+          "score": 60
+        },
+        {
+          "name": "Plus",
+          "score": 100
+        }
+      ]
+    },
+    {
+      "categoryId": "car",
+      "order": 3,
+      "header": "Twój ubezpieczyciel samochód?",
+      "suppliers": [
+        {
+          "name": "Liberty",
+          "score": 40
+        },
+        {
+          "name": "Direct",
+          "score": 30
+        },
+        {
+          "name": "Link 4",
+          "score": 60
+        },
+        {
+          "name": "You Can Drive",
+          "score": 30
+        },
+        {
+          "name": "Aviva Direct",
+          "score": 70
+        },
+        {
+          "name": "General",
+          "score": 80
+        },
+        {
+          "name": "PZU",
+          "score": 100
+        },
+        {
+          "name": "Alianz",
+          "score": 60
+        },
+        {
+          "name": "Proama",
+          "score": 70
+        },
+        {
+          "name": "Uniqa",
+          "score": 70
+        },
+        {
+          "name": "Warta",
+          "score": 100
+        }
+      ]
+    },
+    {
+      "categoryId": "estate",
+      "order": 4,
+      "header": "Twój ubezpieczyciel samochód?",
+      "suppliers": [
+        {
+          "name": "Generali",
+          "score": 60
+        },
+        {
+          "name": "Link 4",
+          "score": 60
+        },
+        {
+          "name": "Inter Polska",
+          "score": 40
+        },
+        {
+          "name": "Concordia",
+          "score": 60
+        },
+
+        {
+          "name": "Aviva",
+          "score": 70
+        },
+        {
+          "name": "PZU",
+          "score": 100
+        },
+        {
+          "name": "Warta",
+          "score": 100
+        }
+      ]
+    },
+    {
+      "categoryId": "energy2",
+      "order": 5,
+      "header": "Twój dostawca prądu?",
+      "suppliers": [
+        {
+          "name": "Axpo",
+          "score": 70
+        },
+        {
+          "name": "Elektrix",
+          "score": 60
+        },
+        {
+          "name": "Energa",
+          "score": 100
+        },
+        {
+          "name": "Ewe",
+          "score": 70
+        },
+        {
+          "name": "Fortum",
+          "score": 60
+        },
+        {
+          "name": "G. En gaz energia",
+          "score": 40
+        },
+        {
+          "name": "Handen",
+          "score": 80
+        },
+        {
+          "name": "PGNiG",
+          "score": 100
+        }
+      ]
+    },
+    {
+      "categoryId": "television",
+      "order": 6,
+      "header": "Twój dostawca telewizji?",
+      "suppliers": [
+        {
+          "name": "Canal+",
+          "score": 50
+        },
+        {
+          "name": "Multimedia Polska",
+          "score": 60
+        },
+        {
+          "name": "Netia",
+          "score": 90
+        },
+        {
+          "name": "player+",
+          "score": 90
+        },
+        {
+          "name": "Polsat Box",
+          "score": 100
+        },
+        {
+          "name": "UPC",
+          "score": 60
+        },
+        {
+          "name": "Vectra",
+          "score": 70
+        }
+      ]
+    },
+    {
+      "categoryId": "finances",
+      "order": 7,
+      "header": "Twój bank?",
+      "suppliers": [
+        {
+          "name": "Citi Handlowy",
+          "score": 80
+        },
+        {
+          "name": "Bank PKO",
+          "score": 100
+        },
+        {
+          "name": "Bank Pekao",
+          "score": 100
+        },
+        {
+          "name": "Santander",
+          "score": 80
+        },
+        {
+          "name": "ING",
+          "score": 70
+        },
+        {
+          "name": "mBank",
+          "score": 40
+        },
+        {
+          "name": "BNP Paribas",
+          "score": 70
+        },
+        {
+          "name": "Millennium ",
+          "score": 60
+        },
+        {
+          "name": "Alior Bank",
+          "score": 60
+        },
+        {
+          "name": "Getin Bank",
+          "score": 100
+        },
+        {
+          "name": "Bank Pocztowy",
+          "score": 100
+        }
+      ]
+    },
+    {
+      "categoryId": "internet",
+      "order": 8,
+      "header": "Twój dostawca internetu?",
+      "suppliers": [
+        {
+          "name": "Inea",
+          "score": 60
+        },
+        {
+          "name": "UPC",
+          "score": 50
+        },
+        {
+          "name": "Vectra",
+          "score": 70
+        },
+        {
+          "name": "Netia",
+          "score": 60
+        },
+        {
+          "name": "Orange",
+          "score": 90
+        },
+        {
+          "name": "T-Mobile",
+          "score": 60
+        },
+        {
+          "name": "Cyfrowy Polsat",
+          "score": 100
+        }
+      ]
+    }
+  ]
+}
