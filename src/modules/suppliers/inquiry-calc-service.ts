@@ -1,28 +1,4 @@
-import { CalculationResultType, InquiryOption, InquiryQuestion, Score } from '.';
-
-const getSelectedOptions = (questions: InquiryQuestion[]): InquiryOption[] => {
-  const selectedOptions = questions.reduce((options: InquiryOption[], question: InquiryQuestion) => {
-    if (question.selectedOptionId) {
-      if (question.newOption.optionId === question.selectedOptionId) {
-        options = [...options, question.newOption];
-      } else {
-        const selectedOption = question.options.find((option) => option.optionId === question.selectedOptionId);
-        if (selectedOption) {
-          options = [...options, selectedOption];
-        }
-      }
-    }
-
-    return options;
-  }, []);
-  return selectedOptions;
-};
-
-export interface IInquiryCalculationResult {
-  type: CalculationResultType;
-  score?: Score;
-  message: string;
-}
+import { CalculationResultType, IInquiryCalculationResult, InquiryOption, InquiryQuestion, Score } from '.';
 
 export const calculateTotalScore = (questions: InquiryQuestion[]): IInquiryCalculationResult => {
   const selectedOptions = getSelectedOptions(questions);
@@ -52,4 +28,22 @@ export const calculateTotalScore = (questions: InquiryQuestion[]): IInquiryCalcu
       message: 'Do wyznaczenia wyniku potrzeba przynajmniej 3 zaznaczonych dostawców',
     };
   }
+};
+
+const getSelectedOptions = (questions: InquiryQuestion[]): InquiryOption[] => {
+  const selectedOptions = questions.reduce((options: InquiryOption[], question: InquiryQuestion) => {
+    if (question.selectedOptionId) {
+      if (question.newOption.optionId === question.selectedOptionId) {
+        options = [...options, question.newOption];
+      } else {
+        const selectedOption = question.options.find((option) => option.optionId === question.selectedOptionId);
+        if (selectedOption) {
+          options = [...options, selectedOption];
+        }
+      }
+    }
+
+    return options;
+  }, []);
+  return selectedOptions;
 };

@@ -1,11 +1,12 @@
 import data from '../modules/suppliers/content/suppliers.json';
 import { ISuppliersState, SuppliersFormStatus, SuppliersInquiryData } from 'modules/suppliers';
-import { InquiryResultModal } from 'modules/suppliers/components/InquiryResultModal';
 import { SuppliersInquiry } from 'modules/suppliers/components/SuppliersInquiry';
+import { calculateTotalScore } from 'modules/suppliers/inquiry-calc-service';
+import { showInquiryResults } from 'modules/suppliers/state/inquiry-result-reducer';
 import { suppliersReducer } from 'modules/suppliers/state/suppliers-reducer';
-import { calculateTotalScore } from 'modules/suppliers/suppliers-service';
 
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { GatsbyPage } from '@App/generics';
 import { PageType } from '@App/website';
@@ -18,8 +19,6 @@ import { guid } from '@Utils/data/random-number';
 export interface ISuppliersInquiryPage extends GatsbyPage {}
 
 const SuppliersInquiryPage = (props: ISuppliersInquiryPage) => {
-  console.log('Hello');
-
   const inquiry: SuppliersInquiryData = new SuppliersInquiryData(data.categories, data.messages);
   const initialState: ISuppliersState = {
     status: SuppliersFormStatus.LOADED,
@@ -27,17 +26,22 @@ const SuppliersInquiryPage = (props: ISuppliersInquiryPage) => {
     questions: inquiry.questions,
   };
 
-  const [isResultVisible, setResultVisible] = React.useState(false);
   const [inquiryState, dispatch] = React.useReducer(suppliersReducer, initialState);
-
+  const dis = useDispatch();
   const handleSelect = (questionId: guid, selectedOptionId: guid) => {
     dispatch({ type: 'selectMain', payload: { questionId, selectedOptionId } });
   };
 
-  const handleCalculate = () => {
+  const handleCalculate = async () => {
     const calculationResult = calculateTotalScore(inquiryState.questions);
     dispatch({ type: 'calculate', payload: calculationResult });
-    setResultVisible(true);
+
+    await dis(
+      showInquiryResults({
+        messages: inquiryState.messages,
+        totalScore: calculationResult,
+      })
+    );
   };
 
   const handleUnselect = (questionId: guid) => {
@@ -52,14 +56,6 @@ const SuppliersInquiryPage = (props: ISuppliersInquiryPage) => {
     dispatch({ type: 'updateSupplierName', payload: { questionId, newSupplierName } });
   };
 
-  const handleSubmit = () => {
-    console.warn('submitting form is not implemented');
-  };
-
-  const hideDialog = () => {
-    setResultVisible(false);
-  };
-
   const handleQuestionExpand = (questionId: guid, expanded: boolean) => {
     dispatch({ type: 'toggleExpand', payload: { questionId, expanded } });
   };
@@ -68,15 +64,6 @@ const SuppliersInquiryPage = (props: ISuppliersInquiryPage) => {
     <PageLayout location={props.location} page={PageType.SUPPLIERS} styles={{ marginTop: '4em' }}>
       <SEOMetadata pageTitle="Ankieta" />
       <PageSection>
-        <div></div>
-        {isResultVisible && inquiryState.status !== SuppliersFormStatus.LOADED && (
-          <InquiryResultModal
-            totalScore={inquiryState.totalScore}
-            messages={inquiryState.messages}
-            onClose={hideDialog}
-            onSubmit={handleSubmit}
-          />
-        )}
         <SuppliersInquiry
           messages={inquiryState.messages}
           questions={inquiryState.questions}

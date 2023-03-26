@@ -1,7 +1,5 @@
 import { getGuid, guid } from 'utils/data/random-number';
 
-import { IInquiryCalculationResult } from './suppliers-service';
-
 export enum SuppliersFormStatus {
   LOADED = 'loaded',
   CALCULATED = 'calculated',
@@ -59,6 +57,12 @@ export enum CalculationResultType {
   SCORED,
   CUSTOM_OPTIONS_SELECTED,
   NOT_ENOUGH_OPTIONS,
+}
+
+export interface IInquiryCalculationResult {
+  type: CalculationResultType;
+  score?: Score;
+  message: string;
 }
 
 export interface ISuppliersData {

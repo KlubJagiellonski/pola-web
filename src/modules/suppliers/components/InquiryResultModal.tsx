@@ -1,9 +1,10 @@
-import { CalculationResultType, ISuppliersInquiryMessages, Score } from '..';
-import { IInquiryCalculationResult } from '../suppliers-service';
+import { CalculationResultType, IInquiryCalculationResult, ISuppliersInquiryMessages, Score } from '..';
+import { hideInquiryResults } from '../state/inquiry-result-reducer';
 import styled from 'styled-components';
 
 import * as React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { PrimaryButton } from 'components/buttons/PrimaryButton';
 import { FormInput } from 'components/form-input';
@@ -31,8 +32,6 @@ const Content = styled.div`
 export interface IInquiryResultModal {
   messages: ISuppliersInquiryMessages;
   totalScore?: IInquiryCalculationResult;
-  onClose: () => void;
-  onSubmit: () => void;
 }
 
 const ModalContent = (
@@ -65,10 +64,20 @@ const ModalContent = (
 
 export const InquiryResultModal: React.FC<IInquiryResultModal> = (props: IInquiryResultModal) => {
   const { messages, totalScore } = props;
-  const content = totalScore ? ModalContent(totalScore, messages, props.onSubmit) : null;
+
+  const handleSubmit = () => {
+    console.warn('submitting form is not implemented');
+  };
+
+  const content = totalScore ? ModalContent(totalScore, messages, handleSubmit) : null;
+  const dis = useDispatch();
+
+  const hideDialog = async () => {
+    await dis(hideInquiryResults());
+  };
 
   return (
-    <Modal onClose={props.onClose}>
+    <Modal onClose={hideDialog}>
       <ContentWrapper style={{ padding: '2rem', textAlign: 'center' }}>
         <h2>{messages.resultHeader}</h2>
         {content}

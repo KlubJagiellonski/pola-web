@@ -1,4 +1,6 @@
+import { InquiryResultModal } from 'modules/suppliers/components/InquiryResultModal';
 import styled from 'styled-components';
+import 'styles/pola-web.css';
 
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
@@ -22,17 +24,22 @@ import { PageHeader } from './PageHeader';
 import { StateLoader } from './StateLoader';
 import PageFooter from './footer/PageFooter';
 
-import '@Styles/pola-web.css';
 import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {
-    const { app, search } = state;
+    const { app, search, inquiryResult } = state;
     return {
-      isSearchInfoVisible: app.isSearchInfoVisible,
       activePage: app.activePage,
       isMenuExpanded: app.isMenuExpanded,
+
+      // TODO: move modals' data somewhere else
+      isSearchInfoVisible: app.isSearchInfoVisible,
       selectedProduct: search.stateName === SearchStateName.SELECTED ? search.selectedProduct : undefined,
+
+      visible: inquiryResult.visible,
+      score: inquiryResult.totalScore,
+      inquiryResultMessages: inquiryResult.messages,
     };
   },
   {
@@ -40,6 +47,8 @@ const connector = connect(
     selectActivePage: appDispatcher.selectActivePage,
     toggleSearchInfo: appDispatcher.toggleSearchInfo,
     expandMenu: appDispatcher.expandMenu,
+
+    // TODO: move modals' actions somewhere else
     unselectProduct: searchDispatcher.unselectProduct,
   }
 );
@@ -81,18 +90,25 @@ const PageContent = styled.main<ILayoutStyles>`
 
 const Layout: React.FC<IPageLayout> = ({
   location,
+  loadBrowserLocation,
   page,
-  activePage,
+  children,
+  styles,
+
   isMenuExpanded,
+  expandMenu,
+
+  activePage,
+  selectActivePage,
+
   isSearchInfoVisible,
   selectedProduct,
-  children,
-  toggleSearchInfo,
-  expandMenu,
   unselectProduct,
-  loadBrowserLocation,
-  selectActivePage,
-  styles,
+  toggleSearchInfo,
+
+  visible,
+  score,
+  inquiryResultMessages,
 }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -111,6 +127,7 @@ const Layout: React.FC<IPageLayout> = ({
     }
   }, []);
 
+  // TODO: handle all modal types in one place
   return (
     <ErrorBoundary scope="page-layout">
       <ErrorBoundary scope="app-state-loader">
@@ -119,6 +136,7 @@ const Layout: React.FC<IPageLayout> = ({
       <LayoutContainer id="layout-container">
         {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
+        {visible && inquiryResultMessages && <InquiryResultModal totalScore={score} messages={inquiryResultMessages} />}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
           activePage={activePage}
