@@ -103,6 +103,7 @@ export class InquiryQuestion {
 
   public AddOptions(options: InquiryOption[]) {
     this.options.push(...options);
+    return this;
   }
 }
 
