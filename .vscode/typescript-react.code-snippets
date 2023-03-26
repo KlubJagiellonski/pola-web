@@ -47,6 +47,36 @@
     ],
     "description": "redux typescript template for action builder"
   },
+  "redux toolkit reducer": {
+    "prefix": "rtr",
+    "body": [
+      "import { createSlice } from \"@reduxjs/toolkit\";",
+      "",
+      "export interface I${1:ReducerName}State {",
+      "  initialized: boolean;",
+      "}",
+      "",
+      "const initialState: I${1:ReducerName}State = {",
+      "  initialized: false,",
+      "}",
+      "",
+      "const ${1:ReducerName}Slice = createSlice({",
+      "  name: '${1:ReducerName}',",
+      "  initialState,",
+      "  reducers: {",
+      "    initialize: (state: I${1:ReducerName}State) => {",
+      "      state.initialized = true;",
+      "    },",
+      "  }",
+      "});"
+      "",
+      "export const {",
+      "  initialize",
+      "} = ${1:ReducerName}Slice.actions;",
+      "export default ${1:ReducerName}Slice.reducer;"
+    ],
+    "description": "redux typescript template for action builder"
+  },
   "react typescript props deconstruct": {
     "prefix": "rrsp",
     "body": ["const {$0} = this.props;"],
