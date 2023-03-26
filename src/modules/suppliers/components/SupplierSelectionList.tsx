@@ -1,4 +1,5 @@
-import { InquiryOption, InquiryQuestion, pgeTheme, px } from '..';
+import { InquiryOption, InquiryQuestion } from '..';
+import { pgeTheme } from '../styles/inquiry-theme';
 import debounce from 'lodash.debounce';
 import styled, { keyframes } from 'styled-components';
 import { color, fontSize } from 'styles/theme';

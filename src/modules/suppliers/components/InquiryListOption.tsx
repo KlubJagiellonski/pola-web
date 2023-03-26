@@ -1,6 +1,7 @@
-import * as React from 'react';
+import { pgeTheme, px } from '../styles/inquiry-theme';
 import styled from 'styled-components';
-import { pgeTheme, px } from '..';
+
+import * as React from 'react';
 
 const OptionContainer = styled.label`
   align-items: flex-start;
@@ -78,7 +79,12 @@ export const InquiryListOption: React.FC<IInquiryListOption> = (props: IInquiryL
 
   return (
     <OptionContainer className="container">
-      <input type="radio" name={groupName} onChange={(e: React.FormEvent<HTMLInputElement>) => onSelect()} />
+      <input
+        type="radio"
+        name={groupName}
+        title={name}
+        onChange={(e: React.FormEvent<HTMLInputElement>) => onSelect()}
+      />
       <span className="checkmark"></span>
       <span className="option-name">{text}</span>
     </OptionContainer>

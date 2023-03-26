@@ -1,4 +1,4 @@
-import { ISuppliersState, InquiryOption, InquiryQuestion, SuppliersFormStatus } from '.';
+import { ISuppliersState, InquiryOption, InquiryQuestion, SuppliersFormStatus } from '..';
 
 import { assertStatus } from 'utils/assert-status';
 

@@ -1,5 +1,5 @@
-import { ISuppliersInquiryMessages, Score } from '..';
-import { CalculationResultType, IInquiryCalculationResult } from '../suppliers-service';
+import { CalculationResultType, ISuppliersInquiryMessages, Score } from '..';
+import { IInquiryCalculationResult } from '../suppliers-service';
 import styled from 'styled-components';
 
 import * as React from 'react';

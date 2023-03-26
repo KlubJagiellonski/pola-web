@@ -1,5 +1,3 @@
-import { color, margin } from 'styles/theme';
-
 import { getGuid, guid } from 'utils/data/random-number';
 
 import { IInquiryCalculationResult } from './suppliers-service';
@@ -55,6 +53,12 @@ export interface ISuppliersInquiryMessages {
   resultHeader: string;
   countButtonText: string;
   submitButtonText: string;
+}
+
+export enum CalculationResultType {
+  SCORED,
+  CUSTOM_OPTIONS_SELECTED,
+  NOT_ENOUGH_OPTIONS,
 }
 
 export interface ISuppliersData {
@@ -132,21 +136,3 @@ export class Score {
     return this.value === score.value;
   }
 }
-
-export const pgeTheme = {
-  colors: {
-    line: color.text.red,
-    option: color.border.grey,
-    optionHover: color.button.redLight,
-    optionSelected: color.text.red,
-  },
-  space: {
-    small: margin.small,
-    normal: margin.normal,
-    large: margin.big,
-    checkmark: 25,
-    checkmarkCenter: 9,
-  },
-};
-
-export const px = (size: number): string => size + 'px';

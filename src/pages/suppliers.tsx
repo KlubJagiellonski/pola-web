@@ -2,7 +2,7 @@ import data from '../modules/suppliers/content/suppliers.json';
 import { ISuppliersState, SuppliersFormStatus, SuppliersInquiryData } from 'modules/suppliers';
 import { InquiryResultModal } from 'modules/suppliers/components/InquiryResultModal';
 import { SuppliersInquiry } from 'modules/suppliers/components/SuppliersInquiry';
-import { suppliersReducer } from 'modules/suppliers/suppliers-reducer';
+import { suppliersReducer } from 'modules/suppliers/state/suppliers-reducer';
 import { calculateTotalScore } from 'modules/suppliers/suppliers-service';
 
 import * as React from 'react';

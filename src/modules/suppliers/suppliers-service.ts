@@ -1,6 +1,6 @@
-import { InquiryOption, InquiryQuestion, Score } from '.';
+import { CalculationResultType, InquiryOption, InquiryQuestion, Score } from '.';
 
-export const getSelectedOptions = (questions: InquiryQuestion[]): InquiryOption[] => {
+const getSelectedOptions = (questions: InquiryQuestion[]): InquiryOption[] => {
   const selectedOptions = questions.reduce((options: InquiryOption[], question: InquiryQuestion) => {
     if (question.selectedOptionId) {
       if (question.newOption.optionId === question.selectedOptionId) {
@@ -17,12 +17,6 @@ export const getSelectedOptions = (questions: InquiryQuestion[]): InquiryOption[
   }, []);
   return selectedOptions;
 };
-
-export enum CalculationResultType {
-  SCORED,
-  CUSTOM_OPTIONS_SELECTED,
-  NOT_ENOUGH_OPTIONS,
-}
 
 export interface IInquiryCalculationResult {
   type: CalculationResultType;
