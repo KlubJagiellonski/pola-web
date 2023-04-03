@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import businessReducer, { IBusinessState } from 'business/state/business-reducer';
-import inquiryResultReducer, { IInquiryResultState } from 'modules/suppliers/state/inquiry-result-reducer';
+import inquiryResultReducer, { ISurveyResultState } from 'modules/suppliers/state/survey-result-reducer';
 import partnersReducer, { IPartnersState } from 'partners/state/partners-reducer';
 import { AnyAction, Reducer } from 'redux';
 
@@ -19,7 +19,7 @@ export interface IPolaState {
   friends: IFriendsState;
   partners: IPartnersState;
   business: IBusinessState;
-  inquiryResult: IInquiryResultState;
+  inquiryResult: ISurveyResultState;
 }
 
 export interface IAction extends AnyAction {

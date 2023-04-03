@@ -1,4 +1,4 @@
-import { ISuppliersState, InquiryOption, InquiryQuestion, SuppliersFormStatus } from '..';
+import { ISuppliersState, QuestionOption, SuppliersFormStatus, SurveyQuestion } from '..';
 
 import { assertStatus } from 'utils/assert-status';
 
@@ -46,7 +46,7 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
             ? ({
                 ...question,
                 selectedOptionId,
-              } as InquiryQuestion)
+              } as SurveyQuestion)
             : question
         );
         return {
@@ -65,7 +65,7 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
             ? ({
                 ...question,
                 selectedOptionId: question.newOption.optionId,
-              } as InquiryQuestion)
+              } as SurveyQuestion)
             : question
         );
         return {
@@ -88,7 +88,7 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
                   ...question.newOption,
                   text: newSupplierName || '',
                 },
-              } as InquiryQuestion)
+              } as SurveyQuestion)
             : question
         );
         return {
@@ -108,7 +108,7 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
             ? ({
                 ...question,
                 selectedOptionId: undefined,
-              } as InquiryQuestion)
+              } as SurveyQuestion)
             : question
         );
         return {
@@ -138,7 +138,7 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
             ? ({
                 ...question,
                 expanded,
-              } as InquiryQuestion)
+              } as SurveyQuestion)
             : question
         );
         return {

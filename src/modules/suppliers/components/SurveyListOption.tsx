@@ -65,7 +65,7 @@ const OptionContainer = styled.label`
   }
 `;
 
-export interface IInquiryListOption {
+export interface ISurveyListOption {
   name: string;
   groupName: string;
   score?: number;
@@ -73,7 +73,7 @@ export interface IInquiryListOption {
   onSelect: () => void;
 }
 
-export const InquiryListOption: React.FC<IInquiryListOption> = (props: IInquiryListOption) => {
+export const SurveyListOption: React.FC<ISurveyListOption> = (props: ISurveyListOption) => {
   const { name, groupName, score, onSelect } = props;
   const text = score ? `${name} (${score})` : name;
 

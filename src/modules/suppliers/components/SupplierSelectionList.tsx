@@ -1,4 +1,4 @@
-import { InquiryOption, InquiryQuestion } from '..';
+import { QuestionOption, SurveyQuestion } from '..';
 import { pgeTheme } from '../styles/inquiry-theme';
 import debounce from 'lodash.debounce';
 import styled, { keyframes } from 'styled-components';
@@ -15,7 +15,7 @@ import {
 
 import { guid } from 'utils/data/random-number';
 
-import { InquiryListOption } from './InquiryListOption';
+import { SurveyListOption } from './SurveyListOption';
 
 const InquiryQuestionContainer = styled(AccordionItem)`
   border-left: ${pgeTheme.space.small} solid ${pgeTheme.colors.line};
@@ -83,7 +83,7 @@ const ListElement = styled.li`
 `;
 
 export interface ISupplierSelectionList {
-  question: InquiryQuestion;
+  question: SurveyQuestion;
 
   onSelectSupplier: (questionId: string, selectedOptionId: guid) => void;
   onSelectNew: (questionId: string) => void;
@@ -125,9 +125,9 @@ export const SupplierSelectionList: React.FC<ISupplierSelectionList> = (props: I
       </AccordionItemHeading>
       <ItemPanel>
         <InquiryOptionsList>
-          {question.options.sort(sortOptions).map((option: InquiryOption) => (
+          {question.options.sort(sortOptions).map((option: QuestionOption) => (
             <ListElement key={option.optionId}>
-              <InquiryListOption
+              <SurveyListOption
                 name={option.text}
                 score={option?.score?.value}
                 groupName={question.questionId}
@@ -137,7 +137,7 @@ export const SupplierSelectionList: React.FC<ISupplierSelectionList> = (props: I
           ))}
 
           <ListElement>
-            <InquiryListOption
+            <SurveyListOption
               name="Inny"
               groupName={question.questionId}
               onSelect={() => onSelectNew(question.questionId)}
@@ -156,7 +156,7 @@ export const SupplierSelectionList: React.FC<ISupplierSelectionList> = (props: I
             />
           </ListElement>
           <ListElement>
-            <InquiryListOption
+            <SurveyListOption
               name="Brak"
               groupName={question.questionId}
               onSelect={() => onSelectNone(question.questionId)}
@@ -168,7 +168,7 @@ export const SupplierSelectionList: React.FC<ISupplierSelectionList> = (props: I
   );
 };
 
-const sortOptions = (first: InquiryOption, second: InquiryOption) => {
+const sortOptions = (first: QuestionOption, second: QuestionOption) => {
   if (!first.score?.value && !second.score?.value) {
     return 0;
   }

@@ -1,5 +1,5 @@
-import { CalculationResultType, IInquiryCalculationResult, ISuppliersInquiryMessages, Score } from '..';
-import { hideInquiryResults } from '../state/inquiry-result-reducer';
+import { CalculationResultType, ISuppliersSurveyMessages, ISurveyCalculationResult, OptionScore } from '..';
+import { hideSurveyResults } from '../state/survey-result-reducer';
 import styled from 'styled-components';
 
 import * as React from 'react';
@@ -29,14 +29,14 @@ const Content = styled.div`
   gap: 1rem;
 `;
 
-export interface IInquiryResultModal {
-  messages: ISuppliersInquiryMessages;
-  totalScore?: IInquiryCalculationResult;
+export interface ISurveyResultModal {
+  messages: ISuppliersSurveyMessages;
+  totalScore?: ISurveyCalculationResult;
 }
 
 const ModalContent = (
-  totalScore: IInquiryCalculationResult,
-  messages: ISuppliersInquiryMessages,
+  totalScore: ISurveyCalculationResult,
+  messages: ISuppliersSurveyMessages,
   onSubmit: () => void
 ): JSX.Element => {
   const { type, score, message } = totalScore;
@@ -62,7 +62,7 @@ const ModalContent = (
   }
 };
 
-export const InquiryResultModal: React.FC<IInquiryResultModal> = (props: IInquiryResultModal) => {
+export const InquiryResultModal: React.FC<ISurveyResultModal> = (props: ISurveyResultModal) => {
   const { messages, totalScore } = props;
 
   const handleSubmit = () => {
@@ -73,7 +73,7 @@ export const InquiryResultModal: React.FC<IInquiryResultModal> = (props: IInquir
   const dis = useDispatch();
 
   const hideDialog = async () => {
-    await dis(hideInquiryResults());
+    await dis(hideSurveyResults());
   };
 
   return (

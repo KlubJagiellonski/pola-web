@@ -1,10 +1,10 @@
-import { InquiryOption, InquiryQuestion, Score } from '.';
+import { CalculationResultType, OptionScore, QuestionOption, SurveyQuestion } from '..';
 import 'jest';
 import 'jest-expect-message';
 
 import React from 'react';
 
-import { calculateTotalScore } from './inquiry-calc-service';
+import { calculateTotalScore } from './survey-calc-service';
 
 function createQuestion(
   questionId: string,
@@ -13,8 +13,8 @@ function createQuestion(
   options: { text: string; score: number }[],
   selectedOptionText?: string
 ) {
-  const question = new InquiryQuestion(header, order, questionId).AddOptions(
-    options.map((o) => new InquiryOption(o.text, Score.create(o.score)))
+  const question = new SurveyQuestion(header, order, questionId).AddOptions(
+    options.map((o) => new QuestionOption(o.text, OptionScore.create(o.score)))
   );
   question.selectedOptionId = !selectedOptionText
     ? undefined
@@ -28,7 +28,7 @@ describe('Inquiry Calculation Service', () => {
   });
 
   test('', () => {
-    const questions: InquiryQuestion[] = [
+    const questions: SurveyQuestion[] = [
       createQuestion(
         'question A',
         'What option of question A',
@@ -66,6 +66,7 @@ describe('Inquiry Calculation Service', () => {
 
     var result = calculateTotalScore(questions);
 
+    expect(result.type).toBe(CalculationResultType.SCORED);
     expect(result.score?.value).toBe(80);
   });
 });

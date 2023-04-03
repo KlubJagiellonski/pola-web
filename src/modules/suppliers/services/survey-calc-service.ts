@@ -1,19 +1,19 @@
-import { CalculationResultType, IInquiryCalculationResult, InquiryOption, InquiryQuestion, Score } from '.';
+import { CalculationResultType, ISurveyCalculationResult, OptionScore, QuestionOption, SurveyQuestion } from '..';
 
-export const calculateTotalScore = (questions: InquiryQuestion[]): IInquiryCalculationResult => {
+export const calculateTotalScore = (questions: SurveyQuestion[]): ISurveyCalculationResult => {
   const selectedOptions = getSelectedOptions(questions);
   const hasEnoughSelectedOptions = selectedOptions.length >= 3;
   if (hasEnoughSelectedOptions) {
     const allOptionsHaveScore = selectedOptions.every((option) => option.score?.value);
     if (allOptionsHaveScore) {
-      const totalScore = selectedOptions.reduce((total: number, option: InquiryOption) => {
+      const totalScore = selectedOptions.reduce((total: number, option: QuestionOption) => {
         const optionScore = option.score?.value || 0;
         return total + optionScore;
       }, 0);
 
       return {
         type: CalculationResultType.SCORED,
-        score: Score.create(totalScore / selectedOptions.length),
+        score: OptionScore.create(totalScore / selectedOptions.length),
         message: 'Twój wynik został obliczony',
       };
     } else {
@@ -30,13 +30,15 @@ export const calculateTotalScore = (questions: InquiryQuestion[]): IInquiryCalcu
   }
 };
 
-const getSelectedOptions = (questions: InquiryQuestion[]): InquiryOption[] => {
-  const selectedOptions = questions.reduce((options: InquiryOption[], question: InquiryQuestion) => {
+const getSelectedOptions = (questions: SurveyQuestion[]): QuestionOption[] => {
+  const selectedOptions = questions.reduce((options: QuestionOption[], question: SurveyQuestion) => {
     if (question.selectedOptionId) {
       if (question.newOption.optionId === question.selectedOptionId) {
         options = [...options, question.newOption];
       } else {
-        const selectedOption = question.options.find((option) => option.optionId === question.selectedOptionId);
+        const selectedOption = question.options.find(
+          (option: QuestionOption) => option.optionId === question.selectedOptionId
+        );
         if (selectedOption) {
           options = [...options, selectedOption];
         }

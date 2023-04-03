@@ -1,4 +1,4 @@
-import { InquiryResultModal } from 'modules/suppliers/components/InquiryResultModal';
+import { InquiryResultModal } from 'modules/suppliers/components/SurveyResultModal';
 import styled from 'styled-components';
 import 'styles/pola-web.css';
 
