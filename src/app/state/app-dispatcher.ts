@@ -32,7 +32,7 @@ export const appDispatcher = {
 
   selectActivePage: (type: PageType) => async (dispatch: Dispatch, getState: () => IPolaState) => {
     const { search } = getState();
-    if (search.stateName === SearchStateName.LOADED) {
+    if (search.stateName === SearchStateName.LOADED && type !== PageType.PRODUCTS) {
       await dispatch(searchActions.ClearResults());
     }
     await dispatch(selectActivePage(type));
