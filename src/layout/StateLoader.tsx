@@ -1,7 +1,5 @@
 import { BusinessLoader } from 'business/state/business-loader';
 import { loadServices } from 'business/state/business-reducer';
-import { SurveyQuestion } from 'modules/suppliers';
-import { SurveyService } from 'modules/suppliers/services/survey-service';
 import { PartnersLoader } from 'partners/state/partners-loader';
 import { loadPartners } from 'partners/state/partners-reducer';
 import { IArticleNode } from 'posts';
@@ -67,13 +65,6 @@ const Loader = (props: IStateLoader) => {
     dispatch(loadServices([]));
     logError(error, 'Cannot load business services data');
   }
-
-  // try {
-  //   const result = SurveyService.getAll();
-  //   console.log('survey data:', result);
-  // } catch (error: unknown) {
-  //   logError(error, 'Cannot load articles data');
-  // }
 
   try {
     const queryResult = ArticleService.getAll();

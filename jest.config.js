@@ -44,6 +44,5 @@ const config = {
   verbose: true,
   // automock: true,
 };
-// export default config;
 
 module.exports = config;
