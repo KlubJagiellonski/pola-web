@@ -1,14 +1,10 @@
-import { useLocation } from '@reach/router';
-import { IArticleData } from 'posts';
-import queryString from 'query-string';
-import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
-
 import { graphql, useStaticQuery } from 'gatsby';
-import { useEffect, useState } from 'react';
+
+import { ContentfulSurvey } from '@Utils/contentful';
 
 export const SurveyService = {
-  getAll: () => {
-    const c = useStaticQuery(
+  getAllSurveys: (): ContentfulSurvey[] => {
+    const query = useStaticQuery(
       graphql`
         {
           allContentfulSurveys {
@@ -41,6 +37,6 @@ export const SurveyService = {
       `
     );
 
-    return c.allContentfulSurveys.nodes[0];
+    return query.allContentfulSurveys.nodes as ContentfulSurvey[];
   },
 };

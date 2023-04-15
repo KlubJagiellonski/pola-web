@@ -1,4 +1,5 @@
-import { CalculationResultType, ISuppliersSurveyMessages, ISurveyCalculationResult, OptionScore } from '..';
+import { ISurveyActionLabels } from '../domain/supplier-survey-state';
+import { ISurveyCalculationResult } from '../services/suppliers-calculation-service';
 import { hideSurveyResults } from '../state/survey-result-reducer';
 import styled from 'styled-components';
 
@@ -6,6 +7,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { renderStyled } from '@Utils/contentful/render-styled';
 import { PrimaryButton } from 'components/buttons/PrimaryButton';
 import { FormInput } from 'components/form-input';
 import { Modal } from 'layout/modal/Modal';
@@ -30,33 +32,33 @@ const Content = styled.div`
 `;
 
 export interface ISurveyResultModal {
-  messages: ISuppliersSurveyMessages;
+  messages: ISurveyActionLabels;
   totalScore?: ISurveyCalculationResult;
 }
 
 const ModalContent = (
   totalScore: ISurveyCalculationResult,
-  messages: ISuppliersSurveyMessages,
+  messages: ISurveyActionLabels,
   onSubmit: () => void
 ): JSX.Element => {
   const { type, score, message } = totalScore;
   const [email, setEmail] = useState('');
 
   switch (type) {
-    case CalculationResultType.SCORED:
-      return <Content className="scored-content">{score?.value && <h2>{score.value.toFixed(2)} punktów</h2>}</Content>;
-    case CalculationResultType.CUSTOM_OPTIONS_SELECTED:
+    case 'scored':
+      return <Content className="scored-content">{score && <h2>{score.toFixed(2)} punktów</h2>}</Content>;
+    case 'custom-option':
       return (
         <Content className="custom-options-content" style={{ textAlign: 'center' }}>
-          <p>{message}</p>
+          <div>{renderStyled(message)}</div>
           <FormInput type="email" value={email} placeholder="Twój adres email" onChange={setEmail} />
           <PrimaryButton label={messages.submitButtonText} onClick={onSubmit} />
         </Content>
       );
-    case CalculationResultType.NOT_ENOUGH_OPTIONS:
+    case 'not-enough':
       return (
         <Content className="not-enough-options-content">
-          <p>{message}</p>
+          <div>{renderStyled(message)}</div>
         </Content>
       );
   }

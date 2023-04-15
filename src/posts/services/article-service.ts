@@ -10,9 +10,9 @@ export const ArticleService = {
   getAll: () =>
     useStaticQuery(
       graphql`
-      {
-        allContentfulPosts(limit: 1000) {
-          nodes {
+        {
+          allContentfulPosts(limit: 1000) {
+            nodes {
               slug
               date
               subTitle

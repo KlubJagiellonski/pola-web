@@ -1,11 +1,12 @@
-import { ContentfulRichText, ISuppliersSurveyMessages, OptionScore, SurveyQuestion } from '..';
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
+import { SurveyQuestion } from '../domain/supplier-survey';
+import { ISurveyActionLabels } from '../domain/supplier-survey-state';
 import styled from 'styled-components';
 
-import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import * as React from 'react';
 import { Accordion } from 'react-accessible-accordion';
 
+import { ContentfulRichText } from '@Utils/contentful';
+import { renderStyled } from '@Utils/contentful/render-styled';
 import { PrimaryButton } from 'components/buttons/PrimaryButton';
 import { guid } from 'utils/data/random-number';
 
@@ -33,7 +34,7 @@ const SurveyContainer = styled(Accordion)`
 export interface ISuppliersSurvey {
   title: string;
   description: ContentfulRichText;
-  messages: ISuppliersSurveyMessages;
+  messages: ISurveyActionLabels;
   questions: SurveyQuestion[];
 
   onSelectSupplier: (questionId: guid, selectedOptionId: guid) => void;
@@ -44,7 +45,7 @@ export interface ISuppliersSurvey {
   onToggleExpand: (questionId: guid, expanded: boolean) => void;
 }
 
-export const SuppliersSurvey: React.FC<ISuppliersSurvey> = ({
+export const PolishSuppliers: React.FC<ISuppliersSurvey> = ({
   title,
   description,
   messages,
@@ -56,32 +57,11 @@ export const SuppliersSurvey: React.FC<ISuppliersSurvey> = ({
   onCalculate,
   onToggleExpand,
 }) => {
-  const options = {
-    renderMark: {
-      [MARKS.BOLD]: (text) => <b className="font-bold">{text}</b>,
-    },
-    renderNode: {
-      [INLINES.HYPERLINK]: (node, children) => {
-        const { uri } = node.data;
-        return (
-          <a href={uri} className="underline">
-            {children}
-          </a>
-        );
-      },
-      [BLOCKS.HEADING_2]: (node, children) => {
-        return <h2>{children}</h2>;
-      },
-      [BLOCKS.HEADING_4]: (node, children) => {
-        return <h4>{children}</h4>;
-      },
-    },
-  };
   return (
     <SurveyContainer className="suppliers-survey" allowMultipleExpanded={true} allowZeroExpanded={true}>
       <div className="survey-header">
         <h2>{title}</h2>
-        <div>{renderRichText(description, options)}</div>
+        <div>{renderStyled(description)}</div>
       </div>
       {questions
         .sort((first: SurveyQuestion, second: SurveyQuestion) => first.order - second.order)

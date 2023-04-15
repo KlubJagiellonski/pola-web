@@ -1,4 +1,5 @@
-import { ISuppliersState, QuestionOption, SuppliersFormStatus, SurveyQuestion } from '..';
+import { SurveyQuestion } from '../domain/supplier-survey';
+import { ISupplierSurveyState, SurveyStatus } from '../domain/supplier-survey-state';
 
 import { assertStatus } from 'utils/assert-status';
 
@@ -17,31 +18,43 @@ export interface IAction<T extends string> {
 }
 
 const applyStateChange = (
-  state: ISuppliersState,
-  actionHandler: () => ISuppliersState | undefined
-): ISuppliersState => {
+  state: ISupplierSurveyState,
+  actionHandler: () => ISupplierSurveyState | undefined
+): ISupplierSurveyState => {
   try {
     const newState = actionHandler();
     newState ? console.log(`state updated`, newState) : console.warn(`cannot update state`);
     return newState || state;
   } catch (error: unknown) {
     console.error(error);
+    const updatedSurvey = state.survey;
+    updatedSurvey.categories = { ...state.survey.categories };
     return {
-      status: SuppliersFormStatus.ERROR,
-      questions: { ...state.questions },
-      messages: { ...state.messages },
+      status: SurveyStatus.ERROR,
+      survey: updatedSurvey,
+      actionLabels: { ...state.actionLabels },
       errorMessage: error instanceof Error ? error.message : 'unexpected error',
     };
   }
 };
 
-export const suppliersReducer = (state: ISuppliersState, action: IAction<SupplierAction>): ISuppliersState => {
+/**
+ * Internal Survey component reducer responsible for managing supplier survey state.
+ * It is separated from other application reducers to decouple survey logic from Pola app logic.
+ * @param state actual survey state, in particular selected options for questions
+ * @param action operation on the survey
+ * @returns new survey state
+ */
+export const suppliersReducer = (
+  state: ISupplierSurveyState,
+  action: IAction<SupplierAction>
+): ISupplierSurveyState => {
   switch (action.type) {
     case 'selectMain':
       return applyStateChange(state, () => {
-        assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
+        assertStatus(state, SurveyStatus.LOADED, SurveyStatus.CALCULATED);
         const { questionId, selectedOptionId } = action.payload;
-        const updatedQuestions = state.questions.map((question) =>
+        const updatedQuestions = state.survey.categories.map((question) =>
           question.questionId === questionId
             ? ({
                 ...question,
@@ -51,16 +64,19 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
         );
         return {
           ...state,
-          status: SuppliersFormStatus.LOADED,
-          questions: updatedQuestions,
+          status: SurveyStatus.LOADED,
+          survey: {
+            ...state.survey,
+            categories: updatedQuestions,
+          },
         };
       });
 
     case 'proposeNewSupplier':
       return applyStateChange(state, () => {
-        assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
+        assertStatus(state, SurveyStatus.LOADED, SurveyStatus.CALCULATED);
         const { questionId } = action.payload;
-        const updatedQuestions = state.questions.map((question) =>
+        const updatedQuestions = state.survey.categories.map((question) =>
           question.questionId === questionId
             ? ({
                 ...question,
@@ -70,17 +86,20 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
         );
         return {
           ...state,
-          status: SuppliersFormStatus.LOADED,
-          questions: updatedQuestions,
-          messages: { ...state.messages },
+          status: SurveyStatus.LOADED,
+          survey: {
+            ...state.survey,
+            categories: updatedQuestions,
+          },
+          actionLabels: { ...state.actionLabels },
         };
       });
 
     case 'updateSupplierName':
       return applyStateChange(state, () => {
-        assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
+        assertStatus(state, SurveyStatus.LOADED, SurveyStatus.CALCULATED);
         const { questionId, newSupplierName } = action.payload;
-        const updatedQuestions = state.questions.map((question) =>
+        const updatedQuestions = state.survey.categories.map((question) =>
           question.questionId === questionId
             ? ({
                 ...question,
@@ -93,17 +112,20 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
         );
         return {
           ...state,
-          status: SuppliersFormStatus.LOADED,
-          questions: updatedQuestions,
-          messages: { ...state.messages },
+          status: SurveyStatus.LOADED,
+          survey: {
+            ...state.survey,
+            categories: updatedQuestions,
+          },
+          actionLabels: { ...state.actionLabels },
         };
       });
 
     case 'unselect':
       return applyStateChange(state, () => {
-        assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
+        assertStatus(state, SurveyStatus.LOADED, SurveyStatus.CALCULATED);
         const { questionId } = action.payload;
-        const updatedQuestions = state.questions.map((question) =>
+        const updatedQuestions = state.survey.categories.map((question) =>
           question.questionId === questionId
             ? ({
                 ...question,
@@ -113,19 +135,25 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
         );
         return {
           ...state,
-          status: SuppliersFormStatus.LOADED,
-          questions: updatedQuestions,
+          status: SurveyStatus.LOADED,
+          survey: {
+            ...state.survey,
+            categories: updatedQuestions,
+          },
         };
       });
 
     case 'calculate':
       return applyStateChange(state, () => {
-        assertStatus(state, SuppliersFormStatus.LOADED, SuppliersFormStatus.CALCULATED);
+        assertStatus(state, SurveyStatus.LOADED, SurveyStatus.CALCULATED);
 
         return {
-          status: SuppliersFormStatus.CALCULATED,
-          questions: [...state.questions],
-          messages: { ...state.messages },
+          status: SurveyStatus.CALCULATED,
+          survey: {
+            ...state.survey,
+            categories: [...state.survey.categories],
+          },
+          actionLabels: { ...state.actionLabels },
           totalScore: action.payload,
         };
       });
@@ -133,7 +161,7 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
     case 'toggleExpand':
       return applyStateChange(state, () => {
         const { questionId, expanded } = action.payload;
-        const updatedQuestions = state.questions.map((question) =>
+        const updatedQuestions = state.survey.categories.map((question) =>
           question.questionId === questionId
             ? ({
                 ...question,
@@ -143,7 +171,10 @@ export const suppliersReducer = (state: ISuppliersState, action: IAction<Supplie
         );
         return {
           ...state,
-          questions: updatedQuestions,
+          survey: {
+            ...state.survey,
+            categories: updatedQuestions,
+          },
         };
       });
 

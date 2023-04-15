@@ -12,7 +12,7 @@ import { appDispatcher } from '@App/state/app-dispatcher';
 import { PageType } from '@App/website';
 
 import Download from '@Components/Download';
-import ErrorBoundary from 'utils/error-boundary';
+import ErrorBoundary from '@Utils/error-handling/error-boundary';
 
 import { SearchInfoModal } from 'search/components/form/SearchInfoModal';
 import { ProductModal } from 'search/components/product-modal';
@@ -39,7 +39,7 @@ const connector = connect(
 
       visible: inquiryResult.visible,
       score: inquiryResult.totalScore,
-      inquiryResultMessages: inquiryResult.messages,
+      inquiryResultMessages: inquiryResult.actionLabels,
     };
   },
   {
