@@ -16,8 +16,8 @@ import { appDispatcher } from '@App/state/app-dispatcher';
 import { loadBrowserLocation, selectActivePage } from '@App/state/app-reducer';
 import { PageType } from '@App/website';
 
+import ErrorBoundary from '@Utils/error-handling/error-boundary';
 import { WebViewLayout } from 'layout/WebViewLayout';
-import ErrorBoundary from 'utils/error-boundary';
 
 import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
 import { SearchInput } from 'search/components/form/SearchInput';

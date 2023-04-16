@@ -10,6 +10,7 @@ export enum PageType {
   FRIENDS = 'friends',
   PARTNERS = 'partners',
   BUSINESS = 'business',
+  SUPPLIERS = 'suppliers',
   TEAM = 'team',
   CONTACT = 'contact',
   PRODUCTS = 'products',

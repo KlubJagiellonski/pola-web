@@ -1,8 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 
+import React from 'react';
+
 import { MobileApps } from '@Components/MobileApps';
-import ErrorBoundary from '@Utils/error-boundary';
+import ErrorBoundary from '@Utils/error-handling/error-boundary';
 
 import { SearchInput } from './SearchInput';
 
