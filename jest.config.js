@@ -31,6 +31,7 @@ const config = {
     '^@Styles/(.*)$': '<rootDir>/src/styles/$1',
     '^@Templates/(.*)$': '<rootDir>/src/gatsby-templates/$1',
     '^@Utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^utils/(.*)$': '<rootDir>/src/utils/$1',
   },
   // testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   testEnvironmentOptions: {
@@ -43,6 +44,5 @@ const config = {
   verbose: true,
   // automock: true,
 };
-// export default config;
 
 module.exports = config;
