@@ -1,11 +1,10 @@
+import { color, fontSize, lineHeight, padding } from '../styles/theme';
 import { lighten } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
 import React from 'react';
 
 import { seconds } from 'app/generics';
-
-import { color, fontSize, lineHeight, padding } from '@Styles/theme';
 
 const progressValue = (percentage?: number) => keyframes`
     0% {width: 0}
