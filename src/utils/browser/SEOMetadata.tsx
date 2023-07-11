@@ -11,7 +11,7 @@ interface ISEOMetadata {
 }
 
 const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, description = '', lang = 'en', meta = [] }) => {
-  const { site } = useStaticQuery(
+  const { site, allFile } = useStaticQuery(
     graphql`
       query {
         site {
@@ -22,12 +22,20 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
             siteUrl
           }
         }
+        allFile(filter: {name: {eq: "pola-color"}, ext: {eq: ".png"}}) {
+          edges {
+            node {
+              publicURL
+            }
+          }
+        }
       }
     `
   );
 
   const metaDescription = description || site.siteMetadata.description;
   const browserTabTitle = `${pageTitle} | Pola Web`;
+  const metaImage = image ? image : `${site.siteMetadata.siteUrl}${allFile.edges[0].node.publicURL}`
 
   return (
     <Helmet
@@ -69,22 +77,18 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           name: 'twitter:description',
           content: metaDescription,
         },
-        ...(image
-          ? [
-              {
-                name: 'og:image',
-                content: `${site.siteMetadata.siteUrl}${image}`,
-              },
-              {
-                name: 'twitter:image',
-                content: `${site.siteMetadata.siteUrl}${image}`,
-              },
-              {
-                name: 'og:image:width',
-                content: '1200',
-              },
-            ]
-          : []),
+        {
+          name: 'og:image',
+          content: metaImage,
+        },
+        {
+          name: 'twitter:image',
+          content: metaImage,
+        },
+        {
+          name: 'og:image:width',
+          content: '1200',
+        },
       ].concat(meta)}
     />
   );
