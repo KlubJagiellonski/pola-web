@@ -22,7 +22,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
             siteUrl
           }
         }
-        allFile(filter: {name: {eq: "pola-color"}, ext: {eq: ".png"}}) {
+        allFile(filter: {name: {eq: "background2"}, ext: {eq: ".jpg"}}) {
           edges {
             node {
               publicURL
