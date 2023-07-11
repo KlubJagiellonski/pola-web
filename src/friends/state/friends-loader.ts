@@ -6,16 +6,18 @@ import { IGatsbyNode } from '@App/generics';
 
 export interface IFriendNode extends IGatsbyNode {
   name: string;
-  description: string;
+  description: {
+    description: string
+  }
   image: {
-    base: string;
+    url: string;
   };
   page: string;
   slug: string;
 }
 
 export interface IFriendsGraph {
-  allFriendsYaml: {
+  allContentfulFriends: {
     nodes: IFriendNode[];
   };
 }
@@ -30,31 +32,33 @@ export class FriendsLoader {
   private static getAllNodes() {
     const resultGraph: IFriendsGraph = useStaticQuery(
       graphql`
-        {
-          allFriendsYaml {
-            nodes {
-              id
-              name
-              description
-              image {
-                base
-              }
-              page
-              slug
-            }
+    {
+      allContentfulFriends {
+        nodes {
+          id
+          name
+          image {
+            url
+          }
+          slug
+          page
+          description {
+            description
           }
         }
+      }
+    }
       `
     );
 
-    return resultGraph?.allFriendsYaml?.nodes;
+    return resultGraph?.allContentfulFriends?.nodes;
   }
 
   private static toDataModel = (node: IFriendNode): IFriendData => ({
     id: node.id,
     name: node.name,
-    image: node.image.base,
-    description: node.description,
+    image: node.image.url,
+    description: node.description.description,
     page: node.page,
     slug: node.slug,
   });
