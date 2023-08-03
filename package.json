@@ -142,7 +142,7 @@
     "prettier": "^2.7.1",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4",
-    "styled-components": "^5.3.6",
+    "styled-components": "^6.0.7",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "tslint": "^6.1.3",
