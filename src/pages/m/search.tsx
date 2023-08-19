@@ -110,7 +110,6 @@ const connector = connect(
               token: search.nextPageToken,
             }
           : undefined,
-      token: search.nextPageToken,
       newsletterStatus: newsletter.status,
       follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
       articles: articles.data,
