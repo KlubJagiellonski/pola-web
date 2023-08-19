@@ -61,12 +61,11 @@ export const searchDispatcher = {
       if (search.stateName === SearchStateName.LOADED) {
         const { phrase, nextPageToken } = search;
         const service = ProductService.getInstance();
+        console.log('next page token', nextPageToken);
         const response = await service.searchProducts(phrase, nextPageToken);
 
         if (response) {
-          const { products } = response;
-
-          await dispatch(actions.LoadNextPage(phrase, products));
+          await dispatch(actions.LoadNextPage(phrase, response.products, response.nextPageToken));
         } else {
           throw new EmptyResponseDataError('EAN Product');
         }

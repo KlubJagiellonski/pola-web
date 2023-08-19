@@ -34,11 +34,12 @@ export const LoadResults = (
   },
 });
 
-export const LoadNextPage = (phrase: string, pageProducts: IProductData[]): IAction => ({
+export const LoadNextPage = (phrase: string, pageProducts: IProductData[], token?: string | null): IAction => ({
   type: actionTypes.LOAD_NEXT_PAGE,
   payload: {
     phrase,
     pageProducts,
+    token,
   },
 });
 

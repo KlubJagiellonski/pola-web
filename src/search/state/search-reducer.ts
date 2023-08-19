@@ -103,6 +103,7 @@ const reducers: IActionReducer<SearchState> = {
             products: action.payload.pageProducts,
           },
         ],
+        nextPageToken: action.payload.token,
       };
     }
 
