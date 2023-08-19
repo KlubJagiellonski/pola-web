@@ -69,7 +69,7 @@ const Loader = (props: IStateLoader) => {
   try {
     const queryResult = ArticleService.getAll();
     const articleNodes: IArticleNode[] = queryResult?.allContentfulPosts?.nodes;
-    console.log(queryResult);
+
     if (!props.isArticlesLoaded && articleNodes && props.loadArticles) {
       articleNodes.sort((a: IArticleNode, b: IArticleNode) => {
         return Date.parse(b.date) - Date.parse(a.date);

@@ -146,7 +146,7 @@ type ISearchPage = ConnectedProps<typeof connector> & {
 };
 
 const SearchPage = (props: ISearchPage) => {
-  const { location, searchState, searchResults, onLoadMore } = props;
+  const { location, searchState, token, searchResults, onLoadMore } = props;
   const dispatch = useDispatch();
   const isLoading = searchState === SearchStateName.LOADING;
 
@@ -183,6 +183,7 @@ const SearchPage = (props: ISearchPage) => {
           <DynamicProductResults
             {...searchResults}
             state={searchState}
+            token={token}
             onSelect={props.selectProduct}
             onLoadMore={onLoadMore}
             hideMissingProductInfo={true}
