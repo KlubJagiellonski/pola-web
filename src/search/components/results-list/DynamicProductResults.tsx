@@ -17,7 +17,6 @@ import { color } from '@Styles/theme';
 interface IDynamicProductResults {
   state: SearchStateName;
   phrase?: string;
-  token?: string;
   pages: IProductData[];
   totalItems?: number;
   hideMissingProductInfo?: boolean;
@@ -35,16 +34,28 @@ export const DynamicProductResults: React.FC<IDynamicProductResults> = ({
   onLoadMore,
   hideMissingProductInfo,
 }) => {
-  const loadButton =
-    state === SearchStateName.LOADING ? (
-      <PrimaryButton
-        disabled={true}
-        icon={<Spinner styles={{ size: 20, color: color.button.white }} />}
-        styles={ButtonThemes[ButtonFlavor.RED]}
-      />
-    ) : (
-      <PrimaryButton label="Wczytaj więcej" styles={ButtonThemes[ButtonFlavor.RED]} onClick={onLoadMore} />
-    );
+  let loadButton;
+
+  switch (state) {
+    case SearchStateName.LOADING:
+      loadButton = (
+        <PrimaryButton
+          disabled={true}
+          icon={<Spinner styles={{ size: 20, color: color.button.white }} />}
+          styles={ButtonThemes[ButtonFlavor.RED]}
+        />
+      );
+      break;
+    case SearchStateName.RESULTS_END:
+      loadButton = (
+        <PrimaryButton label="Brak kolejnych wyników" disabled={true} styles={ButtonThemes[ButtonFlavor.RED]} />
+      );
+      break;
+    default:
+      loadButton = (
+        <PrimaryButton label="Wczytaj więcej" styles={ButtonThemes[ButtonFlavor.RED]} onClick={onLoadMore} />
+      );
+  }
 
   return (
     <>

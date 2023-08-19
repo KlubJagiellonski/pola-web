@@ -110,6 +110,7 @@ const connector = connect(
               token: search.nextPageToken,
             }
           : undefined,
+      token: search.nextPageToken,
       newsletterStatus: newsletter.status,
       follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
       articles: articles.data,
@@ -146,7 +147,7 @@ type ISearchPage = ConnectedProps<typeof connector> & {
 };
 
 const SearchPage = (props: ISearchPage) => {
-  const { location, searchState, searchResults, onLoadMore } = props;
+  const { location, searchState, token, searchResults, onLoadMore } = props;
   const dispatch = useDispatch();
   const isLoading = searchState === SearchStateName.LOADING;
 
@@ -183,6 +184,7 @@ const SearchPage = (props: ISearchPage) => {
           <DynamicProductResults
             {...searchResults}
             state={searchState}
+            token={token}
             onSelect={props.selectProduct}
             onLoadMore={onLoadMore}
             hideMissingProductInfo={true}

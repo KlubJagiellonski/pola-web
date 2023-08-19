@@ -61,9 +61,12 @@ export const searchDispatcher = {
       if (search.stateName === SearchStateName.LOADED) {
         const { phrase, nextPageToken } = search;
         const service = ProductService.getInstance();
-        console.log('next page token', nextPageToken);
         const response = await service.searchProducts(phrase, nextPageToken);
 
+        const isLastPage = search.nextPageToken !== null && response?.nextPageToken === null;
+        if (isLastPage) {
+          await dispatch(actions.LoadLastPage(phrase, response.products));
+        }
         if (response) {
           await dispatch(actions.LoadNextPage(phrase, response.products, response.nextPageToken));
         } else {
