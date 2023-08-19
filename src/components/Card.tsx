@@ -1,10 +1,13 @@
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
-import { ButtonThemes, ButtonFlavor } from './buttons/Button';
-import { TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
-import { color, fontSize, margin, padding } from '../styles/theme';
+
+import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
+
+import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   margin: 0;
@@ -37,6 +40,7 @@ interface ICard {
   chidlren?: JSX.Element;
   buttonLabel?: string;
   url: string;
+  children?: React.ResctNone;
 }
 
 const Card: React.FC<ICard> = ({ title, children, buttonLabel, url }) => {

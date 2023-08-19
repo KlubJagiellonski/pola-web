@@ -1,28 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { PageType } from '../domain/website';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import { PageLayout } from '../layout/PageLayout';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import SEOMetadata from '../utils/browser/SEOMetadata';
 
-interface INotFoundPage {
-  location?: Location;
-}
+import { GatsbyPage } from '@App/generics';
+import { PageType } from 'app/website';
+
+import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+interface INotFoundPage extends GatsbyPage {}
 
 const NotFoundPage = (props: INotFoundPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.ERROR_404));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.ERROR_404}>
       <SEOMetadata pageTitle="404: Not found" />
       <DevelopmentPlaceholder text="Strona nie istnieje" />
     </PageLayout>

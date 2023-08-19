@@ -1,13 +1,62 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import { WrapperTeams, Title, TextSection, ButtonTeams, IconTeams } from './Teams.css';
-import { Text } from '../styles/GlobalStyle.css';
-import { color } from '../styles/theme';
-import { ButtonThemes, ButtonFlavor } from '../components/buttons/Button';
-import { ResponsiveImage } from './images/ResponsiveImage';
-import { urls } from '../domain/website';
 import { Link } from 'gatsby';
+import React from 'react';
+
+import { urls } from 'app/website';
+
+import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
+
+import { PrimaryButton } from './buttons/PrimaryButton';
+import { ResponsiveImage } from './images/ResponsiveImage';
+
+import { Text } from '@Styles/GlobalStyle.css';
+import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { color } from '@Styles/theme';
+import { Device, margin, padding } from '@Styles/theme';
+
+export const WrapperTeams = styled(WrapperSection)`
+  height: 100%;
+  min-height: 11.4em;
+  padding: ${margin.normal};
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  padding-top: 10px;
+`;
+
+export const TextSection = styled.div`
+  text-align: center;
+  padding: ${padding.normal} ${padding.huge} ${padding.veryBig} ${padding.huge};
+
+  @media ${Device.mobile} {
+    padding: ${padding.normal} ${padding.big} ${padding.veryBig} ${padding.big};
+  }
+`;
+
+export const Title = styled(TitleSection)`
+  padding: ${padding.normal};
+`;
+
+export const ButtonTeams = styled(PrimaryButton)`
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  padding: ${padding.normal};
+
+  @media ${Device.mobile} {
+    position: relative;
+    margin-top: ${margin.normal};
+  }
+`;
+
+export const IconTeams = styled.div`
+  margin: auto;
+  width: 7.5em;
+  height: 7.5em;
+`;
 
 const Wrapper = styled(WrapperTeams)`
   grid-area: teams;
@@ -24,7 +73,7 @@ const Teams = () => {
       <div className="content" id={'contact'}>
         <TextSection>
           <IconTeams>
-            <ResponsiveImage imageSrc="ikona-przyjaciele.png" />
+            <ResponsiveImage title="team" imageSrc="ikona-przyjaciele.png" />
           </IconTeams>
           <Title>Kontakt</Title>
           <Text>

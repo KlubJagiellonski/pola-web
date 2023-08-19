@@ -1,4 +1,5 @@
-import { Validator } from '../../state/types';
+//import { hello } from '@InPerceptic/web-utils';
+import { Validator } from '@App/state';
 
 export const isNotEmpty = (value: string) => !!value && value.length && value.length > 0;
 
@@ -20,3 +21,24 @@ export const validateEmail: Validator<string | undefined> = (email: string | und
   }
   return;
 };
+
+
+export const decodeHtml = (html: string) => {
+  var entities = [
+    ['amp', '&'],
+    ['apos', '\''],
+    ['#x27', '\''],
+    ['#x2F', '/'],
+    ['#39', '\''],
+    ['#47', '/'],
+    ['lt', '<'],
+    ['gt', '>'],
+    ['nbsp', ' '],
+    ['quot', '"']
+  ];
+
+  for (var i = 0, max = entities.length; i < max; ++i) 
+  html = html.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+
+  return html;
+}

@@ -5,6 +5,8 @@ on:
     branches: [master, prod]
   pull_request:
     branches: [master]
+  repository_dispatch:
+    types: [publish-event]
 
 env:
   # Enable colors in CLI apps.
@@ -68,21 +70,35 @@ jobs:
         if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/prod'
         run: |
           echo 'PUBLIC_URL=https://www.pola-app.pl/' >> $GITHUB_ENV
-      - name: 'Set public URL'
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: |
-          echo 'PUBLIC_URL=https://pola-staging.herokuapp.com/' >> $GITHUB_ENV
+      # - name: 'Set public URL'
+      #   if: |
+      #     github.repository == 'KlubJagiellonski/pola-web' &&
+      #     (
+      #       ( github.event_name == 'push' && github.ref == 'refs/heads/master' ) ||
+      #       github.event_name == 'repository_dispatch'
+      #     )
+      #   run: |
+      #     echo 'PUBLIC_URL=https://pola-staging.herokuapp.com/' >> $GITHUB_ENV
       - name: 🗂 Checkout
-        uses: actions/checkout@v2
-      - name: 🟢 Use Node.js ${{ matrix.node-version }}
+        uses: actions/checkout@v3
+        if: github.event_name == 'repository_dispatch'
+        with:
+          ref: 'prod'
+      - name: 🗂 Checkout
+        uses: actions/checkout@v3
+        if: github.event_name != 'repository_dispatch'
+      - name: 🟢 Use Node.js
         uses: actions/setup-node@v2.5.1
         with:
-          node-version: 14.x
+          node-version-file: '.nvmrc'
           cache: 'npm'
       - name: 🟢 Install dependencies
         run: npm ci
       - name: 🔧 Build app
-        run: npm run build && cp -r mobile-web/m/ public/
+        run: npm run build
+        env:
+          CONTENTFUL_SPACE_ID: ${{secrets.CONTENTFUL_SPACE_ID}}
+          CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
       - name: 🚀 Upload app as artifact
         uses: actions/upload-artifact@v2
         with:
@@ -96,23 +112,44 @@ jobs:
           (
           (github.event_name == 'pull_request' && github.event.sender.type == 'User') ||
           (github.event_name == 'push' && github.ref == 'refs/heads/master') ||
-          (github.event_name == 'push' && github.ref == 'refs/heads/prod')
+          (github.event_name == 'push' && github.ref == 'refs/heads/prod') ||
+          github.event_name == 'repository_dispatch'
           )
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           role-session-name: GitHubActions-${{ github.run_id }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-      - name: 🚀 Upload staging app to AWS S3
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_STAG}/"
+      # - name: 🚀 Upload staging app to AWS S3
+      #   if: |
+      #     github.repository == 'KlubJagiellonski/pola-web' &&
+      #     (
+      #       ( github.event_name == 'push' && github.ref == 'refs/heads/master' ) ||
+      #         github.event_name == 'repository_dispatch'
+      #     )
+      #   run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_STAG}/"
       - name: 🚀 Upload production app to AWS S3
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'push' && github.ref == 'refs/heads/prod'
+        if: |
+          github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            ( github.event_name == 'push' && github.ref == 'refs/heads/prod') ||
+              github.event_name == 'repository_dispatch'
+          )
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PROD}/"
       - name: 🚀 Upload preview app to AWS S3
-        if: github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') ||
+              github.event_name == 'repository_dispatch'
+          )
         run: aws s3 sync --delete ./public/ "s3://${AWS_S3_BUCKET_PREVIEW}/${PREVIEW_DIR}"
       - name: Set success deployment status
-        if: success() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          success() && github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') || 
+              github.event_name == 'repository_dispatch'
+          )
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -121,7 +158,12 @@ jobs:
           url: ${{ env.PUBLIC_URL }}
           context: Deploy Preview URL
       - name: Set failed deployment status
-        if: failure() && github.repository == 'KlubJagiellonski/pola-web' && github.event_name == 'pull_request' && github.event.sender.type == 'User'
+        if: |
+          failure() && github.repository == 'KlubJagiellonski/pola-web' && 
+          (
+            ( github.event_name == 'pull_request' && github.event.sender.type == 'User') || 
+              github.event_name == 'repository_dispatch'
+          )
         uses: pbrandone/create-status-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

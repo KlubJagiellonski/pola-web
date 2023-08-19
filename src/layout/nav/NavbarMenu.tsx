@@ -1,10 +1,11 @@
-import React from 'react';
+import { urls } from 'app/website';
 import { Link } from 'gatsby';
+import React from 'react';
 import styled from 'styled-components';
 
 import { PolaLogo } from '../PolaLogo';
-import { Device } from '../../styles/theme';
-import { urls } from '../../domain/website';
+
+import { Device } from '@Styles/theme';
 
 interface INavbarMenu {}
 

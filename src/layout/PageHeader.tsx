@@ -1,11 +1,12 @@
+import { ExternalLinkData, PageLinkData, PageType, pageLinks } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
 
 import { HamburgerMenu } from './nav/HamburgerMenu';
-import { NavbarMenu } from './nav/NavbarMenu';
-import { desktopHeaderHeight, Device, pageWidth, color } from '../styles/theme';
 import { ExtNavItem, NavItem } from './nav/NavItem';
-import { pageLinks, PageType, PageLinkData, ExternalLinkData } from '../domain/website';
+import { NavbarMenu } from './nav/NavbarMenu';
+
+import { Device, color, desktopHeaderHeight, pageWidth } from '@Styles/theme';
 
 const HeaderContainer = styled.header`
   display: flex;

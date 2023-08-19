@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-import { TitleSection, WrapperSection } from './../styles/GlobalStyle.css';
-import { Device, color, margin, padding, fontSize, width } from './../styles/theme';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import styled from 'styled-components';
+
+import { TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding, width } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   width: 100%;
@@ -17,7 +17,8 @@ const Wrapper = styled(WrapperSection)`
 
   @media ${Device.mobile} {
     background-color: white;
-    padding: ${padding.big} 0;
+    padding-top: ${padding.small};
+    padding-bottom: ${(p) => (p?.isMobile ? padding.normal : padding.big)};
   }
 `;
 
@@ -42,6 +43,7 @@ const SliderLink = styled(AnchorLink)`
   bottom: 0;
   color: ${color.text.secondary};
   height: 100%;
+  target: string;
 `;
 
 const SliderItem = styled.div`
@@ -50,13 +52,20 @@ const SliderItem = styled.div`
 
 interface ISliderElement {
   to: string;
+  newTab?: boolean;
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export const SliderElement: React.FC<ISliderElement> = ({ to, children }) => {
+export const SliderElement: React.FC<ISliderElement> = ({ to, newTab, children }) => {
   return (
     <SliderItem>
-      <SliderLink to={to}>{children}</SliderLink>
+      {newTab ? (
+        <SliderLink to={to} target="_blank">
+          {children}
+        </SliderLink>
+      ) : (
+        <SliderLink to={to}>{children}</SliderLink>
+      )}
     </SliderItem>
   );
 };
@@ -65,9 +74,10 @@ interface ISliderContainer {
   title?: string;
   rows?: number;
   children?: React.ReactNode | React.ReactNode[];
+  isMobile?: boolean;
 }
 
-export const SliderContainer: React.FC<ISliderContainer> = ({ rows, children, title }) => {
+export const SliderContainer: React.FC<ISliderContainer> = ({ rows, children, title, isMobile }) => {
   const rowsSettingsDesktop = rows && rows > 1 ? { rows, slidesPerRow: 4 } : {};
   const rowsSettingsMobile = rows && rows > 1 ? { rows, slidesPerRow: 3 } : {};
   const slidesSettingsDesktop = rows && rows > 1 ? {} : { slidesToShow: 5, slidesToScroll: 5 };
@@ -94,7 +104,7 @@ export const SliderContainer: React.FC<ISliderContainer> = ({ rows, children, ti
   };
 
   return (
-    <Wrapper color={color.background.white}>
+    <Wrapper color={color.background.white} isMobile={isMobile}>
       <TitleSection>{title}</TitleSection>
       <ImageWrapper>
         <SliderStyled {...settings}>{children}</SliderStyled>

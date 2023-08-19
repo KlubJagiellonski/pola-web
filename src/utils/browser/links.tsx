@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import React from 'react';
 import styled from 'styled-components';
+
 import { classNames } from '../class-names';
 
 const Anchor = styled.a`

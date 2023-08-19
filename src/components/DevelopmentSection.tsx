@@ -1,16 +1,18 @@
+import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
 import styledContainerQuery from 'styled-container-query';
 
-import { Device, fontSize, margin, color, padding } from './../styles/theme';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { openNewTab } from '@Utils/browser';
+
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
-import { WrapperSection } from '../styles/GlobalStyle.css';
-import { TitleSection, Text } from '../styles/GlobalStyle.css';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { openNewTab } from '../utils/browser';
-import { urls } from '../domain/website';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
+
+import { WrapperSection } from '@Styles/GlobalStyle.css';
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Info = styled.div`
   width: 100%;

@@ -1,6 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended"],
+  "extends": ["react-app", "shared-config", "tslint:recommended"],
   "jsRules": {},
   "linterOptions": {
     "exclude": ["**/*.d.ts", "src/migration/*"]

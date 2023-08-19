@@ -1,13 +1,16 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import { padding, margin, color, fontSize } from '../styles/theme';
+import { Link } from 'gatsby';
+import React from 'react';
+
+import { urls } from 'app/website';
+
 import { ButtonFlavor, ButtonThemes } from './buttons/Button';
-import { WrapperSection, Text, TitleSection } from '../styles/GlobalStyle.css';
 import { SecondaryButton } from './buttons/SecondaryButton';
 import { ResponsiveImage } from './images/ResponsiveImage';
-import { Link } from 'gatsby';
-import { urls } from '../domain/website';
+
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: about;
@@ -21,8 +24,10 @@ const MockUp = styled.div`
   height: 100%;
 
   .gatsby-image-wrapper {
+    width: 100%;
+
     div {
-      padding-bottom: 17.8em !important;
+      height: 17.8em !important;
     }
   }
 `;
@@ -64,7 +69,7 @@ const About = () => {
         </Link>
       </Info>
       <MockUp>
-        <ResponsiveImage imageSrc="1-prom-strona.png" />
+        <ResponsiveImage imageSrc="1-prom-strona.png" title={'info'} />
       </MockUp>
     </Wrapper>
   );

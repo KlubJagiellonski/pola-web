@@ -1,32 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import { IFriendData } from 'friends';
+import { IArticleData } from 'posts';
 import styled from 'styled-components';
-import { Article } from '../domain/articles';
-import { Friend } from '../domain/friends';
-import { Device, margin } from '../styles/theme';
-import { getVisibleArticles } from '../utils/articles';
-import { getRandomFriend } from '../utils/friends';
-import { getTagsList } from '../utils/tags';
-import ArticlesListPreview from './articles/list/ArticlesListPrewiev';
+
+import { navigate } from 'gatsby';
+import React, { useEffect, useState } from 'react';
+
+import FriendCard from '../friends/components/FriendCard';
+import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
+import TagsList from '../posts/tags/TagsList';
+import { getRandomFriend } from 'friends/state/friends-selectors';
+import { buildArticlesQuery, getVisibleArticles, useArticlesParams } from 'posts/services/article-service';
+import { getUniqueTags } from 'posts/services/url-service';
+import { TagLinks } from 'posts/tags/TagLinks';
+
 import DevelopmentSection from './DevelopmentSection';
-import FriendCard from './friends/FriendCard';
 import SocialMedia from './social-media/SocialMedia';
-import TagsList from './tags/TagsList';
+
+import { Device, margin } from '@Styles/theme';
 
 const Wrapper = styled.div`
   gap: ${margin.normal};
   display: flex;
   flex-direction: column;
-`
+`;
 
 const Title = styled.p`
   font-weight: bold;
-`
+`;
 
 const FirstSection = styled.div`
   @media ${Device.mobile} {
     display: none;
   }
-`
+`;
 
 const SecondSection = styled.div`
   display: flex;
@@ -36,27 +42,32 @@ const SecondSection = styled.div`
   @media ${Device.mobile} {
     flex-direction: column-reverse;
   }
-`
+`;
+
+const ArticlesWrapper = styled.div`
+  .gatsby-image-wrapper {
+    height: 10em !important;
+  }
+`;
 
 interface ISideInformations {
-  actualArticleId: string,
-  articles: Article[],
-  friends?: Friend[]
+  actualArticleId: string;
+  articles: IArticleData[];
+  friends?: IFriendData[];
 }
 
 const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articles, friends }) => {
-  const [articlesPreview, setArticlesPreview] = useState<Article[]>([])
-  const [selectedFriend, setSelectedFriend] = useState<Friend>()
-
+  const [articlesPreview, setArticlesPreview] = useState<IArticleData[]>([]);
+  const [selectedFriend, setSelectedFriend] = useState<IFriendData>();
   useEffect(() => {
     if (articles) {
-      setArticlesPreview(getVisibleArticles(actualArticleId, articles))
+      setArticlesPreview(getVisibleArticles(actualArticleId, articles));
     }
   }, [articles]);
 
   useEffect(() => {
     if (friends) {
-      setSelectedFriend(getRandomFriend(friends))
+      setSelectedFriend(getRandomFriend(friends));
     }
   }, [friends]);
 
@@ -67,13 +78,15 @@ const SideInformations: React.FC<ISideInformations> = ({ actualArticleId, articl
       </FirstSection>
       <SecondSection>
         <SocialMedia />
-        <TagsList tag={articles && getTagsList(articles)} />
+        <TagLinks tags={articles && getUniqueTags(articles)} />
       </SecondSection>
       <Title>Zobacz także:</Title>
-      <ArticlesListPreview articles={articlesPreview} />
+      <ArticlesWrapper>
+        <ArticlesListPreview articles={articlesPreview} />
+      </ArticlesWrapper>
       {friends && selectedFriend && <FriendCard {...selectedFriend} />}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default SideInformations;

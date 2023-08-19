@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { color, fontSize, margin, evalPx, lineHeight } from './theme';
+
+import { color, evalPx, fontSize, lineHeight, margin } from './theme';
 
 type IWrapperSection = {
   color?: string;
   borderColor?: string;
+  isMobile?: boolean;
 };
 
 export const WrapperSection = styled.div<IWrapperSection>`
@@ -21,7 +23,7 @@ export const TitleSection = styled.p`
   font-size: ${fontSize.normal};
   font-weight: 700;
   color: ${color.text.primary};
-  line-height: ${lineHeight.normall};
+  line-height: ${lineHeight.normal};
 `;
 
 interface IText {
@@ -31,7 +33,6 @@ interface IText {
 }
 
 export const Text = styled.p<IText>`
-  margin-top: 5px;
   padding: 0;
   font-family: 'Merriweather';
   font-size: ${fontSize.small};

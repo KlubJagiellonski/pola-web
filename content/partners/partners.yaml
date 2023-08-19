@@ -1,0 +1,12 @@
+- name: 'Klub Jagielloński'
+  imageSrc: 'logos/logo_cakjv2_crop.png'
+  description: 'Opracowanie algorytmu i wydawanie aplikacji'
+  sourceUrl: https://ilim.lukasiewicz.gov.pl
+- name: 'Instytut Logistyki i Magazynowania'
+  imageSrc: 'logos/logo_logistyka.png'
+  description: 'Baza kodów kreskowych i producentów'
+  sourceUrl: https://ilim.lukasiewicz.gov.pl
+- name: 'Koduj dla Polski'
+  imageSrc: 'logos/logo_kodujdlapolski.png'
+  description: 'Otwarte spotkania projektowe dla programistów'
+  sourceUrl: https://mojepanstwo.pl

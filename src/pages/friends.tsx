@@ -1,20 +1,23 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { Text, TitleSection, WrapperSection } from '../styles/GlobalStyle.css';
-import { PageSection } from '../layout/PageSection';
-import { margin, padding, Device, color, fontSize } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import Placeholder from '../components/Placeholder';
-import { Friend } from '../domain/friends';
-import Card from '../components/Card';
-import FriendsSection from '../components/friends/FriendsSection';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { GatsbyPage } from '@App/generics';
+import { IPolaState } from '@App/state';
+import { PageType, urls } from 'app/website';
+
+import Card from '@Components/Card';
+import Placeholder from '@Components/Placeholder';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import FriendsSection from 'friends/components/FriendsSection';
+
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;
@@ -69,28 +72,17 @@ const TitleInfo = styled(TitleSection)`
   }
 `;
 
-interface IFriendsPage {
-  location?: Location;
-  friends?: Friend[];
-}
+interface IFriendsPage extends GatsbyPage {}
 
 const FriendsPage = (props: IFriendsPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.FRIENDS));
-    }
-  }, []);
+  const friendData = useSelector((state: IPolaState) => state.friends.data);
 
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.FRIENDS}>
       <SEOMetadata pageTitle="Klub przyjaciół Poli" />
       <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>
-        <FriendsSection friends={props.friends} />
+        <FriendsSection friends={friendData} />
       </PageSection>
       <PageSection style={{ paddingBottom: 0, marginBottom: 0 }}>
         <Info style={{ paddingBottom: 0, marginBottom: 0 }}>
@@ -120,7 +112,7 @@ const FriendsPage = (props: IFriendsPage) => {
             dzięki stworzeniu silnego środowiska społeczno-biznesowego, które poprzez kooperację i wspólne działania
             przyczyni się do popularyzacji mody na patriotyzm gospodarczy.
           </Text>
-          <ResponsiveImage imageSrc="szproty-2.png" />
+          <ResponsiveImage title="Klub Przyjaciół Poli" imageSrc="szproty-2.png" />
         </Info>
         <Info color={color.background.transparencyGrey}>
           <TitleInfo>Co zyskuje przyjaciel Poli?</TitleInfo>
@@ -169,6 +161,4 @@ const FriendsPage = (props: IFriendsPage) => {
   );
 };
 
-export default connect((state: IPolaState) => ({
-  friends: state.friends.data,
-}))(FriendsPage);
+export default FriendsPage;

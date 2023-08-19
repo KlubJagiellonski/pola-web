@@ -1,18 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { ButtonThemes } from '../../components/buttons/Button';
-import { SecondaryButton } from '../../components/buttons/SecondaryButton';
 import { SubscriptionStatus } from '../state/newsletter-reducer';
-import { SubscribeForm } from './SubscribeForm';
 import { Follower } from 'newsletter';
-import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
-import { SubscriptionRegisteredResult, SubscriptionRepeatedResult, SubscriptionFailureResult } from './SubscribeResult';
-import { Spinner } from 'components/Spinner';
+import styled from 'styled-components';
 import { Device } from 'styles/theme';
+
+import React, { useEffect, useRef, useState } from 'react';
+
+import { ButtonThemes } from '@Components/buttons/Button';
+import { SecondaryButton } from '@Components/buttons/SecondaryButton';
+import { classNames } from '@Utils/class-names';
+import { Spinner } from 'components/Spinner';
+
+import { SubscibeDialogFrame } from './SubscirbeDialogFrame';
+import { SubscribeForm } from './SubscribeForm';
+import { SubscriptionFailureResult, SubscriptionRegisteredResult, SubscriptionRepeatedResult } from './SubscribeResult';
 
 interface INewsletterFormStyles {
   spaceTop?: string;
   spaceBottom?: string;
+  isMobile?: boolean;
+  height?: string;
 }
 
 const Container = styled.div<{ styles?: INewsletterFormStyles }>`
@@ -26,7 +32,7 @@ const Container = styled.div<{ styles?: INewsletterFormStyles }>`
 
     &.expanded {
       transition: height 0.5s;
-      height: 14.5rem;
+      height: ${({ styles }) => styles?.height || '14.5rem'};
     }
   }
 `;
@@ -45,6 +51,7 @@ interface ISubscribeDialog {
   onSubmit: (email: string, name?: string) => void;
   onClear: () => void;
   stopExpanded?: boolean;
+  isInitiallyExpanded?: boolean;
 }
 
 export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
@@ -54,8 +61,9 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   onSubmit,
   onClear,
   stopExpanded,
+  isInitiallyExpanded = false,
 }) => {
-  const [isExpanded, setExpanded] = useState<boolean>(false);
+  const [isExpanded, setExpanded] = useState<boolean>(isInitiallyExpanded);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -81,6 +89,7 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   );
 
   let frameContent;
+  let height = '14.5em';
   switch (status) {
     case SubscriptionStatus.INITIAL:
       frameContent = (
@@ -97,28 +106,31 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
     case SubscriptionStatus.REGISTERED:
       if (follower) {
         frameContent = <SubscriptionRegisteredResult follower={follower} clearButton={clearButton} />;
+        height = '20.5em';
       }
       break;
 
     case SubscriptionStatus.REPEATED:
       if (follower) {
         frameContent = <SubscriptionRepeatedResult follower={follower} clearButton={clearButton} />;
+        height = '20.5em';
       }
       break;
 
     case SubscriptionStatus.REJECTED:
       frameContent = <SubscriptionFailureResult clearButton={clearButton} />;
+      height = '20.5em';
       break;
   }
 
   return (
-    <Container styles={styles}>
+    <Container styles={{ ...styles, height }}>
       {!isExpanded && (
         <Buttons>
           <SecondaryButton label="Newsletter Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
         </Buttons>
       )}
-      <div ref={containerRef} className="newsletter-frame-container">
+      <div ref={containerRef} className={classNames('newsletter-frame-container', ['expanded', isExpanded])}>
         {frameContent}
       </div>
     </Container>

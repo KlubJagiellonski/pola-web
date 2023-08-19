@@ -1,5 +1,5 @@
-import { v4 } from 'uuid';
 import Ean from 'ean-generator';
+import { v4 } from 'uuid';
 
 /**
  * Gets random number from min-max scope
