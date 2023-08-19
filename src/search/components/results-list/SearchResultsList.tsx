@@ -48,8 +48,8 @@ export const SearchResultsList: React.FC<ISearchResultsList> = ({ results, actio
   return (
     <ResultsList>
       <ul className="products-list">
-        {results.map((product: IProductData) => (
-          <SearchResultElement product={product} key={product.code} onSelect={onSelect} />
+        {results.map((product: IProductData, index: number) => (
+          <SearchResultElement product={product} key={`${index}-${product.code}`} onSelect={onSelect} />
         ))}
       </ul>
       {actions && <div className="actions">{actions}</div>}
