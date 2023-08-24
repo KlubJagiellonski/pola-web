@@ -129,7 +129,7 @@
     "@types/uuid": "^8.3.4",
     "babel-jest": "^29.4.3",
     "babel-plugin-styled-components": "^2.0.7",
-    "babel-preset-gatsby": "^2.25.0",
+    "babel-preset-gatsby": "^3.12.0",
     "gatsby-plugin-root-import": "^2.0.8",
     "gatsby-plugin-tsconfig-paths": "^1.0.5",
     "gh-pages": "^3.2.0",
