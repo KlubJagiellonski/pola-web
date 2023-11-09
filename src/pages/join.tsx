@@ -129,6 +129,7 @@ const TeamPage = (props: ITeamPage) => {
                 <TitleSection>redakcja:</TitleSection>
                 <List>
                   <li>Bartek Ząbek</li>
+                  <li>Monika Kotula</li>
                   <li>Piotr Kaźmierski</li>
                   <li>Arkadiusz Tomczyński</li>
                   <li>Mikołaj Dłubak</li>
