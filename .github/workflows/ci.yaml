@@ -106,7 +106,7 @@ jobs:
           path: ./public
           if-no-files-found: error
       - name: 🟠 Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         if: |
           github.repository == 'KlubJagiellonski/pola-web' && 
           (
