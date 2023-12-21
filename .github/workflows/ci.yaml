@@ -80,12 +80,12 @@ jobs:
       #   run: |
       #     echo 'PUBLIC_URL=https://pola-staging.herokuapp.com/' >> $GITHUB_ENV
       - name: 🗂 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: github.event_name == 'repository_dispatch'
         with:
           ref: 'prod'
       - name: 🗂 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: github.event_name != 'repository_dispatch'
       - name: 🟢 Use Node.js
         uses: actions/setup-node@v4.0.1
