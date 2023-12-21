@@ -93,7 +93,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - name: 🟢 Install dependencies
-        run: npm ci
+        run: npm version && npm ci
       - name: 🔧 Build app
         run: npm run build
         env:
