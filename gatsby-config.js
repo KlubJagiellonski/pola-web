@@ -188,9 +188,6 @@ module.exports = {
 
     {
       resolve: '@sentry/gatsby',
-      dsn: 'https://76785631b189463b86823d54c0cffc44@o1100740.ingest.sentry.io/6126100',
-      tracesSampleRate: 1.0,
-      sampleRate: 1.0,
     },
     {
       resolve: `gatsby-plugin-google-gtag`,
