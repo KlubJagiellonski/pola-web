@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query';
 
 import { Facebook, Instagram, Twitter } from './Icons';
 
@@ -39,7 +38,7 @@ const Title = styled(TitleSection)`
 
 const Wrapper = styled(WrapperSection)``;
 
-const Container = styledContainerQuery.div`
+const Container = styled.div`
   min-height: 5em;
   height: 100%;
   grid-area: social-media;

@@ -20,7 +20,7 @@ const ItemButton = styled(AccordionItemButton)`
   font-size: ${fontSize.small};
   font-weight: bolder;
 
-  ::before {
+  &::before {
     display: inline-block;
     content: '';
     height: 7px;

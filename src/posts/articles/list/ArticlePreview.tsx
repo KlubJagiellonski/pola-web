@@ -1,6 +1,5 @@
 import { IArticleData } from 'posts';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query';
 
 import React from 'react';
 
@@ -25,7 +24,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const Container = styledContainerQuery.div`
+const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;

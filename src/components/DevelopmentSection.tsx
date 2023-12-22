@@ -1,7 +1,6 @@
 import { urls } from 'app/website';
 import React from 'react';
 import styled from 'styled-components';
-import styledContainerQuery from 'styled-container-query';
 
 import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
@@ -85,7 +84,7 @@ const ImgSection = styled.div`
 
 const Wrapper = styled(WrapperSection)``;
 
-const Container = styledContainerQuery(Wrapper)`
+const Container = styled(Wrapper)`
   display: flex;
   flex-direction: row;
   grid-area: development;
