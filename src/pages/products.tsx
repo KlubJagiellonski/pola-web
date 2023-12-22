@@ -1,7 +1,6 @@
 import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
-import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
@@ -14,6 +13,7 @@ import { DynamicProductResults } from '../search/components/results-list/Dynamic
 import { reduceToFlatProductsList } from '../search/services/search-service';
 import { searchDispatcher } from '../search/state/search-dispatcher';
 import { SearchStateName } from '../search/state/search-reducer';
+import {PageProps} from "gatsby";
 
 const connector = connect(
   (state: IPolaState) => {
@@ -38,7 +38,7 @@ const connector = connect(
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
-type IProductsPage = GatsbyPage & ReduxProps & {};
+type IProductsPage = PageProps<any> & ReduxProps & {};
 
 const ProductsPage = (props: IProductsPage) => {
   const { searchState, searchResults, onLoadMore } = props;

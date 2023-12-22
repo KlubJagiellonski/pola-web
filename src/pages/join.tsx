@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-import { GatsbyPage } from '@App/generics';
-import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
@@ -13,8 +11,9 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
 import { Device, fontSize, margin, padding } from '@Styles/theme';
+import {PageProps} from "gatsby";
 
-interface ITeamPage extends GatsbyPage {}
+interface ITeamPage extends PageProps<any> {}
 
 const Wrapper = styled.div`
   margin: ${padding.veryBig} 0 ${margin.normal} 0;

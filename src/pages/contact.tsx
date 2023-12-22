@@ -1,14 +1,13 @@
 import React from 'react';
 
-import { GatsbyPage } from '@App/generics';
-import { IPolaState } from '@App/state';
 import { PageType } from 'app/website';
 
 import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
+import {PageProps} from "gatsby";
 
-interface IContactPage extends GatsbyPage {}
+interface IContactPage extends PageProps<any> {}
 
 const ContactPage = (props: IContactPage) => {
   return (
