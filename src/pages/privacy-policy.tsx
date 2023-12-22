@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-import { Link } from 'gatsby';
+import {Link, PageProps} from 'gatsby';
 import React from 'react';
 
-import { GatsbyPage } from '@App/generics';
-import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
 import { PageLayout } from '@Layout/PageLayout';
@@ -30,7 +28,7 @@ const LetterList = styled.p`
   padding-left: ${padding.small};
 `;
 
-interface IPrivacyPolicyPage extends GatsbyPage {}
+interface IPrivacyPolicyPage extends PageProps<any> {}
 
 const PrivacyPolicy = (props: IPrivacyPolicyPage) => {
   return (
