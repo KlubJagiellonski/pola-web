@@ -1,4 +1,3 @@
-import { useLocation } from '@reach/router';
 import { Product } from 'search';
 import styled from 'styled-components';
 import { color, padding } from 'styles/theme';
@@ -54,10 +53,10 @@ const AppDownload = styled.div`
 interface IProductModal {
   product: Product;
   onClose: () => void;
+  location: Location
 }
 
-export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
-  const location = useLocation();
+export const ProductModal: React.FC<IProductModal> = ({ product, onClose, location }) => {
   const isMobile = location.href.indexOf(`/${MobilePagesPrefix}/`) > -1;
   const handleReport = () => {
     onClose();

@@ -50,7 +50,7 @@ export type Action = { type: 'setTag'; payload: string[] } | { type: 'setPage'; 
 
 const NewsPage: React.FC<INewsPage> = ({ location }) => {
   const articlesData = useSelector((state: IPolaState) => state.articles.data);
-  const queryParams = useArticlesParams();
+  const queryParams = useArticlesParams(false, location);
   const tags = getUniqueTags(articlesData);
 
   useEffect(() => {

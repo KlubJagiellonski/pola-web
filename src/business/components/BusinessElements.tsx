@@ -1,5 +1,5 @@
 import { IBusinessData } from 'business';
-import { IBusinessNode, useBusinessParams } from 'business/state/business-loader';
+import { useBusinessParams } from 'business/state/business-loader';
 import styled from 'styled-components';
 
 import React from 'react';
@@ -22,10 +22,11 @@ const SliderOrientation = styled.div`
 
 interface IBusinessElements {
   services: IBusinessData[];
+  location: Location
 }
 
-const BusinessElements: React.FC<IBusinessElements> = ({ services }) => {
-  const query = useBusinessParams();
+const BusinessElements: React.FC<IBusinessElements> = ({ services , location}) => {
+  const query = useBusinessParams(location);
 
   return (
     <>

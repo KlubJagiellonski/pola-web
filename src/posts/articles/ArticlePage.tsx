@@ -1,13 +1,10 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { BLOCKS, NodeData } from '@contentful/rich-text-types';
-import { useLocation } from '@reach/router';
-import { IFriendData } from 'friends';
-import { IArticleData } from 'posts';
+import { BLOCKS } from '@contentful/rich-text-types';
 import { IArticleNode } from 'posts';
 import styled from 'styled-components';
 
-import React, { useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { IPolaState } from '@App/state';
 import { PageType } from 'app/website';
@@ -77,13 +74,14 @@ const SecondColumn = styled.div`
 
 interface IArticlePage {
   article: IArticleNode;
+  location: Location
 }
 
 const ArticlePage: React.FC<IArticlePage> = (props) => {
   const { article } = props;
   const { title, subTitle, category, date, html } = article;
   const { url: imageSrc } = article.cover;
-  const location = useLocation();
+  const location = props.location
   const articles = useSelector((state: IPolaState) => state.articles.data);
   const friends = useSelector((state: IPolaState) => state.friends.data);
 

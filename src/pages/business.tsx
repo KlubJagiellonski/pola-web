@@ -64,7 +64,7 @@ const BusinessPage = (props: IBusinessPage) => {
             Chętnie podejmiemy wspólne działania, które mogą zwiększyć pozycje rynkową Twojej firmy, a także stać się
             wyrazem społecznej odpowiedzialności biznesu.
           </Text>
-          <BusinessElements services={services} />
+          <BusinessElements services={services} location={props.location}/>
           <Text>
             Chcemy dostarczać użytkownikom informacji niezbędnych do podjęcia świadomych decyzji. Transparentność w
             zakresie udostępniania danych to wzorcowa prokonsumencka postawa. Możemy dodać do bazy zgromadzoną przez
