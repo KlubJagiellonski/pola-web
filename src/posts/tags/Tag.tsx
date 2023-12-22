@@ -6,7 +6,7 @@ import { TagButton } from '@Components/buttons/TagButton';
 interface ITag {
   label?: string;
   active?: boolean;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 const Tag: React.FC<ITag> = ({ label, active, onClick }) => {

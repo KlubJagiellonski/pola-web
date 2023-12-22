@@ -1,7 +1,7 @@
 import { encodeStringToBase64 } from '../services/url-service';
 import styled from 'styled-components';
 
-import { Link } from 'gatsby';
+import {Link, navigate} from 'gatsby';
 import React from 'react';
 
 import { urls } from '@App/website';
@@ -27,10 +27,12 @@ export interface ITagLink {
 }
 export const TagLink: React.FC<ITagLink> = ({ label }) => {
   const url = `${urls.pola.news()}?page=1&tags=${encodeStringToBase64(label)}`;
+  console.log("TagLink", {url})
   return (
-    <Link to={url}>
-      <Tag key={`tag_${getGuid()}`} label={label} />
-    </Link>
+      <Tag key={`tag_${getGuid()}`} label={label} onClick={() => {
+          console.log("TagLink::onClick", url)
+          return navigate(url)
+      }} />
   );
 };
 
