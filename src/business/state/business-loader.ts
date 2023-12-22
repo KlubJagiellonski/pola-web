@@ -1,4 +1,3 @@
-import { useLocation } from '@reach/router';
 import { IBusinessData } from 'business';
 import queryString from 'query-string';
 
@@ -84,8 +83,7 @@ export interface IBusinessQuery {
   value?: string;
 }
 
-export const useBusinessParams = (): IBusinessQuery => {
-  const location = useLocation();
+export const useBusinessParams = (location: Location): IBusinessQuery => {
   const [storedQuery, setStoredQuery] = useState<IBusinessQuery>({});
 
   useEffect(() => {

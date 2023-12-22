@@ -61,7 +61,7 @@ type ILayoutStyles = {
 
 type IPageLayout = ReduxProps & {
   page: PageType;
-  location?: Location;
+  location: Location;
 
   styles?: ILayoutStyles;
   children: JSX.Element | JSX.Element[];
@@ -134,7 +134,7 @@ const Layout: React.FC<IPageLayout> = ({
         <StateLoader />
       </ErrorBoundary>
       <LayoutContainer id="layout-container">
-        {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
+        {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} location={location} />}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
         {visible && inquiryResultMessages && <InquiryResultModal totalScore={score} messages={inquiryResultMessages} />}
         <PageHeader

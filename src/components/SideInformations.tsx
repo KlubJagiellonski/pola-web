@@ -2,14 +2,12 @@ import { IFriendData } from 'friends';
 import { IArticleData } from 'posts';
 import styled from 'styled-components';
 
-import { navigate } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 
 import FriendCard from '../friends/components/FriendCard';
 import ArticlesListPreview from '../posts/articles/list/ArticlesListPreview';
-import TagsList from '../posts/tags/TagsList';
 import { getRandomFriend } from 'friends/state/friends-selectors';
-import { buildArticlesQuery, getVisibleArticles, useArticlesParams } from 'posts/services/article-service';
+import { getVisibleArticles } from 'posts/services/article-service';
 import { getUniqueTags } from 'posts/services/url-service';
 import { TagLinks } from 'posts/tags/TagLinks';
 

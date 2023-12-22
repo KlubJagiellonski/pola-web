@@ -1,4 +1,3 @@
-import { useLocation } from '@reach/router';
 import { IArticleData } from 'posts';
 import queryString from 'query-string';
 import { ArrayParam, NumberParam, useQueryParams, withDefault } from 'use-query-params';
@@ -76,8 +75,7 @@ export const buildArticlesQuery = (query: IArticleQuery): string | undefined => 
   return url;
 };
 
-export const useArticlesParams = (withUseQueryParams: boolean = false): IArticleQuery => {
-  const location = useLocation();
+export const useArticlesParams = (withUseQueryParams: boolean = false, location: Location): IArticleQuery => {
   if (withUseQueryParams) {
     const [query, setQuery] = useQueryParams({
       tags: withDefault(ArrayParam, []),
@@ -104,22 +102,6 @@ export const useArticlesParams = (withUseQueryParams: boolean = false): IArticle
 
     return storedQuery;
   }
-};
-
-export const useQueryParam = (paramName: string, initialValue: string): string => {
-  const location = useLocation();
-
-  const [storedQuery, setStoredQuery] = useState<T>(initialValue);
-
-  useEffect(() => {
-    const parsedSearch = location?.search ? queryString.parse(location.search, { arrayFormat: 'comma' }) : undefined;
-    if (parsedSearch && parsedSearch[paramName]) {
-      const value = parsedSearch[paramName];
-      setStoredQuery(value);
-    }
-  }, [location]);
-
-  return storedQuery;
 };
 
 export function getVisibleArticles(actualArticleId: string, articles: IArticleData[]) {
