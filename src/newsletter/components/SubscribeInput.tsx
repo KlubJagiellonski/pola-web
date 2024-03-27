@@ -42,7 +42,7 @@ export const SubscribeInput: React.FC<ISubscribeInput> = ({
 }) => {
   return (
     <Container>
-      <InputContainer>
+      <InputContainer className="input-container">
         <FormInput name={name} type={type} value={value} placeholder={placeholder} onChange={onChange} />
       </InputContainer>
       {errorMessage && <span className="error-message">{errorMessage}</span>}
