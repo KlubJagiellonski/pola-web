@@ -21,6 +21,7 @@ import { decodeHtml } from '@Utils/strings';
 import { ArticleHeader } from './ArticleHeader';
 
 import { Device, margin } from '@Styles/theme';
+import { Script } from 'gatsby';
 
 const ContenttWrapper = styled.div`
   img {
@@ -105,6 +106,7 @@ const ArticlePage: React.FC<IArticlePage> = (props) => {
           </SecondColumn>
         </Wrapper>
       </PageSection>
+      <Script src="https://nowe.platnosci.ngo.pl/campaign.js"></Script>
     </PageLayout>
   );
 };
