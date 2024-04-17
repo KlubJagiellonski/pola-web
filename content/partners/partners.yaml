@@ -6,7 +6,7 @@
   imageSrc: 'logos/logo_logistyka.png'
   description: 'Baza kodów kreskowych i producentów'
   sourceUrl: https://ilim.lukasiewicz.gov.pl
-- name: 'Koduj dla Polski'
-  imageSrc: 'logos/logo_kodujdlapolski.png'
-  description: 'Otwarte spotkania projektowe dla programistów'
-  sourceUrl: https://mojepanstwo.pl
+- name: 'Macopedia'
+  imageSrc: 'logos/logo_macopedia.png'
+  description: 'Partner technologiczny, wsparcie rozwoju aplikacji'
+  sourceUrl: https://macopedia.com/pl
