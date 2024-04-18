@@ -17,6 +17,7 @@ export enum PageType {
   ERROR_404 = "404",
   PRIVACY_POLICY = "privacyPolicy",
   NEWSLETTER = "newsletter",
+  MATERIALS = "materials",
 }
 
 export const MobilePagesPrefix = "m";
@@ -84,6 +85,7 @@ export const urls: WebsiteMap = {
     products: hashableUrl("products"),
     privacyPolicy: hashableUrl("privacy-policy"),
     newsletter: hashableUrl("newsletter"),
+    materials: hashableUrl("materials"),
   },
   external: {
     links: {
