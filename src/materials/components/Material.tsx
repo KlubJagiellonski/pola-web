@@ -67,10 +67,10 @@ const DownloadButton = styled(PrimaryButton)`
     width: 5.5rem;
 `
 
-const Material: React.FC<IMaterial> = ({ name, description, prevImage, file }) => {
+const Material: React.FC<IMaterial> = ({ title, description, prevImage, file }) => {
     return (
         <MaterialWrapper>
-            <h2>{name}</h2>
+            <h2>{title}</h2>
             <MaterialContent>
                 <ImageColumn fraction={20}>
                     <MaterialPrevImage imageSrc={prevImage.url} title={prevImage.title} />

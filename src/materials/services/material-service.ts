@@ -31,7 +31,7 @@ export const MaterialsService = {
         {
           allContentfulMaterials(limit: 1000) {
             nodes {
-              name
+              title
               id
               description {
                 childMarkdownRemark {

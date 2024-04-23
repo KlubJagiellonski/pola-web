@@ -2,7 +2,7 @@ import { IGatsbyNode } from "@App/generics";
 
 export interface IMaterial extends IGatsbyNode {
   id: string;
-  name: string;
+  title: string;
   description: {
     childMarkdownRemark: {
       html: string;
