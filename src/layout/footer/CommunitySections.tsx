@@ -34,6 +34,7 @@ export const CommunitySections: React.FC<ICommunitySections> = (props) => (
       <TextLink label="Aktualności" href={urls.pola.news()} />
       <TextLink label="O Poli" href={urls.pola.about()} />
       <TextLink label="Newsletter" href={urls.pola.newsletter()} />
+      <TextLink label="Materials" href={urls.pola.materials()} />
     </FooterSection>
     <FooterSection title="Działaj z nami">
       <TextExternalLink label="Wesprzyj aplikację" url={urls.external.links.polaSupport} />
