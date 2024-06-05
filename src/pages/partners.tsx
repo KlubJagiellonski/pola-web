@@ -11,9 +11,9 @@ import Placeholder from '@Components/Placeholder';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
-import {PageProps} from "gatsby";
+import { PageProps } from "gatsby";
 
-interface IPartnersPage extends PageProps<any> {}
+interface IPartnersPage extends PageProps<any> { }
 
 const PartnersPage = (props: IPartnersPage) => {
   const partners = useSelector((state: IPolaState) => state.partners.data);
@@ -22,7 +22,7 @@ const PartnersPage = (props: IPartnersPage) => {
       <SEOMetadata pageTitle="Partnerzy" />
       <Placeholder text="Partner aplikacji Pola" />
       <PageSection>
-        <BuyPolishInitiative />
+        {/* <BuyPolishInitiative /> */}
       </PageSection>
       <PageSection>
         <PartnersList partners={partners} />
