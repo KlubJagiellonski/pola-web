@@ -54,7 +54,7 @@ const ImageSection = styled.div`
   }
 `;
 
-export interface IBuyPolishInitiative {}
+export interface IBuyPolishInitiative { }
 
 export const BuyPolishInitiative: React.FC<IBuyPolishInitiative> = () => (
   <Wrapper>
