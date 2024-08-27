@@ -1,11 +1,11 @@
 - name: 'Klub Jagielloński'
   imageSrc: 'logos/logo_cakjv2_crop.png'
   description: 'Opracowanie algorytmu i wydawanie aplikacji'
-  sourceUrl: https://ilim.lukasiewicz.gov.pl
-- name: 'Instytut Logistyki i Magazynowania'
-  imageSrc: 'logos/logo_logistyka.png'
-  description: 'Baza kodów kreskowych i producentów'
-  sourceUrl: https://ilim.lukasiewicz.gov.pl
+  sourceUrl: https://klubjagiellonski.pl/projekty/centrum-analiz/
+- name: 'Food Farmer'
+  imageSrc: 'logos/food_farmer.png'
+  description: 'Partner medialny'
+  sourceUrl: https://foodfarmer.pl/
 - name: 'Macopedia'
   imageSrc: 'logos/logo_macopedia.png'
   description: 'Partner technologiczny, wsparcie rozwoju aplikacji'
