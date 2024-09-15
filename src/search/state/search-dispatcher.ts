@@ -63,10 +63,12 @@ export const searchDispatcher = {
         const service = ProductService.getInstance();
         const response = await service.searchProducts(phrase, nextPageToken);
 
+        const isLastPage = search.nextPageToken !== null && response?.nextPageToken === null;
+        if (isLastPage) {
+          await dispatch(actions.LoadLastPage(phrase, response.products));
+        }
         if (response) {
-          const { products } = response;
-
-          await dispatch(actions.LoadNextPage(phrase, products));
+          await dispatch(actions.LoadNextPage(phrase, response.products, response.nextPageToken));
         } else {
           throw new EmptyResponseDataError('EAN Product');
         }

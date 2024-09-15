@@ -1,4 +1,3 @@
-//import Img, { FluidObject } from 'gatsby-image';
 import styled from 'styled-components';
 
 import React from 'react';

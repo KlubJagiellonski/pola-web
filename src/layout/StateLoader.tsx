@@ -14,12 +14,16 @@ import { FriendsLoader } from '../friends/state/friends-loader';
 import { ArticleService } from '../posts/services/article-service';
 import { articlesDispatcher } from '../posts/state/articles-dispatcher';
 import { loadFriends } from 'friends/state/friends-reducer';
+import { MaterialsService } from 'materials/services/material-service';
+import { IMaterial } from 'materials';
+import { loadMaterials } from 'materials/state/materials-reducer';
 
 interface IStateLoader {
   isArticlesLoaded?: boolean;
   isFriendsLoaded?: boolean;
   isPartnersLoaded?: boolean;
   isBusinessLoaded?: boolean;
+  isMaterialsLoaded?: boolean;
   initApp?: () => void;
   loadArticles?: (edges: IArticleNode[]) => void;
 }
@@ -69,7 +73,7 @@ const Loader = (props: IStateLoader) => {
   try {
     const queryResult = ArticleService.getAll();
     const articleNodes: IArticleNode[] = queryResult?.allContentfulPosts?.nodes;
-    console.log(queryResult);
+
     if (!props.isArticlesLoaded && articleNodes && props.loadArticles) {
       articleNodes.sort((a: IArticleNode, b: IArticleNode) => {
         return Date.parse(b.date) - Date.parse(a.date);
@@ -81,6 +85,16 @@ const Loader = (props: IStateLoader) => {
       props.loadArticles([]);
     }
     logError(error, 'Cannot load articles data');
+  }
+
+  try {
+    if (!props.isMaterialsLoaded) {
+      const materials = MaterialsService.getAll()?.allContentfulMaterials?.nodes;
+      dispatch(loadMaterials(materials));
+    }
+  } catch (error: unknown) {
+    dispatch(loadMaterials([]));
+    logError(error, 'Cannot load friends data');
   }
 
   return null;
@@ -99,6 +113,7 @@ export const StateLoader = connect(
     isFriendsLoaded: state.friends.initialized,
     isPartnersLoaded: state.partners.initialized,
     isBusinessLoaded: state.partners.initialized,
+    isMaterialsLoaded: state.materials.initialized,
   }),
   {
     initApp: appDispatcher.initialize,

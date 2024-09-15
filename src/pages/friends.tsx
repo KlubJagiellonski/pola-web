@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
@@ -18,6 +17,7 @@ import FriendsSection from 'friends/components/FriendsSection';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
 import { Device, color, fontSize, margin, padding } from '@Styles/theme';
+import {PageProps} from "gatsby";
 
 const Title = styled(TitleSection)`
   margin: ${margin.normal} 0;
@@ -72,7 +72,7 @@ const TitleInfo = styled(TitleSection)`
   }
 `;
 
-interface IFriendsPage extends GatsbyPage {}
+interface IFriendsPage extends PageProps<any> {}
 
 const FriendsPage = (props: IFriendsPage) => {
   const friendData = useSelector((state: IPolaState) => state.friends.data);

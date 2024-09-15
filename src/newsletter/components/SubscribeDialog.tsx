@@ -52,6 +52,7 @@ interface ISubscribeDialog {
   onClear: () => void;
   stopExpanded?: boolean;
   isInitiallyExpanded?: boolean;
+  isAlwaysExpanded?: boolean;
 }
 
 export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
@@ -62,6 +63,7 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   onClear,
   stopExpanded,
   isInitiallyExpanded = false,
+  isAlwaysExpanded = false,
 }) => {
   const [isExpanded, setExpanded] = useState<boolean>(isInitiallyExpanded);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -89,11 +91,11 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   );
 
   let frameContent;
-  let height = '14.5em';
+  let height = styles?.height || '14.5em';
   switch (status) {
     case SubscriptionStatus.INITIAL:
       frameContent = (
-        <SubscibeDialogFrame title="Newsletter Poli">
+        <SubscibeDialogFrame title={!isAlwaysExpanded ? "Newsletter Poli" : ""}>
           <SubscribeForm styles={styles} onSubmit={onSubmit} />
         </SubscibeDialogFrame>
       );
@@ -106,31 +108,31 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
     case SubscriptionStatus.REGISTERED:
       if (follower) {
         frameContent = <SubscriptionRegisteredResult follower={follower} clearButton={clearButton} />;
-        height = '20.5em';
+        height = '14.5em';
       }
       break;
 
     case SubscriptionStatus.REPEATED:
       if (follower) {
         frameContent = <SubscriptionRepeatedResult follower={follower} clearButton={clearButton} />;
-        height = '20.5em';
+        height = '14.5em';
       }
       break;
 
     case SubscriptionStatus.REJECTED:
       frameContent = <SubscriptionFailureResult clearButton={clearButton} />;
-      height = '20.5em';
+      height = '14.5em';
       break;
   }
 
   return (
     <Container styles={{ ...styles, height }}>
-      {!isExpanded && (
+      {(!isExpanded && !isAlwaysExpanded) && (
         <Buttons>
           <SecondaryButton label="Newsletter Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
         </Buttons>
       )}
-      <div ref={containerRef} className={classNames('newsletter-frame-container', ['expanded', isExpanded])}>
+      <div ref={containerRef} className={classNames('newsletter-frame-container', ['expanded', isExpanded || isAlwaysExpanded])}>
         {frameContent}
       </div>
     </Container>

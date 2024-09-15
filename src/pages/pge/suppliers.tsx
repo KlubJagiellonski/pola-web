@@ -12,15 +12,15 @@ import { showSurveyResults } from 'modules/suppliers/state/survey-result-reducer
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { GatsbyPage } from '@App/generics';
 import { PageType } from '@App/website';
 
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { guid } from '@Utils/data/random-number';
+import {PageProps} from "gatsby";
 
-export interface ISuppliersInquiryPage extends GatsbyPage {}
+export interface ISuppliersInquiryPage extends PageProps<any> {}
 
 const SuppliersInquiryPage = (props: ISuppliersInquiryPage) => {
   const surveys = SurveyService.getAllSurveys();

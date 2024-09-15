@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-import { navigate } from 'gatsby';
+import {navigate, PageProps} from 'gatsby';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType } from '@App/website';
 
@@ -45,7 +44,7 @@ const InfoSection = styled.div`
   }
 `;
 
-interface INewsPage extends GatsbyPage {}
+interface INewsPage extends PageProps<any> {}
 
 export type Action = { type: 'setTag'; payload: string[] } | { type: 'setPage'; payload: number };
 

@@ -32,7 +32,7 @@ const PartnersPage = (props: IPartnersPage) => {
     <WebViewLayout>
       <SEOMetadata pageTitle="Partnerzy" />
       <PageSection>
-        <BuyPolishInitiative />
+        {/* <BuyPolishInitiative /> */}
       </PageSection>
       <PageSection>
         <PartnersList partners={partners} />

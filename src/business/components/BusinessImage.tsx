@@ -5,22 +5,17 @@ import React from 'react';
 
 export const BusinessImage: React.FC<IResponsiveImage> = ({ imageSrc, title }) => (
   <StaticQuery
-    query={graphql`
-      query {
-        images: allFile(filter: { sourceInstanceName: { eq: "business-images" } }) {
-          nodes {
-            extension
-            relativePath
-            childImageSharp {
-              fluid {
-                src
-              }
-              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
-            }
-          }
-        }
+    query={graphql`{
+  images: allFile(filter: {sourceInstanceName: {eq: "business-images"}}) {
+    nodes {
+      extension
+      relativePath
+      childImageSharp {
+        gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
       }
-    `}
+    }
+  }
+}`}
     render={(data) => renderFromQuery(data.images.nodes, imageSrc, title)}
   />
 );

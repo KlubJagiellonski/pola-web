@@ -25,7 +25,7 @@ const CommunitySectionsContainer = styled.div`
   }
 `;
 
-export interface ICommunitySections {}
+export interface ICommunitySections { }
 
 export const CommunitySections: React.FC<ICommunitySections> = (props) => (
   <CommunitySectionsContainer className="sections">
@@ -33,6 +33,8 @@ export const CommunitySections: React.FC<ICommunitySections> = (props) => (
       <TextLink label="Home" href={urls.pola.home()} />
       <TextLink label="Aktualności" href={urls.pola.news()} />
       <TextLink label="O Poli" href={urls.pola.about()} />
+      <TextLink label="Newsletter" href={urls.pola.newsletter()} />
+      <TextLink label="Materiały" href={urls.pola.materials()} />
     </FooterSection>
     <FooterSection title="Działaj z nami">
       <TextExternalLink label="Wesprzyj aplikację" url={urls.external.links.polaSupport} />

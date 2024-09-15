@@ -16,6 +16,7 @@ export enum SearchStateName {
   INITIAL = 'initial',
   LOADING = 'loading',
   LOADED = 'loaded',
+  RESULTS_END = 'results_end',
   SELECTED = 'selected',
   ERROR = 'error',
 }
@@ -32,6 +33,12 @@ export type SearchState =
       stateName: SearchStateName.LOADED;
       phrase: string;
       nextPageToken: string;
+      resultPages: ISearchResultPage[];
+      totalItems: number;
+    }
+  | {
+      stateName: SearchStateName.RESULTS_END;
+      phrase: string;
       resultPages: ISearchResultPage[];
       totalItems: number;
     }
@@ -96,6 +103,28 @@ const reducers: IActionReducer<SearchState> = {
       return {
         ...state,
         stateName: SearchStateName.LOADED,
+        resultPages: [
+          ...state.resultPages,
+          {
+            pageIndex: state.resultPages.length + 1,
+            products: action.payload.pageProducts,
+          },
+        ],
+        nextPageToken: action.payload.token,
+      };
+    }
+
+    return state;
+  },
+
+  [actionTypes.LOAD_LAST_PAGE]: (
+    state: SearchState = initialState,
+    action: ReturnType<typeof actions.LoadLastPage>
+  ) => {
+    if (state.stateName === SearchStateName.LOADED) {
+      return {
+        ...state,
+        stateName: SearchStateName.RESULTS_END,
         resultPages: [
           ...state.resultPages,
           {

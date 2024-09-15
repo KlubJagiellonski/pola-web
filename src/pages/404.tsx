@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { GatsbyPage } from '@App/generics';
 import { PageType } from 'app/website';
 
 import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
 import { PageLayout } from '@Layout/PageLayout';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
+import {PageProps} from "gatsby";
 
-interface INotFoundPage extends GatsbyPage {}
+interface INotFoundPage extends PageProps<any> {}
 
 const NotFoundPage = (props: INotFoundPage) => {
   return (

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { GatsbyPage } from '@App/generics';
 import { IPolaState } from '@App/state';
 import { PageType, urls } from 'app/website';
 
@@ -15,6 +14,7 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
 import { Device, margin, padding } from '@Styles/theme';
+import {PageProps} from "gatsby";
 
 const Wrapper = styled.div`
   margin-top: ${margin.normal};
@@ -40,7 +40,7 @@ const Title = styled(TitleSection)`
   text-align: center;
 `;
 
-interface IBusinessPage extends GatsbyPage {}
+interface IBusinessPage extends PageProps<any> {}
 
 const BusinessPage = (props: IBusinessPage) => {
   const services = useSelector((state: IPolaState) => state.business.data);

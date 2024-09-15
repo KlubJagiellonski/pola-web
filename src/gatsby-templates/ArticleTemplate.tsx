@@ -1,11 +1,9 @@
-import { graphql } from 'gatsby';
+import {graphql, PageProps} from 'gatsby';
 import * as React from 'react';
 
 import ArticlePage from 'posts/articles/ArticlePage';
 
-interface IArticleTemplate {
-  data: any;
-}
+export type IArticleTemplate = PageProps<any>;
 
 const Testowa: React.FC<IArticleTemplate> = ({ data }) => {
   return <ArticlePage article={data.post} />;

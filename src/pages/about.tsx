@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import React from 'react';
 
-import { GatsbyPage } from '@App/generics';
 import { PageType, urls } from 'app/website';
 
 import Faq from '@Components/Faq';
@@ -14,6 +13,7 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
 import { margin, padding } from '@Styles/theme';
+import {PageProps} from "gatsby";
 
 const Image = styled.div`
   height: 100%;
@@ -36,7 +36,7 @@ const Image = styled.div`
   }
 `;
 
-interface IAboutPage extends GatsbyPage {}
+interface IAboutPage extends PageProps<any> {}
 
 const AboutPage = (props: IAboutPage) => {
   return (
