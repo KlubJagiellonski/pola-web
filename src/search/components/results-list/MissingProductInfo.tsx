@@ -20,7 +20,7 @@ const InfoTile = styled.div`
 const buttonStyle = { ...ButtonThemes[ButtonFlavor.RED], fontSize: fontSize.small, lowercase: true };
 
 export const MissingProductInfo = () => (
-  <InfoBox>
+  <InfoBox data-testid="missing-product-info">
     <Title>Nie znalazłeś czego szukasz?</Title>
     <div className="content">
       <InfoTile>

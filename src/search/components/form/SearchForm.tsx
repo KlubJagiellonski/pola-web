@@ -5,12 +5,14 @@ import React from 'react';
 import { MobileApps } from '@Components/MobileApps';
 import ErrorBoundary from '@Utils/error-handling/error-boundary';
 
+import { SearchStateName, checkLoaded } from 'search/state/search-reducer';
+
 import { SearchInput } from './SearchInput';
 
 import { TitleSection } from '@Styles/GlobalStyle.css';
 import { Device, color, fontSize, introHeight, lineHeight, margin } from '@Styles/theme';
 
-const Container = styled.div`
+const Container = styled.div<{ isSearchLoaded?: boolean }>`
   display: flex;
   flex-flow: column;
   width: 100%;
@@ -20,7 +22,7 @@ const Container = styled.div`
   text-align: left;
 
   @media ${Device.mobile} {
-    padding: 100px 0 20px 0;
+    padding: ${(props) => (props.isSearchLoaded ? '100px 0 20px 0' : '32px 0 20px 0')};
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -40,7 +42,7 @@ const Title = styled(TitleSection)`
   }
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.div<{ isSearchLoaded?: boolean }>`
   margin-top: ${margin.normal};
   display: flex;
   flex-flow: column;
@@ -52,6 +54,7 @@ const SearchWrapper = styled.div`
     justify-content: center;
   }
   @media ${Device.mobile} {
+    margin-top: ${(props) => (props.isSearchLoaded ? '0' : margin.normal)};
     max-width: 30rem;
   }
 
@@ -71,28 +74,40 @@ const SearchWrapper = styled.div`
 `;
 
 interface ISearchForm {
-  isLoading: boolean;
+  searchState: SearchStateName;
   onInfoClicked: () => void;
   onSearch: (phrase: string) => void;
   onEmptyInput: () => void;
+  showApps?: boolean;
 }
 
-export const SearchForm: React.FC<ISearchForm> = ({ isLoading, onInfoClicked, onSearch, onEmptyInput }) => {
+export const SearchForm: React.FC<ISearchForm> = ({
+  searchState,
+  onInfoClicked,
+  onSearch,
+  onEmptyInput,
+  showApps = true,
+}) => {
+  const isLoaded = checkLoaded(searchState);
   return (
     <ErrorBoundary scope="search-container">
       <Container>
-        <Title>Sprawdź informacje o produkcie</Title>
-        <SearchWrapper>
-          <SearchInput
-            onInfoClicked={onInfoClicked}
-            onSearch={onSearch}
-            onEmptyInput={onEmptyInput}
-            disabled={isLoading}
-          />
-          <div className="mobile-apps">
-            <MobileApps size={48} />
-          </div>
-        </SearchWrapper>
+        <div>
+          <Title>Sprawdź informacje o produkcie</Title>
+          <SearchWrapper isSearchLoaded={isLoaded}>
+            <SearchInput
+              onInfoClicked={onInfoClicked}
+              onSearch={onSearch}
+              onEmptyInput={onEmptyInput}
+              disabled={searchState === SearchStateName.LOADING}
+            />
+            {showApps && !isLoaded && (
+              <div className="mobile-apps">
+                <MobileApps size={40} />
+              </div>
+            )}
+          </SearchWrapper>
+        </div>
       </Container>
     </ErrorBoundary>
   );

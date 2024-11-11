@@ -32,7 +32,12 @@ const config = {
     '^@Templates/(.*)$': '<rootDir>/src/gatsby-templates/$1',
     '^@Utils/(.*)$': '<rootDir>/src/utils/$1',
     '^utils/(.*)$': '<rootDir>/src/utils/$1',
+
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  //moduleFileExtensions: [...defaults.moduleFileExtensions, 'mts', 'cts'],
   // testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   testEnvironmentOptions: {
     url: `http://localhost`,
@@ -40,9 +45,10 @@ const config = {
   testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   testPathIgnorePatterns: [`node_modules`, `.cache`, `\\.cache`, `public`, `<rootDir>.*/public`, `src/utils/test`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby|gatsby-script|gatsby-link|uuid)/)`],
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'mts', 'cts'],
   verbose: true,
   // automock: true,
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/**/*.stories.{ts,tsx}', '!src/**/*.test.{ts,tsx}'],
 };
 
 module.exports = config;

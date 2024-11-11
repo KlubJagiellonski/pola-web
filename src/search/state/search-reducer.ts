@@ -12,6 +12,9 @@ export interface ISearchResultPage {
   products: IProductData[];
 }
 
+export const checkLoaded = (state: SearchStateName) =>
+  state === SearchStateName.LOADED || state === SearchStateName.SELECTED;
+
 export enum SearchStateName {
   INITIAL = 'initial',
   LOADING = 'loading',

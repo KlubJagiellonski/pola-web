@@ -1,6 +1,8 @@
-import { AppSettings } from 'app/app-settings';
-import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+
+import React, { useEffect, useRef } from 'react';
+
+import { AppSettings } from 'app/app-settings';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
@@ -100,10 +102,9 @@ const SubmitButton = styled(SecondaryButton)`
   height: 56px;
   border-radius: 3em;
   @media ${Device.mobile} {
-    padding: 5px 0;
+    padding: 0 20px;
     margin-left: 0;
-    margin-top: 5px;
-    width: 100%;
+    margin-top: 1em;
   }
 `;
 
