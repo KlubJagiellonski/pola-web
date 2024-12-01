@@ -29,10 +29,10 @@ const Container = styled.div<{ isSearchLoaded?: boolean }>`
   }
 `;
 
-const Title = styled(TitleSection)`
+const Title = styled(TitleSection)<{ variant: 'wide' | 'centered' }>`
   font-size: ${fontSize.big};
   line-height: ${lineHeight.big};
-  text-align: left;
+  text-align: ${(props) => (props.variant === 'centered' ? 'center' : 'left')};
   margin: 0;
 
   @media ${Device.mobile} {
@@ -48,6 +48,7 @@ const SearchWrapper = styled.div<{ isSearchLoaded?: boolean }>`
   flex-flow: column;
   gap: ${margin.normal};
   width: 100%;
+  align-items: baseline;
 
   @media ${Device.desktop} {
     flex-flow: row nowrap;
@@ -79,6 +80,7 @@ interface ISearchForm {
   onSearch: (phrase: string) => void;
   onEmptyInput: () => void;
   showApps?: boolean;
+  variant?: 'wide' | 'centered';
 }
 
 export const SearchForm: React.FC<ISearchForm> = ({
@@ -87,13 +89,16 @@ export const SearchForm: React.FC<ISearchForm> = ({
   onSearch,
   onEmptyInput,
   showApps = true,
+  variant = 'wide',
 }) => {
   const isLoaded = checkLoaded(searchState);
   return (
     <ErrorBoundary scope="search-container">
       <Container>
         <div>
-          <Title>Sprawdź informacje o produkcie</Title>
+          <Title className="search-title" variant={variant}>
+            Sprawdź informacje o produkcie
+          </Title>
           <SearchWrapper isSearchLoaded={isLoaded}>
             <SearchInput
               onInfoClicked={onInfoClicked}

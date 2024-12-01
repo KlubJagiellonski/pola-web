@@ -143,6 +143,13 @@ const Wrapper = styled.div`
   }
 `;
 
+const NewsletterContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 1rem;
+`;
+
 type IHomePage = PageProps<any> &
   ReduxProps & {
     searchState: SearchStateName;
@@ -179,11 +186,10 @@ const HomePage = (props: IHomePage) => {
             onSearch={props.invokeSearch}
             onEmptyInput={props.clearResults}
             searchState={searchState}
+            variant={isLoaded ? 'centered' : 'wide'}
           />
           {!isLoaded && (
-            <div
-              className="newsletter-container"
-              style={{ display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', margin: '1rem' }}>
+            <NewsletterContainer className="newsletter-container">
               <SubscribeDialog
                 status={newsletterStatus}
                 follower={follower}
@@ -192,7 +198,7 @@ const HomePage = (props: IHomePage) => {
                 onClear={clearForm}
                 stopExpanded={!!searchResults}
               />
-            </div>
+            </NewsletterContainer>
           )}
         </Content>
       </PageSection>

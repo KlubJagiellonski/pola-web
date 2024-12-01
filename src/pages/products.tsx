@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { PageProps } from 'gatsby';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
 import { IPolaState } from '@App/state';
@@ -89,7 +89,8 @@ const ProductsPage = (props: IProductsPage) => {
           onSearch={props.invokeSearch}
           onEmptyInput={props.clearResults}
           searchState={searchState}
-          showApps={false}
+          showApps={true}
+          variant="centered"
         />
       </SearchContainer>
 
