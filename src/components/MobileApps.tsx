@@ -1,7 +1,9 @@
+import styled from 'styled-components';
+
+import React from 'react';
+
 import { AppSettings } from 'app/app-settings';
 import { urls } from 'app/website';
-import React from 'react';
-import styled from 'styled-components';
 
 import { Device, padding, px } from '@Styles/theme';
 
@@ -22,12 +24,13 @@ const DownloadLinks = styled.div`
   }
 
   @media ${Device.mobile} {
-    flex-direction: column;
-    width: 8em;
+    flex-direction: row;
 
     a {
       padding: 0;
     }
+
+    gap: 0.5em;
   }
 `;
 
@@ -35,7 +38,7 @@ interface IMobileApps {
   size?: number;
 }
 
-export const MobileApps: React.FC<IMobileApps> = ({ size = 64 }) => {
+export const MobileApps: React.FC<IMobileApps> = ({ size = 48 }) => {
   return (
     <DownloadLinks>
       {AppSettings.mobile?.SHOW_APPLE_STORE_LINK && <AppStoreLink size={size} />}
@@ -45,7 +48,7 @@ export const MobileApps: React.FC<IMobileApps> = ({ size = 64 }) => {
   );
 };
 
-export const GooglePlayLink: React.FC<IIconLink> = ({ size = 64 }) => (
+export const GooglePlayLink: React.FC<IIconLink> = ({ size = 48 }) => (
   <a href={urls.external.links.polaGooglePlay.href}>
     <Image
       size={64}

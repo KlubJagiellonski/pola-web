@@ -169,6 +169,7 @@ const SearchPage = (props: ISearchPage) => {
             <SearchContainer>
               <SearchTitle>Sprawdź informacje o produkcie</SearchTitle>
               <SearchInput
+                variant="centered"
                 onInfoClicked={props.toggleSearchInfo}
                 onSearch={props.invokeSearch}
                 onEmptyInput={props.clearResults}

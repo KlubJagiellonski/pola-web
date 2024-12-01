@@ -30,8 +30,8 @@ const connector = connect(
   (state: IPolaState) => {
     const { app, search, inquiryResult } = state;
     return {
-      activePage: app.activePage,
-      isMenuExpanded: app.isMenuExpanded,
+      // activePage: app.activePage,
+      // isMenuExpanded: app.isMenuExpanded,
 
       // TODO: move modals' data somewhere else
       isSearchInfoVisible: app.isSearchInfoVisible,
@@ -46,7 +46,7 @@ const connector = connect(
     loadBrowserLocation: appDispatcher.loadBrowserLocation,
     selectActivePage: appDispatcher.selectActivePage,
     toggleSearchInfo: appDispatcher.toggleSearchInfo,
-    expandMenu: appDispatcher.expandMenu,
+    // expandMenu: appDispatcher.expandMenu,
 
     // TODO: move modals' actions somewhere else
     unselectProduct: searchDispatcher.unselectProduct,
@@ -95,10 +95,10 @@ const Layout: React.FC<IPageLayout> = ({
   children,
   styles,
 
-  isMenuExpanded,
-  expandMenu,
+  // isMenuExpanded,
+  // expandMenu,
 
-  activePage,
+  // activePage,
   selectActivePage,
 
   isSearchInfoVisible,
@@ -121,11 +121,12 @@ const Layout: React.FC<IPageLayout> = ({
   `);
 
   useEffect(() => {
+    // console.log(`loaded page: ${page} for ${activePage}`);
     if (location) {
       loadBrowserLocation(location);
       selectActivePage(page);
     }
-  }, []);
+  }, [location?.pathname]);
 
   // TODO: handle all modal types in one place
   return (
@@ -139,9 +140,9 @@ const Layout: React.FC<IPageLayout> = ({
         {visible && inquiryResultMessages && <InquiryResultModal totalScore={score} messages={inquiryResultMessages} />}
         <PageHeader
           siteTitle={data.site.siteMetadata.title}
-          activePage={activePage}
-          isMenuExpanded={isMenuExpanded}
-          onExpand={expandMenu}
+          // activePage={activePage}
+          // isMenuExpanded={isMenuExpanded}
+          // onExpand={expandMenu}
         />
         <PageContent {...styles}>{children}</PageContent>
         <Download />

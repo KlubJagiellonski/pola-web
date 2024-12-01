@@ -2,7 +2,7 @@ import { EmptyResponseDataError, ErrorHandler, ProductNotFoundError } from '../.
 import { ProductEANService } from '../services/ean-service';
 import { ProductService } from '../services/search-service';
 import { Dispatch } from 'redux';
-import { EAN, IProductData, IProductEAN, Product } from 'search';
+import { EAN, IProductEAN, Product } from 'search';
 
 import { IPolaState } from '@State/types';
 
