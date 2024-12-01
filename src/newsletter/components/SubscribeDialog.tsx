@@ -38,10 +38,8 @@ const Container = styled.div<{ styles?: INewsletterFormStyles }>`
 `;
 
 const Buttons = styled.div`
-  @media ${Device.mobile} {
-    display: flex;
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
 `;
 
 interface ISubscribeDialog {
@@ -95,7 +93,7 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
   switch (status) {
     case SubscriptionStatus.INITIAL:
       frameContent = (
-        <SubscibeDialogFrame title={!isAlwaysExpanded ? "Newsletter Poli" : ""}>
+        <SubscibeDialogFrame title={!isAlwaysExpanded ? 'Newsletter Poli' : ''}>
           <SubscribeForm styles={styles} onSubmit={onSubmit} />
         </SubscibeDialogFrame>
       );
@@ -127,12 +125,14 @@ export const SubscribeDialog: React.FC<ISubscribeDialog> = ({
 
   return (
     <Container styles={{ ...styles, height }}>
-      {(!isExpanded && !isAlwaysExpanded) && (
+      {!isExpanded && !isAlwaysExpanded && (
         <Buttons>
           <SecondaryButton label="Newsletter Poli" onClick={handleExpand} styles={ButtonThemes.Red} />
         </Buttons>
       )}
-      <div ref={containerRef} className={classNames('newsletter-frame-container', ['expanded', isExpanded || isAlwaysExpanded])}>
+      <div
+        ref={containerRef}
+        className={classNames('newsletter-frame-container', ['expanded', isExpanded || isAlwaysExpanded])}>
         {frameContent}
       </div>
     </Container>
