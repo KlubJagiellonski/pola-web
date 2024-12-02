@@ -114,6 +114,7 @@ const SubmitButton = styled(SecondaryButton)`
   height: 56px;
   border-radius: 3em;
   margin: 0.1em;
+  cursor: pointer;
 
   @media ${Device.mobile} {
     padding: 0 20px;

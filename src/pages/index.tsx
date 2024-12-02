@@ -32,6 +32,7 @@ import { SearchResultsHeader } from 'search/components/results-list/SearchResult
 import { reduceToFlatProductsList } from 'search/services/search-service';
 import { searchDispatcher } from 'search/state/search-dispatcher';
 import { SearchStateName, checkLoaded } from 'search/state/search-reducer';
+import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
 
 import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
 
@@ -41,7 +42,7 @@ const connector = connect(
     return {
       searchState: search.stateName,
       searchResults:
-        search.stateName === SearchStateName.LOADED || search.stateName === SearchStateName.SELECTED
+        search.stateName === SearchStateName.LOADED // || search.stateName === SearchStateName.SELECTED
           ? {
               phrase: search.phrase,
               products: reduceToFlatProductsList(search.resultPages),
@@ -60,7 +61,7 @@ const connector = connect(
     invokeSearch: searchDispatcher.invokeSearch,
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
-    selectProduct: searchDispatcher.selectProduct,
+    selectProduct: selectedProductDispatcher.selectProduct,
     subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
     clearForm: newsletterDispatcher.clearSubscriptionFormData,
   }
@@ -186,6 +187,7 @@ const HomePage = (props: IHomePage) => {
             onSearch={props.invokeSearch}
             onEmptyInput={props.clearResults}
             searchState={searchState}
+            showApps={true}
             variant={isLoaded ? 'centered' : 'wide'}
           />
           {!isLoaded && (
