@@ -25,6 +25,7 @@ import { DynamicProductResults } from 'search/components/results-list/DynamicPro
 import { reduceToFlatProductsList } from 'search/services/search-service';
 import { searchDispatcher } from 'search/state/search-dispatcher';
 import { SearchStateName } from 'search/state/search-reducer';
+import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
 
 const Content = styled.div`
   width: 100%;
@@ -101,7 +102,7 @@ const connector = connect(
     return {
       searchState: search.stateName,
       searchResults:
-        search.stateName === SearchStateName.LOADED || search.stateName === SearchStateName.SELECTED
+        search.stateName === SearchStateName.LOADED // || search.stateName === SearchStateName.SELECTED
           ? {
               pages: reduceToFlatProductsList(search.resultPages),
               phrase: search.phrase,
@@ -121,7 +122,7 @@ const connector = connect(
     invokeSearch: searchDispatcher.invokeSearch,
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
-    selectProduct: searchDispatcher.selectProduct,
+    selectProduct: selectedProductDispatcher.selectProduct,
     onLoadMore: searchDispatcher.invokeLoadMore,
     subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
     clearForm: newsletterDispatcher.clearSubscriptionFormData,
@@ -169,7 +170,6 @@ const SearchPage = (props: ISearchPage) => {
             <SearchContainer>
               <SearchTitle>Sprawdź informacje o produkcie</SearchTitle>
               <SearchInput
-                variant="centered"
                 onInfoClicked={props.toggleSearchInfo}
                 onSearch={props.invokeSearch}
                 onEmptyInput={props.clearResults}

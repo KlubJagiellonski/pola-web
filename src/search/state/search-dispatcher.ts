@@ -1,14 +1,11 @@
-import { EmptyResponseDataError, ErrorHandler, ProductNotFoundError } from '../../app/api-errors';
-import { ProductEANService } from '../services/ean-service';
+import { EmptyResponseDataError, ErrorHandler } from '../../app/api-errors';
 import { ProductService } from '../services/search-service';
 import { Dispatch } from 'redux';
-import { EAN, IProductEAN, Product } from 'search';
 
 import { IPolaState } from '@State/types';
 
 import { isNotEmpty } from '@Utils/strings';
 
-import { ProductSelectors } from './product-selectors';
 import * as actions from './search-actions';
 import { SearchStateName } from './search-reducer';
 
@@ -94,59 +91,6 @@ export const searchDispatcher = {
     } catch (error: unknown) {
       if (error instanceof ErrorHandler) {
         console.error('[Search clearing error]:', error);
-        await dispatch(actions.SearchFailed(error));
-      } else {
-        console.error('[Unhandled error]:', error);
-        throw error;
-      }
-    }
-  },
-
-  /**
-   * Stores which product from retrieved search results is selected.
-   * Loads detailed product data from EAN service.
-   * @param code EAN code of selected product
-   */
-  selectProduct: (code: EAN) => async (dispatch: Dispatch, getState: () => IPolaState) => {
-    try {
-      const { search } = getState();
-      if (search.stateName === SearchStateName.LOADED) {
-        const service = ProductEANService.getInstance();
-        const productEntityEAN: IProductEAN = await service.getProduct(code);
-        const prod = ProductSelectors.findProduct(productEntityEAN.code, search);
-        if (prod) {
-          const product = new Product(prod.name, productEntityEAN);
-          await dispatch(actions.ShowProductDetails(product));
-        } else {
-          throw new ProductNotFoundError('Cannot find product');
-        }
-      }
-    } catch (error: unknown) {
-      if (error instanceof ErrorHandler) {
-        console.error('[Selected product error]:', error);
-        await dispatch(actions.SearchFailed(error));
-      } else {
-        console.error('[Unhandled error]:', error);
-        throw error;
-      }
-    }
-  },
-
-  /**
-   * Clears selected product data.
-   */
-  unselectProduct: () => async (dispatch: Dispatch, getState: () => IPolaState) => {
-    try {
-      const {
-        search: { stateName },
-      } = getState();
-
-      if (stateName === SearchStateName.SELECTED) {
-        await dispatch(actions.UnselectProduct());
-      }
-    } catch (error: unknown) {
-      if (error instanceof ErrorHandler) {
-        console.error('[Selected product error]:', error);
         await dispatch(actions.SearchFailed(error));
       } else {
         console.error('[Unhandled error]:', error);
