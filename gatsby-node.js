@@ -2,6 +2,10 @@ const path = require('path');
 // const { createFilePath } = require(`gatsby-source-filesystem`);
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   // if (node.internal.type === `MarkdownRemark`) {

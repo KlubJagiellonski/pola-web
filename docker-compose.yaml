@@ -1,18 +1,30 @@
-services: 
-  pola_web-init:
-    image: node:20.10.0-stretch
-    working_dir: /app
-    volumes: 
-     - .:/app
-    command: npm install
-  pola_web:
-    image: node:20.10.0-stretch
-    working_dir: /app
-    volumes: 
-     - .:/app
-    command: npm run develop -- -H=0.0.0.0
-    ports: 
-      - 8000:8000
-    depends_on: 
-      pola_web-init: 
-        condition: service_completed_successfully
+services:
+  # pola_web-init:
+  #   image: node:16
+  #   working_dir: /app
+  #   volumes:
+  #     - .:/app
+  #   command: npm install
+  # pola_web:
+  #   image: node:16
+  #   working_dir: /app
+  #   volumes:
+  #     - .:/app
+  #   command: npm run develop -- -H=0.0.0.0
+  #   ports:
+  #     - 8123:8000
+  #   depends_on:
+  #     pola_web-init:
+  #       condition: service_completed_successfully
+  gatsby:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000' # Expose Gatsby development server
+    volumes:
+      - .:/app # Sync project files for hot-reloading
+      - /app/node_modules # Cache dependencies to avoid reinstallation
+    environment:
+      NODE_ENV: development
+    command: gatsby develop -H 0.0.0.0 -p 8000
