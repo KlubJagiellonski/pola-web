@@ -1,0 +1,17 @@
+services:
+  pola-web:
+    # image: node:20.10.0-stretch
+    # working_dir: /app
+    build: .
+    container_name: pola-web
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run develop -- -H=0.0.0.0
+    ports:
+      - 8000:8000
+    environment:
+      - NODE_ENV=development
+    # depends_on:
+    #   pola_web-init:
+    #     condition: service_completed_successfully
