@@ -1,0 +1,40 @@
+- slug: radziemska
+  name: Radziemska
+  description: Rodzime przedsiębiorstwo chemiczne powstałe w 1982 roku. Firma specjalizuje się w produkcji chemii gospodarczej, w tym odplamiaczy, proszków do prania czy wybielaczy. Jest laureatem wielu nagród konsumenckich, a jej siedziba znajduje się w Łomiankach pod Warszawą.
+  image: logos/logo_radziemska.jpg
+  page: https://www.radziemska.pl/
+- slug: woda-staropolska
+  name: Woda Staropolska
+  description: Polski producent wody mineralnej pochodzący z Iłży. Jest to firma rodzinna o ponad 30-letniej tradycji, która specjalizuje się w produkcji bogatych w magnez i wapń wód mineralnych pod marką „Staropolska”. Od 1986 r. przedsiębiorstwo realizuje swoją misję, stając się w ostatnim czasie liderem wśród producentów i dostawców butelkowanej wody mineralnej przeznaczonej dla firm.
+  image: logos/staropolska-logo.png
+  page: https://wodadlafirmy.pl/
+- slug: italian-fashion
+  name: Italian Fashion
+  description: Firma Italian Fashion istnieje na rynku polskim od 1990 roku. Zatrudnia około 300 pracowników. Od początku istnienia zajmuje się produkcją bielizny damskiej, męskiej i dziecięcej oraz wygodnej odzieży domowej i akcesoriów, takich jak skarpety. W ofercie firmy znaleźć można również kolekcje dedykowane dla kobiet w ciąży i mam karmiących, jak również piżamy i koszule nocne dla kobiet puszystych.”
+  image: logos/italian-fashion.jpg
+  page: https://www.italianfashion.pl/
+- slug: avetpharma
+  name: AvetPharma
+  description: Spółka farmaceutyczna założona 10 lat temu przez magistra farmacji z wieloletnim doświadczeniem w branży leków OTC oraz suplementów diety. Firma zajmuje się produkcją oraz dystrybucją suplementów diety. Przez dekadę wprowadziła na rynek ponad 40 produktów własnych, które są dostępne w aptekach, sklepach zielarsko-medycznych oraz marketach. Siedziba spółki znajduje się w Warszawie.
+  image: logos/AvetPharma.png
+  page: https://avetpharma.pl/
+- slug: ameripol-trading
+  name: AmeriPol Trading
+  description: Firma Ameri-Pol Trading Ltd sp. z o.o. jest polską firmą założoną w 1992 r. jako spółka polsko amerykańska, jednak w ciągu lat działalności udziałowiec amerykański został wykupiony przez polskich udziałowców. Firma oferuje szeroki wybór klejów kontaktowych w pojemnikach ciśnieniowych oraz rozpuszczalników mających zastosowanie w różnych branżach, m.in. w meblarstwie, w branży motoryzacyjnej, w produkcji jachtów, w branży budowlanej. Oferowane przez nas kleje są sprzedawane pod własną wspólną marką SPRAY-KON i LEP-KON.
+  image: logos/AmeriPol-Trading.png
+  page: https://spraykon.pl/
+- slug: pluton-kawa
+  name: Pluton Kawa
+  description: Historia firmy sięga XIX wieku. Jej założycielem był Tadeusz Tarasiewicz, który założył pierwszą na ziemiach polskich palarnię kawy, pod nazywą Pluton. Firma przetrwała do 1950 r. W 2017 r. została reaktywowana. Pluton Kawa kultywuje tradycje i z powodzeniem stosuje współcześnie wartości kupieckie XX-lecia międzywojennego.
+  image: logos/logo_pluton.png
+  page: https://kawapluton.com/
+- slug: naturalne-zdrowie-barbara-bucko
+  name: Naturalne Zdrowie Barbara Bućko
+  description: Firma rodzinna, producent zdrowej żywności prowadzący również sklep internetowy. Firma w swoim asortymencie posiada produkty naturalne i nieprzetworzone. Stawia na dostawy bezpośrednio od polskich rolników i współpracę ze sprawdzonymi i zaufanymi dostawcami.
+  image: logos/logo_bucko.png
+  page: https://naturalniezdrowe.pl/
+- slug: tylko-produkty-pl
+  name: TylkoProdukty.PL
+  description: Sklep powstały z myślą o osobach, które cenią patriotyzm gospodarczy i chcą kupować polskie produkty. Dzięki tej inicjatywie ich znalezienie będzie znacznie prostsze. Firma przygotowuje kosze prezentowe, które zawierają produkty wielu polskich marek, z różnych kategorii.
+  image: logos/tylkoprodukty.png
+  page: https://tylkoprodukty.pl/

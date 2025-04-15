@@ -1,0 +1,34 @@
+import React from 'react';
+import { Accordion } from 'react-accessible-accordion';
+import styled from 'styled-components';
+
+import SingleAccordion from './SingleAccordion';
+
+const Wrapper = styled(Accordion)`
+  border-radius: 2px;
+
+  [hidden] {
+    display: none;
+  }
+`;
+export interface ISingleAccordion {
+  question: string;
+  answer: string;
+  id?: number;
+}
+
+export interface IAccordionList {
+  list: ISingleAccordion[];
+}
+
+const AccordionList: React.FC<IAccordionList> = ({ list }) => {
+  return (
+    <Wrapper allowMultipleExpanded allowZeroExpanded>
+      {list.map((item) => (
+        <SingleAccordion question={item.question} answer={item.answer} key={item.id} />
+      ))}
+    </Wrapper>
+  );
+};
+
+export default AccordionList;

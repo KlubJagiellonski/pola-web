@@ -1,36 +1,82 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { IFriendData } from 'friends';
+import { IArticleData } from 'posts';
+import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { SearchForm } from '../search/form/SearchForm';
-import Contents from '../components/Contents';
-import { PageSection } from '../layout/PageSection';
-import { Device, pageWidth, padding, margin, color, fontSize } from '../styles/theme';
-import { IPolaState } from '../state/types';
-import { searchDispatcher } from '../state/search/search-dispatcher';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { IProductData } from '../domain/products';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
-import { IFriend } from '../domain/friends';
-import { SearchResultsList } from '../search/results-list/SearchResultsList';
-import { PrimaryButton } from '../components/buttons/PrimaryButton';
-import { SecondaryButton } from '../components/buttons/SecondaryButton';
-import { ButtonColor } from '../styles/button-theme';
-import { SearchResultsHeader } from '../search/results-list/SearchResultsHeader';
-import { openNewTab } from '../utils/browser';
-import { SearchStateName } from '../state/search/search-reducer';
-import { PageType, urls } from '../domain/website';
-import { Article } from '../domain/articles';
+import { PageProps } from 'gatsby';
+import React from 'react';
+import { ConnectedProps, connect } from 'react-redux';
 
-const Content = styled.div`
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { PageType, urls } from '@App/website';
+
+import About from '@Components/About';
+import DevelopmentSection from '@Components/DevelopmentSection';
+import { InfoBox } from '@Components/InfoBox';
+import Teams from '@Components/Teams';
+import TeamsFriend from '@Components/TeamsFriend';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import SocialMedia from '@Components/social-media/SocialMedia';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import Friends from 'friends/components/Friends';
+import { SubscribeDialog } from 'newsletter/components/SubscribeDialog';
+import { newsletterDispatcher } from 'newsletter/state/newsletter-dispatcher';
+import ArticlesListPreview from 'posts/articles/list/ArticlesListPreview';
+import { SearchForm } from 'search/components/form/SearchForm';
+import { FirstPageResults } from 'search/components/results-list/FirstPageResults';
+import { SearchResultsHeader } from 'search/components/results-list/SearchResultsHeader';
+import { reduceToFlatProductsList } from 'search/services/search-service';
+import { searchDispatcher } from 'search/state/search-dispatcher';
+import { SearchStateName, checkLoaded } from 'search/state/search-reducer';
+import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
+
+import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
+
+const connector = connect(
+  (state: IPolaState) => {
+    const { search, newsletter, articles, friends } = state;
+    return {
+      searchState: search.stateName,
+      searchResults:
+        search.stateName === SearchStateName.LOADED // || search.stateName === SearchStateName.SELECTED
+          ? {
+              phrase: search.phrase,
+              products: reduceToFlatProductsList(search.resultPages),
+              totalItems: search.totalItems,
+              token: search.nextPageToken,
+            }
+          : undefined,
+      newsletterStatus: newsletter.status,
+      follower: newsletter.status !== 'initial' ? newsletter.follower : undefined,
+      friends: friends.data,
+      articles: articles.data,
+    };
+  },
+  {
+    toggleSearchInfo: appDispatcher.toggleSearchInfo,
+    invokeSearch: searchDispatcher.invokeSearch,
+    invokeLoadMore: searchDispatcher.invokeLoadMore,
+    clearResults: searchDispatcher.clearResults,
+    selectProduct: selectedProductDispatcher.selectProduct,
+    subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
+    clearForm: newsletterDispatcher.clearSubscriptionFormData,
+  }
+);
+
+type ReduxProps = ConnectedProps<typeof connector>;
+
+const Content = styled.div<{ isSearchLoaded: boolean }>`
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+  position: relative;
 
   @media ${Device.mobile} {
-    padding: ${padding.normal};
+    padding: ${(props) => (props.isSearchLoaded ? '0' : padding.normal)};
   }
   @media ${Device.desktop} {
     padding: ${padding.normal} 0;
@@ -40,132 +86,162 @@ const Content = styled.div`
 
 const Background = styled.div<{ img?: string }>`
   position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 
   div {
     width: 100%;
     height: 100%;
   }
 
-  @media ${Device.mobile} {
-    opacity: 0.2;
-  }
+  opacity: 0.4;
 `;
 
 const WrapperContents = styled(PageSection)`
   @media ${Device.mobile} {
     padding: 0;
-  } 
-`
-
-const MissingProductInfo = styled.div`
-  background-color: ${color.background.red};
-  color: ${color.text.light};
-  text-align: center;
-  font-size: ${fontSize.big};
-  padding: ${padding.normal};
-  margin-top: ${margin.big};
+  }
 `;
 
-interface IHomePage {
-  searchState: SearchStateName;
+const WrapperResult = styled(PageSection)`
+  @media ${Device.mobile} {
+    position: realtive;
+    //top: -18em; // because results should be visible immediately on mobile screen
+    background-color: ${color.background.white};
+    margin-left: 5px;
+  }
+`;
 
-  location?: Location;
-  phrase?: string;
-  searchResults?: IProductData[];
-  token?: string;
-  articles?: Article[];
-  activeTags: string[];
-  friends?: IFriend[];
+const Wrapper = styled.div`
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding-top: ${padding.normal};
+  display: grid;
+  grid-gap: 15px;
+  grid-template-areas:
+    'articles development'
+    'articles social-media'
+    'articles about'
+    'friends friends'
+    'teams-friend teams';
 
-  invokeSearch: (phrase: string) => void;
-  invokeLoadMore: () => void;
-  clearResults: () => void;
-  selectProduct: (code: string, id: string) => void;
-}
+  @media ${Device.mobile} {
+    margin: 0;
+    padding: 0;
+    grid-gap: 0px;
+    grid-template-areas:
+      'development'
+      'articles'
+      'about'
+      'social-media'
+      'friends'
+      'teams-friend'
+      'teams';
+  }
+`;
 
-const HomePage = (props: IHomePage) => {
-  const { phrase, searchResults, location, searchState } = props;
-  const dispatch = useDispatch();
+const NewsletterContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 1rem;
+`;
 
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.HOME));
-    }
-  }, []);
+type IHomePage = PageProps<any> &
+  ReduxProps & {
+    searchState: SearchStateName;
+    searchResults?: ISearchResults;
+    articles?: IArticleData[];
+    activeTags: string[];
+    friends?: IFriendData[];
 
-  const handleCancel = () => {
-    props.clearResults();
+    toggleSearchInfo: () => void;
+    invokeSearch: (phrase: string) => void;
+    invokeLoadMore: () => void;
+    subscribeEmail: (email: string, name?: string | undefined) => void;
+    clearResults: () => void;
+    selectProduct: (code: EAN) => void;
   };
 
-  const emptyResults = !searchResults || searchResults.length < 1;
+const HomePage = (props: IHomePage) => {
+  const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
+  const freshArticles = props.articles?.slice(0, 3);
+  const isLoaded = checkLoaded(searchState);
   const isLoading = searchState === SearchStateName.LOADING;
+  const isError = searchState === SearchStateName.ERROR;
 
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.HOME}>
       <SEOMetadata pageTitle="Strona główna" />
       <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>
-          <ResponsiveImage imageSrc={'background.png'} />
+          <ResponsiveImage title="main background" imageSrc={'background2.jpg'} />
         </Background>
-        <Content>
-          <SearchForm onSearch={props.invokeSearch} isLoading={isLoading} />
+        <Content isSearchLoaded={isLoaded}>
+          <SearchForm
+            onInfoClicked={props.toggleSearchInfo}
+            onSearch={props.invokeSearch}
+            onEmptyInput={props.clearResults}
+            searchState={searchState}
+            showApps={true}
+            variant={isLoaded ? 'centered' : 'wide'}
+          />
+          {!isLoaded && (
+            <NewsletterContainer className="newsletter-container">
+              <SubscribeDialog
+                status={newsletterStatus}
+                follower={follower}
+                styles={{ spaceBottom: margin.small }}
+                onSubmit={subscribeEmail}
+                onClear={clearForm}
+                stopExpanded={!!searchResults}
+              />
+            </NewsletterContainer>
+          )}
         </Content>
       </PageSection>
-      <SearchResultsHeader
-        phrase={phrase}
-        searchResults={searchResults}
-        searchState={searchState}
-        resultsUrl={urls.pola.products}
-      />
-      {!emptyResults && (
-        <PageSection>
-          <SearchResultsList
-            results={searchResults}
-            actions={
-              <PrimaryButton color={ButtonColor.Gray} onClick={handleCancel}>
-                <span>Anuluj</span>
-              </PrimaryButton>
-            }
-            onSelect={props.selectProduct}
+      <WrapperResult>
+        {(isLoaded || isLoading) && (
+          <SearchResultsHeader
+            phrase={searchResults?.phrase}
+            totalItems={searchResults?.totalItems}
+            searchState={searchState}
+            resultsUrl={searchResults && searchResults.totalItems > 0 ? urls.pola.products() : undefined}
           />
-          <MissingProductInfo>
-            <p>Nie znalazłeś czego szukasz?</p>
-            <SecondaryButton
-              onClick={() => openNewTab(urls.external.openFoods)}
-              color={ButtonColor.Red}
-              fontSize={fontSize.small}>
-              Zgłoś produkt do bazy
-            </SecondaryButton>
-          </MissingProductInfo>
-        </PageSection>
-      )}
+        )}
+        {searchResults && (
+          <FirstPageResults
+            {...searchResults}
+            isLoaded={isLoaded}
+            isLoading={isLoading}
+            onSelect={props.selectProduct}
+            onClear={props.clearResults}
+          />
+        )}
+        {isError && (
+          <InfoBox>
+            <h3>Błąd Wyszukiwania</h3>
+            <p>Spróbuj wprowadzić inną frazę...</p>
+          </InfoBox>
+        )}
+      </WrapperResult>
       <WrapperContents>
-        <Contents articles={props.articles?.slice(0, 3)} friends={props.friends} />
+        <Wrapper>
+          <ArticlesListPreview articles={freshArticles} />
+          <DevelopmentSection />
+          <SocialMedia />
+          <About />
+          <Friends friends={props.friends} />
+          <Teams />
+          <TeamsFriend />
+        </Wrapper>
       </WrapperContents>
     </PageLayout>
   );
 };
 
-export default connect(
-  (state: IPolaState) => ({
-    searchState: state.search.stateName,
-
-    location: state.app.location,
-    phrase: state.search.phrase,
-    searchResults: state.search.products,
-    token: state.search.token,
-    articles: state.articles.data,
-    friends: state.friends.data,
-  }),
-  {
-    invokeSearch: searchDispatcher.invokeSearch,
-    invokeLoadMore: searchDispatcher.invokeLoadMore,
-    clearResults: searchDispatcher.clearResults,
-    selectProduct: searchDispatcher.selectProduct,
-  }
-)(HomePage);
+export default connector(HomePage);

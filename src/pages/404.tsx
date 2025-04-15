@@ -1,30 +1,27 @@
+import { PageProps } from 'gatsby';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { PageType } from '../domain/website';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import { PageLayout } from '../layout/PageLayout';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import SEOMetadata from '../utils/browser/SEOMetadata';
 
-interface INotFoundPage {
-  location?: Location;
-}
+import { PageType } from 'app/website';
+
+import { Spinner } from '@Components/Spinner';
+import { DevelopmentPlaceholder } from '@Layout/DevelopmentPlaceholder';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { color } from '@Styles/theme';
+
+interface INotFoundPage extends PageProps<any> {}
 
 const NotFoundPage = (props: INotFoundPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.ERROR_404));
-    }
-  }, []);
-
+  const isHomePage = props.location.pathname === '/';
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.ERROR_404}>
       <SEOMetadata pageTitle="404: Not found" />
-      <DevelopmentPlaceholder text="Strona nie istnieje" />
+      {isHomePage ? (
+        <Spinner styles={{ size: 300, color: color.text.red }} />
+      ) : (
+        <DevelopmentPlaceholder text="Strona nie istnieje" />
+      )}
     </PageLayout>
   );
 };

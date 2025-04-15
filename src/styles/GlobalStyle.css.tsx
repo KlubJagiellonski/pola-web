@@ -1,15 +1,19 @@
 import styled from 'styled-components';
-import { color, fontSize, margin } from './theme';
 
-type Color = {
-  color: string;
+import { color, evalPx, fontSize, lineHeight, margin } from './theme';
+
+type IWrapperSection = {
+  color?: string;
+  borderColor?: string;
+  isMobile?: boolean;
 };
 
-export const WrapperSection = styled.div`
+export const WrapperSection = styled.div<IWrapperSection>`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: ${({ color }: Color) => color};
+  background: ${({ color }) => color};
+  border-right: ${({ borderColor }) => (borderColor ? `8px solid ${borderColor}` : 'none')};
   width: 100%;
 `;
 
@@ -18,17 +22,23 @@ export const TitleSection = styled.p`
   padding: 0;
   font-size: ${fontSize.normal};
   font-weight: 700;
-  line-height: 1rem;
   color: ${color.text.primary};
+  line-height: ${lineHeight.normal};
 `;
 
-export const Text = styled.p`
-  margin-top: 5px;
+interface IText {
+  styles?: {
+    maxWidth?: number | string;
+  };
+}
+
+export const Text = styled.p<IText>`
   padding: 0;
   font-family: 'Merriweather';
   font-size: ${fontSize.small};
   color: ${color.text.secondary};
-  line-height: 1rem;
+  line-height: ${lineHeight.normal};
+  max-width: ${({ styles }) => evalPx(styles?.maxWidth)};
 
   font-feature-settings: 'kern', 'liga', 'clig', 'calt';
 

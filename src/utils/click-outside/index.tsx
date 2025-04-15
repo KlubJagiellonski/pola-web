@@ -3,6 +3,7 @@ import onClickOutside from 'react-onclickoutside';
 
 export interface IClickOutsideComponentProps {
   clickOutsideHandler?: () => void;
+  children: React.ReactNode[] | React.ReactNode;
 }
 
 class ClickOutsideComponent extends Component<IClickOutsideComponentProps> {

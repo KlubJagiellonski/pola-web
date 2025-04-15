@@ -1,8 +1,11 @@
+import { urls } from 'app/website';
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
 import { PolaLogo } from '../PolaLogo';
-import { Device, padding, color } from '../../styles/theme';
+
+import { Device } from '@Styles/theme';
 
 interface INavbarMenu {}
 
@@ -22,7 +25,9 @@ const NavbarLayout = styled.nav`
 
 export const NavbarMenu: React.FC<INavbarMenu> = ({ children }) => (
   <NavbarLayout className="navbar-manu">
-    <PolaLogo />
+    <Link to={urls.pola.home()}>
+      <PolaLogo />
+    </Link>
     {children}
   </NavbarLayout>
 );

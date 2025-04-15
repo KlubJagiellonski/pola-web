@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Device, pageWidth, padding, color } from '../styles/theme';
+
+import { Device, color, padding, pageWidth } from '@Styles/theme';
 
 interface IPageSection {
   size?: 'narrow' | 'full';
@@ -7,6 +8,7 @@ interface IPageSection {
     backgroundColor?: string;
     textColor?: string;
     textAlign?: string;
+    marginBottom?: string;
   };
 }
 
@@ -18,10 +20,11 @@ export const PageSection = styled.section<IPageSection>`
   text-align: ${({ styles }) => styles?.textAlign || 'left'};
   position: relative;
   box-sizing: border-box;
+  margin-bottom: ${({ styles }) => styles?.marginBottom || 0};
 
   @media ${Device.mobile} {
     padding: 0 ${padding.tiny};
-  } 
+  }
   @media ${Device.desktop} {
     max-width: ${(props) => (props.size === 'full' ? undefined : pageWidth)};
     padding-bottom: ${(props) => (props.size === 'full' ? 0 : padding.normal)};

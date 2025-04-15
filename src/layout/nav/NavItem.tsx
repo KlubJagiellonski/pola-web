@@ -1,8 +1,13 @@
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
-import { PageLinkData, PageType } from '../../domain/website';
-import { color, Device, margin } from '../../styles/theme';
+
+import { ExternalLinkData, PageLinkData, PageType } from 'app/website';
+
+import { ExternalLink } from '@Utils/browser/links';
+
+import { Device, color, margin } from '@Styles/theme';
 
 const Item = styled.div<{ selected: boolean }>`
   display: flex;
@@ -31,7 +36,8 @@ const Cricle = styled.div`
   border-radius: 50%;
   z-index: 0;
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
+  box-shadow: 0 10px 10px -9px ${color.background.secondary};
 
   @media ${Device.mobile} {
     display: none;
@@ -45,10 +51,30 @@ interface INavItem {
 
 export const NavItem: React.FC<INavItem> = ({ data, activePage }) => {
   const selected = data.type === activePage;
+  const href = typeof data.url === 'function' ? data.url() : data.url;
 
   return (
     <Item className={data.type} selected={selected}>
-      <Link to={data.url}>{data.label}</Link>
+      <Link to={href}>{data.label}</Link>
+      {selected && <Cricle />}
+    </Item>
+  );
+};
+
+interface IExtNavItem {
+  data: ExternalLinkData;
+  activePage: PageType;
+}
+
+export const ExtNavItem: React.FC<IExtNavItem> = ({ data, activePage }) => {
+  const selected = data.type === activePage;
+  const href = typeof data.url === 'function' ? data.url() : data.url;
+
+  return (
+    <Item className={data.type} selected={selected}>
+      <ExternalLink url={href} newTab={true}>
+        {data.label}
+      </ExternalLink>
       {selected && <Cricle />}
     </Item>
   );
