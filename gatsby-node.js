@@ -2,6 +2,19 @@ const path = require('path');
 // const { createFilePath } = require(`gatsby-source-filesystem`);
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
+const fs = require('fs-extra');
+
+exports.onPostBuild = async () => {
+  const filesToCopy = ['google1de6e0bf81fe0e15.html'];
+
+  filesToCopy.forEach((file) => {
+    const destination = path.join(__dirname, 'public', path.basename(file));
+    fs.copySync(file, destination);
+  });
+
+  console.log('Files copied to public folder:', filesToCopy.join(', '));
+};
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   // if (node.internal.type === `MarkdownRemark`) {

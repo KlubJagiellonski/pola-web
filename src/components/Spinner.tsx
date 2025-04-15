@@ -20,7 +20,7 @@ interface ISpinner {
 }
 
 export const Spinner: React.FC<ISpinner> = ({ text, styles = { size: 80, color: color.button.red } }) => (
-  <Container>
+  <Container data-testid="spinner">
     <Rings color={styles.color} height={styles.size} width={styles.size} />
     {text && <label>{text}</label>}
   </Container>

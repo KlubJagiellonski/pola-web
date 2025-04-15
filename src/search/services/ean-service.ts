@@ -1,5 +1,5 @@
 import { ApiAdapter } from '../../app/api-adapter';
-import { EmptyResponseDataError, FetchError } from '../../app/api-errors';
+import { EmptyResponseDataError, FetchError, ProductNotFoundError } from '../../app/api-errors';
 import { AppSettings } from '../../app/app-settings';
 import axios from 'axios';
 import { EAN, IProductEAN } from 'search';
@@ -37,8 +37,12 @@ export class ProductEANService extends ApiAdapter {
       const response = await await axios.get(`${this.apiUrl}?${query}`);
       const product: IProductEAN = response.data;
 
+      if (response.status === 404) {
+        throw new ProductNotFoundError(`EAN${code}`);
+      }
+
       if (!product) {
-        throw new EmptyResponseDataError('EAN Product');
+        throw new EmptyResponseDataError(`EAN${code}`);
       }
 
       return product;

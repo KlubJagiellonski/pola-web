@@ -1,6 +1,6 @@
 import { ErrorHandler } from '../../app/api-errors';
 import { AnyAction, Reducer } from 'redux';
-import { IProductData, Product } from 'search';
+import { IProductData } from 'search';
 
 import { IAction, IActionReducer } from 'app/state';
 
@@ -12,12 +12,13 @@ export interface ISearchResultPage {
   products: IProductData[];
 }
 
+export const checkLoaded = (state: SearchStateName) => state === SearchStateName.LOADED;
+
 export enum SearchStateName {
   INITIAL = 'initial',
   LOADING = 'loading',
   LOADED = 'loaded',
   RESULTS_END = 'results_end',
-  SELECTED = 'selected',
   ERROR = 'error',
 }
 
@@ -43,20 +44,11 @@ export type SearchState =
       totalItems: number;
     }
   | {
-      stateName: SearchStateName.SELECTED;
-      phrase: string;
-      nextPageToken: string;
-      resultPages: ISearchResultPage[];
-      totalItems: number;
-      selectedProduct: Product;
-    }
-  | {
       stateName: SearchStateName.ERROR;
       phrase?: string;
       nextPageToken?: string;
       resultPages?: ISearchResultPage[];
       totalItems?: number;
-      selectedProduct?: Product;
       error: ErrorHandler;
     };
 
@@ -80,7 +72,6 @@ const reducers: IActionReducer<SearchState> = {
       return {
         ...state,
         stateName: SearchStateName.LOADED,
-        //phrase: action.payload.phrase,
         nextPageToken: action.payload.token,
         totalItems: action.payload.totalItems,
         resultPages: [
@@ -148,33 +139,6 @@ const reducers: IActionReducer<SearchState> = {
       stateName: SearchStateName.ERROR,
       error: action.payload.error,
     };
-  },
-
-  [actionTypes.SHOW_PRODUCT_DETAILS]: (
-    state: SearchState = initialState,
-    action: ReturnType<typeof actions.ShowProductDetails>
-  ) => {
-    if (state.stateName === SearchStateName.LOADED) {
-      return {
-        ...state,
-        stateName: SearchStateName.SELECTED,
-        selectedProduct: action.payload.product,
-      };
-    }
-
-    return state;
-  },
-
-  [actionTypes.UNSELECT_PRODUCT]: (state: SearchState = initialState) => {
-    if (state.stateName === SearchStateName.SELECTED) {
-      return {
-        ...state,
-        stateName: SearchStateName.LOADED,
-        selectedProduct: undefined,
-      };
-    }
-
-    return state;
   },
 };
 

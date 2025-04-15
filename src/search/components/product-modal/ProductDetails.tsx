@@ -60,10 +60,6 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       </header>
       <RussiaInfoBox product={product} />
       <Field>
-        <p className="property heading">{product.manufacturer.name}</p>
-        <p className="property">{product.manufacturer.description}</p>
-      </Field>
-      <Field>
         <p className="property heading">Punkty w rankingu Poli:</p>
         <ScoreBar
           value={product.manufacturer.plScore}
@@ -106,6 +102,11 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
         falseLabel="jest częścią zagranicznego koncernu"
         notes={notGlobalProperty.notes}
       />
+      <br />
+      <Field>
+        <p className="property heading">{product.manufacturer.name}</p>
+        <p className="property">{product.manufacturer.description}</p>
+      </Field>
     </DetailsContainer>
   );
 };

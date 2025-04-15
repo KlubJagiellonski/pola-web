@@ -3,6 +3,7 @@ import { IArticleData } from 'posts';
 import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
+import { PageProps } from 'gatsby';
 import React from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
@@ -30,10 +31,10 @@ import { FirstPageResults } from 'search/components/results-list/FirstPageResult
 import { SearchResultsHeader } from 'search/components/results-list/SearchResultsHeader';
 import { reduceToFlatProductsList } from 'search/services/search-service';
 import { searchDispatcher } from 'search/state/search-dispatcher';
-import { SearchStateName } from 'search/state/search-reducer';
+import { SearchStateName, checkLoaded } from 'search/state/search-reducer';
+import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
 
 import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
-import {PageProps} from "gatsby";
 
 const connector = connect(
   (state: IPolaState) => {
@@ -41,7 +42,7 @@ const connector = connect(
     return {
       searchState: search.stateName,
       searchResults:
-        search.stateName === SearchStateName.LOADED || search.stateName === SearchStateName.SELECTED
+        search.stateName === SearchStateName.LOADED // || search.stateName === SearchStateName.SELECTED
           ? {
               phrase: search.phrase,
               products: reduceToFlatProductsList(search.resultPages),
@@ -60,7 +61,7 @@ const connector = connect(
     invokeSearch: searchDispatcher.invokeSearch,
     invokeLoadMore: searchDispatcher.invokeLoadMore,
     clearResults: searchDispatcher.clearResults,
-    selectProduct: searchDispatcher.selectProduct,
+    selectProduct: selectedProductDispatcher.selectProduct,
     subscribeEmail: newsletterDispatcher.requestSubscriptionForEmail,
     clearForm: newsletterDispatcher.clearSubscriptionFormData,
   }
@@ -68,14 +69,14 @@ const connector = connect(
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
-const Content = styled.div`
+const Content = styled.div<{ isSearchLoaded: boolean }>`
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   position: relative;
 
   @media ${Device.mobile} {
-    padding: ${padding.normal};
+    padding: ${(props) => (props.isSearchLoaded ? '0' : padding.normal)};
   }
   @media ${Device.desktop} {
     padding: ${padding.normal} 0;
@@ -107,7 +108,7 @@ const WrapperContents = styled(PageSection)`
 const WrapperResult = styled(PageSection)`
   @media ${Device.mobile} {
     position: realtive;
-    top: -18em;
+    //top: -18em; // because results should be visible immediately on mobile screen
     background-color: ${color.background.white};
     margin-left: 5px;
   }
@@ -143,6 +144,13 @@ const Wrapper = styled.div`
   }
 `;
 
+const NewsletterContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 1rem;
+`;
+
 type IHomePage = PageProps<any> &
   ReduxProps & {
     searchState: SearchStateName;
@@ -162,7 +170,7 @@ type IHomePage = PageProps<any> &
 const HomePage = (props: IHomePage) => {
   const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const freshArticles = props.articles?.slice(0, 3);
-  const isLoaded = searchState === SearchStateName.LOADED || searchState === SearchStateName.SELECTED;
+  const isLoaded = checkLoaded(searchState);
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
 
@@ -173,25 +181,27 @@ const HomePage = (props: IHomePage) => {
         <Background>
           <ResponsiveImage title="main background" imageSrc={'background2.jpg'} />
         </Background>
-        <Content>
+        <Content isSearchLoaded={isLoaded}>
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
             onEmptyInput={props.clearResults}
-            isLoading={isLoading}
+            searchState={searchState}
+            showApps={true}
+            variant={isLoaded ? 'centered' : 'wide'}
           />
-          <div
-            className="newsletter-container"
-            style={{ display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', margin: '1rem' }}>
-            <SubscribeDialog
-              status={newsletterStatus}
-              follower={follower}
-              styles={{ spaceBottom: margin.small }}
-              onSubmit={subscribeEmail}
-              onClear={clearForm}
-              stopExpanded={!!searchResults}
-            />
-          </div>
+          {!isLoaded && (
+            <NewsletterContainer className="newsletter-container">
+              <SubscribeDialog
+                status={newsletterStatus}
+                follower={follower}
+                styles={{ spaceBottom: margin.small }}
+                onSubmit={subscribeEmail}
+                onClear={clearForm}
+                stopExpanded={!!searchResults}
+              />
+            </NewsletterContainer>
+          )}
         </Content>
       </PageSection>
       <WrapperResult>

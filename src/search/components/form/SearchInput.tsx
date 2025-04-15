@@ -1,11 +1,18 @@
-import { AppSettings } from 'app/app-settings';
-import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+
+import React, { useEffect, useRef } from 'react';
+import { useStore } from 'react-redux';
+
+import { IPolaState } from '@App/state';
+import { PageType } from '@App/website';
+import { AppSettings } from 'app/app-settings';
 
 import { ButtonFlavor, ButtonThemes } from '@Components/buttons/Button';
 import { SecondaryButton } from '@Components/buttons/SecondaryButton';
 import { keys } from '@Utils/keyboard';
 import { isNotEmpty } from '@Utils/strings';
+
+import { SearchStateName } from 'search/state/search-reducer';
 
 import { Device, color, fontSize, margin, padding, px } from '@Styles/theme';
 
@@ -18,14 +25,21 @@ const FormSearch = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   position: relative;
+  background-color: white;
+  border-radius: 3em;
 
   @media ${Device.mobile} {
+    background-color: transparent;
     flex-direction: column;
+    width: 100%;
   }
 `;
 
 const InputWrapper = styled.div`
   position: relative;
+  @media ${Device.mobile} {
+    width: 100%;
+  }
 `;
 
 const InputElement = styled.div`
@@ -38,11 +52,11 @@ const InputElement = styled.div`
 `;
 
 const InputSection = styled(InputElement)`
-  background-color: white;
   display: flex;
   justify-content: flex-end;
 
   @media ${Device.mobile} {
+    background-color: white;
     min-width: 0;
   }
 `;
@@ -99,11 +113,13 @@ const SubmitButton = styled(SecondaryButton)`
   margin-left: 15px;
   height: 56px;
   border-radius: 3em;
+  margin: 0.1em;
+  cursor: pointer;
+
   @media ${Device.mobile} {
-    padding: 5px 0;
+    padding: 0 20px;
     margin-left: 0;
-    margin-top: 5px;
-    width: 100%;
+    margin-top: 1em;
   }
 `;
 
@@ -115,10 +131,18 @@ interface ISearchInput {
 }
 
 export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, onSearch, onEmptyInput }) => {
-  const [phrase, setPhrase] = React.useState<string>('');
+  const {
+    app: { activePage },
+    search: searchState,
+  } = useStore().getState() as IPolaState;
+  const previousPhrase = searchState.stateName !== SearchStateName.INITIAL ? searchState.phrase || '' : '';
+
+  const [phrase, setPhrase] = React.useState<string>(() => previousPhrase);
+
   const hasPhrase = isNotEmpty(phrase);
   const submitButtonTheme = disabled || !hasPhrase ? ButtonThemes[ButtonFlavor.GRAY] : ButtonThemes[ButtonFlavor.RED];
   let inputRef = useRef<HTMLInputElement>(null);
+
   const search = () => {
     if (isNotEmpty(phrase)) {
       onSearch(phrase);
@@ -146,6 +170,18 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, o
   };
 
   useEffect(() => {
+    if (activePage === PageType.HOME) {
+      setPhrase('');
+    }
+  }, [activePage]);
+
+  useEffect(() => {
+    if (activePage === PageType.HOME && previousPhrase) {
+      setPhrase(previousPhrase);
+    }
+  }, [previousPhrase]);
+
+  useEffect(() => {
     if (inputRef && inputRef.current) {
       inputRef.current.focus();
     }
@@ -165,6 +201,7 @@ export const SearchInput: React.FC<ISearchInput> = ({ disabled, onInfoClicked, o
             onChange={handlePhraseChange}
             onKeyDown={handleEnter}
             disabled={disabled}
+            value={phrase || ''}
           />
           <InputIconSection>
             {AppSettings.search?.SHOW_BARCODE_ICON && <InputIcon imagePath={Kod} width={48} />}

@@ -1,7 +1,9 @@
-import { ExternalLinkData, PageLinkData, PageType } from 'app/website';
+import styled from 'styled-components';
+
 import { Link } from 'gatsby';
 import React from 'react';
-import styled from 'styled-components';
+
+import { ExternalLinkData, PageLinkData, PageType } from 'app/website';
 
 import { ExternalLink } from '@Utils/browser/links';
 

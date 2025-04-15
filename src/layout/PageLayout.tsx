@@ -2,7 +2,7 @@ import { InquiryResultModal } from 'modules/suppliers/components/SurveyResultMod
 import styled from 'styled-components';
 import 'styles/pola-web.css';
 
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, navigate, useStaticQuery } from 'gatsby';
 import React from 'react';
 import { useEffect } from 'react';
 import { ConnectedProps, connect } from 'react-redux';
@@ -16,8 +16,7 @@ import ErrorBoundary from '@Utils/error-handling/error-boundary';
 
 import { SearchInfoModal } from 'search/components/form/SearchInfoModal';
 import { ProductModal } from 'search/components/product-modal';
-import { searchDispatcher } from 'search/state/search-dispatcher';
-import { SearchStateName } from 'search/state/search-reducer';
+import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
 
 import { CustomScrollbarDiv } from './CustomScrollbar';
 import { PageHeader } from './PageHeader';
@@ -28,14 +27,11 @@ import { Device, desktopHeaderHeight, mobileHeaderHeight } from '@Styles/theme';
 
 const connector = connect(
   (state: IPolaState) => {
-    const { app, search, inquiryResult } = state;
+    const { app, selectedProduct, inquiryResult } = state;
     return {
-      activePage: app.activePage,
-      isMenuExpanded: app.isMenuExpanded,
-
       // TODO: move modals' data somewhere else
       isSearchInfoVisible: app.isSearchInfoVisible,
-      selectedProduct: search.stateName === SearchStateName.SELECTED ? search.selectedProduct : undefined,
+      selectedProduct: selectedProduct.product,
 
       visible: inquiryResult.visible,
       score: inquiryResult.totalScore,
@@ -46,10 +42,11 @@ const connector = connect(
     loadBrowserLocation: appDispatcher.loadBrowserLocation,
     selectActivePage: appDispatcher.selectActivePage,
     toggleSearchInfo: appDispatcher.toggleSearchInfo,
-    expandMenu: appDispatcher.expandMenu,
+
+    selectProduct: selectedProductDispatcher.selectProduct,
 
     // TODO: move modals' actions somewhere else
-    unselectProduct: searchDispatcher.unselectProduct,
+    unselectProduct: selectedProductDispatcher.unselectProduct,
   }
 );
 
@@ -95,12 +92,8 @@ const Layout: React.FC<IPageLayout> = ({
   children,
   styles,
 
-  isMenuExpanded,
-  expandMenu,
-
-  activePage,
   selectActivePage,
-
+  selectProduct,
   isSearchInfoVisible,
   selectedProduct,
   unselectProduct,
@@ -125,24 +118,38 @@ const Layout: React.FC<IPageLayout> = ({
       loadBrowserLocation(location);
       selectActivePage(page);
     }
-  }, []);
+  }, [location?.pathname]);
 
-  // TODO: handle all modal types in one place
+  useEffect(() => {
+    if (location) {
+      const params = new URLSearchParams(location.search);
+      const eanCode = params.get('ean');
+      if (eanCode) {
+        selectProduct(eanCode);
+      }
+    }
+  }, [location?.search]);
+
+  // TODO: handle all modal types with React portals
+  // https://react.dev/reference/react-dom/createPortal#rendering-a-modal-dialog-with-a-portal
   return (
     <ErrorBoundary scope="page-layout">
       <ErrorBoundary scope="app-state-loader">
         <StateLoader />
       </ErrorBoundary>
       <LayoutContainer id="layout-container">
-        {selectedProduct && <ProductModal product={selectedProduct} onClose={unselectProduct} />}
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => {
+              navigate(location?.pathname || '', { replace: true });
+              unselectProduct();
+            }}
+          />
+        )}
         {isSearchInfoVisible && <SearchInfoModal onClose={toggleSearchInfo} />}
         {visible && inquiryResultMessages && <InquiryResultModal totalScore={score} messages={inquiryResultMessages} />}
-        <PageHeader
-          siteTitle={data.site.siteMetadata.title}
-          activePage={activePage}
-          isMenuExpanded={isMenuExpanded}
-          onExpand={expandMenu}
-        />
+        <PageHeader siteTitle={data.site.siteMetadata.title} />
         <PageContent {...styles}>{children}</PageContent>
         <Download />
         <PageFooter />

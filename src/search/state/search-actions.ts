@@ -9,8 +9,6 @@ export const actionTypes = {
   LOAD_LAST_PAGE: 'SEARCH:LOAD_LAST_PAGE',
   CLEAR_RESULTS: 'SEARCH:CLEAR_RESULTS',
   SEARCH_FAILED: 'SEARCH:SEARCH_FAILED',
-  SHOW_PRODUCT_DETAILS: 'SEARCH:SHOW_PRODUCT_DETAILS',
-  UNSELECT_PRODUCT: 'SEARCH:UNSELECT_PRODUCT',
 };
 
 export const InvokeSearch = (phrase: string): IAction => ({
@@ -55,15 +53,4 @@ export const SearchFailed = (error: ErrorHandler): IAction => ({
   payload: {
     error,
   },
-});
-
-export const ShowProductDetails = (product: Product): IAction => ({
-  type: actionTypes.SHOW_PRODUCT_DETAILS,
-  payload: {
-    product,
-  },
-});
-
-export const UnselectProduct = (): IAction => ({
-  type: actionTypes.UNSELECT_PRODUCT,
 });
