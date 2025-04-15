@@ -1,34 +1,21 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { DevelopmentPlaceholder } from '../layout/DevelopmentPlaceholder';
-import { PageType } from '../domain/website';
+import { PageType } from 'app/website';
 
-interface ISupportPage {
-  location?: Location;
-}
+import Placeholder from '@Components/Placeholder';
+import { PageLayout } from '@Layout/PageLayout';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+import {PageProps} from "gatsby";
+
+interface ISupportPage extends PageProps<any> {}
 
 const SupportPage = (props: ISupportPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.SUPPORT));
-    }
-  }, []);
-
   return (
-    <PageLayout>
+    <PageLayout location={props.location} page={PageType.SUPPORT}>
       <SEOMetadata pageTitle="Wesprzyj aplikację" />
-      <DevelopmentPlaceholder />
+      <Placeholder text="Strona w budowie" />
     </PageLayout>
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(SupportPage);
+export default SupportPage;

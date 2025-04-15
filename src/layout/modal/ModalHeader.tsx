@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IconButton } from '../../components/buttons/IconButton';
-import { color, Device, fontSize, padding } from '../../styles/theme';
+
+import { IconButton } from '@Components/buttons/IconButton';
+
+import { Device, color, fontSize, padding } from '@Styles/theme';
 
 const Header = styled.div`
   display: flex;
   flex-flow: row nowrap;
   padding: ${padding.small} ${padding.normal};
+  align-items: baseline;
 
   h3 {
     font-weight: bold;
     color: ${color.text.dark};
     flex: 1 1 100%;
+    margin: 0;
 
     @media ${Device.phone} {
       font-size: 0.8em;

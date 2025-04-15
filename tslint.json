@@ -1,6 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended"],
+  "extends": ["react-app", "shared-config", "tslint:recommended"],
   "jsRules": {},
   "linterOptions": {
     "exclude": ["**/*.d.ts", "src/migration/*"]
@@ -14,6 +14,7 @@
     "no-console": false,
     "interface-name": false,
     "max-classes-per-file": false,
+    "no-implicit-any-catch": true,
     "max-line-length": [false, { "limit": 120, "ignore-pattern": "^import |^export {(.*?)}" }],
     "no-any": false,
     "no-consecutive-blank-lines": false,

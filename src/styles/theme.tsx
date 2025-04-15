@@ -2,13 +2,15 @@ export const color = {
   background: {
     primary: '#C4C4C4',
     secondary: '#A0A0A0',
-    gray: '#FAFAFA',
+    gray: '#e5e5e5',
+    lightGray: '#FAFAFA',
     dark: '#333333',
     black: '#000000',
     red: '#D8152F',
     white: '#ffffff',
     search: '#E5E5E5',
-    transparencyGrey: '#e5e5e5d8'
+    transparencyGrey: '#e5e5e5d8',
+    transparencyRed: '#d8152fd8',
   },
   text: {
     primary: '#333333',
@@ -16,6 +18,8 @@ export const color = {
     light: '#ffffff',
     dark: '#000000',
     red: '#D8152F',
+    success: '#03c900',
+    fail: '#ff0000',
   },
   button: {
     white: '#ffffff',
@@ -31,10 +35,11 @@ export const color = {
   },
 };
 
+export const introHeight = '160px';
 export const mobileHeaderHeight = '40px';
-export const desktopHeaderHeight = '96px';
+export const desktopHeaderHeight = '112px';
 
-const width = 1272;
+export const width = 1272;
 export const pageWidth = width + 'px';
 export const padding = {
   tiny: '4px',
@@ -54,14 +59,14 @@ export const margin = {
 
 export const fontSize = {
   big: '24px',
-  normal: '18px',
-  small: '14px',
+  normal: '20px',
+  small: '16px',
   tiny: '12px',
 };
 
 export const lineHeight = {
   big: '26px',
-  normal: '20px',
+  normal: '22px',
   small: '16px',
   tiny: '14px',
 };
@@ -82,3 +87,6 @@ export type pixels = number;
  * @returns string for CSS
  */
 export const px = (value: pixels): string => value + 'px';
+
+export const evalPx = (value?: string | number) =>
+  value ? (typeof value === 'string' ? value : px(value)) : undefined;

@@ -1,13 +1,18 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import { padding, margin, color, fontSize } from '../styles/theme';
-import { ButtonColor } from '../styles/button-theme';
-import { WrapperSection, Text, TitleSection } from '../styles/GlobalStyle.css';
+import { Link } from 'gatsby';
+import React from 'react';
+
+import { urls } from 'app/website';
+
+import { ButtonFlavor, ButtonThemes } from './buttons/Button';
 import { SecondaryButton } from './buttons/SecondaryButton';
+import { ResponsiveImage } from './images/ResponsiveImage';
+
+import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
+import { color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
-  min-height: 32.3em;
   grid-area: about;
   margin: 0;
   padding: 0;
@@ -16,50 +21,55 @@ const Wrapper = styled(WrapperSection)`
 `;
 
 const MockUp = styled.div`
-  background-color: ${color.background.primary};
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  p {
-    margin: 0;
-    color: ${color.text.secondary};
-    font-size: ${fontSize.small};
+  .gatsby-image-wrapper {
+    width: 100%;
+
+    div {
+      height: 17.8em !important;
+    }
   }
 `;
 
 const Info = styled.div`
   background-color: ${color.background.dark};
-  padding: ${padding.normal} ${padding.big};
+  padding: ${padding.normal};
 `;
 
-const AboutText = styled(Text)`
-  color: ${color.text.light};
-  margin-top: ${margin.normal};
+const AboutButton = styled(SecondaryButton)`
+  margin: ${margin.small} 0;
+  font-weight: bold;
 `;
 
 const AboutTitle = styled(TitleSection)`
   color: ${color.text.light};
 `;
-const AboutButton = styled(SecondaryButton)`
-  margin: ${margin.normal} 0;
+
+const AboutText = styled(Text)`
+  color: ${color.text.light};
 `;
 
 const About = () => {
   return (
     <Wrapper color={color.background.dark}>
       <Info>
-        <TitleSection>O Poli</TitleSection>
-        <Text>
+        <AboutTitle>O Poli</AboutTitle>
+        <AboutText>
           Masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże Ci
           odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską
           gospodarkę.
-        </Text>
-        <AboutButton label="Dowiedz się więcej... " color={ButtonColor.White} fontSize={fontSize.small} />
+        </AboutText>
+        <Link to={urls.pola.about()}>
+          <AboutButton
+            label="Dowiedz się więcej... "
+            styles={{ ...ButtonThemes[ButtonFlavor.WHITE], fontSize: fontSize.small }}
+            fontSize={fontSize.small}
+          />
+        </Link>
       </Info>
       <MockUp>
-        <p>Mock up telefonu z uruchomioną aplikacją</p>
+        <ResponsiveImage imageSrc="1-prom-strona.png" title={'info'} />
       </MockUp>
     </Wrapper>
   );

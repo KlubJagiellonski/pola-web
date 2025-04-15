@@ -1,50 +1,53 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { PageLayout } from '../layout/PageLayout';
-import SEOMetadata from '../utils/browser/SEOMetadata';
-import { IPolaState } from '../state/types';
-import { LoadBrowserLocation, SelectActivePage } from '../state/app/app-actions';
-import { PageType, urls } from '../domain/website';
-import { PageSection } from '../layout/PageSection';
-import { Text, TitleSection } from '../styles/GlobalStyle.css';
-import { ColumnsLayout, ContentColumn } from '../layout/ColumnsLayout';
-import { PartnerService } from '../domain/partners/partners-service';
-import { PartnersList } from '../components/partners/PartnersList';
-import { padding } from '../styles/theme';
-import { ResponsiveImage } from '../components/images/ResponsiveImage';
+import React from 'react';
 
-const ImageContainer = styled.div`
-min-width: 20em;
-  max-width: 40em;
-  margin: 0 auto;
+import { PageType, urls } from 'app/website';
+
+import Faq from '@Components/Faq';
+import { ResponsiveImage } from '@Components/images/ResponsiveImage';
+import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
+import { PageLayout } from '@Layout/PageLayout';
+import { PageSection } from '@Layout/PageSection';
+import SEOMetadata from '@Utils/browser/SEOMetadata';
+
+import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { margin, padding } from '@Styles/theme';
+import {PageProps} from "gatsby";
+
+const Image = styled.div`
+  height: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: ${margin.normal};
+
+  .gatsby-image-wrapper {
+    height: 100%;
+
+    div {
+      padding-bottom: 100% !important;
+    }
+
+    picture {
+      img {
+        width: auto !important;
+      }
+    }
+  }
 `;
 
-interface IAboutPage {
-  location?: Location;
-}
+interface IAboutPage extends PageProps<any> {}
 
 const AboutPage = (props: IAboutPage) => {
-  const { location } = props;
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (location) {
-      dispatch(LoadBrowserLocation(location));
-      dispatch(SelectActivePage(PageType.ABOUT));
-    }
-  }, []);
-
   return (
-    <PageLayout styles={{ marginTop: padding.big }}>
+    <PageLayout location={props.location} page={PageType.ABOUT} styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="O Poli" />
       <ColumnsLayout>
-        <ContentColumn>
+        <ContentColumn fraction={60}>
           <PageSection>
             <TitleSection>O Poli</TitleSection>
             <Text>
-              Masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
+              masz dość masówki globalnych koncernów? Szukasz lokalnych firm tworzących unikatowe produkty? Pola pomoże
               Ci odnaleźć polskie wyroby. Zabierając Polę na zakupy, odnajdujesz produkty „z duszą” i wspierasz polską
               gospodarkę.
             </Text>
@@ -77,33 +80,31 @@ const AboutPage = (props: IAboutPage) => {
             <TitleSection>Filozofia działania</TitleSection>
             <Text>
               Staramy się być maksymalnie przejrzyści w naszych działaniach. Całość kodu źródłowego serwisu udostępniamy
-              na zasadach otwartego oprogramowania na{' '}
-              <a href={urls.external.polaGitHub.href} target="__blank">
+              na zasadach otwartego oprogramowania na
+              <a href={urls.external.links.polaGitHub.href} target="__blank">
                 koncie Klubu Jagiellońskiego
               </a>{' '}
               w serwisie GitHub. Wktórce planujemy udostępnić w Internecie całość bazy danych producentów wraz z
               historią zmian i źródłami, na podstawie których podejmujemy decyzję o liczbie punktów, które im
               przyznajemy. Działamy zgodnie z naszą{' '}
-              <a href={urls.external.polaPrivacyPolicy.href} target="__blank">
+              <a href={urls.external.links.polaPrivacyPolicy.href} target="__blank">
                 polityką prywatności
               </a>
               .
             </Text>
           </PageSection>
-          <PageSection>
-            <TitleSection>Partnerzy</TitleSection>
-            <PartnersList partners={PartnerService.getAll()} />
-          </PageSection>
-
         </ContentColumn>
-        <ContentColumn hideOnMobile={true}>
-          <ImageContainer>
-            <ResponsiveImage imageSrc="sok.png" />
-          </ImageContainer>
+        <ContentColumn hideOnMobile={true} fraction={40}>
+          <Image>
+            <ResponsiveImage imageSrc="3-bez_loga.png" />
+          </Image>
         </ContentColumn>
       </ColumnsLayout>
-    </PageLayout >
+      <PageSection>
+        <Faq />
+      </PageSection>
+    </PageLayout>
   );
 };
 
-export default connect((state: IPolaState) => ({ location: state.app.location }), {})(AboutPage);
+export default AboutPage;

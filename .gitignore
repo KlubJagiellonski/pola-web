@@ -1,5 +1,10 @@
+get-response.json
+
 build
-public
+public*
+
+# Security
+get-response.json
 
 # Logs
 logs

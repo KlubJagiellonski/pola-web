@@ -1,11 +1,32 @@
-import React from 'react';
 import styled from 'styled-components';
 
+import React from 'react';
+import { ConnectedProps, connect } from 'react-redux';
+
+import { IPolaState } from '@App/state';
+import { appDispatcher } from '@App/state/app-dispatcher';
+import { ExternalLinkData, PageLinkData, PageType, pageLinks } from 'app/website';
+
 import { HamburgerMenu } from './nav/HamburgerMenu';
+import { ExtNavItem, NavItem } from './nav/NavItem';
 import { NavbarMenu } from './nav/NavbarMenu';
-import { desktopHeaderHeight, Device, pageWidth, color } from '../styles/theme';
-import { NavItem } from './nav/NavItem';
-import { pageLinks, PageType } from '../domain/website';
+
+import { Device, color, desktopHeaderHeight, pageWidth } from '@Styles/theme';
+
+const connector = connect(
+  (state: IPolaState) => {
+    const { app } = state;
+    return {
+      activePage: app.activePage,
+      isMenuExpanded: app.isMenuExpanded,
+    };
+  },
+  {
+    expandMenu: appDispatcher.expandMenu,
+  }
+);
+
+type ReduxProps = ConnectedProps<typeof connector>;
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -13,9 +34,10 @@ const HeaderContainer = styled.header`
   justify-content: center;
   position: absolute;
   top: 0;
-  z-index: 10;
+  z-index: 2;
   width: 100%;
   background: ${color.background.white};
+  box-shadow: 0 1px 10px ${color.background.secondary};
 
   .header-content {
     display: flex;
@@ -37,25 +59,34 @@ const HeaderContainer = styled.header`
   }
 `;
 
-interface IPageHeader {
+type IPageHeader = ReduxProps & {
   siteTitle?: string;
-  activePage: PageType;
-  isMenuExpanded: boolean;
+};
 
-  onExpand: (expanded: boolean) => void;
-}
+const Header: React.FC<IPageHeader> = ({ siteTitle, activePage, isMenuExpanded, expandMenu }) => {
+  const isExternalLink = (link: PageLinkData | ExternalLinkData) => {
+    const href = typeof link.url === 'function' ? link.url() : link.url;
+    return href.startsWith('http');
+  };
 
-export const PageHeader = (props: IPageHeader) => {
-  const navItems = pageLinks.map((link) => <NavItem key={link.type} data={link} activePage={props.activePage} />);
+  const navItems = pageLinks.map((link) => {
+    if (!isExternalLink(link)) {
+      return <NavItem key={link.type} data={link} activePage={activePage} />;
+    } else {
+      return <ExtNavItem key={link.type} data={link} activePage={activePage} />;
+    }
+  });
 
   return (
     <HeaderContainer>
       <div className="header-content">
         <NavbarMenu>{navItems}</NavbarMenu>
-        <HamburgerMenu expanded={props.isMenuExpanded} onExpand={props.onExpand}>
+        <HamburgerMenu expanded={isMenuExpanded} onExpand={expandMenu}>
           {navItems}
         </HamburgerMenu>
       </div>
     </HeaderContainer>
   );
 };
+
+export const PageHeader = connector(Header);

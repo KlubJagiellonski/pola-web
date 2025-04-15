@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { color, fontSize, Device, padding, margin } from './../styles/theme';
-import { TitleSection } from './../styles/GlobalStyle.css';
-import { GooglePlayLink, AppStoreLink } from './links';
+import { MobileApps } from './MobileApps';
+
+import { TitleSection } from '@Styles/GlobalStyle.css';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,23 +28,7 @@ const DownoladTitle = styled(TitleSection)`
   font-size: ${fontSize.normal};
 
   @media ${Device.mobile} {
-    margin: ${margin.small}
-  }
-`;
-
-const DownloadLinks = styled.div`
-  a {
-    padding: ${padding.small};
-
-    img {
-      @media ${Device.mobile} {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width: 8em;
-      }
-    }
+    margin: ${margin.small};
   }
 `;
 
@@ -51,10 +36,7 @@ const Download = () => {
   return (
     <Wrapper>
       <DownoladTitle>APLIKACJA POLA</DownoladTitle>
-      <DownloadLinks>
-        <GooglePlayLink />
-        <AppStoreLink />
-      </DownloadLinks>
+      <MobileApps />
     </Wrapper>
   );
 };
