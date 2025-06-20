@@ -23,7 +23,7 @@ export const selectedProductDispatcher = {
       const productEntityEAN: IProductEAN = await service.getProduct(code);
       const product = new Product(productEntityEAN.name, productEntityEAN);
 
-      navigate(`${location?.pathname}?ean=${code}`, { replace: true });
+      window.history.replaceState(null, '', `${location.pathname}?ean=${code}`);
 
       await dispatch(selectProduct(product));
     } catch (error: unknown) {
