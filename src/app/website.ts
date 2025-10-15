@@ -154,7 +154,7 @@ export const pageLinks: (PageLinkData | ExternalLinkData)[] = [
   { type: PageType.NEWS, label: "Aktualności", url: urls.pola.news() },
   {
     type: PageType.FRIENDS,
-    label: "Klub przyjaciół Poli",
+    label: "Klub Przyjaciół Poli",
     url: urls.pola.friends(),
   },
   { type: PageType.PARTNERS, label: "Partnerzy", url: urls.pola.partners() },
