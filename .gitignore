@@ -78,3 +78,5 @@ yarn-error.log
 
 # === UNCOMMENT THIS ===
 # public
+
+.env.development
