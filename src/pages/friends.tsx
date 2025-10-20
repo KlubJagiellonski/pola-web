@@ -79,7 +79,7 @@ const FriendsPage = (props: IFriendsPage) => {
 
   return (
     <PageLayout location={props.location} page={PageType.FRIENDS}>
-      <SEOMetadata pageTitle="Klub przyjaciół Poli" />
+      <SEOMetadata pageTitle="Klub Przyjaciół Poli" />
       <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>
         <FriendsSection friends={friendData} />

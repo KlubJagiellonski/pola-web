@@ -80,7 +80,7 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
           <Actions>
             <a href={`https://pola-app.pl/${urls.pola.friends()}`} target="_blank">
               <ButtonContainer theme={ButtonThemes.WhiteRed}>
-                <span>Zobacz przyjaciół Poli</span>
+                <span>Zobacz Przyjaciół Poli</span>
               </ButtonContainer>
             </a>
             <a href={product.donate.url} target="_blank">
@@ -91,7 +91,7 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
           </Actions>
         ) : (
           <Actions>
-            <LinkButton label="Zobacz przyjaciół Poli" styles={ButtonThemes.WhiteRed} onClick={redirectToFriends} />
+            <LinkButton label="Zobacz Przyjaciół Poli" styles={ButtonThemes.WhiteRed} onClick={redirectToFriends} />
             {product.donate.show_button && (
               <LinkButton label="Potrzebujemy 1 ZŁ1" styles={ButtonThemes.Red} onClick={handleDonate} />
             )}
