@@ -27,6 +27,12 @@ const ContenttWrapper = styled.div`
   img {
     max-width: 100%;
   }
+
+  blockquote{
+    margin: 0;
+    border-left: 3px solid #d8152f;
+    padding-left: 1rem;
+  }
 `;
 
 const Content = (props: any) => {
