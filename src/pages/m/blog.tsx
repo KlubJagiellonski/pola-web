@@ -125,7 +125,7 @@ const BlogPage: React.FC<INewsPage> = (props) => {
               fontSize={fontSize.normal}
             />
           </a>
-          <a href={'https://www.pola-app.pl/business?value=audyt-i-dzien-polskiego-produktu'} target="_blank">
+          <a href={'/m/business?value=audyt-i-dzien-polskiego-produktu'}>
             <ButtonWhiteRed
               label="Sprawdź ofertę dla firm"
               styles={{ ...ButtonThemes[ButtonFlavor.WHITE_RED], fontSize: fontSize.normal }}
