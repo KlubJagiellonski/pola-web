@@ -114,6 +114,26 @@ const BlogPage: React.FC<INewsPage> = (props) => {
           />
         </MobileNewsletterContainer>
       </PageSection>
+      <PageSection>
+        <ButtonSection>
+          <a
+            href={'https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform'}
+            target="_blank">
+            <ButtonRed
+              label="Dodaj firmę"
+              styles={{ ...ButtonThemes[ButtonFlavor.RED], fontSize: fontSize.normal }}
+              fontSize={fontSize.normal}
+            />
+          </a>
+          <a href={'/m/business?value=audyt-i-dzien-polskiego-produktu'}>
+            <ButtonWhiteRed
+              label="Sprawdź ofertę dla firm"
+              styles={{ ...ButtonThemes[ButtonFlavor.WHITE_RED], fontSize: fontSize.normal }}
+              fontSize={fontSize.normal}
+            />
+          </a>
+        </ButtonSection>
+      </PageSection>
       <PageSection styles={{ marginBottom: '2em' }}>
         <MobileFriendsCarousel friends={props.friends} />
       </PageSection>
