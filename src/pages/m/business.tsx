@@ -10,6 +10,7 @@ import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { padding } from '@Styles/theme';
 import {PageProps} from "gatsby";
 import BusinessAll from 'business/components/BussinesAll';
+import { WebViewLayout } from '@Layout/WebViewLayout';
 
 
 interface IBusinessPage extends PageProps<any> {}
@@ -17,10 +18,9 @@ interface IBusinessPage extends PageProps<any> {}
 const BusinessPage = (props: IBusinessPage) => {
 
   return (
-    <PageLayout location={props.location} page={PageType.BUSINESS} styles={{ marginTop: padding.big }}>
-      <SEOMetadata pageTitle="Oferta Biznesowa" />
+    <WebViewLayout styles={{ marginTop: padding.big }}>
       <BusinessAll {...props}/>
-    </PageLayout>
+    </WebViewLayout>
   );
 };
 
