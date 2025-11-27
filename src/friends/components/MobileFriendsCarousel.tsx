@@ -51,7 +51,7 @@ export const MobileFriendsCarousel: React.FC<IFriends> = ({ friends, rows }) => 
     <Wrapper>
       <SliderContainer title="Przyjaciele Poli" rows={rows} isMobile={true}>
         {friends?.map((el) => (
-          <SliderElement to={urls.pola.friends('friend', el.slug)} key={el.id}>
+          <SliderElement to={"/m/friends"} key={el.id}>
             <Element>
               <Image>{el.image && <FriendLogo title={el.name} imageSrc={el.image} />}</Image>
               {el.slug && <>Zobacz {'>'}</>}

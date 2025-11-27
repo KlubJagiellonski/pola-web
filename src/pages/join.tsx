@@ -27,15 +27,27 @@ const List = styled.ul`
   padding: 0;
   margin: 0;
   list-style-type: none;
+  text-align: center;
+    font-weight: bold;
 
   li {
     font-size: ${fontSize.small};
   }
 `;
 
+const ListTeam = styled(List)`
+  font-weight: bold;
+`;
+
 const Section = styled.div`
   margin-top: ${margin.big};
 `;
+
+const TitleTeam = styled(TitleSection)`
+  font-weight: normal;
+  text-align: center;
+  margin-top: ${margin.big};
+`
 
 const TeamPage = (props: ITeamPage) => {
   return (
@@ -43,62 +55,106 @@ const TeamPage = (props: ITeamPage) => {
       <Wrapper>
         <SEOMetadata pageTitle="Dołącz do zespołu" />
         <PageSection>
-          <TitleSection>Zespół</TitleSection>
-          <Text>
-            Działamy razem dla dobra wspólnego. Tutaj wykorzystujemy nasze umiejętności, by tworzyć projekt pożyteczny
-            społecznie. Całość prac programistycznych jest całkowicie transparentna i publicznie{' '}
-            <a href={urls.external.links.github.href}>dostępna w serwisie GitHub</a>.
-          </Text>
-          <Text>
-            Aplikacja Pola to dowód na to, że można programować inaczej. Nie pobieramy absolutnie żadnych informacji o
-            naszych użytkownikach, nie wyświetlamy reklam, a każda linijka naszego kodu jest publicznie dostępna i każdy
-            może ją zweryfikować. Staramy się realizować w ten sposób <b> ideę prospołecznego kodowania. </b>
-          </Text>
           <Section>
-            <TitleSection>Zespół aplikacji Pola:</TitleSection>
-          </Section>
+            <TitleSection style={{textAlign: "center"}}>Obecny zespół aplikacji Pola:</TitleSection>
           <ColumnsLayout>
             <ContentColumn>
-              <Section>
-                <TitleSection>programowanie</TitleSection>
-                <List>
-                  <li>Kamil Breguła</li>
-                  <li>Rafał Gawlik</li>
+              <TitleTeam>iOS developer</TitleTeam>
+              <ListTeam>
                   <li>Marcin Stepnowski</li>
-                  <li>Zuzanna Dudzińska</li>
-                  <li>Julia Dudzińska</li>
-                  <li>Jakub Kałamarz</li>
-                  <li>Karol Kamiński</li>
-                  <li>Mikołaj Rodkiewicz</li>
-                  <li>Katarzyna Grudzień</li>
-                  <li>Adam Walkowski</li>
-                  <li>Damian Paśko</li>
-                  <li>Marcin Murgas</li>
-                  <li>Mateusz Śląski</li>
-                  <li>Kuba Lipiński</li>
-                  <li>Łukasz Rejman</li>
-                  <li>Arek Banas</li>
-                  <li>Paweł Janeczek</li>
-                  <li>Grzesiek Kapusta</li>
-                  <li>Jurek Kleszcz</li>
-                  <li>Konrad Krakowiak</li>
-                  <li>Antoni Kędracki</li>
-                  <li>Michał Tajchert</li>
-                </List>
-              </Section>
-              <Section>
-                <TitleSection>Kontakt</TitleSection>
-                <List>
-                  <li>
-                    <a href={urls.external.mail.Klub.href}>pola@klubjagiellonski.pl</a>
-                  </li>
-                  <li>tel. 660 010 034</li>
-                </List>
-              </Section>
+              </ListTeam>
             </ContentColumn>
             <ContentColumn>
-              <Section>
-                <TitleSection>algorytm:</TitleSection>
+              <TitleTeam>backend developer</TitleTeam>
+              <ListTeam>
+                  <li>Dominik Krzemiński</li>
+                  <li>Hubert Skibiński</li>
+              </ListTeam>
+            </ContentColumn>
+            <ContentColumn>
+              <TitleTeam>android developer</TitleTeam>
+              <ListTeam>
+                  <li>Piotr Ryś</li>
+              </ListTeam>
+            </ContentColumn>
+          </ColumnsLayout>
+          <ColumnsLayout>
+            <ContentColumn>
+              <TitleTeam>web developer</TitleTeam>
+              <ListTeam>
+                  <li>Zuzanna Dudzińska</li>
+                  <li>Magdalena Redka</li>
+              </ListTeam>
+            </ContentColumn>
+            <ContentColumn>
+              <TitleTeam>analityka</TitleTeam>
+              <ListTeam>
+                  <li>Monika Kotula</li>
+              </ListTeam>
+            </ContentColumn>
+            <ContentColumn>
+              <TitleTeam>flutter developer</TitleTeam>
+              <ListTeam>
+                  <li>Kacper Żebrowski</li>
+              </ListTeam>
+            </ContentColumn>
+          </ColumnsLayout>
+          <ColumnsLayout>
+            <ContentColumn>
+              <TitleTeam>media manager</TitleTeam>
+              <ListTeam>
+                  <li>Anna Siłaczuk</li>
+              </ListTeam>
+            </ContentColumn>
+            <ContentColumn>
+              <TitleTeam>redaktor bazy danych</TitleTeam>
+              <ListTeam>
+                  <li>Bartłomiej Siedlecki</li>
+              </ListTeam>
+            </ContentColumn>
+            <ContentColumn>
+              <TitleTeam>UI/UX designer</TitleTeam>
+              <ListTeam>
+                  <li>Jakub Majkowski</li>
+              </ListTeam>
+            </ContentColumn>
+          </ColumnsLayout>
+          </Section>
+          <Section>
+          <TitleSection style={{textAlign: "center", paddingTop: margin.big}}>Pola istnieje dzięki nim!</TitleSection>
+          <ColumnsLayout>
+            <ContentColumn>
+                <TitleTeam>programowanie</TitleTeam>
+                <List>
+                <li>Arek Banas</li>
+                <li>Kamil Breguła</li>
+                <li>Zuzanna Dudzińska</li>
+                <li>Rafał Gawlik</li>
+                <li>Katarzyna Grudzień</li>
+                <li>Paweł Janeczek</li>
+                <li>Jakub Kałamarz</li>
+                <li>Karol Kamiński</li>
+                <li>Grzegorz Kapusta</li>
+                <li>Antoni Kędracki</li>
+                <li>Jurek Kleszcz</li>
+                <li>Konrad Krakowiak</li>
+                <li>Dominik Krzemiński</li>
+                <li>Jakub Lipiński</li>
+                <li>Marcin Murgas</li>
+                <li>Damian Paśko</li>
+                <li>Magdalena Redka</li>
+                <li>Łukasz Rejman</li>
+                <li>Piotr Ryś</li>
+                <li>Mikołaj Rodkiewicz</li>
+                <li>Hubert Skibiński</li>
+                <li>Marcin Stepnowski</li>
+                <li>Kacper Żebrowski</li>
+                <li>Julia Sulich</li>
+                <li>Mateusz Śląski</li>
+                <li>Michał Tajchert</li>
+                <li>Adam Walkowski</li>
+                </List>
+                <TitleTeam>algorytm:</TitleTeam>
                 <List>
                   <li>Piotr Dardziński</li>
                   <li>Michał Kot</li>
@@ -106,44 +162,60 @@ const TeamPage = (props: ITeamPage) => {
                   <li>Joanna Szalacha-Jarmużek</li>
                   <li>Leszek Wojdalski</li>
                 </List>
-              </Section>
-              <Section>
-                <TitleSection>projektowanie i design:</TitleSection>
+            </ContentColumn>
+            <ContentColumn>
+                <TitleTeam>projektowanie i design:</TitleTeam>
                 <List>
                   <li>Katarzyna Grudzień</li>
                   <li>Magdalena Karpińska</li>
                   <li>Tomasz Szczodrowski</li>
                   <li>Przemek Pomaski</li>
                 </List>
-              </Section>
-              <Section>
-                <TitleSection>koordynacja:</TitleSection>
+                <TitleTeam>redakcja bazy danych:</TitleTeam>
                 <List>
-                  <li>Obecnie - Mateusz Perowicz</li>
-                  <li>Bartosz Paszcza</li>
-                  <li>Maciej Dulak</li>
+                    <li>Łukasz Cader</li>
+                    <li>Mikołaj Dłubak</li>
+                    <li>Maciej Dulak</li>
+                    <li>Michał Kania</li>
+                    <li>Piotr Kaźmierski</li>
+                    <li>Dawid Kiljański</li>
+                    <li>Monika Kotula</li>
+                    <li>Mateusz Mroczek</li>
+                    <li>Mateusz Perowicz</li>
+                    <li>Bartłomiej Siedlecki</li>
+                    <li>Anna Siłaczuk</li>
+                    <li>Wojtek Skierski</li>
+                    <li>Arkadiusz Tomczyński</li>
+                    <li>Michał Wincel</li>
+                    <li>Bartek Ząbek</li>
                 </List>
-              </Section>
-              <Section>
-                <TitleSection>redakcja:</TitleSection>
-                <List>
-                  <li>Bartek Ząbek</li>
-                  <li>Monika Kotula</li>
-                  <li>Piotr Kaźmierski</li>
-                  <li>Arkadiusz Tomczyński</li>
-                  <li>Mikołaj Dłubak</li>
-                  <li>Łukasz Cader</li>
-                  <li>Dawid Kiljański</li>
-                  <li>Michał Wincel</li>
-                  <li>Michał Kania</li>
-                  <li>Maciek Dulak</li>
-                  <li>Mateusz Mroczek</li>
-                  <li>Mateusz Perowicz</li>
-                  <li>Wojtek Skierski</li>
-                </List>
-              </Section>
+                  <TitleTeam>inicjatorzy i pomysłodawcy:</TitleTeam>
+                  <List>
+                    <li>Grzegorz Kapusta</li>
+                    <li>Jakub Lipiński</li>
+                    <li>Krzysztof Mazur</li>
+                    <li>Piotr Trudnowski</li>
+                  </List>
             </ContentColumn>
           </ColumnsLayout>
+            <ColumnsLayout>
+              <ContentColumn>
+                  <TitleTeam>koordynacja:</TitleTeam>
+                  <List>
+                    <li>Maciej Dulak</li>
+                    <li>Bartosz Paszcza</li>
+                    <li>obecnie - Mateusz Perowicz</li>
+                  </List>
+                  <TitleTeam>Kontakt</TitleTeam>
+                  <List>
+                    <li>
+                      <a href={urls.external.mail.Klub.href}>pola@klubjagiellonski.pl</a>
+                    </li>
+                    <li>tel. 660 010 034</li>
+                  </List>
+              </ContentColumn>
+            </ColumnsLayout>
+          </Section>
         </PageSection>
       </Wrapper>
     </PageLayout>

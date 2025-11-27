@@ -1,27 +1,22 @@
+import { graphql } from "gatsby";
+
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS, NodeData } from '@contentful/rich-text-types';
 import { useLocation } from '@reach/router';
-import { IFriendData } from 'friends';
-import { IArticleData } from 'posts';
 import { IArticleNode } from 'posts';
 import styled from 'styled-components';
 
-import React, { useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React from 'react';
 
-import { IPolaState } from '@App/state';
-import { PageType } from 'app/website';
-
-import SideInformations from '@Components/SideInformations';
-import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 import { decodeHtml } from '@Utils/strings';
 
-import { ArticleHeader } from './ArticleHeader';
 
 import { Device, margin } from '@Styles/theme';
 import { Script } from 'gatsby';
+import { ArticleHeader } from "posts/articles/ArticleHeader";
+import { WebViewLayout } from "@Layout/WebViewLayout";
 
 const ContenttWrapper = styled.div`
   img {
@@ -86,16 +81,12 @@ interface IArticlePage {
   article: IArticleNode;
 }
 
-const ArticlePage: React.FC<IArticlePage> = (props) => {
-  const { article } = props;
-  const { title, subTitle, category, date, html } = article;
-  const { url: imageSrc } = article.cover;
-  const location = useLocation();
-  const articles = useSelector((state: IPolaState) => state.articles.data);
-  const friends = useSelector((state: IPolaState) => state.friends.data);
+const ArticlePage: React.FC<IArticlePage> = (props: any) => {
+  const { title, subTitle, category, date, html } = props.data.allContentfulPosts.nodes[0];
+  const { url: imageSrc } = props.data.allContentfulPosts.nodes[0].cover;
 
   return (
-    <PageLayout location={location} page={PageType.ARTICLE}>
+    <WebViewLayout>
       <SEOMetadata pageTitle={title} image={imageSrc} />
       <PageSection>
         <Wrapper>
@@ -107,14 +98,37 @@ const ArticlePage: React.FC<IArticlePage> = (props) => {
               <Content html={html} />
             </PageSection>
           </FirstColumn>
-          <SecondColumn>
-            <SideInformations actualArticleId={article.id} articles={articles} friends={friends} />
-          </SecondColumn>
         </Wrapper>
       </PageSection>
       <Script src="https://nowe.platnosci.ngo.pl/campaign.js"></Script>
-    </PageLayout>
+    </WebViewLayout>
   );
 };
 
 export default ArticlePage;
+
+export const query = graphql`
+  query LatestPost {
+    allContentfulPosts(sort: { fields: date, order: DESC }, limit: 1) {
+      nodes {
+        title
+        subTitle
+        date
+        category
+        cover {
+          url
+        }
+        html {
+          raw
+          references {
+            ... on ContentfulAsset {
+              contentful_id
+              url
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`;

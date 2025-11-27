@@ -20,7 +20,7 @@ const NotFoundPage = (props: INotFoundPage) => {
       {isHomePage ? (
         <Spinner styles={{ size: 300, color: color.text.red }} />
       ) : (
-        <DevelopmentPlaceholder text="Strona nie istnieje" />
+        <DevelopmentPlaceholder text="Trwa ładowanie strony" />
       )}
     </PageLayout>
   );
