@@ -1,9 +1,9 @@
 import React from 'react';
 import { RussiaInfoBox } from '../results-list/RussiaInfoBox';
-import { Product } from 'search';
+import { Product, IManufacturer } from 'search';
 import styled from 'styled-components';
-import { FaCheckCircle, FaRegCircle } from 'react-icons/fa';
 import { ScoreBar } from '@Components/ScoreBar';
+import { ScoreGauge } from '@Components/ScoreGauge';
 import { PolishPropertyName, getPropertiesFromManufacturer } from './PolishValues';
 import { AppSettings } from 'app/app-settings';
 import InfoIcon from '@Assets/info.results.png';
@@ -83,37 +83,6 @@ const CriteriaList = styled.div`
   line-height: 0.9em;
 `;
 
-const CircleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 85px;
-  height: 85px;
-  position: relative;
-  margin-top: -50px;
-`;
-
-const Percentage = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 27px;
-  font-size: ${fontSize.newsTitle};
-  font-weight: bold;
-  color: ${color.red};
-  text-align: center;
-`;
-
-const InnerLabel = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -13px;
-  font-size: ${fontSize.smallTitle};
-  color: ${color.text};
-  text-align: center;
-`;
 
 const Notes = styled.p`
   font-size: ${fontSize.description};
@@ -130,78 +99,6 @@ const ManufacturerDesc = styled.p`
 
 // ---- KOMPONENTY ----
 
-interface PercentCircleProps {
-  percent: number;
-  label?: string;
-}
-
-
-const PercentCircle: React.FC<{ percent: number; label?: string }> = ({ percent, label }) => {
-  const radius = 36;
-  const stroke = 7.5;
-  const normalizedRadius = radius - stroke / 2;
-  const circumference = normalizedRadius * 2 * Math.PI;
-
-  // ---- GAP (proporcja obwodu) ----
-  const gap = 0.25;
-  const gapLength = circumference * gap;
-  const visibleLength = circumference - gapLength;
-
-  // ---- długość faktycznego paska (procent × visibleLength) ----
-  const pct = Math.max(0, Math.min(100, Number(percent || 0)));
-  const progressLength = (pct / 100) * visibleLength;
-
-  // ---- dasharray dla tła i dla paska ----
-  const backgroundArray = `${visibleLength} ${gapLength}`;
-  const progressArray = `${progressLength} ${circumference}`;
-
-  // ---- offsety ----
-  const baseOffset = visibleLength + gapLength / 2;
-
-  // --- progressOffset ---
-  const progressOffset = baseOffset + progressLength;
-
-  return (
-    <CircleWrapper>
-      <svg width={radius * 2} height={radius * 2}>
-        {/* TŁO (szare) */}
-        <circle
-          stroke={color.backgroundLight}
-          fill="none"
-          cx={radius}
-          cy={radius}
-          r={normalizedRadius}
-          strokeWidth={stroke}
-          strokeDasharray={backgroundArray}
-          strokeDashoffset={baseOffset}
-          strokeLinecap="round"
-          transform={`rotate(90 ${radius} ${radius})`}
-        />
-
-        {/* PASEK (czerwony) */}
-        {progressLength > 0 && (
-          <circle
-            stroke={color.red}
-            fill="none"
-            cx={radius}
-            cy={radius}
-            r={normalizedRadius}
-            strokeWidth={stroke}
-            strokeDasharray={progressArray}
-            strokeDashoffset={progressOffset}
-            strokeLinecap="round"
-            transform={`rotate(90 ${radius} ${radius})`}
-            style={{ transition: "stroke-dashoffset 0.5s ease-out, stroke-dasharray 0.5s ease-out" }}
-          />
-        )}
-      </svg>
-      <Percentage style={{ color: color.text }}>{pct}%</Percentage>
-      {label && <InnerLabel>{label}</InnerLabel>}
-    </CircleWrapper>
-  );
-};
-
-
 const CriterionItem: React.FC<{ condition: boolean; label: string }> = ({ condition, label }) => (
   <div style={{
     display: "flex",
@@ -212,41 +109,28 @@ const CriterionItem: React.FC<{ condition: boolean; label: string }> = ({ condit
     minWidth: 0,
     
   }}>
-    {condition
-  ? <FaCheckCircle
-      style={{
-        color: color.red,
-        fontSize: '1.2em',
-        minWidth: '1.2em',
-        minHeight: '1.2em',
-        flexShrink: 0,
-        verticalAlign: 'middle'
-      }}
-    />
-  : <FaRegCircle
-      style={{
-        color: color.inactive,
-        fontSize: '1.2em',
-        minWidth: '1.2em',
-        minHeight: '1.2em',
-        flexShrink: 0,
-        verticalAlign: 'middle'
-      }}
-    />
-}
+    {condition ? (
+      <svg
+        width="1.2em"
+        height="1.2em"
+        viewBox="0 0 24 24"
+        fill="none"
+        style={{ display: 'inline-block', verticalAlign: 'middle', color: color.red, flexShrink: 0, minWidth: '1.2em', minHeight: '1.2em' }}
+      >
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
+        <path d="M7 12l3 3 7-7" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ) : (
+      <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: color.inactive, flexShrink: 0, minWidth: '1.2em', minHeight: '1.2em' }}>
+        <circle cx="12" cy="12" r="10" />
+      </svg>
+    )}
     {label}
   </div>
 );
 
 // ------------ GŁÓWNY KOMPONENT ---------------
-interface Product {
-  name: string;
-  manufacturer: {
-    plScore: number;
-    capitalShare: number;
-    description?: string;
-  };
-}
+
 interface Property {
   value: number;
   notes?: string;
@@ -285,7 +169,6 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
         Nasza ocena: <b>{product.manufacturer.plScore ?? "-"}</b> pkt
       </ScoreLabel>
       <ScoreBarWrapper>
-        {/* ScoreBar - podmień poniżej na swój komponent */}
         <ScoreBar
           value={product.manufacturer.plScore}
           unit="pkt"
@@ -298,9 +181,11 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
     {/* Kryteria oceniania */}
     <Heading><h2>Kryteria oceniania:</h2></Heading>
     <CriteriaRow>
-      <PercentCircle
-        percent={capitalProperty.value}
-        label="Polski kapitał"
+      <ScoreGauge
+        value={capitalProperty.value}
+        unit="%"
+        animation={{ duration: 1 }}
+        missingValuePlaceholder="—"
       />
       
       <CriteriaList>
@@ -319,7 +204,6 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
         <CriterionItem
           condition={notGlobalProperty.value === 100}
           label="Nie jest częścią zagranicznego koncernu"
-          notes={notGlobalProperty.notes}
         />
         <br />
       </CriteriaList>
