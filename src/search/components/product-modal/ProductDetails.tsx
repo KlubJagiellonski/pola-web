@@ -165,6 +165,25 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
 
     {/* Ocena + progress bar */}
     <ScoreRow>
+      {product.manufacturer.plScore === 100 && (
+        <div style={{
+          background: '#ffe5e5',
+          color: '#c10028',
+          padding: '10px 0',
+          textAlign: 'center',
+          fontWeight: '600',
+          borderRadius: '8px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingLeft: '20px',
+          paddingRight: '20px'
+        }}>
+          <span>❤️</span>
+          <span>Ta firma jest Przyjacielem Poli</span>
+          <span>❤️</span>
+        </div>
+      )}
       <ScoreLabel>
         <img src={InfoIcon} alt="Info" style={{ width: '14px', marginRight: '4px' }} />
         Nasza ocena: <b>{product.manufacturer.plScore ?? "-"}</b> pkt
