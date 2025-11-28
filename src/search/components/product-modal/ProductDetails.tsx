@@ -7,6 +7,7 @@ import { ScoreGauge } from '@Components/ScoreGauge';
 import { PolishPropertyName, getPropertiesFromManufacturer } from './PolishValues';
 import { AppSettings } from 'app/app-settings';
 import InfoIcon from '@Assets/info.results.png';
+import { ReadMoreArea } from '../../../components/ReadMoreArea';
 
 // ---- PALETA KOLORÓW ----
 const color = {
@@ -215,7 +216,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
     )}
 
     {product.manufacturer.description && (
-      <ManufacturerDesc>{product.manufacturer.description}</ManufacturerDesc>
+      <ManufacturerDesc><ReadMoreArea text={product.manufacturer.description} maxLength={184} /></ManufacturerDesc>
     )}
   </DetailsContainer>
 );
