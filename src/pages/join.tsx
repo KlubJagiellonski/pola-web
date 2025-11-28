@@ -95,8 +95,7 @@ const TeamPage = (props: ITeamPage) => {
             <ContentColumn>
               <TitleTeam>flutter developer</TitleTeam>
               <ListTeam>
-                  <li>Adam Stolarczyk</li>
-                  <li>Karol Stolarczyk</li>
+                  <li>Kacper Żebrowski</li>
               </ListTeam>
             </ContentColumn>
           </ColumnsLayout>
@@ -149,8 +148,7 @@ const TeamPage = (props: ITeamPage) => {
                 <li>Mikołaj Rodkiewicz</li>
                 <li>Hubert Skibiński</li>
                 <li>Marcin Stepnowski</li>
-                <li>Adam Stolarczyk</li>
-                <li>Karol Stolarczyk</li>
+                <li>Kacper Żebrowski</li>
                 <li>Julia Sulich</li>
                 <li>Mateusz Śląski</li>
                 <li>Michał Tajchert</li>
