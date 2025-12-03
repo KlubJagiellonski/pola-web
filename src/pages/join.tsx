@@ -148,6 +148,8 @@ const TeamPage = (props: ITeamPage) => {
                 <li>Mikołaj Rodkiewicz</li>
                 <li>Hubert Skibiński</li>
                 <li>Marcin Stepnowski</li>
+                <li>Adam Stolarczyk</li>
+                <li>Karol Stolarczyk</li>
                 <li>Kacper Żebrowski</li>
                 <li>Julia Sulich</li>
                 <li>Mateusz Śląski</li>
