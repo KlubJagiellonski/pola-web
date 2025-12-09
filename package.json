@@ -85,6 +85,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-icons": "^5.5.0",
     "react-loader-spinner": "^5.1.5",
     "react-onclickoutside": "^6.12.2",
     "react-paginate": "^7.1.3",
