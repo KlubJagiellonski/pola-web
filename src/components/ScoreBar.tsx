@@ -29,6 +29,9 @@ const BarComponent = styled.div`
 
 const ValueBar = styled(BarComponent)<{ value?: number; animation?: IAnimation }>`
   text-align: right;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 
   .value-belt {
     position: absolute;
@@ -78,7 +81,6 @@ export const ScoreBar: React.FC<IScoreBar> = ({ value, unit, animation, missingV
     return (
       <ValueBar value={knownValue} animation={animation}>
         <div className="value-belt" data-testid="value-belt" />
-        <div className="label">{scoreText}</div>
       </ValueBar>
     );
   } else {
