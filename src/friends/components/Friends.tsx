@@ -30,7 +30,7 @@ const Image = styled.div`
 `;
 
 const Element = styled.div`
-  opacity: 0.6;
+  opacity: 1;
 `;
 
 interface IFriends {
