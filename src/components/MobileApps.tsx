@@ -25,9 +25,12 @@ const DownloadLinks = styled.div`
 
   @media ${Device.mobile} {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 
     a {
       padding: 0;
+      max-width: 100%;
     }
 
     gap: 0.5em;
