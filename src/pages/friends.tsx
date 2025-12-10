@@ -29,8 +29,9 @@ const BoldText = styled(Text)`
 `;
 
 const UlSection = styled.ul`
-  color: ${color.text.secondary};
+  color: ${color.text.primary};
   font-size: ${fontSize.small};
+  font-weight: 700;
   margin: ${margin.small};
   padding: ${padding.small};
 `;

@@ -25,14 +25,24 @@ import { Script } from 'gatsby';
 
 const ContenttWrapper = styled.div`
   img {
-    max-width: 100%;
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 1.5rem auto !important;
   }
 
-  blockquote{
-    margin: 0;
-    border-left: 3px solid #d8152f;
-    padding-left: 1rem;
+  figure img {
+  max-width: 700px;
+  width: 100%;
   }
+
+  blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 4px solid #d8152f;
+  font-style: italic;
+  color: #444;
+ }
 `;
 
 const Content = (props: any) => {

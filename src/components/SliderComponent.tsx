@@ -41,7 +41,7 @@ const SliderLink = styled(AnchorLink)`
   font-size: ${fontSize.small};
   position: relative;
   bottom: 0;
-  color: ${color.text.secondary};
+  color: ${color.text.primary};
   height: 100%;
   target: string;
 `;
