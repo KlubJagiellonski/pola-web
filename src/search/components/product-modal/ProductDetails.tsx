@@ -1,6 +1,7 @@
+import { CompanyLogo } from '../../../components/CompanyLogo';
 import React from 'react';
 import { RussiaInfoBox } from '../results-list/RussiaInfoBox';
-import { Product, IManufacturer } from 'search';
+import { Product} from 'search';
 import styled from 'styled-components';
 import { ScoreBar } from '@Components/ScoreBar';
 import { ScoreGauge } from '@Components/ScoreGauge';
@@ -98,6 +99,45 @@ const ManufacturerDesc = styled.p`
   color: ${color.text};
 `;
 
+// ---- STYLE DLA LOGO MAREK ----
+const BrandsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 20px;
+  margin-top: 16px;
+`;
+
+
+const BrandTile = styled.div`
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform .2s ease, box-shadow .2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+`;
+
+const BrandLogo = styled.img`
+  max-height: 45px;
+  max-width: 100%;
+  object-fit: contain;
+`;
+
+// ---- POMOCNICZA FUNKCJA ----
+const isRealUrl = (url?: string | null) => {
+  if (!url) return false;
+  const u = url.toLowerCase();
+  return !u.includes("example.pl") && !u.includes("example.com");
+};
+
+
 // ---- KOMPONENTY ----
 
 const CriterionItem: React.FC<{ condition: boolean; label: string }> = ({ condition, label }) => (
@@ -148,95 +188,150 @@ interface IProductDetails {
 
 export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const manufacturer = product.manufacturer;
+  const brandsWithLogo = manufacturer.brands?.filter(b => b.logotype_url) || [];
   const workersProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.WORKERS);
   const researchProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.RnD);
   const registeredProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.REGISTERED);
   const notGlobalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.NOT_GLOBAL);
   const capitalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.CAPITAL);
 
- return (
-  <DetailsContainer>
-    <Header>
-      <h3>
-        {product.name}
-      </h3>
-    </Header>
-    <RussiaInfoBox product={product} />
+  return (
+    <DetailsContainer>
+      <Header>
+        <h3>
+          {product.name}
+        </h3>
+      </Header>
+      <RussiaInfoBox product={product} />
 
-    {/* Ocena + progress bar */}
-    <ScoreRow>
-      {product.manufacturer.plScore === 100 && (
-        <div style={{
-          background: '#ffe5e5',
-          color: '#c10028',
-          padding: '10px 0',
-          textAlign: 'center',
-          fontWeight: '600',
-          borderRadius: '8px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingLeft: '20px',
-          paddingRight: '20px'
-        }}>
-          <span>❤️</span>
-          <span>Ta firma jest Przyjacielem Poli</span>
-          <span>❤️</span>
-        </div>
+      {/* Ocena + progress bar */}
+      <ScoreRow>
+        {product.manufacturer.plScore === 100 && (
+          <div style={{
+            background: '#ffe5e5',
+            color: '#c10028',
+            padding: '10px 0',
+            textAlign: 'center',
+            fontWeight: '600',
+            borderRadius: '8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingLeft: '20px',
+            paddingRight: '20px'
+          }}>
+            <span>❤️</span>
+            <span>Ta firma jest Przyjacielem Poli</span>
+            <span>❤️</span>
+          </div>
+        )}
+        <ScoreLabel>
+          <img src={InfoIcon} alt="Info" style={{ width: '14px', marginRight: '4px' }} />
+          Nasza ocena: <b>{product.manufacturer.plScore ?? "-"}</b> pkt
+        </ScoreLabel>
+        <ScoreBarWrapper>
+          <ScoreBar
+            value={product.manufacturer.plScore}
+            unit="pkt"
+            missingValuePlaceholder="brak punktacji w rankingu Poli"
+            animation={{ duration: 1, delay: 0.2 }}
+          />
+        </ScoreBarWrapper>
+      </ScoreRow>
+
+      {/* Kryteria oceniania */}
+      <Heading><h2>Kryteria oceniania:</h2></Heading>
+      <CriteriaRow>
+        <ScoreGauge
+          value={capitalProperty.value}
+          unit="%"
+          animation={{ duration: 1 }}
+          missingValuePlaceholder="—"
+        />
+        
+        <CriteriaList>
+          <CriterionItem
+            condition={workersProperty.value === 100}
+            label="Produkuje w Polsce"
+          />
+          <CriterionItem
+            condition={researchProperty.value === 100}
+            label="Prowadzi badania w Polsce"
+          />
+          <CriterionItem
+            condition={registeredProperty.value === 100}
+            label="Zarejestrowana w Polsce"
+          />
+          <CriterionItem
+            condition={notGlobalProperty.value === 100}
+            label="Nie jest częścią zagranicznego koncernu"
+          />
+          <br />
+        </CriteriaList>
+      </CriteriaRow>
+
+      {/* Notatki o kapitale, producent */}
+      {AppSettings.SHOW_POLISH_VALUE_NOTES && capitalProperty.notes && (
+        <Notes>{capitalProperty.notes}</Notes>
       )}
-      <ScoreLabel>
-        <img src={InfoIcon} alt="Info" style={{ width: '14px', marginRight: '4px' }} />
-        Nasza ocena: <b>{product.manufacturer.plScore ?? "-"}</b> pkt
-      </ScoreLabel>
-      <ScoreBarWrapper>
-        <ScoreBar
-          value={product.manufacturer.plScore}
-          unit="pkt"
-          missingValuePlaceholder="brak punktacji w rankingu Poli"
-          animation={{ duration: 1, delay: 0.2 }}
-        />
-      </ScoreBarWrapper>
-    </ScoreRow>
 
-    {/* Kryteria oceniania */}
-    <Heading><h2>Kryteria oceniania:</h2></Heading>
-    <CriteriaRow>
-      <ScoreGauge
-        value={capitalProperty.value}
-        unit="%"
-        animation={{ duration: 1 }}
-        missingValuePlaceholder="—"
-      />
-      
-      <CriteriaList>
-        <CriterionItem
-          condition={workersProperty.value === 100}
-          label="Produkuje w Polsce"
-        />
-        <CriterionItem
-          condition={researchProperty.value === 100}
-          label="Prowadzi badania w Polsce"
-        />
-        <CriterionItem
-          condition={registeredProperty.value === 100}
-          label="Zarejestrowana w Polsce"
-        />
-        <CriterionItem
-          condition={notGlobalProperty.value === 100}
-          label="Nie jest częścią zagranicznego koncernu"
-        />
-        <br />
-      </CriteriaList>
-    </CriteriaRow>
+      {product.manufacturer.description && (
+        <ManufacturerDesc><ReadMoreArea text={product.manufacturer.description} maxLength={184} /></ManufacturerDesc>
+      )}
 
-    {/* Notatki o kapitale, producent */}
-    {AppSettings.SHOW_POLISH_VALUE_NOTES && capitalProperty.notes && (
-      <Notes>{capitalProperty.notes}</Notes>
-    )}
+      {/* Logo producenta */}
+        {manufacturer.logotype_url && (
+          isRealUrl(manufacturer.official_url) ? (
+            <a
+              href={manufacturer.official_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ marginTop: "-15px", display: "block" }}
+            >
+              <CompanyLogo
+                logoUrl={manufacturer.logotype_url}
+                companyName={manufacturer.name}
+              />
+            </a>
+          ) : (
+            <div style={{ marginTop: "10px" }}>
+              <CompanyLogo
+                logoUrl={manufacturer.logotype_url}
+                companyName={manufacturer.name}
+              />
+            </div>
+          )
+        )}
 
-    {product.manufacturer.description && (
-      <ManufacturerDesc><ReadMoreArea text={product.manufacturer.description} maxLength={184} /></ManufacturerDesc>
-    )}
-  </DetailsContainer>
-);
+
+        {/* Logo marek */}
+        {brandsWithLogo.length > 0 && (
+          <div style={{ marginTop: "20px" }}>
+            <h4 style={{ marginBottom: "10px", fontWeight: "700", color: "#212121" }}>
+              Marki producenta:
+            </h4>
+
+            <BrandsGrid>
+              {brandsWithLogo.map((brand, i) => (
+                <BrandTile key={i}>
+                  {isRealUrl(brand.website_url) ? (
+                    <a
+                      href={brand.website_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <BrandLogo src={brand.logotype_url} alt={brand.name} />
+                    </a>
+                  ) : (
+                    <BrandLogo src={brand.logotype_url} alt={brand.name} />
+                  )}
+                </BrandTile>
+              ))}
+            </BrandsGrid>
+          </div>
+        )}
+
+      </DetailsContainer>
+  );
 };
