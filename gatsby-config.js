@@ -8,7 +8,7 @@ module.exports = {
     title: `Pola Web`,
     description: `Strona aplikacji Pola`,
     author: `Klub Jagielloński`,
-    siteUrl: (process.env.PUBLIC_URL && new URL(process.env.PUBLIC_URL).origin) || 'http://localhost:8000',
+    siteUrl: 'https://www.pola-app.pl',
   },
   flags: {
     FAST_DEV: false,
@@ -21,6 +21,22 @@ module.exports = {
     'gatsby-plugin-use-query-params',
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [`/dev-404-page`, `/404`, `/404.html`],
+        
+      },
+    },
+
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://www.pola-app.pl",
+        sitemap: "https://www.pola-app.pl/sitemap-index.xml",
+        policy: [{ userAgent: "*", allow: "/", disallow: ['/dev-404-page'], }],
+      },
+    },
 
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
