@@ -18,6 +18,17 @@ const Wrapper = styled.div`
   @media ${Device.mobile} {
     display: none;
   }
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const Sections = styled.div`
@@ -31,6 +42,17 @@ const Sections = styled.div`
 
 const ImageSection = styled.div`
   flex: 3;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 `;
 
 const TextSection = styled.div`
