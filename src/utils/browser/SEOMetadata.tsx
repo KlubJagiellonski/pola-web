@@ -8,50 +8,76 @@ interface ISEOMetadata {
   meta?: any[];
   description?: string;
   image?: string;
+  pathname?: string;
+  keywords?: string[];
 }
 
-const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, description = '', lang = 'en', meta = [] }) => {
-  const { site, allFile } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-            siteUrl
-          }
+const SEOMetadata: React.FC<ISEOMetadata> = ({
+  image = '',
+  pageTitle,
+  description = '',
+  lang = 'pl',
+  meta = [],
+  pathname = '',
+  keywords = [],
+}) => {
+  const { site, allFile } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
+          siteUrl
         }
-        allFile(filter: {name: {eq: "background3"}, ext: {eq: ".jpg"}}) {
-          edges {
-            node {
-              publicURL
-            }
+      }
+      allFile(filter: { name: { eq: "background3" }, ext: { eq: ".jpg" } }) {
+        edges {
+          node {
+            publicURL
           }
         }
       }
-    `
-  );
+    }
+  `);
 
   const metaDescription = description || site.siteMetadata.description;
-  const browserTabTitle = `${pageTitle} | Pola Web`;
-  const metaImage = image ? image : `${site.siteMetadata.siteUrl}${allFile.edges[0].node.publicURL}`
+  const siteTitle = site.siteMetadata.title || 'Pola';
+  const fullTitle = `${pageTitle} | ${siteTitle}`;
+  const metaImage = image || `${site.siteMetadata.siteUrl}${allFile.edges[0].node.publicURL}`;
+  const canonicalUrl = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : site.siteMetadata.siteUrl;
+
+  const defaultKeywords = [
+    'polskie produkty',
+    'polskie firmy',
+    'kod EAN',
+    'sprawdz czy produkt jest polski',
+    'Pola aplikacja',
+  ];
+
+  const allKeywords = [...new Set([...defaultKeywords, ...keywords])];
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={browserTabTitle}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={fullTitle}
+      titleTemplate={`%s`}
       meta={[
         {
           name: 'description',
           content: metaDescription,
         },
+        allKeywords.length > 0
+          ? {
+              name: 'keywords',
+              content: allKeywords.join(', '),
+            }
+          : {},
         {
           property: 'og:title',
-          content: pageTitle,
+          content: fullTitle,
         },
         {
           property: 'og:description',
@@ -62,23 +88,35 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           content: 'website',
         },
         {
+          property: 'og:site_name',
+          content: siteTitle,
+        },
+        {
+          property: 'og:url',
+          content: canonicalUrl,
+        },
+        {
           name: 'twitter:card',
-          content: 'summary',
+          content: 'summary_large_image',
         },
         {
           name: 'twitter:creator',
           content: site.siteMetadata.author,
         },
         {
+          name: 'twitter:site',
+          content: site.siteMetadata.author,
+        },
+        {
           name: 'twitter:title',
-          content: pageTitle,
+          content: fullTitle,
         },
         {
           name: 'twitter:description',
           content: metaDescription,
         },
         {
-          name: 'og:image',
+          property: 'og:image',
           content: metaImage,
         },
         {
@@ -86,10 +124,18 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({ image = '', pageTitle, descriptio
           content: metaImage,
         },
         {
-          name: 'og:image:width',
+          property: 'og:image:width',
           content: '1200',
         },
-      ].concat(meta)}
+      ]
+        .filter(Boolean as any)
+        .concat(meta)}
+      link={[
+        {
+          rel: 'canonical',
+          href: canonicalUrl,
+        },
+      ]}
     />
   );
 };
