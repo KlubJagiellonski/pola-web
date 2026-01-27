@@ -67,7 +67,7 @@ const PageFooter: React.FC<PageFooterProps> = ({ newsletterStatus, follower, sub
       <div className="footer-content">
         <FooterSection>
           <div className="logo">
-            <img src={LogoWhite} />
+            <img src={LogoWhite} alt="Pola" />
           </div>
         </FooterSection>
         <CommunitySections />
