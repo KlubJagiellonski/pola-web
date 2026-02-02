@@ -9,9 +9,11 @@ import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
-import { Text, TitleSection } from '@Styles/GlobalStyle.css';
+import { TitleSection } from '@Styles/GlobalStyle.css';
 import { Device, fontSize, margin, padding } from '@Styles/theme';
 import {PageProps} from "gatsby";
+import TeamCarousel from '../components/TeamCarousel';
+
 
 interface ITeamPage extends PageProps<any> {}
 
@@ -35,10 +37,6 @@ const List = styled.ul`
   }
 `;
 
-const ListTeam = styled(List)`
-  font-weight: bold;
-`;
-
 const Section = styled.div`
   margin-top: ${margin.big};
 `;
@@ -49,6 +47,37 @@ const TitleTeam = styled(TitleSection)`
   margin-top: ${margin.big};
 `
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: ${margin.normal};
+  text-align: center;
+`;
+
+const RoleCard = styled.div`
+  border-radius: 16px;
+  padding: 16px 20px;
+  text-align: center;
+  justify-self: center;
+`;
+
+const RoleName = styled.p`
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #777;
+  margin: 0 0 4px;
+`;
+
+const PersonName = styled.p`
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+`;
+
+
 const TeamPage = (props: ITeamPage) => {
   return (
     <PageLayout location={props.location} page={PageType.TEAM}>
@@ -56,75 +85,83 @@ const TeamPage = (props: ITeamPage) => {
         <SEOMetadata pageTitle="Dołącz do zespołu" />
         <PageSection>
           <Section>
+              <TitleSection style={{ textAlign: 'center', fontSize: `${fontSize.big}` }}>
+                Poznaj nasz zespół
+              </TitleSection>
+              <br />
+              <TeamCarousel />
+            </Section>
+          <Section>
             <TitleSection style={{textAlign: "center"}}>Obecny zespół aplikacji Pola:</TitleSection>
-          <ColumnsLayout>
-            <ContentColumn>
-              <TitleTeam>iOS developer</TitleTeam>
-              <ListTeam>
-                  <li>Marcin Stepnowski</li>
-              </ListTeam>
-            </ContentColumn>
-            <ContentColumn>
-              <TitleTeam>backend developer</TitleTeam>
-              <ListTeam>
-                  <li>Dominik Krzemiński</li>
-                  <li>Hubert Skibiński</li>
-              </ListTeam>
-            </ContentColumn>
-            <ContentColumn>
-              <TitleTeam>android developer</TitleTeam>
-              <ListTeam>
-                  <li>Piotr Ryś</li>
-              </ListTeam>
-            </ContentColumn>
-          </ColumnsLayout>
-          <ColumnsLayout>
-            <ContentColumn>
-              <TitleTeam>web developer</TitleTeam>
-              <ListTeam>
-                  <li>Zuzanna Dudzińska</li>
-                  <li>Magdalena Redka</li>
-              </ListTeam>
-            </ContentColumn>
-            <ContentColumn>
-              <TitleTeam>analityka</TitleTeam>
-              <ListTeam>
-                  <li>Monika Kotula</li>
-              </ListTeam>
-            </ContentColumn>
-            <ContentColumn>
-              <TitleTeam>flutter developer</TitleTeam>
-              <ListTeam>
-                  <li>Kacper Żebrowski</li>
-              </ListTeam>
-            </ContentColumn>
-          </ColumnsLayout>
-          <ColumnsLayout>
-            <ContentColumn>
-              <TitleTeam>media manager</TitleTeam>
-              <ListTeam>
-                  <li>Anna Siłaczuk</li>
-              </ListTeam>
-            </ContentColumn>
-            <ContentColumn>
-              <TitleTeam>redaktor bazy danych</TitleTeam>
-              <ListTeam>
-                  <li>Bartłomiej Siedlecki</li>
-              </ListTeam>
-            </ContentColumn>
-            <ContentColumn>
-              <TitleTeam>UI/UX designer</TitleTeam>
-              <ListTeam>
-                  <li>Jakub Majkowski</li>
-              </ListTeam>
-            </ContentColumn>
-          </ColumnsLayout>
+            <br />
+             <Grid>
+                <RoleCard>
+                  <RoleName>Head Developer</RoleName>
+                  <PersonName>Marcin Stepnowski</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>Backend Developer</RoleName>
+                  <PersonName>Dominik Krzemiński</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>Flutter Developer</RoleName>
+                  <PersonName>Kacper Żebrowski</PersonName>
+                </RoleCard>
+              </Grid>
+              <Grid>
+                <RoleCard>
+                  <RoleName>Security Engineer</RoleName>
+                  <PersonName>Hubert Skibiński</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>QA Engineer</RoleName>
+                  <PersonName>Piotr Ryś</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>UI/UX Designer</RoleName>
+                  <PersonName>Jakub Majkowski</PersonName>
+                </RoleCard>
+              </Grid>
+              <Grid>
+                <RoleCard>
+                  <RoleName>Web Developer</RoleName>
+                  <PersonName>Zuzanna Dudzińska</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>SEO Manager</RoleName>
+                  <PersonName>Magdalena Redka</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>Data Analyst</RoleName>
+                  <PersonName>Monika Kotula</PersonName>
+                </RoleCard>
+              </Grid>
+              <Grid>
+                <RoleCard>
+                  <RoleName>Media Manager</RoleName>
+                  <PersonName>Anna Siłaczuk</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>Redaktor</RoleName>
+                  <PersonName>Adam Bajerski</PersonName>
+                </RoleCard>
+                <RoleCard>
+                  <RoleName>Relacja z Biznesem</RoleName>
+                  <PersonName>Marcin Kawko</PersonName>
+                </RoleCard>
+              </Grid>
+              <Grid>
+                <RoleCard style={{ textAlign: 'center' }}>
+                  <RoleName>Project Manager</RoleName>
+                  <PersonName>Mateusz Perowicz</PersonName>
+                </RoleCard>
+              </Grid>
           </Section>
           <Section>
           <TitleSection style={{textAlign: "center", paddingTop: margin.big}}>Pola istnieje dzięki nim!</TitleSection>
           <ColumnsLayout>
             <ContentColumn>
-                <TitleTeam>programowanie</TitleTeam>
+                <TitleTeam>Programowanie:</TitleTeam>
                 <List>
                 <li>Arek Banas</li>
                 <li>Kamil Breguła</li>
@@ -156,7 +193,7 @@ const TeamPage = (props: ITeamPage) => {
                 <li>Michał Tajchert</li>
                 <li>Adam Walkowski</li>
                 </List>
-                <TitleTeam>algorytm:</TitleTeam>
+                <TitleTeam>Algorytm:</TitleTeam>
                 <List>
                   <li>Piotr Dardziński</li>
                   <li>Michał Kot</li>
@@ -166,14 +203,15 @@ const TeamPage = (props: ITeamPage) => {
                 </List>
             </ContentColumn>
             <ContentColumn>
-                <TitleTeam>projektowanie i design:</TitleTeam>
+                <TitleTeam>Projektowanie i Design:</TitleTeam>
                 <List>
                   <li>Katarzyna Grudzień</li>
                   <li>Magdalena Karpińska</li>
                   <li>Tomasz Szczodrowski</li>
                   <li>Przemek Pomaski</li>
+                  <li>Jakub Majkowski</li>
                 </List>
-                <TitleTeam>redakcja bazy danych:</TitleTeam>
+                <TitleTeam>Baza danych i promocja projektu:</TitleTeam>
                 <List>
                     <li>Łukasz Cader</li>
                     <li>Mikołaj Dłubak</li>
@@ -190,8 +228,10 @@ const TeamPage = (props: ITeamPage) => {
                     <li>Arkadiusz Tomczyński</li>
                     <li>Michał Wincel</li>
                     <li>Bartek Ząbek</li>
+                    <li>Adam Bajerski</li>
+                    <li>Marcin Kawko</li>
                 </List>
-                  <TitleTeam>inicjatorzy i pomysłodawcy:</TitleTeam>
+                  <TitleTeam>Inicjatorzy i pomysłodawcy:</TitleTeam>
                   <List>
                     <li>Grzegorz Kapusta</li>
                     <li>Jakub Lipiński</li>
@@ -202,7 +242,7 @@ const TeamPage = (props: ITeamPage) => {
           </ColumnsLayout>
             <ColumnsLayout>
               <ContentColumn>
-                  <TitleTeam>koordynacja:</TitleTeam>
+                  <TitleTeam>Koordynacja:</TitleTeam>
                   <List>
                     <li>Maciej Dulak</li>
                     <li>Bartosz Paszcza</li>
