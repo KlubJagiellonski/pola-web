@@ -194,6 +194,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const registeredProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.REGISTERED);
   const notGlobalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.NOT_GLOBAL);
   const capitalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.CAPITAL);
+  const isFriend = !!manufacturer.is_friend;
 
   return (
     <DetailsContainer>
@@ -206,7 +207,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
 
       {/* Ocena + progress bar */}
       <ScoreRow>
-        {product.manufacturer.plScore === 100 && (
+        {isFriend && (
           <div style={{
             background: '#ffe5e5',
             color: '#c10028',
