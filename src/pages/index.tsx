@@ -4,7 +4,7 @@ import { EAN, ISearchResults } from 'search';
 import styled from 'styled-components';
 
 import { PageProps } from 'gatsby';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConnectedProps, connect } from 'react-redux';
 
 import { IPolaState } from '@App/state';
@@ -35,6 +35,7 @@ import { SearchStateName, checkLoaded } from 'search/state/search-reducer';
 import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
 
 import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
+import MyModal from '../components/Modal';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -173,6 +174,13 @@ const HomePage = (props: IHomePage) => {
   const isLoaded = checkLoaded(searchState);
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const timer = setTimeout(() => setIsModalOpen(true), 1000); // np. 1s opóźnienie
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <PageLayout location={props.location} page={PageType.HOME}>
@@ -204,6 +212,7 @@ const HomePage = (props: IHomePage) => {
           )}
         </Content>
       </PageSection>
+      <MyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <WrapperResult>
         {(isLoaded || isLoading) && (
           <SearchResultsHeader
