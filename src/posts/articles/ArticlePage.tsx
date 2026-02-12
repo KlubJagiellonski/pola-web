@@ -49,13 +49,28 @@ const Content = (props: any) => {
   const { html, children } = props;
   const body = JSON.parse(html.raw);
 
-  const findImg = (id: string) => html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
+  const findAsset = (id: string) =>
+    html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
 
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-        const image = findImg(node.data.target.sys.id);
-        return `<img src=${image.url} alt=${image.title}/>`;
+        const asset = findAsset(node.data.target.sys.id);
+        if (!asset) return '';
+
+        const url = asset.url;
+        const title = asset.title || '';
+
+        if (url.match(/\.(wmv|mp4)$/i)) {
+          return `
+            <video controls style="display:block;max-width:100%;height:auto;margin:1.5rem auto;">
+              <source src="${url}" />
+              Your browser does not support the video tag.
+            </video>
+          `;
+        }
+
+        return `<img src="${url}" alt="${title}" />`;
       },
     },
   };
