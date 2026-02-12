@@ -152,6 +152,61 @@ const NewsletterContainer = styled.div`
   margin: 1rem;
 `;
 
+const SearchHeading = styled.h1`
+  color: ${color.text.main};
+  margin: 15px 0 ${margin.small} 0;
+`;
+
+const SearchDescription = styled.p`
+  margin: 0 0 ${margin.normal} 0;
+  color: ${color.text.main};
+  font-weight: 600;
+`;
+
+const SeoSection = styled.section`
+  width: 100%;
+  padding: 3.5rem 1rem;
+
+  background: ${color.background.light};
+
+  @media ${Device.desktop} {
+    padding: 4rem 0;
+  }
+`;
+
+const SeoInner = styled.div`
+  max-width: ${pageWidth};
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  overflow-x: hidden;
+
+  @media ${Device.mobile} {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+`;
+
+const SeoHeading = styled.h2`
+  font-size: 2rem;
+  line-height: 1.2;
+  color: ${color.text.main};
+  font-weight: 700;
+
+  @media ${Device.mobile} {
+    font-size: 1.6rem;
+  }
+`;
+
+const SeoParagraph = styled.p`
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: ${color.text.secondary};
+  margin-bottom: 1.25rem;
+`;
+
+
 type IHomePage = PageProps<any> &
   ReduxProps & {
     searchState: SearchStateName;
@@ -184,12 +239,18 @@ const HomePage = (props: IHomePage) => {
 
   return (
     <PageLayout location={props.location} page={PageType.HOME}>
-      <SEOMetadata pageTitle="Strona główna" />
+      <SEOMetadata pageTitle="Pola – wybieraj polskie produkty, wspieraj polskie firmy" />
       <PageSection size="full" styles={{ backgroundColor: color.background.search }}>
         <Background>
           <ResponsiveImage title="main background" imageSrc={'background2.jpg'} />
         </Background>
         <Content isSearchLoaded={isLoaded}>
+          <SearchHeading as="h1">
+           Pola – wyszukiwarka polskich produktów wspierająca patriotyzm gospodarczy
+          </SearchHeading>
+          <SearchDescription>
+            Pola to bezpłatna aplikacja mobilna. Każda „Polska firma” jest wysoko oceniania. Dzięki niej znajdziesz też prawdziwy „Produkt Polski”.
+          </SearchDescription>
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
@@ -238,6 +299,34 @@ const HomePage = (props: IHomePage) => {
           </InfoBox>
         )}
       </WrapperResult>
+      <PageSection>
+        <SeoSection>
+          <SeoInner>
+          <SeoHeading>
+            Polskie produkty i patriotyzm gospodarczy
+            <br />
+            w codziennych zakupach
+          </SeoHeading>
+          <SeoParagraph>
+              Patriotyzm gospodarczy to świadomy wybór produktów i usług, które realnie
+              wspierają rozwój polskiej gospodarki, miejsc pracy oraz rodzimych firm.
+              W praktyce oznacza to sięganie po polskie produkty – nie tylko z polskim
+              kodem kreskowym, ale rzeczywiście wytwarzane przez firmy działające w Polsce.
+          </SeoParagraph>
+
+          <SeoParagraph>
+              Aplikacja i wyszukiwarka Pola pomagają sprawdzić pochodzenie produktów
+              dostępnych na sklepowych półkach. Dzięki analizie danych o producencie możesz szybko sprawdzić, czy dany zakup wspiera
+              polską gospodarkę.
+          </SeoParagraph>
+
+          <SeoParagraph>
+              Korzystając z Poli, wspierasz świadomą konsumpcję i rozwój patriotyzmu
+              gospodarczego – bez rezygnowania z wygody codziennych zakupów.
+          </SeoParagraph>
+          </SeoInner>
+        </SeoSection>
+      </PageSection>
       <WrapperContents>
         <Wrapper>
           <ArticlesListPreview articles={freshArticles} />
