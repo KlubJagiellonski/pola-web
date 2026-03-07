@@ -68,15 +68,31 @@ export const HamburgerMenu: React.FC<IHamburgerMenu> = ({ expanded, children, on
     items?.classList.toggle('open');
   };
 
+  const handleItemClick = () => {
+    onExpand(false);
+    const items = itemsRef.current;
+    items?.classList.remove('open');
+  };
+
+  const handleLogoClick = () => {
+    const layout = document.getElementById('layout-container');
+    if (layout) {
+      layout.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <HamburgerLayout className="hamburger-menu">
       <Navbar>
-        <Link to={urls.pola.home()}>
+        <Link to={urls.pola.home()} onClick={handleLogoClick}>
           <img width="auto" height="100%" src={LogoColor} alt="Pola" />
         </Link>
         <FontAwesomeIcon icon={faBars} onClick={handleOpen} className="menu-icon" size="2x" />
       </Navbar>
-      <Items ref={itemsRef} className={classNames('nav-items')}>
+      <Items ref={itemsRef} className={classNames('nav-items', expanded && 'open')} onClick={handleItemClick}
+      >
         {children}
       </Items>
     </HamburgerLayout>
