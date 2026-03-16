@@ -48,7 +48,7 @@ export const CommunitySections: React.FC<ICommunitySections> = (props) => (
       <TextLink label="Polityka prywatności" href={urls.pola.privacyPolicy()} />
       <TextExternalLink label="Uzupełnij dane o firmie" url={urls.external.links.newCompanyForm} />
     </FooterSection>
-    <FooterSection title="Śledź nas na:">
+    <FooterSection title='Śledź nas na:'>
       <div className="social-rows">
         <Facebook type="filled" />
         <Instagram type="filled" />
