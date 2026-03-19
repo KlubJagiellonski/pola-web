@@ -54,11 +54,14 @@ const Section = styled.div`
 interface IFooterSection {
   title?: string;
   children?: React.ReactNode | React.ReactNode[];
+  textAlign?: 'left' | 'center' | 'right';
 }
 
-export const FooterSection: React.FC<IFooterSection> = ({ title, children }) => (
+export const FooterSection: React.FC<IFooterSection> = ({ title, children, textAlign }) => (
   <Section>
-    <p className="title">{title}</p>
+    <p className="title" style={{ textAlign }}>
+      {title}
+    </p>
     {children}
   </Section>
 );
