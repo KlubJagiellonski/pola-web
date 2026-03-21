@@ -46,7 +46,7 @@ export const SearchResultsHeader: React.FC<ISearchResultsHeader> = ({
   };
 
   return (
-    <PageSection styles={{ textAlign: 'left' }}>
+    <PageSection styles={{ textAlign: 'center' }}>
       <Header>Uzyskano</Header>
       {resultsUrl ? (
         <Link to={resultsUrl} onClick={handleClick}>

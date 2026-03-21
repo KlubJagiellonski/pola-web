@@ -9,7 +9,7 @@ import { ScoreBar } from '@Components/ScoreBar';
 
 import { RussiaInfoBox } from './RussiaInfoBox';
 
-import { Device, color, fontSize, lineHeight, padding } from '@Styles/theme';
+import { Device, color, fontSize, lineHeight, padding, margin } from '@Styles/theme';
 
 const ListElement = styled.li`
   min-width: 40em;
@@ -26,12 +26,16 @@ const ListElement = styled.li`
 const ResultElement = styled.div`
   display: flex;
   flex-flow: column;
-  padding: ${padding.normal} ${padding.normal};
+  padding: ${padding.big};
 
   .name {
     font-size: ${fontSize.normal};
     font-weight: bold;
     margin-bottom: 0.5em;
+    text-align: center;
+    @media ${Device.mobile} {
+      font-size: ${fontSize.small};
+    }
   }
   .manufacturer,
   .brand {
@@ -44,6 +48,12 @@ const ResultElement = styled.div`
     font-size: ${fontSize.small};
     font-weight: 600;
   }
+`;
+
+const ScoreLabel = styled.div`
+  display: inline-block;
+  font-size: ${fontSize.small};
+  margin-bottom: ${margin.normal};
 `;
 
 interface IResultProperty {
@@ -67,6 +77,7 @@ interface ISearchResultElement {
 }
 
 export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, onSelect }) => {
+  const score = product.manufacturer?.plScore ?? product.company?.score ?? null;
   return (
     <ListElement onClick={(e) => onSelect(product.code)}>
       <ResultElement>
@@ -82,13 +93,15 @@ export const SearchResultElement: React.FC<ISearchResultElement> = ({ product, o
           />
         )}
         <RussiaInfoBox product={product} />
-      </ResultElement>
+        <ScoreLabel>Nasza ocena: <b>{score ?? "-"}</b> pkt</ScoreLabel>
+      
       <ScoreBar
-        value={product.company?.score}
+        value={score}
         unit="pkt"
         missingValuePlaceholder="Brak wyniku w rankingu Poli"
         animation={{ duration: 1, delay: 0.2 }}
       />
+      </ResultElement>
     </ListElement>
   );
 };
