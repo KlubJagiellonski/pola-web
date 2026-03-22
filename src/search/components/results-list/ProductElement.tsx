@@ -26,7 +26,7 @@ const ListElement = styled.li`
 const ResultElement = styled.div`
   display: flex;
   flex-flow: column;
-  padding: ${padding.big};
+  padding: ${padding.small};
 
   .name {
     font-size: ${fontSize.normal};
