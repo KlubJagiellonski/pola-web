@@ -170,9 +170,4 @@ export const pageLinks: (PageLinkData | ExternalLinkData)[] = [
     label: "Wesprzyj aplikację",
     url: urls.external.links.polaSupport.href,
   },
-  {
-    type: PageType.COMPANY_FORM,
-    label: "Dodaj firmę",
-    url: urls.external.links.newCompanyForm.href,
-  },
 ];
