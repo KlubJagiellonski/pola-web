@@ -5,6 +5,7 @@ export enum PageType {
   NEWS = "news",
   ARTICLE = "article",
   ABOUT = "about",
+  POLSKI = "produkt-polski",
   SUPPORT = "support",
   COMPANY_FORM = "company-form",
   FRIENDS = "friends",
@@ -77,6 +78,7 @@ export const urls: WebsiteMap = {
     home: hashableUrl(),
     news: hashableUrl("news"),
     about: hashableUrl("about"),
+    polski: hashableUrl("produkt-polski"),
     support: hashableUrl("support"),
     friends: sluggableUrl("friends"),
     partners: hashableUrl("partners"),
@@ -151,6 +153,11 @@ export const urls: WebsiteMap = {
 
 export const pageLinks: (PageLinkData | ExternalLinkData)[] = [
   { type: PageType.ABOUT, label: "O Poli", url: urls.pola.about() },
+  {
+    type: PageType.POLSKI,
+    label: "Produkt polski",
+    url: urls.pola.polski(),
+  },
   { type: PageType.NEWS, label: "Aktualności", url: urls.pola.news() },
   {
     type: PageType.FRIENDS,
