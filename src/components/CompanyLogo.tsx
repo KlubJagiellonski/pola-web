@@ -8,15 +8,15 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: ${padding.normal};
+  margin-bottom: ${padding.small};
   background-color: ${color.background.lightGray};
   border-radius: 0.5rem;
-  padding: ${padding.normal};
-  min-height: 80px;
+  padding: ${padding.tiny};
+  min-height: 60px;
 
   img {
     max-width: 100%;
-    max-height: 120px;
+    max-height: 50px;
     object-fit: contain;
   }
 `;
