@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { IPolaState } from '@App/state';
+import { PartnersList } from 'partners/components/PartnersList';
 
 import { PageType, urls } from 'app/website';
 
@@ -9,6 +12,7 @@ import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { ColumnsLayout, ContentColumn } from '@Layout/ColumnsLayout';
 import { PageLayout } from '@Layout/PageLayout';
 import { PageSection } from '@Layout/PageSection';
+import Placeholder from '@Components/Placeholder';
 import SEOMetadata from '@Utils/browser/SEOMetadata';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
@@ -39,6 +43,7 @@ const Image = styled.div`
 interface IAboutPage extends PageProps<any> {}
 
 const AboutPage = (props: IAboutPage) => {
+  const partners = useSelector((state: IPolaState) => state.partners.data);
   return (
     <PageLayout location={props.location} page={PageType.ABOUT} styles={{ marginTop: padding.big }}>
       <SEOMetadata pageTitle="O Poli" />
@@ -100,6 +105,15 @@ const AboutPage = (props: IAboutPage) => {
           </Image>
         </ContentColumn>
       </ColumnsLayout>
+      <PageSection>
+        <TitleSection style={{textAlign:'center'}}>Partnerzy</TitleSection>
+      </PageSection>
+      <PageSection>
+        <Placeholder text="Partner aplikacji Pola" />
+      </PageSection>
+      <PageSection>
+        <PartnersList partners={partners} />
+      </PageSection>
       <PageSection>
         <Faq />
       </PageSection>
