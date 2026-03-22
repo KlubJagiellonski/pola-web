@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { lighten } from "polished";
 
 import { seconds } from "app/generics";
-import { color, fontSize } from "@Styles/theme";
+import { Device, color, fontSize } from "@Styles/theme";
 
 export interface IAnimation {
   duration: seconds;
@@ -55,6 +55,11 @@ const GaugeWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media ${Device.mobile} {
+    width: ${SIZE * 0.5}px;
+    height: ${SIZE * 0.5}px;
+    margin-top: 10px;
+  }
 
   .label {
     position: absolute;
@@ -63,6 +68,10 @@ const GaugeWrapper = styled.div`
     z-index: 2;
     text-align: center;
     top: 32px;
+    @media ${Device.mobile} {
+      font-size: 14px;
+      top: 10px;
+    }
   }
 
   .subtitle {
@@ -73,6 +82,10 @@ const GaugeWrapper = styled.div`
     font-size: 12px;
     color: ${color.text ? color.text.primary : "#000"};
     z-index: 2;
+    @media ${Device.mobile} {
+      font-size: 10px;
+      top: 40px;
+    }
   }
 `;
 

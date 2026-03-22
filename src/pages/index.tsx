@@ -82,6 +82,7 @@ const Content = styled.div<{ isSearchLoaded: boolean }>`
   @media ${Device.desktop} {
     padding: ${padding.normal} 0;
     max-width: ${pageWidth};
+    margin: 0 auto;
   }
 `;
 
@@ -97,7 +98,7 @@ const Background = styled.div<{ img?: string }>`
     height: 100%;
   }
 
-  opacity: 0.4;
+  opacity: 0.6;
 `;
 
 const WrapperContents = styled(PageSection)`
@@ -107,11 +108,11 @@ const WrapperContents = styled(PageSection)`
 `;
 
 const WrapperResult = styled(PageSection)`
+padding: 0;
   @media ${Device.mobile} {
     position: realtive;
     //top: -18em; // because results should be visible immediately on mobile screen
     background-color: ${color.background.white};
-    margin-left: 5px;
   }
 `;
 
@@ -152,25 +153,73 @@ const NewsletterContainer = styled.div`
   margin: 1rem;
 `;
 
+const HeroText = styled.div`
+  max-width: 40rem;
+  margin-left: auto;
+  text-align: right;  
+  
+
+  @media ${Device.mobile} {
+    max-width: 100%;
+    margin-left: 0;
+    text-align: center;
+    font-bold: 800;
+  }
+`;
+
 const SearchHeading = styled.h1`
   color: ${color.text.main};
   margin: 15px 0 ${margin.small} 0;
+  font-bold: 700;
+  text-align: right;
+
+  @media ${Device.mobile} {
+    font-size: 1rem;
+    line-height: 1.3;
+    text-align: center;
+  }
 `;
 
 const SearchDescription = styled.p`
   margin: 0 0 ${margin.normal} 0;
   color: ${color.text.main};
-  font-weight: 600;
+  font-weight: 700;
+  text-align: right;
+
+  @media ${Device.mobile} {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: ${({ expanded }) => (expanded ? 'unset' : '1')};
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+`;
+
+const DescriptionToggle = styled.span`
+  display: block;
+  cursor: pointer;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: ${color.primary};
+  margin-top: 4px;
+  text-align: center;
+
+  @media ${Device.desktop} {
+    display: none;
+  }
 `;
 
 const SeoSection = styled.section`
   width: 100%;
   padding: 3.5rem 1rem;
-
   background: ${color.background.light};
 
-  @media ${Device.desktop} {
-    padding: 4rem 0;
+  @media ${Device.mobile} {
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -181,29 +230,43 @@ const SeoInner = styled.div`
   grid-template-columns: 1fr 1.2fr;
   gap: 3rem;
   overflow-x: hidden;
+  box-sizing: border-box;
 
   @media ${Device.mobile} {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    padding: 0 ${padding.normal};
   }
 `;
 
 const SeoHeading = styled.h2`
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 1.2;
   color: ${color.text.main};
   font-weight: 700;
 
   @media ${Device.mobile} {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 1.5rem;
   }
 `;
 
 const SeoParagraph = styled.p`
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   line-height: 1.75;
   color: ${color.text.secondary};
   margin-bottom: 1.25rem;
+
+  @media ${Device.mobile} {
+    font-size: 1rem;
+    line-height: 1.6; 
+    margin-bottom: 1rem;
+    max-width: 100%;
+    overflow: visible;
+    padding: 0 0.9rem;
+    text-align: center;
+  }
 `;
 
 
@@ -226,6 +289,7 @@ type IHomePage = PageProps<any> &
 const HomePage = (props: IHomePage) => {
   const { searchState, searchResults, subscribeEmail, clearForm, newsletterStatus, follower } = props;
   const freshArticles = props.articles?.slice(0, 3);
+  const [isDescExpanded, setIsDescExpanded] = useState(false);
   const isLoaded = checkLoaded(searchState);
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
@@ -245,12 +309,17 @@ const HomePage = (props: IHomePage) => {
           <ResponsiveImage title="main background" imageSrc={'background2.jpg'} />
         </Background>
         <Content isSearchLoaded={isLoaded}>
+          <HeroText>
           <SearchHeading as="h1">
            Pola – wyszukiwarka polskich produktów wspierająca patriotyzm gospodarczy
           </SearchHeading>
-          <SearchDescription>
+          <SearchDescription expanded={isDescExpanded}>
             Pola to bezpłatna aplikacja mobilna. Każda „Polska firma” jest wysoko oceniania. Dzięki niej znajdziesz też prawdziwy „Produkt Polski”.
           </SearchDescription>
+          <DescriptionToggle onClick={() => setIsDescExpanded((v) => !v)}>
+            {isDescExpanded ? 'Zwiń opis' : 'Czytaj dalej...'}
+          </DescriptionToggle>
+          </HeroText>
           <SearchForm
             onInfoClicked={props.toggleSearchInfo}
             onSearch={props.invokeSearch}
@@ -299,34 +368,35 @@ const HomePage = (props: IHomePage) => {
           </InfoBox>
         )}
       </WrapperResult>
-      <PageSection>
         <SeoSection>
           <SeoInner>
-          <SeoHeading>
-            Polskie produkty i patriotyzm gospodarczy
-            <br />
-            w codziennych zakupach
-          </SeoHeading>
-          <SeoParagraph>
-              Patriotyzm gospodarczy to świadomy wybór produktów i usług, które realnie
-              wspierają rozwój polskiej gospodarki, miejsc pracy oraz rodzimych firm.
-              W praktyce oznacza to sięganie po polskie produkty – nie tylko z polskim
-              kodem kreskowym, ale rzeczywiście wytwarzane przez firmy działające w Polsce.
-          </SeoParagraph>
+            <div>
+            <SeoHeading>
+              Polskie produkty i patriotyzm gospodarczy
+              <br />
+              w codziennych zakupach
+            </SeoHeading>
+            <SeoParagraph>
+                Patriotyzm gospodarczy to świadomy wybór produktów i usług, które realnie
+                wspierają rozwój polskiej gospodarki, miejsc pracy oraz rodzimych firm.
+                W praktyce oznacza to sięganie po polskie produkty – nie tylko z polskim
+                kodem kreskowym, ale rzeczywiście wytwarzane przez firmy działające w Polsce.
+            </SeoParagraph>
+            </div>  
+            <div>
+              <SeoParagraph>
+                  Aplikacja i wyszukiwarka Pola pomagają sprawdzić pochodzenie produktów
+                  dostępnych na sklepowych półkach. Dzięki analizie danych o producencie możesz szybko sprawdzić, czy dany zakup wspiera
+                  polską gospodarkę.
+              </SeoParagraph>
 
-          <SeoParagraph>
-              Aplikacja i wyszukiwarka Pola pomagają sprawdzić pochodzenie produktów
-              dostępnych na sklepowych półkach. Dzięki analizie danych o producencie możesz szybko sprawdzić, czy dany zakup wspiera
-              polską gospodarkę.
-          </SeoParagraph>
-
-          <SeoParagraph>
-              Korzystając z Poli, wspierasz świadomą konsumpcję i rozwój patriotyzmu
-              gospodarczego – bez rezygnowania z wygody codziennych zakupów.
-          </SeoParagraph>
+              <SeoParagraph>
+                  Korzystając z Poli, wspierasz świadomą konsumpcję i rozwój patriotyzmu
+                  gospodarczego – bez rezygnowania z wygody codziennych zakupów.
+              </SeoParagraph>
+            </div>
           </SeoInner>
         </SeoSection>
-      </PageSection>
       <WrapperContents>
         <Wrapper>
           <ArticlesListPreview articles={freshArticles} />
