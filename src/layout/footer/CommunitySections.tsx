@@ -39,7 +39,6 @@ export const CommunitySections: React.FC<ICommunitySections> = (props) => (
     <FooterSection title="Działaj z nami">
       <TextExternalLink label="Wesprzyj aplikację" url={urls.external.links.polaSupport} />
       <TextLink label="Klub Przyjaciół Poli" href={urls.pola.friends()} />
-      <TextLink label="Partnerzy" href={urls.pola.partners()} />
       <TextLink label="Dołącz do zespołu" href={urls.pola.team()} />
     </FooterSection>
     <FooterSection title="Jakieś pytania?">

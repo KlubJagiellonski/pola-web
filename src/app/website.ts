@@ -9,7 +9,6 @@ export enum PageType {
   SUPPORT = "support",
   COMPANY_FORM = "company-form",
   FRIENDS = "friends",
-  PARTNERS = "partners",
   BUSINESS = "business",
   SUPPLIERS = "suppliers",
   TEAM = "team",
@@ -81,7 +80,6 @@ export const urls: WebsiteMap = {
     polski: hashableUrl("produkt-polski"),
     support: hashableUrl("support"),
     friends: sluggableUrl("friends"),
-    partners: hashableUrl("partners"),
     business: sluggableUrl("business"),
     team: hashableUrl("join"),
     products: hashableUrl("products"),
@@ -164,7 +162,6 @@ export const pageLinks: (PageLinkData | ExternalLinkData)[] = [
     label: "Klub Przyjaciół Poli",
     url: urls.pola.friends(),
   },
-  { type: PageType.PARTNERS, label: "Partnerzy", url: urls.pola.partners() },
   {
     type: PageType.BUSINESS,
     label: "Oferta biznesowa",
