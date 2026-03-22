@@ -77,7 +77,6 @@ interface IScoreBar {
 export const ScoreBar: React.FC<IScoreBar> = ({ value, unit, animation, missingValuePlaceholder }) => {
   if (value !== undefined) {
     const knownValue = value !== null ? value : 0;
-    const scoreText = unit ? `${knownValue} ${unit}` : knownValue.toString();
     return (
       <ValueBar value={knownValue} animation={animation}>
         <div className="value-belt" data-testid="value-belt" />

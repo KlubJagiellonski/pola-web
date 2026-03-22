@@ -20,7 +20,7 @@ const ImageWrapper = styled.div`
 
   .gatsby-image-wrapper {
     div {
-      padding-bottom: 100% !important;
+      padding-bottom: 50% !important;
     }
   }
 `;

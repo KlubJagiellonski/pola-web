@@ -16,7 +16,6 @@ import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Info = styled.div`
   width: 100%;
-  height: 12em;
   position: relative;
   margin: ${margin.small} 0;
 
@@ -27,7 +26,6 @@ const Info = styled.div`
 
 const TextSection = styled.div`
   margin-right: ${margin.normal};
-  padding: 0 ${padding.normal};
   background-color: ${color.background.white};
   display: flex;
   flex-direction: column;
@@ -46,8 +44,9 @@ const Texts = styled.div`
 `;
 
 const Column = styled(ContentColumn)`
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
+  gap: ${margin.small};
 `;
 
 const Buttons = styled.div`
@@ -56,14 +55,20 @@ const Buttons = styled.div`
 
 const DevelopmentTitle = styled(TitleSection)`
   margin-bottom: ${margin.normal};
+  text-align: center;
 `;
 
 const DevelopmentText = styled(Text)`
   margin-bottom: ${margin.big};
+  text-align: center;
 `;
 
 const Columns = styled(ColumnsLayout)`
   gap: ${margin.normal};
+  align-items: flex-start;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
 `;
 
 const ImgSection = styled.div`
@@ -89,7 +94,7 @@ const Container = styledContainerQuery(Wrapper)`
   display: flex;
   flex-direction: row;
   grid-area: development;
-  min-height: 16.1em;
+  min-height: 0;
   width: 100%;
 
   @media ${Device.mobile} {
@@ -108,36 +113,9 @@ const Container = styledContainerQuery(Wrapper)`
     border-bottom: 8px solid ${color.background.red};
     border-right: none;
     margin-top: ${margin.small};
-
-    ${Texts}{
-      width: 100%;
-    }
-
-    ${Info}{
-      height: 10em;
-    }
-
-    ${Columns}{
-      flex-direction: column;
-    }
-
-    ${Column}{
-      width: 100%;
-    }
-
-    ${Info}{
-      height: 10em;
-    }
-
-    ${ImgSection}{
-      .gatsby-image-wrapper {
-        picture {
-          img {
-            height: 10em !important;
-          }
-        }
-      }
-    }
+    ${Texts} { width: 100%; }
+    ${Columns} { flex-direction: column; }
+    ${Column} { width: 100%; }
   }
 `;
 

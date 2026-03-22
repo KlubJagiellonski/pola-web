@@ -13,7 +13,6 @@ const Items = styled.div`
   display: flex;
   flex-direction: row;
   width: 80%;
-  float: left;
 
   @media ${Device.mobile} {
     width: 100%;
@@ -44,8 +43,11 @@ const Container = styledContainerQuery.div`
   height: 100%;
   grid-area: social-media;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
+  gap: 40px;
 
   @media ${Device.mobile} {
     padding: 30px 0;
@@ -75,7 +77,6 @@ const SocialMedia = () => {
         <Facebook />
         <Instagram />
         <Twitter />
-        <Item />
       </Items>
     </Container>
   );

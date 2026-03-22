@@ -3,6 +3,7 @@ import React from 'react';
 import { RussiaInfoBox } from '../results-list/RussiaInfoBox';
 import { Product} from 'search';
 import styled from 'styled-components';
+import { Device, margin } from '@Styles/theme';
 import { ScoreBar } from '@Components/ScoreBar';
 import { ScoreGauge } from '@Components/ScoreGauge';
 import { PolishPropertyName, getPropertiesFromManufacturer } from './PolishValues';
@@ -34,6 +35,10 @@ const DetailsContainer = styled.div`
   padding: 1.2em 1em;
   border-top: 1px solid ${color.divider};
   background: ${color.fieldBg};
+
+  @media ${Device.mobile} {
+    padding: 0.8em 0.8em;
+  }
 `;
 
 const Header = styled.header`
@@ -44,21 +49,78 @@ const Header = styled.header`
     font-weight: bold;
     margin: 0;
   }
+
+  @media ${Device.mobile} {
+    margin-bottom: 0.4em;
+
+    h3 {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+  }
 `;
 
 const ScoreRow = styled.div`
   margin-bottom: 1.25em;
+
+  @media ${Device.mobile} {
+    margin-bottom: 0.8em;
+  }
+`;
+
+const FriendBanner = styled.div`
+  background: #ffe5e5;
+  color: #c10028;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: ${margin.small};
+
+  @media ${Device.mobile} {
+    font-size: 12px;
+    padding: 8px 10px;
+    gap: 6px;
+
+    span {
+      font-size: 14px;
+    }
+  }
 `;
 
 const ScoreLabel = styled.div`
   font-size: ${fontSize.mediumTitle};
   color: ${color.text};
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  img {
+    width: 14px;
+  }
+
+  @media ${Device.mobile} {
+    font-size: 13px;
+
+    img {
+      width: 12px;
+    }
+  }
 `;
 
 const ScoreBarWrapper = styled.div`
   margin-top: 0.2em;
   width: 100%;
+
+  @media ${Device.mobile} {
+    margin-top: 0.3em;
+  }
 `;
 
 const Heading = styled.div`
@@ -66,6 +128,16 @@ const Heading = styled.div`
   font-size: ${fontSize.smallTitle};
   margin-bottom: 0.8em;
   color: ${color.text};
+
+  @media ${Device.mobile} {
+    font-size: 16px;
+    margin-bottom: 0.5em;
+
+    h2 {
+      font-size: 14px;
+      margin: 0;
+    }
+  }
 `;
 
 const CriteriaRow = styled.div`
@@ -74,6 +146,12 @@ const CriteriaRow = styled.div`
   gap: 1.5em;
   align-items: center;
   margin-top: 0.4em;
+
+  @media ${Device.mobile} {
+    gap: 0.8em;
+    align-items: flex-start;
+    margin-top: 0.6em;
+  }
 `;
 
 const CriteriaList = styled.div`
@@ -83,6 +161,12 @@ const CriteriaList = styled.div`
   margin-top: 0.3em;
   font-weight: 640;
   line-height: 0.9em;
+
+  @media ${Device.mobile} {
+    gap: 0.3em;
+    font-size: 13px;
+    line-height: 1em;
+  }
 `;
 
 
@@ -90,6 +174,11 @@ const Notes = styled.p`
   font-size: ${fontSize.description};
   color: ${color.inactive};
   margin-top: 0.7em;
+
+  @media ${Device.mobile} {
+    font-size: 12px;
+    margin-top: 0.4em;
+  }
 `;
 
 const ManufacturerDesc = styled.p`
@@ -97,6 +186,10 @@ const ManufacturerDesc = styled.p`
   font-weight: 600;
   margin-top: 0.6em;
   color: ${color.text};
+
+  @media ${Device.mobile} {
+    font-size: 12px;
+  }
 `;
 
 // ---- STYLE DLA LOGO MAREK ----
@@ -104,7 +197,10 @@ const BrandsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   gap: 20px;
-  margin-top: 16px;
+  
+  @media ${Device.mobile} {
+    gap: 12px;
+  }
 `;
 
 
@@ -122,12 +218,20 @@ const BrandTile = styled.div`
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
+
+  @media ${Device.mobile} {
+    font-size: 13px;
+  }
 `;
 
 const BrandLogo = styled.img`
   max-height: 45px;
   max-width: 100%;
   object-fit: contain;
+
+  @media ${Device.mobile} {
+    max-height: 35px;
+  }
 `;
 
 // ---- POMOCNICZA FUNKCJA ----
@@ -152,17 +256,17 @@ const CriterionItem: React.FC<{ condition: boolean; label: string }> = ({ condit
   }}>
     {condition ? (
       <svg
-        width="1.2em"
-        height="1.2em"
+        width="0.9em"
+        height="0.9em"
         viewBox="0 0 24 24"
         fill="none"
-        style={{ display: 'inline-block', verticalAlign: 'middle', color: color.red, flexShrink: 0, minWidth: '1.2em', minHeight: '1.2em' }}
+        style={{ display: 'inline-block', verticalAlign: 'middle', color: color.red, flexShrink: 0, minWidth: '0.9em', minHeight: '0.9em' }}
       >
         <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2" />
         <path d="M7 12l3 3 7-7" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ) : (
-      <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: color.inactive, flexShrink: 0, minWidth: '1.2em', minHeight: '1.2em' }}>
+      <svg width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: color.inactive, flexShrink: 0, minWidth: '0.9em', minHeight: '0.9em' }}>
         <circle cx="12" cy="12" r="10" />
       </svg>
     )}
@@ -208,23 +312,11 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       {/* Ocena + progress bar */}
       <ScoreRow>
         {isFriend && (
-          <div style={{
-            background: '#ffe5e5',
-            color: '#c10028',
-            padding: '10px 0',
-            textAlign: 'center',
-            fontWeight: '600',
-            borderRadius: '8px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingLeft: '20px',
-            paddingRight: '20px'
-          }}>
+          <FriendBanner>
             <span>❤️</span>
             <span>Ta firma jest Przyjacielem Poli</span>
             <span>❤️</span>
-          </div>
+          </FriendBanner>
         )}
         <ScoreLabel>
           <img src={InfoIcon} alt="Info" style={{ width: '14px', marginRight: '4px' }} />
@@ -277,7 +369,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       )}
 
       {product.manufacturer.description && (
-        <ManufacturerDesc><ReadMoreArea text={product.manufacturer.description} maxLength={184} /></ManufacturerDesc>
+        <ManufacturerDesc><ReadMoreArea text={product.manufacturer.description} maxLength={150} /></ManufacturerDesc>
       )}
 
       {/* Logo producenta */}
@@ -295,7 +387,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
               />
             </a>
           ) : (
-            <div style={{ marginTop: "10px" }}>
+            <div style={{ marginTop: "5px" }}>
               <CompanyLogo
                 logoUrl={manufacturer.logotype_url}
                 companyName={manufacturer.name}
@@ -307,8 +399,8 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
 
         {/* Logo marek */}
         {brandsWithLogo.length > 0 && (
-          <div style={{ marginTop: "20px" }}>
-            <h4 style={{ marginBottom: "10px", fontWeight: "700", color: "#212121" }}>
+          <div style={{ marginTop: "6px" }}>
+            <h4 style={{ fontWeight: "700", color: "#212121", textAlign: "center" }}>
               Marki producenta:
             </h4>
 
