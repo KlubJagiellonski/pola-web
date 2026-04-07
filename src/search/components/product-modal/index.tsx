@@ -85,7 +85,7 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
             </a>
             <a href={product.donate.url} target="_blank">
               <ButtonContainer theme={ButtonThemes.Red}>
-                <span>Potrzebujemy 1 ZŁ1</span>
+                <span>Potrzebujemy 1 zł</span>
               </ButtonContainer>
             </a>
           </Actions>
@@ -93,7 +93,7 @@ export const ProductModal: React.FC<IProductModal> = ({ product, onClose }) => {
           <Actions>
             <LinkButton label="Zobacz Przyjaciół Poli" styles={ButtonThemes.WhiteRed} onClick={redirectToFriends} />
             {product.donate.show_button && (
-              <LinkButton label="Potrzebujemy 1 ZŁ1" styles={ButtonThemes.Red} onClick={handleDonate} />
+              <LinkButton label="Potrzebujemy 1 zł" styles={ButtonThemes.Red} onClick={handleDonate} />
             )}
           </Actions>
         )}
