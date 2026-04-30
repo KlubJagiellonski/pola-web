@@ -294,6 +294,7 @@ const HomePage = (props: IHomePage) => {
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const SHOW_HOMEPAGE_MODAL = false;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -342,7 +343,9 @@ const HomePage = (props: IHomePage) => {
           )}
         </Content>
       </PageSection>
+      {SHOW_HOMEPAGE_MODAL ? (
       <MyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      ) : <></>}
       <WrapperResult>
         {(isLoaded || isLoading) && (
           <SearchResultsHeader
