@@ -121,7 +121,7 @@ const ArticlePage: React.FC<IArticlePage> = (props) => {
 
   return (
     <PageLayout location={location} page={PageType.ARTICLE}>
-      <SEOMetadata pageTitle={title} image={imageSrc} />
+      <SEOMetadata pageTitle={title} description={subTitle} image={imageSrc} pathname={location.pathname} type="article" />
       <PageSection>
         <Wrapper>
           <FirstColumn>

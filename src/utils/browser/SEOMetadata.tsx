@@ -10,6 +10,7 @@ interface ISEOMetadata {
   image?: string;
   pathname?: string;
   keywords?: string[];
+  type?: string;
 }
 
 const SEOMetadata: React.FC<ISEOMetadata> = ({
@@ -20,6 +21,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({
   meta = [],
   pathname = '',
   keywords = [],
+  type = 'website',
 }) => {
   const { site, allFile } = useStaticQuery(graphql`
     query {
@@ -85,7 +87,7 @@ const SEOMetadata: React.FC<ISEOMetadata> = ({
         },
         {
           property: 'og:type',
-          content: 'website',
+          content: type,
         },
         {
           property: 'og:site_name',
