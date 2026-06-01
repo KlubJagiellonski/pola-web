@@ -35,7 +35,8 @@ import { SearchStateName, checkLoaded } from 'search/state/search-reducer';
 import { selectedProductDispatcher } from 'search/state/selected-product-dispatcher';
 
 import { Device, color, margin, padding, pageWidth } from '@Styles/theme';
-import MyModal from '../components/Modal';
+// import MyModal from '../components/Modal';
+import PodcastTrailer from '../components/PodcastTrailer';
 
 const connector = connect(
   (state: IPolaState) => {
@@ -294,7 +295,7 @@ const HomePage = (props: IHomePage) => {
   const isLoading = searchState === SearchStateName.LOADING;
   const isError = searchState === SearchStateName.ERROR;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const SHOW_HOMEPAGE_MODAL = false;
+  const SHOW_HOMEPAGE_MODAL = true;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -344,7 +345,11 @@ const HomePage = (props: IHomePage) => {
         </Content>
       </PageSection>
       {SHOW_HOMEPAGE_MODAL ? (
-      <MyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      // <MyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <PodcastTrailer
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       ) : <></>}
       <WrapperResult>
         {(isLoaded || isLoading) && (
