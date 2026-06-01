@@ -144,7 +144,7 @@ const MyModal: React.FC<MyModalProps> = ({ isOpen, onClose }) => {
         <video
           controls
           playsInline
-          preload="none"
+          preload="metadata"
           poster="/images/podcast-cover.jpg"
           style={videoStyle}
         >
