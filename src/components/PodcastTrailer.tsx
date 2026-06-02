@@ -145,10 +145,10 @@ const MyModal: React.FC<MyModalProps> = ({ isOpen, onClose }) => {
           controls
           playsInline
           preload="metadata"
-          poster="/images/podcast-cover.jpg"
+          poster="/images/podcast-cover.png"
           style={videoStyle}
         >
-          <source src="/videos/IntroPola.mp4" type="video/mp4" />
+          <source src="/videos/IntroPola.mp4" type="video/mp4"></source>
         </video>
 
         <p style={descriptionStyle}>Zobacz zwiastun pierwszego sezonu.</p>
