@@ -9,6 +9,7 @@ import { ScoreGauge } from '@Components/ScoreGauge';
 import { PolishPropertyName, getPropertiesFromManufacturer } from './PolishValues';
 import { AppSettings } from 'app/app-settings';
 import InfoIcon from '@Assets/info.results.png';
+import UnverifiedIcon from '@Assets/circle-off.svg';
 import { ReadMoreArea } from '../../../components/ReadMoreArea';
 
 // ---- PALETA KOLORÓW ----
@@ -290,6 +291,28 @@ interface IProductDetails {
 }
 
 
+const UnverifiedCompany = () => (
+  <div style={{ textAlign: 'center', margin: '2em 0' }}>
+    <img
+      src={UnverifiedIcon}
+      alt="Brak weryfikacji"
+      style={{
+        width: '120px',
+        marginBottom: '20px',
+      }}
+    />
+
+    <p style={{ fontSize: '16px', color: '#555', fontWeight: 600 }}>
+      Niestety, ta firma nie została jeszcze zweryfikowana, więc nie możemy
+      wyświetlić jej oceny. Stale rozszerzamy naszą bazę, aby uwzględnić więcej firm.
+    </p>
+
+    <p style={{ fontWeight: 700 }}>
+      Dziękujemy za cierpliwość!
+    </p>
+  </div>
+);
+
 export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const manufacturer = product.manufacturer;
   const brandsWithLogo = manufacturer.brands?.filter(b => b.logotype_url) || [];
@@ -299,6 +322,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const notGlobalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.NOT_GLOBAL);
   const capitalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.CAPITAL);
   const isFriend = !!manufacturer.is_friend;
+  const isVerified = product.manufacturer.plScore !== null && product.manufacturer.plScore !== undefined;
 
   return (
     <DetailsContainer>
@@ -310,58 +334,64 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
       <RussiaInfoBox product={product} />
 
       {/* Ocena + progress bar */}
-      <ScoreRow>
-        {isFriend && (
-          <FriendBanner>
-            <span>❤️</span>
-            <span>Ta firma jest Przyjacielem Poli</span>
-            <span>❤️</span>
-          </FriendBanner>
-        )}
-        <ScoreLabel>
-          <img src={InfoIcon} alt="Info" style={{ width: '14px', marginRight: '4px' }} />
-          Nasza ocena: <b>{product.manufacturer.plScore ?? "-"}</b> pkt
-        </ScoreLabel>
-        <ScoreBarWrapper>
-          <ScoreBar
-            value={product.manufacturer.plScore}
-            unit="pkt"
-            missingValuePlaceholder="brak punktacji w rankingu Poli"
-            animation={{ duration: 1, delay: 0.2 }}
-          />
-        </ScoreBarWrapper>
-      </ScoreRow>
+      {isVerified ? (
+       <>
+        <ScoreRow>
+          {isFriend && (
+            <FriendBanner>
+              <span>❤️</span>
+              <span>Ta firma jest Przyjacielem Poli</span>
+              <span>❤️</span>
+            </FriendBanner>
+          )}
+          <ScoreLabel>
+            <img src={InfoIcon} alt="Info" style={{ width: '14px', marginRight: '4px' }} />
+            Nasza ocena: <b>{product.manufacturer.plScore ?? "-"}</b> pkt
+          </ScoreLabel>
+          <ScoreBarWrapper>
+            <ScoreBar
+              value={product.manufacturer.plScore}
+              unit="pkt"
+              missingValuePlaceholder="brak punktacji w rankingu Poli"
+              animation={{ duration: 1, delay: 0.2 }}
+            />
+          </ScoreBarWrapper>
+        </ScoreRow>
 
-      {/* Kryteria oceniania */}
-      <Heading><h2>Kryteria oceniania:</h2></Heading>
-      <CriteriaRow>
-        <ScoreGauge
-          value={capitalProperty.value}
-          unit="%"
-          animation={{ duration: 1 }}
-          missingValuePlaceholder="—"
-        />
-        
-        <CriteriaList>
-          <CriterionItem
-            condition={workersProperty.value === 100}
-            label="Produkuje w Polsce"
+        {/* Kryteria oceniania */}
+        <Heading><h2>Kryteria oceniania:</h2></Heading>
+        <CriteriaRow>
+          <ScoreGauge
+            value={capitalProperty.value}
+            unit="%"
+            animation={{ duration: 1 }}
+            missingValuePlaceholder="—"
           />
-          <CriterionItem
-            condition={researchProperty.value === 100}
-            label="Prowadzi badania w Polsce"
-          />
-          <CriterionItem
-            condition={registeredProperty.value === 100}
-            label="Zarejestrowana w Polsce"
-          />
-          <CriterionItem
-            condition={notGlobalProperty.value === 100}
-            label="Nie jest częścią zagranicznego koncernu"
-          />
-          <br />
-        </CriteriaList>
-      </CriteriaRow>
+          
+          <CriteriaList>
+            <CriterionItem
+              condition={workersProperty.value === 100}
+              label="Produkuje w Polsce"
+            />
+            <CriterionItem
+              condition={researchProperty.value === 100}
+              label="Prowadzi badania w Polsce"
+            />
+            <CriterionItem
+              condition={registeredProperty.value === 100}
+              label="Zarejestrowana w Polsce"
+            />
+            <CriterionItem
+              condition={notGlobalProperty.value === 100}
+              label="Nie jest częścią zagranicznego koncernu"
+            />
+            <br />
+          </CriteriaList>
+        </CriteriaRow>
+        </>
+      ) : (
+        <UnverifiedCompany />
+      )}
 
       {/* Notatki o kapitale, producent */}
       {AppSettings.SHOW_POLISH_VALUE_NOTES && capitalProperty.notes && (
