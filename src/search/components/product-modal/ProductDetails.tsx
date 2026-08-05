@@ -70,7 +70,7 @@ const ScoreRow = styled.div`
 `;
 
 const FriendBanner = styled.div`
-  background: #ffe5e5;
+  background: #ffe3e3;
   color: #c10028;
   padding: 10px 0;
   text-align: center;
@@ -322,6 +322,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const notGlobalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.NOT_GLOBAL);
   const capitalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.CAPITAL);
   const isFriend = !!manufacturer.is_friend;
+    
   const isVerified = product.manufacturer.plScore !== null && product.manufacturer.plScore !== undefined;
 
   return (
