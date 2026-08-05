@@ -25,7 +25,17 @@ const NavbarLayout = styled.nav`
 
 export const NavbarMenu: React.FC<INavbarMenu> = ({ children }) => (
   <NavbarLayout className="navbar-manu">
-    <Link to={urls.pola.home()}>
+    <Link 
+    to={urls.pola.home()}
+    onClick={() => {
+      const layout = document.getElementById('layout-container');
+      if (layout) {
+        layout.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }}
+    >
       <PolaLogo />
     </Link>
     {children}

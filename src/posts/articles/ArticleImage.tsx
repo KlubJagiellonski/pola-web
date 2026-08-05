@@ -9,8 +9,14 @@ export type ArticleStyles = {
 };
 
 const ArticleCoverWrapper = styled.div<ArticleStyles>`
-  .gatsby-image-wrapper {
-    height: ${(p) => (p.fullSize ? undefined : '16em')};
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 2rem;
+
+  img {
+    width: 100%;
+    height: auto !important;
+    object-fit: contain !important;
   }
 `;
 
@@ -25,7 +31,13 @@ export const ArticleImage: React.FC<ArticleStyles & IResponsiveImage> = ({ image
             relativePath: url
             url
             id
-            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
+            gatsbyImageData(
+              layout: CONSTRAINED
+              placeholder: BLURRED
+              width: 1200
+              quality: 85
+              formats: [AUTO, WEBP]
+            )
           }
         }
       }

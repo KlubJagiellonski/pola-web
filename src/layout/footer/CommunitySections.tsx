@@ -1,7 +1,7 @@
 import { Facebook, Instagram, Twitter } from 'components/social-media/Icons';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Device, padding } from 'styles/theme';
+import { Device, padding, textAlign } from 'styles/theme';
 import { TextExternalLink, TextLink } from 'utils/browser/links';
 
 import { urls } from '@App/website';
@@ -39,7 +39,6 @@ export const CommunitySections: React.FC<ICommunitySections> = (props) => (
     <FooterSection title="Działaj z nami">
       <TextExternalLink label="Wesprzyj aplikację" url={urls.external.links.polaSupport} />
       <TextLink label="Klub Przyjaciół Poli" href={urls.pola.friends()} />
-      <TextLink label="Partnerzy" href={urls.pola.partners()} />
       <TextLink label="Dołącz do zespołu" href={urls.pola.team()} />
     </FooterSection>
     <FooterSection title="Jakieś pytania?">
@@ -48,7 +47,7 @@ export const CommunitySections: React.FC<ICommunitySections> = (props) => (
       <TextLink label="Polityka prywatności" href={urls.pola.privacyPolicy()} />
       <TextExternalLink label="Uzupełnij dane o firmie" url={urls.external.links.newCompanyForm} />
     </FooterSection>
-    <FooterSection title="Śledź nas na:">
+    <FooterSection title="Śledź nas na:" textAlign="center">
       <div className="social-rows">
         <Facebook type="filled" />
         <Instagram type="filled" />

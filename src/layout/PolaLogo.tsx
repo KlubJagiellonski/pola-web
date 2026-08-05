@@ -8,6 +8,7 @@ import Logo from '@Assets/logo/pola-color.svg';
 
 interface IPolaLogo {
   size?: number;
+  alt?: string;
 }
 
 export const LogoColor = styled.div`
@@ -20,6 +21,6 @@ export const LogoColor = styled.div`
 
 export const PolaLogo: React.FC<IPolaLogo> = ({ size = 80 }) => (
   <LogoColor>
-    <img width={size} height={size} src={Logo} />
+    <img width={size} height={size} src={Logo} alt="Pola logo" loading="lazy" />
   </LogoColor>
 );

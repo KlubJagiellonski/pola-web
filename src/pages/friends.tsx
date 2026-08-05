@@ -29,8 +29,9 @@ const BoldText = styled(Text)`
 `;
 
 const UlSection = styled.ul`
-  color: ${color.text.secondary};
+  color: ${color.text.primary};
   font-size: ${fontSize.small};
+  font-weight: 700;
   margin: ${margin.small};
   padding: ${padding.small};
 `;
@@ -83,6 +84,11 @@ const FriendsPage = (props: IFriendsPage) => {
       <Placeholder text="Wspieramy polskie firmy - oto Przyjaciele Poli:" />
       <PageSection>
         <FriendsSection friends={friendData} />
+      </PageSection>
+      <PageSection>
+        <Card title={<a href="https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform" target="_blank" rel="noopener noreferrer">Zgłoś swoją firmę</a>} url="https://docs.google.com/forms/d/e/1FAIpQLSfJ14U66y_Z_thn9wiUHaBGOfKlZNhL4BGYuHjO2tJuzXi9gQ/viewform">
+          <Text>Wypełnij formularz, aby dodać firmę do bazy Poli</Text>
+        </Card>
       </PageSection>
       <PageSection style={{ paddingBottom: 0, marginBottom: 0 }}>
         <Info style={{ paddingBottom: 0, marginBottom: 0 }}>

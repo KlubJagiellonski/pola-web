@@ -20,7 +20,9 @@ const Header = styled.header`
   margin: ${margin.normal} 0 ${margin.small} 0;
 
   @media ${Device.mobile} {
-    padding-top: ${padding.normal};
+    padding-top: ${padding.small};
+    margin: ${margin.small} 0;
+    font-size: ${fontSize.normal};
   }
 `;
 
@@ -46,7 +48,7 @@ export const SearchResultsHeader: React.FC<ISearchResultsHeader> = ({
   };
 
   return (
-    <PageSection styles={{ textAlign: 'left' }}>
+    <PageSection styles={{ textAlign: 'center' }}>
       <Header>Uzyskano</Header>
       {resultsUrl ? (
         <Link to={resultsUrl} onClick={handleClick}>

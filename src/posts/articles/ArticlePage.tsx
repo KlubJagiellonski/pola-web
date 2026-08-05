@@ -25,27 +25,52 @@ import { Script } from 'gatsby';
 
 const ContenttWrapper = styled.div`
   img {
-    max-width: 100%;
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 1.5rem auto !important;
   }
 
-  blockquote{
-    margin: 0;
-    border-left: 3px solid #d8152f;
-    padding-left: 1rem;
+  figure img {
+  max-width: 700px;
+  width: 100%;
   }
+
+  blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 4px solid #d8152f;
+  font-style: italic;
+  color: #444;
+ }
 `;
 
 const Content = (props: any) => {
   const { html, children } = props;
   const body = JSON.parse(html.raw);
 
-  const findImg = (id: string) => html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
+  const findAsset = (id: string) =>
+    html.references.find((el: any) => el?.contentful_id && el.contentful_id === id);
 
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-        const image = findImg(node.data.target.sys.id);
-        return `<img src=${image.url} alt=${image.title}/>`;
+        const asset = findAsset(node.data.target.sys.id);
+        if (!asset) return '';
+
+        const url = asset.url;
+        const title = asset.title || '';
+
+        if (url.match(/\.(wmv|mp4)$/i)) {
+          return `
+            <video controls style="display:block;max-width:100%;height:auto;margin:1.5rem auto;">
+              <source src="${url}" />
+              Your browser does not support the video tag.
+            </video>
+          `;
+        }
+
+        return `<img src="${url}" alt="${title}" />`;
       },
     },
   };
@@ -96,7 +121,7 @@ const ArticlePage: React.FC<IArticlePage> = (props) => {
 
   return (
     <PageLayout location={location} page={PageType.ARTICLE}>
-      <SEOMetadata pageTitle={title} image={imageSrc} />
+      <SEOMetadata pageTitle={title} description={subTitle} image={imageSrc} pathname={location.pathname} type="article" />
       <PageSection>
         <Wrapper>
           <FirstColumn>

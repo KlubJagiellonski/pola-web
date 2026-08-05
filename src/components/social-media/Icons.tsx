@@ -17,40 +17,48 @@ const SocialMediaLink = styled.a`
 interface IIcon {
   href: string;
   img: string;
+  alt?: string;
 }
 
-const Icon: React.FC<IIcon> = ({ href, img }) => {
+const Icon: React.FC<IIcon> = ({ href, img, alt }) => {
   return (
     <SocialMediaLink href={href} target="blank">
-      <img src={img} />
+      <img src={img} alt={alt} />
     </SocialMediaLink>
   );
 };
 
 interface ISocialMedia {
   type?: 'unfilled' | 'filled';
+  alt?: string;
 }
 
-export const Facebook: React.FC<ISocialMedia> = ({ type }) => {
+export const Facebook: React.FC<ISocialMedia> = ({ type, alt = 'Facebook' }) => {
   return (
     <Icon
       href={urls.external.polaSocialMedia.facebook.href}
       img={type === 'filled' ? FacebookIconFill : FacebookIcon}
+      alt={alt}
     />
   );
 };
 
-export const Instagram: React.FC<ISocialMedia> = ({ type }) => {
+export const Instagram: React.FC<ISocialMedia> = ({ type, alt = 'Instagram' }) => {
   return (
     <Icon
       href={urls.external.polaSocialMedia.instagram.href}
       img={type === 'filled' ? InstagramIconFill : InstagramIcon}
+      alt={alt}
     />
   );
 };
 
-export const Twitter: React.FC<ISocialMedia> = ({ type }) => {
+export const Twitter: React.FC<ISocialMedia> = ({ type, alt = 'Twitter' }) => {
   return (
-    <Icon href={urls.external.polaSocialMedia.twitter.href} img={type === 'filled' ? TwitterIconFill : TwitterIcon} />
+    <Icon
+      href={urls.external.polaSocialMedia.twitter.href}
+      img={type === 'filled' ? TwitterIconFill : TwitterIcon}
+      alt={alt}
+    />
   );
 };

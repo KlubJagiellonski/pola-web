@@ -28,6 +28,12 @@ const ArticlesButton = styled(PrimaryButton)`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+
+  @media ${Device.mobile} {
+    position: relative;
+    font-size: 16px;
+    padding: 0.8rem;
+  }
 `;
 
 interface IArticlesList {

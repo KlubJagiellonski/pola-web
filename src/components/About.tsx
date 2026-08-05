@@ -10,24 +10,41 @@ import { SecondaryButton } from './buttons/SecondaryButton';
 import { ResponsiveImage } from './images/ResponsiveImage';
 
 import { Text, TitleSection, WrapperSection } from '@Styles/GlobalStyle.css';
-import { color, fontSize, margin, padding } from '@Styles/theme';
+import { Device, color, fontSize, margin, padding } from '@Styles/theme';
 
 const Wrapper = styled(WrapperSection)`
   grid-area: about;
-  margin: 0;
+  margin-top: 3rem;
   padding: 0;
   display: flex;
   flex-direction: column-reverse;
+  text-align: center;
+
+  @media ${Device.mobile} {
+    width: 100%;
+    margin: 0 0.5rem;
+  }
 `;
 
 const MockUp = styled.div`
   height: 100%;
+  display: flex;
+  justify-content: center;
 
   .gatsby-image-wrapper {
     width: 100%;
+    img {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      
+    }
 
     div {
-      height: 17.8em !important;
+      height: 10em !important;
+      @media ${Device.mobile} {
+        height: 14em !important;
+      }
     }
   }
 `;
