@@ -47,6 +47,35 @@ const Header = styled.header`
 
 const ScoreRow = styled.div`
   margin-bottom: 1.25em;
+
+  @media ${Device.mobile} {
+    margin-bottom: 0.8em;
+  }
+`;
+
+const FriendBanner = styled.div`
+  background: #ffe3e3;
+  color: #c10028;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: ${margin.small};
+
+  @media ${Device.mobile} {
+    font-size: 12px;
+    padding: 8px 10px;
+    gap: 6px;
+
+    span {
+      font-size: 14px;
+    }
+  }
 `;
 
 const ScoreLabel = styled.div`
@@ -153,6 +182,9 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
   const registeredProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.REGISTERED);
   const notGlobalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.NOT_GLOBAL);
   const capitalProperty = getPropertiesFromManufacturer(manufacturer, PolishPropertyName.CAPITAL);
+  const isFriend = !!manufacturer.is_friend;
+    
+  const isVerified = product.manufacturer.plScore !== null && product.manufacturer.plScore !== undefined;
 
  return (
   <DetailsContainer>
