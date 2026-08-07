@@ -376,7 +376,7 @@ export const ProductDetails: React.FC<IProductDetails> = ({ product }) => {
             />
             <CriterionItem
               condition={researchProperty.value === 100}
-              label="Prowadzi badania w Polsce"
+              label="Prowadzi obszar badań i rozwoju w Polsce"
             />
             <CriterionItem
               condition={registeredProperty.value === 100}
