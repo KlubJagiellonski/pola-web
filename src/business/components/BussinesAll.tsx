@@ -11,7 +11,7 @@ import { ResponsiveImage } from '@Components/images/ResponsiveImage';
 import { PageSection } from '@Layout/PageSection';
 
 import { Text, TitleSection } from '@Styles/GlobalStyle.css';
-import { Device, margin, padding } from '@Styles/theme';
+import { Device, margin, padding, color } from '@Styles/theme';
 import {PageProps} from "gatsby";
 
 const Wrapper = styled.div`
@@ -38,6 +38,13 @@ const Title = styled(TitleSection)`
   text-align: center;
 `;
 
+const Paragraph = styled.p`
+  line-height: 1.6;
+  color: ${color.text.secondary};
+  margin-bottom: ${margin.normal};
+  text-align: justify;
+`;
+
 interface IBusinessPage extends PageProps<any> {}
 
 const BusinessAll = (props: IBusinessPage) => {
@@ -46,31 +53,31 @@ const BusinessAll = (props: IBusinessPage) => {
   return (
       <PageSection>
         <Wrapper>
-          <Text>
+          <Paragraph>
             Według badań nawet 90% Polaków chce kupować polskie produkty. Jak jednak rozpoznać polską firmę? Jakie
             kryteria należy wziąć pod uwagę? W odpowiedzi na te pytania powstała aplikacja Pola. Zabierz ją na zakupy.
             To proste narzędzie służące do weryfikowania firm.
-          </Text>
-          <Text>
+          </Paragraph>
+          <Paragraph>
             Realizując ideę patriotyzmu gospodarczego, staramy się wspierać działanie przedsiębiorstw na rzecz dobra
             wspólnego i przekonywać, że warto korzystać z ich produktów i usług.
-          </Text>
-          <Text>
+          </Paragraph>
+          <Paragraph>
             Aplikację Pola pobrano już 750 tys. razy, a liczba zeskanowanych produktów zbliża się do 10 milionów.
             Chętnie podejmiemy wspólne działania, które mogą zwiększyć pozycje rynkową Twojej firmy, a także stać się
             wyrazem społecznej odpowiedzialności biznesu.
-          </Text>
+          </Paragraph>
           <BusinessElements services={services} />
-          <Text>
+          <Paragraph>
             Chcemy dostarczać użytkownikom informacji niezbędnych do podjęcia świadomych decyzji. Transparentność w
             zakresie udostępniania danych to wzorcowa prokonsumencka postawa. Możemy dodać do bazy zgromadzoną przez
             Ciebie listę kodów EAN, listę marek własnych lub zupełnie inne dane, których jeszcze nie mamy. Razem
             budujemy świadomą konsumpcję.
-          </Text>
-          <Text>
+          </Paragraph>
+          <Paragraph style={{ textAlign: 'center', fontSize: '1rem' }}>
             Kontakt: Mateusz Perowicz,{' '}
             <a href={urls.external.mail.Perowicz.href}>mateusz.perowicz@klubjagiellonski.pl</a>, tel. 660 010 034
-          </Text>
+          </Paragraph>
           <Title>
             Pozostała <a href={urls.external.links.biznesKlub.href}>oferta Centrum Analiz Klubu Jagiellońskiego</a>
           </Title>
@@ -81,10 +88,10 @@ const BusinessAll = (props: IBusinessPage) => {
             <ResponsiveImage title="partnerstwo dzialu" imageSrc="partnerstwo-dzialu.jpg" />
             <ResponsiveImage title="okragle stoly" imageSrc="okragle-stoly.jpg" />
           </ImageSection>
-          <Text>
+          <Paragraph style={{ textAlign: 'center', fontSize: '1rem' }}>
             Kontakt: Tomasz Ociepka, <a href={urls.external.mail.Ociepka.href}>tomasz.ociepka@klubjagiellonski.pl</a>
             ,tel. 794 263 629
-          </Text>
+          </Paragraph>
         </Wrapper>
         </PageSection>
   );
