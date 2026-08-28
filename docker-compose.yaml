@@ -1,18 +1,23 @@
 services: 
   pola_web-init:
-    image: node:20.10.0-stretch
+    image: node:20-bookworm-slim
     working_dir: /app
     volumes: 
      - .:/app
-    command: npm install
+    command: npm install --legacy-peer-deps
   pola_web:
-    image: node:20.10.0-stretch
+    image: node:20-bookworm-slim
     working_dir: /app
     volumes: 
      - .:/app
     command: npm run develop -- -H=0.0.0.0
     ports: 
       - 8000:8000
+    expose:
+      - 8000
+    environment:
+      - CONTENTFUL_SPACE_ID=${CONTENTFUL_SPACE_ID:-}
+      - CONTENTFUL_ACCESS_TOKEN=${CONTENTFUL_ACCESS_TOKEN:-}
     depends_on: 
       pola_web-init: 
         condition: service_completed_successfully
