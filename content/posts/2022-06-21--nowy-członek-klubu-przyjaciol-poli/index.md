@@ -31,4 +31,4 @@ jasno wskazuje, kogo warto wspierać” - komentuje Adam Bućko.
 
 Dołącz do grona [Klubu Przyjaciół aplikacji Pola!](https://www.pola-app.pl/friends)
 
-![](3.PNG)
+![](1.PNG)
